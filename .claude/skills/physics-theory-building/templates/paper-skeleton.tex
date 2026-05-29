@@ -1,0 +1,49 @@
+\documentclass[aps,prd,reprint,nofootinbib]{revtex4-2}
+% Co-theoretical-physicist paper skeleton.
+% Compile with pdflatex (revtex4-2). Swap prd -> prl/prb/pre as appropriate.
+
+\usepackage{amsmath,amssymb,bm}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{<Title>}
+\author{<author>}
+\affiliation{<affiliation>}
+\date{\today}
+
+\begin{abstract}
+<Problem, the core idea/unifying principle, main results, and how they were
+established (analytic + numerical), in one paragraph.>
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+% The problem, why it matters, what was known (cite physics-literature), and the
+% contribution of this work.
+
+\section{Framework}
+% Effective description and degrees of freedom; assumptions; symmetries; the model.
+
+\section{Results}
+% Derived results (from physics-derivation) and numerically-established results
+% (from physics-numerics). For each, state its evidence-ladder status.
+
+\section{Predictions}
+% New falsifiable predictions and the experiments/numerics that would test them.
+
+\section{Domain of validity}
+% Examples where the theory applies; non-examples / where it breaks.
+
+\section{Discussion}
+% Relation to prior work, open questions, next steps.
+
+% --- Dependency map (move to a comment or appendix) ---
+% result R1: depends on {assumptions A1}, status = analytically-derived
+% result R2: depends on {R1, numerics N3},  status = numerically-supported
+% ...
+
+\bibliography{refs}
+
+\end{document}
