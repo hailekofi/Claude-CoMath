@@ -43,8 +43,25 @@ Record explicitly:
 ## Method
 
 1. At session start, summarize the current state from the log in 3–5 lines before working.
-2. As work proceeds, append timestamped entries; don't overwrite history.
+2. As work proceeds, append timestamped entries; don't overwrite history (version history
+   lets you see how a claim evolved or was called into question).
 3. Keep statuses current — promote/demote hypotheses as evidence changes.
-4. When abandoning a direction, write the dead-end entry *before* moving on.
+4. When abandoning a direction, write the dead-end entry *before* moving on. Preserving
+   this "negative space" is what lets you and the physicist build new workstreams off past
+   failures instead of silently re-running them.
+
+## Meta-review: learning without retraining
+
+This skill also serves as the **Meta-review agent** (from Co-Scientist). Periodically
+synthesize the recurring patterns across reviews and tournament debates into a short
+**meta-review critique** — e.g. "reviews keep missing whether the weak-coupling expansion
+actually converges," or "candidates keep ignoring a boundary term." Maintain a
+**`META_REVIEW.md`** (or a section of the log) listing these recurring issues.
+
+Because the harness can't retrain the model, this feedback works by **prompt propagation**:
+the meta-review critique is fed forward so that `physics-reflection` checks the recurring
+issue on *every* future hypothesis, and `physics-intuition` (Generation) avoids
+re-introducing it. This closes the loop and makes later iterations sharper than earlier
+ones — improvement without back-propagation.
 
 Use `templates/research-log.md` as the starting structure.

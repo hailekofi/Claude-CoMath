@@ -35,11 +35,37 @@ falsifiable predictions.
 7. **Consistency.** Check limits, dimensional consistency, and that every claim's
    evidence-ladder status is honestly carried into the writeup.
 
+## The living working paper (native artifact)
+
+Center the output on a living **working paper** (revtex), not a transient summary. Following
+the co-mathematician's artifact requirements, every writeup must include:
+
+- **Exposition of process** — explain the *research path* that led to the result (including
+  which intuitions and dead ends shaped it), not just the polished final statement.
+- **Provenance margin notes** — annotate claims with where they came from, e.g.
+  *[pruning heuristic from user suggestion; scaling exponent 1.73±0.02 from
+  experiments/h3.py; bound sourced from arXiv:xxxx]*. Carry each claim's **evidence-ladder
+  status** inline.
+- **Internal linking** — link to the actual derivations, experiment scripts, and log
+  entries so the physicist can audit any claim down to its source.
+- **Review before "final"** — a draft is not finalized until it passes `physics-reflection`
+  (multiple review passes that cross-check references, code outputs, and logical
+  correctness). If it cannot pass, **escalate**: mark it unfinished and surface the
+  unresolved issue to the physicist rather than papering over it.
+
+## Research overview (the Meta-review synthesis)
+
+When concluding a research goal, also produce a short **research overview** (the Meta-review
+agent's final artifact): synthesize the top-ranked hypotheses from `physics-tournament`
+into a roadmap — the promising directions, why each matters, and the specific
+experiment/derivation that would advance each. This maps the boundary of current knowledge
+and seeds the next round of `physics-intuition` generation.
+
 ## Output
 
 A revtex paper skeleton (`templates/paper-skeleton.tex`) with sections wired to the
 dependency map, plus a short **dependency map** listing each result, what it depends on,
 and its evidence-ladder status. Pull finished derivations from `physics-derivation`,
-validated numbers and plots from `physics-numerics`, and prior work from
-`physics-literature`. Keep `physics-research-log` updated as the framework crystallizes
-(promote results, retire superseded hypotheses).
+validated numbers and plots from `physics-numerics`, ranked hypotheses from
+`physics-tournament`, and prior work from `physics-literature`. Keep `physics-research-log`
+updated as the framework crystallizes (promote results, retire superseded hypotheses).

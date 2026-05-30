@@ -5,8 +5,10 @@ description: >-
   physics. Use when generating or sharpening conjectures and research directions, asking
   "why does this happen / what if", sanity-checking a claim or formula, estimating an
   order of magnitude, finding the right limit or regime, or reasoning about symmetry,
-  scaling, and dimensional analysis — before committing to heavy calculation. Runs a
-  lightweight generate–debate–evolve pass and writes hypotheses to a hypothesis card.
+  scaling, and dimensional analysis — before committing to heavy calculation. Plays the
+  Generation role: produces a diverse pool of candidate hypotheses (via literature
+  grounding, self-play debate, assumption identification, and research expansion) and
+  writes them to hypothesis cards, then hands them to reflection and the tournament.
 ---
 
 # Physics Intuition
@@ -40,28 +42,40 @@ Reach for these in roughly this order:
 7. **Sanity checks.** Units consistent? Signs physical? Positivity (energy, probability,
    entropy)? Causality / unitarity respected? Correct behavior as parameters → 0 or ∞?
 
-## Generate–debate–evolve (hypothesis loop)
+## Hypothesis generation (the Generation role)
 
-For an open question, don't anchor on the first idea:
+This skill plays the **Generation agent** role in the research loop: it produces the
+initial pool of candidate hypotheses. Don't anchor on the first idea — generate a diverse
+set using these complementary strategies (adapted from the Co-Scientist Generation agent):
 
-1. **Generate** ≥3 candidate hypotheses or explanations using different tools above.
-2. **Debate** each: argue for and against; check correctness, novelty vs known results,
-   and — crucially — **testability** (is there a cheap numerical or analytic test?).
-3. **Rank** by *plausibility × testability*. Prefer hypotheses that are easy to kill.
-4. **Evolve** the survivors: combine, simplify, sharpen, or take a cleaner limit.
-5. **Meta-review**: state what this round established, what to test next, and which ideas
-   to discard (and record the discards via `physics-research-log`).
+1. **Literature-grounded generation.** Summarize what is known (hand to
+   `physics-literature`), then build novel directions on top of that base rather than
+   reinventing it.
+2. **Simulated scientific debate (self-play).** Argue the question from multiple expert
+   viewpoints across several turns — a skeptic, an optimist, a specialist in a neighboring
+   field — and let the disagreement sharpen a refined hypothesis.
+3. **Iterative assumption identification.** Name the **testable intermediate assumptions**
+   that, if true, would crack the problem. Chain conditional reasoning hops ("if the gap
+   stays open, then…") and aggregate them into full hypotheses.
+4. **Research expansion.** Deliberately probe *unexplored* corners of the hypothesis space,
+   informed by the meta-review feedback and dead ends in `physics-research-log`, to avoid
+   re-treading covered ground.
 
-## Output
+For each candidate, apply the intuition toolkit above as a fast filter (units, limits,
+symmetry must already look right) and attach a cheap **falsification test**.
+
+## Output and hand-off
 
 For each surviving hypothesis, produce a **hypothesis card** (see
 `templates/hypothesis-card.md`) capturing: the statement, the physical intuition behind
 it, its **regime of validity**, the cheapest **falsification test**, and an initial
 evidence-ladder status (usually `conjecture`).
 
-Then hand off:
+This skill *generates*; it does not self-judge. Hand the pool onward:
+- to `physics-reflection` for peer review (assumptions, novelty, failure modes),
+- to `physics-tournament` to rank and evolve competing candidates,
 - to `physics-numerics` to run the falsification/validation test,
 - to `physics-derivation` for an analytic argument,
 - to `physics-literature` to check whether it is already known.
 
-Log every hypothesis and verdict in `physics-research-log`.
+Log every hypothesis in `physics-research-log`.
