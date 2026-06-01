@@ -164,9 +164,15 @@ DECISIVELY settles the one open structural dispute. (Reverses my prior lean towa
   sheet) is required = genuine RANK-3.
 - T6 [gold-gated, positive control]: decoupling locus (gamma_hi->0) -> 2x2, P_2->2->0.221360
   (elementary), band tightens around it -> PV applies EXACTLY at the elementary corner only.
-- **Corroboration (coordinator, independent):** P_2->2 depends on the SHAPE chi beyond the two BE
-  window actions (WS-NUM separation finding) -> more data than the formal/window exponents -> >rank-2
-  [a direct rank-3 signature; coordinator re-check running].
+- **Corroboration (coordinator) -- HONEST: INCONCLUSIVE.** A quick re-check sought matched-window /
+  different-chi pairs to show P_2->2 needs the shape chi beyond the formal exponents (the >rank-2
+  signature). The random search only found tiny-Delta-chi pairs (Dchi=0.05, dP_mid=0.003, comparable
+  to the residual window mismatch Dw=0.009) -> UNDERPOWERED, does NOT cleanly corroborate. A proper
+  test needs a constrained deformation (hold both window actions fixed, vary chi). WS-NUM's separation
+  finding (P_2->2 = f(window actions, chi)) remains the standing chi-dependence evidence but is itself
+  numerically-supported. => The RANK-3 VERDICT RESTS ON T1 (dim 6>2, analytic), T2 (middle-conv
+  obstruction, analytic), and T5 (gold-gated band falsification, the airtight decisive tier), NOT on
+  this re-check.
 - **EXPLICIT NAMED OBJECT:** P_2->2 = |C_{mm}|^2 of the rank-3 isomonodromy problem (one Poincare-
   rank-2 irregular point with known formal exponents c_i; one apparent {0,1,3} point at the algebraic
   node v_*=E_*) -- a c=1-family / confluent-Garnier (9/2-type) connection constant, ABOVE 2F1 and
