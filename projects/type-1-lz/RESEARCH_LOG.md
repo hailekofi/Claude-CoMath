@@ -3,13 +3,14 @@
 _Last updated: 2026-06-01_
 
 ## Current state (read me first)
-Project scaffold created. Awaiting user's source materials in `uploads/` and answers to
-the intent-scoping questions (what "Type 1" denotes, the regime of interest, and the goal).
-No hypotheses generated yet — intent refinement comes first.
+Project scaffold created. Intent partially refined: **"Type 1" is defined in the user's
+own materials** (to be read from `uploads/`), and the **goal is to crack an open problem**
+(generate + stress-test hypotheses). Blocked on the user pushing source files. No
+hypotheses generated yet — the exact problem statement must come from the files first.
 
 ## Open questions
-- Q0 (scoping): What does "Type 1" specify here, what regime, and what is the target output?
-  (To be resolved with the user before generating hypotheses.)
+- Q0 (scoping): Exact definition of "Type 1" Landau–Zener, the regime of interest, and the
+  precise open problem to attack — all to be extracted from `uploads/` once provided.
 
 ## Hypotheses
 | id | statement | status | evidence / links |
