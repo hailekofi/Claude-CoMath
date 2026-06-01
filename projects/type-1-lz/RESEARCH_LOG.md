@@ -124,6 +124,28 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## Q_restart / cyclic-monodromy line (user) — geometric backbone real, bare relation CONTENT-FREE — 2026-06-01
+Code: `experiments/q_restart_probe.py`. User intuition: lambda->u=n/p is degree-3 (3:1), so 3 LZ
+sweeps = 1 loop in lambda; the 'restart' at the poles eps_i + the U(3) fact (DPA)^3=I suggest a
+Q_restart=DP theory constraining the S-matrix A.
+- **Geometry REAL [established]:** deg(lambda->u)=3 (verified); 3 real preimages interlace the poles
+  (projectively, wrapping through inf = the 'funny business' at eps_i); WS-F's fixed sheet
+  permutation (2,0,1) is the natural 3-cycle P.
+- **(i) SALVAGE [established]:** the canonical IP frame is fixed by a GEOMETRIC Coulomb-phase
+  subtraction: diabatic-IP S off-diagonal phases diverge as -(c_j-c_i)log T with
+  c_i = sum_j gam_i^2 gam_j^2 (a_i-a_j)/(eps_i-eps_j)^2 = SIGNED BE Gamma-data (sum=0); all 9 entries
+  match to <0.02 rad; S_canon=e^{i(c_j-c_i)logT}S converges. NEW, clean, and useful for the #2
+  connection problem (pins the phase regularization geometrically).
+- **(ii) NEGATIVE [established]:** in the canonical frame (P S_canon)^3 is NOT diagonal (reloff 0.86).
+  And (P D S D^-1)^3=diagonal is achievable for ANY U(3) by reconvention D (Type-1 AND random U(3)
+  both reach reloff=0.0000) -> the bare cyclic relation is a CONTENT-FREE general unitary fact,
+  exactly the user's own caution. Q_restart=DP does NOT constrain A. A content-ful restart needs a
+  NON-TRIVIAL OFF-DIAGONAL pole factor = the non-Abelian Stokes data = open-problem #2.
+- **Net:** user's caution (D non-canonical; expect diagonal not I) was decisive and correct; pushing
+  it through kills the bare DP relation but extracts the geometric Coulomb regularization (c_i=signed
+  BE Gamma). The 'restart at the poles' is genuinely off-diagonal = the confluent-Heun coefficient.
+  Failed-exploration preserved; the Coulomb-phase result feeds #2 (PA-0/PA-1 frame).
+
 ## Deliverable #1 (paper) + #2 (open problem & plan) — 2026-06-01
 - **Paper draft:** `paper/type1_lz_working_paper.tex` — 10 evidence-tagged results + dependency map.
   Passed a coordinator physics-reflection pass: corrected R3 universal [EST]->[NS] (scan not proof);
