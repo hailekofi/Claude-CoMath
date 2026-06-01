@@ -126,6 +126,22 @@ So the target `S₁₂` *is* the Stokes multiplier `σ_{mid,·}` of the irregula
 the formal exponents `c_i` (known) + these two Stokes shears**, and the connection coefficient is
 their composition.
 
+## Rank correction (WS-PV, 2026-06-01, coordinator-verified logic) — IMPORTANT
+The "expected: Painlevé V" lever (and the "confluent-Heun" class label) are the **rank-2
+decoupling-boundary** cases, **not** the generic answer. The Type-1 scalar reduction is genuinely
+**rank-3** (3rd-order, irreducible over `Q(γ,ε,a)` — WS-C; WS-E's 3rd-order Laplace ODE). Painlevé V
+is a 2×2 (rank-2) isomonodromy problem; confluent-Heun is a 2nd-order (rank-2) ODE — both are reached
+**only on the decoupling locus** where the 3×3 Laplace system `K(v)=−i diag(1/a)(H₀−vI)` block-reduces
+to `2×2 ⊕ 1×1` (verified: send one coupling `s_ij→0` ⇒ a level splits off). That locus is exactly the
+*elementary* boundary (WS-C's "elementary ⟺ a level decouples"). **The generic `S₁₂` is therefore one
+rank up: a rank-3 confluent-Garnier / `c=1` irregular-conformal-block connection constant** (Barnes-G
+family), unpublished and not a classical special function. Published PV/PVI connection constants
+(Lisovyy et al.) apply at the boundary only. [analytically-grounded; contingent on WS-PA1's PA-0
+confirming the 3rd-order is irreducible / the `{0,1,3}` apparent point is not removable.]
+**Unchanged:** PA-2 (does the Gaudin data fix the one accessory coordinate `σ` algebraically?) remains
+the pivot — `σ` is exactly the Barnes-G argument; WS-NUM still guarantees a computable `P₂→₂`; the
+deliverable is still a *named* (now rank-3) connection constant + the numerical model.
+
 ## Workstreams launched (parallel, 2026-06-01)
 - **WS-PA1** (critical path): PA-0+PA-1+PA-2 — re-derive the scalar Laplace ODE, verify the `{0,1,3}`
   apparent singularity (closes R8 TODO), identify the Painlevé type, locate the accessory point vs

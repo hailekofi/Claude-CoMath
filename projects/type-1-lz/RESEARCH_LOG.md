@@ -126,6 +126,30 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## WS-PV completed — RANK CORRECTION (target is rank-3, not Painleve V) — 2026-06-01
+Deliverable paper/pv_tau_route.md. Coordinator-verified the load-bearing logic.
+- **CORRECTION to my plan (and to the WS-A/WS-E 'confluent-Heun' label):** Painleve V is a 2x2
+  (rank-2) isomonodromy problem and confluent-Heun a 2nd-order (rank-2) ODE; the Type-1 scalar
+  reduction is genuinely RANK-3 (3rd-order, irreducible over Q(g,e,a) per WS-C; WS-E 3rd-order
+  Laplace ODE). So PV/CH are the rank-2 DECOUPLING-BOUNDARY cases only: sending one coupling
+  s_ij->0 block-reduces the 3x3 Laplace system K(v)=-i diag(1/a)(H0-vI) to 2x2 (+1x1) = the
+  elementary boundary (= WS-C 'elementary <=> a level decouples'). [verified symbolically]
+- **Generic S_12 = one rank up:** a rank-3 confluent-Garnier / c=1 irregular-conformal-block
+  (Barnes-G family) connection constant — UNPUBLISHED, not classical. Published PV/PVI connection
+  constants (Its-Lisovyy-Prokhorov 1806.08344; Lisovyy et al.) apply at the boundary only.
+- WS-PV delivered the NAMED SHAPE (tau-function ratio / Barnes-G connection constant), the monodromy
+  data in {g,e,a} (formal exponents c_i KNOWN + the two {mid,lo},{mid,hi} Stokes shears), and made
+  the pivot explicit: the one accessory coordinate sigma is exactly what PA-2 fixes (algebraic =>
+  closed; transcendental => irreducibility result).
+- CONTINGENT on WS-PA1 PA-0 (confirm 3rd-order irreducible / {0,1,3} apparent point not removable);
+  if WS-PA1 finds it reduces to 2nd order, PV/CH WOULD apply. WS-CH (attacking confluent-Heun=rank-2)
+  may hit the same rank mismatch -> will reconcile on report.
+- Lit claim 'rank-3 deformation lacks Painleve property' (2503.22198, 2512.24083) is literature-
+  sourced, flagged, NOT load-bearing for the main reframe (which follows from irreducible 3rd-order).
+- Honest impact: the user-favored PV lever is the BOUNDARY case; the realistic named target is one
+  rank higher. Deliverable shape unchanged (named connection constant + WS-NUM computable model);
+  PA-2 still the make-or-break.
+
 ## #2 implementation launched — restart-operator structure + 5 parallel workstreams — 2026-06-01
 User approved the open-problem plan with steers: Painleve-V/tau route + a PARALLEL direct
 confluent-Heun connection-coefficient track; PA-2 (Gaudin fixes accessory param algebraically) is the
