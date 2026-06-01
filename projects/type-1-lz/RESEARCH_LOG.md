@@ -124,6 +124,26 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## Deliverable #1 (paper) + #2 (open problem & plan) — 2026-06-01
+- **Paper draft:** `paper/type1_lz_working_paper.tex` — 10 evidence-tagged results + dependency map.
+  Passed a coordinator physics-reflection pass: corrected R3 universal [EST]->[NS] (scan not proof);
+  R8 accessory-exponent count flagged as resting on two agreeing agent frames (WS-A u-frame + WS-E
+  Laplace frame), [K,K]!=0 coordinator-verified. DRAFT with 2 named verification TODOs (the R9
+  correlation re-check; the R8 accessory re-derivation = PA-0).
+- **Open problem formalized:** `paper/OPEN_PROBLEM.md`. THE PROBLEM: compute the off-diagonal Stokes
+  coefficient S_12 (=P_2->2) of the single rank-2 irregular point — a confluent-Heun connection
+  coefficient one accessory parameter above 1F2 — in closed form via the two window actions + the
+  turning-point cross-ratio, OR prove irreducibility. KEY LEVER: rank-2 irregular + apparent
+  singularity => isomonodromic deformation is Painleve (expected Painleve V), whose connection
+  problem has a modern closed theory (Gamayun-Iorgov-Lisovyy tau-functions / CFT c=1 blocks). Central
+  conjecture: Gaudin data fixes the Heun accessory parameter ALGEBRAICALLY => named closed form.
+- **Plan-of-attack (for review):** PA-0 verify foundation (re-derive scalar Laplace ODE + {0,1,3}
+  apparent sing) -> PA-1 identify Painleve type + node-as-accessory? -> PA-2 PIVOT: does Gaudin fix
+  the accessory param algebraically? -> PA-3 closed form via Painleve-V/CFT connection formulae (if
+  algebraic) | PA-4 validated numerical model + PSLQ recognition (always-on safety net) | PA-5 lit +
+  irreducibility. Honest odds: elementary=low; named-closed-form (Painleve-V tau)=plausible if PA-2
+  algebraic; irreducibility+numerical model=floor. AWAITING USER REVIEW before dispatch.
+
 ## WS-E + WS-C completed — research arc essentially closed — 2026-06-01
 Both verified by coordinator; deliverables paper/ws_e_junction_Smatrix.md, paper/ws_c_factorization_locus.md (+ experiments/ws_{e,c}_*.py).
 
