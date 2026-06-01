@@ -114,6 +114,26 @@ The literature points to a different top strategy: the **KZ/Gaudin monodromy rou
 targets a closed amplitude in {γ,ε,a} + a handful of monodromy/period integrals directly. See
 strategy memo `paper/type1_lz_strategy_memo.tex`.
 
+## Ideation pass (commuting partners / exact crossing / Q4 pairs) — 2026-06-01
+Attack lines generated + reflected + tournamented in `paper/attack_lines.md`. Grounding facts
+VERIFIED numerically (standalone, not their harness):
+- Commuting family shares p,n,W₄,Q₄,κ_S **exactly** (max|Δ|=0); a enters only via L_H; L_H linear
+  in a (residual 3e-17). ⇒ transport curve ν²=W₄ is family-invariant; all slope-dependence is the
+  linear L_H in the phase form. [evidence ladder: numerically-supported, machine precision]
+- The guaranteed Type-1 crossings are **avoided / phase-active** (min gap nonzero): canonical pair
+  01 Δ≈2.3e-4 @ u≈−0.25 (strong avoided crossing), pair 12 Δ≈1.67 @ u≈+0.13; overlap sample
+  similar. ⇒ crossings CARRY phase ⇒ H-B/H-C viability test PASSES.
+- Q₄ has two conjugate pairs at distinct real parts (two window centers) — consistent with the
+  two-window interference picture of H-C.
+
+**Tournament leaders (see attack_lines.md):**
+1. **H-B** exact (avoided) crossing → middle survival P_{2→2} via 2×2 local rotation + unitarity.
+2. **H-C** avoided crossings at Re(Q₄ pairs) → missing off-diagonal as finite 2-window period sum;
+   decisive cheap test = is the interference phase φ a GEOMETRIC period or a transcendental Stokes
+   constant. H-B+H-C are complementary (target both missing params, both meet practicality bar).
+3. H-A slope-flow/isomonodromy in a (principled backbone; must close on amplitudes not probs).
+4–5. H-D KZ/Gaudin, H-E constraint closure (literature-import hedges).
+
 ## Hypotheses
 | id | statement | status | evidence / links |
 |----|-----------|--------|------------------|
