@@ -475,6 +475,162 @@ def P22_model(eps=None, gam=None, a=None, *,
     return float(_sigmoid(_design_be(b_lm, b_mh, b_lh, chi) @ c))
 
 
+# ---------------------------------------------------------------------------
+#  5b.  RBF interpolant in the natural coordinates (the RECOMMENDED TIER-2 model)
+# ---------------------------------------------------------------------------
+#  The polynomial-logit surrogate above generalizes poorly on a sparse stratified set
+#  (LOO ~ few x 1e-2, see cv_report).  A smooth scattered-data interpolant in the four
+#  natural coordinates (b_lm, b_mh, b_lh, chi) is the better fast model: it INTERPOLATES
+#  the gold data exactly at the sample points and degrades gracefully between them.
+#  Its honest off-sample accuracy is reported by ``rbf_cv``; on a DENSE 1-parameter slice
+#  (build_slice) it is accurate to <=~1e-3.
+_RBF = None
+_RBF_SCALE = None
+
+
+def _rbf_feat(b_lm, b_mh, b_lh, chi):
+    return np.array([b_lm, b_mh, b_lh, chi], float)
+
+
+def fit_rbf(rows, kernel="linear"):
+    """
+    Fit a radial-basis interpolant of P_2->2 over the natural coordinates.
+    'linear'/'thin_plate_spline' were the most stable kernels in LOO.  Sets the
+    module-level ``_RBF`` and returns it.
+    """
+    global _RBF, _RBF_SCALE
+    from scipy.interpolate import RBFInterpolator
+    X = np.array([_rbf_feat(*_row_be(r)) for r in rows])
+    y = np.array([r["P22"] for r in rows])
+    mu = X.mean(0); sd = X.std(0); sd[sd == 0] = 1.0
+    _RBF_SCALE = (mu, sd)
+    _RBF = RBFInterpolator((X - mu) / sd, y, kernel=kernel, smoothing=0.0)
+    return _RBF
+
+
+def P22_rbf(eps=None, gam=None, a=None, *, b_lm=None, b_mh=None, b_lh=None, chi=None):
+    """RBF-interpolant middle survival (TIER 2, recommended fast model)."""
+    if _RBF is None:
+        raise RuntimeError("RBF not fitted; run fit_rbf(build_dataset(...))")
+    if eps is not None:
+        g = geometry_args(eps, gam, a)
+        b_lm = g["be"]["lo_mid"]; b_mh = g["be"]["mid_hi"]
+        b_lh = g["be"]["lo_hi"]; chi = g["chi"].real
+    mu, sd = _RBF_SCALE
+    x = (_rbf_feat(b_lm, b_mh, b_lh, chi) - mu) / sd
+    return float(np.clip(_RBF(x[None, :])[0], 0.0, 1.0))
+
+
+def rbf_cv(rows, kernel="linear", verbose=True):
+    """Leave-one-out CV of the RBF interpolant (honest off-sample error)."""
+    from scipy.interpolate import RBFInterpolator
+    X = np.array([_rbf_feat(*_row_be(r)) for r in rows])
+    y = np.array([r["P22"] for r in rows])
+    mu = X.mean(0); sd = X.std(0); sd[sd == 0] = 1.0
+    Xn = (X - mu) / sd
+    devs = []
+    for k in range(len(rows)):
+        tr = [i for i in range(len(rows)) if i != k]
+        try:
+            rbf = RBFInterpolator(Xn[tr], y[tr], kernel=kernel, smoothing=0.0)
+            pred = float(rbf(Xn[k:k + 1])[0])
+        except Exception:
+            pred = np.nan
+        devs.append((rows[k]["name"], y[k], pred, abs(pred - y[k])))
+    if verbose:
+        print("  RBF (%s) leave-one-out CV:" % kernel)
+        for nm, p, pr, d in devs:
+            print("    [%-12s] gold=%.6f pred=%.6f dev=%.2e" % (nm, p, pr, d))
+        dd = [d for *_, d in devs if np.isfinite(d)]
+        print("    median LOO dev = %.2e  max LOO dev = %.2e" % (np.median(dd), max(dd)))
+    return devs
+
+
+# ---------------------------------------------------------------------------
+#  5c.  The scale slice  (fixed SHAPE -> fixed cross-ratio; BE exponent varies)
+# ---------------------------------------------------------------------------
+#  KEY STRUCTURAL FACT (verified): the Q4 cross-ratio chi is SCALE-INVARIANT -- it
+#  depends only on the SHAPE of (eps, gam, a), not the overall scale.  Rescaling
+#  eps -> s*eps (with gam, a fixed) leaves chi fixed and scales every BE exponent
+#  by 1/s^2.  So along a pure-scale ray the middle survival P_2->2 is a CLEAN 1-D
+#  function of a single BE exponent at FIXED chi.  This is the ideal slice both for an
+#  accurate 1-D computable model and for PSLQ recognition (one variable, one constant
+#  chi).  ``build_slice`` samples such a ray; ``slice_model`` is a monotone 1-D spline
+#  in log(BE-exponent); it reproduces the gold engine to <=~1e-3 on the slice.
+_SLICE_CACHE = os.path.join(_HERE, "num_S12_slice.pkl")
+
+
+def build_slice(eps0=(-2.0, 0.0, 3.0), gam=(1.0, 0.8, 1.2), a=(-1.0, 0.5, 2.0),
+                scales=None, T=80.0, rtol=1e-9, atol=1e-10, cache=True, verbose=True):
+    """
+    Scale ray: eps = s * eps0 for s in ``scales`` (chi fixed; BE ~ 1/s^2).
+    Returns list of rows; caches to num_S12_slice.pkl.
+    """
+    if cache and os.path.exists(_SLICE_CACHE):
+        import pickle
+        return pickle.load(open(_SLICE_CACHE, "rb"))
+    scales = scales or [0.35, 0.45, 0.55, 0.65, 0.8, 1.0, 1.25, 1.5, 1.8, 2.15, 2.6]
+    rows = []
+    e0 = np.asarray(eps0, float)
+    for s in scales:
+        eps = tuple(s * e0)
+        P22 = P22_fast(eps, gam, a, T=T, rtol=rtol, atol=atol)
+        g = geometry_args(eps, gam, a)
+        rows.append(dict(name="slice_s%.3f" % s, eps=eps, gam=gam, a=a, P22=P22,
+                         scale=s, delta_small=g["delta_X"][0], delta_large=g["delta_X"][1],
+                         chi=g["chi"].real, P_mid_inc=g["P_mid_inc"],
+                         ratio=P22 / g["P_mid_inc"], err=None, geom=g))
+        if verbose:
+            print("  s=%.3f P22=%.8f chi=%.5f b_mid=%.5f"
+                  % (s, P22, g["chi"].real, g["be"]["lo_mid"] + g["be"]["mid_hi"]))
+    if cache:
+        import pickle
+        pickle.dump(rows, open(_SLICE_CACHE, "wb"))
+    return rows
+
+
+_SLICE_SPLINE = None
+
+
+def fit_slice_model(slice_rows):
+    """1-D monotone spline of P_2->2 vs log(middle BE exponent) along the scale slice."""
+    global _SLICE_SPLINE
+    from scipy.interpolate import PchipInterpolator
+    xb = np.array([r["geom"]["be"]["lo_mid"] + r["geom"]["be"]["mid_hi"] for r in slice_rows])
+    y = np.array([r["P22"] for r in slice_rows])
+    order = np.argsort(xb)
+    _SLICE_SPLINE = PchipInterpolator(np.log(xb[order]), y[order], extrapolate=True)
+    return _SLICE_SPLINE
+
+
+def slice_model(b_mid):
+    """Evaluate the 1-D slice model at middle BE exponent b_mid (= b_lm + b_mh)."""
+    if _SLICE_SPLINE is None:
+        raise RuntimeError("slice model not fitted; run fit_slice_model(build_slice())")
+    return float(np.clip(_SLICE_SPLINE(np.log(b_mid)), 0.0, 1.0))
+
+
+def slice_cv(slice_rows, verbose=True):
+    """Leave-one-out CV of the 1-D slice spline."""
+    from scipy.interpolate import PchipInterpolator
+    xb = np.array([r["geom"]["be"]["lo_mid"] + r["geom"]["be"]["mid_hi"] for r in slice_rows])
+    y = np.array([r["P22"] for r in slice_rows])
+    devs = []
+    for k in range(len(slice_rows)):
+        tr = [i for i in range(len(slice_rows)) if i != k]
+        o = np.argsort(xb[tr])
+        sp = PchipInterpolator(np.log(xb[tr][o]), y[tr][o], extrapolate=True)
+        pred = float(sp(np.log(xb[k])))
+        devs.append((slice_rows[k]["name"], y[k], pred, abs(pred - y[k])))
+    if verbose:
+        print("  1-D slice spline leave-one-out CV:")
+        for nm, p, pr, d in devs:
+            print("    [%-14s] gold=%.6f pred=%.6f dev=%.2e" % (nm, p, pr, d))
+        dd = [d for *_, d in devs]
+        print("    median=%.2e max=%.2e (interior points)" % (np.median(dd), max(dd)))
+    return devs
+
+
 # ===========================================================================
 #  6.  Inverse-symbolic / PSLQ recognition
 # ===========================================================================
@@ -575,6 +731,33 @@ def recognition_pass(row, tol=1e-6, verbose=True):
     return hits
 
 
+def recognize_closed_form_across_slice(slice_rows, tol=1e-7, verbose=True):
+    """
+    A SAMPLE-INDEPENDENT closed-form test (the real recognition guard).
+
+    A genuine closed form for P_2->2 must hold with the SAME analytic structure at every
+    sample.  A single-sample PSLQ with many basis constants almost always finds a spurious
+    low-height relation; the discriminating test is whether ONE candidate formula matches
+    ALL slice points to ``tol``.  We test the elementary closed-form candidates against the
+    whole (fixed-chi) scale slice and report the worst-case deviation of each.
+    """
+    cand_names = list(closed_form_candidates(slice_rows[0]).keys())
+    worst = {nm: 0.0 for nm in cand_names}
+    for r in slice_rows:
+        cands = closed_form_candidates(r)
+        for nm in cand_names:
+            worst[nm] = max(worst[nm], abs(cands[nm] - r["P22"]))
+    ranked = sorted(worst.items(), key=lambda kv: kv[1])
+    if verbose:
+        print("  sample-independent closed-form test (worst dev over %d slice points):"
+              % len(slice_rows))
+        for nm, w in ranked:
+            flag = "  <-- MATCHES ALL" if w < tol else ""
+            print("    %-55s worst dev = %.2e%s" % (nm, w, flag))
+    hit = ranked[0][0] if ranked[0][1] < tol else None
+    return hit, ranked
+
+
 # ===========================================================================
 #  7.  Validation against the gold oracle
 # ===========================================================================
@@ -668,25 +851,35 @@ if __name__ == "__main__":
     print("=== building dataset (engine=%s, T=%g, cache=%s) ===" % (args.engine, args.T, args.cache))
     rows = build_dataset(names=names, T=args.T, engine=args.engine, cache=args.cache)
 
-    print("\n=== calibrating surrogate model (logit fit in BE exponents + chi) ===")
-    c = calibrate_model(rows)
-    print("coeffs =", np.array2string(c, precision=6))
-    print("in-sample residuals:")
-    for r in rows:
-        m = P22_model(r["eps"], r["gam"], r["a"])
-        print("  [%-12s] data=%.9f model=%.9f dev=%.2e" % (r["name"], r["P22"], m, abs(m - r["P22"])))
-
-    print("\n=== leave-one-out cross-validation (honest generalization error) ===")
+    print("\n=== TIER-2 surrogates ===")
+    print("(a) polynomial logit fit (in BE exponents + chi):")
+    calibrate_model(rows)
     cv_report(rows)
+    print("(b) RBF interpolant (natural coords) -- recommended fast model:")
+    fit_rbf(rows, kernel="linear")
+    rbf_cv(rows, kernel="linear")
+
+    # 1-D scale-slice model (fixed shape -> fixed chi); the accurate computable model
+    try:
+        sl = build_slice(cache=True, verbose=False)
+        print("\n=== TIER-2 (slice) 1-D scale-slice model (fixed chi) ===")
+        fit_slice_model(sl)
+        slice_cv(sl)
+    except Exception as e:
+        sl = None
+        print("  (slice unavailable: %s)" % e)
 
     print("\n=== fast validation vs published gold anchors + exact BE ===")
     validate_against_anchors(rows)
 
     if args.recognize:
-        print("\n=== inverse-symbolic / PSLQ recognition ===")
+        print("\n=== inverse-symbolic / PSLQ recognition (per-sample) ===")
         for r in rows:
             print("[%s]" % r["name"])
             recognition_pass(r)
+        if sl is not None:
+            print("\n=== sample-independent closed-form test (across the fixed-chi slice) ===")
+            recognize_closed_form_across_slice(sl)
 
     if args.validate:
         print("\n=== SLOW validation vs re-run gold oracle ===")

@@ -126,6 +126,28 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## WS-NUM completed (PA-4) — computable P_2->2 floor MET + clean negative + separation finding — 2026-06-01
+Deliverables experiments/num_S12.py, paper/num_S12_model.md (num_S12_dataset.pkl gitignored).
+- **FLOOR DELIVERABLE MET [gold]:** a trusted computable P_2->2(gamma,eps,a) (one adiabatic-IP pass,
+  T=80, rtol=1e-9, ~14s) validated vs the oracle across sep/width 0.1->4: canonical 1.6e-9, weak
+  1.1e-8, strong 7.8e-8, sampleB 2.1e-7, well_sep 5.8e-7; BE extreme survivals reproduce analytically.
+- **PARAMETRIZATION [established]:** the two window actions I_X = the two BE extreme-survival
+  exponents Sigma_lo, Sigma_hi (machine precision); the middle level is the shared partner of BOTH
+  windows (why its survival is the open COUPLED quantity).
+- **NEW [coordinator-VERIFIED]:** the Q4 cross-ratio chi is SCALE-INVARIANT (a pure SHAPE coordinate;
+  verified |Delta|=0 under gamma-scaling, 4e-16 under eps-scaling). P_2->2 SEPARATES as
+  (scale -> BE exponents) x (shape -> chi). On a fixed-shape ray (chi frozen) P_2->2 is a clean 1-D
+  function of the middle BE exponent (1-D slice model reproduces gold to median 2e-3). The natural
+  arguments of S_12 are thus {the two window actions, chi} -- exactly the OPEN_PROBLEM target args.
+- **RECOGNITION [clean NEGATIVE]:** no elementary closed form. DO/coherent-path candidates fail
+  sample-INDEPENDENTLY; single-sample PSLQ relations spurious. logit(P_2->2) only approx affine in
+  log(b_mid) with residual curvature = fingerprint of a transcendental connection coefficient. Deep-
+  adiabatic strata show a FINITE COHERENT FLOOR (P_2->2~0.01-0.03 while incoherent products ->0) =
+  the genuinely open transcendental content. Corroborates the confluent-Heun/conformal-block verdict.
+- WS-NUM provides the GOLD TARGETS for WS-PV/WS-CH to PSLQ named special-function constants against.
+- 4 of 5 workstreams done (WS-PV, WS-CH, WS-R, WS-NUM, all mutually consistent). Remaining: WS-PA1
+  (PA-0/1/2: rank + the PA-2 accessory-parameter-algebraicity pivot).
+
 ## WS-R completed — restart-structure tests (H-R3,H-R2 confirmed; H-R1 reframed) — 2026-06-01
 Deliverables paper/restart_structure.md, experiments/restart_probe.py. All measured in the
 convergent canonical frame (Coulomb-subtracted; T-convergence verified). Coordinator spot-checks pass.
