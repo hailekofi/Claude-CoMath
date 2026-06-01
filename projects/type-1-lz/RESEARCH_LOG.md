@@ -126,6 +126,36 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## WS-PA1 completed — PA-0/1/2 — PA-2 VERDICT: ALGEBRAIC (the make-or-break pivot) — 2026-06-01
+Deliverable paper/pa1_isomonodromy_foundation.md; coordinator verification experiments/pa2_accessory_algebraic.py.
+- **PA-0 [established; R8 TODO CLOSED — 3rd independent confirmation]:** cyclic-vector elimination
+  (two different cyclic vectors, both samples) => 3rd-order scalar Laplace ODE with ONE finite
+  singular point v_* (NOT an H0 eigenvalue), exponents {0,1,3}, NO log (Frobenius resonances auto-
+  satisfied + numerical loop monodromy ||M-I||~1e-13), + rank-2 irregular at v=inf. v_*=-748/375 (S1),
+  -112147/44000 (S2). (WS-E, WS-CH, WS-PA1 all agree on {0,1,3}.)
+- **PA-1 [analytically-argued]:** Painleve type = PAINLEVE V. The 3x3 is the HARNAD/middle-convolution
+  image of the 2x2 PV system (rank-2 irregular u-frame <=> unramified rank-1 irregular at v=inf +
+  one apparent point); the {0,1,3} apparent point is the middle-convolution signature; matches the
+  restart 2D {mid,.} reduction. **This OVERRULES WS-PV's 'not PV / rank-3' inference:** the linear
+  system IS rank-3 (WS-PV correct) but its ISOMONODROMY is PV via middle convolution (rank-3 systems
+  can have PV isomonodromy). => the PUBLISHED PV connection constants (Its-Lisovyy-Prokhorov;
+  Lisovyy-Naidiuk confluent-Heun) apply. [needs the decisive formula-evaluation test to confirm.]
+- **NODE DICTIONARY [coordinator-VERIFIED, both samples]:** the accessory point v_*=E_* = the doubly-
+  degenerate eigenvalue of H(u) at the UNIVERSAL REAL NODE u_* (THE EXACT CROSSING, the user's hint!).
+  Exact rational: canonical v_*=-748/375 at u_*=-187/750; sampleB -112147/44000 at -3031/4400.
+  THE EXACT CROSSING = THE ACCESSORY POINT. The whole arc closes.
+- **PA-2 VERDICT: ALGEBRAIC [coordinator-VERIFIED — the realistic-win branch]:** the accessory point
+  is the rational node eigenvalue; the ODE is built by rational ops from H0 and 1/a_j, so ALL local
+  data at v_* (the accessory parameter) is rational/algebraic in {gamma,eps,a}. The accessory
+  parameter is NOT a free transcendental modulus. => S_12 = a PV/c=1 connection coefficient with
+  ALGEBRAICALLY-FIXED monodromy data = a SPECIFIC NAMED constant (computable; not elementary, per
+  WS-E/WS-NUM benchmarks). Honest caveat (WS-PA1): algebraic data pins a specific named constant; it
+  does not make that constant elementary.
+- **ALL 5 WORKSTREAMS DONE.** Deliverable (named form + computable model) ACHIEVED. The ONE remaining
+  decisive step: evaluate the published PV/Lisovyy-Naidiuk connection formula at the algebraic
+  monodromy data (c_i exponents + the rational accessory parameter/node + the two {mid,.} shears) and
+  benchmark vs the oracle -> (a) confirms PV (WS-PA1) vs rank-3 (WS-PV), (b) writes S_12 EXPLICITLY.
+
 ## WS-NUM completed (PA-4) — computable P_2->2 floor MET + clean negative + separation finding — 2026-06-01
 Deliverables experiments/num_S12.py, paper/num_S12_model.md (num_S12_dataset.pkl gitignored).
 - **FLOOR DELIVERABLE MET [gold]:** a trusted computable P_2->2(gamma,eps,a) (one adiabatic-IP pass,
