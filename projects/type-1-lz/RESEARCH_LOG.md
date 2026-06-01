@@ -124,6 +124,30 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## WS-D completed + coordinator reflection — 2026-06-01
+Deliverable `paper/ws_d_nonabelian_E.md`; verification `experiments/ws_d_verification.py`.
+- **KEY CORRECTION (established):** Malikis–Cheianov's `Ê` is **Abelian** ([Ê,H]=0, Ê∈span{I,H,H²},
+  machine precision) — it is a Chernyak–Sinitsyn time-quadratic commuting partner re-read as
+  ε-translations. There is NO non-commuting generator for either model. ⇒ my earlier framing
+  ("the home-run needs a non-commuting Ê outside the ring") was a FALSE PREMISE. Corrected in
+  ring_structure.md / RESEARCH_PROGRAM.md narrative (to do at next consolidated integration).
+- **WS-D verdict (Type-1 cannot MC-factorize) UPHELD, but its obstruction legs were FLAWED:**
+  Coordinator reflection (physics-reflection role) caught it. c1 "rigidity/null-space 0" is WRONG
+  (fixing couplings+slopes leaves a 3-dim family; crossings DO move, rank 6→7). c2 "node" is not a
+  real blocker (a node = diabatic zero-coupling crossing = trivial 2-level event).
+- **REAL obstruction (numerically-supported, 14k-sample scan):** Type-1 crossing separation and
+  avoided-crossing width BOTH scale ~γ²/Δε ⇒ ratio bounded ~O(1) (median 0.5, 99%<2.3, max 4.2,
+  none>5). Crossings are PERMANENTLY marginally-overlapping ⇒ MC isolated-2-level limit UNREACHABLE
+  ⇒ exact S=∏S_ij obstructed (right reason). Also explains the empirical 15% (high-ratio tail) vs
+  85% (overlapping). Open: ANALYTIC proof of the sep~width~γ²/Δε co-scaling.
+- **Net for program:** O4 = FAIL (home run closed), now for a clean, correct reason. Strengthens
+  WS-E: the prefactor is a genuine genus-0 confluent-Heun/Kampé de Fériet connection coefficient
+  (BBGY: 3×3 = Kampé de Fériet F^{0:1;1}_{1:0;0}, reduces to ₁F₂ on ε₂=½(ε₁+ε₃) — a concrete
+  WS-C elementary-locus candidate). The "marginally-overlapping crossings" fact is itself a clean
+  structural theorem of Type-1 worth the paper.
+- **META (recurring):** accept sub-agent VERDICTS only after independently checking the load-bearing
+  leg; a correct conclusion can ride on a wrong argument.
+
 ## Gate-test #1 (genus of spectral curve) — function class CORRECTED — 2026-06-01
 Full result: `paper/gate_test_genus.md`. Ran the review's decisive test; it OVERTURNS the review's
 own A4 elliptic-refutation (in the constructive direction).
