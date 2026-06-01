@@ -126,6 +126,33 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## #2 implementation launched — restart-operator structure + 5 parallel workstreams — 2026-06-01
+User approved the open-problem plan with steers: Painleve-V/tau route + a PARALLEL direct
+confluent-Heun connection-coefficient track; PA-2 (Gaudin fixes accessory param algebraically) is the
+make-or-break; deliverable = named closed form (tau-function/connection coeff) + computable numerical
+model; fold in restart-operator insights; fire H-R1/2/3.
+
+RESTART-OPERATOR HYPOTHESIS CARDS (physics-intuition, conjecture):
+- H-R1 [lead]: restart at eps_i = (formal monodromy e^{2pi i c_i}, DIAGONAL) (x) (Stokes shears,
+  OFF-DIAGONAL), at the rank-2 irregular point u=inf (= the poles eps_i in lambda). Diagonal part is
+  ESTABLISHED: c_i = sum_j s_ij^2 (a_i-a_j) (signed BE) = the measured log-T drift of S. Off-diagonal
+  = Stokes multipliers = the confluent-Heun coefficient. Test: diagonal of restart = e^{2pi i c_i};
+  off-diagonal is TRIANGULAR (Stokes shear) in slope ordering, not dense.
+- H-R2: the two Stokes shears live in the {mid,lo} and {mid,hi} 2D carrier spaces (= WS-G's 12x13
+  joint, middle = shared partner); their non-commutative composition = S_12 = P_2->2. Test: off-diag
+  restart weight concentrates in the mid row/col; decoupling one outer (WS-C trivial-coupling) kills
+  one shear -> collapses joint -> elementary (matches 'elementary <=> a level decouples').
+- H-R3: form factor Gamma_j=(-u'(lambda_j))^{-1/2} is ANALYTIC at the poles (~(lambda-eps_i)); WKB
+  branch points are the TURNING points (-u'=0), not eps_i. So the off-diagonal is an irregular-point
+  Stokes effect, distinct from the turning-point (window/BE) branching.
+Physical payoff: target S_12 IS the Stokes multiplier sigma_{mid,.} of the irregular point, a 2D-reduced
+object; the Painleve/CH monodromy data = known formal exponents c_i + these two Stokes shears.
+
+WORKSTREAMS (parallel background agents): WS-PA1 (PA-0/1/2 foundation+pivot, critical path),
+WS-PV (Painleve-V tau + lit/irreducibility), WS-CH (direct confluent-Heun connection, parallel track),
+WS-NUM (high-precision S_12 + PSLQ, always-on), WS-R (H-R1/2/3 restart structure). See
+paper/OPEN_PROBLEM.md addendum.
+
 ## Q_restart / cyclic-monodromy line (user) — geometric backbone real, bare relation CONTENT-FREE — 2026-06-01
 Code: `experiments/q_restart_probe.py`. User intuition: lambda->u=n/p is degree-3 (3:1), so 3 LZ
 sweeps = 1 loop in lambda; the 'restart' at the poles eps_i + the U(3) fact (DPA)^3=I suggest a

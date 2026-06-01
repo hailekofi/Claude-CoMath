@@ -97,3 +97,44 @@ independent coordinator check of every load-bearing structural claim, tournament
 A *named* closed form (Painlevé-V τ / confluent-Heun connection coefficient with Gaudin-fixed data):
 plausible, contingent on PA-2 being algebraic — this is the realistic "win." A clean irreducibility
 theorem + a validated numerical model: the floor, and already a complete result.
+
+---
+
+## Addendum (user-approved, 2026-06-01): restart-operator structure + parallel tracks
+
+**Decisions:** (1) Painlevé-V/τ route favored, **plus a parallel direct confluent-Heun
+connection-coefficient track**. (2) PA-2 (Gaudin fixes the accessory parameter algebraically) is the
+agreed make-or-break. (3) Acceptable deliverable = a **named closed form** (τ-function / connection
+coefficient) **+ a computable numerical model**. (4) Fold in the restart-operator insights below;
+fire H-R1/H-R2/H-R3 as parallel workstreams.
+
+**Restart-operator structure (physical handle on `S₁₂`).** The single rank-2 irregular point at
+`u=∞` is, in `λ`, split across the three poles `ε_i` (`λ→ε_i ⟺ u→∞`). Its local data factorizes
+canonically as **(formal monodromy, diagonal) ⋉ (Stokes matrices, off-diagonal)**:
+- the **diagonal/formal** part is already identified — `e^{2πi c_i}`, `c_i=Σ_{j≠i}s_{ij}²(a_i−a_j)`
+  (the signed-BE Coulomb coefficient measured as the `log T` drift of `𝒮`); [established]
+- the **off-diagonal** part is the **Stokes shears in the 2D carrier-space pairs `{mid,lo}` and
+  `{mid,hi}`** — these *are* WS-G's `12×13` joint, and their non-commutative composition is `S₁₂≡P₂→₂`.
+  The middle level is the shared subdominant partner; that is *why* the joint is `12×13` and why
+  decoupling one outer link (WS-C trivial-coupling limit) collapses one shear → elementary. [conj]
+- the form factor `Γ_j=(−u'(λ_j))^{-1/2}` is analytic at the poles (`∝(λ−ε_i)`); the WKB
+  branch points are the turning points (`−u'=0`), not the `ε_i` — so the off-diagonal lives in the
+  **Stokes sectors at `∞`**, not the `Γ_j` branch. [conj]
+
+So the target `S₁₂` *is* the Stokes multiplier `σ_{mid,·}` of the irregular point — a concrete,
+2D-reduced object. PA-1/PA-2/PA-3 inherit this: the Painlevé-V/confluent-Heun **monodromy data are
+the formal exponents `c_i` (known) + these two Stokes shears**, and the connection coefficient is
+their composition.
+
+## Workstreams launched (parallel, 2026-06-01)
+- **WS-PA1** (critical path): PA-0+PA-1+PA-2 — re-derive the scalar Laplace ODE, verify the `{0,1,3}`
+  apparent singularity (closes R8 TODO), identify the Painlevé type, locate the accessory point vs
+  the node, and **test whether Gaudin fixes the accessory parameter algebraically** (the pivot).
+- **WS-PV** (PA-3+PA-5): Painlevé-V τ-function / `c=1` CFT connection route + literature/irreducibility.
+- **WS-CH** (parallel direct track): the confluent-Heun **central connection problem** attacked
+  directly (local solutions at the apparent singularity + irregular point; known CH connection results).
+- **WS-NUM** (PA-4, always-on): high-precision numerical `S₁₂(`window actions, cross-ratio`)` +
+  PSLQ/inverse-symbolic recognition → a computable `P₂→₂` regardless of closed form.
+- **WS-R** (H-R1/H-R2/H-R3): extract the restart factor from `𝒮_canon`; test the
+  (formal-monodromy diagonal `e^{2πi c_i}`) ⋉ (triangular Stokes shear in `{mid,·}`) structure, the
+  mid-pair concentration + decoupling collapse, and the form-factor/branch-point loci.
