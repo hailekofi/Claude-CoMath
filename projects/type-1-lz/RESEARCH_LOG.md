@@ -114,6 +114,30 @@ The literature points to a different top strategy: the **KZ/Gaudin monodromy rou
 targets a closed amplitude in {γ,ε,a} + a handful of monodromy/period integrals directly. See
 strategy memo `paper/type1_lz_strategy_memo.tex`.
 
+## Deep-verification review of the KZ line — 2026-06-01
+Full review: `paper/REVIEW_kz_line.md`. Peer-review BEFORE theory-building (user-requested).
+**SURVIVES (keep, established/analytically-derived):** P = connection/Stokes coefficient of the
+rank-2 irregular ODE at u=∞; C-S τ-deformations are isomonodromic (preserve P); commuting-partner
+Abelian ceiling; "closed form in special functions, not elementary" at the existence level.
+**REVISE/REFUTE (→ conjecture / one sub-claim refuted):**
+- A2 "Fuchsian KZ reduction": naive Laplace of i ψ'=(H₀+uA)ψ → Aφ'=(H₀−iλ)φ, coeff LINEAR in λ ⇒
+  still IRREGULAR at λ=∞, NOT Fuchsian. KZ identification borrowed from BBGY hyperbolic; doesn't
+  transfer. Use "isomonodromy" (true) not "KZ" (unproven here).
+- A3 "explicit product-form Euler integral": N=3 Laplace transform is 3rd-order; solution generically
+  NOT ∏(λ−ε_i)^{α_i}. Product form only on a degenerate 2nd-order (hypergeometric) locus = the
+  Lin-Sinitsyn ε₀=0,g₁₃=0 point already shown OUTSIDE Type-1. Writing the integrand is circular.
+- A4 "Kampé de Fériet": **REFUTED as stated.** Phase curve μ²=Q₄ is GENUS-1 ELLIPTIC (4 distinct
+  roots verified, both samples). Kampé/₂F₁ live on genus-0. Live class = Heun/confluent-Heun /
+  elliptic-theta, or (worst case) a Painlevé-type isomonodromic τ-function. BBGY's Kampé came from
+  the rational (genus-0) hyperbolic model; linear/Cauchy Type-1 is genuinely elliptic.
+**VERDICT: do NOT build theory on "Kampé de Fériet."** Framework ready; function-class/representation
+not. Gate theory-building on: (1) genus+Picard-Fuchs order of the OFF-diagonal governing curve
+(sextic gap discriminant), (2) does the N=3 λ-ODE reduce to 2nd order on benchmark strata?,
+(3) saddle↔Q₄-window check for any candidate integrand.
+**META (recurring error):** committing to a special-function class by analogy to an adjacent solved
+model without computing the monodromy/genus of OUR curve (same class as the falsified product
+ansatze). Standing checklist item added.
+
 ## Ring structure → commuting-partner viability verdict — 2026-06-01
 Code: `experiments/ring_structure.{md,py}`. User's lever verified (machine precision):
 - Type-1 family {H^(a)(u)} is a COMMUTING RING (max||[H^a,H^b]||=9e-16); spans full 3-dim commutant.

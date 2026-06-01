@@ -1,5 +1,17 @@
 # From the ring structure to a constructive solution: isomonodromy, KZ, and Kampé de Fériet
 
+> **⚠ Corrected after peer review (`REVIEW_kz_line.md`, 2026-06-01).** The *framework* below
+> (P = connection/Stokes coefficient of the rank-2 irregular ODE; τ-deformations are isomonodromic;
+> commuting-partner Abelian ceiling) **survives review**. But the *specific* claims are demoted:
+> "Fuchsian KZ reduction" and "explicit product-form Euler integral" are **unproven for the linear
+> model** (a naive Laplace transform stays irregular; the N=3 transform is 3rd-order, generically
+> not product-form), and **"Kampé de Fériet" is refuted as stated** — the phase curve `μ²=Q₄` is
+> **genus-1 elliptic** (4 distinct roots), so the live class is **Heun/elliptic or a Painlevé-type
+> isomonodromic τ-function**, not a genus-0 two-variable hypergeometric. Read §§3–4 as the
+> *genus-0 special case*; the generic Type-1 object is higher. Do not build theory on "Kampé de
+> Fériet" until the genus/monodromy gate (REVIEW §"Decisive tests") is passed.
+
+
 This note expands the one-line claim that "P is an isomonodromy/KZ object, generically Kampé de
 Fériet." It (1) explains what an isomonodromy/KZ problem is, (2) defines the Kampé de Fériet
 function, and (3) shows concretely how this machinery *supports a solution* for the Type-1 N=3
