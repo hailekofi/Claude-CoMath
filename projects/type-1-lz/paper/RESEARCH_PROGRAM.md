@@ -236,6 +236,14 @@ outputs · PASS/FAIL gate · parallel? · escalation**.
 
 ## 8. Definition of done / deliverables
 
+**Decisions (user, 2026-06-01):** (1) WS-F + WS-A + WS-D launched now as parallel background agents.
+(2) **WS-D is the emphasized track** (run literature-first as a probe), weighted above the WS-A→E
+spine. (3) Target paper = **honest but maximally elegant/parsimonious**; "elementary everywhere" is
+too ambitious as a requirement, but hope for the best and present the cleanest true result. (4) WS-F
+**ports onto the project interaction-picture harness** (`assay/ip.py`) and makes all improvements
+needed so the gold-standard oracle is highly accurate and faithful to the Type-1 construction.
+
+
 1. **Living working paper** (`paper/type1_lz_working_paper.tex`) — assumptions → model → results →
    predictions → comparison, with provenance margin notes and links to every derivation/script,
    passing `physics-reflection`.
