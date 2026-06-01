@@ -111,8 +111,12 @@ fire H-R1/H-R2/H-R3 as parallel workstreams.
 **Restart-operator structure (physical handle on `S₁₂`).** The single rank-2 irregular point at
 `u=∞` is, in `λ`, split across the three poles `ε_i` (`λ→ε_i ⟺ u→∞`). Its local data factorizes
 canonically as **(formal monodromy, diagonal) ⋉ (Stokes matrices, off-diagonal)**:
-- the **diagonal/formal** part is already identified — `e^{2πi c_i}`, `c_i=Σ_{j≠i}s_{ij}²(a_i−a_j)`
-  (the signed-BE Coulomb coefficient measured as the `log T` drift of `𝒮`); [established]
+- the **diagonal/formal** part is the formal monodromy `e^{2πi c_i}`, `c_i=Σ_{j≠i}s_{ij}²(a_i−a_j)`
+  (signed-BE Coulomb coefficient, the `log T` drift). **[WS-R refinement]** this `M_form` is a factor of
+  the *central connection matrix* `C` (formal Thomé basis at `∞` ↔ Frobenius at the apparent point;
+  WS-CH's `C=M_form·𝒮^{(mid,hi)}·𝒮^{(mid,lo)}`), **not** a factor of the regularized scattering matrix
+  `𝒮_canon` (where it is subtracted); the `𝒮_canon` off-diagonal is **cyclic-permutation × the two
+  mid-pair shears** (NOT triangular). Carry the connection-matrix `C` framing into PA-3/CH work. [established]
 - the **off-diagonal** part is the **Stokes shears in the 2D carrier-space pairs `{mid,lo}` and
   `{mid,hi}`** — these *are* WS-G's `12×13` joint, and their non-commutative composition is `S₁₂≡P₂→₂`.
   The middle level is the shared subdominant partner; that is *why* the joint is `12×13` and why
