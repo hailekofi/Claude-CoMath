@@ -60,7 +60,7 @@ TODO.)*
 isomonodromic form; determine which Painlevé equation governs its deformation (test Painlevé V vs
 III/IV by the irregular Katz invariant / the singularity signature). Locate `v_*` relative to the
 **universal real node** (is the accessory point the exact crossing?). *Gate:* a definite Painlevé
-type + the monodromy/Stokes exponents expressed in `{γ,ε,a}` (expected `∝ Γ_ij`).
+type + the monodromy/Stokes exponents expressed in `{γ,ε,a}` (expected `∝` the BE exponents `s_ij²|a_i−a_j|`).
 
 **PA-2 — Does the Gaudin data fix the accessory parameter?** The make-or-break. Test whether the
 Cauchy/Gaudin structure (rational spectral curve `(E,u)=(m/p,n/p)`; the Abelian ring; the BE +

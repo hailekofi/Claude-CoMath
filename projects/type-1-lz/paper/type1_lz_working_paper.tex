@@ -7,9 +7,12 @@
 \usepackage{xcolor}
 \newcommand{\pnote}[1]{\textcolor{gray}{\footnotesize\,[#1]}}
 \newcommand{\eps}{\varepsilon}
-\newcommand{\Gam}{\Gamma}
+\newcommand{\Scat}{\mathcal{S}}   % scattering matrix (was S); Gamma RESERVED for the Cauchy form factor
 \newcommand{\Pmid}{P_{2\to2}}
 \newcommand{\half}{\tfrac12}
+% Nomenclature (see NOMENCLATURE.md): s_{ij}=gamma_i gamma_j/(eps_i-eps_j) signed Cauchy half-width;
+% w_{ij}=|2 s_{ij}| width; BE exponent = s_{ij}^2 |a_i-a_j| (NOT Gamma); scattering matrix = \Scat;
+% Gamma_j = canonical Cauchy form factor, S_{ij}=Gamma_i Gamma_j/(lambda_i-lambda_j).
 
 \begin{document}
 
@@ -28,9 +31,9 @@ classical Brundobler--Elser (BE) factors; the open content is the middle-level s
 one off-diagonal. We show: (i) the integrable (commuting-ring) structure is \emph{Abelian} and fixes
 only the spectral data (BE survivals, WKB phases), never the transition amplitudes; (ii) the
 spectral curve is genus-0 rational and carries a \emph{universal real exact level crossing}; (iii)
-the avoided-crossing widths are \emph{slope-independent}, $w_{ij}=2|\gamma_i\gamma_j|/|\eps_i-\eps_j|$,
+the avoided-crossing widths are \emph{slope-independent}, $w_{ij}=|2s_{ij}|=2|\gamma_i\gamma_j|/|\eps_i-\eps_j|$,
 forcing the crossings to be permanently marginally overlapping, so no exact factorization
-$S=\prod S_{ij}$ exists; (iv) the irreducible content is the holonomy of a single $12{\times}13$
+$\Scat=\prod \Scat_{ij}$ exists; (iv) the irreducible content is the holonomy of a single $12{\times}13$
 spectral-network \emph{joint}, equal to the off-diagonal Stokes coefficient of a rank-2 irregular
 point of a genuinely three-level system --- a genus-0 confluent-Heun object \emph{one accessory
 parameter above} the ${}_1F_2$/Kamp\'e de F\'eriet of the solvable (tridiagonal) cousins; and (v) a
@@ -52,15 +55,16 @@ $H(u)=H_0+uA$, $A=\mathrm{diag}(a_i)$, with the Cauchy/Gaudin coupling
 $(H_0)_{ij}=\gamma_i\gamma_j(a_i-a_j)/(\eps_i-\eps_j)$ and
 $(H_0)_{ii}=-\sum_{k\ne i}\gamma_k^2(a_i-a_k)/(\eps_i-\eps_k)$; the observable
 $P_{x\to j}=|f_j(+\infty)|^2$ is doubly stochastic on four physical parameters. The two
-extreme-slope survivals are the BE law $P=\prod_m e^{-2\pi\Gam_{nm}}$,
-$\Gam_{ij}=\gamma_i^2\gamma_j^2|a_i-a_j|/(\eps_i-\eps_j)^2$. The middle survival $\Pmid$ and one
-off-diagonal are open. \pnote{model+BE from project brief; standard}
+extreme-slope survivals are the BE law $P=\prod_m e^{-2\pi\, s_{nm}^2|a_n-a_m|}$, where
+$s_{ij}=\gamma_i\gamma_j/(\eps_i-\eps_j)$ is the signed Cauchy half-width
+($w_{ij}=|2s_{ij}|$) and $s_{ij}^2|a_i-a_j|$ the BE pairwise exponent. The middle survival $\Pmid$
+and one off-diagonal are open. \pnote{model+BE from project brief; standard}
 
 \section{Framework: $P$ as Stokes data}
 $i\,\psi'(u)=(H_0+uA)\psi$ has entire coefficients, hence a \emph{single} irregular singular point at
 $u=\infty$ of Poincar\'e rank $2$ (for $N{=}2$ this is Weber's equation and the LZ factor is its
-Stokes multiplier). Thus $P_{ij}=|S_{ij}|^2$, with $S$ the connection across $\infty$.\pnote{F1, AD;
-kz\_isomonodromy\_picture.md} The Chernyak--Sinitsyn $\tau$-deformations that preserve $P$ are
+Stokes multiplier). Thus $P_{ij}=|\Scat_{ij}|^2$, with $\Scat$ the scattering connection across
+$\infty$.\pnote{F1, AD; kz\_isomonodromy\_picture.md} The Chernyak--Sinitsyn $\tau$-deformations that preserve $P$ are
 isomonodromic. The whole question is the off-diagonal of this single irregular connection.
 
 \section{Results}
@@ -91,13 +95,13 @@ yet a proof}
 \subsection{Slope-free widths $\Rightarrow$ permanent overlap $\Rightarrow$ no factorization}
 \textbf{R4 [EST].} The avoided-crossing width is slope-independent,
 \begin{equation}
-w_{ij}=\frac{2|V_{ij}|}{|a_i-a_j|}=\frac{2|\gamma_i\gamma_j|}{|\eps_i-\eps_j|},
+w_{ij}=\frac{2|V_{ij}|}{|a_i-a_j|}=|2s_{ij}|=\frac{2|\gamma_i\gamma_j|}{|\eps_i-\eps_j|},
 \end{equation}
 the slopes cancelling exactly.\pnote{coscaling\_derivation.md, symbolic} Both crossing separations
 and widths scale as $\gamma^2/\Delta\eps$, so $\mathrm{sep}/w$ is a dimensionless shape function.
-\textbf{R5 [NS].} On the genuine-LZ locus (all $\Gam_{ij}=O(1)$) the closest crossing pair is always
-within $\sim1.6$ widths ($35$k samples); \emph{at least two crossings are permanently marginally
-overlapping}. Hence \textbf{no exact $S=\prod_{i<j}S_{ij}$ exists}; the Malikis--Cheianov
+\textbf{R5 [NS].} On the genuine-LZ locus (all BE exponents $s_{ij}^2|a_i-a_j|=O(1)$) the closest
+crossing pair is always within $\sim1.6$ widths ($35$k samples); \emph{at least two crossings are
+permanently marginally overlapping}. Hence \textbf{no exact $\Scat=\prod_{i<j}\Scat_{ij}$ exists}; the Malikis--Cheianov
 ``isolated 2-level'' limit is unreachable in Type-1.\pnote{coscaling; ws\_d} \textbf{R6 [EST].}
 Equivalently, Type-1 is \emph{never tridiagonal}: the extreme--extreme Cauchy coupling $V_{02}$ is
 nonzero and \emph{dominant} (canonical $0.72>0.60>0.48$); every solvable cousin is tridiagonal.
@@ -125,8 +129,9 @@ $[K,K]\ne0$ is coordinator-verified}
 \textbf{R9 [NS].} \emph{Elementary $\Leftrightarrow$ a level decouples.} The factorizable locus, the
 joint-free locus, and the trivial-middle-coupling locus coincide and are the \emph{boundary} of the
 genuine-LZ region (one middle coupling $\to0$); there is no interior elementary locus. Factorization
-tracks the middle coupling, not the separation [Pearson$(\log(\text{enh}-1),\log\Gam_{\rm mid,min})
-{=}{+}0.51$ vs $\log(\mathrm{sep}/w){=}{+}0.015$]. The char-poly quadratic factor is irreducible over
+tracks the middle coupling, not the separation [Pearson$(\log(\text{enh}-1),\,\log$ of the smaller
+middle BE exponent $s_{\rm mid,\cdot}^2|a_{\rm mid}-a_\cdot|){=}{+}0.51$ vs $\log(\mathrm{sep}/w){=}{+}0.015$].
+The char-poly quadratic factor is irreducible over
 $\mathbb{Q}(\gamma,\eps,a)$. BBGY's $\eps_2{=}\half(\eps_1{+}\eps_3)$ reduction does \emph{not}
 transfer to the linear model.\pnote{ws\_c\_factorization\_locus.md} \textbf{R10 [NS].} The
 prefactor is large and overlap-driven: $\Pmid/\Pmid^{\rm inc}=2.5$--$130\times$, pinned by a

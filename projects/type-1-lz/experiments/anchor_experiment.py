@@ -28,8 +28,8 @@ def type1(eps, gam, a):
     return H0, np.diag(a)
 
 
-def Gamma(eps, gam, a, i, j):
-    """Pairwise Brundobler-Elser exponent Gamma_ij."""
+def be_exp(eps, gam, a, i, j):
+    """Pairwise Brundobler-Elser exponent be_exp_ij."""
     return gam[i] ** 2 * gam[j] ** 2 * abs(a[i] - a[j]) / (eps[i] - eps[j]) ** 2
 
 
@@ -69,9 +69,9 @@ if __name__ == "__main__":
         H0, _ = type1(eps, gam, a)
         d = to_CS_frame(H0, a); lo, mid, hi = d["order"]
         P = benchmark_P(eps, gam, a)
-        BE_lo = np.exp(-2 * np.pi * (Gamma(eps, gam, a, lo, mid) + Gamma(eps, gam, a, lo, hi)))
-        BE_hi = np.exp(-2 * np.pi * (Gamma(eps, gam, a, hi, mid) + Gamma(eps, gam, a, hi, lo)))
-        inc   = np.exp(-2 * np.pi * (Gamma(eps, gam, a, mid, lo) + Gamma(eps, gam, a, mid, hi)))
+        BE_lo = np.exp(-2 * np.pi * (be_exp(eps, gam, a, lo, mid) + be_exp(eps, gam, a, lo, hi)))
+        BE_hi = np.exp(-2 * np.pi * (be_exp(eps, gam, a, hi, mid) + be_exp(eps, gam, a, hi, lo)))
+        inc   = np.exp(-2 * np.pi * (be_exp(eps, gam, a, mid, lo) + be_exp(eps, gam, a, mid, hi)))
         print(f"\n[{lbl}]  C-S frame: eps_CS={d['eps_CS']:+.4f}, g_OUTER={d['g_OUTER']:+.4f} (never 0 in Type-1)")
         print(f"  calib  P_lo={P[lo,lo]:.6f} (BE {BE_lo:.6f})   P_hi={P[hi,hi]:.6f} (BE {BE_hi:.6f})")
         print(f"  OPEN   P_mid={P[mid,mid]:.6f}  incoherent={inc:.6f}  ratio={P[mid,mid]/inc:.2f}")

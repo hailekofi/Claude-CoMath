@@ -3,13 +3,13 @@ Co-scaling derivation for the Type-1 N=3 crossing geometry (supports the WS-D ob
 
 Establishes:
   (L)  WIDTH LEMMA [established, exact]:  w_ij = 2|g_i g_j|/|e_i-e_j|  (slope-INDEPENDENT).
-       w_ij is the primary width variable; the LZ exponent Gamma_ij keeps its established meaning
-       Gamma_ij = g_i^2 g_j^2 |a_i-a_j|/(e_i-e_j)^2 (used only for the genuine-LZ constraint).
+       w_ij is the primary width variable; the LZ exponent be_exp_ij keeps its established meaning
+       be_exp_ij = g_i^2 g_j^2 |a_i-a_j|/(e_i-e_j)^2 (used only for the genuine-LZ constraint).
   (S)  scale-invariance: sep/width is invariant under independent rescaling of g, e, a.
   (O)  OBSTRUCTION [analytic backbone + numerically-supported bound]: on the genuine-LZ locus
-       (all Gamma_ij = O(1)) the closest pair of crossings is always within ~1.6 widths
+       (all be_exp_ij = O(1)) the closest pair of crossings is always within ~1.6 widths
        => at least two crossings are PERMANENTLY marginally-overlapping => MC's all-isolated
-       configuration is unreachable.  The degenerate-slope "escape" drives Gamma->0 (trivial).
+       configuration is unreachable.  The degenerate-slope "escape" drives be_exp->0 (trivial).
 numpy only.
 """
 import numpy as np
@@ -40,7 +40,7 @@ def genuine_LZ_bound(N=400000, Gmin=0.2, Gmax=5.0, seed=3):
         r, gmin, gmax = sep_over_width(g, e, a)
         if Gmin <= gmin and gmax <= Gmax and np.isfinite(r): rr.append(r)
     rr = np.array(rr)
-    print(f"(O) genuine-LZ locus (Gamma in [{Gmin},{Gmax}]): {len(rr)} samples")
+    print(f"(O) genuine-LZ locus (be_exp in [{Gmin},{Gmax}]): {len(rr)} samples")
     print(f"    sep/width  median={np.median(rr):.2f}  99%={np.percentile(rr,99):.2f}  "
           f"max={rr.max():.2f}  frac(>5)={np.mean(rr>5):.5f}  -> bounded ~O(1)")
 

@@ -17,7 +17,9 @@ intuition`), reflect, and tournament them. Awaiting user steer on which sub-line
   is the **Type-1** property; Type-1 matrices form a **commuting family** (integrability).
   [LZ_summary.tex gives the augmented-ODE solver in the gauged adiabatic basis; 2N−1 ODEs.]
 - **Observable**: P_{x→j}=|f_j(+∞)|², the N×N transition matrix (rows sum to 1).
-- **Γ_ij = γᵢ²γⱼ²|aᵢ−aⱼ|/(εᵢ−εⱼ)²** (elementary, no elliptic integral).
+- **BE pairwise exponent = s_ij²·|aᵢ−aⱼ|**, with **s_ij = γᵢγⱼ/(εᵢ−εⱼ)** (signed Cauchy half-width)
+  and **w_ij = |2 s_ij|** (elementary). [NOMENCLATURE: Γ is RESERVED for the canonical Cauchy form
+  factor Γ_j and S_ij=Γ_iΓ_j/(λ_i−λ_j); scattering matrix = 𝒮. See `NOMENCLATURE.md`.]
 - **Sextic gap polynomial** (Type1 Note): Δ⁶−2A(t)Δ⁴+A(t)²Δ²−D(t)=0, A=½(3 tr H²−(tr H)²),
   D=Disc χ_H — universal for any 3×3 pencil; explains the 16/28 monomial sparsity. Pairwise
   WKB lives on this explicit rational cover; **virtual turning points / global selector**
@@ -304,7 +306,7 @@ Deliverable `paper/ws_a_riemann_scheme.md`. Claims structurally forced (H(u) pol
   Heun needs regular singular points; the linear model is the pure single-irregular confluent case.
   BBGY's Kampé de Fériet was the hyperbolic regular+irregular model.)
 - **Γ-dictionary confirmed (corrected):** diagonal exponent ρ_i=−i·b1_i (signed Γ row sum);
-  off-diagonal Weber/Stokes exponent = Γ_ij = BE rate. These are residues of the ACTION/Stokes
+  off-diagonal Weber/Stokes exponent = the BE rate s_ij^2|a_i-a_j|. These are residues of the ACTION/Stokes
   one-form, NOT the geometric connection (adiabatic transport ~1/u² ⇒ no simple-pole residue).
   Strengthens E1, no contradiction.
 - **CORRECTS my framing (candor):** the exact-crossing NODE is an ORDINARY point of the honest 3×3

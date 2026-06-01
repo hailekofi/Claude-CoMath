@@ -15,45 +15,45 @@ gap `√((a_i−a_j)²(u−u_ij)² + 4V_ij²)` is within O(1) of its minimum `2|
 w_ij = 2|V_ij|/|a_i−a_j| = 2|γ_iγ_j(a_i−a_j)/(ε_i−ε_j)| / |a_i−a_j| = 2|γ_iγ_j| / |ε_i−ε_j|.
 ```
 The slope difference **cancels exactly** (symbolic, `coscaling.py`): the avoided-crossing width
-`w_ij` depends only on `(γ,ε)`. By contrast the *adiabaticity* of each crossing — the established
-BE/LZ exponent `Γ_ij = γ_i²γ_j²|a_i−a_j|/(ε_i−ε_j)²`, the same `Γ_ij` that appears in the survival
-probabilities — carries the slope dependence (`∝ |a_i−a_j|`). So in Type-1 the **widths are
-slope-free** while the slopes control only the crossing *positions* and the LZ adiabaticity. (We use
-`w_ij` as the primary geometric variable throughout; `Γ_ij` keeps its established meaning only.)
+`w_ij` depends only on `(γ,ε)`. By contrast the *adiabaticity* of each crossing — the BE pairwise
+exponent `s_ij²|a_i−a_j|` (the LZ exponent that appears in the survival probabilities) — carries
+the slope dependence (`∝ |a_i−a_j|`). So in Type-1 the **widths are slope-free** while the slopes
+control only the crossing *positions* and the LZ adiabaticity. (`s_ij=γ_iγ_j/(ε_i−ε_j)`,
+`w_ij=|2s_ij|`; see `NOMENCLATURE.md`. `Γ` is reserved for the Cauchy form factor and is not used here.)
 
 ## Scale-invariance — [analytic]
 `sep/width` is invariant under each independent rescaling `γ→λγ`, `ε→νε`, `a→μa` (verified):
-`w ∼ γ²/Δε`, and `s_i ∼ γ²·Δa/Δε` gives `u_ij ∼ γ²/Δε` — **both the separations and the widths
+`w ∼ γ²/Δε`, and the offsets `(H₀)_ii ∼ γ²·Δa/Δε` give `u_ij ∼ γ²/Δε` — **both the separations and the widths
 carry the same scale `γ²/Δε`, with the slope scale cancelling**. Hence `sep/width` is a
 *dimensionless shape function* of the parameter ratios; no overall scaling can grow it.
 
 ## Theorem (permanently marginally-overlapping crossings) — [analytic backbone + numerically-supported bound]
-On the **genuine-LZ locus** — where all three crossings are real Landau–Zener events,
-`Γ_ij ∈ [Γ_min, Γ_max] ⊂ (0,∞)` — the closest pair of crossings is always within an O(1) multiple
+On the **genuine-LZ locus** — where all three BE exponents `s_ij²|a_i−a_j| ∈ [g_min, g_max] ⊂ (0,∞)`
+(real Landau–Zener events) — the closest pair of crossings is always within an O(1) multiple
 of the largest width:
 ```
- min_{adjacent} |u_ij − u_kl| / max_ij w_ij  ≤  C ≈ 1.6    (35k samples, Γ_ij∈[0.2,5]; median 0.20).
+ min_{adjacent} |u_ij − u_kl| / max_ij w_ij  ≤  C ≈ 1.6   (35k samples, s_ij²|a_i−a_j|∈[0.2,5]; median 0.20).
 ```
 **At least two of the three crossings are always marginally-overlapping.** Therefore the
 Malikis–Cheianov configuration — *all three crossings simultaneously isolated and each a genuine
 2-level LZ* — **does not exist anywhere in the Type-1 N=3 parameter space**, and the exact product
-`S = ∏_{i<j} S_ij` is unreachable. [This is the corrected, sharp form of the WS-D obstruction.]
+`𝒮 = ∏_{i<j} 𝒮_ij` is unreachable. [This is the corrected, sharp form of the WS-D obstruction.]
 
 ### Why the obvious escape fails (loophole closed)
 One *can* send a single crossing to infinity via the degenerate-slope limit `a_i→a_j` (`u_ij→∞`).
-But there the LZ exponent `Γ_ij = γ_i²γ_j²|a_i−a_j|/(ε_i−ε_j)² → 0` (as `a_i→a_j`): the runaway
+But there the BE exponent `s_ij²|a_i−a_j| → 0` (as `a_i→a_j`): the runaway
 crossing becomes a **trivial diabatic pass-through**, not an MC 2-level event — and the *other two*
 crossings stay within ~1.6 widths
 (`min`-separation picks the close pair). So separating any crossing either makes it trivial or
 leaves a marginally-overlapping pair behind. The genuine-LZ bound is robust (and *tighter*, 1.6,
-than the unconstrained scan's 4.2, precisely because the high-ratio tail there had some `Γ_ij`
+than the unconstrained scan's 4.2, precisely because the high-ratio tail there had some BE exponent
 outside `[0.2,5]`).
 
 ## Evidence ladder
-- Width lemma + `Γ`–width–slope relation + scale-invariance: **analytically-derived (exact)**.
+- Width lemma + width–BE-exponent–slope relation + scale-invariance: **analytically-derived (exact)**.
 - The O(1) bound constant (`≈1.6`) on the genuine-LZ locus: **numerically-supported** (35k samples;
   a fully analytic `sup` over shape space is the remaining open piece, but the *mechanism*
-  — common scale `γ²/Δε`, regular off the slope-degenerate boundary where `Γ→0` — is analytic).
+  — common scale `γ²/Δε`, regular off the slope-degenerate boundary where the BE exponent `→0` — is analytic).
 
 ## Consequence for the program
 This upgrades the obstruction theorem (O4 = FAIL) and gives a clean, quotable physical statement:
@@ -61,5 +61,5 @@ This upgrades the obstruction theorem (O4 = FAIL) and gives a clean, quotable ph
 slope-free), so Type-1 crossings are permanently marginally-overlapping** — the structural reason
 Type-1 sits outside the factorizable ("constellation") class and why its middle-survival prefactor
 is an irreducible genus-0 3-level-Weber Stokes connection coefficient (WS-A), not a product of
-two-level factors. It also explains the empirical 15/85 split (the 15% are the high-`Γ`-spread tail
-where the product is *approximately* good, never exact).
+two-level factors. It also explains the empirical 15/85 split (the 15% are the high-(BE-exponent)-spread
+tail where the product is *approximately* good, never exact).
