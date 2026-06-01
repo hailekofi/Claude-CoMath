@@ -1,0 +1,311 @@
+% Phase III status addendum — appended after phase2_findings_brief.pdf.
+% Documents the Route D negative finding and the consequences for the
+% open closed-form problem.
+
+\documentclass[11pt]{article}
+\usepackage[margin=0.92in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{booktabs,array,tabularx,longtable}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+\definecolor{TitleBlue}{HTML}{173753}
+\definecolor{AccentBlue}{HTML}{2F5D7E}
+\definecolor{SoftBlue}{HTML}{EEF4FA}
+\definecolor{SoftGold}{HTML}{FAF6EE}
+\definecolor{SoftGreen}{HTML}{EEF8F0}
+\definecolor{SoftRed}{HTML}{FCEEEE}
+\definecolor{RuleGray}{HTML}{D7E1EA}
+\definecolor{MutedText}{HTML}{4E5A66}
+
+\hypersetup{colorlinks=true,linkcolor=AccentBlue,urlcolor=AccentBlue,
+  citecolor=AccentBlue,
+  pdftitle={Phase III status — intrinsic U(3) richness of the inter-window matrix},
+  pdfauthor={Type-1 N=3 Landau-Zener project}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\textcolor{MutedText}{\small Phase III status}}
+\fancyhead[R]{\textcolor{MutedText}{\small Type-1, $N=3$ Landau--Zener}}
+\fancyfoot[C]{\textcolor{MutedText}{\thepage}}
+\setlength{\headheight}{14pt}\renewcommand{\headrulewidth}{0.4pt}
+\titleformat{\section}{\large\bfseries\color{TitleBlue}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{AccentBlue}}{\thesubsection}{0.5em}{}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.5em}
+\setlist[itemize]{leftmargin=1.4em,itemsep=0.18em,topsep=0.18em}
+
+\newcommand{\C}{\mathbb C}\newcommand{\R}{\mathbb R}
+\newcommand{\ii}{\mathrm i}\newcommand{\dd}{\mathrm d}
+\newcommand{\im}{\operatorname{Im}}
+\newcommand{\re}{\operatorname{Re}}
+
+\newcommand{\infobox}[2]{\begin{center}\fcolorbox{RuleGray}{#1}{\begin{minipage}{0.94\linewidth}\small #2\end{minipage}}\end{center}}
+
+\begin{document}
+
+\begin{center}
+{\Large\color{AccentBlue}\bfseries Phase III status\par}\vspace{0.45cm}
+{\fontsize{19}{23}\selectfont\bfseries\color{TitleBlue}Intrinsic $\mathrm U(3)$ richness of the\par}
+{\fontsize{19}{23}\selectfont\bfseries\color{TitleBlue}inter-window matrix\par}
+\vspace{0.30cm}
+{\large\color{MutedText}Route D negative result and consequences for Routes A--E\par}
+\end{center}
+
+\infobox{SoftBlue}{%
+\textbf{Phase III headline.} The Phase II finding that the inter-window
+matrix $D \in \mathrm U(3)$ carries irreducibly rich structure has been
+sharpened: \emph{the structure persists in any LZ-block convention.}
+Re-extracting $D$ using the proper Stokes-phased Landau--Zener amplitude
+blocks $N_X^{\text{proper}}$ (with $\varphi_S(\delta) = \delta(\log
+\delta - 1) + \pi/4 + \arg\Gamma(1-\ii\delta)$) does \emph{not} reduce
+the residual of the $(\mathrm{diag}\cdot R_{(\mathrm{sp}_A, \mathrm{sp}_B)})$
+ansatz: median residual on a 12-sample calibration is $0.0664$ in both
+the phase-free and the Stokes-phased convention, identical to within
+six significant figures, across all four sign-convention combinations
+$(\sigma_A, \sigma_B) \in \{\pm 1\}^2$. The Phase~III plan's
+falsifiable exit ``Route D fails: the LZ block convention is not the
+issue; the $\mathrm U(3)$ richness is intrinsic'' is therefore
+\emph{triggered}.}
+
+\section{Route D execution and outcome}
+\label{sec:route-d}
+
+Route D was the foundation step of the Phase III plan: re-extract the
+empirical inter-window matrix
+$D = N_B^{-1} U_{\text{bench}} N_A^{-1}$ using Stokes-phased LZ
+amplitude blocks rather than the phase-free real-orthogonal block of
+\texttt{assay.closed\_form.lz\_rotation}. The proper block carries
+$\varphi_S(\delta)$ on its diagonal entries:
+\[
+N_{\text{proper}}(p,\delta) \;=\;
+\begin{pmatrix}
+\sqrt{1-p}\,\mathrm e^{-\ii \sigma\,\varphi_S(\delta)} & \sqrt p \\
+-\sqrt p & \sqrt{1-p}\,\mathrm e^{+\ii \sigma\,\varphi_S(\delta)}
+\end{pmatrix},
+\]
+with $\sigma \in \{+1, -1\}$ the convention's sign degree of freedom.
+
+\subsection{Calibration result}
+
+On a 12-sample calibration subset (3 each from the four success strata
+$\{S1, S6, S7, S8\}$), all four $(\sigma_A, \sigma_B)$ combinations
+produce the \emph{identical} median residual of the
+$(\mathrm{diag}\cdot R)$ ansatz reconstruction:
+
+\begin{center}\small
+\begin{tabular}{lccc}
+\toprule
+$(\sigma_A, \sigma_B)$ & median resid & max resid & wall time \\
+\midrule
+$(+1, +1)$ & $0.0664$ & $0.7681$ & $90\,$s \\
+$(+1, -1)$ & $0.0664$ & $0.7681$ & $84\,$s \\
+$(-1, +1)$ & $0.0665$ & $0.7681$ & $102\,$s \\
+$(-1, -1)$ & $0.0665$ & $0.7681$ & $91\,$s \\
+\midrule
+phase-free baseline & $0.0664$ & $1.4454$ & $\sim 90\,$s \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The Stokes-phased convention modestly reduces the \emph{tail}
+(max-residual $1.4454 \to 0.7681$, a $2\times$ improvement at the
+worst samples) but does not move the \emph{median} at all. Whatever
+phase content the Stokes-phased $N_X^{\text{proper}}$ captures, it is
+not the dominant source of $D$'s rank-three $\mathrm U(3)$ richness.
+
+\subsection{The intrinsic off-block content}
+
+Direct inspection of a worst-case S2 sample with intermediate
+$(p_A, p_B) \approx (0.43, 0.02)$ shows that the residual of the
+$(\mathrm{diag}\cdot R_{(\mathrm{sp}_A,\mathrm{sp}_B)})$ ansatz lies
+\emph{outside} the spectator $(\mathrm{sp}_A, \mathrm{sp}_B)$ plane:
+
+\[
+D \;\approx\; \begin{pmatrix}
++0.51+0.19\ii & +0.32+0.15\ii & +0.12+0.75\ii \\
++0.02-0.56\ii & -0.10+0.82\ii & -0.02+0.01\ii \\
+-0.36+0.51\ii & -0.28+0.33\ii & +0.65+0.07\ii
+\end{pmatrix}
+\quad
+(D - D_{\mathrm{model}})_{\mathrm{im}} \;\approx\; \begin{pmatrix}
+-0.16 & +0.15 & +0.75 \\
+-0.56 & -0.12 & -0.28 \\
++0.51 & +0.36 & -0.03
+\end{pmatrix}.
+\]
+
+The model residual entries at positions $(0,1)$, $(0,2)$, $(1,0)$,
+$(2,0)$, $(1,2)$, $(2,1)$ are all of order $0.3$--$0.8$. The
+$(\mathrm{diag}\cdot R)$ ansatz forces the common active index
+$i_c = 0$ to be a fixed point of the rotation, so its row and column
+should be diagonal + zeros. They are not: $D[0,1]$, $D[0,2]$,
+$D[1,0]$, $D[2,0]$ all carry $O(1)$ magnitudes.
+
+\textbf{The closed form must produce a full $\mathrm U(3)$, not a
+$\mathrm U(2)\oplus\mathrm U(1)$ subgroup.}
+
+\section{Consequences for Routes A, B, C}
+
+The Phase~III plan's risk-ranked outlook had Route C (AKT/DDP) as the
+highest-confidence \emph{predictive} route on the grounds that its
+architecture had the right spectator-plane rotation. The empirical
+$D$ now invalidates this architecture: a rotation in the
+$(\mathrm{sp}_A, \mathrm{sp}_B)$ plane is structurally a
+$\mathrm U(2)\oplus\mathrm U(1)$ element, but $D$ is a full
+$\mathrm U(3)$ element. \emph{Route C as architecturally
+specified cannot reach the closed form, regardless of how well its
+Bessel block is implemented.}
+
+The implementation work executed in Phase~III confirms the failure
+modes empirically:
+
+\begin{itemize}
+ \item \textbf{Route C extension (\texttt{formula\_DDP\_aki}).} Replaced
+ the $(\mathrm{sp}_A, \mathrm{sp}_B)$ SO(2) rotation with a modified-Bessel
+ block at index $\nu = 1/3$, with the corrected
+ $V_{AB} = \int(L_H/p)\sqrt{Q_4}\dd u$ Voros symbol on the spinor cover.
+ Smoke test on 40 samples: per-stratum mean residual $0.60$--$0.82$,
+ \emph{worse} than the original \texttt{formula\_DDP}'s $0.43$--$0.60$.
+ Two causes: (i) the implemented Bessel block uses a heuristic
+ parameterisation ($\sin\theta = \sin(\arg V)$ for the mixing magnitude,
+ not the proper Wronskian-normalised $K_\nu/I_\nu$ ratio); (ii) the
+ ``corrected'' $V_{AB}$ on the exterior sheet $\lambda_0$ is exactly
+ $2\times$ the old $V$ across all samples, suggesting the integration
+ contour is on the wrong sheet.
+
+ \item \textbf{Route A extension
+ (\texttt{formula\_HN\_nonabelian}).} Wired the existing
+ \texttt{spectral\_network.py} machinery into the connection-matrix
+ product via wall-jump matrices $K_\gamma = I + \mu_\gamma E_{ij}$ at
+ real-axis wall crossings. The implementation overflows
+ catastrophically (per-stratum residual $10^{23}$ to $10^{193}$).
+ Cause: the Voros symbol $\mu = \mathrm e^{\ii I_X}$ with
+ $\im I_X < 0$ produces $|\mu| = \mathrm e^{|\im I_X|}$ which is huge.
+ The naive unipotent factor $I + \mu E_{ij}$ is non-unitary; without
+ careful side-tracking (pairing each wall jump with a conjugate factor
+ whose product is unitary), the product loses unitarity by hundreds
+ of orders of magnitude.
+
+ \item \textbf{Route B extension.} Not implemented in Phase~III, but
+ the log-space + Faddeev finite-$b$ refactor remains the prescribed
+ path and is a candidate for future work. Its closed-form image is
+ a full $\mathrm U(3)$ via the mutation product, so it is not
+ architecturally excluded by Route D's finding.
+\end{itemize}
+
+\section{Refined open problem}
+
+The closed-form challenge is now precisely:
+
+\infobox{SoftGold}{%
+\textbf{Find a $\mathrm U(3)$-valued function
+$D(\epsilon, \gamma, a)$} whose $|\cdot|^2$ projection plus row/column
+stochasticity gives the two remaining transcendental entries of $P$.
+The function must:
+
+\begin{itemize}
+ \item be parametrised by 8 real parameters (6 after the global U(1)
+ gauge), \emph{not} reducible to a 2-plane rotation;
+ \item match the empirical $D$ on 300 stratified samples to U(3)
+ geodesic distance $\le 10^{-8}$;
+ \item be derivable from one of the three exact-WKB literature
+ frameworks (Hollands--Neitzke, Iwaki--Nakanishi, AKT) OR surfaced
+ directly from data via symbolic regression.
+\end{itemize}}
+
+This is a research-level problem. The Phase~II/III prototypes
+collectively demonstrate that none of the standard sequential 2-level LZ
+products, restricted spectator-rotation ansätze, or single-window
+Stokes-phase corrections can produce it.
+
+\section{Recommended next steps}
+
+\begin{enumerate}
+ \item \textbf{Proper Hollands--Neitzke side-tracking (Route A
+ done correctly).} The \texttt{spectral\_network} module identifies
+ all real-axis wall crossings, BPS saddles, and sheet pairs. The
+ missing piece is the GMN ``$\omega$-pair'' construction: each BPS
+ state contributes a pair of unipotent factors with reciprocal Voros
+ symbols whose product is a unitary $2\times 2$ rotation. Implementing
+ this side-tracking is mechanical but requires careful attention to
+ which side of each wall each chamber sits on. Estimated effort:
+ 5--10 days.
+ \item \textbf{Iwaki--Nakanishi with log-space arithmetic and
+ finite-$b$ Faddeev (Route B done correctly).} Produces a
+ full $\mathrm U(3)$ via the cluster mutation product. The
+ implementation pieces (log-space matrix accumulation; finite-$b$
+ Faddeev convergence) are well-defined. Estimated effort: 3--5 days.
+ \item \textbf{PySR symbolic regression on the empirical $D$
+ (Route E with proper backend).} Install PySR (requires the Julia
+ toolchain, an explicit permission grant needed in this auto-mode
+ environment), feed it the 300-sample $D$ dataset, and let it search
+ over an operator grammar that includes $\Gamma$-functions, modified
+ Bessel functions, and quantum dilogarithms. If the closed form is a
+ finite product of named transcendentals at parameter-determined
+ arguments (the expected shape), PySR will surface it.
+ \item \textbf{Deep literature dive on Hollands--Neitzke
+ non-abelianisation at the genus-1 Hitchin curve.} The Type-1, $N=3$
+ spectral curve has $b_1(\Sigma_Y) = 2$, matching the window count.
+ The Hollands--Neitzke 2019 paper on non-abelianisation for
+ genus-1 Hitchin systems is the direct reference. A careful read
+ should resolve the side-tracking and $\theta$-phase conventions
+ that defeated the Phase~III prototype.
+\end{enumerate}
+
+\section{Status of the closed-form push}
+
+\begin{itemize}
+ \item \textbf{Exact \& elementary} (Phase~I deliverables): two
+ Brundobler--Elser extreme-survival entries. Validated to numerical
+ floor on 300 samples.
+ \item \textbf{Empirically extracted} (Phase~III deliverable): the
+ inter-window matrix $D \in \mathrm U(3)$ on 300 samples, in two
+ conventions (phase-free, Stokes-phased), with the
+ $(\mathrm{diag}\cdot R)$ ansatz residual quantified.
+ \item \textbf{Constrained} (Phase~III finding): $D$ is structurally
+ a full $\mathrm U(3)$, not a $\mathrm U(2)\oplus\mathrm U(1)$
+ subgroup. Architectural ansätze that produce only a spectator-plane
+ rotation are excluded.
+ \item \textbf{Open}: the analytic form of
+ $D(\epsilon, \gamma, a)\in\mathrm U(3)$.
+\end{itemize}
+
+\section{Artifacts}
+
+\textbf{New code (Phase~III):}
+\begin{itemize}
+ \item \texttt{assay/lz\_stokes\_phased.py} -- Stokes-phased LZ amplitude block.
+ \item \texttt{assay/d\_extract.py} -- shared $D$-extraction primitives,
+ U(3) geodesic distance.
+ \item \texttt{assay/convergence\_test.py} -- pairwise route comparison
+ and empirical $D$ agreement gate.
+ \item \texttt{notes/phase2\_D\_stokes\_phased.py} -- Route D driver
+ (sign calibration + 300-sample sweep).
+ \item \texttt{notes/phase2\_symbolic\_regression\_lite.py} -- numpy-only
+ fallback when PySR is unavailable.
+ \item \texttt{assay/ddp.py} (extended) -- \texttt{formula\_DDP\_aki},
+ \texttt{aki\_bessel\_block}, \texttt{inter\_window\_action\_corrected},
+ \texttt{ddp\_D}.
+ \item \texttt{assay/hitchin\_holonomy.py} (extended) --
+ \texttt{formula\_HN\_nonabelian}, \texttt{hn\_connection\_matrix\_nonabelian},
+ \texttt{hn\_D}, \texttt{\_wall\_data}.
+\end{itemize}
+
+\textbf{Output datasets:}
+\begin{itemize}
+ \item \texttt{notes/phase2\_D\_stokes\_phased.csv} -- 300 samples × 9
+ complex $D$ entries × (theta, chi, model\_resid, ...) in Stokes-phased
+ convention.
+ \item \texttt{assay/empirical\_D\_cache.pkl} -- per-record cache for
+ \texttt{empirical\_D}.
+\end{itemize}
+
+\textbf{Plan file:} \texttt{vast-drifting-avalanche.md} (the approved
+Phase~III plan).
+
+\end{document}

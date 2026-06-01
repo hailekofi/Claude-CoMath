@@ -1,0 +1,715 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{array,booktabs,longtable,tabularx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{needspace}
+\usepackage{caption}
+\usepackage{float}
+
+\definecolor{TitleBlue}{HTML}{16324F}
+\definecolor{AccentBlue}{HTML}{2A5B84}
+\definecolor{SoftBlue}{HTML}{EEF4FA}
+\definecolor{SoftGray}{HTML}{F5F7FA}
+\definecolor{MutedText}{HTML}{4F5B66}
+\definecolor{RuleGray}{HTML}{D7E1EA}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=AccentBlue,
+  citecolor=AccentBlue,
+  urlcolor=AccentBlue,
+  pdftitle={Selector sufficiency and outer-frame descent in Type-1, N=3 Landau-Zener},
+  pdfauthor={OpenAI},
+  bookmarksopen=true,
+  bookmarksnumbered=true
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{MutedText}{Type-1, $N=3$ Landau-Zener}}
+\fancyhead[R]{\textcolor{MutedText}{Selector sufficiency and outer-frame descent}}
+\fancyfoot[C]{\textcolor{MutedText}{\thepage}}
+\setlength{\headheight}{14pt}
+
+\titleformat{\section}{\Large\bfseries\color{TitleBlue}}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\large\bfseries\color{AccentBlue}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{TitleBlue}}{\thesubsubsection}{0.5em}{}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlist[itemize]{leftmargin=1.4em,itemsep=0.25em,topsep=0.25em}
+\setlist[enumerate]{leftmargin=1.6em,itemsep=0.25em,topsep=0.25em}
+\onehalfspacing
+\numberwithin{equation}{section}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\C}{\mathbb C}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\ii}{\mathrm i}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\Disc}{\operatorname{Disc}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\red}{\operatorname{red}}
+\newcommand{\im}{\operatorname{Im}}
+\newcommand{\re}{\operatorname{Re}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\odd}{\operatorname{Odd}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\E}{\mathcal E}
+\newcommand{\CY}{\Sigma_Y}
+\newcommand{\CRcurve}{\Sigma_R}
+\newcommand{\Chat}{\widehat{\mathcal C}}
+\newcommand{\CR}{\mathfrak C_R}
+\newcommand{\Hx}{\mathsf H_x}
+\newcommand{\Yop}{\mathsf Y}
+\newcommand{\Rop}{\mathsf R}
+\newcommand{\sigmaPauli}{\sigma_3}
+\newcommand{\LH}{L_H}
+\newcommand{\wall}{\mathcal W}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.17}
+
+\newcommand{\infobox}[1]{%
+  \begin{center}
+  \fcolorbox{RuleGray}{SoftBlue}{%
+    \begin{minipage}{0.93\linewidth}
+    \small #1
+    \end{minipage}}
+  \end{center}}
+
+\begin{document}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+\vspace*{1.0cm}
+
+{\Large\color{AccentBlue}\bfseries Internal memorialization note\par}
+\vspace{0.7cm}
+
+{\fontsize{24}{28}\selectfont\bfseries\color{TitleBlue}Selector sufficiency and outer-frame descent\par}
+\vspace{0.15cm}
+{\fontsize{19}{23}\selectfont\bfseries\color{TitleBlue}in Type-1, $N=3$ Landau-Zener\par}
+\vspace{0.2cm}
+{\Large\color{AccentBlue}\bfseries Proof record from the present conversation\par}
+
+\vspace{1.0cm}
+
+\begin{minipage}{0.9\textwidth}
+\small
+This note memorializes two proofs developed in the conversation:
+\begin{enumerate}
+  \item the \emph{generic simple local selector sufficiency theorem};
+  \item the \emph{outer-frame descent theorem after resolved-sheet lift and half-form regularization}.
+\end{enumerate}
+It is written to be detailed enough that a technically prepared reader can recreate the arguments without having to reconstruct the conversational steps. It also records the numerical assays that were useful in shaping and stress-testing the theorem statements.
+
+\medskip
+\textbf{Important scope statement.} The descent theorem proved here is the intrinsic one, i.e. after passing to the resolved-sheet coordinate $u=u_*+t^2$ and packaging amplitudes as half-forms. In that formulation the earlier unresolved gauge bridge collapses. This is stronger than the older numerically supported picture, but it is also more precise about the normalization being used.
+\end{minipage}
+
+\vfill
+
+{\large\color{MutedText}\today\par}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+\section{Executive summary}
+
+At the April 18 baseline, the local Type-1 program already had the common cover, the commuting triple $(\Hx,\Yop,\Rop)$, canonical gluing on the regular set, the candidate selector sieve, and the exact two-sheet torus theorem, but still listed selector sufficiency and descent back to the original outer matcher as unresolved items; the same supplement treated outer descent through two narrow numerically supported assumptions and explicitly left selector sufficiency open \cite{SuppApril18,MainApril18,Strategy}. The conversation then supplied two advances:
+\begin{enumerate}
+  \item a proof that the older bridge ambiguity disappears once the local problem is written intrinsically on the resolved-sheet $t$-disk with half-form packaging;
+  \item a proof that every simple phase-active transport ramification point is an actual local selector point in the canonical two-sheet model.
+\end{enumerate}
+
+\infobox{%
+\textbf{What this note proves.}
+
+\textbf{Outer-frame descent (intrinsic form).} Let $v$ be a simple transport ramification point. After resolved-sheet lift and half-form regularization, the quotient-ring/adiabatic exact local frame and the canonical resolved-sheet exact frame differ by a single constant geometry-only matrix $G_v$ on the full $t$-disk; with matched normalization one has $G_v=I$.
+
+\medskip
+\textbf{Selector sufficiency (generic simple local form).} Let $v$ be a simple transport ramification point and fix a Borel direction $\theta$. If the local cubic phase coefficient satisfies $e^{-\ii\theta}\sigma_v(H)\in\mathbb R^\times$, then the corresponding local wall is a genuine Airy Stokes wall, and crossing it inserts the exact local selector block
+\[
+J^{\mathrm{loc}}_{v,\theta}(t;H)=I+s_v^{\mathrm{BS}}(t;H)E_{21}
+\]
+or its opposite triangular companion, with nonzero scalar multiplier
+\[
+s_v^{\mathrm{BS}}(t;H)=-\ii\,e^{2\Theta_v(t;H)}\neq 0.
+\]
+Hence every simple phase-active transport ramification point is an actual local selector point in the canonical two-sheet normalization.
+}
+
+\section{Background and previously established inputs}
+
+\subsection{Standing Type-1 notation}
+
+We work in the Type-1, $N=3$ setting with the standard rational parametrization
+\begin{equation}
+\label{eq:uE}
+ u(\lambda)=\frac{n(\lambda)}{p(\lambda)},
+ \qquad
+ E(\lambda)=\frac{m(\lambda)}{p(\lambda)},
+ \qquad
+ q_u(\lambda)=u\,p(\lambda)-n(\lambda),
+\end{equation}
+and quotient-ring fiber
+\begin{equation}
+\label{eq:quotient-ring}
+ \E_u=\C[\lambda]/(q_u(\lambda)).
+\end{equation}
+The gauged adiabatic evolution is
+\begin{equation}
+\label{eq:adiabatic-gauged}
+ f_i'(u)=-\sum_{j\neq i}S_{ij}(u)f_j(u)+\ii\bigl(E_i(u)-E_x(u)\bigr)f_i(u),
+\end{equation}
+while the quotient-ring reduction is
+\begin{equation}
+\label{eq:reduced-ode}
+ \partial_u[R]=\ii\bigl[(m-E_xp)s_u R\bigr]=\ii\,\Hx[R],
+ \qquad
+ p s_u\equiv 1\pmod{q_u}.
+\end{equation}
+These objects, together with the commuting triple $(\Hx,\Yop,\Rop)$ and the common/spinor cover picture, are formalized in the primer and strategy diagram \cite{Primer,Strategy,LZSummary}.
+
+\subsection{Simple transport ramification points}
+
+The transport quartic is
+\begin{equation}
+\label{eq:W4def}
+ W_4(\lambda)=n(\lambda)p'(\lambda)-n'(\lambda)p(\lambda)=p(\lambda)^2\Sigma^{(2)}(\lambda).
+\end{equation}
+A \emph{simple transport ramification point} is a point $v\in\PP^1_\lambda$ such that
+\begin{equation}
+\label{eq:simple-ramification}
+ W_4(v)=0,
+ \qquad
+ W_4'(v)\neq 0,
+ \qquad
+ u_*=u(v).
+\end{equation}
+Then the base map $u=n/p$ has simple critical behavior at $v$, and on the local double cover we may write
+\begin{equation}
+\label{eq:t-cover}
+ u=u_*+t^2.
+\end{equation}
+The two active local inverse branches are denoted $\lambda_\pm(t)$, and the spectator sheet is omitted from the active $2\times 2$ local analysis.
+
+\subsection{Exact two-sheet torus theorem}
+
+At a simple ramification point, the reduced sheet carriers satisfy exact scalar equations
+\begin{equation}
+\label{eq:Rpm-u}
+ \partial_u R_\pm=\ii(E_\pm-E_x)R_\pm.
+\end{equation}
+On the $t$-cover this becomes the exact diagonal system
+\begin{equation}
+\label{eq:Rpm-t}
+ \partial_t
+ \begin{pmatrix}R_+\\ R_-\end{pmatrix}
+ =\bigl(A_v(t;H)I+B_v(t;H)\sigmaPauli\bigr)
+ \begin{pmatrix}R_+\\ R_-\end{pmatrix}.
+\end{equation}
+Reconstructing the half-form amplitudes gives
+\begin{equation}
+\label{eq:Psi-pm}
+ \Psi_\pm(t;H)=\sqrt{2t}\,\Gamma_\pm(t)R_\pm(t;H)\,\sqrt{\dd t}.
+\end{equation}
+The April 18 theorem states that after removing the common scalar phase, the exact local matching gauge in the canonical resolved-sheet / WKB normalization is exactly torus-valued:
+\begin{equation}
+\label{eq:torus-theorem}
+ \widehat G_v(t;H)=\exp\!\bigl(\Theta_v(t;H)\sigmaPauli\bigr).
+\end{equation}
+Equivalently, no torus-breaking off-diagonal term survives in that canonical two-sheet normalization \cite{MainApril18,SuppApril18}.
+
+\subsection{Local Airy normalization and the candidate selector condition}
+
+The local phase mismatch between the two colliding sheets is
+\begin{equation}
+\label{eq:local-singulant}
+ S_{+-}(u;H)=\sigma_v(H)(u-u_*)^{3/2}+O\bigl((u-u_*)^{5/2}\bigr),
+\end{equation}
+where $\sigma_v(H)\neq 0$ in the generic simple case. The local selector notes computed the linear Langer/Airy coordinate
+\begin{equation}
+\label{eq:linear-zeta}
+ \zeta_v(H;u)=\Bigl(\frac{3\ii}{4}\sigma_v(H)\Bigr)^{2/3}(u-u_*),
+\end{equation}
+which rectifies the leading cubic Airy exponent, and exhibited an explicit wall/on-wall member together with an off-wall control \cite{LocalMatching}. The normalized Airy jump for an $S_1\to S_0$ crossing is
+\begin{equation}
+\label{eq:Airy-jump}
+ J^{\mathrm{norm}}_{1\to 0}=\begin{pmatrix}1&0\\-1&1\end{pmatrix}=I-E_{21}.
+\end{equation}
+In the canonical WKB normalization, the exact local selector multiplier is scalar:
+\begin{equation}
+\label{eq:scalar-multiplier}
+ s_v^{\mathrm{BS}}(t;H)=-\ii\exp\!\bigl(2\Theta_v(t;H)\bigr),
+\end{equation}
+so the exact local block is a scalar renormalization of the universal Airy jump \cite{MainApril18,SuppApril18,TransportPhase}.
+
+\subsection{What was still open before the conversation proofs}
+
+The older local matching note identified one unresolved bridge matrix,
+\begin{equation}
+\label{eq:old-G-vs}
+ Y^{qa}_{v,s}(u)=Y^{rs}_v(u)\,G_{v,s}(H),
+\end{equation}
+connecting the resolved-sheet basis to the original quotient-ring/adiabatic frame, and therefore left the exact local jump in the original frame in the form
+\begin{equation}
+\label{eq:old-jump}
+ J^{qa}_{v;s\to s'}(H)=G_{v,s'}(H)^{-1}J^{\mathrm{norm}}_{s\to s'}G_{v,s}(H).
+\end{equation}
+At the same April 18 baseline, selector sufficiency and the exact global insertion rule were still listed among the remaining symbolic tasks \cite{LocalMatching,SuppApril18,MainApril18}.
+
+\section{Item 3: outer-frame descent after resolved-sheet lift and half-form regularization}
+\label{sec:outer-descent}
+
+\subsection{Statement}
+
+The theorem we prove is the intrinsic bridge theorem. It is deliberately formulated after resolved-sheet lift and half-form regularization, because in that formulation the local bridge becomes exact and sector-independent.
+
+\begin{theorem}[Intrinsic outer-frame descent / bridge lemma]
+\label{thm:bridge}
+Let $v$ be a simple transport ramification point and write $u=u_*+t^2$. Let $L_+\oplus L_-$ be the ordered active resolved-sheet splitting on a sufficiently small $t$-disk $D_t$. Let $Y_v^{rs}(t;H)$ denote the canonical exact resolved-sheet frame in that ordered splitting, after removing the common scalar phase. Let $Y_v^{qa}(t;H)$ denote the exact frame obtained by taking the quotient-ring carriers, reconstructing the adiabatic amplitudes, and packaging them as half-forms on the same $t$-disk.
+
+Then there exists a constant matrix $G_v\in GL_2(\C)$ such that
+\begin{equation}
+\label{eq:bridge-constant}
+ Y_v^{qa}(t;H)=Y_v^{rs}(t;H)\,G_v
+ \qquad \text{for all } t\in D_t.
+\end{equation}
+Moreover:
+\begin{enumerate}
+  \item $G_v$ is sector-independent, because it is defined on the whole connected $t$-disk;
+  \item $G_v$ is geometry-only, i.e. it does not depend on the chosen commuting-family member $H$;
+  \item if the two frames are matched by the same half-form normalization, then $G_v=I$ identically.
+\end{enumerate}
+Consequently the old sector-labeled bridge $G_{v,s}(H)$ disappears in the intrinsic half-form formulation, and the exact jump in the quotient-ring/adiabatic half-form frame is just one fixed conjugate of the canonical local Airy jump.
+\end{theorem}
+
+\subsection{Proof}
+
+The proof has three ingredients: the exact diagonal active carrier system, the regularity of the half-form package on the $t$-disk, and the identification of the quotient-ring/adiabatic half-form frame with the canonical resolved-sheet exact frame.
+
+\begin{lemma}[Regular half-form factors]
+\label{lem:Tregular}
+At a simple transport ramification point, the functions
+\begin{equation}
+\label{eq:Tpm-def}
+ T_\pm(t):=\sqrt{2t}\,\Gamma_\pm(t)
+\end{equation}
+are holomorphic and nonzero at $t=0$.
+\end{lemma}
+
+\begin{proof}
+Expand $\Sigma^{(2)}(\lambda)$ along the two local branches $\lambda_\pm(t)$. Because $W_4(v)=0$ and $W_4'(v)\neq 0$, one has
+\begin{equation}
+\label{eq:Sigma-expand}
+ \Sigma_\pm(t):=\Sigma^{(2)}(\lambda_\pm(t))=\pm A_1 t+A_2 t^2\pm A_3 t^3+A_4 t^4+O(t^5)
+\end{equation}
+with $A_1\neq 0$ \cite{TransportPhase}. Since $\Gamma_\pm=\delta_\pm\Sigma_\pm^{-1/2}$, we obtain
+\[
+T_\pm(t)=\sqrt{2}\,\delta_\pm\,t^{1/2}\Sigma_\pm(t)^{-1/2}.
+\]
+The factor $\Sigma_\pm(t)$ has a simple zero at $t=0$, so $t^{1/2}\Sigma_\pm(t)^{-1/2}$ is holomorphic and nonzero there. Hence $T_\pm$ is holomorphic and nonzero at $t=0$.
+\end{proof}
+
+\begin{lemma}[Active half-form frame is holomorphic on the full $t$-disk]
+\label{lem:holomorphic-frame}
+After half-form packaging, the active exact local system has no residual sectorial singularity at $t=0$.
+\end{lemma}
+
+\begin{proof}
+The exact active carrier system \eqref{eq:Rpm-t} is diagonal with analytic coefficients on the $t$-disk. Therefore the carrier fundamental matrix
+\begin{equation}
+\label{eq:carrier-matrix}
+F_v(t;H):=\diag\bigl(R_+(t;H),R_-(t;H)\bigr)
+\end{equation}
+is holomorphic on $D_t$. Multiplying by the holomorphic nonvanishing factors $T_\pm(t)$ from Lemma~\ref{lem:Tregular} gives the half-form packaged exact frame
+\begin{equation}
+\label{eq:half-form-frame}
+Y_v^{hf}(t;H):=\diag\bigl(T_+(t),T_-(t)\bigr)F_v(t;H).
+\end{equation}
+Thus the active exact system is represented by a holomorphic fundamental matrix on the entire disk. The apparent square-root singularity has been removed by the resolved-sheet lift and half-form packaging.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:bridge}]
+Start from the exact diagonal carrier system \eqref{eq:Rpm-t}. The quotient-ring/adiabatic reconstruction formula is sheetwise and diagonal:
+\begin{equation}
+\label{eq:fi-Gamma-Ri}
+ f_\pm(t;H)=\Gamma_\pm(t)R_\pm(t;H).
+\end{equation}
+After packaging as half-forms using $\sqrt{\dd u}=\sqrt{2t}\,\sqrt{\dd t}$, the resulting local frame is exactly
+\begin{equation}
+\label{eq:Yqa-def-proof}
+Y_v^{qa}(t;H)=\diag\bigl(\sqrt{2t}\,\Gamma_+(t),\sqrt{2t}\,\Gamma_-(t)\bigr)F_v(t;H),
+\end{equation}
+up to the common scalar phase that is removed in determinant-one normalization.
+
+Now compare with the canonical resolved-sheet exact frame. In the April 18 two-sheet theorem the exact resolved-sheet half-form amplitudes are written as
+\begin{equation}
+\label{eq:canonical-exact-basis}
+Y_v^{\mathrm{exact}}(t;H)=\diag\bigl(T_+(t)e^{\Phi_{\mathrm{rel}}(t;H)},\,T_-(t)e^{-\Phi_{\mathrm{rel}}(t;H)}\bigr),
+\end{equation}
+again after removing the common scalar phase \cite{MainApril18,SuppApril18}. But this is precisely the same construction as \eqref{eq:Yqa-def-proof}: the carrier matrix $F_v$ is diagonal, its determinant-one part is $\diag(e^{\Phi_{\mathrm{rel}}},e^{-\Phi_{\mathrm{rel}}})$, and the half-form prefactors are $T_\pm=\sqrt{2t}\Gamma_\pm$. Hence, with matched normalization,
+\begin{equation}
+\label{eq:matched-identity}
+Y_v^{qa}(t;H)=Y_v^{rs}(t;H)
+\qquad\text{for all } t\in D_t.
+\end{equation}
+This already gives $G_v=I$.
+
+If one uses two different but still exact normalizations of the same local horizontal frame, let the resulting frames be denoted $Y_v^{qa}$ and $Y_v^{rs}$. Both are holomorphic fundamental matrices of the same active exact connection on the simply connected disk $D_t$. Therefore
+\begin{equation}
+\label{eq:ratio-derivative}
+\partial_t\bigl((Y_v^{rs})^{-1}Y_v^{qa}\bigr)=0,
+\end{equation}
+so their ratio is constant:
+\[
+(Y_v^{rs})^{-1}Y_v^{qa}=G_v.
+\]
+Because the two frames preserve the ordered splitting $L_+\oplus L_-$, this constant is actually diagonal; determinant-one normalization places it in the torus. In any case it is sector-independent because it is defined on the entire connected disk.
+
+Finally, $G_v$ is geometry-only. In matched normalization $G_v=I$, so this is immediate. In a different normalization, the only possible difference comes from constant rescalings attached to the ordered lines $L_\pm$ and the choice of half-form convention; those are fixed by the local resolved-sheet geometry and do not depend on the commuting-family member. The $H$-dependence lives in the carrier phases and therefore cancels in the ratio.
+
+This proves \eqref{eq:bridge-constant} and all three claims.
+\end{proof}
+
+\begin{corollary}[Intrinsic replacement for the older descent assumptions]
+\label{cor:intrinsic-H1H2}
+In the intrinsic resolved-sheet / half-form formulation, the older raw outer-matcher assumptions
+\begin{enumerate}
+  \item no nondecaying torus-breaking off-diagonal survives after spectator decoupling and curvature subtraction;
+  \item the residual constant non-torus part is sector-independent and geometry-only,
+\end{enumerate}
+are no longer independent hypotheses. They are absorbed by the exact identity \eqref{eq:matched-identity} (or, in a different exact normalization, by the constant geometry-only bridge \eqref{eq:bridge-constant}).
+\end{corollary}
+
+\begin{remark}[Scope of the descent theorem]
+\label{rem:scope-descent}
+The theorem is exact in the intrinsic half-form formulation. It does \emph{not} claim that an arbitrary pre-regularized ``raw outer matcher'' is automatically identical without first being expressed in the same resolved-sheet / half-form gauge. The conversation proof deliberately moved to that intrinsic normalization because that is where the bridge becomes exact rather than only numerically supported.
+\end{remark}
+
+\section{Item 1: selector sufficiency in the generic simple local case}
+\label{sec:selector-sufficiency}
+
+\subsection{Statement}
+
+\begin{theorem}[Generic simple local selector sufficiency]
+\label{thm:sufficiency}
+Let $v$ be a simple transport ramification point and fix a Borel direction $\theta$. Assume:
+\begin{enumerate}
+  \item $W_4(v)=0$ and $W_4'(v)\neq 0$;
+  \item the local phase mismatch is nondegenerate,
+  \begin{equation}
+  \label{eq:nondegenerate-sigulant}
+  S_{+-}(u;H)=\sigma_v(H)(u-u_*)^{3/2}+O\bigl((u-u_*)^{5/2}\bigr),
+  \qquad
+  \sigma_v(H)\neq 0;
+  \end{equation}
+  \item the local disk contains no other transport ramification point and no ordinary turning point.
+\end{enumerate}
+Then, in the intrinsic resolved-sheet / half-form formulation:
+\begin{enumerate}
+  \item if $e^{-\ii\theta}\sigma_v(H)\in\mathbb R^\times$, the corresponding local wall through $u_*$ is an actual selector boundary;
+  \item crossing that wall once produces the exact local jump
+  \begin{equation}
+  \label{eq:local-selector-block}
+  J^{\mathrm{loc}}_{v,\theta}(t;H)=I+s_v^{\mathrm{BS}}(t;H)E_{21}
+  \end{equation}
+  or the opposite triangular companion, depending on orientation, with nonzero scalar multiplier
+  \begin{equation}
+  \label{eq:svBS}
+  s_v^{\mathrm{BS}}(t;H)=-\ii\,e^{2\Theta_v(t;H)}\neq 0;
+  \end{equation}
+  \item therefore every simple phase-active transport ramification point is an actual local selector point in the canonical two-sheet model.
+\end{enumerate}
+\end{theorem}
+
+\subsection{Proof}
+
+The proof is local and has four steps: exact analytic rectification of the singulant, identification of the phase-active wall with a true Airy Stokes wall, nontriviality of the universal Airy jump, and invariance of nontriviality under diagonal torus conjugation.
+
+\begin{lemma}[Odd analyticity of the local singulant on the $t$-cover]
+\label{lem:odd-singulant}
+On the resolved-sheet cover $u=u_*+t^2$, the exact local phase mismatch $S_{+-}(t;H)$ is an odd analytic function of $t$.
+\end{lemma}
+
+\begin{proof}
+The two active local branches satisfy $\lambda_-(t)=\lambda_+(-t)$, because they are exchanged by the deck involution of the simple transport ramification. The phase differential on the common/spinor cover is $\omega=\sqrt{y}\,\dd u$ \cite{Primer,Strategy}. Exchanging the two colliding sheets reverses the sign of the sheetwise phase difference, so the local action mismatch changes sign under $t\mapsto -t$:
+\[
+S_{+-}(-t;H)=-S_{+-}(t;H).
+\]
+Since the branch-resolved data are analytic on the $t$-disk, $S_{+-}(t;H)$ is analytic there. Hence it is an odd analytic function of $t$.
+\end{proof}
+
+\begin{lemma}[Exact nonlinear Langer coordinate]
+\label{lem:nonlinear-Langer}
+Assume $\sigma_v(H)\neq 0$. Define
+\begin{equation}
+\label{eq:Xi-def}
+ \Xi_{\theta,v}(t;H):=\frac{3}{4}e^{-\ii\theta}\ii\,S_{+-}(t;H).
+\end{equation}
+Then there exists a holomorphic function $\chi_{\theta,v}(u;H)$ near $u_*$ such that
+\begin{equation}
+\label{eq:exact-Airy-rectification}
+ e^{-\ii\theta}\ii\,S_{+-}(u;H)=\frac{4}{3}\chi_{\theta,v}(u;H)^{3/2}
+\end{equation}
+exactly, and
+\begin{equation}
+\label{eq:chi-linear}
+ \chi_{\theta,v}(u;H)=\kappa_{\theta,v}(H)(u-u_*)+O\bigl((u-u_*)^2\bigr),
+ \qquad
+ \kappa_{\theta,v}(H)=\Bigl(\frac{3}{4}e^{-\ii\theta}\ii\sigma_v(H)\Bigr)^{2/3}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:odd-singulant} and the nondegenerate expansion \eqref{eq:nondegenerate-sigulant}, one has
+\begin{equation}
+\label{eq:Xi-cubic}
+ \Xi_{\theta,v}(t;H)=c_{\theta,v}(H)t^3\bigl(1+t^2 a(t;H)\bigr),
+ \qquad c_{\theta,v}(H)\neq 0,
+\end{equation}
+with $a(t;H)$ analytic. Choose a branch of $c_{\theta,v}(H)^{2/3}$ and define
+\begin{equation}
+\label{eq:chi-t-def}
+ \chi_{\theta,v}(t;H):=\Xi_{\theta,v}(t;H)^{2/3}
+ =c_{\theta,v}(H)^{2/3}t^2\bigl(1+t^2 a(t;H)\bigr)^{2/3}.
+\end{equation}
+The factor $(1+t^2a)^{2/3}$ has a holomorphic branch near $t=0$, so $\chi_{\theta,v}(t;H)$ is holomorphic. Because only even powers of $t$ occur, it descends to a holomorphic function of $u-u_*=t^2$; we denote the descended function by the same symbol $\chi_{\theta,v}(u;H)$. By construction,
+\[
+\Xi_{\theta,v}(t;H)=\chi_{\theta,v}(u;H)^{3/2},
+\]
+which is exactly \eqref{eq:exact-Airy-rectification}. The linear term \eqref{eq:chi-linear} follows from the leading cubic coefficient.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:sufficiency}]
+Step 1: \emph{The exact local system is already diagonal and torus-valued.} By the exact two-sheet theorem \eqref{eq:torus-theorem}, the canonical exact local gauge is
+\[
+\widehat G_v(t;H)=e^{\Theta_v(t;H)\sigmaPauli}.
+\]
+Therefore the only possible local jump is a diagonal conjugate of the universal Airy jump. In particular, diagonal conjugation can rescale a scalar multiplier, but it cannot create or destroy the presence of a nontrivial triangular jump.
+
+Step 2: \emph{Phase-activity identifies a genuine Airy Stokes wall.} By Lemma~\ref{lem:nonlinear-Langer}, the exact singulant is the pullback of the Airy cubic exponent:
+\[
+e^{-\ii\theta}\ii\,S_{+-}(u;H)=\frac{4}{3}\chi_{\theta,v}(u;H)^{3/2}.
+\]
+Thus the local Stokes geometry is exactly the pullback of the standard Airy Stokes geometry under the holomorphic map $\chi_{\theta,v}$. The phase-active condition
+\begin{equation}
+\label{eq:phase-active}
+ e^{-\ii\theta}\sigma_v(H)\in \mathbb R^\times
+\end{equation}
+means precisely that the linear part $\kappa_{\theta,v}(H)$ in \eqref{eq:chi-linear} aligns the candidate wall through $u_*$ with one of the canonical Airy Stokes rays. Therefore the local wall singled out by transport ramification plus phase resonance is not merely formal: it is an actual Stokes wall of the exact rectified Airy model.
+
+Step 3: \emph{Across that wall, the universal Airy jump is nontrivial.} In the normalized Airy model, for an $S_1\to S_0$ crossing one has the universal jump \eqref{eq:Airy-jump}. This is nontrivial. The opposite orientation gives the opposite triangular companion; in either case the model jump is rank-one triangular and nonzero \cite{LocalMatching}.
+
+Step 4: \emph{Diagonal torus conjugation preserves nontriviality and yields the exact scalar block.} Let
+\[
+D_v(t;H):=e^{\Theta_v(t;H)\sigmaPauli}=\diag(d_+(t;H),d_-(t;H)).
+\]
+Then
+\begin{equation}
+\label{eq:conjugated-jump}
+J^{\mathrm{loc}}_{1\to 0}(t;H)=D_v(t;H)^{-1}J^{\mathrm{norm}}_{1\to 0}D_v(t;H)
+=I-\frac{d_+(t;H)}{d_-(t;H)}E_{21}.
+\end{equation}
+In the WKB-normalized Airy convention of the April 18 notes, the scalar coefficient is written as
+\[
+s_v^{\mathrm{BS}}(t;H)=-\ii\,e^{2\Theta_v(t;H)},
+\]
+so the exact local block has the form \eqref{eq:local-selector-block}. Since the exponential never vanishes, $s_v^{\mathrm{BS}}(t;H)\neq 0$. Thus the exact local jump is genuinely nontrivial.
+
+This proves that every simple phase-active transport ramification point inserts a nonzero local selector block in the canonical two-sheet model. The result is local, so it is independent of any global continuation word. Hence the candidate selector point is an actual local selector point.
+\end{proof}
+
+\begin{corollary}[Off-wall control on the same geometric ray]
+\label{cor:offwall}
+Let $H_{\mathrm{off}}$ be a nearby commuting-family member for which $e^{-\ii\theta}\sigma_v(H_{\mathrm{off}})\notin\mathbb R$. Then the same geometric wall is \emph{not} mapped by $\chi_{\theta,v}(\cdot;H_{\mathrm{off}})$ to a canonical Airy Stokes ray. Consequently the normalized Airy basis continues analytically across that same wall for $H_{\mathrm{off}}$, and the exact diagonal gauge cannot create a jump there.
+\end{corollary}
+
+\begin{proof}
+If $e^{-\ii\theta}\sigma_v(H_{\mathrm{off}})\notin\mathbb R$, the linear coefficient $\kappa_{\theta,v}(H_{\mathrm{off}})$ in \eqref{eq:chi-linear} does not send the chosen wall to one of the fixed Airy Stokes rays. Since the local exact geometry is the pullback of the Airy geometry under $\chi_{\theta,v}$, no Airy Stokes crossing occurs on that wall. The exact local gauge is diagonal, so there is no independent mechanism left to create a jump.
+\end{proof}
+
+\begin{remark}[Transfer to the quotient-ring/adiabatic half-form frame]
+By Theorem~\ref{thm:bridge}, the same local statement holds in the quotient-ring/adiabatic half-form frame: the local block is transferred by the constant geometry-only conjugacy $G_v$, and with matched normalization $G_v=I$.
+\end{remark}
+
+\section{Reconstruction blueprint: how to recreate the proofs}
+\label{sec:reconstruction}
+
+This section gives an explicit recipe for reconstructing the two proofs from the underlying formalism.
+
+\subsection{Blueprint for the intrinsic outer-frame descent theorem}
+
+To recreate Theorem~\ref{thm:bridge}, proceed in the following order.
+\begin{enumerate}
+  \item Start from the quotient-ring reduction \eqref{eq:reduced-ode} and restrict to a simple transport ramification point $v$.
+  \item Lift to the resolved-sheet coordinate $u=u_*+t^2$ so that the two active branches are analytic and the carrier system takes the exact diagonal form \eqref{eq:Rpm-t}.
+  \item Expand $\Sigma^{(2)}(\lambda_\pm(t))$ to obtain \eqref{eq:Sigma-expand}. This shows that $T_\pm=\sqrt{2t}\Gamma_\pm$ is regular and nonzero at $t=0$.
+  \item Form the half-form packaged quotient-ring/adiabatic frame \eqref{eq:Yqa-def-proof}.
+  \item Compare it with the canonical exact resolved-sheet frame \eqref{eq:canonical-exact-basis}. In matched normalization they are identical. In any other exact normalization, differentiate the ratio to obtain \eqref{eq:ratio-derivative} and conclude constancy.
+  \item Observe that any residual constant comes only from linewise normalization conventions and is therefore geometry-only.
+\end{enumerate}
+
+\subsection{Blueprint for the generic simple local sufficiency theorem}
+
+To recreate Theorem~\ref{thm:sufficiency}, proceed as follows.
+\begin{enumerate}
+  \item Start from the local singulant expansion \eqref{eq:nondegenerate-sigulant} at a simple transport ramification point.
+  \item Pass to the resolved-sheet coordinate $t$ and use the deck involution to show that $S_{+-}(t;H)$ is odd analytic.
+  \item Build the exact nonlinear Langer coordinate by defining $\Xi_{\theta,v}=\frac34 e^{-\ii\theta}\ii S_{+-}$ and then $\chi_{\theta,v}=\Xi_{\theta,v}^{2/3}$. The odd-to-even structure ensures that $\chi$ descends holomorphically to the $u$-plane.
+  \item Check the phase-active condition $e^{-\ii\theta}\sigma_v(H)\in\mathbb R^\times$. This guarantees that the chosen local wall is the pullback of a canonical Airy Stokes wall.
+  \item Insert the universal Airy jump \eqref{eq:Airy-jump} and conjugate it by the exact diagonal torus gauge \eqref{eq:torus-theorem}. This yields the exact local selector block \eqref{eq:local-selector-block} with nonzero scalar multiplier \eqref{eq:svBS}.
+  \item For an off-wall control, repeat the same calculation but note that the chosen wall no longer maps to an Airy Stokes wall. Therefore no jump is inserted there.
+\end{enumerate}
+
+\section{Numerical assays that were useful in validating these theorems}
+\label{sec:assays}
+
+The proofs above are symbolic and do not require numerical input. The numerics were nevertheless important for three reasons: (i) they motivated the older outer-matcher conjectures, (ii) they stress-tested the selector sufficiency premise in the extreme-curvature regime, and (iii) they provided a reproducible audit trail that the local statements survived large random samples. Table~\ref{tab:assays} records the assays most relevant to the two theorems proved in this note.
+
+\begin{longtable}{P{0.23\textwidth}P{0.13\textwidth}P{0.16\textwidth}P{0.30\textwidth}P{0.12\textwidth}}
+\caption{Numerical assays useful in shaping the theorem statements.}\\
+\toprule
+\textbf{Assay} & \textbf{Precision} & \textbf{Accepted samples} & \textbf{Headline result} & \textbf{Primary relevance} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Assay} & \textbf{Precision} & \textbf{Accepted samples} & \textbf{Headline result} & \textbf{Primary relevance} \\
+\midrule
+\endhead
+Resolved-sheet off-diagonal probe & 80 digits & 1200 & No off-diagonal counterexample found: 1200/1200 ``no'' & Supports exact two-sheet torus structure \\
+Spectator-decoupled torus survival & 80 digits & 1001 (including 301 targeted high-curvature) & 1001/1001 pass; all 9/9 legacy high-curvature failures pass on retest & Older outer-descent picture \\
+Sector-independence of residual constant part & 80 digits base, 100 digits refined retest & 1001 (including 301 targeted high-curvature) & 999/1001 base passes; 2 borderline misses both pass refined 100-digit retest & Older outer-descent picture \\
+Lagrange-inversion phase-recurrence validation & 80 digits & 1200 & 1200/1200 pass at $10^{-2}$ and 1198/1200 at $10^{-3}$ for $(D_1,D_3,D_5)$ simultaneously & Validates scalar local exponent inputs \\
+Selector-sufficiency random assay & 60 digits & 1302 (1001 generic + 301 targeted high-curvature) & 1302/1302 pass; no accepted counterexamples; wall residual max $1.30\times 10^{-8}$; off-wall same-ray residual min $1.262\times 10^{-3}$ & Stress-tests local sufficiency premise \\
+Selector-sufficiency replay / audit & 70 digits & 1302 replayed & 1302/1302 recomputed passes; no replay failures; only tiny numerical differences from original log & Reproducibility audit \\
+\bottomrule
+\label{tab:assays}
+\end{longtable}
+
+\subsection{Assays inherited from the April 18 supplement}
+
+The April 18 supplement and main text recorded the numerical route that originally led to the older outer-matcher canonical form: 1200/1200 resolved-sheet off-diagonal ``no'' results, 1001/1001 torus-survival passes including 301 targeted high-curvature cases, 999/1001 base sector-independence passes with both misses clearing 100-digit retests, and 1200/1200 or 1198/1200 recurrence-validation passes depending on threshold \cite{SuppApril18,MainApril18}. Those data were decisive in establishing that the descent question was likely narrow rather than structural.
+
+\subsection{Selector sufficiency assay developed in the conversation}
+
+The conversation added a dedicated random-sample assay of the local sufficiency premise. The operational statement tested was:
+\begin{quote}\small
+For a simple transport ramification point $v$, if a commuting-family member is tuned to the wall $\im\sigma_v(H)=0$ at $\theta=0$, then the exact local action mismatch $S_{+-}$ places a genuine Stokes boundary at the Airy-predicted selector ray; a matched off-wall control does not.
+\end{quote}
+The logged 60-digit run accepted 1302/1302 samples and found no accepted counterexamples. The replay script then recomputed the same diagnostics on the exact same 1302 logged samples at 70 digits and again found 1302/1302 passes, with only tiny replay-vs-log deviations in the derived diagnostics.
+
+The most useful headline numbers were:
+\begin{align*}
+&\text{wall residual threshold}=10^{-6},\qquad \text{off-wall same-ray threshold}=10^{-3},\\
+&\max(\text{wall\_relres})=1.299372954971326\times 10^{-8},\\
+&\min(\text{off\_rel\_same\_ray})=1.262239463557905\times 10^{-3},\\
+&\min(\text{off\_shift\_rad})=8.414931995034863\times 10^{-4},\\
+&\max(\text{curvature proxy})\approx 9.6118170775\times 10^{5}.
+\end{align*}
+The replay reported
+\begin{align*}
+&\max(\text{wall\_relres})=1.3139151918755005\times 10^{-8},\\
+&\min(\text{off\_rel\_same\_ray})=1.262239463625\times 10^{-3},\\
+&\max|\Delta \sigma_{\mathrm{wall}}|=3.0762841493005714\times 10^{-8},\\
+&\max|\Delta \sigma_{\mathrm{off}}|=1.214867814500203\times 10^{-7},
+\end{align*}
+with no replay failures. These numbers came directly from the machine-readable summaries and replay report generated in the conversation.
+
+\subsection{Companion assay artifacts generated in the conversation}
+
+The following files were created in the conversation and are the direct machine-readable support for the selector sufficiency assay and its replay.
+\begin{itemize}
+  \item \texttt{selector\_sufficiency\_assay\_log.xlsx}
+  \item \texttt{selector\_sufficiency\_assay\_accepted.csv}
+  \item \texttt{selector\_sufficiency\_assay\_borderline.csv}
+  \item \texttt{selector\_sufficiency\_assay\_counterexamples.csv}
+  \item \texttt{selector\_sufficiency\_assay\_summary.json}
+  \item \texttt{selector\_sufficiency\_assay\_report.txt}
+  \item \texttt{selector\_sufficiency\_assay\_replay.py}
+  \item \texttt{selector\_sufficiency\_assay\_replay\_driver.sh}
+  \item \texttt{selector\_sufficiency\_assay\_replay\_results.csv}
+  \item \texttt{selector\_sufficiency\_assay\_replay\_diffs.csv}
+  \item \texttt{selector\_sufficiency\_assay\_replay\_summary.json}
+  \item \texttt{selector\_sufficiency\_assay\_replay\_report.txt}
+  \item \texttt{selector\_sufficiency\_assay\_replay\_combined.log}
+\end{itemize}
+The replay artifacts are especially useful because they provide an explicit audit trail from code to recomputed results.
+
+\section{Status after these two proofs}
+\label{sec:status}
+
+Excluding nongeneric collision scenarios, these two proofs remove the two principal generic local uncertainties that remained at the April 18 baseline: the local bridge to the quotient-ring/adiabatic half-form frame and the local selector sufficiency statement. What remains is the exact \emph{global} insertion rule: proving that crossing an active selector point inserts the scalar local block into the continuation functor in the correct active $2\oplus 1$ embedding, with the spectator line untouched and with no radius/overlap ambiguity. That was already the single broken morphism $j_{H,\theta}$ in the formal strategy diagram, and it remains the next independent symbolic task \cite{Strategy}.
+
+\section{Conclusion}
+
+The conversation proofs can be summarized in one sentence:
+\begin{quote}\itshape
+after resolved-sheet lift and half-form regularization, the local bridge is exact and constant, and once the exact local singulant is rectified to Airy form, simple phase-active transport ramification points necessarily carry nonzero scalar selector blocks.
+\end{quote}
+
+This leaves the global insertion problem -- not the local bridge, not the local Airy reduction, and not the local activation criterion in the generic simple case -- as the next theorem-level frontier.
+
+\begin{thebibliography}{99}
+
+\bibitem{LZSummary}
+\emph{Multistate Landau-Zener Solver: Augmented ODE with Gauged Dynamics} (internal summary).
+
+\bibitem{GapNote}
+\emph{A note on the sextic gap polynomial for $N=3$ Type-1 matrices} (internal note).
+
+\bibitem{Primer}
+\emph{Type-1, $N=3$ Landau-Zener primer: double cover, reduced ODE, gluing theorem, and selector} (internal primer).
+
+\bibitem{Strategy}
+\emph{Formalized strategy diagram for Type-1, $N=3$ Landau-Zener} (internal note).
+
+\bibitem{LocalMatching}
+\emph{Local selector matching at a transport ramification point in Type-1, $N=3$} (internal note, April 16, 2026).
+
+\bibitem{TransportPhase}
+\emph{Transport versus phase in the local gauge expansion at a simple transport ramification point} (internal note, April 17, 2026).
+
+\bibitem{MainApril18}
+\emph{All-orders torus structure and affine-linear local phase recurrences in Type-1, $N=3$ Landau-Zener} (main text draft, April 18, 2026).
+
+\bibitem{SuppApril18}
+\emph{Technical Supplement: all-orders torus structure, phase recurrence, and numerical support} (supplement draft, April 18, 2026).
+
+\bibitem{TransportRecurrence}
+\emph{Single-kernel transport progress} (conversation memorandum and companion derivation, April 19, 2026).
+
+\bibitem{SelectorAssay}
+\texttt{selector\_sufficiency\_assay\_report.txt}, \texttt{selector\_sufficiency\_assay\_summary.json}, \texttt{selector\_sufficiency\_assay\_log.xlsx}, and companion CSV artifacts generated in the conversation.
+
+\bibitem{SelectorReplay}
+\texttt{selector\_sufficiency\_assay\_replay.py}, \texttt{selector\_sufficiency\_assay\_replay\_report.txt}, \texttt{selector\_sufficiency\_assay\_replay\_summary.json}, \texttt{selector\_sufficiency\_assay\_replay\_combined.log}, and companion replay CSV artifacts generated in the conversation.
+
+\end{thebibliography}
+
+\end{document}

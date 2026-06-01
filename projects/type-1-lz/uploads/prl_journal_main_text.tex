@@ -1,0 +1,131 @@
+
+\documentclass[aps,prl,reprint,superscriptaddress,nofootinbib]{revtex4-2}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\Wfour}{W_4}
+\newcommand{\Qfour}{Q_4}
+\newcommand{\LH}{L_H}
+\newcommand{\hatG}{\widehat G}
+\newcommand{\sigthree}{\sigma_3}
+\begin{document}
+\title{All-orders torus structure and affine-linear local phase recurrences in Type-1, $N=3$ Landau--Zener}
+\author{OpenAI working draft}
+\date{April 18, 2026}
+\begin{abstract}
+At a simple transport ramification point of a Type-1, $N=3$ Landau--Zener family, we show that the canonical exact two-sheet gauge is torus-valued to all orders. Ordinary Lagrange--B\"urmann inversion then yields a compact closed recurrence for the odd local phase coefficients $D_{2m+1}(H)$, and because the commuting-family member enters only through the linear factor $\LH$, the full member-dependent phase series is affine-linear in $\LH(v)$ and $\LH'(v)$ at every order. In the WKB-normalized Airy convention the local selector block therefore reduces to a scalar renormalization of the universal Airy jump. To descend this exact two-sheet theorem back to the original outer matcher, we state two narrow hypotheses supported by high-precision large-sample assays. The remaining open content is then concentrated in the local activation--multiplier morphism: selector sufficiency and the exact global insertion rule for the scalar local block.
+\end{abstract}
+\maketitle
+
+\paragraph*{Setup and goal.}
+The project begins with the gauged adiabatic Type-1 evolution
+\begin{equation}
+ f_i'(u)=-\sum_{j\neq i}S_{ij}(u)f_j(u)+\ii\bigl(E_i(u)-E_x(u)\bigr)f_i(u),
+\end{equation}
+and its quotient-ring reduction
+\begin{equation}
+ \partial_u[R]=\ii\big[(m-E_xp)s_uR\big],\qquad \mathcal E_u=\mathbb C[\lambda]/(q_u).
+\end{equation}
+Here $q_u(\lambda)=up(\lambda)-n(\lambda)$.
+with commuting triple $(H_x,Y,R)$ and common/spinor cover geometry already formalized in Refs.~\onlinecite{summary,gap,primer,strategy,match,gauge}. The unresolved local content was concentrated in the matcher $G_{v,s}(H)$ at a simple transport ramification point. Here we show that the exact canonical two-sheet reduction already forces a torus-valued local gauge, derive an all-orders phase recurrence, and isolate precisely what remains open.
+
+\paragraph*{Exact two-sheet torus theorem.}
+Let $v$ be a simple transport ramification point, $u_*=u(v)$, and write $u=u_*+t^2$. If $\lambda_\pm(t)$ are the two colliding local branches, then the reduced sheet carriers satisfy exact scalar equations
+\begin{equation}
+ \partial_uR_\pm=\ii(E_\pm-E_x)R_\pm,
+\end{equation}
+so on the $t$-cover the active two-sheet system is exactly diagonal,
+\begin{equation}
+ \partial_t\begin{pmatrix}R_+\\R_-\end{pmatrix}=
+ \bigl(A_v(t;H)I+B_v(t;H)\sigma_3\bigr)
+ \begin{pmatrix}R_+\\R_-\end{pmatrix}.
+\end{equation}
+After reconstructing the half-form amplitudes,
+\begin{equation}
+ \Psi_\pm(t;H)=\sqrt{2t}\,\Gamma_\pm(t)R_\pm(t;H)\sqrt{\dd t},
+\end{equation}
+and removing the common scalar phase, the exact basis is diagonal in the ordered resolved-sheet splitting $L_+\oplus L_-$. The WKB-normalized Airy basis preserves the same ordered splitting. The change-of-basis matrix between the two therefore preserves each line separately, hence is diagonal. After determinant-one normalization,
+\begin{equation}
+ \hatG_v(t;H)=\exp\!\bigl(\Theta_v(t;H)\sigma_3\bigr).
+ \label{eq:torus}
+\end{equation}
+This is an exact theorem for the canonical two-sheet reduction: no torus-breaking off-diagonal term can survive in that normalization.
+
+\paragraph*{Lagrange--B\"urmann kernel.}
+Write $z=\lambda-v$ and factor the local map as
+\begin{equation}
+ u(v+z)-u_*=z^2h_v(z),\qquad h_v(0)=\frac{u''(v)}{2}\neq 0.
+\end{equation}
+Define $\phi_v(z)=z\sqrt{h_v(z)}$ and let $\psi_v$ be its ordinary local inverse. Then
+\begin{equation}
+ \lambda_+(t)=v+\psi_v(t),\qquad \lambda_-(t)=v+\psi_v(-t).
+\end{equation}
+With $F_H(z)=\Delta_H(v+z)$ and $\Delta_H(\lambda)=\mu(\lambda)\LH(\lambda)/p(\lambda)$, define
+\begin{equation}
+ \Delta_H(\lambda_+(t)) - \Delta_H(\lambda_-(t)) = 2\sum_{m\ge 0}D_{2m+1}(H)t^{2m+1}.
+\end{equation}
+Ordinary Lagrange--B\"urmann inversion gives the all-orders kernel
+\begin{equation}
+ D_{2m+1}(H)=\frac{1}{2m+1}[z^{2m}]F_H'(z)\left(\frac{z}{\phi_v(z)}\right)^{2m+1}
+ =\frac{1}{2m+1}[z^{2m}]F_H'(z)h_v(z)^{-(2m+1)/2}.
+ \label{eq:kernel}
+\end{equation}
+Writing $h_v(z)=h_0(1+\sum_{k\ge1}a_kz^k)$ and $Q_m(z)=(1+\sum_{k\ge1}a_kz^k)^{-(2m+1)/2}=\sum_{n\ge0}q_n^{(m)}z^n$, one obtains the recursive coefficients
+\begin{equation}
+ q_n^{(m)}=\frac{1}{n}\sum_{k=1}^n\left(\frac{1-2m}{2}k-n\right)a_kq_{n-k}^{(m)}.
+ \label{eq:qrec}
+\end{equation}
+
+\paragraph*{Affine-linearity on the commuting family.}
+For Type-1, $\Delta_H=FL_H$ with $F(\lambda)=\mu(\lambda)/p(\lambda)$ and $\LH$ linear. Hence $\LH(v+z)=\LH(v)+\LH'(v)z$, so every odd phase coefficient splits as
+\begin{equation}
+ D_{2m+1}(H)=A_m(v)\LH(v)+B_m(v)\LH'(v),
+ \label{eq:affine}
+\end{equation}
+with geometry-only sequences $A_m(v)$ and $B_m(v)$. The full member-dependent phase series is therefore an explicitly computable affine-linear sequence on the whole commuting family. In particular, if
+\begin{equation}
+ \Theta_v^{\mathrm{ph}}(t;H)=\sum_{n\ge2}\Xi_{2n+1}(H)t^{2n+1},
+\end{equation}
+then
+\begin{equation}
+ \Xi_{2n+1}(H)=\frac{2\ii}{2n+1}D_{2n-1}(H),\qquad n\ge 2.
+ \label{eq:Xi-relation}
+\end{equation}
+The first new explicit coefficient beyond the previously derived $t^5$ term is thus $\Xi_7(H)=\frac{2\ii}{7}D_5(H)$; explicit formulas for $\Xi_7$ and $\Xi_9$ for the canonical $v_4$ point are given in the Supplement.
+
+\paragraph*{Local scalar multiplier.}
+Because $\dd u=2t\,\dd t$, the exact local phase mismatch is
+\begin{equation}
+ S_{+-}(t;H)=4\sum_{m\ge0}\frac{D_{2m+1}(H)}{2m+3}t^{2m+3}.
+\end{equation}
+The linear Langer coordinate removes the cubic term exactly, so the local phase remainder is analytic. In the WKB-normalized Airy convention, the same-radius active $S_1\to S_0$ crossing therefore carries the Borel-summed scalar multiplier
+\begin{equation}
+ \mathfrak s_v^{\mathrm{BS}}(t;H)=-\ii\exp\!\bigl(2\Theta_v(t;H)\bigr).
+ \label{eq:scalar}
+\end{equation}
+Thus the local selector data in the canonical two-sheet normalization are scalar rather than matrix-valued.
+
+\paragraph*{Numerically supported descent back to the outer frame.}
+To identify the exact two-sheet theorem with the original outer matcher $G_{v,s}(H)$, we use two narrow hypotheses: (H1) after spectator decoupling and curvature subtraction, no nondecaying torus-breaking off-diagonal survives; (H2) the residual constant non-torus part is sector-independent and geometry-only, so it may be absorbed into the resolved-sheet convention. The empirical support is strong. A resolved-sheet probe of $\hatG_v$ found no off-diagonal counterexample in 1200/1200 accepted 80-digit samples. The spectator-decoupled torus-survival assay gave 1001/1001 passes, including 301 deliberately targeted high-curvature cases; all 9 legacy high-curvature failures from the raw assay also passed on retest. The sector-independence assay gave 999/1001 passes in the base 80-digit run, with only 2 borderline extreme-curvature misses, and both passed a refined 100-digit retest. Finally, the independent recurrence validation gave 1200/1200 passes at a $10^{-2}$ relative threshold and 1198/1200 at $10^{-3}$ for $(D_1,D_3,D_5)$ simultaneously. We therefore regard (H1)--(H2) as narrow numerically supported statements rather than theorem-level inputs.
+
+\paragraph*{What remains open.}
+The present work does not yet solve the local activation--multiplier morphism. Two pieces remain: (i) a proof of selector sufficiency, i.e. that every simple phase-active transport ramification point actually inserts the scalar block \eqref{eq:scalar}, and (ii) the exact global insertion rule that places this scalar local block inside the continuation functor. The highest-leverage symbolic next steps are therefore to derive an all-orders recurrence for the transport exponent $\Theta_v^{\mathrm{tr}}(t)$ and to prove a local-to-global exact-WKB comparison theorem for the scalar block. Numerics should now be used only to sharpen theorem statements, especially in the extreme-curvature and nongeneric-collision regimes.
+
+\begin{thebibliography}{99}
+\bibitem{summary} \emph{Multistate Landau--Zener Solver: Augmented ODE with Gauged Dynamics} (internal summary).
+\bibitem{gap} \emph{A note on the sextic gap polynomial for $N=3$ Type-1 matrices} (internal note).
+\bibitem{primer} \emph{Type-1, $N=3$ Landau--Zener primer: double cover, reduced ODE, gluing theorem, and selector} (internal primer).
+\bibitem{strategy} \emph{Formalized strategy diagram for Type-1, $N=3$ Landau--Zener} (internal note).
+\bibitem{match} \emph{Local selector matching at a transport ramification point in Type-1, $N=3$} (internal note).
+\bibitem{gauge} \emph{Transport versus phase in the local gauge expansion at a simple transport ramification point} (internal note).
+\end{thebibliography}
+\end{document}

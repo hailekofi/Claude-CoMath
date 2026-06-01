@@ -1,0 +1,470 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{booktabs,longtable,array,tabularx}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc,shapes.geometric}
+\usepackage{caption}
+
+\definecolor{TitleBlue}{HTML}{173753}
+\definecolor{AccentBlue}{HTML}{2F5D7E}
+\definecolor{SoftBlue}{HTML}{EEF4FA}
+\definecolor{SoftGold}{HTML}{FAF6EE}
+\definecolor{SoftRed}{HTML}{FCEEEE}
+\definecolor{SoftGreen}{HTML}{EEF8F0}
+\definecolor{LineBlue}{HTML}{C9D7E4}
+\definecolor{MutedText}{HTML}{4E5A66}
+
+\hypersetup{colorlinks=true,linkcolor=AccentBlue,urlcolor=AccentBlue,citecolor=AccentBlue,pdftitle={Nontrivial Assay Program for Type-1 N=3 Landau-Zener Continuation Plumbing},pdfauthor={OpenAI}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{MutedText}{Type-1, $N=3$ nontrivial assay program}}
+\fancyhead[R]{\textcolor{MutedText}{continuation constructor review}}
+\fancyfoot[C]{\textcolor{MutedText}{\thepage}}
+\setlength{\headheight}{14pt}
+\titleformat{\section}{\Large\bfseries\color{TitleBlue}}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\large\bfseries\color{AccentBlue}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{TitleBlue}}{\thesubsubsection}{0.5em}{}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\setlist[itemize]{leftmargin=1.4em,itemsep=0.18em,topsep=0.22em}
+\setlist[enumerate]{leftmargin=1.6em,itemsep=0.18em,topsep=0.22em}
+\onehalfspacing
+
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\ii}{\mathrm i}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\calA}{\mathcal A}
+\newcommand{\calE}{\mathcal E}
+\newcommand{\calW}{\mathcal W}
+\newcommand{\hatC}{\widehat{\mathcal C}}
+\newcommand{\Hx}{\mathsf H_x}
+\newcommand{\Yop}{\mathsf Y}
+\newcommand{\Rop}{\mathsf R}
+\newcommand{\Sel}{\operatorname{Sel}}
+\newcommand{\Med}{\operatorname{Med}}
+\newcommand{\Disc}{\operatorname{Disc}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Tol}{\mathrm{tol}}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\begin{document}
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+\vspace*{1.0cm}
+{\Large\color{AccentBlue}\bfseries Internal technical plan\par}
+\vspace{0.6cm}
+{\fontsize{23}{28}\selectfont\bfseries\color{TitleBlue}A Nontrivial Assay Program\par}
+{\fontsize{22}{27}\selectfont\bfseries\color{TitleBlue}for Type-1, $N=3$ Landau--Zener\par}
+\vspace{0.15cm}
+{\fontsize{18}{23}\selectfont\bfseries\color{TitleBlue}Continuation-Functor Constructors and Simple Component Structure\par}
+\vspace{0.9cm}
+\begin{minipage}{0.88\textwidth}
+\small
+This note records the corrected test standard after the previous 520-example segmented-product assay was recognized to be tautological as a validation of local constructors. It specifies what a nontrivial assay must do, separates three increasingly independent constructor levels, lists what has already been validated, what has not been validated, and what has been falsified, and gives a maximalist parallel-agent dispatch plan.
+\end{minipage}
+\vfill
+{\large\color{MutedText}Prepared for the Type-1 multistate Landau--Zener project\par}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+\section{Executive summary}
+
+The current state is best summarized by the distinction
+\[
+\boxed{\text{segmented exact propagator plumbing}}\quad \neq \quad \boxed{\text{independent continuation-functor constructor}.}
+\]
+The earlier 520-example assay confirmed that, once geometric window centers and bounds are chosen, exact segment matrices multiply back to the one-pass fundamental matrix at roundoff-level precision. That test was valuable for debugging factor order, endpoint permutations, and bookkeeping. It did \emph{not} validate any independently constructed local $Q_4$ window object, because the factors were obtained from the same global fundamental solution.
+
+A nontrivial assay must therefore satisfy two conditions.
+\begin{enumerate}
+  \item The benchmark one-pass integration and the constructor used in the product must be disjoint computational pathways.
+  \item The product factors must be shown to have simple structure, not merely to be arbitrary full $3\times 3$ matrices solved on small intervals.
+\end{enumerate}
+
+The corrected no-active-selector scattering ansatz is
+\begin{equation}
+\label{eq:nosel-product}
+S^{\rm ad}_{\rm noSel}=\Pi_+\,D_2\,\calW_{X_2}\,D_1\,\calW_{X_1}\,D_0\,\Pi_- ,
+\end{equation}
+where $X_1,X_2$ are the two projected conjugate-pair $Q_4$ windows in real-axis order. The exact real crossing $L_H=0$ is a regular marker and is absorbed into whichever edge contains it. The old point-local replacement of each $\calW_X$ by one embedded $2\oplus 1$ Airy block is falsified because it produces structural zero amplitudes not present in the ODE data.
+
+The three nontrivial assay levels are:
+\begin{description}[leftmargin=2.0em]
+  \item[Level 1.] Independently solved segment ODEs. This avoids using the stored one-pass fundamental matrix to build factors, but it still uses the same differential equation locally and is therefore a numerical-constructor assay rather than a structural analytic assay.
+  \item[Level 2.] Lateral/median full-window constructors. Each projected conjugate $Q_4$ window is built as a median of upper and lower lateral continuations, $\calW_X=\Med(U_X^+,U_X^-)$, computed independently from lateral contour IVPs.
+  \item[Level 3.] Analytic or semi-analytic $Q_4$ window constructors. Each $U_X^\pm$ is replaced by local normal-form data, Abelian phase integrals, and independently constructed entry/exit frame maps. This is the first level that would provide a genuine closed or semi-closed solution mechanism.
+\end{description}
+
+\section{Mathematical baseline}
+
+The Type-1, $N=3$ problem is controlled by the rational spectral data
+\begin{equation}
+ u(\lambda)=\frac{n(\lambda)}{p(\lambda)},\qquad E(\lambda)=\frac{m(\lambda)}{p(\lambda)},\qquad q_u(\lambda)=u p(\lambda)-n(\lambda).
+\end{equation}
+The gauged adiabatic amplitudes solve
+\begin{equation}
+\label{eq:gauged-ode}
+f_i'(u)=-\sum_{j\neq i}S_{ij}(u)f_j(u)+\ii\bigl(E_i(u)-E_x(u)\bigr)f_i(u).
+\end{equation}
+The primary benchmark observable is the transition matrix
+\begin{equation}
+P_{x\to j}=|f_j(+\infty)|^2.
+\end{equation}
+
+The quotient-ring formulation packages the reduced carrier in
+\begin{equation}
+ \calE_u=\C[\lambda]/(q_u(\lambda)),\qquad \partial_u[R]=\ii\big[(m-E_xp)s_uR\big],\quad ps_u\equiv 1 \pmod{q_u}.
+\end{equation}
+The same geometry is organized by the commuting multiplication operators
+\begin{equation}
+\Yop=M_{Q_4L_H^2/p^2},\qquad \Rop=M_{W_4/L_H^4}.
+\end{equation}
+Thus $Q_4$ controls the phase-square-root sector, $W_4$ controls transport ramification, and $L_H$ is a member-dependent phase/crossing factor. The common/spinor cover carries
+\begin{equation}
+\omega=\sqrt{y}\,du,
+\qquad
+\eta=S\,du=\frac{\rho}{y}\,du.
+\end{equation}
+Away from the transport discriminant, the spectral projectors of $\Rop$ give canonical gluing of the pair sectors. Active selector points are a different mechanism: $W_4=0$ plus phase resonance.
+
+\section{Corrected product architecture}
+
+\subsection{No-active-selector chamber}
+
+For real generic parameters and $\theta=0$, the four $Q_4$ roots typically occur as two conjugate pairs. Each pair defines one projected real-axis window. Let
+\[
+X_1\prec X_2
+\]
+be the order of those two windows under the projection coordinate
+\begin{equation}
+\tau(z;\theta)=\Re(e^{-\ii\theta}z).
+\end{equation}
+For window $X_k$ choose a real projected interval
+\begin{equation}
+ I_{X_k}=[\ell_{X_k},r_{X_k}],
+\end{equation}
+with disjoint interiors. Then the no-selector product is Eq.~\eqref{eq:nosel-product}, with
+\begin{align}
+D_0&:\quad -\infty\to \ell_{X_1},\\
+D_1&:\quad r_{X_1}\to \ell_{X_2},\\
+D_2&:\quad r_{X_2}\to +\infty.
+\end{align}
+The exact crossing $L_H=0$ is not a factor. It remains a useful marker for stationary-phase and large-slope asymptotics, but it is absorbed into the edge containing $u_c=u(\lambda_c)$.
+
+\subsection{General active-selector chamber}
+
+If active selectors are present, the product becomes
+\begin{equation}
+S^{\rm ad}=\Pi_+\,D_m V_mD_{m-1}\cdots V_1D_0\,\Pi_-,
+\end{equation}
+where each $V_k$ is one of:
+\begin{enumerate}
+  \item a full projected $Q_4$ window $\calW_X$;
+  \item an embedded scalar active-selector block $J_{v,\theta}(q;H)$;
+  \item a conventional ordinary turning block if the chosen formulation resolves individual ordinary turning points rather than projected windows.
+\end{enumerate}
+In a generic simple active selector case,
+\begin{equation}
+J_{v,\theta}(q;H)=\iota_v\bigl(I+s^{\rm BS}_{v,\theta}(q;H)N_{v,\theta}\bigr),
+\end{equation}
+with all regular sector propagation assigned to adjacent $D$-factors, not to the pure selector block.
+
+\section{What previous computations actually established}
+
+\begin{longtable}{P{0.25\textwidth}P{0.20\textwidth}P{0.45\textwidth}}
+\toprule
+\textbf{Claim} & \textbf{Status} & \textbf{Reason}\
+\midrule
+Bookkeeping segmentation and path order are implementable. & Validated at Level 0 & 520 samples reproduced one-pass probabilities after segment factors were reconstructed from the global one-pass matrix. This validates indexing, boundaries, multiplication order, and endpoint permutations.\\
+Generic selectors are inactive at $\theta=0$ away from walls. & Empirically supported & In the 520-sample generic assay, no selectors were active at tolerance $10^{-8}$. This matches the expectation that phase activation is codimension one for fixed $\theta$.\\
+The exact $L_H=0$ crossing is a point jump. & Falsified & The crossing shrink diagnostic shows the finite crossing-window propagator tends to identity as $h_c\to0$ at fixed $H$.\\
+A product containing only two embedded point-local $2\oplus1$ $Q_4$ Airy blocks is sufficient. & Falsified & That algebraic collapse forces structural zeros. The ODE transition matrices in the logged samples show no such zero entries.\\
+Each projected $Q_4$ window is a full continuation object. & Required, not yet analytically constructed & It is necessary to remove structural zeros, but its independent analytic or semi-analytic construction remains the target of Levels 2--3.\\
+Active selector insertion is a pure embedded scalar block in generic simple cases. & Symbolically established in separate selector notes & The local-to-global theorem applies to active selectors, not to ordinary projected $Q_4$ windows.\\
+\bottomrule
+\end{longtable}
+
+\section{Control level: exact segmentation identity}
+
+Before the three nontrivial assay levels, retain a Level 0 control. Let $U(t,-T)$ be the benchmark one-pass fundamental matrix. For any boundaries
+\[
+-T=t_0<t_1<\cdots<t_m=T,
+\]
+construct segments by
+\begin{equation}
+F[t_b,t_a]=U(t_b,-T)U(t_a,-T)^{-1}.
+\end{equation}
+Then
+\begin{equation}
+U(T,-T)=F[t_m,t_{m-1}]\cdots F[t_1,t_0].
+\end{equation}
+This is mathematically tautological. It should remain in the harness as a smoke test, but no claim of independent continuation construction should be based on it.
+
+\section{Level 1: independently solved segment-ODE assay}
+
+\subsection{Purpose}
+
+Level 1 enforces the minimum separation between benchmark and constructor. It tests whether independently solved edge and window IVPs compose correctly without reusing stored values from the benchmark fundamental matrix.
+
+\subsection{Inputs}
+
+For each sample:
+\begin{itemize}
+  \item real ordered $\epsilon_0<\epsilon_1<\epsilon_2$;
+  \item nonzero real $\gamma_i$;
+  \item real slopes $a_i$;
+  \item Borel direction $\theta$, initially $\theta=0$;
+  \item projected $Q_4$ windows $I_X=[\ell_X,r_X]$;
+  \item active-selector windows if present.
+\end{itemize}
+
+\subsection{Constructor rules}
+
+The benchmark solves Eq.~\eqref{eq:gauged-ode} once over $[-T,T]$ for each incoming channel. The constructor must not read benchmark intermediate values. For each segment $[a,b]$, independently solve
+\begin{equation}
+\frac{dU_{[a,b]}}{du}=\calA(u)U_{[a,b]},\qquad U_{[a,b]}(a)=I,
+\end{equation}
+where $\calA$ is the chosen gauged or ungauged coefficient matrix. The product is formed from these independently initialized segment matrices.
+
+\subsection{Pass criteria}
+
+\begin{enumerate}
+  \item For every sample and every transition probability,
+  \[
+  \max_{x,j}|P^{\rm prod}_{x\to j}-P^{\rm direct}_{x\to j}|<10^{-8}.
+  \]
+  \item The product must remain stable under shrinking or expanding windows within admissible non-overlap ranges.
+  \item The result must remain stable under refining the cutoff $T$ and solver precision.
+\end{enumerate}
+
+\subsection{What Level 1 proves and does not prove}
+
+Level 1 proves that the factorization is not merely the algebraic identity $U_bU_a^{-1}$. It still does not prove simple component structure. Full-window matrices are still arbitrary local ODE propagators unless further reduced.
+
+\section{Level 2: lateral/median full-window assay}
+
+\subsection{Purpose}
+
+Level 2 tests the actual real-axis continuation idea. A projected $Q_4$ conjugate-pair window should be reconstructed as a median of independent upper and lower lateral continuations:
+\begin{equation}
+\label{eq:median}
+\calW_X=\Med(U_X^+,U_X^-)=U_X^+\bigl((U_X^-)^{-1}U_X^+\bigr)^{-1/2}.
+\end{equation}
+The matrix square root uses a fixed branch, with branch-change events logged as chamber changes.
+
+\subsection{Constructor rules}
+
+For each projected $Q_4$ window $X=\{q,\bar q\}$:
+\begin{enumerate}
+  \item Choose common real projected endpoints $\ell_X,r_X$.
+  \item Construct two contours $\gamma_X^+$ and $\gamma_X^-$ from $\ell_X$ to $r_X$, passing through the upper and lower lateral sectors of $u(q)$ and $u(\bar q)$ respectively.
+  \item Solve the same local ODE independently on those contours with identity initial matrix:
+  \[
+  U_X^\pm=\mathcal P\exp\int_{\gamma_X^\pm}\calA(u)\,du.
+  \]
+  \item Form $\calW_X$ by Eq.~\eqref{eq:median}.
+\end{enumerate}
+
+Edge factors may be either independent real-edge ODE solves or Abelian-frame edge factors with independently constructed endpoint frame maps. The direct benchmark is still the one-pass real-axis ODE.
+
+\subsection{Simplicity tests at Level 2}
+
+A successful Level 2 should show more than accuracy. For each $\calW_X$ log:
+\begin{itemize}
+  \item conjugation symmetry: $U_X^-\approx \overline{U_X^+}$ in the compatible real frame;
+  \item median stability under contour deformation within the same chamber;
+  \item low-dimensional variation of $\log \calW_X$ under changes of window width and contour curvature;
+  \item absence of forced structural zeros;
+  \item bounded condition number of the Stokes automorphism $(U_X^-)^{-1}U_X^+$;
+  \item agreement of the real-axis product with benchmark probabilities to $10^{-8}$ or better.
+\end{itemize}
+
+\subsection{Failure modes}
+
+Level 2 fails if median branch choices jump unpredictably, if lateral contours do not yield a stable median, or if the product requires arbitrary full $3\times3$ fitting beyond independent lateral IVPs. A failure here does not falsify the Type-1 geometry; it falsifies this median implementation.
+
+\section{Level 3: analytic or semi-analytic $Q_4$ window assay}
+
+\subsection{Purpose}
+
+Level 3 is the first genuinely structural assay. It tries to replace $U_X^\pm$ by simple building blocks:
+\begin{equation}
+\label{eq:level3-factor}
+U_X^\pm=F_{X,{\rm out}}^\pm\,C_X^\pm\,P_X^\pm\,(F_{X,{\rm in}}^\pm)^{-1}.
+\end{equation}
+Here:
+\begin{itemize}
+  \item $C_X^\pm$ is a universal ordinary Airy/Stokes connection factor in a local active-pair normal form;
+  \item $P_X^\pm$ is diagonal or block-diagonal Abelian propagation built from integrals of $\omega$ and possible half-form/transport terms;
+  \item $F_{X,{\rm in/out}}^\pm$ are entry/exit frame maps from the physical adiabatic or quotient-ring frame to the local sectorial normal-form frame.
+\end{itemize}
+
+\subsection{Allowed information}
+
+The constructor may use:
+\begin{itemize}
+  \item algebraic data $p,n,m,Q_4,W_4,L_H,\kappa_S$;
+  \item roots of $Q_4$ and $W_4$;
+  \item Abelian integrals on $\hatC$;
+  \item local Airy/Langer normal forms at $Q_4$ roots;
+  \item canonical gluing projectors from $\Rop$;
+  \item local frame equations solved only in small overlap annuli, not across the whole projected window.
+\end{itemize}
+The constructor must not use the one-pass benchmark fundamental matrix or exact window IVPs except as validation references.
+
+\subsection{Simplicity standard}
+
+Level 3 is successful only if each $\calW_X$ is described by a small list of interpretable data:
+\begin{equation}
+\calW_X=\Med\bigl(F_{\rm out}^+C_X^+P_X^+(F_{\rm in}^+)^{-1},\ F_{\rm out}^-C_X^-P_X^-(F_{\rm in}^-)^{-1}\bigr),
+\end{equation}
+with $C_X^\pm$ universal or near-universal, $P_X^\pm$ Abelian, and $F$-maps algebraic or short local-frame solves. An arbitrary numerically fitted full $3\times3$ matrix does not pass.
+
+\subsection{Pass criteria}
+
+\begin{enumerate}
+  \item Accuracy: all transition probabilities below $10^{-8}$ error against one-pass ODE on more than 500 generic samples and targeted stress samples.
+  \item Simplicity: each factor admits the claimed decomposition with logged scalar or low-dimensional parameters.
+  \item Stability: changing local radii and contour gauges conjugates adjacent $F$ maps but leaves the product invariant.
+  \item Falsifiability: every failure must be logged as one of a finite list -- median branch failure, frame-map failure, Airy normal-form failure, edge phase failure, selector activation error, endpoint permutation error, or true counterexample.
+\end{enumerate}
+
+\section{Dense parameter sampling}
+
+A dense assay should combine random and adversarial sampling. Recommended strata:
+\begin{enumerate}
+  \item Generic real ordered $\epsilon$ with $\gamma_i$ away from zero and moderate slopes.
+  \item Small-slope and large-slope regimes.
+  \item Near-degenerate but accepted $Q_4$ roots, excluding collisions only by a controlled margin.
+  \item Near $W_4$ phase-resonance walls, both active and inactive selectors.
+  \item Exact crossing $u_c$ placed before, between, and after the two projected $Q_4$ windows.
+  \item Crossing near $u=0$ and near projected $Q_4$ windows.
+  \item High-curvature transport ramification points.
+  \item Endpoint/asymptotic stress with increasing $T$ and asymptotic phase normalization checks.
+\end{enumerate}
+
+A run should record accepted samples and rejected samples separately. Rejection reasons must be algebraic, not outcome-based: repeated roots, near collisions beyond precision budget, path crossing ambiguity, singular contour, or failed precision certificate.
+
+\section{Mandatory logs and schemas}
+
+Every run should emit:
+\begin{itemize}
+  \item parameter vectors $(\epsilon,\gamma,a)$;
+  \item $Q_4$, $W_4$, and $L_H$ roots and projected $u$ values;
+  \item selector residuals and active selector list;
+  \item window bounds $\ell_X,r_X$ and edge bounds;
+  \item all endpoint permutations $\Pi_\pm$;
+  \item direct benchmark transition matrix;
+  \item product transition matrix;
+  \item per-entry absolute errors and row/column unitarity defects;
+  \item constructor-specific diagnostics: condition numbers, median eigenvalues, branch choices, contour hashes, frame-map gauges, and simplicity parameters.
+\end{itemize}
+
+For Level 3, the log must also contain the factorization residual
+\begin{equation}
+\|U_X^\pm-F_{\rm out}^\pm C_X^\pm P_X^\pm(F_{\rm in}^\pm)^{-1}\|
+\end{equation}
+computed against an independently solved local-contour IVP, never against the one-pass benchmark.
+
+\section{Maximalist parallel-agent dispatch plan}
+
+The maximalist assay can be dispatched as a federation of autonomous agents. Each agent writes machine-readable artifacts and is forbidden to consume artifacts that would create circular validation.
+
+\begin{longtable}{P{0.20\textwidth}P{0.32\textwidth}P{0.38\textwidth}}
+\toprule
+\textbf{Agent} & \textbf{Task} & \textbf{Outputs and independence rule}\\
+\midrule
+Parameter factory & Generate generic and adversarial parameter batches. & CSV/JSON parameter batches plus algebraic rejection reasons. No access to ODE outputs.\\
+Geometry auditor & Compute $p,n,m,Q_4,W_4,L_H$, roots, projections, degeneracy scores. & Geometry logs and certified window order. No access to transition matrices.\\
+Benchmark ODE agent & Compute one-pass high-precision transition matrices. & Direct $P$ matrices, unitarity defects, solver logs. No access to product factors.\\
+Level 1 constructor agents & Solve independent real-edge and full-window segment IVPs with identity initial data. & Segment matrices and product errors. No use of stored benchmark intermediates.\\
+Lateral contour agents & For each $Q_4$ window, compute $U_X^+$ and $U_X^-$ on independent contours. & Lateral matrices, contour certificates, median factors. No access to benchmark.\\
+Median auditor & Check matrix square-root branches, conjugation symmetry, contour deformation invariance. & Median diagnostics, branch logs, failure classifications.\\
+Frame-map agents & Construct $F_{\rm in/out}^\pm$ using quotient-ring frames, projectors, or local gauge equations. & Frame maps and local residuals. No direct use of full-window exact IVP except validation reference.\\
+Airy normal-form agents & Compute local Airy/Langer data at $Q_4$ points and selector points. & $C_X^\pm$, local actions, Stokes constants, normal-form errors.\\
+Edge Abelian agents & Compute edge propagation from Abelian integrals and endpoint frame maps. & $D_e$ factors, asymptotic residue/finite-part logs.\\
+Selector agents & Detect active $W_4$ selectors and insert scalar blocks when active. & Selector residuals, local multipliers, insertion labels.\\
+Crossing audit agents & Verify $L_H=0$ shrink-to-identity across random and targeted samples. & $B_c(h)$ shrink ratios and marker placement.\\
+Falsification agents & Search for structural zeros, instability, branch flips, near-collision failures. & Counterexample candidates with minimal reproducing data.\\
+Reconciliation agent & Compose product factors and compare to benchmark. & Product matrices and all per-entry errors. Cannot construct factors.\\
+Archive agent & Bundle logs, code, seeds, and provenance. & Reproducible audit bundle. No mathematical decisions.\\
+\bottomrule
+\end{longtable}
+
+\section{Acceptance ladder}
+
+The assay should be graded on the following ladder.
+\begin{description}[leftmargin=2.0em]
+  \item[Bookkeeping success.] Level 0 reproduces the benchmark. Already achieved, but tautological.
+  \item[Independent numerical success.] Level 1 reproduces benchmark with independent segment IVPs.
+  \item[Continuation success.] Level 2 reproduces benchmark using lateral/median full-window objects.
+  \item[Structural success.] Level 3 reproduces benchmark using simple local normal-form, Abelian, and frame-map components.
+  \item[Theorem-shaping success.] All failures are localized to nongeneric collision regimes or to explicitly named missing subconstructors.
+\end{description}
+
+\section{Conclusion}
+
+The nontrivial assay should not ask whether exact propagators can be split and multiplied. That is guaranteed. It should ask whether the Type-1, $N=3$ geometry supplies independently constructible and structurally simple factors for the scattering matrix. The corrected program is therefore:
+\[
+\boxed{\text{one-pass ODE benchmark}}
+\quad\text{versus}\quad
+\boxed{\Pi_+D_2\calW_{X_2}D_1\calW_{X_1}D_0\Pi_-}
+\]
+with $\calW_X$ built first by independent lateral/median continuation and then, at the decisive level, by analytic or semi-analytic normal-form data.
+
+\appendix
+\section{Pseudo-code skeleton}
+\begin{verbatim}
+for sample in parameter_batch:
+    geom = GeometryAgent(sample)
+    if geom.reject: log_reject(); continue
+
+    P_direct = BenchmarkODE(sample, geom, T, precision)
+
+    # Level 1
+    factors_L1 = IndependentSegmentODE(sample, geom.windows, geom.edges)
+    P_L1 = ComposeAndPermute(factors_L1, geom.Pi_plus, geom.Pi_minus)
+    compare(P_L1, P_direct)
+
+    # Level 2
+    lateral = LateralContourConstructors(sample, geom.Q4_windows)
+    W = {X: Med(lateral[X].U_plus, lateral[X].U_minus) for X in windows}
+    edges = IndependentEdgeConstructors(sample, geom.edges)
+    P_L2 = ComposeAndPermute(edges, W, geom.Pi_plus, geom.Pi_minus)
+    compare(P_L2, P_direct)
+
+    # Level 3
+    normal_forms = AiryAndFrameConstructors(sample, geom.Q4_windows)
+    W_analytic = BuildWindowMedians(normal_forms)
+    edges_abelian = AbelianEdgeConstructors(sample, geom.edges)
+    P_L3 = ComposeAndPermute(edges_abelian, W_analytic, geom.Pi_plus, geom.Pi_minus)
+    compare(P_L3, P_direct)
+\end{verbatim}
+
+\section{Endpoint permutation convention}
+The convention used in the previous executable scaffold was
+\begin{equation}
+\Pi_-=I_3,
+\qquad
+\Pi_+=\begin{pmatrix}0&0&1\\1&0&0\\0&1&0\end{pmatrix}.
+\end{equation}
+The nontrivial assay should keep this convention explicit and should also run a permutation audit that independently confirms the incoming and outgoing asymptotic label maps for every sample class.
+
+\end{document}

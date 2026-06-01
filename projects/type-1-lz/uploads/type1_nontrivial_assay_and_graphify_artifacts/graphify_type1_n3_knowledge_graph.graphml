@@ -1,0 +1,884 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d6" for="edge" attr.name="note" attr.type="string"/>
+<key id="d5" for="edge" attr.name="status" attr.type="string"/>
+<key id="d4" for="edge" attr.name="predicate" attr.type="string"/>
+<key id="d3" for="node" attr.name="note" attr.type="string"/>
+<key id="d2" for="node" attr.name="status" attr.type="string"/>
+<key id="d1" for="node" attr.name="type" attr.type="string"/>
+<key id="d0" for="node" attr.name="label" attr.type="string"/>
+<graph edgedefault="directed"><node id="params">
+  <data key="d0">Type-1 parameters {epsilon,gamma,a}</data>
+  <data key="d1">input</data>
+  <data key="d2">baseline</data>
+  <data key="d3">Real ordered epsilon, nonzero gamma, slopes a.</data>
+</node>
+<node id="p">
+  <data key="d0">p(lambda)=prod(lambda-epsilon)</data>
+  <data key="d1">polynomial</data>
+  <data key="d2">baseline</data>
+  <data key="d3">Family invariant.</data>
+</node>
+<node id="n">
+  <data key="d0">n(lambda)=sum gamma^2 prod(lambda-eps)</data>
+  <data key="d1">polynomial</data>
+  <data key="d2">baseline</data>
+  <data key="d3">Family invariant.</data>
+</node>
+<node id="m">
+  <data key="d0">m_H(lambda)=sum a gamma^2 prod(lambda-eps)</data>
+  <data key="d1">polynomial</data>
+  <data key="d2">member-dependent</data>
+  <data key="d3">Encodes chosen H.</data>
+</node>
+<node id="q">
+  <data key="d0">q_u(lambda)=u p(lambda)-n(lambda)</data>
+  <data key="d1">spectral polynomial</data>
+  <data key="d2">baseline</data>
+  <data key="d3">Roots define sheets.</data>
+</node>
+<node id="lambda_roots">
+  <data key="d0">lambda_i(u)</data>
+  <data key="d1">sheets</data>
+  <data key="d2">baseline</data>
+  <data key="d3">Three roots of q_u.</data>
+</node>
+<node id="E">
+  <data key="d0">E_i=m(lambda_i)/p(lambda_i)</data>
+  <data key="d1">energies</data>
+  <data key="d2">baseline</data>
+  <data key="d3">Adiabatic energies.</data>
+</node>
+<node id="Gamma">
+  <data key="d0">Gamma_i=delta_i/sqrt(Sigma_i^(2))</data>
+  <data key="d1">normalization</data>
+  <data key="d2">baseline</data>
+  <data key="d3">Eigenvector normalization.</data>
+</node>
+<node id="Sij">
+  <data key="d0">S_ij=Gamma_i Gamma_j/(lambda_i-lambda_j)</data>
+  <data key="d1">transport connection</data>
+  <data key="d2">baseline</data>
+  <data key="d3">Antisymmetric, smooth through u=0.</data>
+</node>
+<node id="ad_ode">
+  <data key="d0">Gauged adiabatic ODE</data>
+  <data key="d1">dynamics</data>
+  <data key="d2">baseline</data>
+  <data key="d3">f_i prime = -sum S_ij f_j + i(E_i-E_x) f_i.</data>
+</node>
+<node id="P">
+  <data key="d0">Transition matrix P_{x-&gt;j}=|f_j(+infty)|^2</data>
+  <data key="d1">observable</data>
+  <data key="d2">baseline</data>
+  <data key="d3">Primary benchmark.</data>
+</node>
+<node id="Hmat">
+  <data key="d0">Type-1 matrix H(u)</data>
+  <data key="d1">matrix realization</data>
+  <data key="d2">baseline</data>
+  <data key="d3">Has off-diagonal Cauchy form and eigenvectors gamma/(lambda-epsilon).</data>
+</node>
+<node id="quotient">
+  <data key="d0">E_u=C[lambda]/(q_u)</data>
+  <data key="d1">quotient-ring bundle</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Rank-three fiber algebra.</data>
+</node>
+<node id="su">
+  <data key="d0">s_u inverse of p mod q_u</data>
+  <data key="d1">quotient-ring object</data>
+  <data key="d2">formalized</data>
+  <data key="d3">p s_u == 1 mod q_u.</data>
+</node>
+<node id="Rcarrier">
+  <data key="d0">Reduced carrier [R]</data>
+  <data key="d1">state representation</data>
+  <data key="d2">formalized</data>
+  <data key="d3">f_i=Gamma_i R(lambda_i;u).</data>
+</node>
+<node id="Hx">
+  <data key="d0">H_x multiplication by red((m-E_x p)s_u)</data>
+  <data key="d1">operator</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Reduced quotient-ring Hamiltonian.</data>
+</node>
+<node id="compact_ode">
+  <data key="d0">Compact quotient-ring ODE</data>
+  <data key="d1">dynamics</data>
+  <data key="d2">formalized</data>
+  <data key="d3">partial_u[R]=i[(m-E_x p)s_u R].</data>
+</node>
+<node id="cauchy_frame">
+  <data key="d0">Cauchy/pole frame V_iα</data>
+  <data key="d1">frame</data>
+  <data key="d2">baseline</data>
+  <data key="d3">V_iα=Gamma_i gamma_alpha/(lambda_i-epsilon_alpha).</data>
+</node>
+<node id="flat_solution">
+  <data key="d0">E=0 flat solution</data>
+  <data key="d1">solution</data>
+  <data key="d2">baseline</data>
+  <data key="d3">f_i=Gamma_i gamma_x/(lambda_i-epsilon_x).</data>
+</node>
+<node id="pair_spaces">
+  <data key="d0">Pair spaces (u,Delta),(u,S),(Delta,S)</data>
+  <data key="d1">geometry</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Directly computable local pair spaces.</data>
+</node>
+<node id="Ainv">
+  <data key="d0">A invariant</data>
+  <data key="d1">invariant</data>
+  <data key="d2">formalized</data>
+  <data key="d3">A=1/2(3 tr H^2 - (tr H)^2).</data>
+</node>
+<node id="Ddisc">
+  <data key="d0">D discriminant</data>
+  <data key="d1">invariant</data>
+  <data key="d2">formalized</data>
+  <data key="d3">D=prod pair gaps squared.</data>
+</node>
+<node id="gap_cubic">
+  <data key="d0">Gap cubic y^3-2Ay^2+A^2y-D=0</data>
+  <data key="d1">algebraic curve</data>
+  <data key="d2">formalized</data>
+  <data key="d3">y=Delta^2.</data>
+</node>
+<node id="gap_sextic">
+  <data key="d0">Gap sextic Delta^6-2A Delta^4 + A^2 Delta^2 - D=0</data>
+  <data key="d1">algebraic relation</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Sparse universal degree-six relation.</data>
+</node>
+<node id="resolvent">
+  <data key="d0">Resolvent M^3-3AM+B=0</data>
+  <data key="d1">algebraic curve</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Delta^2=(4A-M^2)/3.</data>
+</node>
+<node id="ordinary_sector">
+  <data key="d0">Ordinary pairwise WKB sector</data>
+  <data key="d1">exact-WKB sector</data>
+  <data key="d2">partly solved</data>
+  <data key="d3">Algebraic Abelian differentials on low-complexity cover.</data>
+</node>
+<node id="gxi">
+  <data key="d0">Complementary quadratic g_xi(z)</data>
+  <data key="d1">algebraic object</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Roots are complementary pair to spectator xi.</data>
+</node>
+<node id="Q4">
+  <data key="d0">Q4=Disc_z g_lambda</data>
+  <data key="d1">quartic</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Controls phase square root and ordinary Q4 windows.</data>
+</node>
+<node id="LH">
+  <data key="d0">L_H(lambda)</data>
+  <data key="d1">linear factor</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Member-dependent exact crossing/gap factor.</data>
+</node>
+<node id="W4">
+  <data key="d0">W4=n p_prime - n_prime p</data>
+  <data key="d1">quartic</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Controls transport ramification and critical points of u=n/p.</data>
+</node>
+<node id="kappaS">
+  <data key="d0">kappa_S=-Res(p,n)</data>
+  <data key="d1">normalization</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Positive for real ordered Type-1 data.</data>
+</node>
+<node id="ycoord">
+  <data key="d0">y=Q4 L_H^2 / p^2</data>
+  <data key="d1">coordinate</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Sign-invariant phase coordinate.</data>
+</node>
+<node id="rcoord">
+  <data key="d0">r=W4/L_H^4</data>
+  <data key="d1">coordinate</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Sign-invariant transport coordinate.</data>
+</node>
+<node id="Sminus2">
+  <data key="d0">S^{-2}=Q4^2 W4/(kappa_S p^4)</data>
+  <data key="d1">coordinate</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Compatible transport square.</data>
+</node>
+<node id="SigmaY">
+  <data key="d0">Sigma_Y phase curve</data>
+  <data key="d1">curve</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Spectrum of Y; y cubic.</data>
+</node>
+<node id="SigmaR">
+  <data key="d0">Sigma_R transport curve</data>
+  <data key="d1">curve</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Spectrum of R; ramifies at W4.</data>
+</node>
+<node id="Ccover">
+  <data key="d0">Common cover C=Sigma_Y x_u Sigma_R</data>
+  <data key="d1">cover</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Normalizes to P^1_lambda.</data>
+</node>
+<node id="Chat">
+  <data key="d0">Spinor cover Chat, rho^2=kappa_S/r</data>
+  <data key="d1">cover</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Restores transport square root.</data>
+</node>
+<node id="omega">
+  <data key="d0">omega=sqrt(y) du</data>
+  <data key="d1">one-form</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Phase differential.</data>
+</node>
+<node id="eta">
+  <data key="d0">eta=S du=rho du/y</data>
+  <data key="d1">one-form</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Transport differential.</data>
+</node>
+<node id="halfform">
+  <data key="d0">Half-form amplitude vector Psi</data>
+  <data key="d1">frame/section</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Packages f_i on lifted geometry.</data>
+</node>
+<node id="Yop">
+  <data key="d0">Y multiplication by Q4 L_H^2/p^2</data>
+  <data key="d1">operator</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Spectrum gives y=Delta^2.</data>
+</node>
+<node id="Rop">
+  <data key="d0">R multiplication by W4/L_H^4</data>
+  <data key="d1">operator</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Spectrum gives r.</data>
+</node>
+<node id="commuting_triple">
+  <data key="d0">Commuting triple (H_x,Y,R)</data>
+  <data key="d1">operator system</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Turns pair sectors into common eigenlines.</data>
+</node>
+<node id="projectors">
+  <data key="d0">Spectral projectors Pi_alpha</data>
+  <data key="d1">operator</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Project onto Rop eigenlines away from C_R.</data>
+</node>
+<node id="gluing">
+  <data key="d0">Canonical gluing theorem</data>
+  <data key="d1">theorem</data>
+  <data key="d2">proved</data>
+  <data key="d3">No independent pair-sector gluing on regular set.</data>
+</node>
+<node id="CR">
+  <data key="d0">Transport discriminant C_R=u(W4=0)</data>
+  <data key="d1">ramification locus</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Only possible selector/gluing ambiguity locus.</data>
+</node>
+<node id="selector_criterion">
+  <data key="d0">Selector criterion: W4 ramification + phase resonance</data>
+  <data key="d1">criterion</data>
+  <data key="d2">formalized</data>
+  <data key="d3">Im(e^{-i theta} S_{+-})=0.</data>
+</node>
+<node id="local_airy">
+  <data key="d0">Local Airy/Langer model</data>
+  <data key="d1">local model</data>
+  <data key="d2">formalized</data>
+  <data key="d3">At simple phase-active transport ramification.</data>
+</node>
+<node id="torus_theorem">
+  <data key="d0">Exact two-sheet torus theorem</data>
+  <data key="d1">theorem</data>
+  <data key="d2">proved in notes</data>
+  <data key="d3">Canonical local gauge is torus-valued.</data>
+</node>
+<node id="phase_recurrence">
+  <data key="d0">Lagrange-Buermann phase recurrence</data>
+  <data key="d1">recurrence</data>
+  <data key="d2">proved in notes</data>
+  <data key="d3">D_{2m+1}(H) affine-linear in L_H(v), L_H prime(v).</data>
+</node>
+<node id="selector_multiplier">
+  <data key="d0">Scalar selector multiplier s_BS</data>
+  <data key="d1">local multiplier</data>
+  <data key="d2">proved in notes</data>
+  <data key="d3">s=-i exp(2 Theta_v).</data>
+</node>
+<node id="selector_block">
+  <data key="d0">Embedded selector block J_v</data>
+  <data key="d1">local block</data>
+  <data key="d2">proved in notes</data>
+  <data key="d3">I+s N on active 2 plus spectator identity.</data>
+</node>
+<node id="global_insertion">
+  <data key="d0">Exact global selector insertion rule</data>
+  <data key="d1">theorem</data>
+  <data key="d2">proved in notes</data>
+  <data key="d3">T_out J T_in, independent of overlap.</data>
+</node>
+<node id="continuation_functor">
+  <data key="d0">Continuation functor</data>
+  <data key="d1">functor</data>
+  <data key="d2">partly formalized</data>
+  <data key="d3">Path groupoid to GL_3(C), ordered products.</data>
+</node>
+<node id="Q4_window">
+  <data key="d0">Projected conjugate-pair Q4 window W_X</data>
+  <data key="d1">window object</data>
+  <data key="d2">target</data>
+  <data key="d3">Full 3x3 continuation object, not point block.</data>
+</node>
+<node id="Med">
+  <data key="d0">Median Med(T+,T-)</data>
+  <data key="d1">operation</data>
+  <data key="d2">target</data>
+  <data key="d3">T+((T-)^{-1}T+)^{-1/2}.</data>
+</node>
+<node id="edge_D">
+  <data key="d0">Edge propagators D_e</data>
+  <data key="d1">propagator</data>
+  <data key="d2">target</data>
+  <data key="d3">Regular propagation between windows.</data>
+</node>
+<node id="Pi_plus">
+  <data key="d0">Endpoint permutation Pi_+</data>
+  <data key="d1">permutation</data>
+  <data key="d2">validated</data>
+  <data key="d3">[[0,0,1],[1,0,0],[0,1,0]].</data>
+</node>
+<node id="Pi_minus">
+  <data key="d0">Endpoint permutation Pi_-</data>
+  <data key="d1">permutation</data>
+  <data key="d2">validated</data>
+  <data key="d3">Identity in adopted convention.</data>
+</node>
+<node id="crossing_LH">
+  <data key="d0">Exact L_H=0 crossing</data>
+  <data key="d1">marker</data>
+  <data key="d2">regular</data>
+  <data key="d3">Real marker; zero-width exact block tends to I.</data>
+</node>
+<node id="wrong_point_Airy">
+  <data key="d0">Point-local embedded Q4 Airy collapse</data>
+  <data key="d1">false ansatz</data>
+  <data key="d2">falsified</data>
+  <data key="d3">Forces structural zeros.</data>
+</node>
+<node id="wrong_Bc">
+  <data key="d0">Nontrivial point B_c crossing block</data>
+  <data key="d1">false ansatz</data>
+  <data key="d2">falsified</data>
+  <data key="d3">Weber block is blow-up asymptotic, not fixed-H point limit.</data>
+</node>
+<node id="segmented_assay">
+  <data key="d0">520 segmented product assay</data>
+  <data key="d1">assay</data>
+  <data key="d2">validated bookkeeping only</data>
+  <data key="d3">Roundoff recomposition from global U segments; tautological for constructors.</data>
+</node>
+<node id="zero_audit">
+  <data key="d0">Zero-entry audit</data>
+  <data key="d1">assay</data>
+  <data key="d2">falsification support</data>
+  <data key="d3">No zero entries in logged transition matrices.</data>
+</node>
+<node id="crossing_shrink">
+  <data key="d0">Crossing shrink diagnostic</data>
+  <data key="d1">assay</data>
+  <data key="d2">validated regularity</data>
+  <data key="d3">B_c(h)-I scales like h.</data>
+</node>
+<node id="Level1">
+  <data key="d0">Level 1 independent segment ODE assay</data>
+  <data key="d1">assay plan</data>
+  <data key="d2">proposed</data>
+  <data key="d3">Benchmark/constructor separation, still local ODE-based.</data>
+</node>
+<node id="Level2">
+  <data key="d0">Level 2 lateral/median window assay</data>
+  <data key="d1">assay plan</data>
+  <data key="d2">proposed</data>
+  <data key="d3">Independent U_X^± and median windows.</data>
+</node>
+<node id="Level3">
+  <data key="d0">Level 3 analytic/semi-analytic window assay</data>
+  <data key="d1">assay plan</data>
+  <data key="d2">proposed</data>
+  <data key="d3">F_out C P F_in^{-1} structure.</data>
+</node>
+<node id="GraphifyKG">
+  <data key="d0">Graphify knowledge graph</data>
+  <data key="d1">artifact</data>
+  <data key="d2">created</data>
+  <data key="d3">This graph of objects, theorems, assays, and failure modes.</data>
+</node>
+<edge source="params" target="p" id="0">
+  <data key="d4">defines</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="params" target="n" id="1">
+  <data key="d4">defines</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="params" target="m" id="2">
+  <data key="d4">defines</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="params" target="Hmat" id="13">
+  <data key="d4">defines</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="p" target="q" id="3">
+  <data key="d4">enters</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="p" target="su" id="16">
+  <data key="d4">inverted in</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="n" target="q" id="4">
+  <data key="d4">enters</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="m" target="Hx" id="18">
+  <data key="d4">enters</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="q" target="lambda_roots" id="5">
+  <data key="d4">has roots</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="q" target="quotient" id="15">
+  <data key="d4">defines</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="lambda_roots" target="E" id="6">
+  <data key="d4">evaluates</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="lambda_roots" target="Gamma" id="7">
+  <data key="d4">normalizes</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="lambda_roots" target="Sij" id="9">
+  <data key="d4">defines</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="E" target="ad_ode" id="10">
+  <data key="d4">enters</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Gamma" target="Sij" id="8">
+  <data key="d4">defines</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Sij" target="ad_ode" id="11">
+  <data key="d4">enters</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="ad_ode" target="P" id="12">
+  <data key="d4">outputs</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Hmat" target="E" id="14">
+  <data key="d4">has eigenvalues</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="su" target="Hx" id="17">
+  <data key="d4">enters</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Rcarrier" target="ad_ode" id="21">
+  <data key="d4">reconstructs</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Rcarrier" target="halfform" id="22">
+  <data key="d4">reconstructs</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Hx" target="compact_ode" id="19">
+  <data key="d4">generates</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Hx" target="commuting_triple" id="46">
+  <data key="d4">member</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="compact_ode" target="Rcarrier" id="20">
+  <data key="d4">evolves</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="cauchy_frame" target="flat_solution" id="23">
+  <data key="d4">gives</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="pair_spaces" target="ycoord" id="24">
+  <data key="d4">sign-invariant</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="pair_spaces" target="rcoord" id="25">
+  <data key="d4">sign-invariant</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="gap_cubic" target="SigmaY" id="26">
+  <data key="d4">defines</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="gap_sextic" target="ordinary_sector" id="27">
+  <data key="d4">simplifies</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="resolvent" target="ordinary_sector" id="28">
+  <data key="d4">parametrizes</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="ordinary_sector" target="Q4_window" id="89">
+  <data key="d4">ordinary turning data</data>
+  <data key="d5">target</data>
+  <data key="d6">Projected Q4 windows package ordinary sector effects.</data>
+</edge>
+<edge source="gxi" target="Q4" id="29">
+  <data key="d4">discriminant</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Q4" target="ycoord" id="30">
+  <data key="d4">enters</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Q4" target="Sminus2" id="33">
+  <data key="d4">enters</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Q4" target="Q4_window" id="61">
+  <data key="d4">controls</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="LH" target="ycoord" id="31">
+  <data key="d4">enters</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="LH" target="crossing_LH" id="68">
+  <data key="d4">zero defines</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="W4" target="rcoord" id="32">
+  <data key="d4">enters</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="W4" target="Sminus2" id="34">
+  <data key="d4">enters</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="W4" target="CR" id="51">
+  <data key="d4">zeros map to</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="kappaS" target="Sminus2" id="35">
+  <data key="d4">normalizes</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="ycoord" target="SigmaY" id="36">
+  <data key="d4">spectral coordinate</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="rcoord" target="SigmaR" id="37">
+  <data key="d4">spectral coordinate</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="SigmaY" target="Ccover" id="38">
+  <data key="d4">factor</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="SigmaR" target="Ccover" id="39">
+  <data key="d4">factor</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Ccover" target="Chat" id="40">
+  <data key="d4">lifts to</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Chat" target="omega" id="41">
+  <data key="d4">carries</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Chat" target="eta" id="42">
+  <data key="d4">carries</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Chat" target="halfform" id="43">
+  <data key="d4">supports</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="omega" target="selector_criterion" id="53">
+  <data key="d4">phase mismatch</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Yop" target="commuting_triple" id="44">
+  <data key="d4">member</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Yop" target="SigmaY" id="47">
+  <data key="d4">spectrum</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Rop" target="commuting_triple" id="45">
+  <data key="d4">member</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Rop" target="SigmaR" id="48">
+  <data key="d4">spectrum</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="commuting_triple" target="projectors" id="49">
+  <data key="d4">diagonalized by</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="projectors" target="gluing" id="50">
+  <data key="d4">prove</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="CR" target="selector_criterion" id="52">
+  <data key="d4">candidate locus</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="selector_criterion" target="local_airy" id="54">
+  <data key="d4">activates</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="selector_criterion" target="selector_block" id="88">
+  <data key="d4">if active inserts</data>
+  <data key="d5">proved generic</data>
+  <data key="d6">In generic simple selector notes.</data>
+</edge>
+<edge source="local_airy" target="torus_theorem" id="55">
+  <data key="d4">normalizes</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="torus_theorem" target="phase_recurrence" id="56">
+  <data key="d4">enables</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="torus_theorem" target="selector_multiplier" id="57">
+  <data key="d4">scalarizes</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="selector_multiplier" target="selector_block" id="58">
+  <data key="d4">defines</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="selector_block" target="global_insertion" id="59">
+  <data key="d4">inserted by</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="selector_block" target="continuation_functor" id="65">
+  <data key="d4">selector labels</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="global_insertion" target="continuation_functor" id="60">
+  <data key="d4">completes selectors</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="global_insertion" target="Q4_window" id="90">
+  <data key="d4">does not solve</data>
+  <data key="d5">scope warning</data>
+  <data key="d6">Selector theorem applies to W4 selectors, not ordinary Q4 windows.</data>
+</edge>
+<edge source="Q4_window" target="continuation_functor" id="64">
+  <data key="d4">ordinary window labels</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Q4_window" target="wrong_point_Airy" id="85">
+  <data key="d4">not equal to</data>
+  <data key="d5">falsified</data>
+  <data key="d6">Full projected window cannot collapse to point-local embedded 2x2 block.</data>
+</edge>
+<edge source="Med" target="Q4_window" id="62">
+  <data key="d4">constructs target</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="edge_D" target="continuation_functor" id="63">
+  <data key="d4">edge labels</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Pi_plus" target="P" id="66">
+  <data key="d4">label conversion</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Pi_minus" target="P" id="67">
+  <data key="d4">label conversion</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="crossing_LH" target="edge_D" id="69">
+  <data key="d4">absorbed into</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="crossing_LH" target="wrong_Bc" id="86">
+  <data key="d4">not equal to</data>
+  <data key="d5">falsified</data>
+  <data key="d6">Fixed-H zero-width crossing does not give Weber jump.</data>
+</edge>
+<edge source="wrong_point_Airy" target="zero_audit" id="71">
+  <data key="d4">falsified by</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="wrong_Bc" target="crossing_shrink" id="70">
+  <data key="d4">falsified by</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="segmented_assay" target="Pi_plus" id="72">
+  <data key="d4">validated</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="segmented_assay" target="edge_D" id="73">
+  <data key="d4">bookkeeping</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="segmented_assay" target="Q4_window" id="74">
+  <data key="d4">not independently constructed</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="zero_audit" target="Q4_window" id="75">
+  <data key="d4">requires full 3x3</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Level1" target="edge_D" id="76">
+  <data key="d4">tests</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Level1" target="Q4_window" id="77">
+  <data key="d4">tests via independent IVP</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Level2" target="Med" id="78">
+  <data key="d4">tests</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Level2" target="Q4_window" id="79">
+  <data key="d4">constructs</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Level2" target="Level3" id="87">
+  <data key="d4">feeds</data>
+  <data key="d5">roadmap</data>
+  <data key="d6">Lateral data calibrate analytic normal-form constructor.</data>
+</edge>
+<edge source="Level3" target="Q4_window" id="80">
+  <data key="d4">analytic target</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="Level3" target="continuation_functor" id="81">
+  <data key="d4">would validate nontrivially</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="GraphifyKG" target="continuation_functor" id="82">
+  <data key="d4">documents</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="GraphifyKG" target="gluing" id="83">
+  <data key="d4">documents</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+<edge source="GraphifyKG" target="Q4_window" id="84">
+  <data key="d4">documents</data>
+  <data key="d5"></data>
+  <data key="d6"></data>
+</edge>
+</graph></graphml>

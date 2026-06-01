@@ -1,0 +1,1139 @@
+{
+  "metadata": {
+    "title": "Type-1 N=3 Landau-Zener knowledge graph",
+    "created": "2026-05-19T21:49:12.438047Z",
+    "version": "1.0",
+    "description": "Graphify-ready graph of current objects, theorems, assays, and falsifications."
+  },
+  "nodes": [
+    {
+      "id": "params",
+      "label": "Type-1 parameters {epsilon,gamma,a}",
+      "type": "input",
+      "status": "baseline",
+      "note": "Real ordered epsilon, nonzero gamma, slopes a."
+    },
+    {
+      "id": "p",
+      "label": "p(lambda)=prod(lambda-epsilon)",
+      "type": "polynomial",
+      "status": "baseline",
+      "note": "Family invariant."
+    },
+    {
+      "id": "n",
+      "label": "n(lambda)=sum gamma^2 prod(lambda-eps)",
+      "type": "polynomial",
+      "status": "baseline",
+      "note": "Family invariant."
+    },
+    {
+      "id": "m",
+      "label": "m_H(lambda)=sum a gamma^2 prod(lambda-eps)",
+      "type": "polynomial",
+      "status": "member-dependent",
+      "note": "Encodes chosen H."
+    },
+    {
+      "id": "q",
+      "label": "q_u(lambda)=u p(lambda)-n(lambda)",
+      "type": "spectral polynomial",
+      "status": "baseline",
+      "note": "Roots define sheets."
+    },
+    {
+      "id": "lambda_roots",
+      "label": "lambda_i(u)",
+      "type": "sheets",
+      "status": "baseline",
+      "note": "Three roots of q_u."
+    },
+    {
+      "id": "E",
+      "label": "E_i=m(lambda_i)/p(lambda_i)",
+      "type": "energies",
+      "status": "baseline",
+      "note": "Adiabatic energies."
+    },
+    {
+      "id": "Gamma",
+      "label": "Gamma_i=delta_i/sqrt(Sigma_i^(2))",
+      "type": "normalization",
+      "status": "baseline",
+      "note": "Eigenvector normalization."
+    },
+    {
+      "id": "Sij",
+      "label": "S_ij=Gamma_i Gamma_j/(lambda_i-lambda_j)",
+      "type": "transport connection",
+      "status": "baseline",
+      "note": "Antisymmetric, smooth through u=0."
+    },
+    {
+      "id": "ad_ode",
+      "label": "Gauged adiabatic ODE",
+      "type": "dynamics",
+      "status": "baseline",
+      "note": "f_i prime = -sum S_ij f_j + i(E_i-E_x) f_i."
+    },
+    {
+      "id": "P",
+      "label": "Transition matrix P_{x->j}=|f_j(+infty)|^2",
+      "type": "observable",
+      "status": "baseline",
+      "note": "Primary benchmark."
+    },
+    {
+      "id": "Hmat",
+      "label": "Type-1 matrix H(u)",
+      "type": "matrix realization",
+      "status": "baseline",
+      "note": "Has off-diagonal Cauchy form and eigenvectors gamma/(lambda-epsilon)."
+    },
+    {
+      "id": "quotient",
+      "label": "E_u=C[lambda]/(q_u)",
+      "type": "quotient-ring bundle",
+      "status": "formalized",
+      "note": "Rank-three fiber algebra."
+    },
+    {
+      "id": "su",
+      "label": "s_u inverse of p mod q_u",
+      "type": "quotient-ring object",
+      "status": "formalized",
+      "note": "p s_u == 1 mod q_u."
+    },
+    {
+      "id": "Rcarrier",
+      "label": "Reduced carrier [R]",
+      "type": "state representation",
+      "status": "formalized",
+      "note": "f_i=Gamma_i R(lambda_i;u)."
+    },
+    {
+      "id": "Hx",
+      "label": "H_x multiplication by red((m-E_x p)s_u)",
+      "type": "operator",
+      "status": "formalized",
+      "note": "Reduced quotient-ring Hamiltonian."
+    },
+    {
+      "id": "compact_ode",
+      "label": "Compact quotient-ring ODE",
+      "type": "dynamics",
+      "status": "formalized",
+      "note": "partial_u[R]=i[(m-E_x p)s_u R]."
+    },
+    {
+      "id": "cauchy_frame",
+      "label": "Cauchy/pole frame V_i\u03b1",
+      "type": "frame",
+      "status": "baseline",
+      "note": "V_i\u03b1=Gamma_i gamma_alpha/(lambda_i-epsilon_alpha)."
+    },
+    {
+      "id": "flat_solution",
+      "label": "E=0 flat solution",
+      "type": "solution",
+      "status": "baseline",
+      "note": "f_i=Gamma_i gamma_x/(lambda_i-epsilon_x)."
+    },
+    {
+      "id": "pair_spaces",
+      "label": "Pair spaces (u,Delta),(u,S),(Delta,S)",
+      "type": "geometry",
+      "status": "formalized",
+      "note": "Directly computable local pair spaces."
+    },
+    {
+      "id": "Ainv",
+      "label": "A invariant",
+      "type": "invariant",
+      "status": "formalized",
+      "note": "A=1/2(3 tr H^2 - (tr H)^2)."
+    },
+    {
+      "id": "Ddisc",
+      "label": "D discriminant",
+      "type": "invariant",
+      "status": "formalized",
+      "note": "D=prod pair gaps squared."
+    },
+    {
+      "id": "gap_cubic",
+      "label": "Gap cubic y^3-2Ay^2+A^2y-D=0",
+      "type": "algebraic curve",
+      "status": "formalized",
+      "note": "y=Delta^2."
+    },
+    {
+      "id": "gap_sextic",
+      "label": "Gap sextic Delta^6-2A Delta^4 + A^2 Delta^2 - D=0",
+      "type": "algebraic relation",
+      "status": "formalized",
+      "note": "Sparse universal degree-six relation."
+    },
+    {
+      "id": "resolvent",
+      "label": "Resolvent M^3-3AM+B=0",
+      "type": "algebraic curve",
+      "status": "formalized",
+      "note": "Delta^2=(4A-M^2)/3."
+    },
+    {
+      "id": "ordinary_sector",
+      "label": "Ordinary pairwise WKB sector",
+      "type": "exact-WKB sector",
+      "status": "partly solved",
+      "note": "Algebraic Abelian differentials on low-complexity cover."
+    },
+    {
+      "id": "gxi",
+      "label": "Complementary quadratic g_xi(z)",
+      "type": "algebraic object",
+      "status": "formalized",
+      "note": "Roots are complementary pair to spectator xi."
+    },
+    {
+      "id": "Q4",
+      "label": "Q4=Disc_z g_lambda",
+      "type": "quartic",
+      "status": "formalized",
+      "note": "Controls phase square root and ordinary Q4 windows."
+    },
+    {
+      "id": "LH",
+      "label": "L_H(lambda)",
+      "type": "linear factor",
+      "status": "formalized",
+      "note": "Member-dependent exact crossing/gap factor."
+    },
+    {
+      "id": "W4",
+      "label": "W4=n p_prime - n_prime p",
+      "type": "quartic",
+      "status": "formalized",
+      "note": "Controls transport ramification and critical points of u=n/p."
+    },
+    {
+      "id": "kappaS",
+      "label": "kappa_S=-Res(p,n)",
+      "type": "normalization",
+      "status": "formalized",
+      "note": "Positive for real ordered Type-1 data."
+    },
+    {
+      "id": "ycoord",
+      "label": "y=Q4 L_H^2 / p^2",
+      "type": "coordinate",
+      "status": "formalized",
+      "note": "Sign-invariant phase coordinate."
+    },
+    {
+      "id": "rcoord",
+      "label": "r=W4/L_H^4",
+      "type": "coordinate",
+      "status": "formalized",
+      "note": "Sign-invariant transport coordinate."
+    },
+    {
+      "id": "Sminus2",
+      "label": "S^{-2}=Q4^2 W4/(kappa_S p^4)",
+      "type": "coordinate",
+      "status": "formalized",
+      "note": "Compatible transport square."
+    },
+    {
+      "id": "SigmaY",
+      "label": "Sigma_Y phase curve",
+      "type": "curve",
+      "status": "formalized",
+      "note": "Spectrum of Y; y cubic."
+    },
+    {
+      "id": "SigmaR",
+      "label": "Sigma_R transport curve",
+      "type": "curve",
+      "status": "formalized",
+      "note": "Spectrum of R; ramifies at W4."
+    },
+    {
+      "id": "Ccover",
+      "label": "Common cover C=Sigma_Y x_u Sigma_R",
+      "type": "cover",
+      "status": "formalized",
+      "note": "Normalizes to P^1_lambda."
+    },
+    {
+      "id": "Chat",
+      "label": "Spinor cover Chat, rho^2=kappa_S/r",
+      "type": "cover",
+      "status": "formalized",
+      "note": "Restores transport square root."
+    },
+    {
+      "id": "omega",
+      "label": "omega=sqrt(y) du",
+      "type": "one-form",
+      "status": "formalized",
+      "note": "Phase differential."
+    },
+    {
+      "id": "eta",
+      "label": "eta=S du=rho du/y",
+      "type": "one-form",
+      "status": "formalized",
+      "note": "Transport differential."
+    },
+    {
+      "id": "halfform",
+      "label": "Half-form amplitude vector Psi",
+      "type": "frame/section",
+      "status": "formalized",
+      "note": "Packages f_i on lifted geometry."
+    },
+    {
+      "id": "Yop",
+      "label": "Y multiplication by Q4 L_H^2/p^2",
+      "type": "operator",
+      "status": "formalized",
+      "note": "Spectrum gives y=Delta^2."
+    },
+    {
+      "id": "Rop",
+      "label": "R multiplication by W4/L_H^4",
+      "type": "operator",
+      "status": "formalized",
+      "note": "Spectrum gives r."
+    },
+    {
+      "id": "commuting_triple",
+      "label": "Commuting triple (H_x,Y,R)",
+      "type": "operator system",
+      "status": "formalized",
+      "note": "Turns pair sectors into common eigenlines."
+    },
+    {
+      "id": "projectors",
+      "label": "Spectral projectors Pi_alpha",
+      "type": "operator",
+      "status": "formalized",
+      "note": "Project onto Rop eigenlines away from C_R."
+    },
+    {
+      "id": "gluing",
+      "label": "Canonical gluing theorem",
+      "type": "theorem",
+      "status": "proved",
+      "note": "No independent pair-sector gluing on regular set."
+    },
+    {
+      "id": "CR",
+      "label": "Transport discriminant C_R=u(W4=0)",
+      "type": "ramification locus",
+      "status": "formalized",
+      "note": "Only possible selector/gluing ambiguity locus."
+    },
+    {
+      "id": "selector_criterion",
+      "label": "Selector criterion: W4 ramification + phase resonance",
+      "type": "criterion",
+      "status": "formalized",
+      "note": "Im(e^{-i theta} S_{+-})=0."
+    },
+    {
+      "id": "local_airy",
+      "label": "Local Airy/Langer model",
+      "type": "local model",
+      "status": "formalized",
+      "note": "At simple phase-active transport ramification."
+    },
+    {
+      "id": "torus_theorem",
+      "label": "Exact two-sheet torus theorem",
+      "type": "theorem",
+      "status": "proved in notes",
+      "note": "Canonical local gauge is torus-valued."
+    },
+    {
+      "id": "phase_recurrence",
+      "label": "Lagrange-Buermann phase recurrence",
+      "type": "recurrence",
+      "status": "proved in notes",
+      "note": "D_{2m+1}(H) affine-linear in L_H(v), L_H prime(v)."
+    },
+    {
+      "id": "selector_multiplier",
+      "label": "Scalar selector multiplier s_BS",
+      "type": "local multiplier",
+      "status": "proved in notes",
+      "note": "s=-i exp(2 Theta_v)."
+    },
+    {
+      "id": "selector_block",
+      "label": "Embedded selector block J_v",
+      "type": "local block",
+      "status": "proved in notes",
+      "note": "I+s N on active 2 plus spectator identity."
+    },
+    {
+      "id": "global_insertion",
+      "label": "Exact global selector insertion rule",
+      "type": "theorem",
+      "status": "proved in notes",
+      "note": "T_out J T_in, independent of overlap."
+    },
+    {
+      "id": "continuation_functor",
+      "label": "Continuation functor",
+      "type": "functor",
+      "status": "partly formalized",
+      "note": "Path groupoid to GL_3(C), ordered products."
+    },
+    {
+      "id": "Q4_window",
+      "label": "Projected conjugate-pair Q4 window W_X",
+      "type": "window object",
+      "status": "target",
+      "note": "Full 3x3 continuation object, not point block."
+    },
+    {
+      "id": "Med",
+      "label": "Median Med(T+,T-)",
+      "type": "operation",
+      "status": "target",
+      "note": "T+((T-)^{-1}T+)^{-1/2}."
+    },
+    {
+      "id": "edge_D",
+      "label": "Edge propagators D_e",
+      "type": "propagator",
+      "status": "target",
+      "note": "Regular propagation between windows."
+    },
+    {
+      "id": "Pi_plus",
+      "label": "Endpoint permutation Pi_+",
+      "type": "permutation",
+      "status": "validated",
+      "note": "[[0,0,1],[1,0,0],[0,1,0]]."
+    },
+    {
+      "id": "Pi_minus",
+      "label": "Endpoint permutation Pi_-",
+      "type": "permutation",
+      "status": "validated",
+      "note": "Identity in adopted convention."
+    },
+    {
+      "id": "crossing_LH",
+      "label": "Exact L_H=0 crossing",
+      "type": "marker",
+      "status": "regular",
+      "note": "Real marker; zero-width exact block tends to I."
+    },
+    {
+      "id": "wrong_point_Airy",
+      "label": "Point-local embedded Q4 Airy collapse",
+      "type": "false ansatz",
+      "status": "falsified",
+      "note": "Forces structural zeros."
+    },
+    {
+      "id": "wrong_Bc",
+      "label": "Nontrivial point B_c crossing block",
+      "type": "false ansatz",
+      "status": "falsified",
+      "note": "Weber block is blow-up asymptotic, not fixed-H point limit."
+    },
+    {
+      "id": "segmented_assay",
+      "label": "520 segmented product assay",
+      "type": "assay",
+      "status": "validated bookkeeping only",
+      "note": "Roundoff recomposition from global U segments; tautological for constructors."
+    },
+    {
+      "id": "zero_audit",
+      "label": "Zero-entry audit",
+      "type": "assay",
+      "status": "falsification support",
+      "note": "No zero entries in logged transition matrices."
+    },
+    {
+      "id": "crossing_shrink",
+      "label": "Crossing shrink diagnostic",
+      "type": "assay",
+      "status": "validated regularity",
+      "note": "B_c(h)-I scales like h."
+    },
+    {
+      "id": "Level1",
+      "label": "Level 1 independent segment ODE assay",
+      "type": "assay plan",
+      "status": "proposed",
+      "note": "Benchmark/constructor separation, still local ODE-based."
+    },
+    {
+      "id": "Level2",
+      "label": "Level 2 lateral/median window assay",
+      "type": "assay plan",
+      "status": "proposed",
+      "note": "Independent U_X^\u00b1 and median windows."
+    },
+    {
+      "id": "Level3",
+      "label": "Level 3 analytic/semi-analytic window assay",
+      "type": "assay plan",
+      "status": "proposed",
+      "note": "F_out C P F_in^{-1} structure."
+    },
+    {
+      "id": "GraphifyKG",
+      "label": "Graphify knowledge graph",
+      "type": "artifact",
+      "status": "created",
+      "note": "This graph of objects, theorems, assays, and failure modes."
+    }
+  ],
+  "edges": [
+    {
+      "source": "params",
+      "target": "p",
+      "predicate": "defines",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "params",
+      "target": "n",
+      "predicate": "defines",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "params",
+      "target": "m",
+      "predicate": "defines",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "p",
+      "target": "q",
+      "predicate": "enters",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "n",
+      "target": "q",
+      "predicate": "enters",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "q",
+      "target": "lambda_roots",
+      "predicate": "has roots",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "lambda_roots",
+      "target": "E",
+      "predicate": "evaluates",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "lambda_roots",
+      "target": "Gamma",
+      "predicate": "normalizes",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Gamma",
+      "target": "Sij",
+      "predicate": "defines",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "lambda_roots",
+      "target": "Sij",
+      "predicate": "defines",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "E",
+      "target": "ad_ode",
+      "predicate": "enters",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Sij",
+      "target": "ad_ode",
+      "predicate": "enters",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "ad_ode",
+      "target": "P",
+      "predicate": "outputs",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "params",
+      "target": "Hmat",
+      "predicate": "defines",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Hmat",
+      "target": "E",
+      "predicate": "has eigenvalues",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "q",
+      "target": "quotient",
+      "predicate": "defines",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "p",
+      "target": "su",
+      "predicate": "inverted in",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "su",
+      "target": "Hx",
+      "predicate": "enters",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "m",
+      "target": "Hx",
+      "predicate": "enters",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Hx",
+      "target": "compact_ode",
+      "predicate": "generates",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "compact_ode",
+      "target": "Rcarrier",
+      "predicate": "evolves",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Rcarrier",
+      "target": "ad_ode",
+      "predicate": "reconstructs",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Rcarrier",
+      "target": "halfform",
+      "predicate": "reconstructs",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "cauchy_frame",
+      "target": "flat_solution",
+      "predicate": "gives",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "pair_spaces",
+      "target": "ycoord",
+      "predicate": "sign-invariant",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "pair_spaces",
+      "target": "rcoord",
+      "predicate": "sign-invariant",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "gap_cubic",
+      "target": "SigmaY",
+      "predicate": "defines",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "gap_sextic",
+      "target": "ordinary_sector",
+      "predicate": "simplifies",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "resolvent",
+      "target": "ordinary_sector",
+      "predicate": "parametrizes",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "gxi",
+      "target": "Q4",
+      "predicate": "discriminant",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Q4",
+      "target": "ycoord",
+      "predicate": "enters",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "LH",
+      "target": "ycoord",
+      "predicate": "enters",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "W4",
+      "target": "rcoord",
+      "predicate": "enters",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Q4",
+      "target": "Sminus2",
+      "predicate": "enters",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "W4",
+      "target": "Sminus2",
+      "predicate": "enters",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "kappaS",
+      "target": "Sminus2",
+      "predicate": "normalizes",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "ycoord",
+      "target": "SigmaY",
+      "predicate": "spectral coordinate",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "rcoord",
+      "target": "SigmaR",
+      "predicate": "spectral coordinate",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "SigmaY",
+      "target": "Ccover",
+      "predicate": "factor",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "SigmaR",
+      "target": "Ccover",
+      "predicate": "factor",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Ccover",
+      "target": "Chat",
+      "predicate": "lifts to",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Chat",
+      "target": "omega",
+      "predicate": "carries",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Chat",
+      "target": "eta",
+      "predicate": "carries",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Chat",
+      "target": "halfform",
+      "predicate": "supports",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Yop",
+      "target": "commuting_triple",
+      "predicate": "member",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Rop",
+      "target": "commuting_triple",
+      "predicate": "member",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Hx",
+      "target": "commuting_triple",
+      "predicate": "member",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Yop",
+      "target": "SigmaY",
+      "predicate": "spectrum",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Rop",
+      "target": "SigmaR",
+      "predicate": "spectrum",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "commuting_triple",
+      "target": "projectors",
+      "predicate": "diagonalized by",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "projectors",
+      "target": "gluing",
+      "predicate": "prove",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "W4",
+      "target": "CR",
+      "predicate": "zeros map to",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "CR",
+      "target": "selector_criterion",
+      "predicate": "candidate locus",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "omega",
+      "target": "selector_criterion",
+      "predicate": "phase mismatch",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "selector_criterion",
+      "target": "local_airy",
+      "predicate": "activates",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "local_airy",
+      "target": "torus_theorem",
+      "predicate": "normalizes",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "torus_theorem",
+      "target": "phase_recurrence",
+      "predicate": "enables",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "torus_theorem",
+      "target": "selector_multiplier",
+      "predicate": "scalarizes",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "selector_multiplier",
+      "target": "selector_block",
+      "predicate": "defines",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "selector_block",
+      "target": "global_insertion",
+      "predicate": "inserted by",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "global_insertion",
+      "target": "continuation_functor",
+      "predicate": "completes selectors",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Q4",
+      "target": "Q4_window",
+      "predicate": "controls",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Med",
+      "target": "Q4_window",
+      "predicate": "constructs target",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "edge_D",
+      "target": "continuation_functor",
+      "predicate": "edge labels",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Q4_window",
+      "target": "continuation_functor",
+      "predicate": "ordinary window labels",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "selector_block",
+      "target": "continuation_functor",
+      "predicate": "selector labels",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Pi_plus",
+      "target": "P",
+      "predicate": "label conversion",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Pi_minus",
+      "target": "P",
+      "predicate": "label conversion",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "LH",
+      "target": "crossing_LH",
+      "predicate": "zero defines",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "crossing_LH",
+      "target": "edge_D",
+      "predicate": "absorbed into",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "wrong_Bc",
+      "target": "crossing_shrink",
+      "predicate": "falsified by",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "wrong_point_Airy",
+      "target": "zero_audit",
+      "predicate": "falsified by",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "segmented_assay",
+      "target": "Pi_plus",
+      "predicate": "validated",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "segmented_assay",
+      "target": "edge_D",
+      "predicate": "bookkeeping",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "segmented_assay",
+      "target": "Q4_window",
+      "predicate": "not independently constructed",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "zero_audit",
+      "target": "Q4_window",
+      "predicate": "requires full 3x3",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Level1",
+      "target": "edge_D",
+      "predicate": "tests",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Level1",
+      "target": "Q4_window",
+      "predicate": "tests via independent IVP",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Level2",
+      "target": "Med",
+      "predicate": "tests",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Level2",
+      "target": "Q4_window",
+      "predicate": "constructs",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Level3",
+      "target": "Q4_window",
+      "predicate": "analytic target",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Level3",
+      "target": "continuation_functor",
+      "predicate": "would validate nontrivially",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "GraphifyKG",
+      "target": "continuation_functor",
+      "predicate": "documents",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "GraphifyKG",
+      "target": "gluing",
+      "predicate": "documents",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "GraphifyKG",
+      "target": "Q4_window",
+      "predicate": "documents",
+      "status": "",
+      "note": ""
+    },
+    {
+      "source": "Q4_window",
+      "target": "wrong_point_Airy",
+      "predicate": "not equal to",
+      "status": "falsified",
+      "note": "Full projected window cannot collapse to point-local embedded 2x2 block."
+    },
+    {
+      "source": "crossing_LH",
+      "target": "wrong_Bc",
+      "predicate": "not equal to",
+      "status": "falsified",
+      "note": "Fixed-H zero-width crossing does not give Weber jump."
+    },
+    {
+      "source": "Level2",
+      "target": "Level3",
+      "predicate": "feeds",
+      "status": "roadmap",
+      "note": "Lateral data calibrate analytic normal-form constructor."
+    },
+    {
+      "source": "selector_criterion",
+      "target": "selector_block",
+      "predicate": "if active inserts",
+      "status": "proved generic",
+      "note": "In generic simple selector notes."
+    },
+    {
+      "source": "ordinary_sector",
+      "target": "Q4_window",
+      "predicate": "ordinary turning data",
+      "status": "target",
+      "note": "Projected Q4 windows package ordinary sector effects."
+    },
+    {
+      "source": "global_insertion",
+      "target": "Q4_window",
+      "predicate": "does not solve",
+      "status": "scope warning",
+      "note": "Selector theorem applies to W4 selectors, not ordinary Q4 windows."
+    }
+  ]
+}

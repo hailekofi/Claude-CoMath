@@ -1,0 +1,207 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\newcommand{\re}{\operatorname{Re}}
+\newcommand{\im}{\operatorname{Im}}
+
+\title{Multistate Landau--Zener Solver:\\Augmented ODE with Gauged Dynamics}
+\author{Reference Summary --- v3}
+\date{}
+
+\begin{document}
+\maketitle
+
+%% ============================================================
+\section{Parameters}
+%% ============================================================
+
+Fix dimension $N \geq 2$.  The model is specified by three vectors:
+\[
+  \gamma_i, \quad \epsilon_i, \quad a_i, \qquad i = 0, \dots, N{-}1
+\]
+subject to strict ordering $\epsilon_0 < \epsilon_1 < \cdots < \epsilon_{N-1}$.
+
+We fix a preferred initial eigenvector index $x \in \{0,\dots,N{-}1\}$.
+
+%% ============================================================
+\section{Derived Quantities}
+%% ============================================================
+
+All quantities are algebraic functions of $u$ and $\lambda_0(u),\dots,\lambda_{N-1}(u)$.
+
+\subsection{Implicit eigenvalues $\lambda_i$}
+
+The $\lambda_i(u)$ satisfy:
+\begin{equation}\label{eq:lambda-implicit}
+  \sum_{j=0}^{N-1} \frac{\gamma_j^2}{\lambda_i - \epsilon_j} = u
+  \qquad \text{for each } i = 0,\dots,N{-}1
+\end{equation}
+with ordering:
+\begin{itemize}[nosep]
+  \item $\lambda_i \in (\epsilon_{i-1},\, \epsilon_i)$ for $i = 1,\dots,N{-}1$ \quad (interior eigenvalues),
+  \item $\lambda_0 < \epsilon_0$ when $u < 0$; \quad $\lambda_0 > \epsilon_{N-1}$ when $u > 0$ \quad (exterior eigenvalue).
+\end{itemize}
+The exterior eigenvalue diverges as $\lambda_0 \sim \sum\gamma_j^2 / u$ when $u \to 0$.
+
+\subsection{Sign factors $\delta_i$}
+
+\begin{equation}\label{eq:delta}
+  \delta_0 = \bigl(1 - 2\,\theta(u)\bigr)\,\operatorname{sign}(\gamma_0),
+  \qquad
+  \delta_i = \operatorname{sign}(\gamma_i) \quad \text{for } i \geq 1
+\end{equation}
+
+\subsection{Auxiliary sums}
+
+\begin{align}
+  \Sigma^{(2)}_i &\equiv \sum_{j=0}^{N-1} \frac{\gamma_j^2}{(\lambda_i - \epsilon_j)^2}
+  \label{eq:sigsq}\\[4pt]
+  \Sigma^{(3)}_i &\equiv \sum_{j=0}^{N-1} \frac{\gamma_j^2}{(\lambda_i - \epsilon_j)^3}
+  \label{eq:sigcub}
+\end{align}
+
+\subsection{Energies, couplings, and coupling matrix}
+
+\begin{align}
+  E_i &= \sum_{j=0}^{N-1} \frac{a_j\,\gamma_j^2}{\lambda_i - \epsilon_j}
+  \label{eq:E}\\[4pt]
+  \Gamma_i &= \frac{\delta_i}{\sqrt{\Sigma^{(2)}_i}}
+  \label{eq:Gamma}\\[4pt]
+  S_{ij} &= \frac{\Gamma_i\,\Gamma_j}{\lambda_i - \lambda_j}
+  \qquad (i \neq j), \qquad S_{ii} = 0
+  \label{eq:S}
+\end{align}
+Note: $S_{ji} = -S_{ij}$ (antisymmetric).
+
+\subsection{Matrix View}\label{sec:matrix}
+
+\begin{align}
+  H_{ij}(u) &= \gamma_i \gamma_j \dfrac{a_i-a_j}{\epsilon_i-\epsilon_j}
+  \label{eq:Hij}\\[4pt]
+ H_{ii}(u) &= a_i u - \sum_{j \neq i}{\gamma_j^2 \dfrac{a_i-a_j}{\epsilon_i-\epsilon_j}}
+  \label{eq:Hii}
+\end{align}
+
+with eigenvalues $E_j$ \eqref{eq:E} corresponding to eigenvectors $(\vec{v}_j)_k \propto \dfrac{\gamma_k}{\lambda_j-\epsilon_k}$.
+
+\subsection{Smoothness of $S$ across $u=0$}\label{sec:smoothness}
+
+Although $\lambda_0 \to \pm\infty$ and $\delta_0$ flips sign at $u=0$, the coupling matrix $S_{ij}$ is smooth there.  For $i=0$, $j\geq 1$:
+\[
+  \Gamma_0 \sim \frac{\delta_0\,\lambda_0}{\sqrt{\sum\gamma_k^2}}
+  \implies
+  S_{0j} = \frac{\Gamma_0\,\Gamma_j}{\lambda_0 - \lambda_j}
+  \;\to\; \frac{\delta_0\,\Gamma_j}{\sqrt{\sum\gamma_k^2}}
+\]
+From the $u<0$ side: $\delta_0 = +\operatorname{sign}(\gamma_0)$, $\lambda_0 \to -\infty$, so $\lambda_0/|\lambda_0| = -1$.\\
+From the $u>0$ side: $\delta_0 = -\operatorname{sign}(\gamma_0)$, $\lambda_0 \to +\infty$, so $\lambda_0/|\lambda_0| = +1$.\\
+Both give the same limit for $S_{0j}$.
+
+This smoothness is the key structural property: it means the wavefunction equations require \emph{no discontinuous treatment at $u=0$}.
+
+%% ============================================================
+\section{Augmented ODE System}
+%% ============================================================
+
+\subsection{Interior eigenvalue equations}
+
+Differentiating \eqref{eq:lambda-implicit} for $i = 1,\dots,N{-}1$:
+\begin{equation}\label{eq:lambda-ode}
+  \boxed{\;
+    \lambda_i'(u) = -\frac{1}{\Sigma^{(2)}_i}
+  \;}
+  \qquad i = 1,\dots,N{-}1
+\end{equation}
+These are promoted to dynamical ODE variables.
+
+\subsection{Exterior eigenvalue $\lambda_0$}
+
+$\lambda_0$ is \textbf{not} an ODE variable: its equation $\lambda_0' = -1/\Sigma^{(2)}_0$ has a finite-time singularity at $u=0$ (since $\Sigma^{(2)}_0 \to 0$ as $\lambda_0 \to \pm\infty$).
+
+Instead, $\lambda_0$ is recovered at each step by solving the implicit constraint \eqref{eq:lambda-implicit} via Newton iteration, using the asymptotic starting point $\lambda_0 \approx \sum\gamma_j^2 / u$.
+
+\subsection{Wavefunction equations (gauged)}
+
+\begin{equation}\label{eq:f-gauged}
+  \boxed{\;
+    f_i'(u) = -\sum_{j \neq i} S_{ij}\, f_j(u) \;+\; i\bigl(E_i - E_x\bigr)\, f_i(u)
+  \;}
+\end{equation}
+This is the Multistate Landau Zener for Type-1 matrices in the adiabatic basis. The gauge choice sets the effective frequency of $f_x$ to zero.  Since $|f_i|^2$ is gauge-invariant, all transition probabilities are unchanged.
+
+\subsection{State vector}
+
+The system has $2N{-}1$ complex ODEs:
+\[
+  \mathbf{y}(u) = \bigl(\,
+    \underbrace{\lambda_1, \dots, \lambda_{N-1}}_{N-1\text{ interior eigenvalues}},\;
+    \underbrace{f_0, \dots, f_{N-1}}_{N\text{ wavefunctions}}
+  \,\bigr) \in \mathbb{C}^{2N-1}
+\]
+$\lambda_0$ is computed from the constraint at each RHS evaluation; $\delta$ is computed from $u$ on the fly.
+
+\subsection{No phase split required}
+
+Because $S_{ij}$ is smooth across $u=0$ (\S\ref{sec:smoothness}), the RHS of \emph{all} ODE variables is continuous.  The integration proceeds in a single pass from $u_0$ to $u_f$.
+
+%% ============================================================
+\section{Initial Conditions at $u_0 \ll -1$}
+%% ============================================================
+
+\subsection{Initial $\lambda_i(u_0)$}
+
+Clear denominators in \eqref{eq:lambda-implicit} to form a degree-$N$ polynomial.
+Solve and assign roots to intervals per Section~2.1.  The state stores only $\lambda_1,\dots,\lambda_{N-1}$.
+
+\subsection{Initial $f_i(u_0)$}
+
+For the preferred eigenvector $x$:
+\begin{equation}\label{eq:f0-offdiag}
+  f_{x;j} = S_{xj}\left(
+    \frac{i}{E_x - E_j}
+    + \frac{\Gamma_x - \Gamma_j}{\lambda_x - \lambda_j}
+    - \Gamma_x^2\, \Sigma^{(3)}_x
+    - \Gamma_j^2\, \Sigma^{(3)}_j
+  \right)
+  \qquad j \neq x
+\end{equation}
+\begin{equation}\label{eq:f0-diag}
+  f_{x;x} = \sqrt{1 - \sum_{j \neq x} |f_{x;j}|^2}
+\end{equation}
+where $S_{xj}$ uses $\lambda_x - \lambda_j$ (all evaluated at $u_0$).
+
+\medskip
+%\noindent\textbf{Note:} The correction terms inside the parentheses in \eqref{eq:f0-offdiag} contain $(\epsilon_x - \epsilon_j)$ in one denominator, not $(\lambda_x - \lambda_j)$.  This term arises from a different part of the asymptotic expansion and uses the fixed parameters $\epsilon$, not the dynamical $\lambda$.%
+
+\medskip
+\noindent\textbf{Validity check:} $\sum_{j \neq x} |f_{0;j}|^2 < 1$.  If violated, $|u_0|$ is insufficient.
+
+%% ============================================================
+\section{Observables}
+%% ============================================================
+
+\subsection{Transition probabilities}
+
+For a given initial eigenvector $x$:
+\[
+  P_{x \to i} = |f_i(u_f)|^2
+\]
+
+\subsection{Transition matrix}
+
+Running the ODE for each $x \in \{0,\dots,N{-}1\}$ produces the $N \times N$ matrix:
+\[
+  \mathbf{P} = \begin{pmatrix}
+    P_{0\to 0} & P_{0\to 1} & \cdots & P_{0\to N{-}1} \\
+    P_{1\to 0} & P_{1\to 1} & \cdots & P_{1\to N{-}1} \\
+    \vdots & & \ddots & \vdots \\
+    P_{N{-}1\to 0} & P_{N{-}1\to 1} & \cdots & P_{N{-}1\to N{-}1}
+  \end{pmatrix}
+\]
+Unitarity: each row sums to 1.  This matrix is the primary output for parameter sweeps.
+
+\end{document}

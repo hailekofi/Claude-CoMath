@@ -1,0 +1,488 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue,pdftitle={Transport versus phase in the local gauge expansion},pdfauthor={OpenAI}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newcommand{\C}{\mathbb C}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\ii}{\mathrm i}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Disc}{\operatorname{Disc}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\pairgap}{\Delta}
+\newcommand{\leadG}{\widehat G_v^{\mathrm{lead}}}
+\newcommand{\trG}{\widehat G_v^{\mathrm{tr}}}
+\newcommand{\phP}{\Phi_v^{\mathrm{ph}}}
+\newcommand{\Kone}{K_1^{\mathrm{geom}}(v)}
+\newcommand{\Kthree}{K_3^{\mathrm{geom}}(v)}
+\newcommand{\Etwone}{E_{21}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Transport versus phase in the local gauge expansion at a simple transport ramification point}\par
+\vspace{0.35em}
+{\large OpenAI working note}\par
+\vspace{0.35em}
+{\normalsize \today}
+\end{center}
+
+\textbf{Abstract.}
+We determine the next symbolic term beyond the geometry-only coefficient $K_1^{\mathrm{geom}}$ in the local gauge expansion near a simple transport ramification point for Type-1, $N=3$ Landau--Zener systems.  In the natural \emph{linear Langer/WKB normalization}, the determinant-one local gauge factors into a transport/half-form part and a phase remainder,
+\[
+\widehat G_v(t;H)=\widehat G_v^{\mathrm{tr}}(t)\exp\!\bigl(\Phi_v^{\mathrm{ph}}(t;H)\,\sigma_3\bigr),
+\qquad \sigma_3=\begin{pmatrix}1&0\\0&-1\end{pmatrix},
+\]
+with
+\[
+\widehat G_v^{\mathrm{tr}}(t)=\leadG\exp\!\bigl(\Kone t\,\sigma_3+\Kthree t^3\,\sigma_3+O(t^5)\bigr),
+\]
+and
+\[
+\Phi_v^{\mathrm{ph}}(t;H)=\Xi_5(H)t^5+O(t^7).
+\]
+Thus the first two nontrivial transport coefficients are geometry-only, while the first genuine member dependence appears at order $t^5$. Closed symbolic formulas are given for $\Kone$, $\Kthree$, and $\Xi_5(H)$, and an explicit jump-law corollary is derived for the active upper- and lower-half-plane selector blocks.
+
+\section{Setup and notation}
+
+Fix a real Type-1, $N=3$ commuting family.  The shared rational map and transport normalization are
+\[
+ u(\lambda)=\frac{n(\lambda)}{p(\lambda)},
+ \qquad
+ \Sigma^{(2)}(\lambda)=\frac{W_4(\lambda)}{p(\lambda)^2}.
+\]
+Let $v\in \PP^1_\lambda$ be a \emph{simple transport ramification point}, so that
+\[
+ W_4(v)=0,
+ \qquad
+ W_4'(v)\neq 0,
+ \qquad
+ u_*=u(v).
+\]
+On the local double cover we write
+\[
+ u=u_*+t^2.
+\]
+The chosen commuting-family member $H$ enters through the phase carrier
+\[
+ \pairgap_H(\lambda)=\mu(\lambda)\frac{L_H(\lambda)}{p(\lambda)},
+ \qquad \mu(\lambda)^2=Q_4(\lambda).
+\]
+
+The local phase mismatch between the two colliding transport sheets has the form
+\[
+ \mathcal S_{+-}(u;H)=\sigma_v(H)(u-u_*)^{3/2}+O((u-u_*)^{5/2}).
+\]
+We use the \emph{linear Langer coordinate}
+\begin{equation}
+\label{eq:zeta}
+ \zeta_v(H;u)=\left(\frac{3\ii}{4}\sigma_v(H)\right)^{2/3}(u-u_*),
+\end{equation}
+so that
+\[
+ \frac{\ii}{2}\mathcal S_{+-}(u;H)=\frac{2}{3}\zeta_v(H;u)^{3/2}+O(t^5).
+\]
+The WKB-normalized Airy basis is
+\[
+ \psi_\pm^{\mathrm{WKB}}(\zeta)=\zeta^{-1/4}\exp\!\left(\pm \frac{2}{3}\zeta^{3/2}\right).
+\]
+
+\section{The local inverse branches of the common-sheet map}
+
+Expand $u(\lambda)$ at $v$:
+\[
+ u(\lambda)=u_*+\frac{u_2}{2!}(\lambda-v)^2+\frac{u_3}{3!}(\lambda-v)^3+\frac{u_4}{4!}(\lambda-v)^4+\frac{u_5}{5!}(\lambda-v)^5+\cdots,
+\]
+where $u_k=u^{(k)}(v)$.  Solving $u-u_*=t^2$ gives two analytic inverse branches
+\begin{equation}
+\label{eq:lambdapm}
+ \lambda_\pm(t)=v\pm c_1 t+c_2 t^2\pm c_3 t^3+c_4 t^4+O(t^5),
+\end{equation}
+with
+\begin{equation}
+\label{eq:c-coeffs}
+ c_1=\sqrt{\frac{2}{u_2}},
+ \qquad
+ c_2=-\frac{u_3}{3u_2^2},
+\end{equation}
+\begin{equation}
+\label{eq:c3c4}
+ c_3=\sqrt{\frac{2}{u_2}}\,\frac{5u_3^2-3u_2u_4}{36u_2^3},
+ \qquad
+ c_4=\frac{-9u_2^2u_5+45u_2u_3u_4-40u_3^3}{270u_2^5}.
+\end{equation}
+These coefficients depend only on the shared commuting-family geometry.
+
+\section{The transport/half-form factor to next nontrivial order}
+
+Expand $\Sigma^{(2)}$ at $v$:
+\[
+ \Sigma^{(2)}(\lambda)=\Sigma_1(\lambda-v)+\frac{\Sigma_2}{2!}(\lambda-v)^2+\frac{\Sigma_3}{3!}(\lambda-v)^3+\frac{\Sigma_4}{4!}(\lambda-v)^4+\cdots,
+\]
+where $\Sigma_k=\partial_\lambda^k\Sigma^{(2)}(v)$.  Substituting \eqref{eq:lambdapm} gives
+\begin{equation}
+\label{eq:Sigma-pm}
+ \Sigma_\pm(t):=\Sigma^{(2)}(\lambda_\pm(t))=\pm A_1t+A_2t^2\pm A_3t^3+A_4t^4+O(t^5),
+\end{equation}
+with
+\begin{align}
+\label{eq:A1234}
+ A_1&=\Sigma_1 c_1,
+\nonumber\\
+ A_2&=\Sigma_1 c_2+\frac{\Sigma_2}{2}c_1^2,
+\\
+ A_3&=\Sigma_1 c_3+\Sigma_2 c_1c_2+\frac{\Sigma_3}{6}c_1^3,
+\nonumber\\
+ A_4&=\Sigma_1 c_4+\frac{\Sigma_2}{2}(c_2^2+2c_1c_3)+\frac{\Sigma_3}{2}c_1^2c_2+\frac{\Sigma_4}{24}c_1^4.
+\nonumber
+\end{align}
+
+On the $t$-cover, $\sqrt{\dd u}=\sqrt{2t}\,\sqrt{\dd t}$, so the transport/half-form factor is
+\[
+ \mathcal T_\pm(t):=\sqrt{2t}\,\Gamma_\pm(t)=\sqrt{2}\,\delta_\pm\,t^{1/2}\Sigma_\pm(t)^{-1/2}.
+\]
+Set
+\[
+ x:=\frac{A_2}{A_1},\qquad y:=\frac{A_3}{A_1},\qquad z:=\frac{A_4}{A_1}.
+\]
+Then the determinant-one normalized transport gauge has the logarithmic expansion
+\begin{equation}
+\label{eq:transport-log-expansion}
+ \trG(t)=\leadG\exp\!\bigl(\Kone t\,\sigma_3+\Kthree t^3\,\sigma_3+O(t^5)\bigr),
+\end{equation}
+where
+\begin{equation}
+\label{eq:K1-def}
+ \boxed{\Kone=-\frac{A_2}{2A_1}}
+\end{equation}
+and
+\begin{equation}
+\label{eq:K3-def}
+ \boxed{\Kthree=-\frac{A_4}{2A_1}+\frac{A_2A_3}{2A_1^2}-\frac{A_2^3}{6A_1^3}}.
+\end{equation}
+Equivalently,
+\[
+ \trG(t)=\leadG\left[I+\Kone t\,\sigma_3+\frac{\Kone^2}{2}t^2I+\Kthree t^3\sigma_3+O(t^4)\right].
+\]
+
+\begin{proposition}[Closed symbolic transport coefficients]
+\label{prop:K1K3}
+In the linear Langer/WKB normalization, the first two nontrivial transport/half-form gauge coefficients are geometry-only and are given by \eqref{eq:K1-def} and \eqref{eq:K3-def}.  In particular,
+\begin{equation}
+\label{eq:K1-jet}
+ \boxed{
+ \Kone=
+ \sqrt{\frac{2}{u''(v)}}\left(\frac{u'''(v)}{12u''(v)}-\frac{\Sigma^{(2)\prime\prime}(v)}{4\Sigma^{(2)\prime}(v)}\right).
+ }
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The formulas for $A_1,\dots,A_4$ come from substituting \eqref{eq:lambdapm} into the Taylor series of $\Sigma^{(2)}$.  The expansion of $\mathcal T_\pm$ is obtained from the binomial series for $(1+z)^{-1/2}$.  Writing the determinant-one normalized diagonal ratio in exponential form gives
+\[
+\frac12\log\frac{\mathcal T_+(t)}{\mathcal T_-(t)}=
+-\frac{x}{2}t+
+\left(-\frac{x^3}{6}+\frac{xy}{2}-\frac{z}{2}\right)t^3+O(t^5),
+\]
+which yields \eqref{eq:K1-def} and \eqref{eq:K3-def}.  Substituting the expressions for $A_1$ and $A_2$ into \eqref{eq:K1-def} gives \eqref{eq:K1-jet} directly.
+\end{proof}
+
+\section{The phase part and the first appearance of member dependence}
+
+Expand the phase carrier difference along the two branches:
+\begin{equation}
+\label{eq:Delta-diff}
+ \pairgap_H(\lambda_+(t)) - \pairgap_H(\lambda_-(t)) = 2D_1(H)t + 2D_3(H)t^3 + O(t^5),
+\end{equation}
+where
+\begin{equation}
+\label{eq:D1D3}
+ D_1(H)=c_1\pairgap_H'(v),
+ \qquad
+ D_3(H)=c_3\pairgap_H'(v)+c_1c_2\pairgap_H''(v)+\frac{c_1^3}{6}\pairgap_H'''(v).
+\end{equation}
+Since $\dd u=2t\,\dd t$, integrating gives
+\begin{equation}
+\label{eq:S-expansion}
+ \mathcal S_{+-}(t;H)=\frac{4}{3}D_1(H)t^3+\frac{4}{5}D_3(H)t^5+O(t^7).
+\end{equation}
+By definition of the local cubic coefficient,
+\[
+ \sigma_v(H)=\frac{4}{3}D_1(H).
+\]
+Using the linear Langer coordinate \eqref{eq:zeta}, one has
+\[
+ \frac{2}{3}\zeta_v(H;t)^{3/2}=\frac{\ii}{2}\sigma_v(H)t^3.
+\]
+Therefore
+\begin{equation}
+\label{eq:phase-remainder}
+ \frac{\ii}{2}\mathcal S_{+-}(t;H)-\frac{2}{3}\zeta_v(H;t)^{3/2}
+ = \Xi_5(H)t^5+O(t^7),
+ \qquad
+ \boxed{\Xi_5(H)=\frac{2\ii}{5}D_3(H).}
+\end{equation}
+
+\begin{proposition}[First member-dependent term]
+\label{prop:Xi5}
+In the linear Langer/WKB normalization, the member-dependent phase remainder begins at order $t^5$ and is given by \eqref{eq:phase-remainder}.  Equivalently,
+\[
+\Phi_v^{\mathrm{ph}}(t;H)=\Xi_5(H)t^5+O(t^7).
+\]
+No member-dependent contribution appears at orders $t$ or $t^3$.
+\end{proposition}
+
+\begin{proof}
+Because the two colliding branches are exchanged by $t\mapsto -t$, the phase-carrier difference is an odd function of $t$, hence has the form \eqref{eq:Delta-diff}.  Integrating against $\dd u=2t\,\dd t$ produces only odd powers $t^3,t^5,\dots$ in \eqref{eq:S-expansion}.  The linear Langer coordinate is chosen precisely so that the cubic term is removed.  The first surviving coefficient is therefore the $t^5$ term, namely $\Xi_5(H)$.
+\end{proof}
+
+\section{Closed-form transport/phase factorization}
+
+Let the exact local half-form amplitudes be
+\[
+ \Psi_\pm(t;H)=\sqrt{2t}\,\Gamma_\pm(t)R_\pm(t;H)\,\sqrt{\dd t}.
+\]
+Write the reduced sheetwise carriers as
+\[
+ R_\pm(t;H)=\exp\!\bigl(\Phi_{\mathrm{av}}(t;H)\bigr)\exp\!\bigl(\pm \Phi_{\mathrm{rel}}(t;H)\bigr),
+\qquad
+ \Phi_{\mathrm{rel}}(t;H)=\frac{\ii}{2}\mathcal S_{+-}(t;H).
+\]
+Then, after removing the common scalar phase $\Phi_{\mathrm{av}}$, the determinant-one local gauge admits the factorization
+\begin{equation}
+\label{eq:closed-factorization}
+ \boxed{
+ \widehat G_v(t;H)
+ =
+ \trG(t)
+ \exp\!\bigl(\phP(t;H)\,\sigma_3\bigr),
+ }
+\end{equation}
+with
+\begin{equation}
+\label{eq:phase-factor}
+ \phP(t;H)=\Xi_5(H)t^5+O(t^7),
+\end{equation}
+and $\trG(t)$ given by \eqref{eq:transport-log-expansion}.  Therefore
+\begin{equation}
+\label{eq:master-expansion}
+ \boxed{
+ \widehat G_v(t;H)
+ =
+ \leadG
+ \exp\!\bigl(\Kone t\,\sigma_3 + \Kthree t^3\,\sigma_3 + O(t^5)\bigr)
+ \exp\!\bigl(\Xi_5(H)t^5\,\sigma_3 + O(t^7)\bigr).
+ }
+\end{equation}
+
+\begin{theorem}[Transport versus phase in the local gauge expansion]
+\label{thm:main}
+In the linear Langer/WKB normalization at a simple transport ramification point $v$, the determinant-one local gauge separates into a purely transport/half-form part and a purely phase/member-dependent part as in \eqref{eq:master-expansion}.  The coefficients $\Kone$ and $\Kthree$ depend only on the shared commuting-family geometry at $v$, while the first genuine member-dependent coefficient is $\Xi_5(H)$ and appears at order $t^5$.
+\end{theorem}
+
+\begin{proof}
+Combine Proposition~\ref{prop:K1K3} with Proposition~\ref{prop:Xi5}.  The transport/half-form part is built entirely from the shared quantities $u(\lambda)$ and $\Sigma^{(2)}(\lambda)$, while the phase remainder is built from the derivatives of $\pairgap_H(\lambda)$ and therefore carries the member dependence.  The claimed orders follow from the explicit expansions.
+\end{proof}
+
+\begin{remark}[A nonlinear normal-form caveat]
+The statement that member dependence first appears at order $t^5$ is tied to the \emph{linear} Langer normalization \eqref{eq:zeta}.  If one allows a nonlinear redefinition
+\[
+\zeta=\kappa_H t^2(1+\ell_H t^2+\cdots),
+\]
+then part of the $t^5$ phase remainder can be absorbed into the coordinate choice.  What is invariant is the structural split between the geometry-only transport piece and the phase/member-dependent piece.
+\end{remark}
+
+
+
+\section{Consequences for the local jump constants}
+
+Fix the upper-half-plane simple transport ramification point and the local selector crossing
+\[
+ S_1\longrightarrow S_0.
+\]
+In the normalized Airy model, the corresponding local jump matrix is
+\begin{equation}
+\label{eq:Jnorm}
+ J^{\mathrm{norm}}_{1\to 0}=
+ \begin{pmatrix}
+ 1 & 0\\
+ -1 & 1
+ \end{pmatrix}
+ = I-\Etwone,
+ \qquad
+ \Etwone:=\begin{pmatrix}0&0\\1&0\end{pmatrix}.
+\end{equation}
+At the level of the proved gauge structure, the determinant-one exact local gauge is diagonal through the displayed orders:
+\[
+ \widehat G_v(t;H)
+ =
+ \leadG
+ \exp\!\bigl(K^{\mathrm{geom}}_v(t)\sigma_3\bigr)
+ \exp\!\bigl(\phP(t;H)\sigma_3\bigr),
+\]
+where
+\[
+ K^{\mathrm{geom}}_v(t)=\Kone t+\Kthree t^3+O(t^5),
+ \qquad
+ \phP(t;H)=\Xi_5(H)t^5+O(t^7).
+\]
+Because diagonal conjugation preserves the lower-unitriangular rank-one form, the exact local selector block stays in the same one-parameter family as the Airy block.
+
+\begin{corollary}[Scalar jump law through order $t^5$]
+\label{cor:jump-law}
+For the upper-half-plane $S_1\to S_0$ crossing, the exact local selector jump has the form
+\begin{equation}
+\label{eq:Jexact-upper}
+ \boxed{
+ J_v^{\mathrm{exact}}(t;H)=I+\mathfrak s_v(t;H)\,\Etwone,
+ }
+\end{equation}
+with scalar jump coefficient
+\begin{equation}
+\label{eq:sv-exp}
+ \boxed{
+ \mathfrak s_v(t;H)
+ =
+ -\ii\,\exp\!\Bigl(
+ 2\Kone t+2\Kthree t^3+2\Xi_5(H)t^5+O(t^7)
+ \Bigr).
+ }
+\end{equation}
+Equivalently,
+\begin{equation}
+\label{eq:logsv}
+ \boxed{
+ \log\!\left(\frac{\mathfrak s_v(t;H)}{-\ii}\right)
+ =
+ 2\Kone t+2\Kthree t^3+2\Xi_5(H)t^5+O(t^7).
+ }
+\end{equation}
+At the conjugate lower-half-plane point,
+\begin{equation}
+\label{eq:Jexact-lower}
+ \boxed{
+ J_{\bar v}^{\mathrm{exact}}(t;H)=I+\mathfrak s_{\bar v}(t;H)\,\Etwone,
+ \qquad
+ \mathfrak s_{\bar v}(t;H)=+\ii\,\exp\!\Bigl(2\overline{\Kone}t+2\overline{\Kthree}t^3+2\overline{\Xi_5(H)}t^5+O(t^7)\Bigr).
+ }
+\end{equation}
+In particular, the local jump constant is geometry-only through order $t^3$, and the first genuine member dependence appears at order $t^5$.
+\end{corollary}
+
+\begin{proof}
+Let
+\[
+ D_v(t;H):=\leadG\exp\!\bigl(K^{\mathrm{geom}}_v(t)\sigma_3\bigr)\exp\!\bigl(\phP(t;H)\sigma_3\bigr)
+ =\begin{pmatrix}d_+(t;H)&0\\0&d_-(t;H)\end{pmatrix}.
+\]
+Then
+\[
+ J_v^{\mathrm{exact}}(t;H)=D_v(t;H)^{-1}J^{\mathrm{norm}}_{1\to0}D_v(t;H)
+ =I-\frac{d_+(t;H)}{d_-(t;H)}\,\Etwone.
+\]
+ Since
+\[
+ \frac{d_+(t;H)}{d_-(t;H)}
+ =
+ \exp\!\Bigl(
+ 2K^{\mathrm{geom}}_v(t)+2\phP(t;H)
+ \Bigr)
+ \times \frac{e^{\ii\pi/4}}{e^{-\ii\pi/4}}
+ =
+ \ii\,\exp\!\Bigl(
+ 2\Kone t+2\Kthree t^3+2\Xi_5(H)t^5+O(t^7)
+ \Bigr),
+\]
+ the coefficient of $\Etwone$ is the claimed scalar $\mathfrak s_v(t;H)$.  The logarithmic form is immediate.  The lower-half-plane expression follows by conjugation.
+\end{proof}
+
+\begin{remark}[Why the jump computation simplifies]
+\label{rem:jump-simplifies}
+The local selector problem has collapsed from a generic $2\times 2$ matching problem to a one-scalar renormalization of the universal Airy jump.  The exact local data needed by the global continuation word are therefore:
+\begin{enumerate}
+  \item the active selector point $v$ and the sector crossing $S_s\to S_{s'}$;
+  \item the geometry-only coefficients $\Kone$ and $\Kthree$;
+  \item if higher precision is needed, the first phase/member correction $\Xi_5(H)$.
+\end{enumerate}
+Everything else is already fixed by the universal Airy model and the conjugate-pair symmetry of the upper/lower ramification points.
+\end{remark}
+
+\begin{remark}[Scope of the corollary]
+\label{rem:scope-jump}
+The formulas above are exact to the displayed orders of the proved gauge expansion.  They use only the established diagonal transport/phase factorization.  What is still not proved is that no additional off-diagonal or sector-dependent local gauge terms appear before higher order.  So the one-scalar law \eqref{eq:sv-exp} should be read as the strongest current structural statement for the exact local jump, not yet as a fully closed all-orders theorem.
+\end{remark}
+\section{Canonical example}
+
+Take the same canonical commuting family used in the previous notes:
+\[
+(\epsilon_0,\epsilon_1,\epsilon_2)=(-2,0,3),
+\qquad
+(\gamma_0,\gamma_1,\gamma_2)=\left(1,\frac45,\frac65\right).
+\]
+Choose the upper-half-plane ramification point
+\[
+ v=-0.8019106146-1.1076910061\,\ii,
+ \qquad
+ u_*=u(v)=-0.1735624567+0.8968618574\,\ii.
+\]
+Then
+\[
+ u''(v)=0.1611148247+0.5485768616\,\ii,
+ \qquad
+ u'''(v)=1.7051645913-0.7517504141\,\ii,
+\]
+\[
+ \Sigma^{(2)\prime}(v)=-0.1611148247-0.5485768616\,\ii,
+ \qquad
+ \Sigma^{(2)\prime\prime}(v)=-1.7051645913+0.7517504141\,\ii.
+\]
+Substituting into \eqref{eq:K1-jet} gives
+\[
+ \boxed{\Kone = 0.7088279025+0.7278828796\,\ii.}
+\]
+Using the next jet coefficients one finds
+\[
+ \boxed{\Kthree = -0.0482124825+0.9683460218\,\ii.}
+\]
+For the two members from the selector note,
+\[
+ H_{\mathrm{wall}}:\ \alpha=0.1,\ \beta=0.0432447842161505,
+ \qquad
+ H_{\mathrm{off}}:\ \alpha=0.1,\ \beta=0.08,
+\]
+the phase coefficients are
+\[
+ \Xi_5(H_{\mathrm{wall}})=0.0511662459+0.1064888853\,\ii,
+\]
+\[
+ \Xi_5(H_{\mathrm{off}})=0.0535527145+0.1146585773\,\ii.
+\]
+So the transport coefficients $\Kone$ and $\Kthree$ are identical for both members, while the first phase coefficient $\Xi_5(H)$ already distinguishes them.
+
+\section{Interpretation}
+
+The symbolic picture is now quite sharp.
+
+\begin{itemize}
+  \item The transport/half-form side is organized by the shared local jet of the family-invariant map $u=n/p$ and the family-invariant transport normalization $\Sigma^{(2)}=W_4/p^2$.
+  \item The chosen member $H$ enters through the phase carrier $\pairgap_H=\mu L_H/p$.
+  \item The leading cubic phase term is normalized away by the Langer coordinate.
+  \item The first two nontrivial transport coefficients are therefore geometry-only.
+  \item The first unavoidable member dependence in the linear normalization appears at order $t^5$.
+\end{itemize}
+
+This is the clean symbolic explanation for the numerical observation that nearby members of the same commuting family can have very similar local bounded-remainder behavior even when their selector activation differs.
+
+\end{document}

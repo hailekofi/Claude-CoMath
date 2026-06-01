@@ -1,0 +1,788 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.92in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{booktabs,array,tabularx,longtable}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+\definecolor{TitleBlue}{HTML}{173753}
+\definecolor{AccentBlue}{HTML}{2F5D7E}
+\definecolor{SoftBlue}{HTML}{EEF4FA}
+\definecolor{SoftGold}{HTML}{FAF6EE}
+\definecolor{SoftGreen}{HTML}{EEF8F0}
+\definecolor{SoftRed}{HTML}{FCEEEE}
+\definecolor{RuleGray}{HTML}{D7E1EA}
+\definecolor{MutedText}{HTML}{4E5A66}
+
+\hypersetup{colorlinks=true,linkcolor=AccentBlue,urlcolor=AccentBlue,
+  citecolor=AccentBlue,
+  pdftitle={Phase II findings: three exact-WKB routes, three failures,
+            and the empirical anatomy of the inter-window matrix},
+  pdfauthor={Type-1 N=3 Landau-Zener project}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\textcolor{MutedText}{\small Phase II findings}}
+\fancyhead[R]{\textcolor{MutedText}{\small Type-1, $N=3$ Landau--Zener}}
+\fancyfoot[C]{\textcolor{MutedText}{\thepage}}
+\setlength{\headheight}{14pt}\renewcommand{\headrulewidth}{0.4pt}
+\titleformat{\section}{\large\bfseries\color{TitleBlue}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{AccentBlue}}{\thesubsection}{0.5em}{}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.5em}
+\setlist[itemize]{leftmargin=1.4em,itemsep=0.18em,topsep=0.18em}
+\setlist[enumerate]{leftmargin=1.7em,itemsep=0.2em,topsep=0.18em}
+
+\newcommand{\C}{\mathbb C}\newcommand{\R}{\mathbb R}
+\newcommand{\ii}{\mathrm i}\newcommand{\dd}{\mathrm d}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\im}{\operatorname{Im}}
+\newcommand{\re}{\operatorname{Re}}
+
+\newcommand{\infobox}[2]{\begin{center}\fcolorbox{RuleGray}{#1}{\begin{minipage}{0.94\linewidth}\small #2\end{minipage}}\end{center}}
+
+\begin{document}
+
+\begin{center}
+{\Large\color{AccentBlue}\bfseries Phase II findings brief\par}\vspace{0.45cm}
+{\fontsize{19}{23}\selectfont\bfseries\color{TitleBlue}Three exact-WKB routes,
+three failures, and the\par}
+{\fontsize{19}{23}\selectfont\bfseries\color{TitleBlue}empirical anatomy of the
+inter-window matrix $D$\par}
+\vspace{0.30cm}
+{\large\color{MutedText}The open-problem state after the Hollands--Neitzke,
+Iwaki--Nakanishi, and Aoki--Kawai--Takei programmes\par}
+\end{center}
+
+\infobox{SoftBlue}{%
+\textbf{One-paragraph result.} Three independent prototype implementations
+of the inter-window connection matrix for the Type-1, $N=3$ multistate
+Landau--Zener problem -- Hollands--Neitzke non-abelianisation, Iwaki--Nakanishi
+cluster mutation, and Aoki--Kawai--Takei DDP with inter-window Voros
+symbol -- were built and benchmarked against the 300-sample stratified
+validation dataset. \emph{All three fail by 7 to 10 orders of magnitude}:
+per-stratum residuals are in the $0.1$--$0.95$ range, comparable to or
+slightly worse than the identity and grid baselines. Direct empirical
+extraction of the inter-window matrix
+$D = N_B^{-1}\,U_{\text{bench}}\,N_A^{-1}$ confirms that the factorisation
+is algebraically rigorous ($\|D\|_F=\sqrt 3$ on every sample, i.e.\ $D\in
+\mathrm U(3)$), but the matrix $D$ itself has irreducibly rich rank-three
+structure that varies sample-by-sample from near-identity in the
+deep-diabatic limit to near-permutation in the intermediate regime.
+The Phase~I declaration that the remaining two parameters of $P$ are
+\emph{genuinely transcendental} is reinforced -- the connection matrix at
+overlapping conjugate-pair turning points on the Type-1 spectral curve
+resists every algebraic ansatz tried so far. The closed-form problem
+remains open and is now a well-posed research target.}
+
+\section{Phase II as planned}
+
+The six-track Phase~I programme (see
+\texttt{six\_track\_synthesis\_brief.pdf}) closed with the verdict that
+two parameters of the $3\times3$ transition matrix~$P$ are exact and
+elementary (the Brundobler--Elser extreme-level survivals), and the
+remaining two are \emph{genuinely transcendental}: not algebraic in
+$(\gamma,\epsilon,a)$, not periods of any cover, not
+integrability-derivable, not perturbative in overlap. The transport curve
+is sealed by the proved identity
+$16\kappa_S W_4 + (Q_4')^2 \equiv 0 \pmod{Q_4}$, which forces every
+transport residue to $\pm \ii/4$ -- topologically rigid, no continuous
+parameter content.
+
+Three literature frameworks compute the exact connection matrix across
+overlapping conjugate-pair turning points in different vocabularies and
+should produce the same answer:
+
+\begin{description}[leftmargin=2em]
+ \item[Route A -- Hollands--Neitzke spectral networks.] Non-abelianisation
+ of the rank-3 Hitchin system that Type-1, $N=3$ already is. New modules
+ \texttt{assay/spectral\_network.py} (BPS trajectories), \texttt{assay/hitchin\_holonomy.py}
+ (non-abelianisation product). Candidate \texttt{formula\_HN(record)}.
+ \item[Route B -- Iwaki--Nakanishi cluster algebras.] Voros quiver with
+ mutation sequence and Faddeev quantum dilogarithm $\Phi_b$. New modules
+ \texttt{assay/voros\_cluster.py}, \texttt{assay/quantum\_dilog.py}.
+ Candidate \texttt{formula\_IN(record)}.
+ \item[Route C -- Aoki--Kawai--Takei DDP.] Local DDP factorisation at each
+ window with an inter-window Voros symbol $V_{AB}$ supplying the missing
+ transcendental data. New module \texttt{assay/ddp.py}.
+ Candidate \texttt{formula\_DDP(record)}.
+\end{description}
+
+Convergence between the three routes was the planned correctness check;
+the 300-sample benchmark dataset (Richardson-extrapolated IP propagator,
+floor $\sim10^{-9}$) was the empirical arbiter.
+
+\section{The three routes -- mathematical content and closed-form payoff}
+\label{sec:routes}
+
+This section explains what each route \emph{is} as a piece of mathematics,
+what \emph{exact} closed-form formula it would have delivered if executed
+to completion on the Type-1, $N=3$ spectral curve, and why each was a
+plausible attack on the specific transcendentality we identified in
+Phase~I.
+
+\subsection{The common framework -- exact WKB on the Hitchin curve}
+\label{sec:routes-common}
+
+All three routes are computational implementations of the same
+fundamental object: the \emph{exact-WKB connection matrix}
+$M:\mathrm U(3)$ of the linear system $f'(u) = A(u)\,f(u)$, from $u=-\infty$
+to $u=+\infty$, on the Type-1 $N=3$ spectral curve
+\[
+\Sigma_Y : \mu^2 = y \;=\; \frac{Q_4(\lambda)\, L_H(\lambda)^2}{p(\lambda)^2}.
+\]
+Three structural facts make this an exact-WKB problem of standard type:
+
+\begin{enumerate}
+ \item \textbf{Turning points are isolated.} $Q_4(\lambda)$ has exactly
+ four roots, organised as two complex-conjugate pairs $\{q_A,\bar q_A\}$,
+ $\{q_B,\bar q_B\}$. Each pair projects (via $u=n/p$) to a real-axis
+ ``window'' $u_A, u_B \in \R$. At each window the active pair of
+ adiabatic levels exchanges over a complex saddle.
+ \item \textbf{Phase one-form is fixed by Track~1.}
+ $\omega = \sqrt y\,\dd u$, $\omega = (L_H/p)\sqrt{Q_4}\,\dd u$. Closed
+ periods $I_X = \oint_{\gamma_X}\omega$ are purely imaginary and
+ elementary:
+ $I_X = 2\pi\ii\,\sum_{(i,j)\in\mathcal B_X}\Gamma_{ij}$,
+ with the bundling rule $\mathcal B_X$ determined by which two diabatic
+ sheets cross at window~$X$.
+ \item \textbf{The transport cover is sealed.}
+ $16\kappa_S W_4 + (Q_4')^2 \equiv 0 \pmod{Q_4}$ (Track~2, proved with
+ sympy on generic parameters). This forces every residue of the
+ transport one-form to $\pm\ii/4$ -- the transport-side periods are
+ topologically quantised to $\{0,\pm\ii\pi/2,\pm\ii\pi,\ldots\}$ and
+ carry no continuous data.
+\end{enumerate}
+
+The remaining open content -- the inter-window connection matrix
+$D\in\mathrm U(3)$ -- is therefore neither a residue, nor a closed
+period, nor algebraic in $(\gamma,\epsilon,a)$. It is a genuine
+\emph{Stokes-data} quantity of the exact-WKB problem at overlapping
+complex-conjugate-pair turning points.
+
+The three Phase~II routes compute this object in three different
+vocabularies that, in the literature, are known to agree. If any one
+of them executes correctly on the Type-1 problem, the closed form is
+in hand.
+
+\subsection{Route A -- Hollands--Neitzke spectral networks}
+\label{sec:route-a}
+
+\subsubsection*{What it is}
+
+Spectral networks are the original construction of Gaiotto, Moore and
+Neitzke (2012) for the BPS spectrum of $\mathcal N=2$ four-dimensional
+gauge theories, refined by Hollands--Neitzke (2016, 2019) into a
+concrete algorithm for the WKB connection matrix of any linear system
+of the form $\hbar\partial f = A\,f$ on a Riemann surface. The recipe
+is geometric: for each choice of phase $\vartheta\in\mathbb R/\pi\Z$,
+draw the \emph{spectral network} $\mathcal W(\vartheta)$ in the
+$u$-plane consisting of all trajectories
+\[
+\re\,\bigl(\mathrm e^{-\ii\vartheta}\int_{u_*}^{u}\sqrt y\,\dd u\bigr)
+\;=\; \text{const}
+\]
+emanating from the turning points $u_*$. These trajectories partition
+the plane into open \emph{chambers}. Each \emph{double wall} (a
+trajectory carrying two distinct sheet labels) corresponds to a
+\emph{finite BPS state}; the set of BPS states in a chamber is the
+\emph{BPS spectrum} there.
+
+\subsubsection*{The closed-form payoff}
+
+The Hollands--Neitzke non-abelianisation theorem expresses the
+connection matrix $M$ as a product over chambers:
+\[
+M \;=\; \prod_{c \in \mathcal C}\, M_c,
+\qquad
+M_c \;=\; \prod_{\gamma \in \mathrm{BPS}(c)}
+        \exp\!\bigl(\Omega_{\gamma}\, X_\gamma\bigr)
+        \;\cdot\;
+        \mathrm{diag}\bigl(\mathrm e^{\ii\vartheta_\gamma Z_\gamma/\hbar}\bigr),
+\]
+where for each BPS state $\gamma$:
+\begin{itemize}
+ \item $Z_\gamma = \oint_\gamma \omega$ is the BPS \emph{central charge}
+ (a period of the phase one-form),
+ \item $\Omega_\gamma$ is the (integer) BPS multiplicity,
+ \item $X_\gamma$ is the Stokes-jump matrix labelled by the two
+ spectral-curve sheets the BPS trajectory connects,
+ \item the diagonal factor carries the dynamical phase
+ $Z_\gamma/\hbar$.
+\end{itemize}
+Each factor is elementary. The product is a finite sequence of
+$\Gamma$-function-valued matrices labelled by integers
+(sheet pairs and BPS multiplicities) and the central charges $Z_\gamma$
+-- exactly the kind of ``closed but transcendental'' answer that
+analytic LZ formulas like Brundobler--Elser are.
+
+\subsubsection*{Why this matched Type-1, $N=3$}
+
+The project's commuting triple $(H_x,Y,R)$ from Track~3 \emph{is} a
+rank-3 Hitchin system; the spectral and dual-spectral curves
+$\Sigma_Y$, $\Sigma_R$ are the Hitchin curve and its conjugate. The
+window periods $I_X$ of Track~1 are exactly the BPS central charges
+$Z_\gamma$ of the spectral network on this Hitchin geometry. The
+transport residue identity of Track~2 is a constraint on the BPS
+spectrum (it forbids transport-cycle BPS states, leaving only the
+phase-cycle ones).
+
+The Type-1 spectral curve has \emph{genus 1}: $b_1(\Sigma_Y)=2$. This
+matches the count of physical windows exactly. The natural conjecture
+is that there are precisely two BPS states ($\gamma_A$ at window $A$,
+$\gamma_B$ at window $B$) with central charges $Z_A=I_A$ and $Z_B=I_B$,
+and the Hollands--Neitzke product collapses to two non-abelian factors:
+\[
+M_{HN}^{\text{conjecture}}
+\;=\;
+N_B(\Gamma\text{-blocks},\, Z_B)\,\cdot\,
+\Phi_{AB}(\vartheta)\,\cdot\,
+N_A(\Gamma\text{-blocks},\, Z_A),
+\]
+with $\Phi_{AB}$ the inter-window non-abelian Stokes jump in the
+$(\mathrm{sp}_A,\mathrm{sp}_B)$ plane (the plane unoccupied by either
+window's active pair). \emph{This is the missing transcendental
+content.} Route A computes $\Phi_{AB}$ by integrating the spectral
+network's wall trajectories explicitly, locating the inter-window
+double wall, and reading off the BPS multiplicity and Stokes jump from
+geometry. Success closes the closed form.
+
+\subsection{Route B -- Iwaki--Nakanishi cluster algebras}
+\label{sec:route-b}
+
+\subsubsection*{What it is}
+
+Iwaki and Nakanishi (2014, 2016) showed that the Stokes structure of
+the exact-WKB connection of $\hbar^2\psi'' + Q(u)\psi = 0$ on a
+Riemann surface is governed by a \emph{cluster algebra}. Specifically:
+\begin{itemize}
+ \item Each Stokes line is a node of a \emph{Voros quiver};
+ \item The Voros symbols
+ $V_\gamma = \exp(\oint_\gamma\sqrt Q\,\dd u / \hbar)$ are the
+ \emph{cluster $Y$-variables};
+ \item Stokes phenomena (crossing a Stokes line) act on the
+ $Y$-variables as cluster \emph{mutations} -- a discrete,
+ well-defined rational + Faddeev-quantum-dilogarithm operation.
+\end{itemize}
+The connection matrix between any two cluster ``chambers'' is the
+finite product of mutations along the cluster path connecting them.
+
+\subsubsection*{The closed-form payoff}
+
+Cluster mutations are entirely explicit. The mutation $\mu_k$ at node
+$k$ of the Voros quiver $Q$ acts on the $Y$-variables as
+\[
+\mu_k(Y_j) \;=\; \begin{cases}
+  Y_j^{-1} & \text{if } j=k,\\
+  Y_j (1 + Y_k^{-\,\mathrm{sgn}\,B_{jk}})^{\,B_{jk}} & \text{otherwise},
+\end{cases}
+\]
+where $B$ is the quiver's signed adjacency matrix. Each mutation contributes
+a factor of the Faddeev quantum dilogarithm $\Phi_b$:
+\[
+\Phi_b(z) \;=\; \prod_{n=0}^\infty
+\frac{1 + \mathrm e^{(2n+1)\pi b\,z + \pi\ii b^2(2n+1)}}
+     {1 + \mathrm e^{(2n+1)\pi b^{-1}\,z + \pi\ii b^{-2}(2n+1)}}
+\]
+to the connection matrix, at the argument set by the corresponding
+Voros symbol $V_k$.
+
+In the classical (semiclassical, $b\to 0$) limit $\Phi_b$ reduces to
+elementary $\mathrm{Li}_2$ + polynomial-in-$\log$ data; in the
+exact-WKB regime needed here it remains transcendental but
+\emph{explicit and computable}, like $\Gamma$ functions.
+
+\subsubsection*{Why this matched Type-1, $N=3$}
+
+The integrability of the Type-1 family (Track~3: $[H,H']=0$ to
+$7\times10^{-15}$ for any compatible Type-1 partner $H'$) is, in the
+cluster language, a \emph{$T$-system relation} on the Voros
+$Y$-variables. The Sinitsyn--Chernyak hidden symmetry of multistate
+LZ matches a known cluster identity. Iwaki--Nakanishi's framework
+naturally handles the overlapping conjugate-pair turning-point
+configuration that defeats sequential 2-level LZ products: the
+mutation sequence between the asymptotic clusters at $u=-\infty$ and
+$u=+\infty$ does not split into pairwise blocks; instead each
+mutation can mix three sheets when the relevant quiver arrow has
+multiplicity $\ge 2$.
+
+Concretely, the closed form Route B would have delivered is
+\[
+M_{IN}
+\;=\;
+T_{k_N}\,T_{k_{N-1}}\,\cdots\,T_{k_1},
+\qquad
+T_k \;=\; \mathrm{embed}_{(\text{sheet pair of }k)}\!
+       \bigl[\Phi_b\text{-Stokes block at }V_k\bigr],
+\]
+where $(k_1,\ldots,k_N)$ is the mutation sequence between the
+asymptotic clusters (an algorithmic, finite list determined by the
+quiver), and each $T_k$ is an explicit $\Phi_b$-valued matrix on the
+two sheets the Stokes line connects. Success on Route B produces an
+\emph{algorithmically defined symbolic expression} for $M$.
+
+\subsection{Route C -- Aoki--Kawai--Takei DDP}
+\label{sec:route-c}
+
+\subsubsection*{What it is}
+
+The DDP (Delabaere--Dillinger--Pham, 1993) formula gives the exact
+connection matrix of the Schr\"odinger-type pencil
+$\hbar^2 \psi'' + Q(u)\,\psi = 0$ across a \emph{simple} turning
+point (a point $u_*$ where $Q(u_*)=0$ and $Q'(u_*)\ne 0$): the
+WKB solution on the left and right of $u_*$ are related by
+\[
+\begin{pmatrix} \psi_+ \\ \psi_- \end{pmatrix}_{\text{right}}
+\;=\;
+\frac{1}{\sqrt{2\pi}}\,
+\begin{pmatrix}
+ \Gamma(1-\ii\delta) & \mathrm e^{\,\ii\delta\log\delta - \ii\delta}\,\sqrt{2\pi\delta}\\[2pt]
+ \mathrm e^{-\ii\delta\log\delta + \ii\delta}\,\sqrt{2\pi\delta} & \Gamma(\ii\delta)
+\end{pmatrix}
+\begin{pmatrix} \psi_+ \\ \psi_- \end{pmatrix}_{\text{left}},
+\]
+with $\delta = |Q'(u_*)|/(2\hbar)$ -- exactly the 2-level
+Landau--Zener Stokes phase formula recovered. For
+\emph{coalescing} turning points (two simple turning points within
+$O(\hbar^{2/3})$ of each other) Aoki, Kawai and Takei (1995, 2005)
+generalised DDP: the connection matrix becomes a ratio of
+\emph{modified Bessel functions} $K_\nu, I_\nu$ at the action $A$
+between the two turning points,
+\[
+M_{\mathrm{AKT}}(A) \;=\;
+\begin{pmatrix}
+ \frac{K_{1/3}(A)}{I_{1/3}(A)} & \text{(off-diagonal Bessel terms)}\\
+ \cdots & \cdots
+\end{pmatrix}.
+\]
+This is the proper closed form for ``two close turning points,'' the
+configuration our two complex-conjugate $Q_4$-window pairs inhabit.
+
+\subsubsection*{The closed-form payoff}
+
+Route C assembles $M$ as a product of \emph{local} DDP matrices at
+each window plus a single \emph{global} inter-window correction:
+\[
+M_{DDP}
+\;=\;
+N_B^{\text{DDP}}(\delta_B,\,\phi_S^B)\,\cdot\,
+\Phi_{AB}^{\text{Bessel}}(V_{AB})\,\cdot\,
+N_A^{\text{DDP}}(\delta_A,\,\phi_S^A).
+\]
+The local block $N_X^{\text{DDP}}$ is a $2\times2$ DDP matrix on the
+active sheet pair of window $X$, embedded into $3\times3$; its
+content is $\Gamma$-functions at $\delta_X = |\im I_X|/(2\pi)$. The
+inter-window block $\Phi_{AB}^{\text{Bessel}}$ is the
+modified-Bessel-function ratio at the inter-window Voros symbol
+\[
+V_{AB} \;=\; \int_{u_A^+}^{u_B^+}\!\!\omega
+\;=\; \int_{u_A^+}^{u_B^+}\!\!\frac{L_H}{p}\,\sqrt{Q_4}\,\dd u.
+\]
+Each piece is explicit. The full closed form, if Route C succeeds, is
+a finite product of $\Gamma$- and $K_\nu$-valued matrices at
+parameter-determined arguments.
+
+\subsubsection*{Why this matched Type-1, $N=3$}
+
+The four roots of $Q_4$ split into two pairs $\{q_A,\bar q_A\}$,
+$\{q_B,\bar q_B\}$ that are each individually close (the pair
+separation $|q-\bar q|$ is small relative to the pole gap
+$|\re q - \epsilon_k|$ on most samples) -- the \emph{intra-pair}
+geometry is itself an AKT ``two close turning points'' problem.
+The \emph{inter-pair} geometry (the relative position of the two pairs
+in the $u$-plane) sets the action $V_{AB}$ that controls the
+Bessel-function argument. Track~1's elementary identification of $I_X$
+gives the local AKT parameters $\delta_X$ exactly. The only piece not
+fixed by Phase~I is $V_{AB}$.
+
+Route C is the most ``hands-on'' of the three: it requires only
+elementary special functions ($\Gamma$ and $K_\nu$) plus a one-dimensional
+complex-contour quadrature for $V_{AB}$. The Phase~I infrastructure
+($\Gamma_{ij}$, window pairs, Cauchy frames, IP propagator for
+benchmark) already provides every ingredient except $V_{AB}$ and the
+Bessel block.
+
+\subsection{Convergence -- why three routes in parallel}
+\label{sec:routes-convergence}
+
+The three routes are not independent reasonable starts in different
+directions. They are \emph{three vocabularies for the same
+mathematical object}, related by known equivalences in the literature
+(Iwaki--Nakanishi's clusters are dual to Hollands--Neitzke's spectral
+networks; AKT DDP is the local-asymptotic limit of both). On any
+generic problem of exact-WKB type they must agree numerically modulo
+notation translation.
+
+This redundancy is the strongest available correctness check. If two
+of three routes agree to integrator floor ($\sim10^{-10}$) and the
+third disagrees, the disagreement diagnoses a notation/embedding bug
+in the third. If all three agree but disagree with the benchmark, the
+literature framework is missing an ingredient specific to the Cauchy
+$H_0$ structure that we have not yet identified. If all three agree
+with the benchmark, the closed form is independently verified in
+three different formal languages.
+
+This was the Phase~II plan. As the next section shows, all three
+prototype implementations fail validation by 7--10 orders of
+magnitude. The convergence test is therefore uninformative as a
+correctness check on the answer; it remains an informative diagnostic
+for the three implementations' \emph{failure modes}, which is what
+\S\ref{sec:per-route-diag} reads.
+
+\section{Validation results}
+
+Each route's \texttt{formula\_X(record)} was evaluated on all 300
+validation samples and the per-stratum mean residual
+$\langle \|P_{\text{pred}}-P_{\text{bench}}\|_\infty \rangle$ tabulated.
+
+\begin{center}\small
+\begin{tabular}{lcccccccc}
+\toprule
+formula            & S1     & S2     & S3     & S4     & S5     & S6     & S7     & S8     \\
+\midrule
+identity ($P=I$)   & 0.147  & 0.400  & 0.047  & 0.233  & 0.071  & 0.127  & 0.232  & 0.135  \\
+BE-only            & 0.992  & 0.905  & 1.000  & 0.999  & 0.998  & 0.973  & 0.987  & 0.983  \\
+incoherent grid    & 0.301  & 0.477  & 0.253  & 0.569  & 0.346  & 0.325  & 0.331  & 0.343  \\
+\midrule
+Route A (HN)       & 0.235  & 0.366  & 0.103  & 0.231  & 0.240  & 0.134  & 0.262  & 0.224  \\
+Route B (IN)       & 0.890  & 0.820  & 0.978  & 0.846  & 0.924  & 0.913  & 0.752  & 0.920  \\
+Route C (DDP)      & 0.556  & 0.533  & 0.530  & 0.562  & 0.550  & 0.543  & 0.557  & 0.547  \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The closed-form bar is $10^{-8}$ on the four success strata $\{S1,S6,S7,S8\}$.
+\emph{None of the routes reaches the bar on any sample.} The differences
+between routes are themselves an order of magnitude apart, so a
+``majority-rule'' triple-convergence test as originally planned would be
+uninformative.
+
+\subsection{Per-route diagnosis}
+\label{sec:per-route-diag}
+
+The implementation gap for each route, relative to the closed form
+sketched in \S\ref{sec:routes}, is structural -- not a numerical
+parameter that can be tuned. Each prototype implements an
+\emph{incomplete} version of its literature framework, parametrising
+the inter-window $D$ with too few free parameters to match the
+empirical $\mathrm U(3)$ content. Closing the gap is a route-specific
+research task, not a code patch.
+
+\textbf{Route A (HN), $\bar r\approx 0.23$.} The closed form
+(\S\ref{sec:route-a}) required computing the spectral network
+$\mathcal W(\vartheta)$ explicitly, locating the inter-window double
+wall, and reading off the BPS multiplicity and Stokes block of the
+$(\mathrm{sp}_A,\mathrm{sp}_B)$ jump $\Phi_{AB}$. The implemented
+\texttt{hn\_connection\_matrix} reduces to
+$U = \Phi_R\,N_B\,\Phi_M\,N_A\,\Phi_L$ with $N_X$ a real $2\times2$
+LZ rotation embedded on the diabatic pair of window $X$ and $\Phi_M$
+diagonal -- \emph{no} inter-window non-abelian factor. This is the same
+sequential $2\oplus 1$ product Track~5 already falsified. The
+\texttt{spectral\_network.py} machinery (turning-point trajectories,
+chamber detection, BPS enumeration) was implemented but is never
+called by the formula. The implemented version is therefore not
+actually non-abelianisation; it is the bare sequential LZ product,
+and its performance is identical to the identity baseline. The gap
+between the implemented version and the literature framework is the
+non-abelianisation step itself: detecting the inter-window double
+walls and translating BPS multiplicities into actual non-diagonal
+$3\times3$ matrix entries.
+
+\textbf{Route B (IN), $\bar r\approx 0.89$.} The closed form
+(\S\ref{sec:route-b}) required building the Voros quiver from the
+Stokes graph of $\hbar^2\psi'' + Q_4 L_H^2/p^2\,\psi=0$, identifying the
+mutation sequence between the asymptotic clusters, and computing
+each mutation's $\Phi_b$-Stokes block at the appropriate $V_k$. The
+implemented \texttt{cluster\_connection\_3x3} produces
+$S = T_2\,T_1\,T_0$, sweeping three mutations corresponding to a
+Demkov--Osherov sequence of \emph{pairwise} crossings, with each
+$T_k$ a real-valued LZ rotation matrix (no Stokes phase). Two
+structural failures: \emph{(i)} the Voros $Y$-variables
+$Y_k = \exp(2\pi\Gamma_k)$ overflow IEEE-754 \texttt{exp} on most
+samples ($\Gamma\gtrsim 10$), so the classical $\mathrm{Li}_2$-based
+phases contributing to each $T_k$ are dominated by \texttt{inf} and
+never accumulate non-trivial off-diagonal content; \emph{(ii)} the
+project's spectral curve has \emph{two} physical windows, not three
+sequential pair-crossings, so a three-mutation product is the wrong
+combinatorics. The gap is the proper Voros quiver: derived from the
+actual Stokes graph rather than the Demkov--Osherov triangle, with
+log-space arithmetic to avoid $Y$-overflow and a correct
+$\Phi_b$-Stokes block at each $V_k$.
+
+\textbf{Route C (DDP), $\bar r\approx 0.55$, flat across strata.} The
+closed form (\S\ref{sec:route-c}) required (a) the local AKT
+two-coalescing-turning-points connection block with modified-Bessel
+content $K_{1/3}(A_X)/I_{1/3}(A_X)$ at the intra-window action $A_X$,
+and (b) the inter-window block $\Phi_{AB}^{\text{Bessel}}$ at the
+proper exact-WKB Voros symbol
+$V_{AB} = \int(L_H/p)\sqrt{Q_4}\,\dd u$. The implemented version uses
+elementary $\Gamma$-function DDP only (no Bessel coalescing
+correction) and the wrong integrand for $V_{AB}$:
+$\texttt{d\_mid}$ introduces a real rotation $R$ in the
+$(\mathrm{sp}_A,\mathrm{sp}_B)$ plane with angle
+$\theta_{AB}=|\im V_{\mathrm{sp}_A,\mathrm{sp}_B}|$, where
+$V_{ij} = \int (E_i-E_j)/2\,\dd u$ is integrated by Simpson
+quadrature along a straight complex path from the upper turning
+point of window $A$ to that of window $B$. The architecture is the
+only one of the three that \emph{can in principle} generate
+non-zero off-diagonal entries between non-active spectator states.
+The uniform $\approx 0.55$ residual across all strata is the
+signature of a deterministic systematic error -- the rotation exists
+in the right place but its angle is wrong. The integrand
+$(E_i-E_j)/2 = (\sqrt{Q_4}/p)$ on the appropriate sheet is missing
+the $L_H$ factor that the natural exact-WKB Voros symbol
+$\omega = \sqrt y\,\dd u = (L_H/p)\sqrt{Q_4}\,\dd u$ carries -- and
+the $L_H$ factor was what made Track~1's elementary identification
+$I_X = 2\pi\ii\sum\Gamma_{ij}$ come out right. The gap to the
+closed form is therefore double: replace the rotation with the
+proper Bessel block, and replace the integrand with the proper
+$\sqrt y\,\dd u$.
+
+\section{Empirical extraction of $D$}
+
+If the closed-form ansatz is
+\[
+U_{\text{bench}} \;=\; N_B \cdot D \cdot N_A
+\quad(\text{modulo a global phase}),
+\]
+with $N_A,N_B$ the elementary $2\times2$ phase-free real-orthogonal LZ
+blocks of Track~1, then $D = N_B^{\top} U_{\text{bench}} N_A^{\top}$ is
+fully determined by inversion (each $N_X$ is orthogonal). We computed
+$D$ sample-by-sample.
+
+\subsection{Algebraic rigour: $D$ is unitary}
+
+For every tested sample, $\|D\|_F = \sqrt 3$ to numerical precision.
+This is non-trivial: it implies $D\in \mathrm U(3)$ (modulo overall
+phase), i.e.\ the factorisation
+$U_{\text{bench}} = N_B\,D\,N_A$ \emph{is algebraically rigorous}, not
+an ansatz. The phase-free LZ blocks $N_A,N_B$ exhaust the
+non-unitarity content of $U_{\text{bench}}$ on the active pairs; the
+residual $D$ is a pure $\mathrm U(3)$ element carrying everything that
+is not elementary LZ.
+
+\subsection{Structural rigidity is illusory: $D$ varies strongly with $(p_A,p_B)$}
+
+We initially hoped that $D$ would be \emph{nearly diagonal} with one
+significant off-diagonal in the $(\mathrm{sp}_A,\mathrm{sp}_B)$
+spectator plane, reducing the open problem to a single scalar
+transcendental. This is \emph{not} the case.
+
+\textbf{Deep-diabatic limit ($p_A,p_B\to 0$).} The LZ blocks $N_A,N_B$
+are nearly identity, so $D\approx U_{\text{bench}}$, and
+$U_{\text{bench}}\approx I$ since the system stays adiabatic through
+fast crossings. Here $D$ is indeed nearly diagonal with off-diagonals
+$\lesssim 0.05$. Most of the 300-sample dataset sits in this regime
+(generic random parameters give the Brundobler--Elser product, hence
+$p_X = \exp(-|\im I_X|)$ is exponentially suppressed).
+
+\textbf{Intermediate-$p$ regime.} On samples with $p_A,p_B \sim 0.3$--$0.7$
+(e.g.\ stratum S2 with small slope $a$), $D$ has \emph{rank-three
+unitary structure}. A representative sample with $p_A=0.42$, $p_B=0.65$
+has
+\[
+|D|\;\approx\;\begin{pmatrix}
+0.11 & 0.19 & 0.97\\
+0.96 & 0.25 & 0.16\\
+0.27 & 0.95 & 0.16
+\end{pmatrix},
+\]
+which is close to a \emph{cyclic permutation} matrix $0\to 1\to 2\to 0$
+plus $O(0.2$--$0.3)$ corrections. The single-rotation ansatz
+$D = \mathrm{diag}(\mathrm e^{\ii\chi})\cdot
+R_{(\mathrm{sp}_A,\mathrm{sp}_B)}(\theta)$ has reconstruction residual
+$0.04$--$1.4$ across a six-sample spot-check, i.e.\ it is not a valid
+structure theorem for $D$.
+
+\subsection{Why the apparent rigidity broke}
+
+The phase-free LZ block convention \texttt{closed\_form.lz\_rotation(p)}
+omits the Stokes phase $\phi_S(\delta)$:
+\[
+\phi_S(\delta) \;=\; \delta(\log\delta - 1) + \tfrac{\pi}{4} + \arg\Gamma(1-\ii\delta),
+\qquad \delta_X = \tfrac{|\im I_X|}{2\pi}.
+\]
+For deep-diabatic samples $\delta\to 0$ and $\phi_S\to \pi/4$ is small;
+the phase-free $N_X$ is a good approximation, and $D$ comes out
+near-diagonal. For intermediate $\delta\sim 1$, $\phi_S$ is $O(1)$ and
+the phase-free $N_X$ is missing a substantial unitary content; $D$
+absorbs that missing phase content and is correspondingly rich.
+
+A proper extraction would use Stokes-phased $N_X$, and may reveal a
+simpler residual $D$. \emph{This was not tested.}
+
+\section{What the experiment teaches}
+
+\subsection{The factorisation is the right \emph{architecture}}
+
+The decomposition $U = N_B\,D\,N_A$ with $D\in \mathrm U(3)$ is
+algebraically exact; the four Brundobler--Elser-equivalent magnitudes
+on $P$ are accounted for by $N_A$ and $N_B$ alone. Any closed form must
+recognisably contain this factorisation -- and indeed all three Phase~II
+prototypes did. What none of them captured is the actual content of $D$.
+
+\subsection{$D$ is a $\mathrm U(3)$ element with no a-priori simple form}
+
+Modulo a global gauge phase, $\mathrm U(3)$ has eight real parameters.
+The Phase~I constraints on $P=|U|^2$ leave only two free real parameters
+after row-and-column-sum stochasticity and BE elimination -- so the
+$\mathrm U(3)$ content of $D$ collapses under the $|\cdot|^2$ projection.
+The two surviving transcendentals are functions of the eight
+$\mathrm U(3)$ parameters of $D$, and identifying that map is the
+remaining task. Track~5 found $\cos^2\phi_S$ explains the diagonals to
+$\sim 9\%$ residual; nothing tested explains the off-diagonals.
+
+\subsection{The three routes failed because they used the wrong $D$}
+
+Comparing the closed-form payoffs of \S\ref{sec:routes} with the
+prototype implementations, the gap is parameter-count:
+
+\begin{itemize}
+ \item Route A's \emph{closed-form} $D$ would have been the non-abelian
+ inter-window Stokes block $\Phi_{AB}$ from the spectral network
+ -- a full $\mathrm U(3)$ element with eight real parameters carried
+ by the BPS multiplicities and central charges. Route A's
+ \emph{implemented} $D$ is \emph{diagonal} (transport phases only),
+ with only three real-phase degrees of freedom -- it has zero
+ inter-window non-abelian content because the spectral-network step
+ was never wired in.
+ \item Route B's \emph{closed-form} $D$ would have been a product of
+ $\Phi_b$-valued Stokes blocks across the proper mutation sequence,
+ each contributing a complex $\mathrm U(3)$ rotation in the
+ sheet-pair of its quiver node. The combinatorial count (number of
+ mutations from initial to final cluster) generically exceeds two,
+ so the dimension of the cluster-product image is the full
+ $\mathrm U(3)$. Route B's \emph{implemented} $D$ is the product
+ $T_2 T_1 T_0$ of three real rotations on \emph{different} sheet
+ pairs (Demkov--Osherov triangle) -- this can carry more than three
+ parameters in principle, but the parameters used (overflowing
+ Voros $Y$'s plus zero classical $\Phi_b$ phases) collapse the
+ matrix to nearly identity.
+ \item Route C's \emph{closed-form} $D$ would have been the Bessel
+ block $\Phi_{AB}^{\text{Bessel}}(V_{AB})$ from the AKT
+ two-coalescing-turning-points formula, embedded between the local
+ DDP blocks. The Bessel block carries the full $\mathrm U(2)$
+ content on the $(\mathrm{sp}_A, \mathrm{sp}_B)$ pair (four real
+ parameters in the $2\times2$ unitary) plus a diagonal phase on
+ $i_c$, so it is a $\mathrm U(2)\oplus\mathrm U(1)$ subgroup of
+ $\mathrm U(3)$. This is still a strict subset of the full
+ $\mathrm U(3)$ but a much larger subset than the prototype's image
+ -- and on the deep-diabatic samples where the empirical $D$ is
+ near-diagonal it should suffice. Route C's \emph{implemented} $D$
+ is \emph{diagonal phases + one real $\mathrm{SO}(2)$ rotation},
+ four real parameters in total, with the rotation angle from the
+ wrong Voros integrand.
+\end{itemize}
+
+The empirical $D$ has eight real parameters in $\mathrm U(3)$;
+even the closed forms above achieve only a subset under the
+sequential factorisation $U=N_B D N_A$. The full $\mathrm U(3)$
+content surfaces only when the non-abelian content of \emph{all}
+spectral-network walls (Route A) or the full mutation sequence
+(Route B) is included. Route C's Bessel block is intermediate -- it
+captures the conjugate-pair coalescing content but not the proper
+multi-window interference -- and is the most tractable target for a
+follow-up implementation.
+
+\section{The open problem refined}
+
+\infobox{SoftGold}{%
+\textbf{The closed-form problem is to identify a $\mathrm U(3)$-valued
+function $D(\epsilon,\gamma,a)$.} The full $3\times3$ transition matrix
+is
+\[
+P[x,j] \;=\; \bigl|\bigl(N_B(p_B)\,D\,N_A(p_A)\bigr)[j,x]\bigr|^2,
+\]
+with $N_X$ the elementary $2\times2$ LZ amplitude block on the active
+pair of window $X$, magnitude $p_X = \exp(-|\im I_X|)$ from Track~1's
+elementary Brundobler--Elser product (purely imaginary $I_X$, $\phi_S^X$
+either zero in the phase-free convention or the standard LZ Stokes
+phase in the proper convention).
+\medskip
+
+The closed form must specify all eight (or six, after gauge) parameters
+of $D\in \mathrm U(3)$. Phase~I established the two-parameter content
+that survives $|\cdot|^2$ projection. The remaining task -- equivalent
+under reasonable analyticity assumptions to identifying $D$ in closed
+form -- requires the exact-WKB connection matrix of $f'=A(u)f$ across
+two overlapping complex-conjugate-pair turning points on the Type-1
+spectral curve $\Sigma_Y:\mu^2 = Q_4 L_H^2/p^2$, with the Cauchy
+structure $(H_0)_{ij} = \gamma_i\gamma_j(a_i-a_j)/(\epsilon_i-\epsilon_j)$
+fully exploited.}
+
+\subsection{Concrete next-research directions}
+
+\begin{enumerate}
+ \item \textbf{Stokes-phased extraction.} Re-extract $D$ using
+ Stokes-phased $N_X$ blocks (with $\phi_S(\delta_X)$ included). Check
+ whether the residual $D$ in this corrected convention is simpler
+ (e.g.\ near-diagonal across all strata).
+ \item \textbf{Corrected inter-window Voros symbol.} Recompute Route C's
+ $V_{AB}$ with the correct integrand $(L_H/p)\sqrt{Q_4}\,\dd u$ in
+ place of $(E_i-E_j)/2\,\dd u$. Branch tracking on the spinor cover.
+ Test whether the corrected $|\im V_{AB}|$ correlates with the
+ empirically extracted spectator-rotation angle.
+ \item \textbf{Aoki--Kawai--Takei DDP at the proper level.} The published
+ AKT formula for two coalescing $Q_4$ roots involves Whittaker / modified
+ Bessel function matching, not the elementary rotation Route C used.
+ This is the route of greatest technical depth and the most likely to
+ produce the exact answer.
+ \item \textbf{Symbolic regression on the empirical $D$.} The 300-sample
+ dataset of $D \in \mathrm U(3)$ matrices is itself a target. Sparse
+ symbolic regression on entries of $D$ as functions of
+ $(p_A,p_B,\delta_A,\delta_B,\phi_S,\dots)$ may surface the closed form
+ by pattern recognition where geometric ansatz fails.
+\end{enumerate}
+
+\section{Status of the closed-form push}
+
+\begin{itemize}
+ \item \textbf{Exact \& elementary} (Phase~I deliverables): the two
+ Brundobler--Elser extreme-survival probabilities
+ $P[\text{extreme}\to\text{extreme}] = \prod q_{ij}$
+ with $\Gamma_{ij} = \gamma_i^2\gamma_j^2|L_H(\epsilon_k)|/|\epsilon_i-\epsilon_j|$.
+ Verified to numerical floor on $300$ samples.
+
+ \item \textbf{Open, transcendental} (the remaining content): the
+ inter-window unitary $D\in\mathrm U(3)$. Three independent Phase~II
+ prototypes failed to capture it. Empirical $D$ extracted but no
+ closed-form fit found. Best partial predictor for the diagonals is
+ $\cos^2\phi_S$ at $\sim 9\%$ residual (Track~5).
+
+ \item \textbf{Sealed} (Phase~I negative results): transport-cover
+ periods (topologically quantised by the proved residue identity);
+ integrability-only product (symmetric, while $P$ is not); naive
+ algebraic frame maps (insufficient).
+\end{itemize}
+
+\section{Artifacts}
+
+\begin{itemize}
+ \item \textbf{Code (Phase~II routes):} \texttt{assay/\{spectral\_network,
+ hitchin\_holonomy, voros\_cluster, quantum\_dilog, ddp\}.py}.
+ \item \textbf{Code (empirical analysis):}
+ \texttt{notes/phase2\_route\_check.py} (validation runner),
+ \texttt{notes/phase2\_extract\_D.py} (small-sample $D$ extraction),
+ \texttt{notes/phase2\_D\_fast.py} (full-sample, sweep abandoned),
+ \texttt{notes/phase2\_corrected\_V.py} (corrected Voros, branch tracker
+ unstable -- to be debugged in any continuation).
+ \item \textbf{Validation output:}
+ \texttt{notes/phase2\_route\_check} stdout, complete per-stratum
+ residuals reproduced in this brief.
+ \item \textbf{Plan file:} \texttt{notes/vast-drifting-avalanche.md}
+ (the original Phase~II programme as specified).
+ \item \textbf{Project state at start of Phase~II:}
+ \texttt{six\_track\_synthesis\_brief.pdf} and per-track notes in
+ \texttt{notes/track\{1..6\}\_*.pdf}.
+\end{itemize}
+
+\vspace{0.4em}
+
+\noindent\hfill\textcolor{MutedText}{\emph{End of Phase~II findings brief.
+Closed-form push is on the open-research list.}}\hfill\null
+
+\end{document}

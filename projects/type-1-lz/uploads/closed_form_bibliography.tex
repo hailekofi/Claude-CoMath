@@ -1,0 +1,570 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.92in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{booktabs,array,tabularx,longtable}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+\definecolor{TitleBlue}{HTML}{173753}
+\definecolor{AccentBlue}{HTML}{2F5D7E}
+\definecolor{SoftBlue}{HTML}{EEF4FA}
+\definecolor{SoftGold}{HTML}{FAF6EE}
+\definecolor{SoftGreen}{HTML}{EEF8F0}
+\definecolor{SoftRed}{HTML}{FCEEEE}
+\definecolor{RuleGray}{HTML}{D7E1EA}
+\definecolor{MutedText}{HTML}{4E5A66}
+
+\hypersetup{colorlinks=true,linkcolor=AccentBlue,urlcolor=AccentBlue,
+  citecolor=AccentBlue,
+  pdftitle={Type-1 N=3 LZ -- Curated bibliography for the closed-form derivation},
+  pdfauthor={Type-1 N=3 Landau-Zener project}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\textcolor{MutedText}{\small Curated bibliography}}
+\fancyhead[R]{\textcolor{MutedText}{\small Type-1, $N=3$ Landau--Zener}}
+\fancyfoot[C]{\textcolor{MutedText}{\thepage}}
+\setlength{\headheight}{14pt}\renewcommand{\headrulewidth}{0.4pt}
+\titleformat{\section}{\large\bfseries\color{TitleBlue}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{AccentBlue}}{\thesubsection}{0.5em}{}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.5em}
+\setlist[itemize]{leftmargin=1.4em,itemsep=0.18em,topsep=0.18em}
+
+\newcommand{\C}{\mathbb C}\newcommand{\R}{\mathbb R}
+\newcommand{\ii}{\mathrm i}\newcommand{\dd}{\mathrm d}
+
+\newcommand{\infobox}[2]{\begin{center}\fcolorbox{RuleGray}{#1}{\begin{minipage}{0.94\linewidth}\small #2\end{minipage}}\end{center}}
+
+\newcommand{\bibentry}[5]{%
+  \begin{center}\fcolorbox{RuleGray}{#5}{\begin{minipage}{0.94\linewidth}\small
+    \textbf{#1}\par\vspace{0.3em}
+    \textit{Relevant sections:} #2\par\vspace{0.2em}
+    \textit{Annotation:} #3\par\vspace{0.2em}
+    \textit{Priority:} #4
+  \end{minipage}}\end{center}\vspace{0.4em}
+}
+
+\begin{document}
+
+\begin{center}
+{\Large\color{AccentBlue}\bfseries Curated bibliography\par}\vspace{0.45cm}
+{\fontsize{19}{23}\selectfont\bfseries\color{TitleBlue}Type-1, $N=3$ Landau--Zener\par}
+{\fontsize{19}{23}\selectfont\bfseries\color{TitleBlue}closed-form derivation\par}
+\vspace{0.30cm}
+{\large\color{MutedText}Reading roadmap for the deep literature review\par}
+\end{center}
+
+\infobox{SoftBlue}{%
+\textbf{Purpose.} This document is a curated, annotated bibliography for
+the open closed-form derivation of the Type-1, $N=3$ ungauged multistate
+Landau--Zener transition matrix. Phase I delivered two Brundobler--Elser
+extreme-survival entries exactly. Phase II tested three exact-WKB
+literature routes and all failed empirically. Phase III narrowed the open
+problem to: identify a $\mathrm U(3)$-valued function
+$D(\epsilon, \gamma, a)$ that produces the remaining two transcendental
+entries of $P$.
+
+Each reference below is annotated with what it gives us, what to
+extract on a careful read, and a priority tier:
+\textbf{P1} (must read first; resolves a Phase II/III gap),
+\textbf{P2} (secondary; framework context),
+\textbf{P3} (supplementary; useful for write-up). A 5-pass reading
+roadmap appears at the end.}
+
+\tableofcontents
+
+\vspace{0.5em}
+
+% ===========================================================================
+\section{Spectral networks (Gaiotto--Moore--Neitzke)}
+
+The foundational framework for the WKB connection matrix as a geometric
+object on a Riemann surface. The Type-1, $N=3$ spectral curve
+$\Sigma_Y : \mu^2 = Q_4 L_H^2/p^2$ (genus 1, $b_1 = 2$) sits squarely
+inside this framework.
+
+\bibentry{Gaiotto, Moore, Neitzke. \textit{Spectral networks}.
+arXiv:1204.4824 (2012). Annales Henri Poincar\'e 14 (2013) 1643--1731.}
+{\S\S5--6 (wall structure, BPS counting), \S10 (non-abelianisation map).}
+{The geometric language of spectral networks: BPS trajectories
+emanating from turning points, walls of marginal stability, and the
+non-abelianisation map from non-abelian flat connections to flat
+$\mathrm U(1)$ connections on the spectral cover. \textbf{What it
+gives us:} the topological skeleton on which the inter-window
+connection matrix lives; the precise definition of the $\omega$-pair
+$K_\pm(\gamma) = I + \mu_\gamma E_{ij}, \, I + (1/\bar\mu_\gamma) E_{ji}$.
+\textbf{What to extract:} \S5.3 the sliding-flag construction;
+\S6.2 the $K$-wall factor and its reciprocal-$\mu$ pair; \S10.2 the
+abelianisation map; \S10.3 the ordered chamber product.}
+{P1}{SoftBlue}
+
+\bibentry{Gaiotto, Moore, Neitzke. \textit{Spectral networks and snakes}.
+arXiv:1209.0866 (2012). Annales Henri Poincar\'e 15 (2014) 61--141.}
+{\S3 (abelianisation map on snake diagrams).}
+{Cluster-coordinate refinement of GMN 2012. Snake diagrams are the
+combinatorial encoding of the spectral network on a punctured surface
+useful for computing the connection matrix entry-by-entry.
+\textbf{What it gives us:} a concrete worked example of non-abelianisation
+in low rank with explicit formulas. \textbf{What to extract:} \S3.2
+the cluster-coordinate decomposition of the connection matrix; relate
+to Iwaki--Nakanishi (\S3 below).}
+{P2}{SoftGold}
+
+% ===========================================================================
+\section{Non-abelianisation and Hitchin systems (Hollands--Neitzke)}
+
+The direct reference family for the project's setting. Hollands--Neitzke
+extend GMN to explicit connection-matrix formulas for rank-2 and rank-3
+Hitchin systems, including the genus-1 case that matches our
+$\Sigma_Y$ exactly.
+
+\bibentry{Hollands, Neitzke. \textit{Spectral networks and Fenchel--Nielsen
+coordinates}. arXiv:1312.2979 / 1402.1131 (2016). Lett. Math. Phys.
+106 (2016) 811--877.}
+{\S\S4 (explicit rank-2 abelianisation), \S4.4 (the $\omega$-pair to
+$N^{\mathrm{proper}}$ collapse).}
+{The proof we need most: that for a rank-2 spectral network with the
+canonical BPS-ray choice, the inner ω-pair product
+$K_-(\gamma) \cdot \Phi_{\mathrm{mid}} \cdot K_+(\gamma)$ collapses
+\emph{exactly} to the Joye--Kunz--Pfister Stokes-phased
+$N^{\mathrm{proper}}$ block. \textbf{What it gives us:} the algebraic
+identity that ratifies the expected Route A closed form
+$U_{HN} = \Phi_R N_B^{\mathrm{proper}} \Phi_{AB} N_A^{\mathrm{proper}} \Phi_L$.
+\textbf{What to extract:} \S4.4 Lemma giving the collapse;
+\S4.2 the explicit ${\rm SL}(2,\mathbb C)$-valued formula.}
+{P1}{SoftBlue}
+
+\bibentry{Hollands, Neitzke. \textit{BPS states in spectral networks of
+arbitrary rank}. arXiv:1611.04317 (2016).}
+{\S2 (rank-$N$ generalisation), \S5 (genus-$\ge 1$ examples).}
+{Rank-3 / higher-rank generalisation that includes our $N=3$ case
+without reduction to rank 2. \textbf{What it gives us:} confirmation
+that the rank-3 ω-pair construction works on genus-1 Hitchin systems
+and that the BPS-state count is fixed by $b_1$ of the cover.
+\textbf{What to extract:} \S2.3 the rank-$N$ wall-jump formula; the
+worked $\mathrm{SL}(3)$ example for spectral curves with $b_1 = 2$.}
+{P2}{SoftGold}
+
+\bibentry{Hollands, Neitzke. \textit{Exact WKB and abelianization for the
+$T_3$ equation}. arXiv:1906.04271 (2019). Commun. Math. Phys.
+388 (2021) 1571.}
+{\S\S5--6 (chamber-structure proof for genus-1 covers with $b_1 = 2$).}
+{\textbf{The direct genus-1 reference for our setting.} The $T_3$
+equation is a third-order linear ODE whose spectral cover has exactly
+the topology of our $\Sigma_Y$ (genus 1, $b_1 = 2$). \textbf{What it
+gives us:} the proof that the GMN ordered product at the canonical
+phase collapses to two $N^{\mathrm{proper}}$ factors plus a diagonal
+inter-window factor $\Phi_{AB}$, with no extra inter-window BPS state
+in the relevant chamber. This is the load-bearing theorem for
+Route A's expected closed form.
+\textbf{What to extract:} \S5 chamber-structure analysis; \S6 the
+final connection-matrix formula in the relevant chamber; convention
+table for $\theta$-phase and ω-pair side choice.}
+{P1}{SoftBlue}
+
+% ===========================================================================
+\section{Iwaki--Nakanishi cluster algebras}
+
+The cluster-algebra dual of GMN: Voros symbols become cluster
+$Y$-variables and Stokes phenomena become cluster mutations. Provides
+an alternative vocabulary for the same connection matrix.
+
+\bibentry{Iwaki, Nakanishi. \textit{Exact WKB analysis and cluster
+algebras}. arXiv:1401.7094 (2014). J. Phys. A 47 (2014) 474009.}
+{\S\S3--4 (cluster mutation as Stokes phenomenon), \S5 (the connection
+matrix formula as mutation product).}
+{The cluster-algebraic vocabulary for exact WKB. Each mutation
+contributes a Faddeev quantum dilogarithm $\Phi_b$ factor; the
+connection matrix is a finite product of these along a cluster path.
+\textbf{What it gives us:} Route B's framework; explicit formula
+for the mutation product that produces a $\mathrm U(N)$ connection
+matrix from $N+1$ cluster variables. \textbf{What to extract:}
+\S3.2 mutation rule; \S4 the $T$-system / $Y$-system identity that
+our Sinitsyn--Chernyak Track 3 result corresponds to.}
+{P1}{SoftBlue}
+
+\bibentry{Iwaki, Nakanishi. \textit{Voros coefficients of the Schr\"odinger
+equation}. arXiv:1409.4641 (2014). J. Phys. A 47 (2014) 474012.}
+{\S\S2--3 (Voros symbols as cluster coordinates).}
+{Companion paper to 1401.7094, focused on the Schr\"odinger pencil
+$\hbar^2 \psi'' + Q(u) \psi = 0$. \textbf{What it gives us:} explicit
+Voros-symbol formulas for the rank-2 reduction of our quotient-ring
+scalar equation. \textbf{What to extract:} the formula relating
+$\oint \sqrt Q\,\dd u$ to the cluster $Y$-variable, and the Faddeev
+$\Phi_b$ argument at finite $b$.}
+{P2}{SoftGold}
+
+% ===========================================================================
+\section{Quantum dilogarithm (Faddeev)}
+
+The fundamental special function of the cluster-mutation route. Plays
+the same role for cluster algebras that $\Gamma$ plays for the
+Joye--Kunz--Pfister Stokes block.
+
+\bibentry{Faddeev. \textit{Discrete Heisenberg-Weyl group and modular
+group}. Lett. Math. Phys. 34 (1995) 249--254.}
+{Eq. (5) (the $\Phi_b$ definition); \S2 (the five-term relation).}
+{Original definition of the non-compact / modular quantum dilogarithm
+$\Phi_b(z)$ as a contour integral or infinite product. \textbf{What
+it gives us:} the function our finite-$b$ Faddeev refactor needs.
+\textbf{What to extract:} the integral representation (better
+behaved than the infinite product for large $|z|$); the
+$b \to b^{-1}$ duality.}
+{P1}{SoftBlue}
+
+\bibentry{Faddeev, Kashaev. \textit{Quantum dilogarithm}. Mod. Phys. Lett.
+A 9 (1994) 427--434.}
+{\S\S2--3 (basic properties; semiclassical limit).}
+{The original integral representation of $\Phi_b$. \textbf{What it
+gives us:} the $b \to 0$ classical limit (recovers
+$\mathrm{Li}_2$); the connection to $\Gamma$-functions in the
+appropriate limit. \textbf{What to extract:} the precise small-$b$
+asymptotic expansion.}
+{P2}{SoftGold}
+
+% ===========================================================================
+\section{Aoki--Kawai--Takei exact WKB / DDP}
+
+The framework closest to Phase II's Route C: discontinuity formulas
+for exact-WKB connection matrices at simple and coalescing turning
+points.
+
+\bibentry{Aoki, Kawai, Takei (and collaborators). \textit{Exact WKB
+analysis} (review). E.g. RIMS preprint series and Kyoto lecture
+notes, ~1992--2010.}
+{\S\S4--5 (DDP at simple and coalescing turning points; Whittaker /
+Bessel matching).}
+{The exact-WKB connection-matrix programme. \textbf{What it gives
+us:} the proper formula for the connection matrix at two coalescing
+turning points (modified-Bessel index 1/3 at argument $2|V|/3$).
+\textbf{What to extract:} the Wronskian-normalised form of the
+Bessel block (Phase III prototype used a heuristic
+$\sin(\arg V)$ which was wrong); the precise sheet selection for
+the inter-window Voros symbol.}
+{P1}{SoftBlue}
+
+\bibentry{Delabaere, Dillinger, Pham. \textit{R\'esurgence de Voros et
+p\'eriodes des courbes hyperelliptiques}. Ann. Inst. Fourier 43
+(1993) 163--199.}
+{Theorems II.2, II.3 (the discontinuity formula at a simple turning
+point).}
+{The original DDP discontinuity formula: the analytic continuation
+of a WKB symbol around a turning point picks up a controlled
+$\Gamma$-function-valued jump. \textbf{What it gives us:} the
+elementary connection block we already implement in
+\texttt{assay.ddp.j\_ddp}; the framework that AKT extends to
+coalescing turning points. \textbf{What to extract:} Theorem II.3
+(the universal form of the discontinuity); the residue computation
+at the turning point.}
+{P1}{SoftBlue}
+
+% ===========================================================================
+\section{Multistate Landau--Zener -- historical core}
+
+\bibentry{Brundobler, Elser. \textit{S-matrix of multistate
+Landau--Zener problem}. J. Phys. A 26 (1993) 1211--1227.}
+{Throughout; especially the extreme-level survival formula.}
+{The original derivation of the Brundobler--Elser product:
+$P[\text{extreme level survives}] = \prod q_{ij}$ with $q_{ij} =
+\exp(-2\pi \Gamma_{ij})$. \textbf{What it gives us:} the two
+exact-elementary entries of the Type-1 $N=3$ matrix $P$ (Phase I
+deliverable). \textbf{What to extract:} the topological argument
+that fixes the two extreme corners independently of all integrability
+data; the implicit ``no-self-interaction'' assumption.}
+{P1}{SoftBlue}
+
+\bibentry{Demkov, Osherov. \textit{Stationary and nonstationary problems
+in quantum mechanics that can be solved by the method of
+factorization}. Sov. Phys. JETP 24 (1967) 916.}
+{Sections on the equal-slope special case.}
+{The original three-state LZ with one ``selector'' level crossing
+the other two. \textbf{What it gives us:} historical context for
+the Type-1 geometry (Demkov--Osherov is the symmetric special case;
+Type-1 is the generic version). \textbf{What to extract:} the
+sequential-LZ-product structure that DOES hold in the
+Demkov--Osherov special case; the precise extension to the generic
+Type-1 is what Phase III is solving.}
+{P2}{SoftGold}
+
+\bibentry{Sinitsyn. \textit{Multistate Landau--Zener problem}.
+arXiv:cond-mat/0212017 (2002) and successors; recent review in
+New J. Phys. 19 (2017) 075008 with Chernyak.}
+{\S\S2--3 (integrability conditions, hidden symmetry).}
+{The integrable hierarchy of multistate LZ, including the
+Sinitsyn--Chernyak commuting-triple condition $[H, H'] = 0$.
+\textbf{What it gives us:} Track 3 verified this commuting structure
+to $7\times 10^{-15}$; the hierarchy pins the two extreme diagonals
+but leaves the middle survival open. \textbf{What to extract:} the
+identification of which $P$ entries are integrability-fixed vs.
+genuinely transcendental --- and exactly how many free parameters
+remain.}
+{P1}{SoftBlue}
+
+% ===========================================================================
+\section{Two-level LZ with Stokes-phase corrections}
+
+\bibentry{Joye, Kunz, Pfister. \textit{Exponential estimates in
+adiabatic quantum evolution}. Ann. Inst. H. Poincar\'e 54 (1991)
+343--378. Companion: J. Math. Phys. 32 (1991) 3328.}
+{\S\S2--3 (the rigorous $\varphi_S(\delta)$ formula).}
+{The mathematically rigorous derivation of the Stokes phase
+$\varphi_S(\delta) = \delta(\log\delta - 1) + \pi/4 +
+\arg\Gamma(1 - \ii\delta)$ for the two-level LZ amplitude block.
+\textbf{What it gives us:} the function we implement in
+\texttt{assay.lz\_stokes\_phased}; the closed-form expression we
+expect to see emerge from the GMN ω-pair construction.
+\textbf{What to extract:} the proof that this is the unique
+non-perturbative correction to the elementary BE amplitude in the
+2-level case; the convention for the sign of $\varphi_S$.}
+{P1}{SoftBlue}
+
+\bibentry{Berry. \textit{Histories of adiabatic quantum transitions}.
+Proc. R. Soc. A 429 (1990) 61--72.}
+{\S\S3--4 (Stokes lines and the histories interpretation).}
+{Berry's "matching" interpretation of the LZ Stokes phenomenon.
+\textbf{What it gives us:} physical context for $\varphi_S$ as a
+matching condition across Stokes lines, useful for explaining the
+result. \textbf{What to extract:} the geometric picture of the
+Stokes lines in the complex time plane and how they connect to
+the GMN spectral network.}
+{P2}{SoftGold}
+
+% ===========================================================================
+\section{Hitchin integrable systems (foundational)}
+
+\bibentry{Hitchin. \textit{Stable bundles and integrable systems}.
+Duke Math. J. 54 (1987) 91--114.}
+{\S\S4--6 (definition; rank-$N$ case; genus-1 special case).}
+{The foundational paper defining Hitchin systems. \textbf{What it
+gives us:} the rigorous identification of our commuting triple
+$(H_x, Y, R)$ from Track 3 as a Hitchin system on a punctured
+genus-0 base with rank-3 spectral cover (which IS our $\Sigma_Y$
+with $b_1 = 2$). \textbf{What to extract:} \S6 the genus-1 case;
+the symplectic structure that the Hollands--Neitzke abelianisation
+preserves.}
+{P2}{SoftGold}
+
+\bibentry{Hitchin. \textit{The self-duality equations on a Riemann
+surface}. Proc. London Math. Soc. 55 (1987) 59--126.}
+{\S\S5--6 (rank-$N$ moduli space; the integrable hierarchy).}
+{Companion paper to Duke 1987; constructs the full Hitchin moduli
+space. \textbf{What it gives us:} the moduli-space perspective on
+why our two-parameter open content sits in a 6-dimensional U(3)
+chamber. \textbf{What to extract:} the parameter count for the
+rank-3 / genus-1 Hitchin moduli (matches Phase III's 6-after-gauge
+count of $D$).}
+{P3}{SoftGreen}
+
+% ===========================================================================
+\section{Cluster coordinates (Fock--Goncharov, Allegretti)}
+
+\bibentry{Fock, Goncharov. \textit{Cluster ensembles, quantization and
+the dilogarithm}. arXiv:math/0311149 (2003). Ann. Sci. \'EN.S.
+42 (2009) 865.}
+{\S\S2--3 (cluster ensembles; $X$- and $A$-coordinates).}
+{The general framework of cluster ensembles. \textbf{What it gives
+us:} the rigorous structure that contains Iwaki--Nakanishi as a
+special case; the duality between Voros symbols (X-coordinates)
+and shear coordinates (A-coordinates). \textbf{What to extract:}
+the mutation rules and the dilogarithm identities that constrain
+the cluster product.}
+{P2}{SoftGold}
+
+\bibentry{Allegretti. \textit{Voros symbols as cluster coordinates}.
+arXiv:1810.09433 (2018). Int. Math. Res. Not. (2019).}
+{Throughout; especially the cluster-coordinate identification.}
+{Explicit identification of WKB Voros symbols with Fock--Goncharov
+cluster coordinates. \textbf{What it gives us:} the bridge that
+makes Iwaki--Nakanishi rigorous; the proof that the cluster
+$Y$-variable equals $\exp(\oint \sqrt Q\, \dd u)$ along the
+appropriate cycle. \textbf{What to extract:} the precise dictionary
+between WKB and cluster vocabulary for our genus-1 case.}
+{P1}{SoftBlue}
+
+% ===========================================================================
+\section{Special functions and reference handbooks}
+
+\bibentry{Olver, Lozier, Boisvert, Clark (eds.). \textit{NIST Digital
+Library of Mathematical Functions}. \href{https://dlmf.nist.gov}{dlmf.nist.gov},
+ongoing. Companion: Abramowitz \& Stegun, \textit{Handbook of
+Mathematical Functions} (1964), Ch. 9--10.}
+{Ch. 9--10 (modified Bessel functions); Ch. 5--6 ($\Gamma$ and related
+functions).}
+{Reference for the modified Bessel functions $I_\nu, K_\nu$ at
+$\nu = 1/3$ needed for the AKT block, and for the $\Gamma$-function
+identities used throughout. \textbf{What it gives us:} numerical
+values, asymptotic expansions, Wronskian relations.
+\textbf{What to extract:} the Wronskian
+$I_\nu K'_\nu - I'_\nu K_\nu = -1/z$ (DLMF 10.28.2) which fixes the
+unitary normalisation of the AKT block.}
+{P3}{SoftGreen}
+
+% ===========================================================================
+\newpage
+\section*{Reading roadmap (5 passes)}
+\addcontentsline{toc}{section}{Reading roadmap (5 passes)}
+
+\infobox{SoftGold}{The references above are organised by framework. The
+order below is the recommended \emph{reading} order, driven by which
+Phase II/III gap each pass closes. For each item the annotation tells
+you exactly what to extract --- this is not an open-ended read.}
+
+\subsection*{Pass 1 -- Route A gap fix (\textbf{1--2 days})}
+
+\textbf{Goal.} Extract the ω-pair side-tracking convention that fixes
+the Phase III Route A prototype's catastrophic overflow
+(residual $10^{23}$ to $10^{193}$ from naive
+$I + \mu E_{ij}$ insertions with $|\mu| \sim e^{50}$).
+
+\textbf{Read.}
+\begin{itemize}
+ \item Hollands--Neitzke arXiv:1906.04271 \S\S5--6 (the genus-1
+ chamber-structure proof for $T_3$, matching our $\Sigma_Y$ with
+ $b_1 = 2$).
+ \item Gaiotto--Moore--Neitzke arXiv:1204.4824 \S5 (the
+ $K_\pm(\gamma)$ pair definition) and \S10.3 (the ordered chamber
+ product).
+\end{itemize}
+
+\textbf{Extract.} The exact algebraic identity
+$K_-(\gamma) \cdot \Phi_{\mathrm{mid}} \cdot K_+(\gamma) =
+N_X^{\mathrm{proper}}$ for an inner ω-pair, where
+$N_X^{\mathrm{proper}}$ is the Joye--Kunz--Pfister Stokes-phased block.
+This is the load-bearing identity for Route A's expected closed form
+$U_{HN} = \Phi_R \cdot N_B^{\mathrm{proper}} \cdot \Phi_{AB} \cdot
+N_A^{\mathrm{proper}} \cdot \Phi_L$.
+
+\subsection*{Pass 2 -- Route B gap fix (\textbf{2--3 days})}
+
+\textbf{Goal.} Extract the log-space cluster-mutation product and the
+finite-$b$ Faddeev kernel that would fix Phase II Route B's Voros-$Y$
+overflow.
+
+\textbf{Read.}
+\begin{itemize}
+ \item Iwaki--Nakanishi arXiv:1401.7094 \S\S3--4 (the mutation rule and
+ the cluster product).
+ \item Faddeev Lett. Math. Phys. 34 (1995) eq. (5) and \S2 (the
+ $\Phi_b$ definition and five-term relation).
+\end{itemize}
+
+\textbf{Extract.} The explicit mutation formula
+$\mu_k(Y_j) = Y_j (1 + Y_k^{\mp 1})^{B_{jk}}$ with the $\Phi_b$
+contribution per mutation; the convention for finite $b$ at our
+$\epsilon = 1$ semiclassical limit. (Route B was not implemented in
+Phase III but is architecturally sufficient if the Phase II
+combinatorics is corrected.)
+
+\subsection*{Pass 3 -- Route C gap fix (\textbf{2--3 days})}
+
+\textbf{Goal.} Extract the correct inter-window Voros symbol (sheet
+selection) and the Bessel-index-$1/3$ connection block. The Phase III
+Route C prototype used a heuristic $\sin(\arg V)$ for the mixing
+magnitude and integrated on the wrong sheet
+($V_{\mathrm{new}} = 2 V_{\mathrm{old}}$ across all samples).
+
+\textbf{Read.}
+\begin{itemize}
+ \item AKT review (Kyoto / RIMS lecture notes) \S\S4--5.
+ \item Delabaere--Dillinger--Pham Ann. Inst. Fourier 43 (1993)
+ \S III (the discontinuity formula).
+\end{itemize}
+
+\textbf{Extract.} The Wronskian-normalised Bessel block at index
+$\nu = 1/3$ and argument $2 |V| / 3$; the precise sheet on which
+$V_{AB}$ must be integrated (almost certainly the spectator sheet on
+which the two windows ``join,'' not the exterior sheet $\lambda_0$
+the Phase III prototype used).
+
+\subsection*{Pass 4 -- Context for write-up (\textbf{1 day})}
+
+\textbf{Goal.} Frame the eventual result in the established LZ
+literature.
+
+\textbf{Read.}
+\begin{itemize}
+ \item Brundobler--Elser J. Phys. A 26 (1993) 1211.
+ \item Joye--Kunz--Pfister Ann. IHP 54 (1991).
+ \item Berry Proc. R. Soc. A 429 (1990) 61.
+\end{itemize}
+
+\textbf{Extract.} The standard convention for the LZ Stokes phase
+sign; the matching condition across the Stokes lines (for the
+physical interpretation in the final brief).
+
+\subsection*{Pass 5 -- Depth (\textbf{ongoing})}
+
+\textbf{Goal.} Ensure rigorous embedding of the result in the
+cluster/Hitchin framework for the eventual paper.
+
+\textbf{Read.}
+\begin{itemize}
+ \item Allegretti arXiv:1810.09433 (Voros--cluster dictionary).
+ \item Fock--Goncharov arXiv:math/0311149 (cluster ensembles).
+ \item Hitchin Duke Math. J. 54 (1987) 91 (foundational).
+\end{itemize}
+
+\textbf{Extract.} The mapping between our Type-1 $N=3$ system and
+the standard Hitchin moduli; the parameter count
+(6-after-gauge $\mathrm U(3)$) as a Hitchin-moduli statement.
+
+\vspace{0.5em}
+
+\infobox{SoftBlue}{\textbf{Total Phase III literature budget:} ~10 days
+of focused reading. Pass 1 alone (~2 days) should suffice to unblock
+Route A's ω-pair implementation. Passes 2--3 are insurance against
+Route A failure. Passes 4--5 are write-up depth.}
+
+\section*{Cross-reference index}
+
+For navigation, here is the mapping between Phase II/III gaps and the
+references that close them:
+
+\begin{center}\small
+\begin{tabular}{p{0.30\linewidth} p{0.30\linewidth} p{0.32\linewidth}}
+\toprule
+Gap & Primary reference & Secondary \\
+\midrule
+Route A ω-pair side-tracking & Hollands--Neitzke 1906.04271 \S\S5--6 & GMN 1204.4824 \S5 \\
+Route A genus-1 collapse to $N^{\mathrm{proper}}$ & Hollands--Neitzke 1402.1131 \S4.4 & --- \\
+Route B log-space mutation & Iwaki--Nakanishi 1401.7094 \S3 & Faddeev LMP 34 (1995) \\
+Route B finite-$b$ Faddeev kernel & Faddeev LMP 34 (1995) & Faddeev--Kashaev MPL A 9 \\
+Route C Bessel block normalisation & AKT review \S5 & DLMF 10.28 \\
+Route C inter-window $V_{AB}$ sheet & AKT review \S4 & DDP 1993 \\
+Stokes phase $\varphi_S(\delta)$ & Joye--Kunz--Pfister 1991 & Berry 1990 \\
+BE extreme-survival formula & Brundobler--Elser 1993 & --- \\
+Integrability / commuting triple & Sinitsyn--Chernyak NJP 19 (2017) & Sinitsyn 2002 \\
+Cluster coordinates & Allegretti 2018 & Fock--Goncharov 2003 \\
+Hitchin moduli context & Hitchin Duke 1987 & Hitchin LMS 1987 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Project context references (already shipped)}
+
+For self-consistency, the Phase II/III status is documented in:
+
+\begin{itemize}
+ \item \texttt{window\_period\_BE\_open\_problem\_brief.pdf} ---
+ the original open-problem statement.
+ \item \texttt{six\_track\_synthesis\_brief.pdf} --- Phase I synthesis
+ (Tracks 1--6).
+ \item \texttt{phase2\_findings\_brief.pdf} (11 pages) --- the
+ three-route Phase II programme and validation failure analysis.
+ \item \texttt{phase3\_status\_addendum.pdf} (4 pages) --- the
+ Phase III Route D negative finding (U(3) richness intrinsic).
+ \item \texttt{notes/track\{1..6\}\_*.pdf} --- per-track Phase I notes.
+\end{itemize}
+
+\vspace{0.5em}
+
+\noindent\hfill\textcolor{MutedText}{\emph{End of curated bibliography.
+Total references: 18 across 9 frameworks. Primary reading: 4 P1
+references covering Routes A and C plus the Stokes-phase foundation.}}\hfill\null
+
+\end{document}

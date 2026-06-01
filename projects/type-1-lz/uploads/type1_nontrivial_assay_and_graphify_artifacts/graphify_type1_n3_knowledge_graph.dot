@@ -1,0 +1,202 @@
+digraph G {
+  graph [rankdir=LR, overlap=false, splines=true, bgcolor="white", fontsize=18, fontname="Helvetica"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, color="#4E5A66", penwidth=1.0];
+  edge [fontname="Helvetica", fontsize=8, color="#667788", arrowsize=0.7];
+  subgraph cluster_baseline_ode {
+    label="Baseline ODE and Type-1 data"; style="rounded,filled"; color="#C9D7E4"; fillcolor="#EEF4FA";
+    "params" [label="Type-1 parameters {epsilon,gamma,a}\n[input; baseline]", fillcolor="#FFFFFF"];
+    "p" [label="p(lambda)=prod(lambda-epsilon)\n[polynomial; baseline]", fillcolor="#FFFFFF"];
+    "n" [label="n(lambda)=sum gamma^2 prod(lambda-eps)\n[polynomial; baseline]", fillcolor="#FFFFFF"];
+    "m" [label="m_H(lambda)=sum a gamma^2 prod(lambda-eps)\n[polynomial; member-dependent]", fillcolor="#FFFFFF"];
+    "q" [label="q_u(lambda)=u p(lambda)-n(lambda)\n[spectral polynomial; baseline]", fillcolor="#FFFFFF"];
+    "lambda_roots" [label="lambda_i(u)\n[sheets; baseline]", fillcolor="#FFFFFF"];
+    "E" [label="E_i=m(lambda_i)/p(lambda_i)\n[energies; baseline]", fillcolor="#FFFFFF"];
+    "Gamma" [label="Gamma_i=delta_i/sqrt(Sigma_i^(2))\n[normalization; baseline]", fillcolor="#FFFFFF"];
+    "Sij" [label="S_ij=Gamma_i Gamma_j/(lambda_i-lambda_j)\n[transport connection; baseline]", fillcolor="#FFFFFF"];
+    "ad_ode" [label="Gauged adiabatic ODE\n[dynamics; baseline]", fillcolor="#FFFFFF"];
+    "P" [label="Transition matrix P_{x->j}=|f_j(+infty)|^2\n[observable; baseline]", fillcolor="#FFFFFF"];
+    "Hmat" [label="Type-1 matrix H(u)\n[matrix realization; baseline]", fillcolor="#FFFFFF"];
+    "compact_ode" [label="Compact quotient-ring ODE\n[dynamics; formalized]", fillcolor="#FFFFFF"];
+    "flat_solution" [label="E=0 flat solution\n[solution; baseline]", fillcolor="#FFFFFF"];
+    "kappaS" [label="kappa_S=-Res(p,n)\n[normalization; formalized]", fillcolor="#FFFFFF"];
+  }
+  subgraph cluster_quotient {
+    label="Quotient-ring reduction"; style="rounded,filled"; color="#C9D7E4"; fillcolor="#F3F0FA";
+    "quotient" [label="E_u=C[lambda]/(q_u)\n[quotient-ring bundle; formalized]", fillcolor="#FFFFFF"];
+    "su" [label="s_u inverse of p mod q_u\n[quotient-ring object; formalized]", fillcolor="#FFFFFF"];
+    "Rcarrier" [label="Reduced carrier [R]\n[state representation; formalized]", fillcolor="#FFFFFF"];
+  }
+  subgraph cluster_operators {
+    label="Commuting operators"; style="rounded,filled"; color="#C9D7E4"; fillcolor="#F7F3E8";
+    "Hx" [label="H_x multiplication by red((m-E_x p)s_u)\n[operator; formalized]", fillcolor="#FFFFFF"];
+    "Yop" [label="Y multiplication by Q4 L_H^2/p^2\n[operator; formalized]", fillcolor="#FFFFFF"];
+    "Rop" [label="R multiplication by W4/L_H^4\n[operator; formalized]", fillcolor="#FFFFFF"];
+    "commuting_triple" [label="Commuting triple (H_x,Y,R)\n[operator system; formalized]", fillcolor="#FFFFFF"];
+    "projectors" [label="Spectral projectors Pi_alpha\n[operator; formalized]", fillcolor="#FFFFFF"];
+  }
+  subgraph cluster_frames {
+    label="Frames and reconstruction"; style="rounded,filled"; color="#C9D7E4"; fillcolor="#EEF8F0";
+    "cauchy_frame" [label="Cauchy/pole frame V_iα\n[frame; baseline]", fillcolor="#FFFFFF"];
+    "halfform" [label="Half-form amplitude vector Psi\n[frame/section; formalized]", fillcolor="#FFFFFF"];
+  }
+  subgraph cluster_geometry {
+    label="Covers and coordinates"; style="rounded,filled"; color="#C9D7E4"; fillcolor="#F4F7FA";
+    "pair_spaces" [label="Pair spaces (u,Delta),(u,S),(Delta,S)\n[geometry; formalized]", fillcolor="#FFFFFF"];
+    "gxi" [label="Complementary quadratic g_xi(z)\n[algebraic object; formalized]", fillcolor="#FFFFFF"];
+    "Q4" [label="Q4=Disc_z g_lambda\n[quartic; formalized]", fillcolor="#FFFFFF"];
+    "LH" [label="L_H(lambda)\n[linear factor; formalized]", fillcolor="#FFFFFF"];
+    "W4" [label="W4=n p_prime - n_prime p\n[quartic; formalized]", fillcolor="#FFFFFF"];
+    "ycoord" [label="y=Q4 L_H^2 / p^2\n[coordinate; formalized]", fillcolor="#FFFFFF"];
+    "rcoord" [label="r=W4/L_H^4\n[coordinate; formalized]", fillcolor="#FFFFFF"];
+    "Sminus2" [label="S^{-2}=Q4^2 W4/(kappa_S p^4)\n[coordinate; formalized]", fillcolor="#FFFFFF"];
+    "SigmaY" [label="Sigma_Y phase curve\n[curve; formalized]", fillcolor="#FFFFFF"];
+    "SigmaR" [label="Sigma_R transport curve\n[curve; formalized]", fillcolor="#FFFFFF"];
+    "Ccover" [label="Common cover C=Sigma_Y x_u Sigma_R\n[cover; formalized]", fillcolor="#FFFFFF"];
+    "Chat" [label="Spinor cover Chat, rho^2=kappa_S/r\n[cover; formalized]", fillcolor="#FFFFFF"];
+    "omega" [label="omega=sqrt(y) du\n[one-form; formalized]", fillcolor="#FFFFFF"];
+    "eta" [label="eta=S du=rho du/y\n[one-form; formalized]", fillcolor="#FFFFFF"];
+    "CR" [label="Transport discriminant C_R=u(W4=0)\n[ramification locus; formalized]", fillcolor="#FFFFFF"];
+  }
+  subgraph cluster_gap {
+    label="Gap algebra and ordinary sector"; style="rounded,filled"; color="#C9D7E4"; fillcolor="#FFF5E5";
+    "Ainv" [label="A invariant\n[invariant; formalized]", fillcolor="#FFFFFF"];
+    "Ddisc" [label="D discriminant\n[invariant; formalized]", fillcolor="#FFFFFF"];
+    "gap_cubic" [label="Gap cubic y^3-2Ay^2+A^2y-D=0\n[algebraic curve; formalized]", fillcolor="#FFFFFF"];
+    "gap_sextic" [label="Gap sextic Delta^6-2A Delta^4 + A^2 Delta^2 - D=0\n[algebraic relation; formalized]", fillcolor="#FFFFFF"];
+    "resolvent" [label="Resolvent M^3-3AM+B=0\n[algebraic curve; formalized]", fillcolor="#FFFFFF"];
+    "ordinary_sector" [label="Ordinary pairwise WKB sector\n[exact-WKB sector; partly solved]", fillcolor="#FFFFFF"];
+  }
+  subgraph cluster_theorems {
+    label="Theorems"; style="rounded,filled"; color="#C9D7E4"; fillcolor="#EAF7F7";
+    "gluing" [label="Canonical gluing theorem\n[theorem; proved]", fillcolor="#EEF8F0"];
+    "torus_theorem" [label="Exact two-sheet torus theorem\n[theorem; proved in notes]", fillcolor="#EEF8F0"];
+    "global_insertion" [label="Exact global selector insertion rule\n[theorem; proved in notes]", fillcolor="#EEF8F0"];
+  }
+  subgraph cluster_selectors {
+    label="Selectors"; style="rounded,filled"; color="#C9D7E4"; fillcolor="#FCEEEE";
+    "selector_criterion" [label="Selector criterion: W4 ramification + phase resonance\n[criterion; formalized]", fillcolor="#FFFFFF"];
+    "local_airy" [label="Local Airy/Langer model\n[local model; formalized]", fillcolor="#FFFFFF"];
+    "phase_recurrence" [label="Lagrange-Buermann phase recurrence\n[recurrence; proved in notes]", fillcolor="#EEF8F0"];
+    "selector_multiplier" [label="Scalar selector multiplier s_BS\n[local multiplier; proved in notes]", fillcolor="#EEF8F0"];
+    "selector_block" [label="Embedded selector block J_v\n[local block; proved in notes]", fillcolor="#EEF8F0"];
+  }
+  subgraph cluster_functor {
+    label="Continuation functor/product"; style="rounded,filled"; color="#C9D7E4"; fillcolor="#F5F7FA";
+    "continuation_functor" [label="Continuation functor\n[functor; partly formalized]", fillcolor="#FFFFFF"];
+    "Q4_window" [label="Projected conjugate-pair Q4 window W_X\n[window object; target]", fillcolor="#FFF8E8"];
+    "Med" [label="Median Med(T+,T-)\n[operation; target]", fillcolor="#FFF8E8"];
+    "edge_D" [label="Edge propagators D_e\n[propagator; target]", fillcolor="#FFF8E8"];
+    "Pi_plus" [label="Endpoint permutation Pi_+\n[permutation; validated]", fillcolor="#EEF8F0"];
+    "Pi_minus" [label="Endpoint permutation Pi_-\n[permutation; validated]", fillcolor="#EEF8F0"];
+    "crossing_LH" [label="Exact L_H=0 crossing\n[marker; regular]", fillcolor="#FFFFFF"];
+  }
+  subgraph cluster_falsified {
+    label="Falsified collapses"; style="rounded,filled"; color="#C9D7E4"; fillcolor="#FFF0F0";
+    "wrong_point_Airy" [label="Point-local embedded Q4 Airy collapse\n[false ansatz; falsified]", fillcolor="#FCEEEE"];
+    "wrong_Bc" [label="Nontrivial point B_c crossing block\n[false ansatz; falsified]", fillcolor="#FCEEEE"];
+  }
+  subgraph cluster_assays {
+    label="Assays and roadmap"; style="rounded,filled"; color="#C9D7E4"; fillcolor="#F0F6FF";
+    "segmented_assay" [label="520 segmented product assay\n[assay; validated bookkeeping only]", fillcolor="#EEF8F0"];
+    "zero_audit" [label="Zero-entry audit\n[assay; falsification support]", fillcolor="#FFFFFF"];
+    "crossing_shrink" [label="Crossing shrink diagnostic\n[assay; validated regularity]", fillcolor="#EEF8F0"];
+    "Level1" [label="Level 1 independent segment ODE assay\n[assay plan; proposed]", fillcolor="#FFF8E8"];
+    "Level2" [label="Level 2 lateral/median window assay\n[assay plan; proposed]", fillcolor="#FFF8E8"];
+    "Level3" [label="Level 3 analytic/semi-analytic window assay\n[assay plan; proposed]", fillcolor="#FFF8E8"];
+  }
+  subgraph cluster_artifacts {
+    label="Artifacts"; style="rounded,filled"; color="#C9D7E4"; fillcolor="#F7F7F7";
+    "GraphifyKG" [label="Graphify knowledge graph\n[artifact; created]", fillcolor="#FFFFFF"];
+  }
+  "params" -> "p" [label="defines"];
+  "params" -> "n" [label="defines"];
+  "params" -> "m" [label="defines"];
+  "p" -> "q" [label="enters"];
+  "n" -> "q" [label="enters"];
+  "q" -> "lambda_roots" [label="has roots"];
+  "lambda_roots" -> "E" [label="evaluates"];
+  "lambda_roots" -> "Gamma" [label="normalizes"];
+  "Gamma" -> "Sij" [label="defines"];
+  "lambda_roots" -> "Sij" [label="defines"];
+  "E" -> "ad_ode" [label="enters"];
+  "Sij" -> "ad_ode" [label="enters"];
+  "ad_ode" -> "P" [label="outputs"];
+  "params" -> "Hmat" [label="defines"];
+  "Hmat" -> "E" [label="has eigenvalues"];
+  "q" -> "quotient" [label="defines"];
+  "p" -> "su" [label="inverted in"];
+  "su" -> "Hx" [label="enters"];
+  "m" -> "Hx" [label="enters"];
+  "Hx" -> "compact_ode" [label="generates"];
+  "compact_ode" -> "Rcarrier" [label="evolves"];
+  "Rcarrier" -> "ad_ode" [label="reconstructs"];
+  "Rcarrier" -> "halfform" [label="reconstructs"];
+  "cauchy_frame" -> "flat_solution" [label="gives"];
+  "pair_spaces" -> "ycoord" [label="sign-invariant"];
+  "pair_spaces" -> "rcoord" [label="sign-invariant"];
+  "gap_cubic" -> "SigmaY" [label="defines"];
+  "gap_sextic" -> "ordinary_sector" [label="simplifies"];
+  "resolvent" -> "ordinary_sector" [label="parametrizes"];
+  "gxi" -> "Q4" [label="discriminant"];
+  "Q4" -> "ycoord" [label="enters"];
+  "LH" -> "ycoord" [label="enters"];
+  "W4" -> "rcoord" [label="enters"];
+  "Q4" -> "Sminus2" [label="enters"];
+  "W4" -> "Sminus2" [label="enters"];
+  "kappaS" -> "Sminus2" [label="normalizes"];
+  "ycoord" -> "SigmaY" [label="spectral coordinate"];
+  "rcoord" -> "SigmaR" [label="spectral coordinate"];
+  "SigmaY" -> "Ccover" [label="factor"];
+  "SigmaR" -> "Ccover" [label="factor"];
+  "Ccover" -> "Chat" [label="lifts to"];
+  "Chat" -> "omega" [label="carries"];
+  "Chat" -> "eta" [label="carries"];
+  "Chat" -> "halfform" [label="supports"];
+  "Yop" -> "commuting_triple" [label="member"];
+  "Rop" -> "commuting_triple" [label="member"];
+  "Hx" -> "commuting_triple" [label="member"];
+  "Yop" -> "SigmaY" [label="spectrum"];
+  "Rop" -> "SigmaR" [label="spectrum"];
+  "commuting_triple" -> "projectors" [label="diagonalized by"];
+  "projectors" -> "gluing" [label="prove"];
+  "W4" -> "CR" [label="zeros map to"];
+  "CR" -> "selector_criterion" [label="candidate locus"];
+  "omega" -> "selector_criterion" [label="phase mismatch"];
+  "selector_criterion" -> "local_airy" [label="activates"];
+  "local_airy" -> "torus_theorem" [label="normalizes"];
+  "torus_theorem" -> "phase_recurrence" [label="enables"];
+  "torus_theorem" -> "selector_multiplier" [label="scalarizes"];
+  "selector_multiplier" -> "selector_block" [label="defines"];
+  "selector_block" -> "global_insertion" [label="inserted by"];
+  "global_insertion" -> "continuation_functor" [label="completes selectors"];
+  "Q4" -> "Q4_window" [label="controls"];
+  "Med" -> "Q4_window" [label="constructs target"];
+  "edge_D" -> "continuation_functor" [label="edge labels"];
+  "Q4_window" -> "continuation_functor" [label="ordinary window labels"];
+  "selector_block" -> "continuation_functor" [label="selector labels"];
+  "Pi_plus" -> "P" [label="label conversion"];
+  "Pi_minus" -> "P" [label="label conversion"];
+  "LH" -> "crossing_LH" [label="zero defines"];
+  "crossing_LH" -> "edge_D" [label="absorbed into"];
+  "wrong_Bc" -> "crossing_shrink" [label="falsified by"];
+  "wrong_point_Airy" -> "zero_audit" [label="falsified by"];
+  "segmented_assay" -> "Pi_plus" [label="validated"];
+  "segmented_assay" -> "edge_D" [label="bookkeeping"];
+  "segmented_assay" -> "Q4_window" [label="not independently constructed"];
+  "zero_audit" -> "Q4_window" [label="requires full 3x3"];
+  "Level1" -> "edge_D" [label="tests"];
+  "Level1" -> "Q4_window" [label="tests via independent IVP"];
+  "Level2" -> "Med" [label="tests"];
+  "Level2" -> "Q4_window" [label="constructs"];
+  "Level3" -> "Q4_window" [label="analytic target"];
+  "Level3" -> "continuation_functor" [label="would validate nontrivially"];
+  "GraphifyKG" -> "continuation_functor" [label="documents"];
+  "GraphifyKG" -> "gluing" [label="documents"];
+  "GraphifyKG" -> "Q4_window" [label="documents"];
+  "Q4_window" -> "wrong_point_Airy" [label="not equal to"];
+  "crossing_LH" -> "wrong_Bc" [label="not equal to"];
+  "Level2" -> "Level3" [label="feeds"];
+  "selector_criterion" -> "selector_block" [label="if active inserts"];
+  "ordinary_sector" -> "Q4_window" [label="ordinary turning data"];
+  "global_insertion" -> "Q4_window" [label="does not solve"];
+}
