@@ -114,6 +114,16 @@ The literature points to a different top strategy: the **KZ/Gaudin monodromy rou
 targets a closed amplitude in {γ,ε,a} + a handful of monodromy/period integrals directly. See
 strategy memo `paper/type1_lz_strategy_memo.tex`.
 
+## Theory-building: autonomous research program drafted — 2026-06-01
+`paper/RESEARCH_PROGRAM.md` (the plan) + `paper/type1_lz_working_paper.tex` (living paper, DRAFT,
+not finalized until physics-reflection passes). Unifying principle: P = |Stokes/connection data of a
+rank-2 irregular connection on the genus-0 rational spectral curve marked by {eps_i}, irregular inf,
+and the exact-crossing node|^2; Abelian ring fixes elementary exponents (BE), non-Abelian connection
+coefficient = the confluent-Heun/Kampe de Feriet prefactor. Six workstreams WS-A..F with pass/fail
+gates, skill routing, dependency map, coordination protocol (log=shared state; reflection gates;
+tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
+(factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
+
 ## Gate-test #1 (genus of spectral curve) — function class CORRECTED — 2026-06-01
 Full result: `paper/gate_test_genus.md`. Ran the review's decisive test; it OVERTURNS the review's
 own A4 elliptic-refutation (in the constructive direction).
