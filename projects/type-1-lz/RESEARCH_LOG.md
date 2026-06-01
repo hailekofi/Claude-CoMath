@@ -144,6 +144,45 @@ DECISIVE TEST + AUDIT:
   (slope-middle, NOT eps-index-1 in general); energy ordering is NOT a labeling convention.
   Retracted the earlier 'P_2->2 by energy rank' framing as a red herring.
 
+## WS-CAP completed — CAPSTONE VERDICT: RANK-3 (WS-PV confirmed; WS-PA1 'PV' refuted) — 2026-06-01
+Deliverables paper/cap_connection_formula.md, experiments/cap_connection_formula.py. The capstone
+DECISIVELY settles the one open structural dispute. (Reverses my prior lean toward WS-PA1's 'PV'.)
+- **VERDICT: the published rank-2 Painleve-V / Lisovyy connection constant does NOT compute the
+  generic Type-1 N=3 P_2->2.** It fails at the SIZE/RANK of the monodromy manifold, not a missing calc.
+- T1 [analytic, lit-grounded]: the 3x3 rank-2 irregular point has a 6-DIM wild character variety vs
+  PV's 2-DIM (PVI cubic surface -> PV by confluence). 6>2: the rank-2 formula has too few parameters.
+- T2 [analytic]: closes WS-PA1's 'PV via Harnad/middle-convolution' escape -- the three GENERIC
+  distinct irregular rates {a_i} (no {+L,-L,0} symmetry) can't be the single-middle-convolution image
+  of a 2x2 PV's two rates. Directly refutes PA-1.
+- T3 [exact]: formal exponents = signed-BE traceless SL(3) PAIR c_i (Sum=0), not PV's single theta_inf.
+- T4 [exact]: accessory v_*=E_* rational (PA-2 favourable, CONFIRMED) -> P_2->2 is a SPECIFIC named
+  constant, but a RANK-3 one.
+- **T5 [gold-gated, DECISIVE]:** on 7/14 strata P_2->2 lies STRICTLY OUTSIDE the widest single-sigma
+  (rank-2/PV) Stuckelberg band. sampleB P_2->2=0.02101769 (gold, err 1.5e-8; matches our oracle
+  0.021018) vs band [0.8327,0.8800], margin +0.81. No single rank-2 connection constant reproduces it
+  -> a third coherent amplitude (the two shears' non-commutative composition through the shared mid
+  sheet) is required = genuine RANK-3.
+- T6 [gold-gated, positive control]: decoupling locus (gamma_hi->0) -> 2x2, P_2->2->0.221360
+  (elementary), band tightens around it -> PV applies EXACTLY at the elementary corner only.
+- **Corroboration (coordinator, independent):** P_2->2 depends on the SHAPE chi beyond the two BE
+  window actions (WS-NUM separation finding) -> more data than the formal/window exponents -> >rank-2
+  [a direct rank-3 signature; coordinator re-check running].
+- **EXPLICIT NAMED OBJECT:** P_2->2 = |C_{mm}|^2 of the rank-3 isomonodromy problem (one Poincare-
+  rank-2 irregular point with known formal exponents c_i; one apparent {0,1,3} point at the algebraic
+  node v_*=E_*) -- a c=1-family / confluent-Garnier (9/2-type) connection constant, ABOVE 2F1 and
+  ABOVE the rank-2 PV transcendent, UNPUBLISHED in closed form; reduces to the published PV/Barnes-G
+  constant ONLY on the decoupling (elementary) locus.
+- **Simplification hope (partial):** the two shears are individually 2x2 (Weber/Gamma), but their
+  composition is genuinely non-commutative through the shared mid sheet; the joint constant does NOT
+  collapse to a single PV/Barnes-G value on the overlapping stratum.
+- Honesty (agent): T1/T2 are [analytic] (standard dim count + leading-rate argument; lit-grounded, not
+  machine-proved); the DECISIVE tier is T5's gold-gated falsification (airtight). PA-2 (algebraic)
+  STANDS; only PA-1's 'PV type' overturned -> RANK-3.
+- **NET (deliverable achieved):** the open quantity is a SPECIFIC, NAMED, algebraically-pinned,
+  computable RANK-3 (confluent-Garnier/c=1) connection constant -- a genuinely NEW object, not the
+  published PV. Even sharper than 'it's published PV': Type-1 N=3 realizes a minimal rank-3 connection
+  constant. The governing theory + computable model stand.
+
 ## WS-PA1 completed — PA-0/1/2 — PA-2 VERDICT: ALGEBRAIC (the make-or-break pivot) — 2026-06-01
 Deliverable paper/pa1_isomonodromy_foundation.md; coordinator verification experiments/pa2_accessory_algebraic.py.
 - **PA-0 [established; R8 TODO CLOSED — 3rd independent confirmation]:** cyclic-vector elimination
