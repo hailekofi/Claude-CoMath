@@ -2,8 +2,9 @@
 Co-scaling derivation for the Type-1 N=3 crossing geometry (supports the WS-D obstruction).
 
 Establishes:
-  (L)  WIDTH LEMMA [established, exact]:  w_ij = 2|g_i g_j|/|e_i-e_j|  (slope-INDEPENDENT),
-       and the LZ exponent  Gamma_ij = (w_ij/2)^2 |a_i-a_j|.
+  (L)  WIDTH LEMMA [established, exact]:  w_ij = 2|g_i g_j|/|e_i-e_j|  (slope-INDEPENDENT).
+       w_ij is the primary width variable; the LZ exponent Gamma_ij keeps its established meaning
+       Gamma_ij = g_i^2 g_j^2 |a_i-a_j|/(e_i-e_j)^2 (used only for the genuine-LZ constraint).
   (S)  scale-invariance: sep/width is invariant under independent rescaling of g, e, a.
   (O)  OBSTRUCTION [analytic backbone + numerically-supported bound]: on the genuine-LZ locus
        (all Gamma_ij = O(1)) the closest pair of crossings is always within ~1.6 widths

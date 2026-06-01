@@ -15,11 +15,11 @@ gap `√((a_i−a_j)²(u−u_ij)² + 4V_ij²)` is within O(1) of its minimum `2|
 w_ij = 2|V_ij|/|a_i−a_j| = 2|γ_iγ_j(a_i−a_j)/(ε_i−ε_j)| / |a_i−a_j| = 2|γ_iγ_j| / |ε_i−ε_j|.
 ```
 The slope difference **cancels exactly** (symbolic, `coscaling.py`): the avoided-crossing width
-depends only on `(γ,ε)`. Moreover, with `Γ_ij = γ_i²γ_j²|a_i−a_j|/(ε_i−ε_j)²` (the BE/LZ exponent),
-```
-Γ_ij = (w_ij/2)² · |a_i−a_j|    ⟺    |a_i−a_j| = 4Γ_ij / w_ij².      [exact]
-```
-So the slopes enter the geometry *only* through the `Γ_ij`; the widths are fixed by `(γ,ε)` alone.
+`w_ij` depends only on `(γ,ε)`. By contrast the *adiabaticity* of each crossing — the established
+BE/LZ exponent `Γ_ij = γ_i²γ_j²|a_i−a_j|/(ε_i−ε_j)²`, the same `Γ_ij` that appears in the survival
+probabilities — carries the slope dependence (`∝ |a_i−a_j|`). So in Type-1 the **widths are
+slope-free** while the slopes control only the crossing *positions* and the LZ adiabaticity. (We use
+`w_ij` as the primary geometric variable throughout; `Γ_ij` keeps its established meaning only.)
 
 ## Scale-invariance — [analytic]
 `sep/width` is invariant under each independent rescaling `γ→λγ`, `ε→νε`, `a→μa` (verified):
@@ -41,8 +41,9 @@ Malikis–Cheianov configuration — *all three crossings simultaneously isolate
 
 ### Why the obvious escape fails (loophole closed)
 One *can* send a single crossing to infinity via the degenerate-slope limit `a_i→a_j` (`u_ij→∞`).
-But there `Γ_ij = (w_ij/2)²|a_i−a_j| → 0`: the runaway crossing becomes a **trivial diabatic
-pass-through**, not an MC 2-level event — and the *other two* crossings stay within ~1.6 widths
+But there the LZ exponent `Γ_ij = γ_i²γ_j²|a_i−a_j|/(ε_i−ε_j)² → 0` (as `a_i→a_j`): the runaway
+crossing becomes a **trivial diabatic pass-through**, not an MC 2-level event — and the *other two*
+crossings stay within ~1.6 widths
 (`min`-separation picks the close pair). So separating any crossing either makes it trivial or
 leaves a marginally-overlapping pair behind. The genuine-LZ bound is robust (and *tighter*, 1.6,
 than the unconstrained scan's 4.2, precisely because the high-ratio tail there had some `Γ_ij`

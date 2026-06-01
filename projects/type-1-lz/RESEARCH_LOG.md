@@ -128,7 +128,8 @@ tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduc
 `paper/coscaling_derivation.md` + `experiments/coscaling.py`. Done by coordinator (not delegated;
 the obstruction statement needed judgment).
 - **WIDTH LEMMA [established, exact, symbolic]:** w_ij = 2|γ_iγ_j|/|ε_i−ε_j| — avoided-crossing
-  width is SLOPE-INDEPENDENT (Δa cancels). And Γ_ij=(w_ij/2)²|a_i−a_j| ⟺ |a_i−a_j|=4Γ_ij/w_ij².
+  width is SLOPE-INDEPENDENT (Δa cancels). Primary variable = w_ij; Γ_ij keeps its established
+  meaning (BE/LZ exponent γ²γ²|Δa|/Δε²) — the slope-free width vs slope-carrying adiabaticity split.
 - **Scale-invariance [analytic]:** both separation and width ~ γ²/Δε (slope scale cancels) ⇒
   sep/width is a dimensionless shape function; no overall scaling grows it.
 - **THEOREM (corrected, sharp) [analytic backbone + num bound]:** on the genuine-LZ locus
