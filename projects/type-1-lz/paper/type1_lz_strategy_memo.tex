@@ -24,15 +24,23 @@ parameters $\{\gamma_i,\eps_i,a_i\}$ with \emph{no} numerical ODE integration an
 handful of geometric (Abelian) integrals --- and rank-order the available strategies against
 that bar. The two extreme-level survivals are already exact (Brundobler--Elser, realized as the
 imaginary window periods $I_X$); the open content is the middle-level survival $\Pmid$ and one
-independent off-diagonal. Our audit shows the project's local exact-WKB programme has, in the
-generic simple regime, \emph{already proved} selector sufficiency and the exact global insertion
-rule, leaving essentially one symbolic gap (the all-orders transport exponent $\Theta^{\rm tr}_v$).
-However, fleshing out $\Theta^{\rm tr}_v$ does \emph{not} by itself yield a practical amplitude:
-it returns one local factor as a power series requiring Borel resummation. We therefore rank the
-\textbf{KZ/Gaudin monodromy route} (Barik--Bakker--Gritsev--Yuzbashyan 2025) first, because it
-targets the amplitude \emph{directly} as connection data of a rational flat connection in
-$\{\gamma,\eps,a\}$. We give five ranked strategies, each with near-term targets and falsification
-tests, and a recommended two-week critical path.
+independent off-diagonal. \textbf{This revision (v2) incorporates the four primary sources, now
+read in full}; they sharpen both the ceiling and the route. The decisive finding is
+authoritative and sobering: Chernyak--Sinitsyn (arXiv:2006.15144), analysing \emph{exactly} our
+linear $3$-state class with its time-quadratic commuting partner, state that for nonzero
+middle-level energy $\eps_0\ne0$ ``there is likely no analytical solution of the general
+three-state LZ model''; and that the multistate generalisation of the Dykhne complex-turning-point
+formula --- which is precisely what our $Q_4$-window machinery \emph{is} --- ``has no general
+analog'' for $N=3$, with only ``limited progress'' on the subleading prefactor. That prefactor is
+exactly our missing $\Pmid$/off-diagonal. We therefore \textbf{re-rank}: the
+\textbf{zero-curvature / Lax path-deformation route} (Malikis--Cheianov, arXiv:2505.06048) is
+promoted to first, because it is the \emph{only} method among the four with demonstrated
+\emph{elementary} closed-form output (an exact factorisation $S=\prod S_{ij}$ of two-level
+S-matrices), and it cashes out the commuting-partner lever directly. The KZ/Gaudin route (BBGY,
+arXiv:2409.17053) is demoted: it is \emph{hyperbolic} ($\hat A+\hat B/t$) and its $N{=}3$ output is
+a two-variable Kamp\'e de F\'eriet function --- it tells us the \emph{transcendentality class} of
+the off-diagonal rather than delivering an elementary form. We give five ranked strategies with
+falsification tests, and an honest reset of the practicality bar.
 \end{abstract}
 
 \paragraph{Status legend / evidence ladder.}
@@ -114,8 +122,8 @@ Two facts should drive the attack.
 \item \textbf{Guaranteed exact crossing $\Rightarrow$ a regular singular point.} A commuting
   partner $H'$ (same $\gamma,\eps$; different slopes $a'$) shares the eigenvector geometry; the
   guaranteed level crossing is a degeneracy point whose \emph{local monodromy is computable}. In
-  the KZ/Gaudin picture (\S4.1) this is precisely a marked point of a rational flat connection
-  whose residues are built from $\{\gamma,\eps,a\}$.
+  the zero-curvature picture (S1) this is precisely a marked point at which the deformed path
+  reduces to a two-level LZ vertex with residues built from $\{\gamma,\eps,a\}$.
 \end{enumerate}
 \textbf{Caveat (falsified).} The lever must \emph{not} be cashed out as a product of two-level
 factors --- that is the falsified \texttt{integrability.py} route (the benchmark off-diagonals
@@ -123,64 +131,120 @@ imply a \emph{non-symmetric} $\Gam'$, so no partner slope can satisfy a two-Dykh
 only viable use is as a flat-connection / conserved-quantity \emph{constraint} system.
 
 %==============================================================
-\section{Ranked strategies}
+\section{Findings from the four primary sources (read in full)}
+%==============================================================
+The four papers form a coherent narrative that resets expectations.
+\begin{itemize}[nosep,leftmargin=1.4em]
+\item \textbf{Chernyak--Sinitsyn 2021 (arXiv:2006.15144) --- our exact model class.} Their
+  general $3$-state $H_3=\mathrm{diag}(b_1t,\eps,-b_2t)+\{g_{ij}\}$ \emph{is} Type-1; the
+  commuting partner is \textbf{time-quadratic} (their Eq.~20), the integrability condition is
+  $|g_{ij}|^2/(B_{ii}-B_{jj})=|\gamma_{ij}|^2$ conserved plus an ``area-conservation rule.''
+  \emph{Verdict:} integrability $\Rightarrow$ $P$ is invariant under a $\tau$-deformation but
+  ``\emph{generally does not lead to the possibility to write the scattering matrix in terms of
+  known special functions}''; for $\eps_0\ne0$ ``\emph{there is likely no analytical solution of
+  the general three-state LZ model}.'' Their working tool is the \textbf{Dykhne formula}
+  $P=\eta\,e^{-2\,\Im\!\int\Delta E\,dt}$ with complex turning points where eigenvalues coincide
+  (their Eqs.~41,46,47) --- \emph{this is exactly our $Q_4$-window construction}
+  ($\delta_X=|\Im I_X|/2\pi$). Crucially they state there is \textbf{``no general analog of the
+  Dykhne formula''} for $N{=}3$ and only ``limited progress'' on the prefactor $\eta$ and
+  subdominant exponents. \emph{That prefactor/subdominant content is precisely our missing
+  $\Pmid$ and off-diagonal.} They do give two exact handles: the $\eps_0=0$ slice is solvable
+  (confluent hypergeometric; $P_{2\to2}(\eps{=}0)=2e^{-\pi g^2/b}/(1+e^{-\pi g^2/b})$, their
+  Eq.~49) and the adiabatic limit is asymptotically exact via time-scale separation.
+\item \textbf{Malikis--Cheianov 2025 (arXiv:2505.06048) --- the elementary route.} A
+  \emph{zero-curvature} operator $\hat E$ ($\partial_\eps\hat H-\partial_t\hat E+i[\hat E,\hat H]=0$)
+  lets one \textbf{deform the path in the $(t,\eps)$ plane} keeping endpoints fixed, so the
+  S-matrix is path-independent. Deforming so that level crossings become \emph{well separated}
+  reduces the exact $S$ to a \textbf{product of two-level LZ S-matrices}, e.g.\ for the
+  $3$-level bow-tie $S_{BT}=S_{13}S_{23}$ (their Eqs.~28--29) --- \emph{elementary}. This is the
+  rigorous statement of \emph{when} an ``incoherent product'' becomes exact: when an $\hat E$
+  exists \emph{and} the path can be deformed to separate all crossings.
+\item \textbf{BBGY 2024 (arXiv:2409.17053) --- KZ, but hyperbolic.} Integrable
+  \emph{hyperbolic} LZ $\hat H=\hat A+\hat B/t\leftrightarrow$ KZ equations; the $N{=}3$ tunnelling
+  amplitudes are a \textbf{two-variable Kamp\'e de F\'eriet} function (App.~A.2), the $2\times2$
+  a Gauss hypergeometric. Not the linear model; tells us the \emph{expected transcendentality} of
+  the generic off-diagonal, not an elementary formula.
+\item \textbf{Lin--Sinitsyn 2013 (arXiv:1310.7245) --- the template.} Full $N{=}3$ LZ--Coulomb
+  matrix: entries out of the special (Coulomb) level are \emph{elementary/rational} in the LZ
+  factors, while transitions between the two ordinary diabatic levels are \emph{hypergeometric}
+  with multiple oscillations. Their closing line --- ``the simplicity of known exact results
+  \emph{does not directly follow from integrability}; there is an additional, yet unknown,
+  principle'' --- is the precise warning against expecting elementary $P$ from integrability alone.
+\end{itemize}
+
+\paragraph{Reset of the practicality bar (honest).} Two of the four papers, written by the
+architects of MLZ integrability and treating \emph{exactly} our model, indicate that a fully
+elementary closed form for generic ($\eps_0\ne0$) Type-1 $N{=}3$ \textbf{very likely does not
+exist} --- the missing $\Pmid$/off-diagonal is the \emph{multistate-Dykhne prefactor problem},
+open with ``limited progress'' for $\sim$two decades. The realistic, still-publishable target set
+is therefore: (a) the exact elementary entries (BE survivals + the ``out-of-special-level''
+elements, à la Lin--Sinitsyn Table~2); (b) the \emph{exact} $\eps_0=0$ slice; (c) the
+adiabatic-limit asymptotically-exact full $P$ (Dykhne + path deformation); and (d) --- the
+home run --- an \emph{exact} factorised $S$ \emph{iff} a zero-curvature $\hat E$ exists for Type-1
+and separates the crossings. The tournament below is re-ranked around this reset.
+
+%==============================================================
+\section{Ranked strategies (v2, post-reading)}
 %==============================================================
 Each strategy lists: idea; why it can meet the practicality bar; near-term target; falsification
 test (against the existing $10^{-9}$ harness).
 
-\subsection*{[S1 --- TOP] KZ / Gaudin monodromy route}
-\textbf{Idea.} Recognize $P$ as the $t\to\pm\infty$ connection (monodromy) matrix of the
-\emph{rational flat connection} underlying the integrable Type-1 family --- the
-Knizhnik--Zamolodchikov / Gaudin structure. Barik--Bakker--Gritsev--Yuzbashyan
-(arXiv:2409.17053, SciPost Phys.\ 18, 212 (2025)) solve integrable LZ for $N=2,3,4$ in exactly
-this language; our $H_0+uA$ is the same Cauchy/Gaudin data.\\
-\textbf{Practicality.} The connection has poles at $\{\eps_i\}$ with residues elementary in
-$\{\gamma,\eps,a\}$; the transition matrix is its monodromy, expressible through a \emph{handful}
-of period/connection integrals --- the target object class, no ODE matrizant.\\
-\textbf{Near-term target.} (i) Obtain/transcribe the BBGY $N=3$ construction; check whether their
-$\hat A+\hat B/t$ hyperbolic connection \emph{specializes} to our $H_0+uA$ (or is gauge/variable
-related). (ii) If yes, read off $\Pmid$ and the off-diagonal in closed form. (iii) Confirm the BE
-entries \eqref{eq:BE} drop out as the extreme-level monodromy --- a built-in consistency check.\\
-\textbf{Falsification.} Evaluate the candidate closed form on the 8 benchmark strata; demand
-agreement to the $\sim10^{-9}$ floor (esp.\ the generic overlapping-crossing stratum where all
-prior ansatze failed). A single stratum miss $>10^{-6}$ kills it.
+\subsection*{[S1 --- TOP] Zero-curvature / Lax path-deformation (Malikis--Cheianov)}
+\textbf{Idea.} Find the zero-curvature operator $\hat E$ for Type-1 $N{=}3$ (the commuting-partner
+lever in $(t,\eps)$ form), then deform the evolution path so the three avoided crossings separate;
+the exact S-matrix factorises into two-level LZ factors $S=\prod_{i<j}S_{ij}$, elementary in
+$\{\gamma,\eps,a\}$.\\
+\textbf{Practicality.} \emph{Highest} --- the only one of the four methods with demonstrated
+elementary closed-form output, and it directly realises the user's commuting-partner steer. It
+also \emph{explains} the project's $15\%$ ``incoherent-grid works'' observation: those are the
+parameter regions where the deformed path already separates the crossings.\\
+\textbf{Near-term target.} (i) Construct $\hat E$ from the Chernyak--Sinitsyn time-quadratic
+partner (the two are the same integrability datum). (ii) Determine whether the constant middle
+level $\eps_0$ obstructs full separation (Chernyak--Sinitsyn warn it can): does the bow-tie
+factorisation survive, or does an irreducible $2{\times}3$ ``$C$ point'' remain (cf.\ BBGY Fig.~1)?\\
+\textbf{Falsification.} Evaluate $S=\prod S_{ij}$ on the 8 benchmark strata to the $10^{-9}$ floor.
+If the generic overlapping-crossing stratum misses by $>10^{-6}$, the path does \emph{not} fully
+separate $\Rightarrow$ an irreducible interference factor survives (expected: the
+multistate-Dykhne prefactor). That miss is itself the publishable boundary of factorisability.
 
-\subsection*{[S2] Conserved-quantity constraint closure (quadratic commuting operators)}
-\textbf{Idea.} Use the commuting triple $(H_x,Y,R)$ \emph{plus} time-quadratic commuting
-operators (Chernyak--Sinitsyn, arXiv:2006.15144) to impose linear constraints on the S-matrix;
-combine with unitarity + double stochasticity + BE \eqref{eq:BE} and \emph{count}: do the
-constraints reduce the $4$ parameters to $0$?\\
-\textbf{Practicality.} If the system closes, $\Pmid$ is an algebraic function of $\{\gamma,\eps,a\}$
---- maximally practical. Even if it only closes \emph{asymptotically} (adiabatic limit), that is a
-genuine exact entry in a regime and a hard check on S1.\\
-\textbf{Near-term target.} Write the constraint equations from $[H,Y]=[H,R]=0$ at
-$u\to\pm\infty$; tabulate \#independent equations vs \#unknowns after BE. Identify exactly which
-of $\{\Pmid,\text{off-diag}\}$ they pin.\\
-\textbf{Falsification.} The quadratic-operator prediction is claimed only \emph{adiabatically};
-test against the harness \emph{and} against finite-rate corrections --- if it cannot be promoted
-beyond leading order, log it as a partial result, not a closed form.
+\subsection*{[S2] Adiabatic Dykhne + exact $\eps_0{=}0$ slice (Chernyak--Sinitsyn)}
+\textbf{Idea.} Recognise the project's $Q_4$-window machinery as the multistate Dykhne method;
+take the BE survivals as its exact leading exponents, the $\eps_0=0$ confluent-hypergeometric
+slice as an exact anchor (their Eq.~49), and develop the controlled adiabatic-limit expansion
+(time-scale separation, their Sec.~III) for the leading behaviour of $\Pmid$.\\
+\textbf{Practicality.} Mixed: the $\eps_0=0$ slice and BE entries are exact and elementary; the
+generic $\Pmid$ comes out as an asymptotic series whose \emph{leading} term is closed-form but
+whose prefactor is the hard part. This is the rigorous \emph{foundation}, not a full closed form.\\
+\textbf{Near-term target.} (i) Reproduce Eq.~49 inside the harness as a zero-parameter check.
+(ii) Compute the Dykhne exponent for the middle gap and compare to the benchmark $\Pmid$ across
+strata --- quantify how much of $\Pmid$ is leading-exponent vs prefactor.\\
+\textbf{Falsification.} If the leading Dykhne exponent already matches $\Pmid$ to $10^{-3}$ over a
+stratum, the prefactor is mild there and a closed form is in reach; if it is off by $O(1)$, that
+stratum needs the full (open) prefactor.
 
-\subsection*{[S3] Lax / zero-curvature algebraic S-matrix}
-\textbf{Idea.} Recast as a Lax equation with a non-Abelian flat connection and integrate the
-connection \emph{algebraically} (Malikis--Cheianov, arXiv:2505.06048).\\
-\textbf{Practicality.} Demonstrated to give exact S-matrices for generalized bow-tie / new reps
-without solving the ODE; output is algebraic in the data. Strong fit to the commuting family.\\
-\textbf{Near-term target.} Construct the Lax pair for Type-1 $N=3$; attempt the algebraic
-integration of the connection between $u=\pm\infty$.\\
-\textbf{Falsification.} Same benchmark gate as S1. Risk: the algebraic integration may reintroduce
-a transcendental connection constant --- watch for exactly the object the frame-map test already
-showed must be transcendental.
+\subsection*{[S3] Contour-integral / KZ form of the off-diagonal (BBGY + Lin--Sinitsyn)}
+\textbf{Idea.} Set up the Laplace/contour-integral solution of the $3\times3$ Cauchy system and
+identify the off-diagonal's special-function class, using BBGY's KZ contour technology and
+Lin--Sinitsyn's $N{=}3$ template as the expected answer (Kamp\'e de F\'eriet / Gauss
+hypergeometric).\\
+\textbf{Practicality.} Medium: yields an \emph{exact} but generally \emph{transcendental}
+off-diagonal. Acceptable under a relaxed bar (``closed form in named special functions of
+$\{\gamma,\eps,a\}$''), and decisive for confirming that the elementary bar cannot be met.\\
+\textbf{Near-term target.} Transcribe the BBGY $N{=}3$ contour integral; attempt the
+linear-in-$t$ limit (or the variable change relating $\hat A+\hat B/t$ to $\hat A+\hat Bt$) and
+read off the off-diagonal's hypergeometric type.\\
+\textbf{Falsification.} Benchmark gate; require BE entries to reappear as the elementary limit.
 
-\subsection*{[S4] Contour-integral / Laplace-transform on the Cauchy structure}
-\textbf{Idea.} The classic Demkov--Osherov / generalized-bow-tie technique: Laplace transform the
-$N=3$ system and do the $t\to\pm\infty$ asymptotics by contour integration of the explicit Cauchy
-integrand.\\
-\textbf{Practicality.} When the contour integral closes, it yields the full matrix in closed form;
-the Type-1 Cauchy integrand is the natural candidate. May land in hypergeometric functions
-(cf.\ Lin--Sinitsyn $N=3$ LZ--Coulomb, arXiv:1310.7245) --- acceptable if reducible to $\{\gamma,\eps,a\}$.\\
-\textbf{Near-term target.} Set up the Laplace-transformed $3\times3$ system; identify the
-singularity structure; attempt the steepest-descent/residue evaluation.\\
-\textbf{Falsification.} Benchmark gate; also require the BE entries to reappear.
+\subsection*{[S4 --- DEMOTED] KZ / Gaudin direct monodromy (BBGY)}
+\textbf{Idea.} Read $P$ as the monodromy of the rational KZ/Gaudin flat connection, specialising
+the BBGY $N{=}3$ solution.\\
+\textbf{Why demoted (was \#1 in v1).} Now that the paper is read: BBGY is \emph{hyperbolic}
+($\hat A+\hat B/t$), its $N{=}3$ amplitude is a two-variable Kamp\'e de F\'eriet function, and the
+specialisation to linear $\hat A+\hat Bt$ is the same singular limit that makes the Coulomb models
+non-elementary. It informs the \emph{transcendentality class} (subsumed into S3) but does not, on
+its own evidence, deliver an elementary $P$.\\
+\textbf{Residual use.} As the conceptual home of S3's contour integrals and as a cross-check that
+any candidate off-diagonal has the right monodromy/branching.
 
 \subsection*{[S5 --- finishing / LOW leverage for closed form] Complete the transport recurrence}
 \textbf{Idea.} Close $\Theta^{\rm tr}_v(t)$ to all orders by the same Lagrange--B\"urmann route
@@ -203,41 +267,49 @@ lever --- see \S2.)
 \toprule
 Rank & Strategy & Leverage toward practical closed form & First concrete step \\
 \midrule
-1 & S1 KZ/Gaudin monodromy & \textbf{High} --- targets amplitude directly in $\{\gamma,\eps,a\}$ & get BBGY $N{=}3$; test specialization \\
-2 & S2 Constraint closure & High \emph{if} it closes; else exact-in-regime & count constraints vs unknowns \\
-3 & S3 Lax / zero-curvature & Medium--High; algebraic S-matrix & build Type-1 Lax pair \\
-4 & S4 Contour integral & Medium; may be hypergeometric & Laplace-transform the $3{\times}3$ \\
+1 & S1 Zero-curvature path deform.\ & \textbf{High} --- only demonstrated elementary $S=\prod S_{ij}$ & build $\hat E$; test crossing separation \\
+2 & S2 Adiabatic Dykhne + $\eps_0{=}0$ & Exact slice + foundation; partial generic & reproduce Eq.~49; Dykhne vs $\Pmid$ \\
+3 & S3 Contour/KZ off-diagonal & Medium; exact but transcendental & transcribe BBGY $N{=}3$ contour \\
+4 & S4 KZ/Gaudin direct (demoted) & Low for \emph{elementary}; sets branch class & monodromy cross-check only \\
 5 & S5 Transport recurrence & \textbf{Low} for closed form (finishing) & derive $K_5,K_7$; test collapse \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\noindent\textbf{Two-week critical path.}
+\noindent\textbf{Revised critical path.}
 \begin{enumerate}[nosep,leftmargin=1.4em]
-\item \textbf{Days 1--3 (S1+S2 in parallel, cheap and decisive).} Pull the BBGY (2409.17053) $N=3$
-  construction and the Chernyak--Sinitsyn (2006.15144) constraint equations. Two questions:
-  does the BBGY connection specialize to ours, and do the conserved-quantity constraints + BE +
-  unitarity \emph{count down to zero} free parameters? Either ``yes'' likely cracks the problem.
-\item \textbf{Days 4--8.} Whichever of S1/S2 looks live, push to an explicit candidate
-  $\Pmid(\{\gamma,\eps,a\})$ and the off-diagonal. In parallel, set up S4's Laplace contour as an
-  independent cross-check route.
-\item \textbf{Days 9--14.} Falsify hard: evaluate every candidate on all 8 benchmark strata to the
-  $10^{-9}$ floor, with special weight on the generic overlapping-crossing stratum. Promote a
-  survivor to \textsc{numerically-supported}; pursue an analytic proof (residue/monodromy identity)
-  to reach \textsc{established}.
+\item \textbf{Days 1--2 (cheap, decisive anchors).} Reproduce the Chernyak--Sinitsyn $\eps_0=0$
+  exact result (Eq.~49) inside the harness as a zero-parameter validation, and overlay the leading
+  Dykhne exponent for the middle gap against the benchmark $\Pmid$ on all 8 strata. This
+  \emph{measures} how much of $\Pmid$ is leading-exponent vs.\ the hard prefactor --- telling us
+  immediately where (if anywhere) an elementary form is reachable.
+\item \textbf{Days 3--8 (S1, the home-run attempt).} Construct the zero-curvature $\hat E$ from the
+  time-quadratic commuting partner; deform the path and test whether the constant middle level
+  $\eps_0$ permits full crossing separation into $S=\prod S_{ij}$, or leaves an irreducible
+  $2{\times}3$ interference vertex. Either outcome is a result: an exact factorised $S$, \emph{or}
+  a sharp characterisation of the non-factorisable (multistate-Dykhne-prefactor) remainder.
+\item \textbf{Days 9--14 (falsify + bound).} Benchmark every candidate to $10^{-9}$. Where S1
+  factorises, prove it (zero-curvature + separation $\Rightarrow$ exact product); where it does
+  not, use S3/S4 to name the transcendental class of the residual off-diagonal and publish the
+  \emph{factorisability boundary} as the contribution.
 \end{enumerate}
 
-\paragraph{Highest-conviction single move.} Determine whether the
-Barik--Bakker--Gritsev--Yuzbashyan $N=3$ KZ solution specializes to the Type-1 $H_0+uA$ family. If
-it does, the open two parameters are very likely already expressible as KZ monodromy/period data
-in $\{\gamma,\eps,a\}$ --- meeting the practicality bar by construction --- and the project's
-established BE/window geometry becomes the consistency check rather than the engine.
+\paragraph{Highest-conviction single move.} Construct the zero-curvature operator $\hat E$ for
+Type-1 $N{=}3$ (equivalently, recast the known time-quadratic commuting partner in $(t,\eps)$
+form) and test whether path deformation separates all three avoided crossings. If it does, $P$ is
+an \emph{exact, elementary} product of two-level S-matrices --- the home run, directly built on the
+commuting-partner structure. If the constant middle level obstructs separation, the surviving
+factor is exactly the multistate-Dykhne prefactor the literature flags as open, and bounding it is
+itself the publishable result.
 
-\paragraph{Honest caveats.} (i) The literature was assembled from search metadata; full texts were
-not opened (fetcher blocked). Verify the BBGY $N=3$ specialization and the Chernyak--Sinitsyn
-constraint count \emph{directly in the papers} before committing. (ii) ``No published generic
-Type-1 $N=3$ closed form'' is $\sim$80\% confidence --- if S1 simply reproduces a known result,
-that is still a win (it hands you the closed form). (iii) Applying spectral networks /
-non-abelianization to the MLZ connection appears genuinely unexplored; it is the natural geometric
-home of your covers and a high-risk/high-reward fallback if S1--S4 stall on the off-diagonal phase.
+\paragraph{Honest caveats (v2).} (i) Full texts are now read; the central new fact is the
+authors' own verdict that generic $\eps_0\ne0$ Type-1 $N{=}3$ ``\emph{likely has no analytical
+solution}'' and that the multistate Dykhne prefactor (our $\Pmid$/off-diagonal) is an open problem
+with ``limited progress.'' Confidence that \emph{no fully-elementary generic closed form exists}
+is now $\sim$70--80\% --- so S1's value is as much in \emph{delimiting} factorisability as in
+achieving it. (ii) The $\eps_0=0$ slice and BE entries \emph{are} exact and elementary --- bank
+them. (iii) Whether a zero-curvature $\hat E$ exists for Type-1 with $\eps_0\ne0$ and separates the
+crossings is the single unresolved technical pivot; Malikis--Cheianov demonstrate it for bow-tie
+(degenerate crossing geometry), and Chernyak--Sinitsyn caution that nonzero $\eps_0$ is precisely
+what spoils clean reduction --- so this is genuinely open and worth the first real effort.
 \end{document}

@@ -114,6 +114,40 @@ The literature points to a different top strategy: the **KZ/Gaudin monodromy rou
 targets a closed amplitude in {γ,ε,a} + a handful of monodromy/period integrals directly. See
 strategy memo `paper/type1_lz_strategy_memo.tex`.
 
+## Primary-source read + strategy v2 re-rank — 2026-06-01
+Read all four cited papers in full (were search-metadata only before). Memo updated to v2
+(`paper/type1_lz_strategy_memo.tex`). Key findings:
+- **Chernyak–Sinitsyn 2021 (2006.15144)** = OUR exact model class (linear 3-state, time-quadratic
+  commuting partner, Eq.20). Verdict: integrability ⇒ τ-invariant P but "generally NOT expressible
+  in known special functions"; for ε₀≠0 "likely no analytical solution." Their tool = Dykhne
+  complex-turning-point formula = OUR Q4-window machinery. They state there is **"no general analog
+  of the Dykhne formula" for N=3** (only "limited progress" on the prefactor η + subdominant
+  exponents) — that prefactor IS our missing P_{2→2}/off-diagonal. Exact handles: ε₀=0 slice
+  (confluent hypergeometric, P_{2→2}(0)=2e^{−πg²/b}/(1+e^{−πg²/b}), their Eq.49) + adiabatic-limit
+  asymptotics via time-scale separation.
+- **Malikis–Cheianov 2025 (2505.06048)** = the elementary route. Zero-curvature operator Ê ⇒
+  path-deform in (t,ε) ⇒ exact S = product of 2-level LZ S-matrices (bow-tie: S=S13·S23, Eq.29).
+  This is the rigorous "when is the incoherent product EXACT" statement → explains our 15%.
+- **BBGY 2024 (2409.17053)** = KZ but HYPERBOLIC (A+B/t); N=3 amplitude = two-variable Kampé de
+  Fériet. Tells transcendentality class, not elementary form. **Demoted from v1 #1.**
+- **Lin–Sinitsyn 2013 (1310.7245)** = template: LZ-Coulomb N=3 has elementary entries out of the
+  special level, hypergeometric between ordinary levels; "simplicity does NOT follow from
+  integrability."
+
+**Re-rank (v2):** S1 zero-curvature/Lax path-deformation (Malikis–Cheianov) → TOP (only elementary
+output; uses commuting partner directly). S2 adiabatic Dykhne + ε₀=0 exact slice → foundation +
+exact anchors. S3 contour/KZ off-diagonal (BBGY+Lin-Sinitsyn) → exact-but-transcendental. S4
+KZ/Gaudin direct → demoted (hyperbolic, Kampé de Fériet). S5 transport recurrence → unchanged low.
+**Honest reset:** fully-elementary generic (ε₀≠0) closed form likely does NOT exist (~70–80%);
+realistic deliverables = BE+elementary entries, exact ε₀=0 slice, adiabatic asymptotics, and
+(home run) exact factorisation IFF Ê exists & separates crossings. The pivot question: does the
+constant middle level ε₀ obstruct path-separation? (Malikis-Cheianov yes for bow-tie;
+Chernyak-Sinitsyn warn ε₀≠0 spoils clean reduction.)
+
+This reconciles the earlier ideation cards: H-B/H-C (exact-crossing/Q4-interference) ARE the
+multistate-Dykhne prefactor problem; H-C's "is φ geometric or transcendental?" test now has a
+literature-predicted answer (transcendental). H-A slope-flow ⊂ S1 (zero-curvature is its closed form).
+
 ## Ideation pass (commuting partners / exact crossing / Q4 pairs) — 2026-06-01
 Attack lines generated + reflected + tournamented in `paper/attack_lines.md`. Grounding facts
 VERIFIED numerically (standalone, not their harness):
