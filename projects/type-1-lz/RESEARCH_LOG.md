@@ -114,6 +114,26 @@ The literature points to a different top strategy: the **KZ/Gaudin monodromy rou
 targets a closed amplitude in {γ,ε,a} + a handful of monodromy/period integrals directly. See
 strategy memo `paper/type1_lz_strategy_memo.tex`.
 
+## Day 1–2 anchor experiment (Type-1 vs C-S mismatch resolved) — 2026-06-01
+Full write-up + reproducible code: `experiments/anchor_experiment.{md,py}`.
+- **Model-mismatch resolved.** Type-1 → C-S Eq.(11) dictionary derived & computed (time-shift t₀
+  + diagonal gauge flatten the middle level; ε_CS, b1,b2, couplings read off). KEY: the C-S
+  exactly-solvable bow-tie point needs ε_CS=0 AND g_OUTER=0; Type-1's outer-outer coupling
+  g_OUTER=γ_loγ_hi(a_lo−a_hi)/(ε_lo−ε_hi) is NEVER zero ⇒ **C-S Eq.49 anchor is OUTSIDE Type-1.**
+  (Earlier proposal to reproduce Eq.49 was wrong for Type-1; corrected.) ε_CS=0 IS reachable
+  (one condition) but g_OUTER stays nonzero there.
+- **Corrected intrinsic experiment** (numpy+scipy, self-calibrated on EXACT BE extreme survivals):
+  benchmark P by direct integration vs incoherent-product middle survival.
+- **Headline result (numerically-supported, ~1% finite-T):** middle survival is 2.5×–104× LARGER
+  than the incoherent product (canonical 0.212 vs 0.084 = 2.5×; sampleB 0.0169 vs 0.00016 = 104×),
+  growing with crossing overlap. The interference/prefactor is the DOMINANT part of P_mid, not a
+  small correction. Convergence = oscillatory ~1/T Stückelberg tail.
+- **Strategic updates:** (i) S2 leading-Dykhne CANNOT reach P_mid (wrong order of magnitude when
+  crossings overlap) — confine S2 to BE entries + deep-adiabatic limit. (ii) Re-confirms no
+  product-of-real-tunneling-factors closed form (falsified class). (iii) sampleB (104×) is now the
+  sharpest discriminator: any candidate must hit P_mid≈0.017. Next: S1 zero-curvature — does the
+  path-deformed two-level product reproduce P_mid via Stückelberg PHASES?
+
 ## Primary-source read + strategy v2 re-rank — 2026-06-01
 Read all four cited papers in full (were search-metadata only before). Memo updated to v2
 (`paper/type1_lz_strategy_memo.tex`). Key findings:
