@@ -22,7 +22,9 @@ exponents `{0,1,3}` (gap at 2) plus the **rank-2 irregular point** at `v=∞`. E
 residue-collapsing periods; the **off-diagonal Stokes coefficient `S₁₂` (≡ middle survival `P₂→₂`)
 is the open quantity**, carried by the single `12×13` spectral-network joint (WS-G).
 
-**THE PROBLEM.** Compute `S₁₂` — equivalently `P₂→₂` and one independent off-diagonal — in closed
+**THE PROBLEM.** [Notation: `S₁₂` is DEPRECATED — see NOMENCLATURE.md. The target is the
+middle-survival probability `P₂→₂=|𝒮_{mm}|²` (`m=slope-middle`), whose transcendental ingredient is
+the off-diagonal Stokes multiplier `σ`; `P₂→₂=|C_{mm}|²=f(σ,c_i)`.] Compute `P₂→₂` and one independent off-diagonal — in closed
 form as a function of `{γ,ε,a}`, with the natural arguments being the two window actions
 `I_X = ∮_X √(Q₄) L_H W₄/p³ dλ` (the BE exponents) and the cross-ratio of the four complex turning
 points; **or** prove that `S₁₂` is not reducible to classical special functions (a rigorous

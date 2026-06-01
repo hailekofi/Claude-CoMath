@@ -1,5 +1,10 @@
 # WS-CH — The direct confluent-Heun central connection problem for `S₁₂`
 
+> **Notation note (coordinator):** this deliverable's `S₁₂` is DEPRECATED — read it as the middle
+> survival `P₂→₂=|𝒮_{mm}|²` (`m=slope-middle`) `=|C_{mm}|²`, built from the off-diagonal Stokes
+> multiplier `σ`. See `NOMENCLATURE.md`. (The benchmarked numbers are `|𝒮_{mm}|²`, correct.)
+
+
 **Owner:** WS-CH (parallel direct confluent-Heun connection-coefficient track, independent of
 the Painlevé-V/τ route WS-PV). **Date:** 2026-06-01.
 **Inputs read:** `NOMENCLATURE.md`, `paper/OPEN_PROBLEM.md`, `paper/ws_e_junction_Smatrix.md`,

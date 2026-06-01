@@ -47,8 +47,22 @@ remove a `Γ`/`S` collision. **`Γ` and `S` have exactly the meanings below and 
   rank to label channels — use ε (basis) and slope (BE roles). [Retraction: an earlier framing of
   `P₂→₂` "by energy rank" was a red herring; the correct statement is slope-middle, ε-indexed.]
 
-## Quick map (old → canonical)
-| old / colliding | canonical |
+## The open quantity — three distinct objects (`S₁₂` is DEPRECATED)
+The early notes wrote `S₁₂` (or `𝒮₁₂`) loosely for "the target," conflating three different things
+whose `1,2` subscripts were never pinned. Use these instead:
+- **`P₂→₂ := |𝒮_{mm}|²`**, `m=argsort(a)[1]` (slope-middle) — the physical middle-survival
+  **probability**. Diagonal, gauge-invariant. **THE deliverable.**
+- **`𝒮_{mm}`** (physical, gauge phase) / **`C_{mm}`** (the (mid,mid) entry of the central connection
+  matrix `C`) — the survival **amplitude**; `|·|² = P₂→₂`. Diagonal.
+- **`σ`** — the off-diagonal **Stokes multiplier(s)** of the rank-2 irregular point (the `{mid,lo}`,
+  `{mid,hi}` shears) — the genuine named transcendental constant. Its indices are abstract
+  sector/solution-basis labels, **not** physical levels, so `σ` does **not** carry the ε/slope
+  ordering. `C = (formal monodromy e^{2πi c_i}) ⋉ (shears in σ)`, and `P₂→₂ = |C_{mm}|² = f(σ, c_i)`.
+
+`S₁₂` ≡ DEPRECATED (it merged `P₂→₂`, `𝒮_{mm}/C_{mm}`, and `σ`). The computed numbers always meant
+`P₂→₂=|𝒮_{mm}|²` (slope-middle), which is correct; only the symbol was ambiguous.
+
+## Quick map (old → canonical)| old / colliding | canonical |
 |---|---|
 | `Γ_{ij}` = BE exponent | `s_{ij}²|a_i−a_j|` (no `Γ`) |
 | `Γ` (the Coulomb `c_i` build) | `c_i = Σ_j s_{ij}²(a_i−a_j)` |

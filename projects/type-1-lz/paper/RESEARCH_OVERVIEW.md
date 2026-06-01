@@ -10,9 +10,12 @@ Closed-form Type-1 N=3 MLZ transition matrix `P` (`H(u)=H₀+uA`, Cauchy couplin
 **Open:** the middle-slope survival `P₂→₂=|𝒮_{mid,mid}|²` (`mid=argsort(a)[1]`) and one off-diagonal.
 
 ## Headline
-We went from "the middle survival is open and unnamed" to **"`𝒮₁₂` is a specific, named connection
-constant of the Painlevé-V / confluent-Heun / `c=1` family, with monodromy data fixed
-*algebraically* by the exact crossing, computable to `10⁻⁹`."** A fully-elementary closed form does
+We went from "the middle survival is open and unnamed" to **"the middle survival
+`P₂→₂=|𝒮_{mm}|²` (`m=slope-middle`) is `|C_{mm}|²`, built from a specific, named Stokes multiplier
+`σ` of the Painlevé-V / confluent-Heun / `c=1` family, with monodromy data fixed *algebraically* by
+the exact crossing, computable to `10⁻⁹`."** [Notation: the symbol `S₁₂` used in earlier notes is
+DEPRECATED — it conflated `P₂→₂` (diagonal probability), the amplitude `𝒮_{mm}/C_{mm}`, and the
+Stokes multiplier `σ`; see NOMENCLATURE.md.] A fully-elementary closed form does
 not exist (ruled out, multiple ways); the deliverable is a *named* constant + a *computable* model.
 
 ## The theory (why) — established structural results [EST]
@@ -40,7 +43,7 @@ not exist (ruled out, multiple ways); the deliverable is a *named* constant + a 
 The accessory parameter (the free knob of a generic Heun connection problem) **is the node** —
 the apparent singularity `v_*=E_*`, a *rational* double root of the spectral discriminant. The ODE
 is built by rational operations from `H₀,1/a_j`, so the accessory parameter is algebraic in
-`{γ,ε,a}`, **not a free transcendental modulus.** ⇒ `𝒮₁₂` is a *specific* named constant.
+`{γ,ε,a}`, **not a free transcendental modulus.** ⇒ `C_{mm}` is a *specific* named constant.
 **The exact crossing IS the accessory parameter** — the program's arc closes here.
 
 ## Computable model [gold]
@@ -49,14 +52,14 @@ sampleB `0.0210`); BE survivals analytic. (num_S12.py, ws_ch.)
 
 ## Boundary of knowledge — what remains
 1. **Capstone [in progress]:** evaluate the *published* PV/Lisovyy–Naidiuk connection formula at the
-   algebraic monodromy data and benchmark vs the oracle. Match ⇒ PV (WS-PA1), `𝒮₁₂` written
+   algebraic monodromy data and benchmark vs the oracle. Match ⇒ PV (WS-PA1), `C_{mm}` written
    *explicitly*; no match ⇒ rank-3 (WS-PV), the higher (unpublished) constant. Settles the one open
    structural dispute (PV-via-middle-convolution vs rank-3).
 2. **Three proofs to promote `[NS]→established`** (physics-derivation, no new agents): node
    *universality*; the `≈1.6` overlap bound; full accessory-parameter algebraicity (have: 2 samples +
    structural argument).
 3. **Simplification hope:** the two shears are rank-2 (Heun) pieces; only their composition is
-   rank-3. `𝒮₁₂` may reduce to (Γ-function dressing of the BE data) × (one joint constant). The
+   rank-3. `C_{mm}` may reduce to (Γ-function dressing of the BE data) × (one joint constant). The
    algebraic accessory parameter is the lever (special monodromy can collapse the conformal block).
    Floor: cannot become elementary (residual curvature + finite coherent floor, WS-NUM).
 
