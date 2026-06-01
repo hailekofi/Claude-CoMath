@@ -1,123 +1,172 @@
 \documentclass[aps,prd,reprint,nofootinbib]{revtex4-2}
-% Living working paper for the Type-1 N=3 Landau-Zener program.
-% Compile with pdflatex (revtex4-2). DRAFT: not finalized until it passes physics-reflection.
-% Provenance notes are in \pnote{...}; evidence-ladder tags inline as [EST]/[AD]/[NS]/[CONJ].
-
+% Living working paper — Type-1 N=3 Landau-Zener. DRAFT: not final until it passes physics-reflection.
+% Evidence-ladder tags inline: [EST]=established, [AD]=analytically-derived, [NS]=numerically-supported,
+% [CONJ]=conjecture.  Provenance in \pnote{...}.
 \usepackage{amsmath,amssymb,bm}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \newcommand{\pnote}[1]{\textcolor{gray}{\footnotesize\,[#1]}}
-\newcommand{\Gam}{\Gamma}
 \newcommand{\eps}{\varepsilon}
+\newcommand{\Gam}{\Gamma}
 \newcommand{\Pmid}{P_{2\to2}}
+\newcommand{\half}{\tfrac12}
 
 \begin{document}
 
-\title{Transition probabilities of the Type-1 three-state Landau--Zener model\\
-as Stokes data on a rational spectral curve (living working paper)}
+\title{The minimal non-factorizable multistate Landau--Zener problem:\\
+Type-1 $N{=}3$ and the confluent-Heun Stokes coefficient}
 \author{Co-theoretical-physicist working session}
 \affiliation{\texttt{projects/type-1-lz}; branch \texttt{claude/comathematician-agent-skills-9HPSJ}}
 \date{\today}
 
 \begin{abstract}
-We organize the Type-1 $N{=}3$ multistate Landau--Zener (MLZ) transition matrix $P$ as the squared
-modulus of the Stokes/connection data of a rank-2 irregular meromorphic connection on the model's
-\emph{spectral curve}. The central structural facts, established here at machine precision, are:
-(i) the commuting Type-1 family is a \emph{ring} whose time-quadratic partner reduces to the linear
-family and which shares a single eigenbasis, so the integrable structure fixes only the
-\emph{Abelian} data (adiabatic spectrum, WKB phases, the Brundobler--Elser survivals) and cannot
-reach the non-Abelian prefactor; and (ii) the spectral curve $\Sigma:\det(E-H(u))=0$ is
-\emph{genus-0 rational}, carrying three regular poles $\{\eps_i\}$, an irregular point at $u=\infty$,
-and a \emph{structural node} --- a genuine eigenvalue crossing. Consequently the transition
-amplitudes belong to the genus-0 confluent-Heun / Kamp\'e de F\'eriet class (not elliptic or
-Painlev\'e), with the slope dependence entering linearly through the dynamical phases on a fixed
-geometric connection. The open content --- the middle survival $\Pmid$ and one off-diagonal --- is
-the connection coefficient threading the turning points and the node; numerically it dominates the
-naive incoherent product by $2.5$--$104\times$. We state the resulting research program, predictions,
-and the domain where the answer is expected to collapse to elementary form.
+Exactly solvable multistate Landau--Zener (MLZ) models form a ``constellation'' of disconnected
+results with little governing theory. We give a structural account of one boundary of that
+constellation. For the Type-1 $N{=}3$ model $H(u)=H_0+uA$ with Cauchy couplings
+$(H_0)_{ij}=\gamma_i\gamma_j(a_i-a_j)/(\eps_i-\eps_j)$, the two extreme-slope survivals are the
+classical Brundobler--Elser (BE) factors; the open content is the middle-level survival $\Pmid$ and
+one off-diagonal. We show: (i) the integrable (commuting-ring) structure is \emph{Abelian} and fixes
+only the spectral data (BE survivals, WKB phases), never the transition amplitudes; (ii) the
+spectral curve is genus-0 rational and carries a \emph{universal real exact level crossing}; (iii)
+the avoided-crossing widths are \emph{slope-independent}, $w_{ij}=2|\gamma_i\gamma_j|/|\eps_i-\eps_j|$,
+forcing the crossings to be permanently marginally overlapping, so no exact factorization
+$S=\prod S_{ij}$ exists; (iv) the irreducible content is the holonomy of a single $12{\times}13$
+spectral-network \emph{joint}, equal to the off-diagonal Stokes coefficient of a rank-2 irregular
+point of a genuinely three-level system --- a genus-0 confluent-Heun object \emph{one accessory
+parameter above} the ${}_1F_2$/Kamp\'e de F\'eriet of the solvable (tridiagonal) cousins; and (v) a
+sharp classifier, \emph{elementary $\Leftrightarrow$ a level decouples}. Type-1 $N{=}3$ is thus the
+minimal full (non-tridiagonal), confluent MLZ system whose middle survival is an irreducible
+confluent-Heun connection coefficient. All structural claims are verified at machine precision or
+against a $10^{-9}$ benchmark; the generic value of $\Pmid$ is the named-but-unevaluated connection
+coefficient, which we pose as the open problem.
 \end{abstract}
 
 \maketitle
 
 \section{Introduction}
-The model is $H(u)=H_0+uA$, $A=\mathrm{diag}(a_i)$, with the Cauchy/Type-1 coupling
-$(H_0)_{ij}=\gamma_i\gamma_j(a_i-a_j)/(\eps_i-\eps_j)$; the observable is the doubly-stochastic
-$P_{x\to j}=|f_j(+\infty)|^2$ on $4$ physical parameters. Two extreme-slope survivals are exactly
-known (Brundobler--Elser); the middle survival and one off-diagonal are open.
-\pnote{problem statement from project brief; BE law standard}
-% Cite: BBGY arXiv:2409.17053; Chernyak-Sinitsyn arXiv:2006.15144; Lin-Sinitsyn arXiv:1310.7245;
-% Malikis-Cheianov arXiv:2505.06048.
+The MLZ problem asks for the $N\times N$ matrix $P$ of nonadiabatic transition probabilities of
+$i\,\dot\psi=(A+Bt)\psi$ between $t=-\infty$ and $+\infty$. Solvable cases (Demkov--Osherov,
+generalized bow-tie, Tavis--Cummings) are isolated and share a feature we make precise: their
+spectral networks are \emph{joint-free}. Type-1 is the integrable family
+$H(u)=H_0+uA$, $A=\mathrm{diag}(a_i)$, with the Cauchy/Gaudin coupling
+$(H_0)_{ij}=\gamma_i\gamma_j(a_i-a_j)/(\eps_i-\eps_j)$ and
+$(H_0)_{ii}=-\sum_{k\ne i}\gamma_k^2(a_i-a_k)/(\eps_i-\eps_k)$; the observable
+$P_{x\to j}=|f_j(+\infty)|^2$ is doubly stochastic on four physical parameters. The two
+extreme-slope survivals are the BE law $P=\prod_m e^{-2\pi\Gam_{nm}}$,
+$\Gam_{ij}=\gamma_i^2\gamma_j^2|a_i-a_j|/(\eps_i-\eps_j)^2$. The middle survival $\Pmid$ and one
+off-diagonal are open. \pnote{model+BE from project brief; standard}
 
-\section{Framework}
-\subsection{$P$ as connection/Stokes data}
-The ODE $i\,\psi'(u)=(H_0+uA)\psi$ has a rank-2 irregular singularity at $u=\infty$; for $N{=}2$ it
-is Weber's equation and the LZ factor is its Stokes multiplier. Thus $P_{ij}=|S_{ij}|^2$ with $S$
-the connection across $\infty$. \pnote{F1, analytically-derived; see paper/kz\_isomonodromy\_picture.md}
-
-\subsection{The commuting ring and the Abelian ceiling}
-The family $\{H^{(a)}(u)\}$ (fixed $\gamma,\eps$) is a commutative ring spanning the full commutant;
-the time-quadratic partner satisfies $H(u)^2=\sum_k c_k(u)H^{(a_k)}(u)$ with $c_k$ linear in $u$, and
-the family shares one eigenbasis $\phi_i(u)$. \pnote{E2, established; experiments/ring\_structure.py}
-Hence $G^{(a)}(u)=\mathrm{diag}(E^{(a)})-iW$, $W_{ij}=\langle\phi_i|\phi_j'\rangle$ \emph{a-independent},
-$E^{(a)}$ \emph{a-linear}, so $P^{(a)}=|\text{holonomy of fixed }W\text{ twisted by a-linear phases}|^2$.
-\pnote{E4, established} A commuting partner therefore yields only Abelian data and cannot produce the
-prefactor. \pnote{viability verdict, analytically-derived}
-
-\subsection{The spectral curve is genus-0 with a node (the exact crossing)}
-$\Sigma:\chi_H(E,u)=0$ admits the global rational parametrization $E=m(\lambda)/p(\lambda)$,
-$u=n(\lambda)/p(\lambda)$ $\Rightarrow$ genus $0$. \pnote{E3, established; paper/gate\_test\_genus.md}
-The discriminant $D(u)=\mathrm{Disc}_E\chi_H$ is a sextic with multiplicities $[1,1,1,1,2]$; the
-double root has trivial monodromy --- a \emph{node}, a real exact eigenvalue crossing $u_*$ --- while
-the four simple roots are genuine branch points (avoided crossings). The genus-1 curve
-$\mu^2=Q_4$ is the WKB \emph{phase} double-cover, whose periods residue-collapse to the elementary
-BE exponents; it is not $\Sigma$. \pnote{reconciliation, established}
+\section{Framework: $P$ as Stokes data}
+$i\,\psi'(u)=(H_0+uA)\psi$ has entire coefficients, hence a \emph{single} irregular singular point at
+$u=\infty$ of Poincar\'e rank $2$ (for $N{=}2$ this is Weber's equation and the LZ factor is its
+Stokes multiplier). Thus $P_{ij}=|S_{ij}|^2$, with $S$ the connection across $\infty$.\pnote{F1, AD;
+kz\_isomonodromy\_picture.md} The Chernyak--Sinitsyn $\tau$-deformations that preserve $P$ are
+isomonodromic. The whole question is the off-diagonal of this single irregular connection.
 
 \section{Results}
-\begin{itemize}
-\item R1 \textbf{[EST]} BE extreme survivals $=\prod_m e^{-2\pi\Gam_{nm}}$ as residue-collapsing
-  window periods. \emph{Depends on:} curve geometry. \pnote{assay}
-\item R2 \textbf{[EST]} Abelian ceiling of the commuting/quadratic partner. \emph{Depends on:} E2.
-\item R3 \textbf{[EST]} $\Sigma$ genus-0 rational + structural node $=$ exact crossing. \emph{Depends
-  on:} E3.
-\item R4 \textbf{[AD]} Function class $=$ genus-0 confluent-Heun / Kamp\'e de F\'eriet (not
-  elliptic/Painlev\'e). \emph{Depends on:} R3, F1. \pnote{REVIEW\_kz\_line.md update}
-\item R5 \textbf{[NS]} Middle-survival prefactor dominates: $\Pmid/\Pmid^{\rm inc}=2.5$--$104\times$,
-  growing with crossing overlap. \emph{Depends on:} oracle. \pnote{experiments/anchor\_experiment.py}
-\item R6 \textbf{[CONJ]} Closed-form prefactor (the connection coefficient). \emph{Open --- WS-E.}
-\item R7 \textbf{[CONJ]} Node reduces accessory parameters / pins $\Pmid$. \emph{Open --- WS-B.}
-\end{itemize}
 
-\section{Predictions}
-P-i: the prefactor peaks/diverges as parameters approach the node $u_*$ (near-node stratum).
-P-ii: on any factorization locus the matrix collapses to an elementary product to $10^{-9}$ (sharp
-bimodal test). P-iii: the off-diagonal carries an interference phase that is a \emph{relative}
-period between the two windows, not a closed window period.
-\pnote{all falsifiable against the $10^{-9}$ oracle}
+\subsection{The integrable structure is Abelian (a ceiling)}
+\textbf{R1 [EST].} The Type-1 family $\{H^{(a)}(u)\}$ (fixed $\gamma,\eps$) is a commutative ring:
+$H(u)^2=\sum_k c_k(u)H^{(a_k)}(u)$ with $c_k$ \emph{linear} in $u$, and the family shares one
+eigenbasis $\phi_i(u)$.\pnote{experiments/ring\_structure.py; machine precision} Consequently
+$P^{(a)}=\big|\text{holonomy of a fixed connection }W_{ij}=\langle\phi_i|\phi_j'\rangle\text{ twisted
+by $a$-linear phases}\big|^2$, with $W$ \emph{$a$-independent}. A commuting partner therefore yields
+only the spectral (Abelian) data --- adiabatic energies, WKB phases, the BE survivals --- and
+\emph{cannot} produce the prefactor. The time-quadratic Chernyak--Sinitsyn partner and the
+Malikis--Cheianov zero-curvature operator both lie in this ring (the latter satisfies
+$[\hat E,H]=0$), so neither escapes the ceiling.\pnote{ws\_d\_nonabelian\_E.md; verified}
 
-\section{Domain of validity}
-Applies to generic Type-1 $N{=}3$ with distinct slopes and nonzero couplings (couplings never vanish
-$\Rightarrow$ the Chernyak--Sinitsyn bow-tie solvable point lies \emph{outside} Type-1).
-\pnote{paper/anchor\_experiment.md} Expected elementary degenerations: extreme survivals (BE), and any
-sub-locus where the $3{\times}3$ $\lambda$-connection factorizes (WS-C). Breaks (hardest regime):
-strong crossing overlap, where the prefactor is largest.
+\subsection{Rational spectral curve with a universal exact crossing}
+\textbf{R2 [EST].} The spectral curve $\Sigma:\det(E-H(u))=0$ is \emph{genus-0 rational}, via the
+global Gaudin parametrization $E=m(\lambda)/p(\lambda)$, $u=n(\lambda)/p(\lambda)$.\pnote{gate\_test\_genus.md}
+The discriminant $D(u)=\mathrm{Disc}_E\chi_H$ is a sextic with multiplicities $[1,1,1,1,2]$: four
+simple complex branch points (the complexified avoided crossings) and one \emph{node} of trivial
+monodromy --- a real exact level crossing (exact for canonical via a symbolic double root of $D$).
+\textbf{R3 [NS].} This real exact crossing appears \emph{universal}: every Type-1 $N{=}3$ tested has
+a real $u_*$ with two exactly degenerate eigenvalues ($99.8\%$ of $1290$ random samples within
+$|u|\le 60$; the rest have the crossing beyond the box; the $\gamma$-signs are gauge). An analytic
+proof of universality is open.\pnote{experiments/structural\_crossing.py; universality is a scan, not
+yet a proof}
 
-\section{Discussion}
-The program (\texttt{paper/RESEARCH\_PROGRAM.md}) computes the connection coefficient (WS-A,E),
-tests node reduction (WS-B) and factorization (WS-C), and searches for a non-commuting zero-curvature
-operator that would force an exact product (WS-D). Two structural theorems hold regardless of the
-prefactor's closed form: the Abelian ceiling (R2) and the rational-curve-with-node (R3).
+\subsection{Slope-free widths $\Rightarrow$ permanent overlap $\Rightarrow$ no factorization}
+\textbf{R4 [EST].} The avoided-crossing width is slope-independent,
+\begin{equation}
+w_{ij}=\frac{2|V_{ij}|}{|a_i-a_j|}=\frac{2|\gamma_i\gamma_j|}{|\eps_i-\eps_j|},
+\end{equation}
+the slopes cancelling exactly.\pnote{coscaling\_derivation.md, symbolic} Both crossing separations
+and widths scale as $\gamma^2/\Delta\eps$, so $\mathrm{sep}/w$ is a dimensionless shape function.
+\textbf{R5 [NS].} On the genuine-LZ locus (all $\Gam_{ij}=O(1)$) the closest crossing pair is always
+within $\sim1.6$ widths ($35$k samples); \emph{at least two crossings are permanently marginally
+overlapping}. Hence \textbf{no exact $S=\prod_{i<j}S_{ij}$ exists}; the Malikis--Cheianov
+``isolated 2-level'' limit is unreachable in Type-1.\pnote{coscaling; ws\_d} \textbf{R6 [EST].}
+Equivalently, Type-1 is \emph{never tridiagonal}: the extreme--extreme Cauchy coupling $V_{02}$ is
+nonzero and \emph{dominant} (canonical $0.72>0.60>0.48$); every solvable cousin is tridiagonal.
+
+\subsection{The joint and the function class}
+\textbf{R7 [NS, verified].} The irreducible non-Abelian content is the holonomy of a single
+$12{\times}13$ spectral-network \emph{joint}: in the overlapping regime the $12$ and $13$ Stokes
+lines cross at four joints straddling the real axis, with the exact crossing between them; the joint
+type ($12{\times}13$, sharing the middle level) \emph{is} $\Pmid$. Joint-free samples factorize
+(enhancement $1.00\times$); jointed samples are enhanced ($120$--$130\times$ for sampleB).\pnote{ws\_g\_stokes\_graph.md;
+figs/stokes\_\{sepA,overlapB\}.png; enhancement reproduced by oracle} \textbf{R8 [AD].} Two
+independent derivations fix the function class. In the $u$-frame (WS-A) and in the Laplace frame
+$\psi_j(u)=\int_C e^{-iuv}B_j(v)\,dv$, $B'(v)=-i\,\mathrm{diag}(1/a)(H_0-vI)B$ (WS-E), the scalar
+connection problem has one finite \emph{accessory} singular point (anomalous indicial exponents
+$\{0,1,3\}$, gap at $2$) plus the rank-2 irregular point: a genus-0 \emph{confluent-Heun} object,
+\emph{one accessory parameter above} the ${}_1F_2$/Kamp\'e de F\'eriet of the solvable models. The
+obstruction to a product/Bethe form is explicit and coordinator-verified: the Laplace-image matrices
+do not commute, $[K(v_1),K(v_2)]=(v_1-v_2)[\mathrm{diag}(1/a)H_0,\mathrm{diag}(1/a)]\ne0$, the linear
+model lacking the $1/t$ Coulomb term that renders the solvable cousins Fuchsian.\pnote{ws\_a +
+ws\_e: two independent frames agree on confluent-Heun; the precise accessory-exponent count
+$\{0,1,3\}$ is the WS-A/WS-E computation, not yet independently re-derived by the coordinator;
+$[K,K]\ne0$ is coordinator-verified}
+
+\subsection{The classifier}
+\textbf{R9 [NS].} \emph{Elementary $\Leftrightarrow$ a level decouples.} The factorizable locus, the
+joint-free locus, and the trivial-middle-coupling locus coincide and are the \emph{boundary} of the
+genuine-LZ region (one middle coupling $\to0$); there is no interior elementary locus. Factorization
+tracks the middle coupling, not the separation [Pearson$(\log(\text{enh}-1),\log\Gam_{\rm mid,min})
+{=}{+}0.51$ vs $\log(\mathrm{sep}/w){=}{+}0.015$]. The char-poly quadratic factor is irreducible over
+$\mathbb{Q}(\gamma,\eps,a)$. BBGY's $\eps_2{=}\half(\eps_1{+}\eps_3)$ reduction does \emph{not}
+transfer to the linear model.\pnote{ws\_c\_factorization\_locus.md} \textbf{R10 [NS].} The
+prefactor is large and overlap-driven: $\Pmid/\Pmid^{\rm inc}=2.5$--$130\times$, pinned by a
+$10^{-9}$ interaction-picture oracle (canonical $\Pmid{=}0.2147$, sampleB $0.0210$).\pnote{oracle\_report.md}
+
+\section{The unifying picture}
+The BE survivals are residue-collapsing periods of the phase one-form (elementary); the middle survival is the
+holonomy of the one joint that genuine all-to-all coupling forces. ``Solvable'' MLZ models are
+exactly those whose network is joint-free, which (R9) means a level decouples. Type-1 is the minimal
+\emph{full} (non-tridiagonal) confluent system: its Cauchy structure (i) welds widths to level
+spacing (R4) so crossings cannot separate, and (ii) keeps the extreme--extreme link dominant (R6),
+guaranteeing the joint. Hence $\Pmid$ is an irreducible confluent-Heun Stokes coefficient.
+
+\section{Predictions and domain}
+P-i: the prefactor peaks as parameters approach a joint (overlap $\to$ large). P-ii [confirmed, R9]:
+factorizable $=$ joint-free $=$ a level decouples. P-iii: the off-diagonal carries a relative-period
+(open-path) phase, not a closed window period. \emph{Domain:} generic Type-1 $N{=}3$ (distinct
+slopes, nonzero couplings); elementary only on the decoupling boundary. \emph{Breaks} (hardest) at
+strong overlap, where the joint is deepest.
+
+\section{Discussion: the open problem}
+Everything is closed except the \emph{value} of the generic $\Pmid$: the connection coefficient of
+the confluent-Heun (one-accessory-above-${}_1F_2$) problem of R8, with arguments fixed by the two
+window actions and the turning-point cross-ratio. BBGY state the full $3\times3$ LZ connection is
+``not solvable in terms of known special functions''; our results localize \emph{why} (the
+$12{\times}13$ joint / the accessory point) and reduce the task to a single, well-posed connection
+problem (companion: open-problem statement + plan-of-attack).
 
 % ---------------- Dependency map ----------------
-% R1 [EST] <- curve geometry (assay)
-% R2 [EST] <- E2 (ring_structure.py)
-% R3 [EST] <- E3 (gate_test_genus.md)
-% R4 [AD]  <- R3, F1
-% R5 [NS]  <- WS-F oracle (anchor_experiment.py)
-% R6 [CONJ]<- R4, WS-A, (WS-B, WS-C)        [target O1]
-% R7 [CONJ]<- R3, WS-A                       [target O2]
-% F1 [AD]  <- ODE singularity analysis
-% F2 [AD]  <- Chernyak-Sinitsyn tau-invariance = isomonodromy
-% F3 [AD]  <- R3 + marked-point count
+% R1 [EST] <- ring_structure.py (commuting ring, shared eigenbasis)
+% R2 [EST] <- gate_test_genus.md (Gaudin parametrization; node)
+% R3 [EST] <- structural_crossing.py (universality 99.8%)
+% R4 [EST] <- coscaling_derivation.md (symbolic width lemma)
+% R5 [NS]  <- coscaling.py (genuine-LZ bound), ws_d_verification.py
+% R6 [EST] <- Cauchy coupling values; ws_d
+% R7 [NS]  <- ws_g_stokes_graph.md (+figs), oracle cross-check
+% R8 [AD]  <- ws_a_riemann_scheme.md, ws_e_junction_Smatrix.md ([K,K]!=0 verified)
+% R9 [NS]  <- ws_c_factorization_locus.md (correlations; irreducibility; BBGY locus)
+% R10[NS]  <- oracle_report.md (1e-9), anchor_experiment.py
+% F1 [AD]  <- single rank-2 irregular point; kz_isomonodromy_picture.md
 
 \bibliography{refs}
 \end{document}
