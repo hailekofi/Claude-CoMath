@@ -31,7 +31,7 @@ not exist (ruled out, multiple ways); the deliverable is a *named* constant + a 
 - `P=|𝒮|²` = Stokes data of a **single rank-2 irregular point** (3-level Weber). [F1, AD]
 - Scalar reduction: one **apparent `{0,1,3}` singularity** (= the node, `v_*=E_*`) + the irregular
   point — confluent-Heun class. **Derived 3 independent ways** (WS-E, WS-CH, WS-PA1). [EST]
-- **Structure:** `𝒮₁₂ = ` (formal monodromy `c_i=Σ_j s_ij²(a_i−a_j)`, *known* = signed BE) ⋉ two
+- **Structure:** `C_{mm} = ` (formal monodromy `c_i=Σ_j s_ij²(a_i−a_j)`, *known* = signed BE) ⋉ two
   Stokes shears in the `{mid,lo}`,`{mid,hi}` carrier spaces (the `12×13` joint). The middle is hard
   because `c_mid` is a **cancelling** sum, not a definite survival. [EST: WS-CH, WS-R]
 - **Arguments:** `{two window actions (= BE exponents, scale), scale-invariant cross-ratio χ (shape)}`.
