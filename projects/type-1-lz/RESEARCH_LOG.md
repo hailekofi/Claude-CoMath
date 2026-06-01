@@ -124,6 +124,33 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## WS-A completed (gate-1 PASS) + coordinator integration — 2026-06-01
+Deliverable `paper/ws_a_riemann_scheme.md`. Claims structurally forced (H(u) polynomial), low risk.
+- **Riemann scheme (established):** honest object = 3×3 diabatic system ψ'=−i(H0+uA)ψ; entire
+  coefficients ⇒ EXACTLY ONE singular point: u=∞, rank-2 irregular (the 3-level Weber/parabolic-
+  cylinder point). No finite singularities. Accessory parameters (Fuchsian) = 0.
+- **Class verdict:** NOT hypergeometric (one irregular point, not 3 regular). The transcendental
+  unknowns are PURELY the off-diagonal STOKES connection coefficients of this rank-2 irregular point
+  — the 3-level generalization of the Weber/Zener connection problem. (Refines "confluent-Heun":
+  Heun needs regular singular points; the linear model is the pure single-irregular confluent case.
+  BBGY's Kampé de Fériet was the hyperbolic regular+irregular model.)
+- **Γ-dictionary confirmed (corrected):** diagonal exponent ρ_i=−i·b1_i (signed Γ row sum);
+  off-diagonal Weber/Stokes exponent = Γ_ij = BE rate. These are residues of the ACTION/Stokes
+  one-form, NOT the geometric connection (adiabatic transport ~1/u² ⇒ no simple-pole residue).
+  Strengthens E1, no contradiction.
+- **CORRECTS my framing (candor):** the exact-crossing NODE is an ORDINARY point of the honest 3×3
+  system — it carries NO local connection data and NO accessory parameter. My repeated "exact
+  crossing = local reduction handle / rigorous H-B" was WRONG: it conflated the adiabatic-frame
+  gauge singularity (eigenvectors rotate fast at the degeneracy) with a local ODE feature. In the
+  diabatic frame u* is regular. ⇒ **WS-B as specced (model the node as a local 2×2 connection
+  coefficient pinning P₂→₂) is CANCELLED.** The node's 2.5–104× enhancement is a GLOBAL Stokes
+  near-degeneracy, not local data.
+- **Net for program:** the target is now sharp and singular: compute the off-diagonal STOKES
+  CONNECTION COEFFICIENT of the rank-2 irregular point of the 3×3 system. Elementary ceiling = Weber
+  data (BE + quadratic/linear phases). This is exactly the project's ORIGINAL exact-WKB / global-
+  selector machinery (Voros symbols / virtual turning points). WS-E ← this object. WS-C (factorization
+  on sub-loci, e.g. ε₂=½(ε₁+ε₃)) is the remaining gate-2 question. WS-F (oracle) still running.
+
 ## WS-D completed + coordinator reflection — 2026-06-01
 Deliverable `paper/ws_d_nonabelian_E.md`; verification `experiments/ws_d_verification.py`.
 - **KEY CORRECTION (established):** Malikis–Cheianov's `Ê` is **Abelian** ([Ê,H]=0, Ê∈span{I,H,H²},
