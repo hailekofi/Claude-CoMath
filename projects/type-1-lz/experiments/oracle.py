@@ -142,7 +142,11 @@ def oracle_P(eps, gam, a, T: float = 80.0,
     ----------
     eps, gam, a : length-3 model parameters (eps strictly increasing, gam nonzero).
     T           : base truncation half-window.  The propagator is run at T and 2T and
-                  16:1 Richardson-extrapolated in the cutoff (tail ~ 1/T^4).
+                  16:1 Richardson-extrapolated in the cutoff.  NOTE: the per-entry
+                  truncation tail is MIXED in order -- most entries (incl. the BE survival
+                  diagonal) decay as 1/T^4 (16:1 optimal), but a few off-diagonal entries
+                  decay closer to 1/T^3.  16:1 is optimal-on-average; at large T (T>=120)
+                  8:1 and 16:1 agree to ~1e-8, so use T>=120 for ~1e-9 gold accuracy.
     rtol, atol  : DOP853 tolerances for the IP IVP.
     richardson  : if False, return the raw P(2T) without extrapolation.
     verify_convention : if True, check the fixed PI_IN/PI_OUT against the asymptotic
@@ -177,11 +181,14 @@ def oracle_P(eps, gam, a, T: float = 80.0,
     P_2T = _P_diabatic_at_T(geo, 2.0 * T, rtol, atol)
 
     if richardson:
-        P = (16.0 * P_2T - P_T) / 15.0
-        # conservative per-entry error: max of (Richardson correction residual) and
-        # (distance from the finer raw grid).  The true error is ~ |P-P_2T|/15-ish;
-        # we report the larger, safe surrogate.
-        err = np.maximum(np.abs(P - P_2T), np.abs(P_2T - P_T) / 15.0)
+        P16 = (16.0 * P_2T - P_T) / 15.0     # optimal for the 1/T^4 (majority) entries
+        P8 = (8.0 * P_2T - P_T) / 7.0        # optimal for the ~1/T^3 entries
+        P = P16
+        # CONSERVATIVE per-entry error: the tail order is mixed across entries, so we
+        # bound the residual by the larger of (a) the spread between the two Richardson
+        # weights |R16-R8| and (b) the raw Richardson increment |P-P_2T|.  This safely
+        # upper-bounds the truncation error regardless of the (entrywise) tail power.
+        err = np.maximum(np.abs(P16 - P8), np.abs(P - P_2T))
     else:
         P = P_2T.copy()
         err = np.abs(P_2T - P_T)

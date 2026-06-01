@@ -124,6 +124,29 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## WS-F completed + coordinator integration (one finding REJECTED) — 2026-06-01
+Deliverables `experiments/oracle.py` (gold oracle wrapping assay ip.propagate_ad_ip + 7-stratum
+suite) and `experiments/oracle_report.md`. Verification `experiments/structural_crossing.py`.
+- **ACCEPTED:** oracle is faithful (assay builds exactly Type-1 Cauchy H; IP vs lab agree 1e-12).
+  BE survivals ≤1e-8 @T=80, ~1e-9 @T>=120; double-stochasticity 1e-11-1e-13. **sampleB reconciled:
+  converged P_mid=0.02102, ratio 128.7x** (my standalone 0.017/104x was UNDER-converged; oracle
+  trusted). canonical P_mid=0.21472 (2.55x). FIX 2 (Richardson): tails are MIXED-order per entry
+  (most 1/T^4, some off-diag ~1/T^3); 8:1 sub-optimal, oracle uses 16:1; persisted
+  validation_dataset.pkl (T=120,8:1) carries ~1e-7 not 1e-9 — corrected honestly.
+- **ACCEPTED PENDING VERIFY (labeling only):** FIX 1 endpoint-permutation. WS-F claims the assay's
+  pi_in=argsort(a),pi_out=argsort(-a) is wrong; correct sheet->diabatic map is fixed PI_IN=(0,1,2),
+  PI_OUT=(2,0,1). Affects WHICH transition each P-entry is (not the physics values). Not re-derived
+  from ip.py internals here; WS-F's BE-landing test is reasonable evidence. Flag for formula-
+  validation downstream.
+- **REJECTED:** WS-F report Sec.7 "the node is COMPLEX / real gaps stay >=0.14." REFUTED: the real
+  exact crossing is STRUCTURAL and universal — every Type-1 sample has real min gap ~1e-8 (canonical
+  -0.249, sampleB -0.689, 8/8 randoms), INCLUDING WS-F's OWN near_node params (crossing at u~-3.02,
+  gap 1.9e-8; its bounded search missed it). WS-F's λ-interlacing argument is a non-sequitur (E=m/p:
+  two distinct interlacing λ can give the same E). γ-signs are gauge (eigenvalues invariant).
+  Confirms gate_test_genus + WS-D + the user's "exact crossing" hint, now shown UNIVERSAL.
+- **META (3rd time):** independently check a sub-agent's surprising structural claim before adopting
+  — WS-F's complex-node finding would have mis-centered the near-node stratum and the local models.
+
 ## Co-scaling derivation (obstruction upgraded) — 2026-06-01
 `paper/coscaling_derivation.md` + `experiments/coscaling.py`. Done by coordinator (not delegated;
 the obstruction statement needed judgment).

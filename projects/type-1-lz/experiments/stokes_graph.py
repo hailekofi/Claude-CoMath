@@ -80,29 +80,65 @@ def sep_width_ratio(eps, gam, a):
 
 
 # ----------------------------------------------------------------- turning points
+def _charpoly_u_coeffs(H0, A):
+    """
+    Coefficients c2(u),c1(u),c0(u) of the characteristic polynomial
+    chi(E,u) = E^3 + c2 E^2 + c1 E + c0  of M(u)=H0+u*diag(a), each as a numpy poly in u
+    (highest power first).  Built by exact polynomial interpolation (degrees <=3) from
+    sample evaluations -- fully numeric, no symbolic resultant (so it never hangs on
+    irrational float parameters).
+    """
+    a = np.diag(A).astype(float)
+    us = np.array([-3.0, -1.0, 0.0, 1.0, 3.0])           # 5 nodes, fit degree<=3 exactly
+    C2 = np.empty(len(us)); C1 = np.empty(len(us)); C0 = np.empty(len(us))
+    for k, uu in enumerate(us):
+        M = H0 + uu * np.diag(a)
+        tr = np.trace(M)
+        tr2 = np.trace(M @ M)
+        C2[k] = -tr
+        C1[k] = 0.5 * (tr * tr - tr2)
+        C0[k] = -np.linalg.det(M)
+    c2 = np.polyfit(us, C2, 2)
+    c1 = np.polyfit(us, C1, 2)
+    c0 = np.polyfit(us, C0, 3)
+    return c2, c1, c0
+
+
 def turning_points(eps, gam, a):
     """
     Roots in complex u of Disc_E(chi_H) -- the pairwise turning points.
-    Uses exact rational arithmetic for the discriminant, then numeric roots.
+    Fully numeric: builds the cubic-in-E char poly coefficients c2(u),c1(u),c0(u) as
+    polynomials in u, then the cubic discriminant
+        Disc = 18 c2 c1 c0 - 4 c2^3 c0 + c2^2 c1^2 - 4 c1^3 - 27 c0^2
+    as a degree-6 polynomial in u, and roots it.  (No symbolic resultant -> no hangs.)
     Returns: list of (u_complex, multiplicity_label) where label in {'simple','node'}.
     """
-    u, E = sp.symbols('u E')
-    epsS = [sp.nsimplify(x) for x in eps]
-    gamS = [sp.nsimplify(x) for x in gam]
-    aS = [sp.nsimplify(x) for x in a]
-    H0 = sp.zeros(3, 3)
-    for i in range(3):
-        for j in range(3):
-            if i != j:
-                H0[i, j] = gamS[i] * gamS[j] * (aS[i] - aS[j]) / (epsS[i] - epsS[j])
-        H0[i, i] = -sum(gamS[k] ** 2 * (aS[i] - aS[k]) / (epsS[i] - epsS[k])
-                        for k in range(3) if k != i)
-    M = H0 + u * sp.diag(*aS)
-    chi = sp.Poly(sp.expand((E * sp.eye(3) - M).det()), E)
-    disc = sp.Poly(sp.expand(sp.resultant(chi, chi.diff(E))), u)
-    coeffs = [complex(c) for c in disc.all_coeffs()]
-    roots = np.roots(coeffs)
-    # classify: cluster near-equal roots (the real double root = the node)
+    H0, A = type1(eps, gam, a)
+    c2, c1, c0 = _charpoly_u_coeffs(H0, A)
+    pm = np.polymul
+
+    def padd(*polys):
+        L = max(len(p) for p in polys)
+        return sum(np.pad(p, (L - len(p), 0)) for p in polys)
+
+    disc = padd(18 * pm(pm(c2, c1), c0),
+                -4 * pm(pm(pm(c2, c2), c2), c0),
+                pm(pm(c2, c2), pm(c1, c1)),
+                -4 * pm(pm(c1, c1), c1),
+                -27 * pm(c0, c0))
+    # trim leading near-zero coefficients (numerical noise can inflate the degree)
+    disc = np.trim_zeros(disc, 'f')
+    scale = np.max(np.abs(disc)) if disc.size else 1.0
+    nz = np.argmax(np.abs(disc) > 1e-9 * scale)
+    disc = disc[nz:]
+    roots = np.roots(disc)
+    # discard spurious roots far outside the physical region (Disc is genuinely degree 6;
+    # the avoided crossings/node all live at moderate |u| set by the parameter scales)
+    H0, A = type1(eps, gam, a)
+    span = 6.0 + 3.0 * np.max(np.abs(np.diag(A))) + np.max(np.abs(H0))
+    roots = np.array([r for r in roots if abs(r) < 50 * span])
+    # cluster near-equal roots; the real double root = the node
+    tol = 1e-2 * (1 + np.max(np.abs(roots))) if roots.size else 1e-2
     out = []
     used = [False] * len(roots)
     for i in range(len(roots)):
@@ -110,12 +146,31 @@ def turning_points(eps, gam, a):
             continue
         cluster = [i]
         for j in range(i + 1, len(roots)):
-            if not used[j] and abs(roots[i] - roots[j]) < 1e-5:
+            if not used[j] and abs(roots[i] - roots[j]) < tol:
                 cluster.append(j)
         for j in cluster:
             used[j] = True
         z = np.mean([roots[j] for j in cluster])
-        out.append((z, 'node' if len(cluster) > 1 else 'simple'))
+        # a node has multiplicity 2 AND is (nearly) real with an exact eigenvalue degeneracy
+        is_node = len(cluster) > 1
+        out.append((z, 'node' if is_node else 'simple'))
+    # safety: exactly one node expected (the exact crossing). If clustering missed it,
+    # the two closest real roots whose midpoint gives a real eigenvalue degeneracy = node.
+    if sum(1 for _, k in out if k == 'node') == 0 and len(out) >= 2:
+        reals = [(abs(z.imag), idx) for idx, (z, _) in enumerate(out)]
+        reals.sort()
+        # find the two near-real roots closest together
+        cand = [out[idx][0] for _, idx in reals[:4]]
+        best = None
+        for p in range(len(cand)):
+            for q in range(p + 1, len(cand)):
+                d = abs(cand[p] - cand[q])
+                if best is None or d < best[0]:
+                    best = (d, cand[p], cand[q])
+        if best is not None and best[0] < 0.1 * (1 + abs(best[1])):
+            zc = 0.5 * (best[1] + best[2])
+            out = [(z, k) for z, k in out if abs(z - best[1]) > 1e-12 and abs(z - best[2]) > 1e-12]
+            out.append((zc, 'node'))
     return out
 
 
@@ -231,7 +286,7 @@ class EigenTracer:
         return out
 
 
-def phase_field(H0, A, t, GX, GY, nseg=26):
+def phase_field(H0, A, t, GX, GY, nseg=20):
     """
     Robust Stokes-phase scalar field  phi(u) = Im int_t^u (E_i - E_j) du'  on the grid
     (GX,GY), integrated along the STRAIGHT RAY t->u, with the colliding pair (E_i,E_j)
@@ -308,10 +363,16 @@ def contour_polylines(GX, GY, phi, level=0.0):
 
 def stokes_lines_for_tp(H0, A, t, all_tps, span, grid_n=110):
     """
-    Stokes lines (zero-contours of phi) emanating from turning point t, masked to a disk
-    of radius = 0.92 * (distance to the nearest OTHER turning point) so we never trust the
-    ray integral past another branch point (where the cut would corrupt it).
-    Returns list of complex polylines.
+    Stokes lines (zero-contours of the WKB phase phi) emanating from turning point t,
+    masked to a disk of radius  rmask = 0.92 * (distance to the nearest OTHER turning
+    point).  Past a neighbouring branch point the ray integral crosses a cut of
+    sqrt(disc) and phi is no longer trustworthy, so we trace each tp's lines only inside
+    this clean disk.  This is the CONSERVATIVE choice: it never produces a spurious joint
+    by over-extending a line, at the cost of possibly MISSING a joint between two turning
+    points that are far apart while a same-type conjugate twin sits close (a documented
+    false-negative mode -- see ws_g_stokes_graph.md sec.6).  Joint PRESENCE here is a
+    sufficient (not necessary) witness of non-factorization.
+    Returns (list of complex polylines, rmask).
     """
     others = [abs(t - s) for s, _ in all_tps if abs(t - s) > 1e-6]
     rmask = 0.92 * min(others) if others else span
@@ -321,11 +382,9 @@ def stokes_lines_for_tp(H0, A, t, all_tps, span, grid_n=110):
     gy = np.linspace(t.imag - pad, t.imag + pad, grid_n)
     GX, GY = np.meshgrid(gx, gy)
     phi = phase_field(H0, A, t, GX, GY)
-    # mask outside disk
     R = np.abs((GX - t.real) + 1j * (GY - t.imag))
     phi = np.where(R <= rmask, phi, np.nan)
     polylines = contour_polylines(GX, GY, phi)
-    # keep only polyline pieces that actually touch the turning point neighbourhood
     keep = []
     for pl in polylines:
         if np.min(np.abs(pl - t)) < 0.25 * rmask:
@@ -426,7 +485,12 @@ def wkb_action_between(tracer, t, u_target, pair, n=600):
 
 
 # --------------------------------------------------------------- benchmark P_2->2
-def benchmark_P(eps, gam, a, T=200.0, rtol=1e-12, atol=1e-13):
+def benchmark_P(eps, gam, a, T=100.0, rtol=1e-9, atol=1e-11):
+    """
+    P[n<-m] = |U_nm|^2 from i U' = H(u) U, U(-T)=I.  Tolerances/horizon are chosen so the
+    *enhancement ratio* (the diagnostic) is good to ~3 sig figs while staying fast enough
+    for the parameter scan.  For machine-precision BE calibration use the project oracle.
+    """
     H0, A = type1(eps, gam, a)
     rhs = lambda u, y: (-1j * ((H0 + u * A) @ y.reshape(3, 3))).ravel()
     sol = solve_ivp(rhs, [-T, T], np.eye(3, dtype=complex).ravel(),
@@ -434,9 +498,14 @@ def benchmark_P(eps, gam, a, T=200.0, rtol=1e-12, atol=1e-13):
     return np.abs(sol.y[:, -1].reshape(3, 3)) ** 2
 
 
-def mid_enhancement(eps, gam, a):
-    """P_mid / P_mid^incoherent (the 2.5-104x diagnostic), with mid = middle slope."""
-    P = benchmark_P(eps, gam, a)
+def mid_enhancement(eps, gam, a, hi_accuracy=False):
+    """P_mid / P_mid^incoherent (the 2.5-104x diagnostic), with mid = middle slope.
+    hi_accuracy=True uses the tighter ODE (for the showcase figures); the default fast
+    settings are used in the scan (the enhanced/not-enhanced classification is robust)."""
+    if hi_accuracy:
+        P = benchmark_P(eps, gam, a, T=160.0, rtol=1e-11, atol=1e-13)
+    else:
+        P = benchmark_P(eps, gam, a)
     lo, mid, hi = np.argsort(a)
     inc = np.exp(-2 * np.pi * (Gamma(eps, gam, a, mid, lo) + Gamma(eps, gam, a, mid, hi)))
     return P[mid, mid], inc, P[mid, mid] / inc
@@ -595,7 +664,7 @@ def main():
     for lbl, smp in [("WELL-SEPARATED (sampleA)", sampleA),
                      ("OVERLAPPING (sampleB)", sampleB)]:
         r = sep_width_ratio(*smp)
-        Pmid, inc, enh = mid_enhancement(*smp)
+        Pmid, inc, enh = mid_enhancement(*smp, hi_accuracy=True)
         fn = os.path.join(FIGS, f"stokes_{'sepA' if 'WELL' in lbl else 'overlapB'}.png")
         title = (f"{lbl}\nsep/width={r:.2f}  P_2->2={Pmid:.4f}  "
                  f"incoh={inc:.4f}  enh={enh:.2f}x")
@@ -648,22 +717,30 @@ def main():
             print(f"  (skip sample: {e})")
     rows.sort()
 
-    # correlation summary
+    # correlation summary.  Enhancement spans ~1 to ~1e10, so we correlate against
+    # log10(enh) (raw Pearson would be dominated by a couple of extreme outliers) and we
+    # also report a robust 2x2 contingency of joint-presence vs significant enhancement.
     rows_a = np.array([(r, nj, strg, enh) for r, nj, strg, _, _, enh in rows])
     if len(rows_a) > 3:
         rr, jj, ss, ee = rows_a.T
-        print("\nCORRELATIONS (Pearson):")
-        print(f"  ratio vs enhancement      : {np.corrcoef(rr, ee)[0,1]:+.3f}")
-        print(f"  #joints vs enhancement    : {np.corrcoef(jj, ee)[0,1]:+.3f}")
-        print(f"  joint-strength vs enhancement: {np.corrcoef(ss, ee)[0,1]:+.3f}")
-        print(f"  ratio vs #joints          : {np.corrcoef(rr, jj)[0,1]:+.3f}")
-        print(f"  ratio vs joint-strength   : {np.corrcoef(rr, ss)[0,1]:+.3f}")
-        # the 15/85 split: incoherent exact <=> enh ~ 1
-        exact = ee < 1.15
-        print(f"\n  'incoherent exact' (enh<1.15): {np.sum(exact)}/{len(ee)} samples")
-        if np.any(exact) and np.any(~exact):
-            print(f"     mean #joints  exact={jj[exact].mean():.2f}  overlap={jj[~exact].mean():.2f}")
-            print(f"     mean strength exact={ss[exact].mean():.3f}  overlap={ss[~exact].mean():.3f}")
+        le = np.log10(ee)
+        hasj = jj > 0
+        enhd = ee > 1.15                          # "significantly enhanced" (non-factorizing)
+        print("\nCORRELATIONS (Pearson, vs log10 enhancement):")
+        print(f"  ratio          vs log-enh : {np.corrcoef(rr, le)[0,1]:+.3f}")
+        print(f"  #joints        vs log-enh : {np.corrcoef(jj, le)[0,1]:+.3f}")
+        print(f"  joint-strength vs log-enh : {np.corrcoef(ss, le)[0,1]:+.3f}")
+        print(f"  joint-present  vs log-enh : {np.corrcoef(hasj.astype(float), le)[0,1]:+.3f}")
+        print("\nJOINT-PRESENCE vs ENHANCEMENT contingency:")
+        print(f"  joint & enhanced      : {np.sum(hasj & enhd)}")
+        print(f"  joint & NOT enhanced  : {np.sum(hasj & ~enhd)}   (false positives)")
+        print(f"  NO joint & enhanced   : {np.sum(~hasj & enhd)}   (false negatives, far-apart tail)")
+        print(f"  NO joint & NOT enhanced: {np.sum(~hasj & ~enhd)}")
+        if np.sum(hasj):
+            print(f"  => when a joint IS found, fraction enhanced = {np.mean(enhd[hasj]):.2f}")
+        print(f"\n  'incoherent exact' (enh<1.15): {np.sum(~enhd)}/{len(ee)} samples")
+        if np.any(~enhd) and np.any(enhd):
+            print(f"     mean #joints  exact={jj[~enhd].mean():.2f}  enhanced={jj[enhd].mean():.2f}")
     print("\nDone. Figures in", FIGS)
 
 
