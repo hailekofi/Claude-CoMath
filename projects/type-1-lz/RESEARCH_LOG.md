@@ -144,6 +144,33 @@ DECISIVE TEST + AUDIT:
   (slope-middle, NOT eps-index-1 in general); energy ordering is NOT a labeling convention.
   Retracted the earlier 'P_2->2 by energy rank' framing as a red herring.
 
+## STRATEGIC REASSESSMENT + traceable synthesis written — 2026-06-01
+NEW companion artifacts for cold pickup: **SESSION_SYNTHESIS.md** (full traceable arc + hypothesis
+ledger + dead ends with WHY + open questions) and **META_REVIEW.md** (recurring failure patterns,
+propagate-forward rules). Read those + NOMENCLATURE.md first.
+- **Honest state:** NO concise computable closed form yet; STRONG multi-method evidence that an exact
+  one in elementary OR *published* special functions does NOT exist. We have: structural theory (why
+  hard), the object characterized as a RANK-3 connection coefficient with accessory parameter fixed
+  algebraically by the exact crossing (node), and a validated NUMERICAL model (1e-7..1e-9).
+- **Q2 (user) — node <-> connection coefficient, status:** the relationship "exact crossing (node
+  E_*) = the apparent/accessory singularity of the connection ODE" is VALID and verified on 4/4
+  independent samples (incl. non-monotonic; clean rational match e.g. -5313773/12376000), with a
+  clean characterization (unique rational root of the cyclic Wronskian det[e0,Me0,M^2e0],
+  M=diag(1/a)(H0-vI)). BUT: (a) NOT a general rigorous theorem (4 samples + structural argument);
+  (b) 'confluent-Heun' was the WRONG label -> it is RANK-3 (capstone); (c) it is STRUCTURAL, not
+  CONSTRUCTIVE -- it locates the accessory parameter, does not give a computable expression.
+- **Diagnosed strategic drift:** pursued the CLASSIFICATORY path (name the special function:
+  Kampe de Feriet -> Painleve V -> confluent-Heun -> c=1), which dead-ended at 'unpublished rank-3'
+  and by construction never yields a formula; ABANDONED the project's original CONSTRUCTIVE exact-WKB
+  program (selector/global-insertion/virtual-turning-points = the 12x13 joint). Likely OVER-concluded
+  'no concise form': rank-3 != 'no concise constructive formula' (the product of two explicit Weber
+  shears was never tried).
+- **Recommended redirect (pending user steer):** recalibrate goal to constructive/realistic targets:
+  O1 [primary] constructive exact-WKB product P_2->2=|M_form . Weber . Weber|^2_{mm} with explicit
+  Weber shears + the spectral-network junction factor; O2 exact integral representation; O3 validated
+  semi-analytic approximation. Proofs owed: node universality, node=accessory (general, via cyclic
+  Wronskian), the ~1.6 bound, accessory algebraicity, the dim-count 6>2.
+
 ## WS-CAP completed — CAPSTONE VERDICT: RANK-3 (WS-PV confirmed; WS-PA1 'PV' refuted) — 2026-06-01
 Deliverables paper/cap_connection_formula.md, experiments/cap_connection_formula.py. The capstone
 DECISIVELY settles the one open structural dispute. (Reverses my prior lean toward WS-PA1's 'PV'.)
