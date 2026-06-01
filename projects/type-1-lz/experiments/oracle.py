@@ -246,8 +246,10 @@ def _near_node_params():
     strictly interlace the real poles, so an EXACT real-u degeneracy does not occur;
     this is the closest physical approach.  See oracle_report.md.
     """
-    return dict(eps=(-2.0, -1.4, 3.0), gam=(1.5, 1.5, 0.6), a=(-2.0, 1.9, 2.1),
-                desc="near-node: small real-axis avoided-crossing gap (node approach)")
+    return dict(eps=(-1.6956, -1.0984, -0.6165),
+                gam=(-1.2828, -0.2569, 1.413),
+                a=(0.0517, 1.5311, -0.9889),
+                desc="near-node: min real-axis eigen-gap ~0.14 (closest node approach)")
 
 
 SUITE["near_node"] = _near_node_params()

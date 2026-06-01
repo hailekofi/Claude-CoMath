@@ -231,79 +231,106 @@ class EigenTracer:
         return out
 
 
-def stokes_line(tracer, t, pair, length=6.0, n=700, ds=None):
+def phase_field(H0, A, t, GX, GY, nseg=26):
     """
-    Trace the three Stokes lines emanating from turning point t for the given pair.
-    A Stokes line satisfies  Im int_t^u (E_i - E_j) du' = 0.
-    Near t,  E_i-E_j ~ c (u-t)^{1/2}, so int ~ (2/3) c (u-t)^{3/2}: three directions
-    at 120 deg where the integral is real.  We integrate the ODE
-        du/ds = 1 / (E_i - E_j)        (so that  d/ds int(E_i-E_j) du = 1, real),
-    i.e. the line is a real-time flow of the inverse energy-difference (the standard
-    Stokes-line flow).  Three seeds at the 3 cube-root directions.
-    Returns list of 3 arrays of complex u (the line points), each with its integral S(s).
+    Robust Stokes-phase scalar field  phi(u) = Im int_t^u (E_i - E_j) du'  on the grid
+    (GX,GY), integrated along the STRAIGHT RAY t->u, with the colliding pair (E_i,E_j)
+    tracked by continuity from the turning point t.  Zero set of phi = the Stokes lines
+    emanating from t (three branches at 120 deg near t).  This is the standard exact-WKB
+    Stokes-line definition; the ray-integration with pair tracking handles the branch of
+    sqrt(disc) cleanly in the neighbourhood of t (the only place we trust it -- far past
+    another turning point the ray may cross a cut, so we MASK beyond the nearest other tp).
+
+    VECTORIZED: all grid points are advanced TOGETHER over a common normalized parameter
+    s in [0,1] (u(s)=t+s*(grid-t)); at each s we batch-diagonalize the N Hamiltonians and
+    track the colliding pair by nearest-neighbour to the previous step.  ~nseg batched
+    eigvals calls instead of N*nseg scalar ones.
     """
-    H0, A = tracer.H0, tracer.A
-    i, j = pair
-    # leading coefficient c: E_i-E_j ~ c*(u-t)^{1/2}.  Estimate c by sampling near t.
-    h = 1e-4
-    # need branch-consistent delta near t; sample on a tiny circle and take pair gap
-    def gap(u):
-        w = np.linalg.eigvals(H0 + u * A)
-        # the two closest eigenvalues form the colliding pair near t
-        d = [(abs(w[p] - w[q]), w[p] - w[q]) for p in range(3) for q in range(p + 1, 3)]
-        d.sort(key=lambda x: x[0])
-        return d[0][1]  # signed difference of closest pair (sign arbitrary)
-    # leading c^2 from  (E_i-E_j)^2 ~ c^2 (u-t):
-    g1 = gap(t + h)
-    c2 = (g1 ** 2) / h
-    c = np.sqrt(c2)
-    # three Stokes directions: where (2/3) c (u-t)^{3/2} is real & we move outward.
-    # (u-t) = r e^{i theta}; need arg of c*(u-t)^{1/2} integrated real.
-    # The 3 outgoing Stokes directions: theta_k such that arg(c)+ (3/2) theta = k*pi.
-    argc = np.angle(c)
-    thetas = [(k * np.pi - argc) * 2 / 3 for k in range(3)]
-    lines = []
-    s_max = length
-    if ds is None:
-        ds = s_max / n
-    for th in thetas:
-        # seed a small step away from t in direction th
-        r0 = 5e-3
-        u_seed = t + r0 * np.exp(1j * th)
-        # determine local delta sign at seed by continuity to the colliding pair
-        pts = [u_seed]
-        # we flow du/ds = 1/delta where delta is the colliding-pair difference,
-        # tracked by nearest-neighbour from the seed.
-        w = np.linalg.eigvals(H0 + u_seed * A)
-        # pick the colliding pair = two closest eigenvalues at the seed
-        dd = [(abs(w[p] - w[q]), p, q) for p in range(3) for q in range(p + 1, 3)]
-        dd.sort()
-        p_, q_ = dd[0][1], dd[0][2]
-        ep, eq = w[p_], w[q_]
-        delta = ep - eq
-        # orient delta so that moving by +ds increases |u-t| (outgoing)
-        # we want d(u-t)/ds along +real-integral; check sign:
-        if (np.exp(1j * th) / delta).real < 0:
-            delta = -delta
-        u = u_seed
-        Sint = 0.0 + 0j
-        for _ in range(n):
-            wn = np.linalg.eigvals(H0 + u * A)
-            # match ep,eq by nearest neighbour to keep the pair
-            cn = np.abs(np.array([ep, eq])[:, None] - wn[None, :])
-            m = _greedy_match_2x3(cn, 3)
-            ep, eq = wn[m[0]], wn[m[1]]
-            delta = ep - eq
-            if abs(delta) < 1e-9:
-                break
-            du = (1.0 / delta) * ds
-            u = u + du
-            Sint += delta * du  # = ds (real) by construction; track for diagnostics
-            pts.append(u)
-            if abs(u - t) > length:
-                break
-        lines.append(np.array(pts))
-    return lines
+    ny, nx = GX.shape
+    grid = (GX + 1j * GY).ravel()
+    N = grid.size
+    diff = grid - t                                  # (N,)
+    a = np.diag(A).astype(float)                     # slopes
+    # seed colliding pair just off t along each ray
+    s0 = 1e-3
+    Us = t + s0 * diff
+    W = _batch_eigvals(H0, a, Us)                    # (N,3) eigenvalues
+    # colliding pair at t = the two closest eigenvalues (per ray)
+    gaps = np.stack([np.abs(W[:, p] - W[:, q]) for (p, q) in PAIRS], axis=1)  # (N,3)
+    kmin = np.argmin(gaps, axis=1)
+    pidx = np.array([PAIRS[k][0] for k in kmin])
+    qidx = np.array([PAIRS[k][1] for k in kmin])
+    ep = W[np.arange(N), pidx]
+    eq = W[np.arange(N), qidx]
+    integ = np.zeros(N, complex)
+    uprev = Us.copy()
+    ss = np.linspace(s0, 1.0, nseg)
+    for s in ss[1:]:
+        Uk = t + s * diff
+        Wk = _batch_eigvals(H0, a, Uk)               # (N,3)
+        # match ep,eq to the closest of the 3 new eigenvalues (independently; the two
+        # tracked sheets are well separated from the third except exactly at a tp)
+        dep = np.abs(Wk - ep[:, None]); newp = np.argmin(dep, axis=1)
+        deq = np.abs(Wk - eq[:, None]); newq = np.argmin(deq, axis=1)
+        # if both map to same sheet (near-collision), keep previous assignment for the
+        # weaker match
+        clash = newp == newq
+        if np.any(clash):
+            # for clashes, force q to the next-best distinct sheet
+            for idx in np.nonzero(clash)[0]:
+                order = np.argsort(np.abs(Wk[idx] - eq[idx]))
+                newq[idx] = order[1] if order[0] == newp[idx] else order[0]
+        ep = Wk[np.arange(N), newp]
+        eq = Wk[np.arange(N), newq]
+        integ += (ep - eq) * (Uk - uprev)
+        uprev = Uk
+    return integ.imag.reshape(ny, nx)
+
+
+def _batch_eigvals(H0, a, Us):
+    """Eigenvalues of H0 + u*diag(a) for an array Us of u-values. Returns (len(Us),3)."""
+    Us = np.asarray(Us)
+    M = H0[None, :, :].astype(complex) + Us[:, None, None] * np.diag(a)[None, :, :]
+    return np.linalg.eigvals(M)
+
+
+def contour_polylines(GX, GY, phi, level=0.0):
+    """Extract zero-level contour polylines (lists of complex points) from a scalar field."""
+    cs = plt.contour(GX, GY, phi, levels=[level])
+    polylines = []
+    # matplotlib >=3.8: use allsegs
+    for seg in cs.allsegs[0]:
+        if len(seg) >= 2:
+            polylines.append(seg[:, 0] + 1j * seg[:, 1])
+    plt.close('all')
+    return polylines
+
+
+def stokes_lines_for_tp(H0, A, t, all_tps, span, grid_n=110):
+    """
+    Stokes lines (zero-contours of phi) emanating from turning point t, masked to a disk
+    of radius = 0.92 * (distance to the nearest OTHER turning point) so we never trust the
+    ray integral past another branch point (where the cut would corrupt it).
+    Returns list of complex polylines.
+    """
+    others = [abs(t - s) for s, _ in all_tps if abs(t - s) > 1e-6]
+    rmask = 0.92 * min(others) if others else span
+    rmask = min(rmask, span)
+    pad = rmask * 1.15
+    gx = np.linspace(t.real - pad, t.real + pad, grid_n)
+    gy = np.linspace(t.imag - pad, t.imag + pad, grid_n)
+    GX, GY = np.meshgrid(gx, gy)
+    phi = phase_field(H0, A, t, GX, GY)
+    # mask outside disk
+    R = np.abs((GX - t.real) + 1j * (GY - t.imag))
+    phi = np.where(R <= rmask, phi, np.nan)
+    polylines = contour_polylines(GX, GY, phi)
+    # keep only polyline pieces that actually touch the turning point neighbourhood
+    keep = []
+    for pl in polylines:
+        if np.min(np.abs(pl - t)) < 0.25 * rmask:
+            keep.append(pl)
+    return keep, rmask
 
 
 def _greedy_match_2x3(cost, ncol):
@@ -416,22 +443,30 @@ def mid_enhancement(eps, gam, a):
 
 
 # ----------------------------------------------------------------------- plotting
-def plot_stokes_graph(eps, gam, a, fname, title, length=6.0):
+def build_stokes_graph(eps, gam, a, span=6.0):
+    """
+    Build the full Stokes graph: for every turning point (simple AND the node), classify
+    its colliding pair, extract its Stokes lines (zero-contours of the WKB phase), and
+    detect joints (intersections of lines of DIFFERENT pair-type away from a tp).
+    Returns (tps, lines_by_pair, tp_pairs, joints).
+    """
     H0, A = type1(eps, gam, a)
-    tracer = EigenTracer(eps, gam, a)
     tps = turning_points(eps, gam, a)
-    # build Stokes lines from each SIMPLE turning point, classified by pair
     lines_by_pair = {p: [] for p in PAIRS}
-    simple_tps = []
+    tp_pairs = []
     for t, kind in tps:
-        if kind == 'node':
-            continue
         pair = classify_turning_pair(t, eps, gam, a)
-        simple_tps.append((t, pair))
-        ls = stokes_line(tracer, t, pair, length=length)
-        for ln in ls:
+        tp_pairs.append((t, pair, kind))
+        lines, _ = stokes_lines_for_tp(H0, A, t, tps, span)
+        for ln in lines:
             lines_by_pair[pair].append(ln)
     joints = find_joints(lines_by_pair, tps)
+    return tps, lines_by_pair, tp_pairs, joints
+
+
+def plot_stokes_graph(eps, gam, a, fname, title, span=6.0):
+    tps, lines_by_pair, tp_pairs, joints = build_stokes_graph(eps, gam, a, span=span)
+    simple_tps = [(t, p) for t, p, k in tp_pairs if k != 'node']
 
     fig, ax = plt.subplots(figsize=(7.2, 6.4))
     # diabatic crossing real locations (vertical guides)
@@ -468,29 +503,25 @@ def plot_stokes_graph(eps, gam, a, fname, title, length=6.0):
     fig.tight_layout()
     fig.savefig(fname, dpi=140)
     plt.close(fig)
-    return simple_tps, joints
+    return simple_tps, joints, tps
 
 
 # ----------------------------------------------------------------- joint strength
-def joint_strength(eps, gam, a, joints):
+def joint_strength(tps, joints):
     """
-    For each joint, the relative WKB 'depth': |Im S| from the nearest simple turning
-    point of the OTHER pair, normalised by the action of the colliding window.
-    Smaller |Im S| at the crossing of the OTHER pair's Stokes line => deeper joint.
-    We report the minimum over joints of the normalised |Im S| of the *crossing* line
-    measured from its own turning point to the joint -- a Stokes line has Im S = 0 by
-    construction along itself, so the relevant 'strength' is how close the joint is to
-    BOTH turning points relative to the inter-turning-point separation.  We use a robust
-    geometric proxy: 1 - (dist of joint to nearest tp)/(tp-tp separation), clamped >=0.
+    Geometric 'depth' of a joint:  1 - dist(joint, nearest turning point)/median(tp-tp
+    separation), clamped to [0,1].  A joint that sits well inside the turning-point cluster
+    (small dist relative to the cluster scale) is 'strong' (deep in the Stokes region); a
+    joint grazing the edge is 'weak'.  Returns (max_strength, n_joints).
     """
-    tps = [t for t, _ in turning_points(eps, gam, a)]
+    tp = [t for t, _ in tps]
     if not joints:
         return 0.0, 0
-    seps = [abs(tps[i] - tps[j]) for i in range(len(tps)) for j in range(i + 1, len(tps))]
-    scale = np.median(seps)
+    seps = [abs(tp[i] - tp[j]) for i in range(len(tp)) for j in range(i + 1, len(tp))]
+    scale = np.median([s for s in seps if s > 1e-6]) if any(s > 1e-6 for s in seps) else 1.0
     strengths = []
     for x, pa, pb in joints:
-        dmin = min(abs(x - t) for t in tps)
+        dmin = min(abs(x - t) for t in tp)
         strengths.append(max(0.0, 1.0 - dmin / scale))
     return float(np.max(strengths)), len(joints)
 
@@ -568,11 +599,14 @@ def main():
         fn = os.path.join(FIGS, f"stokes_{'sepA' if 'WELL' in lbl else 'overlapB'}.png")
         title = (f"{lbl}\nsep/width={r:.2f}  P_2->2={Pmid:.4f}  "
                  f"incoh={inc:.4f}  enh={enh:.2f}x")
-        stps, joints = plot_stokes_graph(*smp, fname=fn, title=title)
-        strg, nj = joint_strength(*smp, joints)
+        stps, joints, tps = plot_stokes_graph(*smp, fname=fn, title=title)
+        strg, nj = joint_strength(tps, joints)
         print(f"\n[{lbl}]")
         print(f"  turning-point pairs: {[(round(t.real,3),round(t.imag,3),PAIRLAB[p]) for t,p in stps]}")
         print(f"  joints found: {nj}   max strength: {strg:.3f}")
+        if joints:
+            for x, pa, pb in joints:
+                print(f"     joint @ {x.real:+.3f}{x.imag:+.3f}i  types {PAIRLAB[pa]}x{PAIRLAB[pb]}")
         print(f"  P_2->2={Pmid:.5f}  incoherent={inc:.5f}  enhancement={enh:.2f}x")
         print(f"  saved figure: {fn}")
 
@@ -605,17 +639,8 @@ def main():
         seen.add(key)
         try:
             r = sep_width_ratio(*smp)
-            tps = turning_points(*smp)
-            tracer = EigenTracer(*smp)
-            lines_by_pair = {p: [] for p in PAIRS}
-            for t, kind in tps:
-                if kind == 'node':
-                    continue
-                pair = classify_turning_pair(t, *smp)
-                for ln in stokes_line(tracer, t, pair, length=6.0):
-                    lines_by_pair[pair].append(ln)
-            joints = find_joints(lines_by_pair, tps)
-            strg, nj = joint_strength(*smp, joints)
+            tps, lines_by_pair, tp_pairs, joints = build_stokes_graph(*smp, span=6.0)
+            strg, nj = joint_strength(tps, joints)
             Pmid, inc, enh = mid_enhancement(*smp)
             rows.append((r, nj, strg, Pmid, inc, enh))
             print(f"{r:7.3f} {nj:7d} {strg:8.3f} {Pmid:9.5f} {inc:9.5f} {enh:8.2f}")
