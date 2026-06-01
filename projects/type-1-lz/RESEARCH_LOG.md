@@ -124,6 +124,25 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## Co-scaling derivation (obstruction upgraded) — 2026-06-01
+`paper/coscaling_derivation.md` + `experiments/coscaling.py`. Done by coordinator (not delegated;
+the obstruction statement needed judgment).
+- **WIDTH LEMMA [established, exact, symbolic]:** w_ij = 2|γ_iγ_j|/|ε_i−ε_j| — avoided-crossing
+  width is SLOPE-INDEPENDENT (Δa cancels). And Γ_ij=(w_ij/2)²|a_i−a_j| ⟺ |a_i−a_j|=4Γ_ij/w_ij².
+- **Scale-invariance [analytic]:** both separation and width ~ γ²/Δε (slope scale cancels) ⇒
+  sep/width is a dimensionless shape function; no overall scaling grows it.
+- **THEOREM (corrected, sharp) [analytic backbone + num bound]:** on the genuine-LZ locus
+  (all Γ_ij∈[0.2,5]) the closest crossing pair is within ~1.6 max-widths (35k samples; median 0.20;
+  TIGHTER than the unconstrained 4.2). At least TWO crossings are ALWAYS marginally-overlapping ⇒
+  MC all-isolated config does not exist in Type-1 ⇒ S=∏S_ij unreachable.
+- **Loophole closed:** degenerate-slope limit sends one crossing to ∞ but Γ→0 there (trivial pass);
+  the other two stay overlapping. So the earlier worry (ratio unbounded in degenerate limit) does
+  NOT provide an escape with genuine crossings.
+- Upgrades O4-FAIL obstruction from numerically-supported to analytically-derived backbone. Quotable:
+  the Cauchy structure welds widths to level spacing (slope-free), so Type-1 crossings are
+  permanently marginally-overlapping — the structural reason it's outside the factorizable class.
+- Open: fully-analytic sup of the O(1) constant over shape space.
+
 ## WS-A completed (gate-1 PASS) + coordinator integration — 2026-06-01
 Deliverable `paper/ws_a_riemann_scheme.md`. Claims structurally forced (H(u) polynomial), low risk.
 - **Riemann scheme (established):** honest object = 3×3 diabatic system ψ'=−i(H0+uA)ψ; entire
