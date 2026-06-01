@@ -126,6 +126,32 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## WS-R completed — restart-structure tests (H-R3,H-R2 confirmed; H-R1 reframed) — 2026-06-01
+Deliverables paper/restart_structure.md, experiments/restart_probe.py. All measured in the
+convergent canonical frame (Coulomb-subtracted; T-convergence verified). Coordinator spot-checks pass.
+- **H-R3 CONFIRMED [symbolic]:** -u'(lambda)=W4(lambda)/p(lambda)^2 (W4=np'-n'p), so Gamma_j~(lambda-eps_i)/|g_i|
+  near the poles -- ANALYTIC, no monodromy at eps_i. The sqrt branch points of Gamma are the W4 zeros
+  (turning points, -u'=0), 4 complex points well separated from the real poles. Turning-point
+  (window/BE) branching and irregular-point (off-diagonal Stokes) structure are on distinct sheets.
+- **H-R2 CONFIRMED [oracle, strong]:** off-diagonal weight concentrates on the mid row/col
+  (frac_mid 0.607-0.757); shrinking ONE outer coupling (gamma x1e-3) collapses P_mid to the
+  incoherent BE product (|diff|~1e-3) AND frac_mid->1.0 -- one shear vanishes, joint -> single Weber
+  factor. The {mid,lo},{mid,hi} shears (=12x13 joint) ARE the non-factorizing carrier;
+  'elementary <=> a level decouples' reconfirmed.
+- **H-R1 REFRAMED (my hypothesis PARTLY WRONG):** (a) the off-diagonal is CYCLIC (dominated by the
+  3-cycle lo->mid->hi->lo = PI_OUT=(2,0,1)), NOT triangular (coordinator-confirmed from |S|^2 argmax
+  pattern (0<-1,1<-2,2<-0)). (b) 'e^{2pi i c_i} = a diagonal factor of S_canon' is a CATEGORY ERROR:
+  c_i is the logT drift SUBTRACTED to build the frame, so S_canon carries no such factor; extracting
+  'D.P' reproduces the content-free Q_restart. The sound residue is exactly H-R2.
+- **RECONCILIATION with WS-CH:** WS-CH's C=M_form . shear . shear is the CENTRAL CONNECTION MATRIX
+  (formal Thome basis at inf <-> Frobenius at the apparent point) -- there M_form (formal monodromy
+  e^{2pi i c_i}) IS a factor (the Thome basis carries the formal exponents). WS-R's statement is about
+  the REGULARIZED SCATTERING matrix S_canon (diabatic basis), where M_form is subtracted. Different
+  matrices/frames; both correct. INVARIANT content (both agree): the TWO mid-pair Stokes shears.
+- **CAUTION (carry into PA work):** use the connection-matrix framing (M_form (x) two mid-pair shears,
+  WS-CH); do NOT claim 'triangular shear' or 'e^{2pi i c_i} as a factor of S_canon'. The frame-pinned
+  S_canon reality is cyclic-permutation x mid-pair shears.
+
 ## WS-CH completed — confluent-Heun central connection; benchmarked computable P_2->2 — 2026-06-01
 Deliverable paper/ch_direct_connection.md; benchmark scripts archived experiments/ws_ch/.
 - **CONFIRMS (2nd independent derivation, coordinator-spot-checked):** scalar 3rd-order Laplace ODE
