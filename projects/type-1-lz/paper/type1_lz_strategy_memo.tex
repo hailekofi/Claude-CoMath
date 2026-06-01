@@ -1,0 +1,243 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\newcommand{\Gam}{\Gamma}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Pmid}{P_{2\to2}}
+\title{Toward a closed form for the Type-1, $N{=}3$ Landau--Zener transition matrix:\\
+a rank-ordered strategy memo}
+\author{Co-theoretical-physicist working session \\ \small (synthesis of code/notes audit + literature review)}
+\date{2026-06-01}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We restate the goal --- a \emph{closed-form, computationally practical} expression for the
+$3\times3$ Type-1 multistate Landau--Zener (MLZ) transition matrix $P$, reducible to the core
+parameters $\{\gamma_i,\eps_i,a_i\}$ with \emph{no} numerical ODE integration and at most a
+handful of geometric (Abelian) integrals --- and rank-order the available strategies against
+that bar. The two extreme-level survivals are already exact (Brundobler--Elser, realized as the
+imaginary window periods $I_X$); the open content is the middle-level survival $\Pmid$ and one
+independent off-diagonal. Our audit shows the project's local exact-WKB programme has, in the
+generic simple regime, \emph{already proved} selector sufficiency and the exact global insertion
+rule, leaving essentially one symbolic gap (the all-orders transport exponent $\Theta^{\rm tr}_v$).
+However, fleshing out $\Theta^{\rm tr}_v$ does \emph{not} by itself yield a practical amplitude:
+it returns one local factor as a power series requiring Borel resummation. We therefore rank the
+\textbf{KZ/Gaudin monodromy route} (Barik--Bakker--Gritsev--Yuzbashyan 2025) first, because it
+targets the amplitude \emph{directly} as connection data of a rational flat connection in
+$\{\gamma,\eps,a\}$. We give five ranked strategies, each with near-term targets and falsification
+tests, and a recommended two-week critical path.
+\end{abstract}
+
+\paragraph{Status legend / evidence ladder.}
+\textsc{established} (proof or overwhelming combined evidence) $\succ$
+\textsc{analytically-derived} $\succ$ \textsc{numerically-supported} ($\approx$ near-proof, the
+project's $\sim10^{-9}$ benchmark) $\succ$ \textsc{conjecture}. ``Practicality'' below always
+means: \emph{elementary/finite in $\{\gamma,\eps,a\}$ plus $\le$ a few period integrals; no ODE
+matrizant, no order-by-order numerical Borel sum.}
+
+%==============================================================
+\section{The problem and the practicality bar}
+%==============================================================
+The model is $H(u)=H_0+uA$, $A=\mathrm{diag}(a_i)$, with the Cauchy/Type-1 coupling
+$(H_0)_{ij}=\gamma_i\gamma_j(a_i-a_j)/(\eps_i-\eps_j)$. The observable is the doubly-stochastic
+$P_{x\to j}=|f_j(+\infty)|^2$, with $4$ free real parameters. Type-1 matrices form a
+\emph{commuting family} (the integrability structure). Known exactly:
+\begin{equation}
+P[\text{extreme-slope level survives}]=\prod_m e^{-2\pi\Gam_{nm}},\qquad
+\Gam_{ij}=\frac{\gamma_i^2\gamma_j^2\,|a_i-a_j|}{(\eps_i-\eps_j)^2},
+\label{eq:BE}
+\end{equation}
+the Brundobler--Elser (BE) law, here realized intrinsically as $|\!\Im I_X|=2\pi\sum\Gam_{nm}$
+where $I_X=\oint_{\gamma_X}\omega$ is a window period of the phase one-form on
+$E:\mu^2=Q_4$. \textbf{Open:} the middle survival $\Pmid$ and one independent off-diagonal.
+
+\paragraph{Why the bar matters.} The BE result already meets the bar: the elliptic period $I_X$
+\emph{collapsed to residues}, giving the elementary $2\pi i\sum\Gam_{ij}$ with no surviving
+elliptic integral. The transport residues are even topological ($\pm i/4$, \texttt{transport\_actions.py}).
+The open part must be sought in objects that admit the \emph{same} residue/period collapse ---
+not in machinery whose output is an unresummed series.
+
+%==============================================================
+\section{What is already achieved (assessment)}
+%==============================================================
+From the PRL draft, the internal notes, and the \texttt{assay/} package:
+
+\begin{itemize}[nosep,leftmargin=1.4em]
+\item \textsc{established} --- BE extreme survivals as imaginary window periods; residue collapse
+  to elementary $\Gam_{ij}$; $\Re I_X=0$ (pure tunnelling). Validated $\sim10^{-9}$.
+\item \textsc{established} --- \textbf{Universal sextic gap polynomial}
+  $\Delta^6-2A\Delta^4+A^2\Delta^2-D=0$, $A=\tfrac12(3\,\mathrm{tr}\,H^2-(\mathrm{tr}\,H)^2)$,
+  $D=\mathrm{Disc}\,\chi_H$; pairwise WKB lives on an explicit \emph{rational} cover. Turning
+  points $=$ zeros of $D$.
+\item \textsc{established} (generic simple regime) --- \textbf{Selector sufficiency}
+  (\texttt{selector\_sufficiency\_outer\_descent\_memorial}, Thm 1; $1302/1302$ @ 60-digit) and
+  the \textbf{exact global insertion rule} (\texttt{exact\_global\_insertion\_rule\_note}, Thm 2.1
+  with overlap-independence Lemma 2.2). The old descent hypotheses H1/H2 are \emph{superseded} by
+  a bridge lemma ($G_v=I$ in matched half-form normalization).
+\item \textsc{established} --- \textbf{Phase exponent} $D_{2m+1}(H)$ closed to all orders via
+  Lagrange--B\"urmann, \emph{affine-linear} in $L_H(v),L_H'(v)$ across the commuting family.
+\item \textsc{numerically-supported} --- the full $\sim10^{-9}$ interaction-picture benchmark
+  harness (\texttt{ip.py}, \texttt{benchmark.py}, \texttt{validation\_matrix.py}; 8 strata).
+\item \textsc{falsified} (do not revisit as stated) --- two-Dykhne ``strong product'';
+  BE-extended min/max/sum diagonals; incoherent stochastic grid (exact only $\sim15\%$ of
+  parameter space); coherent three-rotation product; algebraic frame maps; point-local Airy
+  collapse of projected $Q_4$ windows. (\texttt{integrability.py}; window brief \S6.)
+\end{itemize}
+
+\paragraph{The one local gap, and why it is \emph{not} the lever.}
+The lone remaining \emph{local} symbolic gap is the all-orders transport recurrence
+$\Theta^{\rm tr}_v(t)$ (only $K_1=-A_2/2A_1$, $K_3$ explicit). \textbf{But closing it does not
+deliver a practical amplitude}: $\Theta^{\rm tr}_v$ is one factor (the scalar block
+$s^{\rm BS}_v=-i\,e^{2\Theta_v}$) at \emph{one} ramification point, returned as a power series in
+the Langer coordinate that still needs Borel resummation, then assembly across all active selector
+points and multiplication by sector propagators. Under the practicality bar it is a low-leverage
+finishing detail, not a route to closed form. This is the key strategic correction from the audit.
+
+%==============================================================
+\section{The structural lever: commuting family + guaranteed crossing}
+%==============================================================
+Two facts should drive the attack.
+\begin{enumerate}[nosep,leftmargin=1.4em]
+\item \textbf{Slope-linearity of the phase.} In the gauged adiabatic ODE
+  $f_i'=-\sum_{j\ne i}S_{ij}f_j+i(E_i-E_x)f_i$, the coupling $S_{ij}$ depends only on
+  $(\gamma,\eps)$ (transport data); the slope vector $a$ enters \emph{only} through the diagonal
+  phase $E_i=\sum_j a_j\gamma_j^2/(\lambda_i-\eps_j)$, \emph{linearly} in $a$. (This is exactly
+  why $D_{2m+1}$ is affine-linear in $L_H$.) So $P=P(a)$ is generated by a \emph{fixed} geometric
+  transport plus an $a$-linear phase --- a strong constraint the closed form must respect.
+\item \textbf{Guaranteed exact crossing $\Rightarrow$ a regular singular point.} A commuting
+  partner $H'$ (same $\gamma,\eps$; different slopes $a'$) shares the eigenvector geometry; the
+  guaranteed level crossing is a degeneracy point whose \emph{local monodromy is computable}. In
+  the KZ/Gaudin picture (\S4.1) this is precisely a marked point of a rational flat connection
+  whose residues are built from $\{\gamma,\eps,a\}$.
+\end{enumerate}
+\textbf{Caveat (falsified).} The lever must \emph{not} be cashed out as a product of two-level
+factors --- that is the falsified \texttt{integrability.py} route (the benchmark off-diagonals
+imply a \emph{non-symmetric} $\Gam'$, so no partner slope can satisfy a two-Dykhne product). Its
+only viable use is as a flat-connection / conserved-quantity \emph{constraint} system.
+
+%==============================================================
+\section{Ranked strategies}
+%==============================================================
+Each strategy lists: idea; why it can meet the practicality bar; near-term target; falsification
+test (against the existing $10^{-9}$ harness).
+
+\subsection*{[S1 --- TOP] KZ / Gaudin monodromy route}
+\textbf{Idea.} Recognize $P$ as the $t\to\pm\infty$ connection (monodromy) matrix of the
+\emph{rational flat connection} underlying the integrable Type-1 family --- the
+Knizhnik--Zamolodchikov / Gaudin structure. Barik--Bakker--Gritsev--Yuzbashyan
+(arXiv:2409.17053, SciPost Phys.\ 18, 212 (2025)) solve integrable LZ for $N=2,3,4$ in exactly
+this language; our $H_0+uA$ is the same Cauchy/Gaudin data.\\
+\textbf{Practicality.} The connection has poles at $\{\eps_i\}$ with residues elementary in
+$\{\gamma,\eps,a\}$; the transition matrix is its monodromy, expressible through a \emph{handful}
+of period/connection integrals --- the target object class, no ODE matrizant.\\
+\textbf{Near-term target.} (i) Obtain/transcribe the BBGY $N=3$ construction; check whether their
+$\hat A+\hat B/t$ hyperbolic connection \emph{specializes} to our $H_0+uA$ (or is gauge/variable
+related). (ii) If yes, read off $\Pmid$ and the off-diagonal in closed form. (iii) Confirm the BE
+entries \eqref{eq:BE} drop out as the extreme-level monodromy --- a built-in consistency check.\\
+\textbf{Falsification.} Evaluate the candidate closed form on the 8 benchmark strata; demand
+agreement to the $\sim10^{-9}$ floor (esp.\ the generic overlapping-crossing stratum where all
+prior ansatze failed). A single stratum miss $>10^{-6}$ kills it.
+
+\subsection*{[S2] Conserved-quantity constraint closure (quadratic commuting operators)}
+\textbf{Idea.} Use the commuting triple $(H_x,Y,R)$ \emph{plus} time-quadratic commuting
+operators (Chernyak--Sinitsyn, arXiv:2006.15144) to impose linear constraints on the S-matrix;
+combine with unitarity + double stochasticity + BE \eqref{eq:BE} and \emph{count}: do the
+constraints reduce the $4$ parameters to $0$?\\
+\textbf{Practicality.} If the system closes, $\Pmid$ is an algebraic function of $\{\gamma,\eps,a\}$
+--- maximally practical. Even if it only closes \emph{asymptotically} (adiabatic limit), that is a
+genuine exact entry in a regime and a hard check on S1.\\
+\textbf{Near-term target.} Write the constraint equations from $[H,Y]=[H,R]=0$ at
+$u\to\pm\infty$; tabulate \#independent equations vs \#unknowns after BE. Identify exactly which
+of $\{\Pmid,\text{off-diag}\}$ they pin.\\
+\textbf{Falsification.} The quadratic-operator prediction is claimed only \emph{adiabatically};
+test against the harness \emph{and} against finite-rate corrections --- if it cannot be promoted
+beyond leading order, log it as a partial result, not a closed form.
+
+\subsection*{[S3] Lax / zero-curvature algebraic S-matrix}
+\textbf{Idea.} Recast as a Lax equation with a non-Abelian flat connection and integrate the
+connection \emph{algebraically} (Malikis--Cheianov, arXiv:2505.06048).\\
+\textbf{Practicality.} Demonstrated to give exact S-matrices for generalized bow-tie / new reps
+without solving the ODE; output is algebraic in the data. Strong fit to the commuting family.\\
+\textbf{Near-term target.} Construct the Lax pair for Type-1 $N=3$; attempt the algebraic
+integration of the connection between $u=\pm\infty$.\\
+\textbf{Falsification.} Same benchmark gate as S1. Risk: the algebraic integration may reintroduce
+a transcendental connection constant --- watch for exactly the object the frame-map test already
+showed must be transcendental.
+
+\subsection*{[S4] Contour-integral / Laplace-transform on the Cauchy structure}
+\textbf{Idea.} The classic Demkov--Osherov / generalized-bow-tie technique: Laplace transform the
+$N=3$ system and do the $t\to\pm\infty$ asymptotics by contour integration of the explicit Cauchy
+integrand.\\
+\textbf{Practicality.} When the contour integral closes, it yields the full matrix in closed form;
+the Type-1 Cauchy integrand is the natural candidate. May land in hypergeometric functions
+(cf.\ Lin--Sinitsyn $N=3$ LZ--Coulomb, arXiv:1310.7245) --- acceptable if reducible to $\{\gamma,\eps,a\}$.\\
+\textbf{Near-term target.} Set up the Laplace-transformed $3\times3$ system; identify the
+singularity structure; attempt the steepest-descent/residue evaluation.\\
+\textbf{Falsification.} Benchmark gate; also require the BE entries to reappear.
+
+\subsection*{[S5 --- finishing / LOW leverage for closed form] Complete the transport recurrence}
+\textbf{Idea.} Close $\Theta^{\rm tr}_v(t)$ to all orders by the same Lagrange--B\"urmann route
+that closed the phase side, then test for a residue/period collapse of its selector value on
+$\nu^2=W_4$.\\
+\textbf{Practicality.} \emph{Only} practical \emph{if} the selector value collapses to residues
+(like $I_X$ did); as an unresummed series it fails the bar. Even then it finishes the
+local-block programme, not the global amplitude.\\
+\textbf{Near-term target.} Derive $K_5,K_7$; test whether
+$\Theta^{\rm tr}_v(t_\star)$ collapses to a finite period sum.\\
+\textbf{Falsification.} If $K_{2m+1}$ shows no collapse pattern by $m=3$, deprioritize. (Useful
+regardless as it completes the exact-WKB paper's stated open item, but it is not the closed-form
+lever --- see \S2.)
+
+%==============================================================
+\section{Recommendation and critical path}
+%==============================================================
+\begin{table}[h]\centering
+\begin{tabular}{@{}clll@{}}
+\toprule
+Rank & Strategy & Leverage toward practical closed form & First concrete step \\
+\midrule
+1 & S1 KZ/Gaudin monodromy & \textbf{High} --- targets amplitude directly in $\{\gamma,\eps,a\}$ & get BBGY $N{=}3$; test specialization \\
+2 & S2 Constraint closure & High \emph{if} it closes; else exact-in-regime & count constraints vs unknowns \\
+3 & S3 Lax / zero-curvature & Medium--High; algebraic S-matrix & build Type-1 Lax pair \\
+4 & S4 Contour integral & Medium; may be hypergeometric & Laplace-transform the $3{\times}3$ \\
+5 & S5 Transport recurrence & \textbf{Low} for closed form (finishing) & derive $K_5,K_7$; test collapse \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Two-week critical path.}
+\begin{enumerate}[nosep,leftmargin=1.4em]
+\item \textbf{Days 1--3 (S1+S2 in parallel, cheap and decisive).} Pull the BBGY (2409.17053) $N=3$
+  construction and the Chernyak--Sinitsyn (2006.15144) constraint equations. Two questions:
+  does the BBGY connection specialize to ours, and do the conserved-quantity constraints + BE +
+  unitarity \emph{count down to zero} free parameters? Either ``yes'' likely cracks the problem.
+\item \textbf{Days 4--8.} Whichever of S1/S2 looks live, push to an explicit candidate
+  $\Pmid(\{\gamma,\eps,a\})$ and the off-diagonal. In parallel, set up S4's Laplace contour as an
+  independent cross-check route.
+\item \textbf{Days 9--14.} Falsify hard: evaluate every candidate on all 8 benchmark strata to the
+  $10^{-9}$ floor, with special weight on the generic overlapping-crossing stratum. Promote a
+  survivor to \textsc{numerically-supported}; pursue an analytic proof (residue/monodromy identity)
+  to reach \textsc{established}.
+\end{enumerate}
+
+\paragraph{Highest-conviction single move.} Determine whether the
+Barik--Bakker--Gritsev--Yuzbashyan $N=3$ KZ solution specializes to the Type-1 $H_0+uA$ family. If
+it does, the open two parameters are very likely already expressible as KZ monodromy/period data
+in $\{\gamma,\eps,a\}$ --- meeting the practicality bar by construction --- and the project's
+established BE/window geometry becomes the consistency check rather than the engine.
+
+\paragraph{Honest caveats.} (i) The literature was assembled from search metadata; full texts were
+not opened (fetcher blocked). Verify the BBGY $N=3$ specialization and the Chernyak--Sinitsyn
+constraint count \emph{directly in the papers} before committing. (ii) ``No published generic
+Type-1 $N=3$ closed form'' is $\sim$80\% confidence --- if S1 simply reproduces a known result,
+that is still a win (it hands you the closed form). (iii) Applying spectral networks /
+non-abelianization to the MLZ connection appears genuinely unexplored; it is the natural geometric
+home of your covers and a high-risk/high-reward fallback if S1--S4 stall on the off-diagonal phase.
+\end{document}
