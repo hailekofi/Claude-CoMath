@@ -114,6 +114,25 @@ The literature points to a different top strategy: the **KZ/Gaudin monodromy rou
 targets a closed amplitude in {γ,ε,a} + a handful of monodromy/period integrals directly. See
 strategy memo `paper/type1_lz_strategy_memo.tex`.
 
+## Ring structure → commuting-partner viability verdict — 2026-06-01
+Code: `experiments/ring_structure.{md,py}`. User's lever verified (machine precision):
+- Type-1 family {H^(a)(u)} is a COMMUTING RING (max||[H^a,H^b]||=9e-16); spans full 3-dim commutant.
+- Time-quadratic partner REDUCES: H(u)²=Σ c_k(u)H^(a_k)(u), c_k LINEAR in u (residual 8e-14).
+- Commuting ⇒ ENTIRE family shares one eigenbasis φ_i(u) (overlap defect 3e-16); members differ
+  only in eigenvalues E_i^(a)(u), linear in a.
+**Viability verdict (negative for naive S2):** a commuting partner carries ONLY Abelian data
+(spectrum→WKB/Dykhne→BE survivals; τ-invariance). The quadratic partner adds NOTHING (reducible).
+⇒ commuting-partner route has an ABELIAN CEILING and CANNOT reach the middle-survival prefactor —
+which the anchor run shows DOMINATES (2.5–104×). This is a proof, not a difficulty. Explains C-S
+asymptotic-only, "no Dykhne analog," our prefactor size.
+**Constructive flip side:** ring ⇒ P^(a) = |holonomy of FIXED algebraic connection
+W_ij=⟨φ_i|φ_j'⟩ (a-independent) twisted by a-LINEAR phases|² = isomonodromy/KZ problem → Kampé de
+Fériet, NOT elementary. The non-Abelian holonomy of W IS the missing prefactor.
+**Relocates the home run:** S1's zero-curvature Ê must be NON-COMMUTING ([Ê,H]≠0), outside the ring,
+NOT subject to this reduction. Bow-tie gets Ê from su(2)/su(3) spin-rep structure; Type-1 is
+Cauchy/Gaudin with no manifest spin rep ⇒ existence of a useful non-Abelian Ê is THE decisive open
+question. Memo updated to v2.1.
+
 ## Day 1–2 anchor experiment (Type-1 vs C-S mismatch resolved) — 2026-06-01
 Full write-up + reproducible code: `experiments/anchor_experiment.{md,py}`.
 - **Model-mismatch resolved.** Type-1 → C-S Eq.(11) dictionary derived & computed (time-shift t₀

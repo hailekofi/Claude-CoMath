@@ -183,6 +183,26 @@ adiabatic-limit asymptotically-exact full $P$ (Dykhne + path deformation); and (
 home run --- an \emph{exact} factorised $S$ \emph{iff} a zero-curvature $\hat E$ exists for Type-1
 and separates the crossings. The tournament below is re-ranked around this reset.
 
+\paragraph{Addendum v2.1 (two structural findings, with code in \texttt{experiments/}).}
+\emph{(a) The C--S solvable slice is outside Type-1.} The exact $\eps_0{=}0$ result (their Eq.~49)
+requires \emph{both} a flat middle level \emph{and} zero outer--outer coupling $g_{\rm out}=0$. The
+Type-1 dictionary maps $H_0+uA$ into the C--S frame exactly, but $g_{\rm out}=\gamma_{\rm lo}
+\gamma_{\rm hi}(a_{\rm lo}-a_{\rm hi})/(\eps_{\rm lo}-\eps_{\rm hi})\ne0$ \emph{always} (couplings
+never vanish), so Eq.~49 is \emph{not} a Type-1 anchor; S2's exact-slice claim is corrected to
+``BE entries + deep-adiabatic only.'' \emph{(b) The commuting partner has an Abelian ceiling.} The
+Type-1 family is a commutative ring: the time-quadratic commuting partner reduces to the linear
+family with linear-in-$u$ coefficients ($H(u)^2=\sum_k c_k(u)H^{(a_k)}(u)$, verified $10^{-13}$),
+and the whole family \emph{shares one eigenbasis} $\phi_i(u)$, differing only in the $a$-linear
+eigenvalues. Hence a commuting partner yields \emph{only} Abelian data (spectrum $\to$ BE/Dykhne;
+$\tau$-invariance) and \emph{cannot} reach the middle-survival prefactor --- which the anchor run
+shows \emph{dominates} ($P_{\rm mid}/P_{\rm mid}^{\rm inc}=2.5$--$104\times$). Constructively, the
+ring recasts $P^{(a)}$ as the holonomy of a \emph{fixed} algebraic connection
+$W_{ij}=\langle\phi_i|\phi_j'\rangle$ ($a$-independent) twisted by $a$-linear phases --- an
+isomonodromy/KZ object (Kamp\'e de F\'eriet), \emph{not} elementary. \textbf{This relocates the home
+run: S1's zero-curvature $\hat E$ must be \emph{non-commuting} ($[\hat E,H]\ne0$), outside the ring;
+its existence for the Cauchy/Gaudin (non-spin-rep) Type-1 family is the single decisive open
+question.}
+
 %==============================================================
 \section{Ranked strategies (v2, post-reading)}
 %==============================================================
