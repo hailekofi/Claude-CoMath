@@ -1,5 +1,16 @@
 # Deep-verification review: the isomonodromy/KZ/Kampé de Fériet line
 
+> **UPDATE (gate-test #1 run, `gate_test_genus.md`): this review's A4 verdict is itself corrected.**
+> A4 below refuted "Kampé de Fériet" by arguing the curve is genus-1 elliptic. Gate-test #1 shows
+> that argument used the *wrong* curve (the phase double-cover `μ²=Q₄`, genus 1) instead of the
+> *spectral* curve `Σ: χ_H=0`, which is **genus-0 rational** (global Gaudin parametrization
+> `(E,u)=(m/p,n/p)`, verified) with a **structural node = the exact crossing**. Net: the function
+> class is **NOT elliptic/Painlevé**; it is **genus-0 confluent-Heun / Kampé de Fériet** — so the
+> Kampé de Fériet *lineage* is reinstated (though genus-0 ≠ elementary; confluent-Heun connection
+> coefficients are themselves generically hard). The other findings (A2 KZ-Fuchsian-reduction
+> unproven; A3 product-form integral circular for generic N=3; A6 confluence uncontrolled) **stand**.
+
+
 **Reviewer role:** tough-but-fair peer review, *before* committing to theory-building.
 **Hypothesis under review (H-KZ):** "The Type-1 N=3 transition amplitudes are connection/Stokes
 coefficients of a KZ/Gaudin flat connection; they admit an explicit Euler integral representation

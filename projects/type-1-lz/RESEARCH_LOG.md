@@ -114,6 +114,32 @@ The literature points to a different top strategy: the **KZ/Gaudin monodromy rou
 targets a closed amplitude in {γ,ε,a} + a handful of monodromy/period integrals directly. See
 strategy memo `paper/type1_lz_strategy_memo.tex`.
 
+## Gate-test #1 (genus of spectral curve) — function class CORRECTED — 2026-06-01
+Full result: `paper/gate_test_genus.md`. Ran the review's decisive test; it OVERTURNS the review's
+own A4 elliptic-refutation (in the constructive direction).
+- **Spectral curve Σ: χ_H(E,u)=0 is GENUS-0 RATIONAL, universally for Type-1.** Proof: global Gaudin
+  parametrization (E,u)=(m(λ)/p(λ), n(λ)/p(λ)) verified |·|≤9e-16. Riemann-Hurwitz agrees once the
+  node is found: D(u)=Disc_E sextic has mults [1,1,1,1,2]; the double root has TRIVIAL monodromy
+  [0,1,2] (a NODE, not a branch point), the 4 simple roots are transpositions → smooth 3:1 cover
+  with 4 branch pts → g=0.
+- **The node = the EXACT CROSSING** (user's hint): real u*≈−0.249 where two eigenvalues are EXACTLY
+  degenerate (gap=0). Structural (all samples). Codim-2 degeneracy forced by Type-1 ⇒ crossing-pair
+  coupling vanishes at u*. The 4 complex branch pts = avoided crossings at Re(Q4 pairs).
+- **Reconciliation:** genus-1 μ²=Q4 is the WKB PHASE/action double-cover (residue-collapsing →
+  elementary exponents), NOT the spectral curve. Earlier refutation conflated the two — that step
+  was wrong.
+- **Corrected class:** NOT elliptic/Painlevé. Genus-0 special-function family. Class set by marked
+  points: 3 poles {ε_i} + irregular ∞ + node ⇒ confluent-Heun / Kampé de Fériet (genus-0), not ₂F₁.
+- **Honest residual:** genus-0 ≠ elementary (confluent-Heun connection coeffs generically hard);
+  but the exact-crossing node has ELEMENTARY (log) local data ⇒ a real reduction handle (rigorous
+  form of old H-B). Exponents elementary (BE) confirmed consistent (genus-0 periods = residues).
+- **Verdict:** theory-building NOW on correct footing — target genus-0 connection problem on P¹_λ
+  with {ε_i}, irregular ∞, node u*; exploit node to cut accessory parameters; expect confluent-Heun/
+  Kampé de Fériet prefactor. Gate-test #2 still open (does 3rd-order λ-connection factorize on a
+  sub-locus → drop to hypergeometric/elementary there).
+- **META:** gate-test caught that BOTH my optimistic (Kampé) and pessimistic (elliptic) priors were
+  imprecise — compute the curve's genus+singularities for OUR model, never import from a neighbor.
+
 ## Deep-verification review of the KZ line — 2026-06-01
 Full review: `paper/REVIEW_kz_line.md`. Peer-review BEFORE theory-building (user-requested).
 **SURVIVES (keep, established/analytically-derived):** P = connection/Stokes coefficient of the
