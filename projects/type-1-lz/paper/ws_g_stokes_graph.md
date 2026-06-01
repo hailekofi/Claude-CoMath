@@ -30,8 +30,12 @@ the high-ratio tail WS-D proved is thin but reaches ~4).
 
 ## 0. Executive summary / verdict
 
-**VERDICT (the joint diagnosis is CONFIRMED at the numerically-supported level).**
-The Stokes graph cleanly separates the two empirical regimes exactly as conjectured:
+**VERDICT (the joint diagnosis is SUPPORTED — clean on the showcases, sound-but-one-directional
+on the scan).** The Stokes graph cleanly separates the two empirical regimes exactly as
+conjectured on the constructed showcase pair, and across a 16-sample scan **every sample that
+carries a joint is enhanced** (joint ⇒ non-factorization is sound), while the converse is only a
+*lower-bound* witness (the conservative joint detector has false negatives in the far-apart
+tail — see §2, §5). Concretely:
 
 - **Well-separated (ratio ≳ 1, the ~15% where the incoherent product is exact):**
   the turning points hug the real axis (narrow avoided crossings) and sit far apart along
@@ -42,14 +46,16 @@ The Stokes graph cleanly separates the two empirical regimes exactly as conjectu
 - **Overlapping (ratio ≲ 1, the ~85% where `P₂→₂` is enhanced 2.5–104×):**
   the complex turning points push deep off the real axis and their Stokes lines of
   **different pair-types (12 and 13) intersect**, forming **genuine joints** — for sampleB,
-  **4 joints** (two conjugate pairs at `u ≈ −0.10 ± 0.90 i`) where the red (12) and green (13)
-  Stokes lines cross between the turning points. **The Stokes graph HAS joints.** `P` does NOT
-  factorize ⇒ enhancement `132.75×`. (`figs/stokes_overlapB.png`)
+  **4 joints** (two conjugate pairs at `u ≈ −0.13 ± 0.95 i` and `−0.07 ± 0.85 i`) where the red
+  (12) and green (13) Stokes lines cross between the turning points. **The Stokes graph HAS
+  joints.** `P` does NOT factorize ⇒ enhancement `120.5×`. (`figs/stokes_overlapB.png`)
 
-- **Across a 16-sample scan spanning ratio 0.1→4**, joint presence and joint "strength"
-  track the 15/85 split and the enhancement: see the correlation table in §5. The
-  joint-free samples are exactly the (near-)factorizing ones; the jointed samples are exactly
-  the enhanced ones.
+- **Across a 16-sample scan spanning ratio 0.1→4**, joint presence/strength correlate with the
+  enhancement in the sound direction (all 3 jointed samples are enhanced above the incoherent
+  product — 2 strongly, 1 mildly at the 1.14/1.15 threshold; mean #joints 0.18 for factorizing
+  vs 1.20 for enhanced; strongest joints in the most overlapping samples; Pearson joint-strength
+  vs `log₁₀ enh` = +0.27). The conservative detector *misses* some joints in the far-apart tail
+  (3 false negatives), so it under-counts but never over-counts — see the contingency table in §5.
 
 **Interpretation.** This makes the WS-A picture geometrically concrete. WS-A established that
 `P` is the Stokes/connection data of a single rank-2 irregular point at `u=∞`, with the
@@ -134,28 +140,32 @@ tail (some genuinely-enhanced samples where the relevant tps are far apart while
 conjugate twin sits close, shrinking the disk below the reach needed to meet the cross-pair
 line). I therefore report the disk-mask results and treat **"a joint is found" as a SOUND
 (sufficient) witness of non-factorization, while "no joint found" is INCONCLUSIVE** in the
-tail. A definitive treatment needs the full GMN spectral-network trajectory rules (§6.2), which
-fix the line-termination/junction grammar canonically — not implemented here.
+tail. A definitive treatment needs the full GMN spectral-network trajectory rules (§6 item 2),
+which fix the line-termination/junction grammar canonically — not implemented here.
 
 ---
 
 ## 3. The two regimes — figures
 
 ### 3a. WELL-SEPARATED (sampleA, ratio 3.97) — `figs/stokes_sepA.png`
-Three **disjoint** turning-point clusters strung along the real axis (node at `+0.33`, a 23
-pair at `−0.35`, a 12 pair at `−0.04`), each with short Stokes fans confined near its own
-crossing. **No Stokes line of one pair reaches a turning point of another pair ⇒ 0 joints.**
-Direct ODE benchmark: `P₂→₂ = 0.9859`, incoherent product `0.9859`, **enhancement 1.00×** —
-the incoherent product is *exact*, the factorizing/elementary regime.
+Three **disjoint** turning-point clusters strung along the real axis (node of pair 23 at
+`+0.33`, a complex 23 pair at `−0.35 ± 0.08 i`, a 12 pair at `−0.04 ± 0.05 i`), each with short
+Stokes fans confined near its own crossing (note the tps hug the real axis — narrow avoided
+crossings). **No Stokes line of one pair reaches a turning point of another pair ⇒ 0 joints**
+(under the conservative disk mask; see §2 for why a looser reach would spuriously cross here).
+Direct ODE benchmark: `P₂→₂ = 0.98592`, incoherent product `0.98588`, **enhancement 1.00×** —
+the incoherent product is *exact* to 4 digits, the factorizing/elementary regime.
 
 ### 3b. OVERLAPPING (sampleB, ratio 0.14) — `figs/stokes_overlapB.png`
 The 12 turning points are at `Im ≈ ±2.05`, the 13 turning points at `Im ≈ ±1.30`; their
 Stokes lines sweep across the strip and **the red (12) and green (13) lines cross at four
-joints** near `u ≈ −0.10 ± 0.90 i` (two conjugate pairs). The node (pair 23, black star) sits
-on the real axis between them. **4 joints.** Direct ODE benchmark: `P₂→₂ = 0.0217`,
-incoherent `0.000164`, **enhancement 132.75×** — strongly non-factorizing, the enhanced
-regime. (This sample's enhancement exceeds the 104× headline because ratio 0.14 is more
-overlapping than the cases that set that figure.)
+joints** at `u ≈ −0.126 ± 0.952 i` and `−0.070 ± 0.853 i` (two conjugate pairs). The node
+(pair 23, black star) sits on the real axis between them. **4 joints.** Direct ODE benchmark
+(T=160, rtol 1e-11): `P₂→₂ = 0.0197`, incoherent product `0.000164`, **enhancement 120.5×** —
+strongly non-factorizing, the enhanced regime. (This sample's enhancement exceeds the 104×
+headline because ratio 0.14 is more overlapping than the cases that set that figure; the
+precise ratio is mildly ODE-horizon-sensitive because both `P₂→₂≈0.02` and the incoherent
+`≈1.6e−4` are small.)
 
 ---
 
@@ -163,8 +173,8 @@ overlapping than the cases that set that figure.)
 
 | sample | ratio | node pair | simple-tp pairs | # joints | joint types | joint locations | enhancement |
 |---|---|---|---|---|---|---|---|
-| sampleA (separated) | 3.97 | 23 | {23, 12} | **0** | — | — | **1.00×** |
-| sampleB (overlapping) | 0.14 | 23 | {12, 12, 13, 13} | **4** | 12 × 13 | `−0.10±0.90 i`, `−0.07±0.85 i` | **132.75×** |
+| sampleA (separated) | 3.97 | 23 | {23, 23, 12, 12} | **0** | — | — | **1.00×** |
+| sampleB (overlapping) | 0.14 | 23 | {12, 12, 13, 13} | **4** | 12 × 13 | `−0.126±0.952 i`, `−0.070±0.853 i` | **120.5×** |
 
 The joints in the overlapping case are **12 × 13** crossings — i.e. Stokes lines of the two
 *off-diagonal pairs that share the middle level* (level 1 is common to 12 and 13). This is
@@ -176,31 +186,87 @@ connection data — its role is to sit *inside* the jointed region, not to be th
 
 ---
 
-## 5. The correlation scan (numerically-supported)
+## 5. The correlation scan (numerically-supported, with stated noise)
 
-`PLACEHOLDER_SCAN_TABLE`
+16 samples, ratio stratified over `0.1 → 4` (the two showcase samples + 14 representatives,
+one per geomspace ratio bin). `# joints` and `strength` from the **conservative disk-mask**
+Stokes graph; `enh` = `P₂→₂ / P₂→₂^{incoherent}` from direct ODE (fast settings, T=100). The
+enhancement spans `~1 → 1e11`: when the incoherent product `e^{−2π(Γ+Γ)}` underflows (wide-`ε`
+samples) the ratio is astronomically large simply because the BE-product prediction is
+essentially zero — read `log₁₀ enh`, not the raw number.
 
-`PLACEHOLDER_CORRELATIONS`
+| ratio | #joints | strength | P₂→₂ | incoherent | enh (×) |
+|---:|---:|---:|---:|---:|---:|
+| 0.142 | **4** | 0.55 | 0.0181 | 1.6e−4 | 110.9 |
+| 0.152 | 0 | 0.00 | 0.0012 | ~0 | 6.3e10  ← *false neg* |
+| 0.199 | 0 | 0.00 | 0.599 | 0.586 | 1.02 |
+| 0.262 | **2** | 0.66 | 0.0019 | ~0 | 8.9e8 |
+| 0.343 | 0 | 0.00 | 0.0112 | 2.7e−4 | 40.8  ← *false neg* |
+| 0.450 | 0 | 0.00 | 0.601 | 0.577 | 1.04 |
+| 0.591 | **2** | 0.80 | 0.0741 | 0.0651 | 1.14 |
+| 0.775 | 0 | 0.00 | 4.6e−4 | ~0 | 1454  ← *false neg* |
+| 1.017 | 0 | 0.00 | 0.719 | 0.652 | 1.10 |
+| 1.333 | 0 | 0.00 | 0.996 | 0.996 | 1.00 |
+| 1.746 | 0 | 0.00 | 0.974 | 0.973 | 1.00 |
+| 2.325 | 0 | 0.00 | 0.617 | 0.621 | 0.99 |
+| 3.016 | 0 | 0.00 | 0.920 | 0.919 | 1.00 |
+| 3.940 | 0 | 0.00 | 0.965 | 0.965 | 1.00 |
+| 3.970 (sampleA) | 0 | 0.00 | 0.986 | 0.986 | 1.00 |
+| 0.142 (sampleB)* | 4 | 0.55 | — | — | 120.5 (hi-acc) |
 
-**Reading.** `PLACEHOLDER_READING`
+(*sampleB appears twice — fast-ODE row 1 and the hi-accuracy showcase value.)
+
+**Correlations (Pearson vs `log₁₀ enh`):** ratio `−0.39`; #joints `+0.22`; joint-strength
+`+0.27`; joint-present `+0.30`.
+
+**Joint-presence × enhancement contingency (threshold enh>1.15):**
+
+| | enhanced | not enhanced |
+|---|---:|---:|
+| **joint found** | 2 | 1† |
+| **no joint** | 3‡ | 10 |
+
+† the lone "joint & not-enhanced" is the ratio-0.591 sample at enh = 1.14 — *just* below the
+1.15 cutoff, i.e. mildly enhanced, not a genuine false positive. ‡ the three "no joint &
+enhanced" are the documented **far-apart false negatives** (§2): the conservative disk shrinks
+below the reach needed to meet the cross-pair line.
+
+**Reading (honest).**
+- **Direction that is SOUND:** every sample where a joint *is* found is enhanced (the one
+  apparent exception is at the 1.14/1.15 boundary). **Joint presence ⇒ non-factorization.**
+- **Direction that is NOISY:** "no joint found" does *not* imply factorization — 3/13 no-joint
+  samples are strongly enhanced (false negatives from the conservative mask). So the disk-mask
+  joint count is a *lower bound* witness, not a complete classifier.
+- **Aggregate separation is clear:** mean #joints `= 0.18` for the (near-)factorizing samples
+  vs `= 1.20` for the enhanced ones; the strongest joints (strength `0.55–0.80`) all sit in the
+  most overlapping samples. `11/16 = 69%` of this (ratio-flat) suite are "incoherent-exact",
+  compatible with the established ~85% (the scan over-weights the high-ratio tail by design, so
+  it tilts toward the exact regime relative to natural sampling).
+- **Net:** the scan *supports* the diagnosis in the sound direction and shows the right
+  monotone trend, while exposing that a robust *bidirectional* classifier needs the full GMN
+  network rules (§6 item 2), not the conservative planar-crossing proxy used here.
 
 ---
 
 ## 6. Honest residuals / what remains ambiguous
 
-1. **Junction *rule* vs junction *presence*.** WS-G shows joints are present iff `P` is
-   enhanced, and that joint *strength* (geometric depth) grows with the enhancement. It does
+1. **Junction *rule* vs junction *presence*.** WS-G shows that *when* a joint is found `P` is
+   enhanced, and that joint *strength* (geometric depth) trends with the enhancement. It does
    **not** compute the GMN junction S-matrix and turn it into the *number* `P₂→₂`. The claim
    "joint holonomy = the enhancement value" is therefore **framework/conjecture**, not a
    derived identity. Promoting it is WS-E's task (assemble the connection coefficient).
 
-2. **Higher-rank spectral networks have structured joints.** For a rank-3 (N=3) WKB problem
-   the relevant object is a GMN *spectral network*, where junctions obey specific
-   sheet-labelled rules (a 12 and a 23 line can *spawn* a 13 line at a joint, etc.). I detect
-   joints purely as planar curve crossings of different types; I have **not** verified the
-   detailed GMN soliton/junction grammar (which crossings are "active" vs accidental). The
-   12×13 joints I find are the physically expected ones (shared middle level), but a full
-   spectral-network treatment could reclassify or add structure. Flagged as open.
+2. **Higher-rank spectral networks have structured joints — and this is exactly the source of
+   the false negatives.** For a rank-3 (N=3) WKB problem the relevant object is a GMN *spectral
+   network*, where junctions obey sheet-labelled rules: a 12 and a 23 line that meet *spawn* a
+   13 line, lines *terminate* at branch points, and only "active" crossings are physical
+   joints. I detect joints purely as planar crossings of different-type Stokes lines inside a
+   conservative disk, which (i) can **miss** a real joint when a line had to be spawned or
+   would form just outside the trusted disk (the §5 false negatives), and (ii) could in
+   principle flag an inactive crossing. The 12×13 joints I find on the showcase are the
+   physically expected ones (shared middle level), but **a definitive, bidirectional
+   classifier requires implementing the GMN trajectory/junction grammar** — the main open
+   technical item this note leaves for WS-E. Flagged as open.
 
 3. **The "joint strength" metric is a geometric proxy** (`1 − dist(joint, nearest tp)/median
    tp-separation`), not the literal relative WKB action at the joint. It correlates with the

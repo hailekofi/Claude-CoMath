@@ -124,6 +124,36 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## WS-G completed + coordinator integration (VERIFIED, promoted) — 2026-06-01
+Deliverables `paper/ws_g_stokes_graph.md`, `experiments/stokes_graph.py`, figs/{stokes_sepA,
+stokes_overlapB}.png. First agent result promoted with FULL confidence (load-bearing claims
+independently verified by coordinator).
+- **Joint diagnosis SUPPORTED (numerically-supported, figures decisive).** Well-separated sampleA:
+  short DISJOINT Stokes fans, 0 joints, enhancement 1.000× (incoherent product EXACT — I verified:
+  P_mid=0.98597 vs incoherent 0.98587). Overlapping sampleB: the 12 and 13 Stokes lines CROSS at 4
+  joints (u≈−0.13±0.95i, −0.07±0.85i), node (exact crossing) on the real axis BETWEEN the two joint
+  clusters, enhancement 120.5× (consistent with WS-F oracle 128.7×). Joints are 12×13 type = the two
+  off-diagonal pairs sharing the MIDDLE level = exactly P₂→₂.
+- **Localizes WS-A's non-Abelian remainder:** the transcendental off-diagonal Stokes coefficient =
+  the JOINT HOLONOMY (the GMN junction S-matrix at the 12×13 joint, node between the two joints, as
+  a function of the two window actions). Joint-free ⇔ elementary (BE×Weber product); jointed ⇔
+  genuine confluent connection coefficient. Hands WS-E a concrete target.
+- **REFINEMENT (coordinator, unifies WS-D+WS-G):** sampleA's enhancement=1 has Γ_mid,lo≈0,
+  Γ_mid,hi=0.002 — the middle level BARELY COUPLES. So joint-free ⟺ TRIVIAL middle coupling
+  (Γ_mid→0 or →∞), NOT 'genuine-but-separated' (which co-scaling proved doesn't exist). The 15%
+  'incoherent works' = trivial-middle-coupling tail. Whenever the middle level genuinely couples
+  (Γ_mid O(1)), there is a joint and non-factorization. Single coherent picture: co-scaling
+  (permanent overlap) + WS-G (joint) + the 15/85 split.
+- **Honest residuals (flagged by WS-G, accepted):** detector is one-directional (3 false negatives
+  in the far-apart tail; 'no joint' is only a lower-bound witness; full GMN trajectory/junction
+  rules needed for a bidirectional classifier); 'joint strength' is a geometric proxy, not the
+  literal relative WKB action; WS-G shows joint PRESENCE tracks enhancement but does not COMPUTE
+  P₂→₂ (that is WS-E).
+- This is the verified mechanism behind the obstruction; with WS-A (class) + WS-D/co-scaling
+  (obstruction) + WS-F (gold data) + WS-G (mechanism), all launched workstreams are in. Remaining:
+  WS-C (factorization/trivial-coupling locus = joint-free locus, prediction P-ii) and WS-E (the
+  joint-holonomy closed form).
+
 ## WS-F completed + coordinator integration (one finding REJECTED) — 2026-06-01
 Deliverables `experiments/oracle.py` (gold oracle wrapping assay ip.propagate_ad_ip + 7-stratum
 suite) and `experiments/oracle_report.md`. Verification `experiments/structural_crossing.py`.
