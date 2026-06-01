@@ -1,0 +1,4 @@
+# regenerable data artifacts (regenerate from the scripts)
+experiments/*.pkl
+*.pyc
+__pycache__/

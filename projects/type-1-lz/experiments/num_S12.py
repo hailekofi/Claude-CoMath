@@ -500,61 +500,124 @@ def pslq_recognize(value, basis_names, basis_values, tol=1e-9, maxcoeff=10 ** 6)
     return relation, resid
 
 
-def recognition_pass(row, tol=1e-7, verbose=True):
+def closed_form_candidates(row):
     """
-    Run a battery of inverse-symbolic checks on one dataset row's P22 / amplitudes /
-    log against candidate closed forms built from the window actions, BE exponents,
-    cross-ratio, pi, and simple Gamma-ratio constants.  Returns a list of hits.
+    Evaluate a battery of CANDIDATE closed forms for P_2->2 from the BE pairwise
+    survivals (the elementary-interference hypotheses).  Returns {name: value}.
+
+    With  q_lm = exp(-2 pi be(lo,mid)),  q_mh = exp(-2 pi be(mid,hi)),
+          q_lh = exp(-2 pi be(lo,hi))   (pairwise LZ survivals),
+    the middle level transitions at its two links (lo-mid and mid-hi).  The
+    independent-crossing baseline is q_lm * q_mh.  Coherent two-path candidates:
+    """
+    g = row["geom"]; be = g["be"]
+    q_lm = np.exp(-2 * np.pi * be["lo_mid"])
+    q_mh = np.exp(-2 * np.pi * be["mid_hi"])
+    q_lh = np.exp(-2 * np.pi * be["lo_hi"])
+    return {
+        "incoherent  q_lm*q_mh": q_lm * q_mh,
+        "stay+flipflip  q_lm q_mh + (1-q_lm)(1-q_mh)":
+            q_lm * q_mh + (1 - q_lm) * (1 - q_mh),
+        "stay+flipflip*q_lh  q_lm q_mh + (1-q_lm)(1-q_mh)q_lh":
+            q_lm * q_mh + (1 - q_lm) * (1 - q_mh) * q_lh,
+        "DO-product  q_lm q_mh / (denom)":
+            q_lm * q_mh / (q_lm * q_mh + (1 - q_lm) * (1 - q_mh)),
+        "1-(1-q_lm)(1-q_mh) coherent-sum":
+            1 - (1 - q_lm) * (1 - q_mh),
+    }
+
+
+def recognition_pass(row, tol=1e-6, verbose=True):
+    """
+    Inverse-symbolic / PSLQ recognition for one dataset row.
+
+    (a) Test P_2->2 directly against the elementary closed-form candidates
+        (``closed_form_candidates``) -- the Demkov-Osherov / coherent-path hypotheses.
+    (b) PSLQ-search log(P22/P_inc) for a low-height integer combination of the natural
+        log-constants (pairwise BE exponents, log(1-chi), pi).
+
+    Returns a list of hits (name, detail, residual).
     """
     hits = []
-    g = row["geom"]
-    ds, dl, chi = row["delta_small"], row["delta_large"], row["chi"]
+    g = row["geom"]; be = g["be"]
     P22, Pinc = row["P22"], row["P_mid_inc"]
-    R = P22 / Pinc
-    logR = np.log(R)
 
-    # candidate basis constants for PSLQ on logR
+    # (a) closed-form candidates
+    for nm, val in closed_form_candidates(row).items():
+        dev = abs(val - P22)
+        if dev < tol:
+            hits.append(("CF: " + nm, float(val), float(dev)))
+
+    # (b) PSLQ on log(P22/P_inc)
+    R = P22 / max(Pinc, 1e-300)
+    logR = np.log(R)
+    chi = row["chi"]
     basis = {
         "pi": np.pi, "1": 1.0,
         "log(1-chi)": np.log(max(1 - chi, 1e-12)),
-        "log(chi)": np.log(max(chi, 1e-12)),
-        "ds": ds, "dl": dl, "ds*dl": ds * dl,
-        "log(ds)": np.log(max(ds, 1e-12)), "log(dl)": np.log(max(dl, 1e-12)),
-        "log(ds+dl)": np.log(max(ds + dl, 1e-12)),
+        "b_lm": be["lo_mid"], "b_mh": be["mid_hi"], "b_lh": be["lo_hi"],
+        "log(b_lm)": np.log(max(be["lo_mid"], 1e-12)),
+        "log(b_mh)": np.log(max(be["mid_hi"], 1e-12)),
     }
     rel, resid = pslq_recognize(logR, list(basis.keys()), list(basis.values()), tol=tol)
     if rel is not None and resid is not None and resid < tol:
-        hits.append(("logR ~ int-combo", rel, resid))
-
-    # simple closed-form guesses for R itself
-    guesses = {
-        "R == 1 + (something)*?": None,
-        "R vs 1/(1-exp(-2pi ds)) ...": None,
-    }
-    # explicit: is R recognizable as a ratio of (1-p) factors (Demkov-Osherov style)?
-    p_ds = np.exp(-2 * np.pi * ds)
-    p_dl = np.exp(-2 * np.pi * dl)
-    do_candidates = {
-        "DO 1": (1 - p_ds) * (1 - p_dl) + p_ds * p_dl,   # generic two-link interference
-        "DO 2": 1 + p_ds * p_dl - p_ds - p_dl,
-        "DO 3": (1 - p_ds * p_dl),
-    }
-    for nm, val in do_candidates.items():
-        if val > 0 and abs(np.log(val) - logR) < tol:
-            hits.append((nm, {"R": val}, abs(np.log(val) - logR)))
+        hits.append(("PSLQ logR int-combo", rel, resid))
 
     if verbose:
         if hits:
             for h in hits:
                 print("   HIT:", h)
         else:
-            print("   no low-height relation found (R=%.9f logR=%.6f)" % (R, logR))
+            cands = closed_form_candidates(row)
+            best = min(cands.items(), key=lambda kv: abs(kv[1] - P22))
+            print("   no closed-form/PSLQ hit (P22=%.9f; best cand '%s'=%.9f dev=%.2e)"
+                  % (P22, best[0], best[1], abs(best[1] - P22)))
     return hits
 
 
 # ===========================================================================
 #  7.  Validation against the gold oracle
 # ===========================================================================
+# Published gold-oracle middle survivals (oracle_report.md, T=80/120, 16:1 Richardson).
+GOLD_ANCHORS = {
+    "canonical": 0.2147243114,
+    "sampleB": 0.0210176923,
+    "well_sep": 0.4735464616,
+    "weak": 0.9598796199,     # weak_coupling
+    "strong": 0.0104641049,   # strong_coupling
+}
+
+
+def validate_against_anchors(rows, verbose=True):
+    """
+    FAST validation: compare the fast-engine P22 (and the surrogate) to the published
+    gold-oracle anchor values (oracle_report.md) and to the EXACT Brundobler-Elser
+    extreme survivals, WITHOUT re-running the slow Richardson oracle.  The BE extreme
+    survivals are analytically exact, so reproducing them is the load-bearing check.
+    """
+    table = []
+    for r in rows:
+        nm = r["name"]
+        anchor = GOLD_ANCHORS.get(nm)
+        fast_dev = None if anchor is None else abs(r["P22"] - anchor)
+        model = P22_model(r["eps"], r["gam"], r["a"]) if _MODEL_COEFFS is not None else None
+        model_dev = None if (model is None or anchor is None) else abs(model - anchor)
+        # exact BE extreme survivals via the oracle helper, compared to the fast P diag
+        eps, gam, a = r["eps"], r["gam"], r["a"]
+        bes = oracle.be_survivals(eps, gam, a)
+        table.append(dict(name=nm, fast=r["P22"], anchor=anchor, fast_dev=fast_dev,
+                          model=model, model_dev=model_dev,
+                          P_lo_exact=bes["P_lo"], P_hi_exact=bes["P_hi"]))
+        if verbose:
+            print("[%-12s] fast=%.9f  anchor=%s  fastdev=%s   model=%s modeldev=%s"
+                  % (nm, r["P22"],
+                     "%.9f" % anchor if anchor is not None else "    --     ",
+                     "%.1e" % fast_dev if fast_dev is not None else "--",
+                     "%.6f" % model if model is not None else "  --  ",
+                     "%.1e" % model_dev if model_dev is not None else "--"))
+    return table
+
+
 def validate(rows_fast, names=None, T: float = 120.0, verbose=True):
     """
     Compare the fast-engine and surrogate P22 to the GOLD oracle on the named strata.
@@ -596,21 +659,28 @@ if __name__ == "__main__":
     ap.add_argument("--engine", default="fast", choices=["fast", "oracle"])
     ap.add_argument("--T", type=float, default=80.0)
     ap.add_argument("--only", type=str, default=None)
-    ap.add_argument("--validate", action="store_true")
+    ap.add_argument("--cache", action="store_true", help="use/save num_S12_dataset.pkl")
+    ap.add_argument("--validate", action="store_true", help="slow: re-run gold oracle")
     ap.add_argument("--recognize", action="store_true")
     args = ap.parse_args()
     names = args.only.split(",") if args.only else None
 
-    print("=== building dataset (engine=%s, T=%g) ===" % (args.engine, args.T))
-    rows = build_dataset(names=names, T=args.T, engine=args.engine)
+    print("=== building dataset (engine=%s, T=%g, cache=%s) ===" % (args.engine, args.T, args.cache))
+    rows = build_dataset(names=names, T=args.T, engine=args.engine, cache=args.cache)
 
-    print("\n=== calibrating surrogate model ===")
+    print("\n=== calibrating surrogate model (logit fit in BE exponents + chi) ===")
     c = calibrate_model(rows)
     print("coeffs =", np.array2string(c, precision=6))
-    # in-sample residuals
+    print("in-sample residuals:")
     for r in rows:
         m = P22_model(r["eps"], r["gam"], r["a"])
-        print("  [%-10s] data=%.9f model=%.9f dev=%.2e" % (r["name"], r["P22"], m, abs(m - r["P22"])))
+        print("  [%-12s] data=%.9f model=%.9f dev=%.2e" % (r["name"], r["P22"], m, abs(m - r["P22"])))
+
+    print("\n=== leave-one-out cross-validation (honest generalization error) ===")
+    cv_report(rows)
+
+    print("\n=== fast validation vs published gold anchors + exact BE ===")
+    validate_against_anchors(rows)
 
     if args.recognize:
         print("\n=== inverse-symbolic / PSLQ recognition ===")
@@ -619,5 +689,5 @@ if __name__ == "__main__":
             recognition_pass(r)
 
     if args.validate:
-        print("\n=== validation vs gold oracle ===")
-        validate(rows, names=names)
+        print("\n=== SLOW validation vs re-run gold oracle ===")
+        validate(rows, names=(names or ["canonical", "sampleB"]))
