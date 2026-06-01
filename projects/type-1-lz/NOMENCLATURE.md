@@ -15,8 +15,7 @@ remove a `Γ`/`S` collision. **`Γ` and `S` have exactly the meanings below and 
   S_{ij} = Γ_i Γ_j / (λ_i − λ_j).
   ```
 
-## Couplings, widths
-- `s_{ij} := γ_iγ_j/(ε_i−ε_j)` (SIGNED Cauchy half-width) — deliberately lowercase, echoing
+## Couplings, widths- `s_{ij} := γ_iγ_j/(ε_i−ε_j)` (SIGNED Cauchy half-width) — deliberately lowercase, echoing
   `S_{ij}=Γ_iΓ_j/(λ_i−λ_j)` (with γ↔Γ, ε↔λ).
 - `w_{ij} := |2 s_{ij}| = 2|γ_iγ_j|/|ε_i−ε_j|` — the (slope-free) avoided-crossing width.
 - Off-diagonal Hamiltonian coupling `(H₀)_{ij} = s_{ij}(a_i−a_j) = γ_iγ_j(a_i−a_j)/(ε_i−ε_j)`.
@@ -29,6 +28,24 @@ remove a `Γ`/`S` collision. **`Γ` and `S` have exactly the meanings below and 
 - **`𝒮`** : the time-evolution **scattering matrix** (the transition amplitudes), `P_{x→j}=|𝒮_{xj}|²`.
   Regularized forms `𝒮_IP`, `𝒮_canon`. The MC-type factorization is `𝒮=∏_{i<j} 𝒮_{ij}`.
   In code (ASCII), the scattering matrix is named `Smat` (= `𝒮`); `s_ij`/`w_ij` as above.
+
+## Channel ordering conventions (READ — three distinct orderings; do not conflate)
+- **Basis / matrix index = ε-ordering (fixed).** States are labeled by index `i ↔ (γ_i,ε_i,a_i)` with
+  `ε_0<ε_1<ε_2` (Params convention). The transition matrix `P[i,j]` (and `𝒮`, `H₀`, the spectral
+  curve, the form factors `Γ_j` on `λ_j∈(ε_{j-1},ε_j)`) is **ε-indexed**. This is THE basis convention.
+- **Extreme/middle = SLOPE-ordering.** Brundobler–Elser: the two **extreme-slope** levels
+  (`argsort(a)[0]`,`argsort(a)[2]`) have exact survivals; the **middle-slope** level
+  `m=argsort(a)[1]` is the OPEN one. The open middle survival is
+  **`P₂→₂ ≡ P_mid := P[m,m]`, `m=argsort(a)[1]`** — the *middle-SLOPE* diagonal entry. It equals the
+  literal adiabatic survival of the middle eigenstate (asymptotically adiabatic = diabatic).
+  **It is NOT `P[1,1]` (ε-index-1) in general** — slope-middle = ε-middle *only* when the slopes are
+  monotonic in ε (true for the `canonical` and `sampleB` benchmarks; false for generic samples). All
+  middle-survival code identifies `m` via `argsort(a)` (verified consistent: anchor_experiment,
+  num_S12, restart_probe, ws_ch).
+- **Energy ordering = NOT a labeling convention.** The instantaneous energy rank *reverses* between
+  `u=±∞` (it only swaps the two extremes; the middle is rank-2 at both ends). Do **not** use energy
+  rank to label channels — use ε (basis) and slope (BE roles). [Retraction: an earlier framing of
+  `P₂→₂` "by energy rank" was a red herring; the correct statement is slope-middle, ε-indexed.]
 
 ## Quick map (old → canonical)
 | old / colliding | canonical |

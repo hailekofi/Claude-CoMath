@@ -126,6 +126,24 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## Ordering-convention audit (user concern) — results SAFE, convention locked — 2026-06-01
+User flagged: basis ordering should be eps, not energy; worried about inconsistency imperiling results.
+DECISIVE TEST + AUDIT:
+- Three orderings: eps (basis index, fixed), slope a (BE extreme/middle), energy (reverses at +-inf).
+- The OPEN middle survival P_2->2 = P[m,m], m=argsort(a)[1] = the MIDDLE-SLOPE level (BE physics).
+  slope-middle = eps-middle ONLY when slopes monotonic in eps. Non-monotonic test (a=(2,-1,0.5),
+  eps=(-2,0,3)): slope-mid=index2 (P=0.571, open); eps-mid=index1 is the slope-MIN (P=0.0185=EXACT BE)
+  -> using eps-middle would return a BE-exact value, NOT the open quantity. Convention matters.
+- AUDIT of all middle-survival code: anchor_experiment, num_S12 (WS-NUM), restart_probe (WS-R),
+  ws_ch (WS-CH) ALL use argsort(a) (slope) consistently. Geometric scans (coscaling, structural_
+  crossing, ws_d_verification) have no middle-label dependence. => NO inconsistency; results NOT
+  imperiled.
+- Headline samples canonical & sampleB have a ASCENDING in eps => slope-mid=eps-mid=index1 =>
+  their specific numbers (P_mid=0.2147, 0.0210, all benchmarks) unconditionally SAFE.
+- Convention LOCKED in NOMENCLATURE.md: basis=eps-index; P_2->2=P[argsort(a)[1],argsort(a)[1]]
+  (slope-middle, NOT eps-index-1 in general); energy ordering is NOT a labeling convention.
+  Retracted the earlier 'P_2->2 by energy rank' framing as a red herring.
+
 ## WS-PA1 completed — PA-0/1/2 — PA-2 VERDICT: ALGEBRAIC (the make-or-break pivot) — 2026-06-01
 Deliverable paper/pa1_isomonodromy_foundation.md; coordinator verification experiments/pa2_accessory_algebraic.py.
 - **PA-0 [established; R8 TODO CLOSED — 3rd independent confirmation]:** cyclic-vector elimination
