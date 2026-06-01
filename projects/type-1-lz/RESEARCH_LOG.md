@@ -126,6 +126,32 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## WS-CH completed — confluent-Heun central connection; benchmarked computable P_2->2 — 2026-06-01
+Deliverable paper/ch_direct_connection.md; benchmark scripts archived experiments/ws_ch/.
+- **CONFIRMS (2nd independent derivation, coordinator-spot-checked):** scalar 3rd-order Laplace ODE
+  has ONE apparent singularity {0,1,3} (no log), residue A=1, v_* RATIONAL (canonical -748/375,
+  sampleB -112147/44000), NOT an H0 eigenvalue. This independently confirms WS-E's {0,1,3} =>
+  closes the paper's R8 TODO (two agents agree).
+- **CONFIRMS the restart structure:** connection matrix C = M_form . S^{(mid,hi)} . S^{(mid,lo)}
+  (formal-monodromy diagonal (x) two Stokes shears in {mid,lo},{mid,hi}); S_12=|C|^2_{mid,mid}.
+- **Formal monodromy = signed-BE [coordinator-VERIFIED]:** c_j=sum_k s_jk^2(a_j-a_k); |e^{2pi c_j}|
+  reproduces the BE survival for the EXTREME levels (canonical e^{2pi c_lo}=0.07474=P_lo; sampleB
+  0.00040). c_mid is a MIXED-SIGN CANCELLING sum (not a BE survival) => clean structural reason the
+  MIDDLE is the hard one. [new solid result]
+- **BENCHMARK PASSED <=4e-7** (target 1e-4): connection decomposition via 2 independent solvers
+  reproduces the oracle (canonical 0.214724 diff 3.95e-7; sampleB 0.021018 diff 1.56e-7), doubly
+  stochastic <1e-5. A computable, validated P_2->2.
+- **Named object:** Lisovyy-Naidiuk (2208.01604) confluent-Heun connection = convergent series in the
+  accessory parameter = quasiclassical Virasoro conformal block = Painleve-V tau-ratio (Bonelli-
+  Iossa-Panea Lichtig-Tanzini). SAME family WS-PV targets -> the two tracks CONVERGE.
+- **RANK DISCREPANCY (WS-CH confluent-Heun rank-2 vs WS-PV rank-3) -- RECONCILED [coordinator synth]:**
+  the two Stokes SHEARS (the {mid,lo},{mid,hi} carrier-space connections) are each rank-2 confluent-
+  Heun connection coefficients (Lisovyy-Naidiuk applies to EACH, published); S_12=P_2->2 is their
+  NON-COMMUTATIVE COMPOSITION = the rank-3 (12x13 joint) object (WS-PV). Pieces rank-2 (published);
+  composition rank-3. To be confirmed by WS-PA1's PA-1 (irreducibility / accessory-param count).
+- PA-2 still the pivot: v_* rational + A=1 is SUGGESTIVE of algebraic accessory parameter but WS-CH
+  did not prove full algebraicity -> WS-PA1.
+
 ## WS-PV completed — RANK CORRECTION (target is rank-3, not Painleve V) — 2026-06-01
 Deliverable paper/pv_tau_route.md. Coordinator-verified the load-bearing logic.
 - **CORRECTION to my plan (and to the WS-A/WS-E 'confluent-Heun' label):** Painleve V is a 2x2
