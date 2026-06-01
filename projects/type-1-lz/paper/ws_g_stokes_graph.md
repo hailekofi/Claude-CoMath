@@ -122,6 +122,21 @@ This grid+contour construction was cross-checked against an independent inverse-
 integrator (`du/ds = 1/(E_i−E_j)`); both agree that the well-separated graph is joint-free and
 the overlapping graph has the 12×13 crossings.
 
+**Reach sensitivity — the central methodological honesty.** Joint detection depends on *how
+far* each Stokes line is traced. I tested two cutoffs: (i) the conservative **disk mask**
+above, and (ii) a **larger-reach** variant (trace to `~1.25×` the nearest tp, clipping near
+other tps). They disagree in the borderline cases: the larger reach finds the **8** joints of
+sampleB (the four 12×13 plus four 13×23) but also produces **2 spurious 12×23 joints in the
+well-separated sampleA** (the 12 and 23 clusters' lines cross midway even though the physics is
+factorizing). The conservative disk mask gives the **clean** showcase verdict (sampleB 4,
+sampleA 0) with **no spurious joints**, at the cost of **false negatives** in the far-apart
+tail (some genuinely-enhanced samples where the relevant tps are far apart while a same-type
+conjugate twin sits close, shrinking the disk below the reach needed to meet the cross-pair
+line). I therefore report the disk-mask results and treat **"a joint is found" as a SOUND
+(sufficient) witness of non-factorization, while "no joint found" is INCONCLUSIVE** in the
+tail. A definitive treatment needs the full GMN spectral-network trajectory rules (§6.2), which
+fix the line-termination/junction grammar canonically — not implemented here.
+
 ---
 
 ## 3. The two regimes — figures
