@@ -124,6 +124,58 @@ gates, skill routing, dependency map, coordination protocol (log=shared state; r
 tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduction), O3
 (factorization locus), O4 (non-Abelian E). Awaiting user review/discussion before dispatch.
 
+## WS-E + WS-C completed — research arc essentially closed — 2026-06-01
+Both verified by coordinator; deliverables paper/ws_e_junction_Smatrix.md, paper/ws_c_factorization_locus.md (+ experiments/ws_{e,c}_*.py).
+
+### WS-E (the prize) — VERDICT: honest NEGATIVE-with-structure. The closed VALUE of P_2->2 is NOT
+elementary; it is the off-diagonal Stokes connection coefficient in the genus-0 confluent-Heun /
+higher-Weber class, ONE accessory parameter above the 1F2 / Kampe de Feriet of the solvable cousins.
+Benchmarked (anchors exact: canonical 0.214724, sampleB 0.021018).
+- [established] BE survivals = the two imaginary window actions (elementary); middle survival is the
+  genuine non-Abelian leftover (a 2-dof family shifts it independent of BE + double-stochasticity).
+- [established] Exact LAPLACE integral rep: psi_j(u)=int_C e^{-iuv}B_j(v)dv, B'(v)=K(v)B,
+  K(v)=-i diag(1/a)(H0-vI); saddles = Q4 turning points / WS-G joint.
+- [VERIFIED by coordinator, by hand] BLOCKER: [K(v1),K(v2)]=(v1-v2)[D H0,D] != 0 (D=diag(1/a)),
+  entries (1/a_i)(H0)_ij(1/a_j-1/a_i) != 0 -> Laplace image non-commuting -> NO product/abelian
+  solution. The linear model lacks the 1/t Coulomb term whose Laplace image gives Lin-Sinitsyn/BBGY
+  their Fuchsian/rank-1 Bethe structure. No Coulomb => no Fuchsian image => no product.
+- [analytic] Laplace scalar ODE: ONE finite accessory singular point (not an H0 eigenvalue),
+  anomalous indicial exponents {0,1,3} (gap at 2) + rank-2 irregular at inf -> strictly above
+  BBGY's 1F2 (singular only at 0,inf). Independently CONFIRMS WS-A's confluent-Heun class, now in
+  the Laplace frame (two independent derivations agree).
+- [VERIFIED, NEW cousin-distinguishing fact] Type-1 is NEVER tridiagonal: the extreme-extreme Cauchy
+  coupling V_02 is nonzero and DOMINANT (canonical 0.72 > V01 0.60 > V12 0.48). Every solvable MLZ
+  cousin (Lin-Sinitsyn/BBGY su(2)-Gaudin) is tridiagonal. Type-1 = the unsolved full confluent case.
+- [num] P_2->2 lies OUTSIDE the entire two-path Stuckelberg interference band on 3/7 overlapping
+  samples -> no two-amplitude/product/sech closed form can reproduce it.
+- Maximal honest result: exact integral rep + named function class (args = window actions +
+  turning-point cross-ratio) + controlled limits (BE; well-separated->incoherent). Closed VALUE
+  needs the generically-unknown confluent-Heun connection coefficients.
+
+### WS-C — VERDICT: prediction P-ii CONFIRMED (sharp), one correction.
+- factorizable = joint-free = trivial-middle-coupling: all three COINCIDE and are the BOUNDARY of
+  the genuine-LZ region (one middle coupling -> 0). NO interior codim-1 elementary locus; on the
+  genuine-LZ locus the matrix is ALWAYS non-factorizing. char-poly quadratic factor IRREDUCIBLE over
+  Q(gamma,eps,a) (sympy) -> confluent-Heun genuine.
+- Factorization locus = middle level decouples from >=1 outer (V_mid,outer->0); algebraically only
+  gamma_i=0 or a_i=a_j kill a coupling.
+- CORRECTION: classifier is 'middle DECOUPLES', not 'min(Gamma_mid) small' (near_deg_slope:
+  Gamma_mid,min=0.010 yet enh=1.31, non-factorizing, because the OTHER middle coupling is O(1)).
+  Clean criterion = enh->1 AND absdef->0, delivered only by the trivial-coupling limit.
+- Correlations [coordinator re-verifying]: Pearson(log(enh-1),log Gamma_mid,min)=+0.51;
+  Pearson(...,log sep/width)=+0.015 (~0). Factorization tracks middle coupling, UNCORRELATED with
+  separation -- WS-G's 'separation' framing was a red herring (sampleA factorizes via Gamma_mid~1e-5).
+- BBGY eps_2=(eps_1+eps_3)/2 is NOT a factorizing locus for the LINEAR model (absdef ~0.07-0.14);
+  the hyperbolic 1F2 reduction does NOT transfer.
+
+### NET (arc essentially complete): an honest, parsimonious THEORY. Class (WS-A/WS-E: genus-0
+confluent-Heun, one accessory above 1F2), obstruction (WS-D/co-scaling: slope-free width lemma ->
+permanent overlap; never tridiagonal), mechanism (WS-G: 12x13 joint = the non-Abelian remainder),
+classifier (WS-C: elementary <=> a level decouples), gold data (WS-F). Type-1 N=3 = the MINIMAL
+full (non-tridiagonal) confluent MLZ whose middle survival is an irreducible confluent-Heun Stokes
+coefficient. The elementary pieces (BE, integral rep, all limits, the bimodal locus) are closed; the
+generic middle-survival VALUE is the named-but-unevaluated connection coefficient.
+
 ## WS-G completed + coordinator integration (VERIFIED, promoted) — 2026-06-01
 Deliverables `paper/ws_g_stokes_graph.md`, `experiments/stokes_graph.py`, figs/{stokes_sepA,
 stokes_overlapB}.png. First agent result promoted with FULL confidence (load-bearing claims
