@@ -246,11 +246,15 @@ numerical artifacts, not counterexamples.
 
 ```
 cd projects/type-1-lz/experiments
-python3 r8_proof.py
+python3 r8_proof.py                  # DEFAULT (fast, ~4 s, exit 0): exact-arithmetic verification
+R8_SYMBOLIC=1 python3 r8_proof.py    # the symbolic IDENTITY proof on the gauge slice (heavy, minutes)
+R8_SYMBOLIC=1 R8_FULL=1 python3 r8_proof.py   # + the no-slice all-symbol cross-check (heaviest)
 ```
-Prints: versions banner; the explicit `v\*=−W₀/W₁`; `Φ(E)`; `Phi(v_*) == 0 identically ? True`;
-the repeated-root `u\*`; `∂_Eχ(u\*,v\*)==0`, `∂_uχ(u\*,v\*)==0`; indicial exponents `{0,1,3}`; and a
-per-case SUMMARY. CASE 1 (gauge slice) is the load-bearing proof and closes quickly; CASE 2
-(full-symbolic) is the heavier independent check. No git operations; no external CAS required
-(SymPy closes both routes), though the script header documents how to escalate to Sage/Mathematica
-if a future, heavier variant is wanted.
+**Default (fast) path** verifies `v\*=E\*` in EXACT rational arithmetic: the canonical sample
+(`v\*=E\*=−748/375`, `u\*=−187/750`; `Phi(v_*)==0 True`, `∂_Eχ=∂_uχ=0 True`, indices `{0,1,3}`) plus
+random rationalized samples (`passed N/N ... (exact)`). No floats — this is the rigorous "beyond one
+sample" check and reproduces in seconds (near-proof tier). **`R8_SYMBOLIC=1`** runs the load-bearing
+symbolic identity over `Q(γ,ε,a)` on the gauge slice `a=(s,1,2)` with `ε,γ` symbolic (the 7-symbol
+resultant; minutes), which together with gauge covariance (§5) is the proof; `R8_FULL=1` adds the
+no-slice all-symbol cross-check. No git operations; SymPy closes both routes (the header documents
+escalation to Sage/Mathematica for heavier variants).

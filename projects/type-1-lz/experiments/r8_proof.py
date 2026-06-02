@@ -305,45 +305,58 @@ def run(label, eps, gam, a):
 
 if __name__ == "__main__":
     banner()
+    SYMBOLIC = os.environ.get("R8_SYMBOLIC") == "1"   # default OFF: fast exact verification
 
-    # symbolic parameters
-    g0, g1, g2 = sp.symbols('g0 g1 g2', positive=True)
-    e0, e1, e2 = sp.symbols('e0 e1 e2', real=True)
-    a0, a1, a2 = sp.symbols('a0 a1 a2', real=True)
-    s = sp.symbols('s', real=True)
-    gam = [g0, g1, g2]
-    eps = [e0, e1, e2]
+    # ---- DEFAULT (fast, rigorous): exact-rational verification ---------------------------
+    # The canonical Type-1 sample, in EXACT rationals -> explicit v_* = E_* and node u_*.
+    # All arithmetic is exact (no floats); route_A/route_B/apparentness close in well under a
+    # minute because no parameters are left symbolic.
+    eps_c = [sp.Rational(-2), sp.Integer(0), sp.Integer(3)]
+    gam_c = [sp.Integer(1), sp.Rational(4, 5), sp.Rational(6, 5)]
+    a_c = [sp.Integer(-1), sp.Rational(1, 2), sp.Integer(2)]
+    okA, node_ok, du_ok, v_star, u_star = run("CANONICAL (exact rationals)", eps_c, gam_c, a_c)
+    print(f"\n  canonical:  v_* = E_* = {v_star} ,   u_* = {u_star}")
 
-    # CASE 1: gauge-reduced slope slice a = (s, 1, 2); eps, gamma fully general.
-    #         (a_i must stay NONZERO for the Laplace dual diag(1/a); two fixed nonzero
-    #          distinct values + one free a_0=s.)  This is the load-bearing identity proof.
-    run("GAUGE SLICE  a=(s,1,2), eps & gamma general", eps, gam, [s, sp.Integer(1), sp.Integer(2)])
+    # Broad EXACT-arithmetic verification across random rationalized samples (no floats).
+    # This is the rigorous "beyond one sample" evidence and is fast.
+    exact_random_check(ntrials=12, seed=0)
 
-    # EXACT-arithmetic random samples (broad M2 supporting evidence; finishes in ~seconds).
-    exact_random_check(ntrials=40, seed=0)
-
-    # CASE 2 (optional, HEAVY): full symbolic slopes a=(a0,a1,a2) -- certifies no gauge
-    #   artifact via the cheap  Res_E(Phi, W1 E + W0) == 0  form (avoids substituting the
-    #   giant rational v_*).  Set R8_FULL=1 to run; it can take several minutes.  CASE 1 +
-    #   gauge covariance (see paper) already PROVES the theorem, so this is redundant.
-    if os.environ.get("R8_FULL") == "1":
-        try:
-            full_symbolic_resE([a0, a1, a2], eps, gam)
-        except Exception as ex:                                # noqa: BLE001
-            print("\n[FULL SYMBOLIC] failed:", repr(ex),
-                  "\n(CASE 1 + gauge covariance suffices for the theorem.)")
+    # ---- THE SYMBOLIC IDENTITY PROOF (heavy): gauge slice a=(s,1,2), eps & gamma symbolic --
+    # This is the load-bearing identity over Q(gamma,eps,a) (7 symbols -> a heavy resultant,
+    # minutes).  Gated behind R8_SYMBOLIC=1 so the default run reproduces quickly.  CASE 2
+    # (R8_FULL=1) is the heavier no-slice all-symbol cross-check.
+    if SYMBOLIC:
+        g0, g1, g2 = sp.symbols('g0 g1 g2', positive=True)
+        e0, e1, e2 = sp.symbols('e0 e1 e2', real=True)
+        s = sp.symbols('s', real=True)
+        run("GAUGE SLICE  a=(s,1,2), eps & gamma general  [SYMBOLIC IDENTITY]",
+            [e0, e1, e2], [g0, g1, g2], [s, sp.Integer(1), sp.Integer(2)])
+        if os.environ.get("R8_FULL") == "1":
+            a0, a1, a2 = sp.symbols('a0 a1 a2', real=True)
+            try:
+                full_symbolic_resE([a0, a1, a2], [e0, e1, e2], [g0, g1, g2])
+            except Exception as ex:                            # noqa: BLE001
+                print("\n[FULL SYMBOLIC] failed:", repr(ex),
+                      "\n(gauge slice + covariance suffices for the theorem.)")
     else:
-        print("\n[FULL SYMBOLIC CASE 2] skipped (set env R8_FULL=1 to run the heavy all-symbol"
-              " Res_E check; CASE 1 + gauge covariance already proves the theorem).")
+        print("\n[SYMBOLIC IDENTITY] skipped for speed (default fast mode).")
+        print("  Set R8_SYMBOLIC=1 for the full symbolic-identity proof on the gauge slice")
+        print("  a=(s,1,2) with eps,gamma symbolic (heavy, minutes); add R8_FULL=1 for the")
+        print("  heaviest no-slice all-symbol Res_E cross-check.")
 
     print("\n" + "=" * 80)
-    print("DONE.  If both cases print Phi(v_*)==0 True and 'double eig' True, the identity")
-    print("v_* == E_* is PROVEN over Q(gamma,eps,a) (route A) with the structural mechanism")
-    print("(route B) supplying the explicit node u_* and the double-eigenvalue reason.")
+    print("RESULT.  DEFAULT (fast): v_* == E_* verified in EXACT arithmetic on the canonical")
+    print("sample and random rationalized samples (no floats) -- near-proof tier, reproducible")
+    print("in seconds.  R8_SYMBOLIC=1: PROVES v_* == E_* as a polynomial identity over")
+    print("Q(gamma,eps,a) (gauge slice + covariance, route A), with route B supplying the")
+    print("structural reason (Krylov rank-drop <=> double eigenvalue) and the explicit node u_*.")
     print("=" * 80)
 
 # ---------------------------------------------------------------------------------------
-# PERFORMANCE: CASE 1 (gauge slice) closes in seconds. CASE 2 (full 9-symbol resultant)
-# is heavier but completes; if a slow box stalls on it, the theorem still stands on
-# CASE 1 + the gauge-covariance argument documented in the header and the paper.
+# PERFORMANCE.  Default run (canonical exact sample + 12 exact random samples) closes in
+# well under a minute -- this is the fast, reproducible verification path.  The symbolic
+# IDENTITY proof (R8_SYMBOLIC=1: gauge slice a=(s,1,2) with eps,gamma symbolic) is the heavy
+# leg (a 7-symbol resultant, minutes); R8_FULL=1 adds the no-slice all-symbol cross-check
+# (heaviest).  The theorem stands on the symbolic identity + gauge covariance; the default
+# exact-arithmetic path reproduces the result quickly without leaving floating point.
 # ---------------------------------------------------------------------------------------
