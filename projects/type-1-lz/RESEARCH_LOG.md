@@ -1117,3 +1117,35 @@ middle is the only RECOMBINING level (two interfering paths); the extremes are o
 
 This ties together the user's "treat Pmid as mysterious" question, the WS-O3 semiclassical success, and the
 WS-RH sigma-isolation into one structural statement. Coordinator-verified numerics (skeleton script).
+
+---
+
+## 2026-06-02 — Commuting family as isomonodromic deformation (user idea: map family -> 2 transcendentals)
+
+Probe: experiments/deformation_family_probe.py. Tested whether the 2-parameter commuting family maps
+usefully onto the two transcendentals {P_mm, b}.
+
+F1 [established, machine prec]: different slope vectors a (same gamma,eps) COMMUTE (||[H^a,H^a']||~1e-16)
+and SHARE one a-INDEPENDENT eigenbasis (shared-eigvec defect ~1e-15) at all u tested. => the
+derivative-coupling SEED W_ij=<phi_i|phi_j'> is a-independent: the ENTIRE transcendental content of the
+WHOLE 2-param family is ONE geometric object W. (Strong confirmation/sharpening of R1.)
+
+F2 [NS]: along a path a(t) in the family (separated->deep), {P_mm(a), b(a)} vary SMOOTHLY (P_mm 0.565->
+0.193, b 0.293->0.867) along with the elementary BE actions. Each member's {P_mm,b} = holonomy of the
+FIXED W against that member's a-linear phases.
+
+VERDICT (honest): the map is the ISOMONODROMY structure -- W = monodromy/Stokes seed (a-invariant);
+a = deformation times; {P_mm(a),b(a)} = tau-data flowing along the deformation. FRUITFUL as STRUCTURE
+(one rigid shared seed for the whole family; characterizing W's Stokes sigma solves the entire family)
+and as the correct SETUP for the Schlesinger/Garnier tau-route (= the named-closed-form deliverable;
+matches WS-RH's sigma-isolation and the GL3/W3 frontier, approached from the deformation side with a clean
+separated-regime initial condition). NOT a shortcut around the Abelian ceiling:
+ - the a-INVARIANT is the SEED W, NOT the two transcendentals (they vary) -- the family preserves/transports
+   the content, never produces it (R1);
+ - no free deep-overlap shortcut: the holonomy of W with deep-overlap phases is still the hard connection
+   problem; the genuine lever (derive the a-flow / Schlesinger ODE with the separated elementary IC) is
+   itself the frontier tau-derivation.
+ - dimension match 2=2 is N=3-special ((N-1)^2-2 transcendentals vs N-1 family params); the real link is
+   the RH deformation<->monodromy correspondence, not the numerology.
+Actionable hard-but-right next step (if pursued): derive/integrate the isomonodromic a-flow (Schlesinger
+for our node-pinned GL3 point) from the separated-regime IC to deep overlap.
