@@ -1086,3 +1086,34 @@ remaining transcendental obstruction is the off-diagonal Stokes constant σ (the
 constant), with EVERYTHING ELSE algebraic (data) and diagonal (G±). σ is now isolated as the unique
 non-abelian unknown. Dovetails with the "BE+geometry captures all but the non-abelian σ" finding and the
 Abelian-ceiling thesis. Rung 3 (closed W₃/Nekrasov σ formula) not attempted (frontier).
+
+---
+
+## 2026-06-02 — Paper subsection: elementary skeleton + two transcendentals + Abelian ceiling (R15, R16)
+
+New §sec:skeleton in type1_lz_working_paper.tex + experiments/skeleton_two_transcendentals.py.
+
+R15 [EST]: P (doubly stochastic, 4 DOF); BE fixes the 2 extreme-slope survivals; BE+DS => every entry
+is an explicit affine function of exactly TWO unknowns, the middle survival Pmid and one off-diagonal
+b:=P[hi,lo] (lo->hi chirality). Reconstruct-from-2 exact to ~2e-10. P strongly NON-symmetric
+(||P-P^T||~0.6-1.0) => b independent of Pmid (no symmetry collapse to one unknown; symmetry would force
+b=(1-Pll-Phh+Pmid)/2, off by ~0.3).
+
+R16 [NS]: vs the incoherent independent-crossing model (BE+geometry, no interference): Pmid is the
+universal hard number (off by up to 0.985 in deep overlap); b is a SOFT transcendental, collapsing to its
+incoherent (cyclic) value in BOTH the separated (|db|~4e-3) and deep-overlap (|db|~9e-4) limits, only
+mildly dressed (|db|~0.15) in the moderate middle.
+
+Why BE+geometry captures so much (three-layer hierarchy): (i) extreme survivals exact (extremes never
+recombine); (ii) directed-cycle skeleton = formal monodromy (abelian, geometric); (iii) the large (2.5-
+130x) interference on Pmid is a coherent SEMICLASSICAL effect (Stuckelberg/period phase, chi) not the
+transcendental constant. The genuine transcendental residue is the rank-3 Stokes joint sigma, subleading
+except at turning-point coalescence (deep overlap).
+
+Abelian-ceiling reading (observable face of R1): integrability fixes all abelian data + the diagonal
+algebraic G+- map; the SOLE non-abelian datum is sigma. WS-RH confirms from the RH side (wall beaten, data
+algebraic, G+- diagonal, stall isolates sigma). Punchline: transcendence localizes on Pmid because the
+middle is the only RECOMBINING level (two interfering paths); the extremes are one-way cascades => BE-exact.
+
+This ties together the user's "treat Pmid as mysterious" question, the WS-O3 semiclassical success, and the
+WS-RH sigma-isolation into one structural statement. Coordinator-verified numerics (skeleton script).

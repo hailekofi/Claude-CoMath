@@ -11,6 +11,7 @@
 \newcommand{\Pmid}{P_{m\to m}}   % slope-middle survival, m=argsort(a)[1] (NOT an energy/eps index)
 \newcommand{\half}{\tfrac12}
 \newcommand{\GE}{\Gamma_{\!E}} % Euler Gamma (NOT the Cauchy form factor Gamma_j)
+\newcommand{\BE}{\mathrm{BE}}
 % Nomenclature (see NOMENCLATURE.md): s_{ij}=gamma_i gamma_j/(eps_i-eps_j) signed Cauchy half-width;
 % w_{ij}=|2 s_{ij}| width; BE/window action delta_{ij} = s_{ij}^2 |a_i-a_j| (NOT Gamma); scattering = \Scat;
 % Gamma_j = canonical Cauchy form factor; Gamma_E = Euler Gamma; G = Barnes G.
@@ -276,6 +277,67 @@ This is the ground truth against which R10--R13 are gold-gated.\pnote{experiment
 num\_S12.py\}; num\_S12\_model.md; anchors re-verified 2026-06-02 (canonical dev $1.6\!\times\!10^{-9}$,
 sampleB dev $2.1\!\times\!10^{-7}$)}
 
+\section{The elementary skeleton: two transcendentals and the Abelian ceiling}\label{sec:skeleton}
+\textbf{R15 [EST].} Write $P_{jk}=|\Scat_{jk}|^2$ in slope order $\mathrm{lo}<\mathrm{mid}<\mathrm{hi}=
+\mathrm{argsort}(a)$ (rows final, columns initial). $P$ is doubly stochastic ($4$ real DOF). The BE law
+fixes the two extreme-slope survivals $P^{\BE}_{\rm lo}=e^{-2\pi(\delta_{\rm lo,mid}+\delta_{\rm lo,hi})}$,
+$P^{\BE}_{\rm hi}=e^{-2\pi(\delta_{\rm hi,lo}+\delta_{\rm hi,mid})}$ ($\delta_{ij}=s_{ij}^2|a_i-a_j|$). BE
+$+$ double stochasticity then write \emph{every} entry as an explicit affine function of exactly
+\emph{two} unknowns --- the middle survival $\Pmid$ and one off-diagonal $b:=P_{\rm hi,lo}$
+(the $\mathrm{lo}\!\to\!\mathrm{hi}$ transition):
+\begin{equation}
+P=\begin{pmatrix}
+P^{\BE}_{\rm lo} & 1-P^{\BE}_{\rm lo}-\beta & \beta\\[2pt]
+1-P^{\BE}_{\rm lo}-b & \Pmid & P^{\BE}_{\rm lo}+b-\Pmid\\[2pt]
+b & 1-b-P^{\BE}_{\rm hi} & P^{\BE}_{\rm hi}
+\end{pmatrix},\quad \beta=1-P^{\BE}_{\rm hi}-(P^{\BE}_{\rm lo}+b-\Pmid).
+\end{equation}
+The reconstruction is exact (verified to $\sim2\times10^{-10}$). $P$ is \emph{strongly non-symmetric}
+($\|P-P^\top\|\approx0.6$--$1.0$), so $b$ is \emph{independent} of $\Pmid$ --- there is no symmetry
+collapse to a single unknown (if $P=P^\top$ then $b=\tfrac12(1-P^{\BE}_{\rm lo}-P^{\BE}_{\rm hi}+\Pmid)$,
+off by $\sim0.3$).\pnote{experiments/skeleton\_two\_transcendentals.py}
+
+\textbf{R16 [NS]. $\Pmid$ is the hard number; $b$ is a \emph{soft} transcendental.} Against the
+incoherent independent-crossing model (BE magnitudes $+$ crossing geometry, \emph{no} interference):
+\begin{center}\small
+\begin{tabular}{lccc|ccc}
+\toprule
+regime & $\Pmid^{\rm Q}$ & $\Pmid^{\rm inc}$ & $|\Delta\Pmid|$ & $b^{\rm Q}$ & $b^{\rm inc}$ & $|\Delta b|$\\
+\midrule
+separated $\delta\!\sim\!0.006$ & 0.930 & 0.930 & $5\!\times\!10^{-4}$ & 0.029 & 0.025 & $4\!\times\!10^{-3}$\\
+moderate $\delta\!\sim\!0.24$ & 0.212 & 0.404 & 0.19 & 0.814 & 0.662 & 0.15\\
+deep overlap $\delta\!\sim\!5.7$ & 0.015 & 1.000 & \textbf{0.985} & 0.999 & 1.000 & $9\!\times\!10^{-4}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+$b$ collapses to its incoherent (cyclic) value in \emph{both} the separated and the deep-overlap limits;
+$\Pmid$ is missed incoherently by up to $0.985$ in deep overlap. So the two unknowns are not equal
+partners: $\Pmid$ is the universal hard number, $b$ a mild correction that is elementary at both
+extremes.\pnote{skeleton\_two\_transcendentals.py}
+
+\textbf{Why BE $+$ geometry captures so much.} A three-layer hierarchy. (i) The extreme survivals are
+\emph{exact} because the extreme levels never recombine --- each sees every crossing once, so its
+survival is a pure product of LZ factors (BE). (ii) The directed-cycle skeleton (the large off-diagonals,
+incl.\ $b$) is the \emph{formal monodromy} / sheet permutation --- abelian, geometric. (iii) The large
+interference the incoherent model misses on $\Pmid$ ($2.5$--$130\times$, R14) is a coherent
+\emph{semiclassical} effect captured by the St\"uckelberg/period phase (the cross-ratio $\chi$, R13),
+\emph{not} the transcendental connection constant. The genuinely transcendental residue is the rank-3
+Stokes \emph{joint} $\sigma$ --- the subleading exact-WKB correction, suppressed except where turning
+points coalesce (deep overlap), where it becomes $O(1)$ and the uniform formula (R13) fails.
+
+\textbf{The Abelian ceiling, made observable.} This is the observable face of R1. Integrability fixes
+\emph{all} abelian data exactly --- spectrum, periods, BE survivals, formal monodromy (the cycle) --- and
+the connection-to-physical map $G_\pm$ is \emph{diagonal} and algebraic; the \emph{only} non-abelian datum
+is the off-diagonal Stokes $\sigma$. The node-pinned $GL_3$ RH analysis confirms this from the
+Riemann--Hilbert side: with the conditioning wall beaten by high precision and all RH data algebraic and
+$G_\pm$ diagonal, the v-plane connection still fails to reproduce $\Scat$ under any diagonal/Sinkhorn
+dressing --- isolating $\sigma$ as the \emph{sole} transcendental obstruction (a structural, not numerical,
+stall).\pnote{paper/gl3\_rh\_problem.md; experiments/gl3\_rh\_solver.py} \emph{Punchline:} transcendence
+has nowhere to live but $\Pmid$ (and its soft companion $b$), because the middle is the only level that
+\emph{recombines} --- it traverses both the mid--lo and mid--hi crossings, so its amplitude is a genuine
+two-path sum whose joint dressing $\sigma$ is irreducible; the extremes each see a one-way cascade and are
+BE-exact.
+
 \section{The unifying picture and the classifier}
 The BE survivals are residue-collapsing periods of the phase one-form (elementary); the middle
 survival is the holonomy of the one joint that genuine all-to-all coupling forces. \emph{Classifier
@@ -329,6 +391,8 @@ R3, are now theorems);
 % R12 [AD/NS]<- ws_o3_uniform_asymptotics.md (two-path structure; cosPhi law, K~3.0)
 % R13 [NS]  <- ws_o3_uniform.py (53-pt sweep; RMS 1-2% for delta<=0.25; fails delta>0.5)
 % R14 [EST/NS]<- oracle.py, num_S12.py, num_S12_model.md (1e-9 benchmark; re-verified 2026-06-02)
+% R15 [EST] <- skeleton_two_transcendentals.py (BE+DS => affine in {Pmid,b}; reconstruct 2e-10; P not symmetric)
+% R16 [NS]  <- skeleton_two_transcendentals.py (Pmid hard / b soft regime table; Abelian-ceiling reading)
 % F1  [AD]  <- single rank-2 irregular point, dim-6 wild char variety; kz_isomonodromy_picture.md
 
 \bibliography{refs}
