@@ -32,7 +32,7 @@ or a **validated semi-analytic approximation** — see §6.
 |----|--------|--------|----------|
 | R1 | Commuting Type-1 family is a **ring**; quadratic partner reduces to linear w/ linear-in-u coeffs; **shared eigenbasis** ⇒ integrability is **Abelian** and fixes only spectrum/BE, **never the prefactor** ("Abelian ceiling"). | **established** (machine-prec) | experiments/ring_structure.py |
 | R2 | Spectral curve `Σ:det(E−H)=0` is **genus-0 rational** (Gaudin param `(E,u)=(m/p,n/p)`) with a structural **node** (real exact crossing). | **established** | paper/gate_test_genus.md |
-| R3 | The real exact crossing (node) is **universal** (rational `u_*,E_*`). | **numerically-supported** (99.8% of 1290) | experiments/structural_crossing.py |
+| R3 | The real exact crossing (node) is **universal** (rational `u_*,E_*`). | **established** — THEOREM: Owusu-Wagh-Yuzbashyan 2009 (arXiv:0807.0259): integrability (commuting partner R1) => exact crossings, violating von Neumann-Wigner. Corroborated by our Brent re-scan (96.9%/351, median 3.1e-9). | arXiv:0807.0259; experiments/structural_crossing.py |
 | R4 | **Width lemma** `w_ij=2|γ_iγ_j|/|ε_i−ε_j|` (slope-free, exact); crossings **permanently marginally overlap** ⇒ no exact `𝒮=∏𝒮_ij`; **never tridiagonal** (extreme–extreme coupling dominant). | **established** (symbolic) + NS (bound) | paper/coscaling_derivation.md, ws_d_verification.py |
 | R5 | **Classifier:** elementary ⟺ a level decouples ⟺ joint-free spectral network ⟺ rank-2 boundary. | **numerically-supported** | paper/ws_c_factorization_locus.md |
 | R6 | `P=|𝒮|²` = Stokes data of a **single rank-2 irregular point** at u=∞ (3-level Weber). | analytically-derived | paper/kz_isomonodromy_picture.md |

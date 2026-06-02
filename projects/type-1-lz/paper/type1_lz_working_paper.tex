@@ -107,15 +107,17 @@ global Gaudin parametrization $E=m(\lambda)/p(\lambda)$, $u=n(\lambda)/p(\lambda
 The discriminant $D(u)=\mathrm{Disc}_E\chi_H$ is a sextic with multiplicities $[1,1,1,1,2]$: four
 simple complex branch points (the complexified avoided crossings) and one \emph{node} of trivial
 monodromy --- a real exact level crossing (symbolic double root of $D$ for the canonical sample).
-\textbf{R3 [NS].} This real exact crossing is \emph{universal}: nearly every Type-1 $N{=}3$ tested
-has a real $u_*$ with two exactly degenerate eigenvalues. A prior $1290$-sample scan reported
-$99.8\%$ within $|u|\le60$; an independent Brent-refined re-scan (2026-06-02) finds $96.9\%$ of
-$351$ samples with min gap $<10^{-3}$ and $96.6\%$ with gap $<10^{-6}$, \emph{median gap}
-$3.1\times10^{-9}$. The few-percent ``misses'' are search-box / secondary-basin resolution
-artifacts (the crossing lies outside the box or away from the global grid minimum), not genuine
-absences. An analytic proof of universality is owed.\pnote{experiments/structural\_crossing.py
-(docstring: 99.8\%/1290); independent re-scan 2026-06-02 (96.9\%/351, median $3.1\!\times\!10^{-9}$);
-scan, not yet a proof} The node fixes the lone
+\textbf{R3 [EST].} This real exact crossing is \emph{universal, and is a theorem}: Owusu, Wagh
+\& Yuzbashyan [J.~Phys.~A \textbf{42}, 035206 (2009); arXiv:0807.0259] prove that any
+$H_0+uA$ possessing a nontrivial commuting partner exhibits exact level crossings as $u$ varies,
+in violation of the von Neumann--Wigner non-crossing rule. Type-1 $N{=}3$ satisfies the hypothesis
+(its commuting partner is R1), so a real exact crossing is \emph{guaranteed}. Our independent
+Brent-refined scan corroborates ($96.9\%$ of $351$ samples within $|u|\le60$ have min gap
+$<10^{-3}$, $96.6\%$ $<10^{-6}$, \emph{median gap} $3.1\times10^{-9}$; the few-percent in-box
+``misses'' have the crossing outside the search box), and the crossing is moreover \emph{rational}
+($u_*=-187/750$ canonical; R8).\pnote{theorem: Owusu--Wagh--Yuzbashyan 2009, arXiv:0807.0259;
+corroboration experiments/structural\_crossing.py + Brent re-scan 2026-06-02 (96.9\%/351, median
+$3.1\!\times\!10^{-9}$)} The node fixes the lone
 finite accessory point of the connection problem \emph{algebraically} (\S\ref{sec:class}).
 
 \subsection{Slope-free widths $\Rightarrow$ permanent overlap $\Rightarrow$ no factorization}
@@ -289,15 +291,16 @@ overlap, where the rank-3 content is deepest.
 rank-3 point is \emph{not} constructive without the genuine rank-3 special function (the unknown
 local parametrix); the one revival route is an mpmath high-precision recessive-split symbol that
 beats the Stokes wall (break is precision-limited, not structural) and could let one \emph{read}
-$\sigma$, plus the closed $v$-frame$\leftrightarrow\Scat$ contour-selection map; (iii) analytic proofs of node universality (R3),
-of accessory$=$node in general (R8), of the $\approx1.6$ overlap bound (R5), and of the
+$\sigma$, plus the closed $v$-frame$\leftrightarrow\Scat$ contour-selection map; (iii) analytic proofs of
+accessory$=$node in general (R8; \emph{node universality itself is now the Owusu--Wagh--Yuzbashyan
+theorem, R3}), of the $\approx1.6$ overlap bound (R5), and of the
 finite-product falsification (R11) as a parameter-region statement rather than a sample scan;
 (iv) an asymmetry-aware uniform law (R12 uses $\delta_{\rm lo}+\delta_{\rm hi}$, not the ratio).
 
 % ---------------- Dependency map (evidence-ladder) ----------------
 % R1  [EST] <- ring_structure.py (commuting ring, shared eigenbasis; Abelian ceiling)
 % R2  [EST] <- gate_test_genus.md (Gaudin parametrization; node)
-% R3  [NS]  <- structural_crossing.py (universality 99.8%; proof owed)
+% R3  [EST] <- Owusu-Wagh-Yuzbashyan 2009 (arXiv:0807.0259) THEOREM; structural_crossing.py corroborates
 % R4  [EST] <- coscaling_derivation.md (symbolic width lemma)
 % R5  [NS]  <- coscaling.py (genuine-LZ ~1.6 bound), ws_d_verification.py
 % R6  [EST] <- Cauchy coupling values; ws_d

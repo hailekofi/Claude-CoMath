@@ -904,3 +904,31 @@ R2 (genus-0, gate_test_genus.md — symbolic memo), R6 (coupling dominance — s
 NET: paper is internally consistent and provenance-clean; tags honest. Draft remains DRAFT (no
 pdflatex in env to compile; R2/R6 memo-only). The three-deliverable story (integral rep / c=1
 Fredholm-det classification / uniform formula + oracle) stands and survives adversarial review.
+
+---
+
+## 2026-06-02 — R3 node universality is a THEOREM (Owusu-Wagh-Yuzbashyan 2009)
+
+User pointed to the proof: H. K. Owusu, K. Wagh, E. A. Yuzbashyan, "The link between
+integrability, level crossings and exact solution in quantum models," J. Phys. A 42, 035206
+(2009), arXiv:0807.0259. (Lead author = the user.) THEOREM: any H0+uA possessing a nontrivial
+commuting partner has exact level crossings as u varies, violating von Neumann-Wigner. Type-1 N=3
+satisfies the hypothesis (commuting partner = R1), so the universal real exact crossing (our "node")
+is GUARANTEED.
+
+Impact:
+- R3 promoted numerically-supported -> ESTABLISHED (theorem + our corroborating Brent re-scan
+  96.9%/351, median gap 3.1e-9; rational location u_*=-187/750 from R8).
+- "Analytic proof of node universality owed" REMOVED from the owed list.
+- Lineage clarified: OWY (integrability => crossings) is the upstream theorem for our entire
+  node-based construction; our R1 commuting ring is exactly its hypothesis. Our contribution is
+  downstream: node = accessory point of the connection problem (R8), the rank-3 classification (R9),
+  and the three deliverables.
+- Paper updated: R3 [EST] with citation; owed-proofs item (iii) now lists only accessory=node (R8),
+  the ~1.6 bound (R5), and the R11 finite-product falsification as a region statement.
+
+Owed proofs remaining (post-OWY): accessory=node in general (R8); ~1.6 overlap bound (R5);
+finite-product falsification as a parameter-region statement (R11). Strategic: direction (1)
+[prove node] is now CLOSED by the literature; the live productive threads are (2) physical meaning
+of the node, the R8 accessory=node proof (now well-posed since node is a theorem), the chi-channel
+map (R13), and publication.
