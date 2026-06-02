@@ -6,7 +6,7 @@
 \usepackage{amsmath,amssymb,bm}
 \newcommand{\eps}{\varepsilon}
 \newcommand{\Scat}{\mathcal{S}}
-\newcommand{\Pmid}{P_{2\to2}}
+\newcommand{\Pmid}{P_{m\to m}}
 \newcommand{\Z}{\mathbb{Q}}
 \newcommand{\diag}{\mathrm{diag}}
 \newcommand{\Res}{\mathrm{Res}}
@@ -49,7 +49,9 @@ solutions --- Demkov--Osherov, bow-tie, Tavis--Cummings --- with little connecti
 facts anchor the landscape. First, the \emph{extreme}-slope survivals obey the universal
 Brundobler--Elser law $P=\prod_m e^{-2\pi s_{nm}^2|a_n-a_m|}$ [Brundobler \& Elser, J.\ Phys.\ A
 \textbf{26}, 1211 (1993)], with $s_{ij}=\gamma_i\gamma_j/(\eps_i-\eps_j)$. Second, the
-\emph{interior} content --- the middle-slope survival $\Pmid$ and one off-diagonal --- is the genuinely
+\emph{interior} content --- the middle-slope survival $\Pmid$ (the diagonal $|\Scat_{mm}|^2$ of the
+\emph{slope}-middle channel $m=\mathrm{argsort}(a)[1]$; the $\eps$-ordering fixes the basis but is not
+itself a channel label) and one off-diagonal --- is the genuinely
 open object, and for the minimal fully-coupled integrable case (Type-1, $N{=}3$, Cauchy/Gaudin
 couplings $(H_0)_{ij}=\gamma_i\gamma_j(a_i-a_j)/(\eps_i-\eps_j)$) it is provably \emph{not} an
 elementary or finite-special-function quantity: it is the connection constant of a rank-3,
@@ -145,7 +147,11 @@ generic random samples.
 $e_0$ is deficient: $e_0$ lies in a proper $M(v_*)$-invariant subspace. The link to the spectrum is a
 one-line pencil identity:
 \begin{equation}
-M(v)w=\mu w\ \Longleftrightarrow\ (H_0-vI)w=\mu A w\ \Longleftrightarrow\ H(-\mu)\,w=v\,w .
+\begin{aligned}
+M(v)\,w=\mu\,w
+  &\ \Longleftrightarrow\ (H_0-vI)\,w=\mu A\,w\\
+  &\ \Longleftrightarrow\ H(-\mu)\,w=v\,w .
+\end{aligned}
 \label{eq:duality}
 \end{equation}
 An eigenpair $(\mu,w)$ of the dual matrix $M(v)$ is therefore an eigenpair of the \emph{physical}
@@ -201,10 +207,14 @@ The bridge also has a conceptual payoff for the theory of integrable time-depend
 Owusu--Wagh--Yuzbashyan theorem is a statement on the spectral side: integrability $\Rightarrow$ an
 exact crossing. Our theorem propagates integrability to the dynamical side: that same crossing
 $\Rightarrow$ a pinned accessory parameter $\Rightarrow$ algebraic monodromy data. Chaining them,
-\[
-\text{commuting partner}\ \Rightarrow\ \text{exact crossing}\ \Rightarrow\ \text{accessory pinned}\
-\Rightarrow\ \text{algebraic connection data},
-\]
+\begin{equation*}
+\begin{aligned}
+\text{commuting partner}
+  &\ \Rightarrow\ \text{exact crossing}\\
+  &\ \Rightarrow\ \text{accessory parameter pinned}\\
+  &\ \Rightarrow\ \text{algebraic monodromy data},
+\end{aligned}
+\end{equation*}
 gives a precise answer to a question the constellation of solvable models leaves implicit: \emph{what
 does integrability buy when it does not buy solvability?} It buys rigidity. The transition amplitude
 remains transcendental --- integrability does not lower it to elementary functions (the ``Abelian
