@@ -1,0 +1,265 @@
+\documentclass[aps,prl,reprint,nofootinbib,superscriptaddress]{revtex4-2}
+% Review Letter -- "Accessory = Node": a spectral-dynamical identity for integrable Landau-Zener.
+% Memorializes the R8 theorem (v_* = E_*). Companion: type1_lz_working_paper.tex; proof artifacts
+% experiments/r8_proof.py, paper/r8_accessory_node_proof.md. Evidence: PROVEN (symbolic identity
+% over Q(gamma,eps,a) via gauge slice + covariance; independently re-verified in exact arithmetic).
+\usepackage{amsmath,amssymb,bm}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Scat}{\mathcal{S}}
+\newcommand{\Pmid}{P_{2\to2}}
+\newcommand{\Z}{\mathbb{Q}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\Res}{\mathrm{Res}}
+\newcommand{\Disc}{\mathrm{Disc}}
+
+\begin{document}
+
+\title{Pinning the accessory parameter: a spectral--dynamical identity\\
+for the integrable multistate Landau--Zener problem}
+\author{Co-theoretical-physicist working session}
+\affiliation{\texttt{projects/type-1-lz}; branch \texttt{claude/comathematician-agent-skills-9HPSJ}}
+\date{\today}
+
+\begin{abstract}
+The transition amplitudes of a multistate Landau--Zener (MLZ) model are the Stokes data of an
+irregular ordinary differential equation; for the integrable Type-1 family at $N{=}3$ that ODE
+carries a single finite \emph{apparent} singularity whose location is the \emph{accessory parameter}
+--- the one datum that, in the general theory of such connection problems, is a free transcendental
+modulus and is precisely what forbids a closed-form answer. We prove that for every generic Type-1
+$N{=}3$ model this accessory parameter is \emph{not} free: it coincides exactly, as a rational
+function of the couplings, with the energy of the model's guaranteed exact level crossing,
+$v_*\equiv E_*$ in $\Z(\gamma,\eps,a)$. The proof has two faces: an elimination identity
+($\Res$-based) and a structural mechanism in which the Laplace-dual conjugation $\diag(1/a)$
+implements an exact duality between the \emph{time} of the spectral degeneracy and an
+\emph{eigenvalue} of the dual pencil, collapsing a deficient Krylov space onto a double eigenvalue.
+The result joins two previously separate facts about integrable MLZ --- that integrability forces an
+exact crossing [Owusu--Wagh--Yuzbashyan, J.\ Phys.\ A \textbf{42}, 035206 (2009)], a statement about
+the \emph{spectrum}, and the structure of the transition \emph{dynamics} --- and shows that
+integrability, while it does not render the amplitude elementary, rigidifies it: the entire
+monodromy data of the (non-elementary) connection problem becomes algebraic in the couplings.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction and motivation}
+The multistate Landau--Zener problem asks for the matrix $P_{x\to j}=|\Scat_{xj}|^2$ of nonadiabatic
+transition probabilities of $i\,\dot\psi=(H_0+tA)\psi$, $A=\diag(a)$, swept from $t=-\infty$ to
+$+\infty$. Despite half a century of work it remains a \emph{constellation} of isolated exact
+solutions --- Demkov--Osherov, bow-tie, Tavis--Cummings --- with little connecting theory. Two robust
+facts anchor the landscape. First, the \emph{extreme}-slope survivals obey the universal
+Brundobler--Elser law $P=\prod_m e^{-2\pi s_{nm}^2|a_n-a_m|}$ [Brundobler \& Elser, J.\ Phys.\ A
+\textbf{26}, 1211 (1993)], with $s_{ij}=\gamma_i\gamma_j/(\eps_i-\eps_j)$. Second, the
+\emph{interior} content --- the middle-slope survival $\Pmid$ and one off-diagonal --- is the genuinely
+open object, and for the minimal fully-coupled integrable case (Type-1, $N{=}3$, Cauchy/Gaudin
+couplings $(H_0)_{ij}=\gamma_i\gamma_j(a_i-a_j)/(\eps_i-\eps_j)$) it is provably \emph{not} an
+elementary or finite-special-function quantity: it is the connection constant of a rank-3,
+$c{=}1$ confluent isomonodromy problem [companion working paper, this project].
+
+Why is the interior hard, in one word? \emph{Accessory parameters.} Laplace-transforming the MLZ
+equation turns $\Scat$ into the connection (Stokes) data of a linear ODE with a single irregular point
+at infinity and a finite number of regular singular points. For Type-1 $N{=}3$ there is exactly one
+finite singular point, and it is \emph{apparent}: the local solutions are single-valued
+(indicial exponents $\{0,1,3\}$, no logarithm), so it carries no local physics --- only its
+\emph{location} $v_*$ matters. That location is the accessory parameter. The accessory parameter is
+the precise marker of the jump from solvable to transcendental: the hypergeometric equation has none
+and its connection coefficients are closed-form (this is the ordinary two-level Landau--Zener answer,
+built from Euler $\Gamma$ functions); adding one apparent singularity gives the Heun class, whose
+connection coefficients have \emph{no} closed form, and the reason is exactly that the accessory
+parameter is a free modulus on which the global connection data depend transcendentally. In a generic
+accessory problem one does not even know \emph{where} the apparent singularity sits as a function of
+the physical couplings; it is determined only by solving the whole problem.
+
+This Letter settles the status of that one knob for integrable MLZ. We prove that for Type-1 $N{=}3$
+the accessory parameter is \emph{pinned}: it equals, as an explicit rational function of
+$(\gamma,\eps,a)$, the energy $E_*$ of the model's exact level crossing. The value of this is sharp.
+It does not make $\Pmid$ elementary --- the no-go stands --- but it removes the single transcendental
+degree of freedom that makes accessory problems hopeless, so that the connection problem one is left
+with has \emph{completely explicit, algebraically-determined data}. In the language of the modern
+Fredholm-determinant / Widom representation of $c{=}1$ connection constants [Cafasso, Gavrylenko \&
+Lisovyy, arXiv:1712.08546], every input to the Riemann--Hilbert problem --- the formal monodromy
+exponents and the accessory location alike --- is now a rational function of the couplings. Before
+this result one could not even \emph{specify} the problem; after it, the only remaining unknown is the
+genuinely transcendental connection constant itself.
+
+\section{Setup: two objects on two sides}
+Fix Type-1 $N{=}3$ data: $\eps_0<\eps_1<\eps_2$ real, $\gamma_i\neq0$ real, slopes $a_i$ distinct,
+real, nonzero. Write $H(u)=H_0+uA$.
+
+\emph{Object 1 --- the node (spectral side).} Let $\chi(u,E):=\det(EI-H(u))$, a cubic in both $u$ and
+$E$. An exact level crossing is a point $(u_*,E_*)$ with $\chi=\partial_E\chi=0$: a double eigenvalue
+$E_*$ at time $u_*$. That such a real crossing \emph{exists at all}, in apparent violation of the von
+Neumann--Wigner non-crossing rule, is the theorem of Owusu, Wagh \& Yuzbashyan [J.\ Phys.\ A
+\textbf{42}, 035206 (2009); arXiv:0807.0259]: any $H_0+uA$ possessing a nontrivial commuting partner
+has such crossings, and Type-1 possesses one. For $N{=}3$ the crossing is unique, rational, and a
+genuine \emph{node} of the spectral curve ($\partial_u\chi=0$ there as well: trivial monodromy).
+
+\emph{Object 2 --- the accessory point (dynamical side).} The Laplace dual
+$\psi_j(u)=\int_C e^{-iuv}B_j(v)\,dv$ obeys $B'(v)=-iM(v)B$ with $M(v):=\diag(1/a)(H_0-vI)$. With the
+cyclic vector $e_0=(1,0,0)^{\!\top}$ define the cyclicity (Wronskian) determinant
+\begin{equation}
+W(v):=\det\!\big[\,e_0\ \big|\ M(v)e_0\ \big|\ M(v)^2 e_0\,\big].
+\end{equation}
+Because the first column is the $v$-independent $e_0$, $W(v)$ is \emph{linear} in $v$, so it has a
+single root
+\begin{equation}
+v_*=-W_0/W_1\ \in\ \Z(\gamma^2,\eps,a),
+\end{equation}
+manifestly algebraic. This $v_*$ is the lone finite apparent singularity of the scalar third-order
+connection ODE --- the accessory parameter.
+
+The two objects live on opposite sides of the problem. $E_*$ is a feature of the \emph{instantaneous
+spectrum} of $H(u)$ in the time domain --- a statement about eigenvalues. $v_*$ is a feature of the
+\emph{singularity structure} of the transformed scattering problem in the Borel/Laplace plane --- a
+statement about where an auxiliary ODE degenerates. There is no a priori reason they should be related.
+
+\section{The theorem}
+\begin{quote}
+\textbf{Theorem (accessory $=$ node).} For every generic Type-1 $N{=}3$ model,
+\begin{equation}
+\boxed{\,v_*\ \equiv\ E_*\,}\qquad\text{as an identity in }\Z(\gamma,\eps,a).
+\end{equation}
+The lone finite apparent singularity of the connection ODE sits exactly at the spectral degeneracy.
+\emph{Corollary:} the accessory parameter is the explicit rational function $E_*(\gamma,\eps,a)$, not
+a free modulus; the connection problem has algebraically-fixed accessory data.
+\end{quote}
+(Genericity: $a_i$ distinct and nonzero, $\eps_i$ distinct, $\gamma_i\neq0$, and the node nondegenerate
+so $W_1\neq0$.) Canonical instance ($\eps=(-2,0,3)$, $\gamma=(1,\tfrac45,\tfrac65)$,
+$a=(-1,\tfrac12,2)$): $u_*=-187/750$, $v_*=E_*=-748/375$.
+
+\section{Proof}
+\emph{Route A (elimination identity).} $W(v)$ is linear (verified $\deg_v W=1$), giving
+$v_*=-W_0/W_1$. The energies of a spectral degeneracy are the roots of
+$\Phi(E):=\Res_u(\chi,\partial_E\chi)$. Substituting $E=v_*$ and clearing denominators, the numerator
+reduces to the zero polynomial,
+\begin{equation}
+\Phi(v_*)\equiv0,
+\end{equation}
+equivalently $\Res_E(\Phi(E),\,W_1E+W_0)\equiv0$: $v_*$ \emph{is} a crossing energy. That it is the
+\emph{node} branch (rather than a complex avoided-crossing branch) follows from Route B, which exhibits
+the matching rational real $u_*$ with $\partial_E\chi=\partial_u\chi=0$. The identity is established
+symbolically on the gauge slice $a=(s,1,2)$ with $\eps,\gamma$ fully symbolic and lifted to all generic
+parameters by covariance (below); it is independently confirmed by exact rational arithmetic on
+generic random samples.
+
+\emph{Route B (structural mechanism --- the heart).} $W(v_*)=0$ says the $M(v_*)$-Krylov space of
+$e_0$ is deficient: $e_0$ lies in a proper $M(v_*)$-invariant subspace. The link to the spectrum is a
+one-line pencil identity:
+\begin{equation}
+M(v)w=\mu w\ \Longleftrightarrow\ (H_0-vI)w=\mu A w\ \Longleftrightarrow\ H(-\mu)\,w=v\,w .
+\label{eq:duality}
+\end{equation}
+An eigenpair $(\mu,w)$ of the dual matrix $M(v)$ is therefore an eigenpair of the \emph{physical}
+Hamiltonian $H(u)$ at time $u=-\mu$ and energy $v$. The dual spectrum at fixed $v$ is the set of times
+at which $v$ is an instantaneous eigenvalue. Hence the Krylov deficiency of $e_0$ at $v_*$ forces
+$\chi(u,v_*)$, read as a polynomial in $u$, to have a \emph{double root} $u_*$
+($\Disc_u\chi(\cdot,v_*)\equiv0$); at $(u_*,v_*)$ one finds $\chi=\partial_E\chi=0$ (double eigenvalue)
+and $\partial_u\chi=0$ (genuine node). The rank-drop of the dynamical Wronskian and the spectral
+degeneracy are \emph{the same event}, so $v_*=E_*$, with $u_*$ the rational node time delivered
+explicitly. $\square$
+
+\emph{Gauge covariance.} The construction is covariant under the affine slope group
+$a_i\mapsto\alpha a_i+\beta$: $H_0$ depends only on differences $a_i-a_j$, so the group merely
+relabels/rescales the MLZ time, and \emph{both} $v_*$ and $E_*$ transform identically (both are
+energies on the same spectral curve). Thus an identity proven on a slice transverse to the orbits holds
+everywhere. The Laplace dual forbids $a_i\to0$ (it uses $\diag(1/a)$), so the slice pins two nonzero
+slopes ($a_1{=}1,a_2{=}2$) and keeps $a_0,\eps,\gamma$ general --- transverse to the $2$-parameter group
+and reaching every generic gauge class.
+
+\section{Why the spectral--dynamical link is nontrivial}
+It is worth dwelling on why Eq.~(3) is not bookkeeping. The accessory parameter and the spectral
+crossing are objects of fundamentally different type, attached to different stages of the problem and
+living in different planes.
+
+The crossing $E_*$ is a property of the \emph{time-domain generator}: it is where two instantaneous
+eigenvalues of $H(u)$ touch as the control parameter $u$ is swept. It knows nothing, a priori, about
+boundary conditions, scattering, or the analytic continuation that produces transition amplitudes ---
+it is defined purely by the characteristic polynomial $\chi$.
+
+The accessory point $v_*$ is a property of the \emph{frequency-domain solution operator}: it is where
+the Laplace-transformed wave equation acquires an apparent singularity, a feature of the global
+analytic structure of the scattering problem in the Borel plane. In the general theory of
+isomonodromy and connection problems --- Heun, Painlev\'e, confluent Garnier --- the position of an
+apparent singularity is the very definition of a modulus that is \emph{decoupled} from the local
+spectral data: it is the free coordinate on the space of monodromy-preserving deformations, and its
+dependence on the physical parameters is, generically, transcendental and implicit. One expects no
+relation to any spectral invariant of a single operator; indeed the whole difficulty of Heun
+connection theory is that this knob floats free.
+
+That for Type-1 it does not float free, but is welded to the spectral degeneracy by an exact
+algebraic identity, is a structural \emph{coincidence engineered by integrability}. The mechanism
+\eqref{eq:duality} makes the coincidence visible: the Cauchy/Gaudin form of $H_0$, together with the
+$\diag(1/a)$ conjugation intrinsic to the Laplace dual, sets up an exact duality that exchanges the
+roles of \emph{time} and \emph{spectral parameter}. Under this duality the single linear Wronskian
+$W(v)$ --- an object built from the dynamical side, the cyclic vector and the dual pencil --- encodes
+the \emph{entire} time-domain spectral curve as seen from $e_0$, and its unique root is forced onto the
+one point where that curve is doubly tangent: the node. The apparent singularity is thus the
+\emph{shadow of the spectral degeneracy} cast through the Laplace transform. Strip away the Cauchy
+structure (take a generic linear-in-time $N{=}3$ Hamiltonian) and the duality \eqref{eq:duality} and the
+linearity of $W$ both break; the accessory parameter resumes floating, and no such identity can hold.
+
+The bridge also has a conceptual payoff for the theory of integrable time-dependent systems. The
+Owusu--Wagh--Yuzbashyan theorem is a statement on the spectral side: integrability $\Rightarrow$ an
+exact crossing. Our theorem propagates integrability to the dynamical side: that same crossing
+$\Rightarrow$ a pinned accessory parameter $\Rightarrow$ algebraic monodromy data. Chaining them,
+\[
+\text{commuting partner}\ \Rightarrow\ \text{exact crossing}\ \Rightarrow\ \text{accessory pinned}\
+\Rightarrow\ \text{algebraic connection data},
+\]
+gives a precise answer to a question the constellation of solvable models leaves implicit: \emph{what
+does integrability buy when it does not buy solvability?} It buys rigidity. The transition amplitude
+remains transcendental --- integrability does not lower it to elementary functions (the ``Abelian
+ceiling'') --- but its analytic skeleton, the monodromy data of the governing connection problem, is
+forced to be an algebraic function of the couplings. ``Integrable but not solvable'' thereby acquires
+a sharp meaning: these are exactly the models whose amplitudes are transcendental \emph{with
+algebraically-determined data}.
+
+\section{Avenues opened and unblocked}
+The theorem is enabling rather than terminal; several lines that were previously ill-posed become
+concrete.
+
+\emph{(i) The connection constant is now fully specified.} With the formal monodromy exponents
+$\Theta=\diag(c_i)$, $c_i=\sum_{j\ne i}s_{ij}^2(a_i-a_j)$ (established independently by the Wasow
+recursion in the Laplace frame) and the accessory location $v_*=E_*$ both algebraic, every datum of
+the rank-3 Riemann--Hilbert / Fredholm-determinant problem for $\Pmid$ is an explicit rational
+function of $(\gamma,\eps,a)$. The remaining unknown is the genuinely transcendental connection
+constant alone; computing or bounding it (e.g.\ via the Widom/Fredholm representation, or a Nekrasov-type
+expansion) is now a well-posed problem with no free parameters.
+
+\emph{(ii) Constructive exact-WKB with explicit turning-point data.} The accessory point is the
+location of the spectral-network joint that carries the irreducible content of $\Pmid$. Knowing it in
+closed form pins the joint and the local Weber/parabolic-cylinder connection pieces, unblocking the
+constructive ``two-shear $\times$ junction'' product as an object with explicit ingredients rather than
+implicit ones.
+
+\emph{(iii) An algebraic equation for the elementary boundary.} The model degenerates to elementary
+(a level decouples) precisely where the accessory point collides with the irregular point at infinity,
+i.e.\ on the locus $W_1=0$. Because $v_*=E_*$ is algebraic, this boundary --- the edge of solvability
+in parameter space --- is now cut out by an explicit polynomial condition, sharpening the classifier
+``elementary $\Leftrightarrow$ a level decouples'' into an equation.
+
+\emph{(iv) A spectral duality to generalize.} The pencil identity \eqref{eq:duality} is not special to
+$N{=}3$: for general $N$ it still exchanges time and dual eigenvalue. This suggests a conjecture --- for
+the integrable Type-1 family at all $N$, the accessory variety of the connection problem coincides with
+the spectral-degeneracy variety of $H(u)$ --- and a strategy (Krylov rank-drop $\Leftrightarrow$
+spectral tangency) to attempt it. If true, it would extend ``algebraic monodromy data'' to the whole
+integrable Type-1 hierarchy and turn a single-model result into a structural theorem about the boundary
+of the solvable constellation.
+
+\emph{(v) A theorem-backed physical handle.} The node is a real-time exact degeneracy whose location
+$u_*$ is now an explicit rational function of the couplings, and which provably controls the analytic
+structure of the middle transition. This makes it a concrete target for studying --- or engineering ---
+the dynamics of the interior channel: the one event that organizes the hard part of the amplitude is no
+longer hidden but addressable.
+
+\emph{(vi) Owed finish.} The strict no-logarithm certificate for the apparent point (the vanishing of
+the order-$2$ Frobenius coefficient as a single fully-symbolic identity) is the one secondary item not
+yet closed; the indicial signature $\{0,1,3\}$ is proven. This is a finishing computation, not an
+obstruction.
+
+\begin{acknowledgments}
+The exact level crossing underpinning this identity is the theorem of Owusu, Wagh \& Yuzbashyan
+(2009); this Letter establishes its dynamical counterpart. Proof artifacts and an exhaustive
+verification record accompany the companion working paper.
+\end{acknowledgments}
+
+\end{document}

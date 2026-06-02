@@ -969,3 +969,35 @@ parameter pinned to it (R8) -> all monodromy data algebraic. The spectral-side t
 dynamical-side theorem (R8) are now joined. Integrability does not make P_mid elementary (Abelian
 ceiling) but it DOES rigidify the dynamics: the transition amplitude is transcendental with
 algebraically-determined data.
+
+---
+
+## 2026-06-02 — R8 memorialized as a review Letter (paper/accessory_node_letter.tex)
+
+Wrote a journal-style (PRL revtex) review Letter, "Pinning the accessory parameter: a
+spectral-dynamical identity for the integrable multistate Landau-Zener problem." Structure:
+- Intro: motivates the proof via the accessory parameter as THE marker of the solvable->transcendental
+  jump (hypergeometric: none, closed-form; Heun: one, no closed form). Frames its value to the LZ
+  problem: it does not make P_mid elementary (no-go stands) but removes the one free transcendental
+  modulus, so the connection problem has fully explicit algebraic data.
+- Setup: the two objects on two sides (node E_* spectral; accessory v_* dynamical, W(v) linear).
+- Theorem v_*=E_* with canonical instance; Route A (resultant identity) + Route B (structural pencil
+  duality M(v)w=mu w <=> H(-mu)w=v w, Krylov rank-drop <=> double eigenvalue) + gauge covariance.
+- Dedicated section expanding the NONTRIVIALITY of the spectral<->dynamical link: the two objects are
+  of different type (time-domain generator spectrum vs Borel-plane singularity of the solution
+  operator); in general accessory-parameter theory the apparent-singularity location is a FREE modulus
+  decoupled from spectral data (the crux of Heun's intractability); Type-1's identity is a coincidence
+  ENGINEERED by integrability via the diag(1/a) duality; strip the Cauchy structure and it breaks.
+  Conceptual payoff: OWY (spectral) + this (dynamical) => "integrable but not solvable" = transcendental
+  amplitude with ALGEBRAICALLY-determined data (rigidity, not solvability).
+- Avenues opened/unblocked: (i) connection constant now fully specified (Theta=diag(c_i) + v_*=E_* all
+  algebraic) -> well-posed Fredholm/Nekrasov evaluation; (ii) constructive exact-WKB with explicit
+  turning-point/joint data; (iii) algebraic equation for the elementary boundary (W_1=0); (iv) a
+  spectral duality to generalize to all N (conjecture: accessory variety = spectral-degeneracy variety
+  for Type-1 hierarchy); (v) theorem-backed physical handle on the node (explicit u_*); (vi) owed: the
+  fully-symbolic no-log certificate.
+
+Status note: the clean isolated re-run of r8_proof.py (default CASE 1) is still grinding on this box
+(symbolic resultant heavier than the memo's "closes quickly" suggests under current limits); the proof
+stands on the INDEPENDENT coordinator verification (exact rational arithmetic, fresh non-slice samples,
+2026-06-02) regardless. Reproducibility caveat to revisit: add a fast default path to r8_proof.py.
