@@ -865,3 +865,42 @@ closed construction. This is the third independent confirmation that no concise/
 form exists for the rank-3 object. Revival route (precision-limited, not structural): mpmath
 recessive-split symbol to beat the Stokes wall and READ sigma; closed v-frame<->S contour map.
 Paper updated: new R11b in sec:fredholm; open-problem (ii) marked attempted/obstructed.
+
+---
+
+## 2026-06-02 — physics-reflection pass: every paper claim cross-checked vs its script
+
+Adversarial verification of paper/type1_lz_working_paper.tex (R1-R14, R11b, F1). Re-ran the
+load-bearing scripts; ALL headline numbers reproduced. Result: VERDICT = KEEP (no result changed);
+only citation/number hygiene fixed.
+
+VERIFIED (re-run 2026-06-02):
+- R1: commutator 8.9e-16, shared eigenbasis 3.3e-16 (ring_structure.py).
+- R4/R5: width slope-independence = 0 exactly; max sep/width = 1.60 over 35079 samples (coscaling.py).
+- R3: real crossings on all anchors (canonical 1.8e-9, sampleB 1.6e-9, WSF_near_node 1.9e-8);
+  independent Brent-refined re-scan: 96.9%/351 gap<1e-3, median gap 3.06e-9 (regenerated; the prior
+  99.8%/1290 was docstring-only, not executed by current script).
+- R8: accessory=node rational (canonical u_*=-187/750, v_*=-748/375; sampleB rational);
+  Theta=diag(c_i) EXACTLY (max|Theta-c|=0.0, canonical) -> R11b by-product verified.
+- R9: VERDICT RANK-3; sampleB band [0.8327,0.8800] OUT=True. Count is 7/14 (cap), NOT 5/8.
+- R10: operator-identity residual canonical 5.77e-14, sampleB 1.87e-13 (paper said ~2e-14 -> O(1e-13)).
+- R11: PROBE1 5/8 outside, PROBE2 4/8 force |cosPhi|>1, Fredholm-det verdict (ws_o2_integral.py).
+- R7: enhancement canonical 2.58x, sampleB 120.54x (anchor_experiment.py) -> "2.5-130x" confirmed.
+- R11b: Widom symbol relresid O(1), Stokes wall cond->1.8e18; v-frame misses oracle; u-frame RHP
+  gold sampleB 7.2e-7 (ws_o2b_fredholm.py).
+- R12/R13: separated RMS 1.23%, weak-mod 1.90%, deep-overlap 11.06%, sampleB off 0.2670 (ws_o3).
+- R14 anchors: canonical dev 1.6e-9, sampleB dev 2.1e-7 (num_S12.py).
+
+PROVENANCE FIXES APPLIED (all citation/number hygiene; no result altered):
+1. R10 residual ~2e-14 -> O(1e-13) with both anchor values.
+2. R9 "5/8" -> "7/14" (cap); 5/8 re-attributed to the c=1 probe (ws_o2).
+3. R7 removed dangling figs/stokes_*.png (figs/ dir does not exist); cited exact enhancement factors.
+4. R10/R14 dangling oracle_report.md -> num_S12_model.md + re-verify date.
+5. R3 softened/grounded: prior 99.8%/1290 (docstring) + independent re-scan 96.9%/351, median 3.1e-9.
+
+NOT independently re-derived this pass (lower-risk, memo/structural; flagged for completeness):
+R2 (genus-0, gate_test_genus.md — symbolic memo), R6 (coupling dominance — stated values).
+
+NET: paper is internally consistent and provenance-clean; tags honest. Draft remains DRAFT (no
+pdflatex in env to compile; R2/R6 memo-only). The three-deliverable story (integral rep / c=1
+Fredholm-det classification / uniform formula + oracle) stands and survives adversarial review.

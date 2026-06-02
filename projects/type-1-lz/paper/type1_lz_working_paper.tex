@@ -107,10 +107,15 @@ global Gaudin parametrization $E=m(\lambda)/p(\lambda)$, $u=n(\lambda)/p(\lambda
 The discriminant $D(u)=\mathrm{Disc}_E\chi_H$ is a sextic with multiplicities $[1,1,1,1,2]$: four
 simple complex branch points (the complexified avoided crossings) and one \emph{node} of trivial
 monodromy --- a real exact level crossing (symbolic double root of $D$ for the canonical sample).
-\textbf{R3 [NS].} This real exact crossing is \emph{universal}: every Type-1 $N{=}3$ tested has a
-real $u_*$ with two exactly degenerate eigenvalues ($99.8\%$ of $1290$ random samples within
-$|u|\le 60$; the remainder have the crossing beyond the box). An analytic proof of universality is
-owed.\pnote{experiments/structural\_crossing.py; scan, not yet a proof} The node fixes the lone
+\textbf{R3 [NS].} This real exact crossing is \emph{universal}: nearly every Type-1 $N{=}3$ tested
+has a real $u_*$ with two exactly degenerate eigenvalues. A prior $1290$-sample scan reported
+$99.8\%$ within $|u|\le60$; an independent Brent-refined re-scan (2026-06-02) finds $96.9\%$ of
+$351$ samples with min gap $<10^{-3}$ and $96.6\%$ with gap $<10^{-6}$, \emph{median gap}
+$3.1\times10^{-9}$. The few-percent ``misses'' are search-box / secondary-basin resolution
+artifacts (the crossing lies outside the box or away from the global grid minimum), not genuine
+absences. An analytic proof of universality is owed.\pnote{experiments/structural\_crossing.py
+(docstring: 99.8\%/1290); independent re-scan 2026-06-02 (96.9\%/351, median $3.1\!\times\!10^{-9}$);
+scan, not yet a proof} The node fixes the lone
 finite accessory point of the connection problem \emph{algebraically} (\S\ref{sec:class}).
 
 \subsection{Slope-free widths $\Rightarrow$ permanent overlap $\Rightarrow$ no factorization}
