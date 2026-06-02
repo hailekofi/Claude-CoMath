@@ -133,7 +133,9 @@ is tridiagonal.
 spectral-network \emph{joint}: in the overlapping regime the two Stokes shears the slope-middle
 level forms with the two outer levels cross, the exact crossing between them; the holonomy of that
 joint \emph{is} $\Pmid$. Joint-free samples factorize (enhancement $1.00\times$); jointed samples are
-enhanced ($120$--$130\times$ for sampleB).\pnote{ws\_g\_stokes\_graph.md; figs/stokes\_\{sepA,overlapB\}.png}
+enhanced (sampleB $120.5\times$; canonical $2.58\times$).\pnote{ws\_g\_stokes\_graph.md; enhancement
+re-verified vs oracle, experiments/anchor\_experiment.py 2026-06-02; Stokes-graph figures not yet
+regenerated}
 
 \textbf{R8 [AD].} The Laplace frame $\psi_j(u)=\int_C e^{-iuv}B_j(v)\,dv$,
 $B'(v)=-i\,\mathrm{diag}(1/a)(H_0-vI)B$, reduces the scalar connection problem to one finite
@@ -149,9 +151,10 @@ dimension-$6$ wild character variety (three distinct irregular rates $a_0,a_1,a_
 object --- Painlev\'e~V, confluent-Heun, the ${}_1F_2$/Kamp\'e de F\'eriet of the decoupling cousins
 --- has wild character variety dimension $2$ and cannot carry it; those forms apply \emph{only} on
 the one-link-decoupling (elementary) boundary. Gold-gated falsification: $\Pmid$ for sampleB
-($0.021$) lies outside the single-$\sigma$ Painlev\'e/Heun band $[0.83,0.88]$, and on $5/8$
-overlapping strata generally.\pnote{cap\_connection\_formula.md (T1/T2/T5); ws\_o2\_integral\_rep.md
-\S3} The earlier ``confluent-Heun, one accessory above ${}_1F_2$'' reading
+($0.021$) lies outside the single-$\sigma$ Painlev\'e/Heun band $[0.83,0.88]$, and on $7/14$
+strata generally (the independent $c{=}1$ Barnes-$G$ probe of \S\ref{sec:fredholm} finds $5/8$
+overlapping strata outside).\pnote{cap\_connection\_formula.md (T1/T2/T5; 7/14 verified, re-run
+2026-06-02); ws\_o2\_integral\_rep.md \S3 (5/8)} The earlier ``confluent-Heun, one accessory above ${}_1F_2$'' reading
 (superseded) is exactly the rank-2 \emph{boundary} case, not the generic object. The correct class is
 a \emph{$c{=}1$ (free-fermion) confluent-Garnier} connection constant.
 
@@ -167,7 +170,7 @@ B'=-i\,\mathrm{diag}(1/a)(H_0-vI)B\;}
 with $C_j$ the steepest-descent contour through the saddle $v_j^*(u)=u\,a_j$ and the prefactor
 stripping the outgoing Stark phase. The integrand is \emph{explicitly defined} (it solves one linear
 ODE), not postulated; the underlying operator identity is verified to residual
-$\approx2\times10^{-14}$.\pnote{experiments/ws\_o2\_integral.py PART~A} \textbf{Gauge lemma [EST].}
+$O(10^{-13})$ (canonical $5.8\times10^{-14}$, sampleB $1.9\times10^{-13}$).\pnote{experiments/ws\_o2\_integral.py PART~A; re-run 2026-06-02} \textbf{Gauge lemma [EST].}
 $H_0$ depends on $a$ only through differences, so $a\to a+c$ leaves $H_0$ invariant and only adds a
 global Stark phase that drops from $P$; WLOG all $a_j>0$, collapsing the three descent directions
 into one Stokes wedge.
@@ -247,7 +250,8 @@ semiclassical phase should sit.
 tails and Richardson extrapolation pins $\Pmid$ to $\le10^{-9}$ across sep/width $0.1\to4$ (canonical
 $\Pmid=0.214724$, sampleB $0.021018$; enhancement over the incoherent product $2.5$--$130\times$).
 This is the ground truth against which R10--R13 are gold-gated.\pnote{experiments/\{oracle.py,
-num\_S12.py\}; oracle\_report.md}
+num\_S12.py\}; num\_S12\_model.md; anchors re-verified 2026-06-02 (canonical dev $1.6\!\times\!10^{-9}$,
+sampleB dev $2.1\!\times\!10^{-7}$)}
 
 \section{The unifying picture and the classifier}
 The BE survivals are residue-collapsing periods of the phase one-form (elementary); the middle
@@ -300,7 +304,7 @@ finite-product falsification (R11) as a parameter-region statement rather than a
 % R11b[AD]  <- ws_o2b_fredholm_kernel.md (Widom det irreducibly classificatory; Theta=diag(c_i) confirmed)
 % R12 [AD/NS]<- ws_o3_uniform_asymptotics.md (two-path structure; cosPhi law, K~3.0)
 % R13 [NS]  <- ws_o3_uniform.py (53-pt sweep; RMS 1-2% for delta<=0.25; fails delta>0.5)
-% R14 [EST/NS]<- oracle.py, num_S12.py, oracle_report.md (1e-9 benchmark)
+% R14 [EST/NS]<- oracle.py, num_S12.py, num_S12_model.md (1e-9 benchmark; re-verified 2026-06-02)
 % F1  [AD]  <- single rank-2 irregular point, dim-6 wild char variety; kz_isomonodromy_picture.md
 
 \bibliography{refs}
