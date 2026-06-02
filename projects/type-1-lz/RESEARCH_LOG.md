@@ -830,3 +830,38 @@ function target is now strongly evidenced NOT to exist; the realistic paper = O2
 Fredholm-det classification as the rigorous spine, O3 as the usable results-section formula,
 oracle as ground truth. OWED: recessive-stable O2 engine; explicit LNR Fredholm kernel for our
 rank-3 point; asymmetry-aware O3 (depends on d_lo+d_hi, not the ratio); proofs to promote NS.
+
+---
+
+## 2026-06-02 — WS-O2b: explicit Fredholm/Widom kernel (open problem ii) — OBSTRUCTED, honestly
+
+Constructive swing at turning the c=1 Fredholm-determinant classification (WS-O2/R11) into a usable
+a-priori construction for our rank-3 (three-distinct-rate) confluent point. → files
+experiments/ws_o2b_fredholm.py, paper/ws_o2b_fredholm_kernel.md.
+
+- Literature verified (M2): CGL/Widom recipe `tau=det(1-K)` of an IIKS/Plemelj operator; one-circle
+  = block-Toeplitz Widom determinant (1712.08546); regular case 1608.00958; irregular generalized-
+  Bessel example 1705.01869; LNR PV connection 1806.08344 (title confirmed correct). The recipe
+  takes the LOCAL Stokes data as INPUT; PV/PIII are constructive because the irregular parametrix is
+  a known special function (Weber/Bessel) with known Stokes matrices.
+- POSITIVE by-product [AD]: Wasow recursion at the rank-2 irregular point gives
+  `Y_inf=G(v)exp(½A0 v^2 + D1 v + Theta ln v)` with `Theta=diag(c_i)` emerging EXACTLY — an
+  independent Laplace-frame confirmation of R8 (formal monodromy = Coulomb exponents).
+- VERDICT [AD, verified]: NO usable construction. Two concrete break points: (#1) no closed-form
+  local parametrix exists for a rank-2 irregular point with THREE distinct rates — its Stokes
+  matrices ARE the unknown sigma = the answer (dim-6 wild char variety, R10); the Widom symbol
+  g=Y_inf^{-1}Y_* is never v-independent and is Stokes-walled (cond ~ e^{R^2/2a} -> 1e18). (#2) the
+  Laplace v-frame connection matrix is NOT the physical S (unitary factor off by up to 0.39; contour
+  selection is the physics). Given resummed Stokes data, P CAN be re-expressed as a block-Toeplitz
+  determinant, but answer-in/answer-out at equal cost, exposing no Nekrasov/theta-truncation or
+  factorization.
+- Gold-gate context: the usable computable object remains the physical-u-frame numerical RHP/oracle
+  (sampleB P=0.02102, err 7.2e-7 at T=60; <=1e-9 at T>=120), which already reaches deep overlap where
+  WS-O3 fails.
+
+NET: open problem (ii) resolved NEGATIVELY but informatively — the Fredholm determinant is an
+IRREDUCIBLY CLASSIFICATORY description of P_mid (sharpens R9-R11 from the constructive side), not a
+closed construction. This is the third independent confirmation that no concise/elementary closed
+form exists for the rank-3 object. Revival route (precision-limited, not structural): mpmath
+recessive-split symbol to beat the Stokes wall and READ sigma; closed v-frame<->S contour map.
+Paper updated: new R11b in sec:fredholm; open-problem (ii) marked attempted/obstructed.

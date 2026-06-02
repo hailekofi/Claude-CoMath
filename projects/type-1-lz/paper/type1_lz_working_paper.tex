@@ -195,6 +195,26 @@ data fixed algebraically ($c_i=\sum_j s_{ij}^2(a_i-a_j)$ known, $E_*$ rational b
 a finite special-function product. Barnes-$G$/Painlev\'e-V applies exactly on the decoupling locus.
 This is the named-closed-form answer, honestly: a Fredholm determinant.
 
+\textbf{R11b [AD, verified]. The Fredholm determinant is irreducibly classificatory.} We attempted
+the explicit Cafasso--Gavrylenko--Lisovyy / Widom construction (det$(1-K)$ of an IIKS/Plemelj
+operator; one-circle case a block-Toeplitz determinant) for our point. It does \emph{not} become a
+usable a-priori construction, and the obstruction is concrete. The CGL recipe takes the
+\emph{local Stokes data as input}; for Painlev\'e~V/III the irregular parametrix is a known
+special function (Weber/Bessel) with known Stokes matrices, which is what makes it constructive
+there. Our rank-2 irregular point has \emph{three distinct rates}, for which no closed-form local
+parametrix is known --- its Stokes matrices \emph{are} the unknown $\sigma$ we are solving for
+(the dim-$6$ wild character variety, R9). Concretely: the Wasow recursion gives the formal solution
+$Y_\infty=G(v)\exp(\half A_0 v^2+D_1 v+\Theta\ln v)$ with $\Theta=\mathrm{diag}(c_i)$ emerging
+\emph{exactly} (an independent Laplace-frame confirmation of R8), but the Widom symbol
+$g=Y_\infty^{-1}Y_*$ is never $v$-independent and is Stokes-walled
+($\mathrm{cond}\sim e^{R^2/2a}\to10^{18}$). Given the resummed Stokes data one \emph{can} re-express
+$\Pmid$ as a block-Toeplitz determinant, but answer-in/answer-out, at equal cost, exposing no
+Nekrasov/$\theta$-truncation or factorization.\pnote{ws\_o2b\_fredholm\_kernel.md; refs verified
+1608.00958, 1712.08546, 1705.01869, 1806.08344} So the Fredholm-determinant description is a
+\emph{correct classification} of $\Pmid$ that sharpens R9--R11 from the constructive side, not a
+usable closed form; the usable computable object remains the numerical RHP/oracle (R14), which
+already reaches the deep-overlap regime.
+
 \section{Layer 2: a uniform semiclassical formula}\label{sec:O3}
 For the value a physicist computes, we give a controlled approximation. The slope-middle level passes
 two avoided crossings (mid--lo, mid--hi) with the \emph{outer} lo--hi link \emph{between} them in $u$
@@ -256,9 +276,11 @@ overlap, where the rank-3 content is deepest.
 
 \section{Open problems (owed to promote NS$\to$EST)}
 (i) a recessive-stable / high-precision engine that evaluates R10 independently of the oracle;
-(ii) the explicit LNR Fredholm/block-Toeplitz kernel for our rank-3 (three-distinct-rate) point ---
-turning ``computable Fredholm determinant'' from classification into construction, and the natural
-exact companion to R12 in the deep-overlap regime; (iii) analytic proofs of node universality (R3),
+(ii) [\emph{attempted, obstructed --- R11b}] the explicit Fredholm/block-Toeplitz kernel for our
+rank-3 point is \emph{not} constructive without the genuine rank-3 special function (the unknown
+local parametrix); the one revival route is an mpmath high-precision recessive-split symbol that
+beats the Stokes wall (break is precision-limited, not structural) and could let one \emph{read}
+$\sigma$, plus the closed $v$-frame$\leftrightarrow\Scat$ contour-selection map; (iii) analytic proofs of node universality (R3),
 of accessory$=$node in general (R8), of the $\approx1.6$ overlap bound (R5), and of the
 finite-product falsification (R11) as a parameter-region statement rather than a sample scan;
 (iv) an asymmetry-aware uniform law (R12 uses $\delta_{\rm lo}+\delta_{\rm hi}$, not the ratio).
@@ -275,6 +297,7 @@ finite-product falsification (R11) as a parameter-region statement rather than a
 % R9  [GG]  <- cap_connection_formula.md (rank-3, dim 6 vs 2; T5 gold-gated falsification)
 % R10 [AD]  <- ws_o2_integral.py PART A (operator identity ~2e-14), gauge lemma
 % R11 [GG]  <- ws_o2_integral_rep.md S3 (Barnes-G finite product falsified; Fredholm-det verdict)
+% R11b[AD]  <- ws_o2b_fredholm_kernel.md (Widom det irreducibly classificatory; Theta=diag(c_i) confirmed)
 % R12 [AD/NS]<- ws_o3_uniform_asymptotics.md (two-path structure; cosPhi law, K~3.0)
 % R13 [NS]  <- ws_o3_uniform.py (53-pt sweep; RMS 1-2% for delta<=0.25; fails delta>0.5)
 % R14 [EST/NS]<- oracle.py, num_S12.py, oracle_report.md (1e-9 benchmark)
