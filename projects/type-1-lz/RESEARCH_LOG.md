@@ -1053,3 +1053,36 @@ representation theory. CGL/Widom is the right *machinery* but needs the local pa
 NOTE: superseded planning memos (RESEARCH_OVERVIEW.md, OPEN_PROBLEM.md, pa1_isomonodromy_foundation.md)
 and earlier chronological log entries retain historical "c=1" language; not rewritten (history
 preserved). The authoritative paper/Letter/synthesis/cap now carry the corrected GL₃/W₃ (c=2) label.
+
+---
+
+## 2026-06-02 — WS-RH: node-pinned GL₃ RH spec + high-precision evaluator (rung 1 done; rung 2 = structural negative)
+
+Files: paper/gl3_rh_problem.md, experiments/gl3_rh_solver.py. Coordinator independently verified and
+CORRECTED the agent's "rung 2 achieved" overstatement.
+
+RUNG 1 — ACHIEVED. Explicit algebraic RH spec for the Laplace-dual oper: irregular point v=∞ (Poincaré
+rank 2, three distinct rates, formal exponents Θ=diag(c_i) re-confirmed to machine precision, an
+independent Laplace-frame re-derivation of R8); apparent point v_*=E_* rational, {0,1,3}, no-log; Stokes
+graph (4 rays). NEW analytic result: the G± physical↔Laplace normalization maps are DIAGONAL
+(channel-wise), derived by steepest descent through v_j*=u a_j -> saddle phase = diabatic Stark phase +
+c_j log-drift. So the v-frame->S map's diagonal part is algebraic/pinned (up to a sample-independent
+sqrt(-i)/sector convention); the ONLY non-diagonal piece is the Stokes σ.
+
+RUNG 2 — NOT achieved as intended (independent RH evaluator beating the oracle). Two engines:
+- Engine A (genuine v-plane RH/oper solve, stripped frame Y=F(v)Z, mpmath): BEATS the WS-O2b
+  conditioning wall — Z stays finite & resolved (canonical max|Z|=327; sampleB up to 6e15 at dps70)
+  where double precision overflowed (cond~e^{R²/2a}->1e18). BUT STALLS: no diagonal/Sinkhorn/polar G±
+  dressing of |Z|² recovers S. COORDINATOR-VERIFIED (canonical): raw|Z|²=1.21, Sinkhorn=0.355,
+  polar=0.152 vs oracle 0.2147 — none match. Stable across dps/order => STRUCTURAL, not numerical.
+- Engine B (passes gold gate: canonical 8.4e-8, sampleB 4.6e-7): coordinator read the code — it solves
+  Y'=-iH(u)Y in the TIME DOMAIN with Richardson = the SAME METHOD as oracle.py, independently coded. NOT
+  an independent RH route; its agreement and deep-overlap reach are inherited. Agent docstring + md §7
+  called it "independent" — CORRECTED in both files.
+
+NET / VALUE: a precise STRUCTURAL upgrade of WS-O2b. The wall is no longer "maybe just conditioning":
+high precision removes the conditioning excuse (Z computed exactly), the stall persists, so the sole
+remaining transcendental obstruction is the off-diagonal Stokes constant σ (the rank-3 connection
+constant), with EVERYTHING ELSE algebraic (data) and diagonal (G±). σ is now isolated as the unique
+non-abelian unknown. Dovetails with the "BE+geometry captures all but the non-abelian σ" finding and the
+Abelian-ceiling thesis. Rung 3 (closed W₃/Nekrasov σ formula) not attempted (frontier).
