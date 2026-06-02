@@ -37,7 +37,7 @@ exponents = BE survivals). The **non-elementary remainder is the off-diagonal St
 coefficient of a 3-level rank-2 irregular point** — confluent-Heun class, generically not elementary.
 **The node `u*` contributes NO accessory parameter and NO non-trivial local connection data** (it is
 an ordinary point of the system / an apparent singularity of the scalar reduction with exponents
-`{0,1,2}` and no logs). This refines O2: the node cannot by itself pin `P₂→₂`; it does not add
+`{0,1,2}` and no logs). This refines O2: the node cannot by itself pin `P_{m→m}`; it does not add
 accessory moduli either, so it does not raise the difficulty, but it is not a free reduction lever in
 the connection-coefficient count. Feed this to WS-B.
 
@@ -197,7 +197,7 @@ WS-C), to be tested on sub-loci.
 - **Hypergeometric? NO** — there are not three regular singular points; there is one rank-2 irregular
   point. **Confluent-Heun-type? YES** — single rank-2 irregular point on a genus-0 curve, 3 levels.
   **Reducible/elementary by count alone? NO** (deferred to WS-C on sub-loci).
-- **Prefactor implication:** the prefactor (middle survival `P₂→₂`, off-diagonals) is the
+- **Prefactor implication:** the prefactor (middle survival `P_{m→m}`, off-diagonals) is the
   **off-diagonal Stokes connection coefficient of a 3-level rank-2 irregular point**. The elementary
   ceiling is the Weber data: `exp(-2πΓ_ij)` survivals (BE), quadratic/linear dynamical phases. The
   genuinely non-elementary content is this single confluent Stokes coefficient — **generically
@@ -206,7 +206,7 @@ WS-C), to be tested on sub-loci.
 - **Node note for WS-B (O2):** the exact-crossing node is an **ordinary point of the system /
   apparent singularity of the scalar ODE with trivial local data** — it carries **no** non-trivial
   local connection data and **no** accessory parameter. Therefore it **cannot by itself pin
-  `P₂→₂`**, and it does **not** reduce the accessory-parameter count (there is nothing to reduce —
+  `P_{m→m}`**, and it does **not** reduce the accessory-parameter count (there is nothing to reduce —
   the count is already 0 in the Fuchsian sense). Its physical role (the `2.5–104×` enhancement, E5)
   must come from the **global** Stokes data as parameters approach the node, not from local node
   data. WS-B should treat the node as a near-degeneracy of the *global* connection problem, not as a

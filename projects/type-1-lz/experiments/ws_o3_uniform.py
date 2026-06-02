@@ -1,6 +1,6 @@
 """
 ws_o3_uniform.py  --  WS-O3 uniform semiclassical (Dykhne + Stueckelberg) model of the
-Type-1 N=3 middle survival P_2->2 = P[mid,mid].
+Type-1 N=3 middle survival P_mm = P[mid,mid].
 
 This is the deliverable for open-question O3 (SESSION_SYNTHESIS sec.6): a *uniform*
 semiclassical, computable approximation to the open middle survival built from the
@@ -27,7 +27,7 @@ paper/ws_o3_uniform_asymptotics.md):
                                                     amplitude^2 = (1-p_lo)(1-p_hi) p_lh
   Uniform two-path survival:
 
-      P_2->2  ~  p_lo p_hi  +  (1-p_lo)(1-p_hi) p_lh
+      P_mm  ~  p_lo p_hi  +  (1-p_lo)(1-p_hi) p_lh
                  +  2 sqrt( p_lo p_hi (1-p_lo)(1-p_hi) p_lh ) * cosPhi      (*)
 
   The leading (parameter-free) UNIFORM term is the incoherent stay+return sum
@@ -43,7 +43,7 @@ paper/ws_o3_uniform_asymptotics.md):
   by an amount set by the middle's TOTAL window action (delta_lo+delta_hi) modulated by
   the SHAPE chi.  K is a single O(1) constant calibrated on the gold dataset.
 
-This cleanly exhibits the R11 structure  P_2->2 = f({two window actions}, chi):
+This cleanly exhibits the R11 structure  P_mm = f({two window actions}, chi):
   - the two BE window actions enter through p_lo, p_hi (scale);
   - the cross-ratio chi enters ONLY through the shape factor (1 - K(1-chi)) (shape).
 
@@ -114,7 +114,7 @@ K_OVERLAP = 3.0
 
 def uniform_P22(eps, gam, a, K: float = K_OVERLAP, return_parts: bool = False):
     """
-    Uniform semiclassical middle survival P_2->2 in {delta_lo, delta_hi, chi}.
+    Uniform semiclassical middle survival P_mm in {delta_lo, delta_hi, chi}.
 
     eps, gam, a : length-3 model params (eps strictly increasing).
     K           : overlap-dressing constant (eq **).
@@ -320,7 +320,7 @@ def recalibrate_K(engine="fast", T=70.0):
 
 if __name__ == "__main__":
     import argparse
-    ap = argparse.ArgumentParser(description="WS-O3 uniform semiclassical P_2->2")
+    ap = argparse.ArgumentParser(description="WS-O3 uniform semiclassical P_mm")
     ap.add_argument("--engine", default="fast", choices=["fast", "oracle"])
     ap.add_argument("--T", type=float, default=70.0)
     ap.add_argument("--recalibrate", action="store_true")

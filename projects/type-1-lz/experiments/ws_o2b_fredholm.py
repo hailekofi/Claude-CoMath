@@ -4,7 +4,7 @@ ws_o2b_fredholm.py  --  WS-O2b: the EXPLICIT Fredholm-determinant / block-Toepli
 
 GOAL (open problem ii, made constructive)
 -----------------------------------------
-WS-O2 (paper/ws_o2_integral_rep.md) established, gold-gated, that P_2->2 is a RANK-3,
+WS-O2 (paper/ws_o2_integral_rep.md) established, gold-gated, that P_mm is a RANK-3,
 c=1 (free-fermion) confluent connection constant that does NOT close as any finite
 Barnes-G / Euler-Gamma product -- it closes only as a Fredholm-determinant /
 block-Toeplitz connection constant (the Cafasso-Gavrylenko-Lisovyy "Widom constant"
@@ -21,7 +21,7 @@ Laplace frame (WS-O2 / R6/R7):  Y'(v) = K(v) Y,  K(v) = -i diag(1/a) (H0 - v I).
   * one rank-2 (Poincare rank 2) IRREGULAR point at v=infinity with THREE distinct
     rates {-i/a_j}; formal-monodromy exponents c_i = sum_{j!=i} s_ij^2 (a_i-a_j), Sum=0.
 The connection matrix C maps the local solution at v_* to the canonical solution in the
-Stokes sectors at v=infinity:  Y_*(v) = Y_inf(v) . C .  P_2->2 = |C_mm|^2, m=argsort(a)[1].
+Stokes sectors at v=infinity:  Y_*(v) = Y_inf(v) . C .  P_mm = |C_mm|^2, m=argsort(a)[1].
 
 THE CONSTRUCTION (verified literature recipe, specialized to OUR data)
 ---------------------------------------------------------------------
@@ -573,7 +573,7 @@ def _u_frame_connection(eps, gam, a, mid, R=60.0, rtol=1e-9, atol=1e-11):
     """The numerically-solved RHP / Stokes-resummed connection in the PHYSICAL u-frame
     (the adiabatic interaction-picture connection matrix, identical idea to oracle/
     ch_connection3): returns the unitary connection-data matrix U in the slope basis, so
-    |U_mid,mid|^2 = P_2->2.  This is the genuinely computable construction; the v-frame
+    |U_mid,mid|^2 = P_mm.  This is the genuinely computable construction; the v-frame
     Widom symbol failed (Parts 1,2).  Richardson in R for ~1e-6."""
     H0, A = type1(eps, gam, a)
     av = np.diag(A)

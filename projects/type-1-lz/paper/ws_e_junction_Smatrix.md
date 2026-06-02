@@ -1,4 +1,4 @@
-# WS-E — Closed form of the 12×13 junction S-matrix / the middle survival `P₂→₂`
+# WS-E — Closed form of the 12×13 junction S-matrix / the middle survival `P_{m→m}`
 
 **Owner:** WS-E (prize workstream / closed-form prefactor assembly). **Date:** 2026-06-01.
 **Inputs read (in order):** `paper/RESEARCH_PROGRAM.md`, `paper/ws_a_riemann_scheme.md`,
@@ -11,7 +11,7 @@ Barik–Bakker–Gritsev–Yuzbashyan "BBGY" (arXiv:2409.17053, KZ ↔ hyperboli
 
 Model: `H(u)=H0+u·diag(a)`, Type-1 Cauchy coupling, `i dψ/du=H(u)ψ`, `u∈(−∞,∞)`. Observable: the
 3×3 doubly-stochastic `P[x,j]`. Slope order `lo,mid,hi=argsort(a)`; the two extreme survivals are
-exact BE, the open targets are the **middle survival `P₂→₂≡P[mid,mid]`** and one independent
+exact BE, the open targets are the **middle survival `P_{m→m}≡P[mid,mid]`** and one independent
 off-diagonal. Anchors: canonical `eps=(−2,0,3),gam=(1,0.8,1.2),a=(−1,0.5,2) → P_mid=0.214724`;
 sampleB `eps=(−1,0,1.5),gam=(0.9,1.1,0.8),a=(−0.7,0.4,1.3) → P_mid=0.021018`.
 
@@ -21,12 +21,12 @@ sampleB `eps=(−1,0,1.5),gam=(0.9,1.1,0.8),a=(−0.7,0.4,1.3) → P_mid=0.02101
 
 **This is a controlled NEGATIVE-with-structure result, exactly the "clean negative" the brief allows.**
 
-> **The 12×13 junction S-matrix / the middle survival `P₂→₂` of generic Type-1 N=3 MLZ is the
+> **The 12×13 junction S-matrix / the middle survival `P_{m→m}` of generic Type-1 N=3 MLZ is the
 > connection (Stokes) coefficient of a rank-2 irregular point of a genuinely 3-level system whose
 > Laplace-transformed scalar ODE carries ONE extra accessory singularity beyond the ₁F₂/Kampé de
 > Fériet level. Generic Type-1 is therefore NOT in the solvable (tridiagonal / su(2)-Gaudin) class of
 > Lin–Sinitsyn or BBGY — it is precisely the "full 3×3 LZ problem" those papers state is unsolved in
-> terms of known special functions. There is no elementary or ₁F₂ closed form for generic `P₂→₂`; the
+> terms of known special functions. There is no elementary or ₁F₂ closed form for generic `P_{m→m}`; the
 > honest deliverable is (i) the exact contour-integral representation for our model, (ii) the named
 > function class (confluent-Heun / higher-Weber, one accessory parameter above Kampé de Fériet),
 > (iii) the exact elementary limits, and (iv) a sharp structural obstruction that explains WHY the
@@ -45,8 +45,8 @@ What IS delivered in closed form:
   non-abelian, `[K(v₁),K(v₂)]≠0`), because the linear model lacks the `1/t` Coulomb term whose Laplace
   image is the Fuchsian (rank-1 Bethe-ansatz) structure that makes Lin–Sinitsyn/BBGY solvable. [§2, §5]
 
-What is NOT delivered: a generic elementary / named-special-function value of `P₂→₂`. The benchmark
-(§6) shows `P₂→₂` is genuinely independent of the BE survivals and is NOT any of the natural
+What is NOT delivered: a generic elementary / named-special-function value of `P_{m→m}`. The benchmark
+(§6) shows `P_{m→m}` is genuinely independent of the BE survivals and is NOT any of the natural
 two-pathway / sech closed forms.
 
 ---
@@ -64,7 +64,7 @@ contour integral of a product is a Beta × ₂F₁ — hence elementary `P` afte
 `H=diag(p/t,q/t,0)+offdiag(a₁,a₂)` — **tridiagonal**: the middle level couples to both extremes, the
 two extremes do NOT couple. Its KZ/off-shell-Bethe solution is `₁F₂` (a special Kampé de Fériet
 `F^{0:1;1}_{1:0;0}`, eq 66, A.27). For equal spacing the middle survival is the elementary
-`P₂→₂ = 1 − 1/cosh(π/ν)` (eq 73). BBGY state plainly (p.14, and Conclusion): the **general 3×3 HLZ /
+`P_{m→m} = 1 − 1/cosh(π/ν)` (eq 73). BBGY state plainly (p.14, and Conclusion): the **general 3×3 HLZ /
 3×3 LZ is "as far as we know, not solvable in terms of known special functions"**, and "all HLZ models
 in this work are represented by **tridiagonal matrices**."
 
@@ -166,23 +166,23 @@ this directly (§6, `experiments/ws_e_geometry.py`). The four complex turning po
 conjugate pairs, so their **cross-ratio is real** — a single real geometric invariant per sample
 (canonical `≈ 64.5`, sampleB `≈ 0.195`, well-sep `≈ 0.933`). The node sits on the real axis between
 the joint clusters (WS-A/WS-G), and as an ORDINARY point of the `u`-system it contributes **no** local
-connection data (WS-A §6) — confirmed: it cannot pin `P₂→₂`.
+connection data (WS-A §6) — confirmed: it cannot pin `P_{m→m}`.
 
 Crucially, even *with* the two window actions and the cross-ratio in hand, there is no elementary map
-to `P₂→₂`: the value is the **connection coefficient** of the §4 confluent-Heun-class equation, whose
+to `P_{m→m}`: the value is the **connection coefficient** of the §4 confluent-Heun-class equation, whose
 connection coefficients are generically not known in closed form (a standard fact for confluent Heun).
 The geometric invariants fix the *arguments* of the transcendental object, not its value.
 
 ---
 
-## 6. Benchmark: `P₂→₂` is genuinely transcendental (numerically-supported)
+## 6. Benchmark: `P_{m→m}` is genuinely transcendental (numerically-supported)
 
 (Oracle = `experiments/oracle.py`, T-converged; T=40 and T=120 agree to ≤1e-5 on the anchors.)
 
-### 6a. `P₂→₂` is independent of the BE survivals + double stochasticity
+### 6a. `P_{m→m}` is independent of the BE survivals + double stochasticity
 A 3×3 doubly-stochastic matrix has 4 dof; fixing the two BE survivals leaves a **2-dimensional**
 family along which `P[mid,mid]` varies (shifts of −0.211 and +0.789 per unit; `experiments/ws_e_geometry.py`).
-So `P₂→₂` is a genuine independent dynamical quantity — no algebraic shortcut. **[established]**
+So `P_{m→m}` is a genuine independent dynamical quantity — no algebraic shortcut. **[established]**
 
 ### 6b. Natural elementary / two-pathway closed forms FAIL
 With `δ₁=2πΓ_{mid,lo}`, `δ₂=2πΓ_{mid,hi}`, `pᵢ=e^{−δᵢ}` (diabatic stay probs):
@@ -194,7 +194,7 @@ With `δ₁=2πΓ_{mid,lo}`, `δ₂=2πΓ_{mid,hi}`, `pᵢ=e^{−δᵢ}` (diabat
 | `p₁p₂+(1−p₁)(1−p₂)` (max-coherence loop) | 0.5663 ✗ | 0.8564 ✗ |
 | 2-path Stückelberg band `[lo,hi]` | `[0.163,0.970]` ∋ true (cosφ=−0.872) | `[0.833,0.880]` **∌** true ✗ |
 
-The decisive line is the last: for **sampleB the true `P₂→₂` lies OUTSIDE** the entire two-pathway
+The decisive line is the last: for **sampleB the true `P_{m→m}` lies OUTSIDE** the entire two-pathway
 interference band — no choice of a single Stückelberg phase between the two BE crossings can produce
 it. The middle survival is a genuine **three-crossing (joint) coherence**, not a product or a
 two-path form. This is the numerical signature of the §4 extra accessory parameter. **[established]**
@@ -248,9 +248,9 @@ as WS-G predicts. Conclusion: the overlapping-regime middle survival is a genuin
 | 4 | Scalar Laplace ODE: 1 finite singular pt, exponents `{0,1,3}`, + rank-2 irregular at ∞ | **established** (symbolic) |
 | 5 | ⇒ class is confluent-Heun/higher-Weber, ONE accessory param ABOVE ₁F₂/Kampé de Fériet | **analytically-derived** |
 | 6 | Type-1 is never tridiagonal (extreme–extreme coupling ≠0; dominant on canonical) | **established** |
-| 7 | `P₂→₂` independent of BE + double-stochasticity (2-dof family) | **established** |
-| 8 | `P₂→₂` ≠ any elementary 2-pathway / sech form (sampleB outside the interference band) | **established** (numeric) |
-| 9 | generic `P₂→₂` = confluent-Heun connection coeff, not elementary / not ₁F₂ | **numerically-supported + analytically-framed** |
+| 7 | `P_{m→m}` independent of BE + double-stochasticity (2-dof family) | **established** |
+| 8 | `P_{m→m}` ≠ any elementary 2-pathway / sech form (sampleB outside the interference band) | **established** (numeric) |
+| 9 | generic `P_{m→m}` = confluent-Heun connection coeff, not elementary / not ₁F₂ | **numerically-supported + analytically-framed** |
 
 No claim contradicts E1–E5 or WS-A/D/G; this work **sharpens** WS-A (the extra accessory point, now
 also in the Laplace frame) and **explains** WS-G/co-scaling (the three-crossing joint coherence is why
@@ -266,7 +266,7 @@ a 3×3 system whose Laplace image is a confluent-Heun-class scalar ODE with an a
 make the Laplace image Fuchsian, giving a product/Bethe-ansatz integrand) — absent in the linear
 model; or (b) a tridiagonal structure (su(2) Gaudin, BBGY) — absent because Type-1's extreme–extreme
 Cauchy coupling never vanishes. Both are structural, not removable by a change of frame. Therefore the
-clean result is: **`P₂→₂` is exactly a genus-0 confluent-Heun connection coefficient (one accessory
+clean result is: **`P_{m→m}` is exactly a genus-0 confluent-Heun connection coefficient (one accessory
 parameter above the ₁F₂/Kampé de Fériet of the solvable tridiagonal cousins), benchmarked, not
 reducible to elementary functions or to ₁F₂ on the generic Type-1 locus.** A closed *value* would
 require the (generically unknown) confluent-Heun connection coefficients; the exact integral

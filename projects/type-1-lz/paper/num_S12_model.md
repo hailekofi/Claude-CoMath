@@ -1,16 +1,16 @@
-# WS-NUM (PA-4): a validated, computable model of the Type-1 N=3 middle survival `P_2→2`
+# WS-NUM (PA-4): a validated, computable model of the Type-1 N=3 middle survival `P_{m→m}`
 
 **Workstream:** WS-NUM (PA-4, the always-on safety net) · **Date:** 2026-06-01 ·
 **Deliverables:** `experiments/num_S12.py` (computable model + suite), this report,
 plus the cached gold data `experiments/num_S12_dataset.pkl` (14 strata) and
 `experiments/num_S12_slice.pkl` (an 11-point fixed-shape scale slice).
 
-**Bottom line.** A trusted, high-precision, **computable** `P_2→2(γ,ε,a)` is delivered
+**Bottom line.** A trusted, high-precision, **computable** `P_{m→m}(γ,ε,a)` is delivered
 and benchmarked to the gold oracle across the full sep/width range (0.1→4): the engine
 reproduces the published gold-oracle anchors to **1.6×10⁻⁹ (canonical) … 5.8×10⁻⁷
 (well-separated)** and the *exact* Brundobler–Elser extreme survivals analytically. The
 natural-geometry **parametrization** is established and validated: the Q4 cross-ratio is
-a pure **shape** coordinate (scale-invariant), and at fixed shape `P_2→2` is a clean 1-D
+a pure **shape** coordinate (scale-invariant), and at fixed shape `P_{m→m}` is a clean 1-D
 function of the middle BE exponent (slice model accurate to ~2×10⁻³). **Symbolic/PSLQ
 recognition is NEGATIVE** for any elementary closed form — every elementary
 interference candidate fails sample-independently, and single-sample PSLQ relations are
@@ -28,7 +28,7 @@ accuracy); **[neg]** = a recognition attempt that failed (a real, useful negativ
 
 `H(u) = H0 + u·diag(a)`, Cauchy couplings `(H0)_ij = γ_iγ_j(a_i−a_j)/(ε_i−ε_j)`. The
 open quantity is the middle-**slope** diabatic survival
-`P_2→2 = P[mid,mid] = |𝒮_{mid,mid}|²`, `mid = argsort(a)[1]`.
+`P_{m→m} = P[mid,mid] = |𝒮_{mid,mid}|²`, `mid = argsort(a)[1]`.
 
 The computable model has three tiers (all in `num_S12.py`):
 
@@ -39,7 +39,7 @@ The computable model has three tiers (all in `num_S12.py`):
 | **2 (surrogate)** | `P22_rbf` / `P22_model` / `slice_model` | smooth interpolants in the geometric arguments | **[num-model]** see §4 |
 
 The fast engine `P22_fast` is the practical computable recipe: a finite, deterministic
-procedure that returns `P_2→2(γ,ε,a)` to ~1e-9 in seconds. **This satisfies the
+procedure that returns `P_{m→m}(γ,ε,a)` to ~1e-9 in seconds. **This satisfies the
 practicality bar regardless of the recognition outcome.** Performance note (this
 environment): the lab-frame diabatic propagator is O(T²) and impractical; the
 adiabatic-IP propagator (`propagate_ad_ip`) is the only efficient engine, and at
@@ -79,10 +79,10 @@ For the four complex Q4 turning points (two complex-conjugate pairs) we form
 The cross-ratio χ is **scale-invariant**: rescaling `ε → s·ε` (γ, a fixed) leaves χ
 *exactly* fixed while scaling every BE exponent by `1/s²`. Verified on the scale slice:
 χ = 0.79979 is constant to 5 digits across `s ∈ [0.35, 2.6]` (a 7× range in ε-spread),
-while the middle BE exponent runs 0.058 → 3.21 and `P_2→2` runs 0.704 → 0.053. So:
+while the middle BE exponent runs 0.058 → 3.21 and `P_{m→m}` runs 0.704 → 0.053. So:
 
-> **`P_2→2` factorizes its arguments as (overall SCALE → the BE exponents) ×
-> (SHAPE → the cross-ratio χ).** Along a fixed-shape ray χ is frozen and `P_2→2` is a
+> **`P_{m→m}` factorizes its arguments as (overall SCALE → the BE exponents) ×
+> (SHAPE → the cross-ratio χ).** Along a fixed-shape ray χ is frozen and `P_{m→m}` is a
 > clean one-dimensional function of the middle BE exponent.
 
 This is the cleanest available coordinate system for the open quantity and is the slice
@@ -99,7 +99,7 @@ on which both an accurate 1-D model (§4) and the recognition attempt (§5) are 
 → strongly overlapping. Selected rows (`P22` = fast engine = gold to ~1e-9; `inc` =
 incoherent baseline; χ = cross-ratio):
 
-| stratum | P_2→2 | incoherent | ratio | δ (windows) | χ |
+| stratum | P_{m→m} | incoherent | ratio | δ (windows) | χ |
 |---|---|---|---|---|---|
 | weak | 0.95987963 | 0.95977472 | 1.000 | (0.0048, 0.0065) | 0.864 |
 | well_sep | 0.47354705 | 0.47048922 | 1.006 | (0.090, 0.090) | 0.933 |
@@ -119,11 +119,11 @@ incoherent baseline; χ = cross-ratio):
 **Sanity checks reproduced exactly. [established/gold]**
 - **BE / extreme survivals:** the two *exact* extreme-slope survivals are matched by
   the engine analytically (`validate_against_anchors`, `be_delta` ≤ a few×1e-8).
-- **Weak-coupling limit:** `P_2→2 → P_mid_inc` (weak: 0.95988 vs 0.95977, Δ=1.0e-4) and
+- **Weak-coupling limit:** `P_{m→m} → P_mid_inc` (weak: 0.95988 vs 0.95977, Δ=1.0e-4) and
   `→ 1 − 2π·b_mid` at leading order (0.95894), i.e. the model recovers the known
   incoherent/perturbative asymptotics.
 - **Adiabatic floor (the open content):** in the deep-adiabatic strata (strong, sep_tiny:
-  all pairwise survivals ≈ 0) the incoherent baseline `→ 0` but `P_2→2` stays **finite**
+  all pairwise survivals ≈ 0) the incoherent baseline `→ 0` but `P_{m→m}` stays **finite**
   (0.0105, 0.0284) — a genuinely coherent floor that no incoherent path product
   reproduces. This is the open, transcendental part of the answer.
 
@@ -144,7 +144,7 @@ cross-validation (the in-sample residual is ~0 by construction and is *not* the 
 surrogate to be reliable (full-space LOO ~6e-2): the honest statement is that **the
 trusted computable model is the engine itself (Tier 0/1)**, and the global surrogates
 are ballpark-only. BUT the scale×shape separation pays off: on a **fixed-shape (fixed-χ)
-ray**, `P_2→2` is a clean monotone 1-D function of the middle BE exponent and the
+ray**, `P_{m→m}` is a clean monotone 1-D function of the middle BE exponent and the
 `PchipInterpolator` slice model reproduces the gold engine to **median 2e-3 / max 1.1e-2**
 out-of-sample — a genuinely useful fast computable model along any scale ray. Densifying
 each fixed-shape slice (≈14 s/point) yields an arbitrarily accurate 1-D computable model
@@ -170,24 +170,24 @@ DO-product           q_lm q_mh / (q_lm q_mh+(1-q_lm)(1-q_mh))  3.3e-1
 
 **None matches** (best is off by ~9×10⁻²). The adiabatic floor (§3) is the reason: every
 incoherent product `→ 0` or `→ 1` as the pairwise survivals saturate, while the true
-`P_2→2` holds a finite coherent value. **[neg]**
+`P_{m→m}` holds a finite coherent value. **[neg]**
 
 **(b) PSLQ — single-sample relations are spurious; the guarded test is negative.**
-A single-sample `mpmath.pslq` of `P_2→2` against eight survival-product constants
+A single-sample `mpmath.pslq` of `P_{m→m}` against eight survival-product constants
 returns a height-≈8 relation `[5,3,−5,−2,−6,−6,8,−1,−5]` at tol 1e-8 — but this is the
 classic PSLQ false positive (eight basis constants fit one real to 1e-8 with small
 integers). A genuine closed form must carry the **same** integer relation at every
-sample; none does. PSLQ on `log(P_2→2/P_inc)` against {π, log(1−χ), the BE exponents,
+sample; none does. PSLQ on `log(P_{m→m}/P_inc)` against {π, log(1−χ), the BE exponents,
 their logs} finds no sample-independent low-height relation either. **[neg]**
 
-**(c) Functional-form probe on the clean 1-D slice.** With χ frozen, `logit(P_2→2)` is
+**(c) Functional-form probe on the clean 1-D slice.** With χ frozen, `logit(P_{m→m})` is
 *approximately* affine in `log(b_mid)` (slope ≈ −0.90) but with clear residual curvature
 (resid_std 0.14) — i.e. **not** a power law / not a closed logit-linear form. This is the
 fingerprint of a transcendental connection coefficient, consistent with the program's
 gate-test conclusion (genus-0 confluent-Heun / Kampé de Fériet class; the prefactor is a
 connection coefficient generically *not* elementary).
 
-**Conclusion of the recognition pass.** No elementary closed form for `P_2→2` was found,
+**Conclusion of the recognition pass.** No elementary closed form for `P_{m→m}` was found,
 on the full family or on the special symmetric/scale slice. This is a **clean negative**
 that *corroborates* the structural expectation (`gate_test_genus.md`, `OPEN_PROBLEM.md`):
 the middle survival is the genuinely coherent, transcendental part of `𝒮` — the target
@@ -203,7 +203,7 @@ against and is deferred to them; WS-NUM provides the gold values they must hit.
 `validate_against_anchors`: fast engine vs the published gold anchors (`oracle_report.md`)
 and the exact BE survivals. The fast single-pass engine **is** gold:
 
-| stratum | fast `P_2→2` | gold anchor | |Δ| |
+| stratum | fast `P_{m→m}` | gold anchor | |Δ| |
 |---|---|---|---|
 | canonical | 0.214724313 | 0.2147243114 | **1.6e-9** |
 | weak | 0.959879631 | 0.9598796199 | **1.1e-8** |
@@ -236,10 +236,10 @@ Files written by WS-NUM (only its own deliverables; `uploads/assay/*` read-only)
 
 ## 8. Honest summary / status
 
-- **Computable `P_2→2(γ,ε,a)`: DELIVERED and gold-benchmarked** (≤1e-7…1e-9 across the
+- **Computable `P_{m→m}(γ,ε,a)`: DELIVERED and gold-benchmarked** (≤1e-7…1e-9 across the
   sep/width 0.1→4 range) — the floor deliverable, met. **[gold]**
 - **Parametrization: established** — two window actions = the two BE extreme exponents;
-  the cross-ratio = a scale-invariant shape coordinate; `P_2→2` separates as
+  the cross-ratio = a scale-invariant shape coordinate; `P_{m→m}` separates as
   scale×shape; on a fixed-shape ray it is a clean 1-D function (slice model ~2e-3).
   **[established / num-model]**
 - **Elementary closed form: NOT found** (sample-independent candidate test and guarded

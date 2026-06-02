@@ -1,6 +1,6 @@
 """
 cap_connection_formula.py  --  WS-CAP capstone: settle PAINLEVE V vs RANK-3 for the Type-1 N=3
-middle-survival connection coefficient S_12 = P_2->2 = |Smat_{mid,mid}|^2 (mid = argsort(a)[1]).
+middle-survival connection coefficient S_12 = P_mm = |Smat_{mid,mid}|^2 (mid = argsort(a)[1]).
 
 GOAL (open-problem #2). Evaluate the PUBLISHED rank-2 Painleve-V / Lisovyy connection theory at our
 ALGEBRAICALLY-FIXED monodromy data (PA-1/PA-2) and benchmark vs the gold oracle. Decide:
@@ -20,13 +20,13 @@ Tests (evidence ladder tagged in the printout and in paper/cap_connection_formul
   T3  formal_exponents   : the KNOWN formal-monodromy exponents c_i = sum_{j!=i} s_ij^2 (a_i-a_j)
                            (signed BE), sum=0 -- the diagonal carrier (matches WS-CH/PA-1). [exact]
   T4  accessory_algebraic: the accessory parameter v_*=E_* is rational (PA-2 ALGEBRAIC). [exact]
-  T5  single_sigma_band  : the DECISIVE physical test -- does the oracle P_2->2 lie OUTSIDE the widest
+  T5  single_sigma_band  : the DECISIVE physical test -- does the oracle P_mm lie OUTSIDE the widest
                            single-intermediate-exponent (2x2 / PV) Stueckelberg band built from the two
                            crossings the middle level participates in? OUTSIDE => a 3rd coherent
                            amplitude is required => genuinely rank-3 (no 2x2-PV connection constant
                            can produce it). [gold-gated numerics]
   T6  reduction_control  : positive control -- on the decoupling locus (one outer link -> 0) the system
-                           reduces to 2x2, P_2->2 -> the elementary single-crossing value, and the
+                           reduces to 2x2, P_mm -> the elementary single-crossing value, and the
                            single-sigma band TIGHTENS around it: PV applies EXACTLY here (the
                            already-elementary corner). [gold-gated numerics]
 
@@ -162,7 +162,7 @@ def T6_reduction_control(T=70.0, verbose=True):
         rows.append(dict(gam_hi=g2, P=P, pmin=pmin, pmax=pmax, q_lomid=q_lomid,
                          inband=bool(pmin - 1e-4 <= P <= pmax + 1e-4)))
     if verbose:
-        print("  decoupling mid-hi (gam_hi -> 0): P_2->2 -> elementary single-crossing q_lomid,")
+        print("  decoupling mid-hi (gam_hi -> 0): P_mm -> elementary single-crossing q_lomid,")
         print("  band tightens around it; PV/2x2 applies exactly on this rank-2 reduction locus.")
         for r in rows:
             print("    gam_hi=%5.2f: P22=%.6f band=[%.5f,%.5f] inband=%s q_lomid=%.6f"
@@ -222,5 +222,5 @@ if __name__ == "__main__":
     print("reproduce the generic Type-1 N=3 middle survival.  S_12 is the off-diagonal Stokes /")
     print("connection coefficient of the rank-3 (3x3, Poincare-rank-2 irregular) isomonodromy problem")
     print("-- the c=1-family 'higher' connection constant, unpublished in closed form.  PV is exactly")
-    print("the rank-2 reduction (decoupling) limit, where P_2->2 is already elementary (T6).")
+    print("the rank-2 reduction (decoupling) limit, where P_mm is already elementary (T6).")
     print("=" * 78)

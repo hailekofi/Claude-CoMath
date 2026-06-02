@@ -13,7 +13,7 @@ Type-1 N=3 MLZ: `i dψ/du = (H₀+uA)ψ`, `A=diag(a)`, Cauchy coupling
 `(H₀)_ij = γ_iγ_j(a_i−a_j)/(ε_i−ε_j)`, `(H₀)_ii=−Σ_{k≠i}γ_k²(a_i−a_k)/(ε_i−ε_k)`; `ε_0<ε_1<ε_2`.
 Observable: doubly-stochastic `P_{x→j}=|𝒮_{xj}|²`, 4 free real params. Two **extreme-slope**
 survivals are exact (Brundobler–Elser). **GOAL:** a *concise, computable* expression for the open
-content — the **middle-slope** survival `P₂→₂=|𝒮_{mm}|²` (`m=argsort(a)[1]`) + one off-diagonal.
+content — the **middle-slope** survival `P_{m→m}=|𝒮_{mm}|²` (`m=argsort(a)[1]`) + one off-diagonal.
 Nomenclature (locked): `s_ij=γ_iγ_j/(ε_i−ε_j)`, `w_ij=|2s_ij|`, BE exponent `=s_ij²|a_i−a_j|`;
 `𝒮`=scattering matrix; `Γ_j`=Cauchy form factor (NOT the BE exponent); `S₁₂` DEPRECATED.
 
@@ -39,16 +39,16 @@ or a **validated semi-analytic approximation** — see §6.
 | R7 | Scalar Laplace ODE: one **apparent `{0,1,3}`** singularity + rank-2 irregular point. | **established** (3 independent derivations: WS-E, WS-CH, WS-PA1; symbolic, 2 samples each) | paper/{ws_e,ch_direct,pa1}*.md |
 | R8 | **Formal monodromy = signed BE:** `c_i=Σ_j s_ij²(a_i−a_j)` (Σ=0); `|e^{2πc_i}|`=BE survival for extremes; `c_mid` is a **cancelling** sum ⇒ middle is the hard one. | **established** (verified) | ws_ch, ws_e |
 | R9 | **Accessory point = node:** `v_*=E_*`=rational double root of discriminant; = unique rational root of cyclic Wronskian `det[e₀,Me₀,M²e₀]`. ⇒ **PA-2 = ALGEBRAIC** (accessory not a free modulus). | **numerically/symbolically-supported** (4 samples incl. non-monotonic) — NOT a general theorem | experiments/pa2_accessory_algebraic.py |
-| R10 | **RANK-3 verdict:** the object is a rank-3 (confluent-Garnier / `c=1`) connection constant, **NOT** the published rank-2 Painlevé-V/confluent-Heun. dim(wild char variety) 6 vs PV's 2; gold-gated falsification `P₂→₂` outside the single-σ band (sampleB 0.021 vs [0.83,0.88]). PV/Heun apply **only at the decoupling (elementary) boundary**. | **numerically-supported (decisive tier T5 gold-gated)** + analytic (T1/T2, not machine-proved) | paper/cap_connection_formula.md |
-| R11 | Computable `P₂→₂(γ,ε,a)` validated vs 1e-9 oracle across sep/width 0.1→4; args separate as `{BE window actions (scale), scale-invariant cross-ratio χ (shape)}`. | **gold / numerically-supported** | experiments/num_S12.py, oracle.py |
+| R10 | **RANK-3 verdict:** the object is a rank-3 (confluent-Garnier / `c=1`) connection constant, **NOT** the published rank-2 Painlevé-V/confluent-Heun. dim(wild char variety) 6 vs PV's 2; gold-gated falsification `P_{m→m}` outside the single-σ band (sampleB 0.021 vs [0.83,0.88]). PV/Heun apply **only at the decoupling (elementary) boundary**. | **numerically-supported (decisive tier T5 gold-gated)** + analytic (T1/T2, not machine-proved) | paper/cap_connection_formula.md |
+| R11 | Computable `P_{m→m}(γ,ε,a)` validated vs 1e-9 oracle across sep/width 0.1→4; args separate as `{BE window actions (scale), scale-invariant cross-ratio χ (shape)}`. | **gold / numerically-supported** | experiments/num_S12.py, oracle.py |
 
-Anchor numbers: canonical `P₂→₂=0.214724`, sampleB `0.021018`; enhancement over incoherent 2.5–130×.
+Anchor numbers: canonical `P_{m→m}=0.214724`, sampleB `0.021018`; enhancement over incoherent 2.5–130×.
 
 ## 3. Hypothesis ledger (incl. demoted/refined)
 - **Zero-curvature factorization `𝒮=∏𝒮_ij` (Malikis–Cheianov home run):** REFUTED for Type-1 — no MC `Ê` is non-Abelian (MC's is Abelian); the real obstruction is permanent overlap (R4). Status: **refuted**.
 - **Painlevé-V (rank-2) via middle convolution (WS-PA1, PA-1):** REFUTED by capstone (R10): three generic distinct irregular rates can't be a 2×2 PV middle-convolution image; dim 6>2. Status: **refuted** (PV is the rank-2 boundary only).
 - **Accessory parameter algebraic (PA-2):** **supported** (R9), the favorable branch.
-- **`P₂→₂` = product of two Weber shears × explicit junction (constructive exact-WKB):** **UNEXPLORED** — the recommended redirect (§6).
+- **`P_{m→m}` = product of two Weber shears × explicit junction (constructive exact-WKB):** **UNEXPLORED** — the recommended redirect (§6).
 
 ## 4. DEAD ENDS (with WHY — the most valuable record)
 1. **Commuting/quadratic partner → the prefactor.** WHY failed: the family is an Abelian ring (R1); a commuting partner carries only spectral data. *Could work only* for the BE/adiabatic part, never the non-Abelian prefactor. (Salvage: the framing led to R1, the Abelian ceiling.)
@@ -73,7 +73,7 @@ explicit Weber shears is still a finite, concise, computable object — never tr
 
 ## 6. Open questions & next steps
 - **O1 [primary redirect]:** the **constructive exact-WKB product** —
-  `P₂→₂=|M_form · 𝒮_Weber^{(mid,hi)} · 𝒮_Weber^{(mid,lo)}|²_{mm}` with each shear explicit
+  `P_{m→m}=|M_form · 𝒮_Weber^{(mid,hi)} · 𝒮_Weber^{(mid,lo)}|²_{mm}` with each shear explicit
   (Γ-functions of `{s_ij,a_i}`) and the spectral-network **junction factor** computed. Candidate
   concise computable formula; the project's original aim. **Unexplored.**
 - **O2:** the **exact integral representation** (WS-E skeleton) `P=|∮ e^{−iuv}B(v)dv|²` — a closed

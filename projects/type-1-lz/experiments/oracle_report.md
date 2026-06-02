@@ -134,7 +134,7 @@ true value for any tail between 1/T³ and 1/T⁴).
 | Γ_ij | `γ_i²γ_j²|a_i−a_j|/(ε_i−ε_j)²` ; `P[lo,lo]=∏_{m≠lo}e^{−2πΓ_lo,m}`, sim. hi |
 | spectral sheet → diabatic | fixed: in=(0,1,2), out=(2,0,1)  (FIX 1) |
 
-The "middle level" whose survival is the open quantity P₂→₂ is the **middle-slope** level
+The "middle level" whose survival is the open quantity P_{m→m} is the **middle-slope** level
 `mid=argsort(a)[1]` — *not* necessarily the middle-ε level (index 1). For the canonical
 and sampleB samples a is given in ε-order with a increasing, so mid=1 coincidentally; in
 general always use the slope order.

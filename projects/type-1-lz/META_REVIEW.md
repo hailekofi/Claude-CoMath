@@ -34,7 +34,7 @@ model. Do not import the class from a neighbor.*
 
 ## M3 — Notation hygiene must precede claim-scaling
 Three collisions corrupted communication (not the numbers): `Γ` (BE exponent vs Cauchy form factor),
-`S₁₂` (conflated `P₂→₂` diagonal probability, the amplitude `C_mm`, and the Stokes multiplier `σ`),
+`S₁₂` (conflated `P_{m→m}` diagonal probability, the amplitude `C_mm`, and the Stokes multiplier `σ`),
 and channel ordering (ε-index vs slope vs energy). Each forced a cleanup pass.
 **RULE:** *Pin conventions in `NOMENCLATURE.md` before scaling claims/agents. State, per quantity:
 basis (ε-index), the physical role (slope), and the gauge status (probability vs amplitude).*

@@ -130,7 +130,7 @@ tournament re-rank per gate). Targets O1 (prefactor closed form), O2 (node reduc
 User flagged: basis ordering should be eps, not energy; worried about inconsistency imperiling results.
 DECISIVE TEST + AUDIT:
 - Three orderings: eps (basis index, fixed), slope a (BE extreme/middle), energy (reverses at +-inf).
-- The OPEN middle survival P_2->2 = P[m,m], m=argsort(a)[1] = the MIDDLE-SLOPE level (BE physics).
+- The OPEN middle survival P_{m→m} = P[m,m], m=argsort(a)[1] = the MIDDLE-SLOPE level (BE physics).
   slope-middle = eps-middle ONLY when slopes monotonic in eps. Non-monotonic test (a=(2,-1,0.5),
   eps=(-2,0,3)): slope-mid=index2 (P=0.571, open); eps-mid=index1 is the slope-MIN (P=0.0185=EXACT BE)
   -> using eps-middle would return a BE-exact value, NOT the open quantity. Convention matters.
@@ -140,9 +140,9 @@ DECISIVE TEST + AUDIT:
   imperiled.
 - Headline samples canonical & sampleB have a ASCENDING in eps => slope-mid=eps-mid=index1 =>
   their specific numbers (P_mid=0.2147, 0.0210, all benchmarks) unconditionally SAFE.
-- Convention LOCKED in NOMENCLATURE.md: basis=eps-index; P_2->2=P[argsort(a)[1],argsort(a)[1]]
+- Convention LOCKED in NOMENCLATURE.md: basis=eps-index; P_{m→m}=P[argsort(a)[1],argsort(a)[1]]
   (slope-middle, NOT eps-index-1 in general); energy ordering is NOT a labeling convention.
-  Retracted the earlier 'P_2->2 by energy rank' framing as a red herring.
+  Retracted the earlier 'P_{m→m} by energy rank' framing as a red herring.
 
 ## STRATEGIC REASSESSMENT + traceable synthesis written — 2026-06-01
 NEW companion artifacts for cold pickup: **SESSION_SYNTHESIS.md** (full traceable arc + hypothesis
@@ -166,7 +166,7 @@ propagate-forward rules). Read those + NOMENCLATURE.md first.
   'no concise form': rank-3 != 'no concise constructive formula' (the product of two explicit Weber
   shears was never tried).
 - **Recommended redirect (pending user steer):** recalibrate goal to constructive/realistic targets:
-  O1 [primary] constructive exact-WKB product P_2->2=|M_form . Weber . Weber|^2_{mm} with explicit
+  O1 [primary] constructive exact-WKB product P_{m→m}=|M_form . Weber . Weber|^2_{mm} with explicit
   Weber shears + the spectral-network junction factor; O2 exact integral representation; O3 validated
   semi-analytic approximation. Proofs owed: node universality, node=accessory (general, via cyclic
   Wronskian), the ~1.6 bound, accessory algebraicity, the dim-count 6>2.
@@ -175,32 +175,32 @@ propagate-forward rules). Read those + NOMENCLATURE.md first.
 Deliverables paper/cap_connection_formula.md, experiments/cap_connection_formula.py. The capstone
 DECISIVELY settles the one open structural dispute. (Reverses my prior lean toward WS-PA1's 'PV'.)
 - **VERDICT: the published rank-2 Painleve-V / Lisovyy connection constant does NOT compute the
-  generic Type-1 N=3 P_2->2.** It fails at the SIZE/RANK of the monodromy manifold, not a missing calc.
+  generic Type-1 N=3 P_{m→m}.** It fails at the SIZE/RANK of the monodromy manifold, not a missing calc.
 - T1 [analytic, lit-grounded]: the 3x3 rank-2 irregular point has a 6-DIM wild character variety vs
   PV's 2-DIM (PVI cubic surface -> PV by confluence). 6>2: the rank-2 formula has too few parameters.
 - T2 [analytic]: closes WS-PA1's 'PV via Harnad/middle-convolution' escape -- the three GENERIC
   distinct irregular rates {a_i} (no {+L,-L,0} symmetry) can't be the single-middle-convolution image
   of a 2x2 PV's two rates. Directly refutes PA-1.
 - T3 [exact]: formal exponents = signed-BE traceless SL(3) PAIR c_i (Sum=0), not PV's single theta_inf.
-- T4 [exact]: accessory v_*=E_* rational (PA-2 favourable, CONFIRMED) -> P_2->2 is a SPECIFIC named
+- T4 [exact]: accessory v_*=E_* rational (PA-2 favourable, CONFIRMED) -> P_{m→m} is a SPECIFIC named
   constant, but a RANK-3 one.
-- **T5 [gold-gated, DECISIVE]:** on 7/14 strata P_2->2 lies STRICTLY OUTSIDE the widest single-sigma
-  (rank-2/PV) Stuckelberg band. sampleB P_2->2=0.02101769 (gold, err 1.5e-8; matches our oracle
+- **T5 [gold-gated, DECISIVE]:** on 7/14 strata P_{m→m} lies STRICTLY OUTSIDE the widest single-sigma
+  (rank-2/PV) Stuckelberg band. sampleB P_{m→m}=0.02101769 (gold, err 1.5e-8; matches our oracle
   0.021018) vs band [0.8327,0.8800], margin +0.81. No single rank-2 connection constant reproduces it
   -> a third coherent amplitude (the two shears' non-commutative composition through the shared mid
   sheet) is required = genuine RANK-3.
-- T6 [gold-gated, positive control]: decoupling locus (gamma_hi->0) -> 2x2, P_2->2->0.221360
+- T6 [gold-gated, positive control]: decoupling locus (gamma_hi->0) -> 2x2, P_{m→m}->0.221360
   (elementary), band tightens around it -> PV applies EXACTLY at the elementary corner only.
 - **Corroboration (coordinator) -- HONEST: INCONCLUSIVE.** A quick re-check sought matched-window /
-  different-chi pairs to show P_2->2 needs the shape chi beyond the formal exponents (the >rank-2
+  different-chi pairs to show P_{m→m} needs the shape chi beyond the formal exponents (the >rank-2
   signature). The random search only found tiny-Delta-chi pairs (Dchi=0.05, dP_mid=0.003, comparable
   to the residual window mismatch Dw=0.009) -> UNDERPOWERED, does NOT cleanly corroborate. A proper
   test needs a constrained deformation (hold both window actions fixed, vary chi). WS-NUM's separation
-  finding (P_2->2 = f(window actions, chi)) remains the standing chi-dependence evidence but is itself
+  finding (P_{m→m} = f(window actions, chi)) remains the standing chi-dependence evidence but is itself
   numerically-supported. => The RANK-3 VERDICT RESTS ON T1 (dim 6>2, analytic), T2 (middle-conv
   obstruction, analytic), and T5 (gold-gated band falsification, the airtight decisive tier), NOT on
   this re-check.
-- **EXPLICIT NAMED OBJECT:** P_2->2 = |C_{mm}|^2 of the rank-3 isomonodromy problem (one Poincare-
+- **EXPLICIT NAMED OBJECT:** P_{m→m} = |C_{mm}|^2 of the rank-3 isomonodromy problem (one Poincare-
   rank-2 irregular point with known formal exponents c_i; one apparent {0,1,3} point at the algebraic
   node v_*=E_*) -- a c=1-family / confluent-Garnier (9/2-type) connection constant, ABOVE 2F1 and
   ABOVE the rank-2 PV transcendent, UNPUBLISHED in closed form; reduces to the published PV/Barnes-G
@@ -246,23 +246,23 @@ Deliverable paper/pa1_isomonodromy_foundation.md; coordinator verification exper
   monodromy data (c_i exponents + the rational accessory parameter/node + the two {mid,.} shears) and
   benchmark vs the oracle -> (a) confirms PV (WS-PA1) vs rank-3 (WS-PV), (b) writes S_12 EXPLICITLY.
 
-## WS-NUM completed (PA-4) — computable P_2->2 floor MET + clean negative + separation finding — 2026-06-01
+## WS-NUM completed (PA-4) — computable P_{m→m} floor MET + clean negative + separation finding — 2026-06-01
 Deliverables experiments/num_S12.py, paper/num_S12_model.md (num_S12_dataset.pkl gitignored).
-- **FLOOR DELIVERABLE MET [gold]:** a trusted computable P_2->2(gamma,eps,a) (one adiabatic-IP pass,
+- **FLOOR DELIVERABLE MET [gold]:** a trusted computable P_{m→m}(gamma,eps,a) (one adiabatic-IP pass,
   T=80, rtol=1e-9, ~14s) validated vs the oracle across sep/width 0.1->4: canonical 1.6e-9, weak
   1.1e-8, strong 7.8e-8, sampleB 2.1e-7, well_sep 5.8e-7; BE extreme survivals reproduce analytically.
 - **PARAMETRIZATION [established]:** the two window actions I_X = the two BE extreme-survival
   exponents Sigma_lo, Sigma_hi (machine precision); the middle level is the shared partner of BOTH
   windows (why its survival is the open COUPLED quantity).
 - **NEW [coordinator-VERIFIED]:** the Q4 cross-ratio chi is SCALE-INVARIANT (a pure SHAPE coordinate;
-  verified |Delta|=0 under gamma-scaling, 4e-16 under eps-scaling). P_2->2 SEPARATES as
-  (scale -> BE exponents) x (shape -> chi). On a fixed-shape ray (chi frozen) P_2->2 is a clean 1-D
+  verified |Delta|=0 under gamma-scaling, 4e-16 under eps-scaling). P_{m→m} SEPARATES as
+  (scale -> BE exponents) x (shape -> chi). On a fixed-shape ray (chi frozen) P_{m→m} is a clean 1-D
   function of the middle BE exponent (1-D slice model reproduces gold to median 2e-3). The natural
   arguments of S_12 are thus {the two window actions, chi} -- exactly the OPEN_PROBLEM target args.
 - **RECOGNITION [clean NEGATIVE]:** no elementary closed form. DO/coherent-path candidates fail
-  sample-INDEPENDENTLY; single-sample PSLQ relations spurious. logit(P_2->2) only approx affine in
+  sample-INDEPENDENTLY; single-sample PSLQ relations spurious. logit(P_{m→m}) only approx affine in
   log(b_mid) with residual curvature = fingerprint of a transcendental connection coefficient. Deep-
-  adiabatic strata show a FINITE COHERENT FLOOR (P_2->2~0.01-0.03 while incoherent products ->0) =
+  adiabatic strata show a FINITE COHERENT FLOOR (P_{m→m}~0.01-0.03 while incoherent products ->0) =
   the genuinely open transcendental content. Corroborates the confluent-Heun/conformal-block verdict.
 - WS-NUM provides the GOLD TARGETS for WS-PV/WS-CH to PSLQ named special-function constants against.
 - 4 of 5 workstreams done (WS-PV, WS-CH, WS-R, WS-NUM, all mutually consistent). Remaining: WS-PA1
@@ -294,7 +294,7 @@ convergent canonical frame (Coulomb-subtracted; T-convergence verified). Coordin
   WS-CH); do NOT claim 'triangular shear' or 'e^{2pi i c_i} as a factor of S_canon'. The frame-pinned
   S_canon reality is cyclic-permutation x mid-pair shears.
 
-## WS-CH completed — confluent-Heun central connection; benchmarked computable P_2->2 — 2026-06-01
+## WS-CH completed — confluent-Heun central connection; benchmarked computable P_{m→m} — 2026-06-01
 Deliverable paper/ch_direct_connection.md; benchmark scripts archived experiments/ws_ch/.
 - **CONFIRMS (2nd independent derivation, coordinator-spot-checked):** scalar 3rd-order Laplace ODE
   has ONE apparent singularity {0,1,3} (no log), residue A=1, v_* RATIONAL (canonical -748/375,
@@ -308,13 +308,13 @@ Deliverable paper/ch_direct_connection.md; benchmark scripts archived experiment
   MIDDLE is the hard one. [new solid result]
 - **BENCHMARK PASSED <=4e-7** (target 1e-4): connection decomposition via 2 independent solvers
   reproduces the oracle (canonical 0.214724 diff 3.95e-7; sampleB 0.021018 diff 1.56e-7), doubly
-  stochastic <1e-5. A computable, validated P_2->2.
+  stochastic <1e-5. A computable, validated P_{m→m}.
 - **Named object:** Lisovyy-Naidiuk (2208.01604) confluent-Heun connection = convergent series in the
   accessory parameter = quasiclassical Virasoro conformal block = Painleve-V tau-ratio (Bonelli-
   Iossa-Panea Lichtig-Tanzini). SAME family WS-PV targets -> the two tracks CONVERGE.
 - **RANK DISCREPANCY (WS-CH confluent-Heun rank-2 vs WS-PV rank-3) -- RECONCILED [coordinator synth]:**
   the two Stokes SHEARS (the {mid,lo},{mid,hi} carrier-space connections) are each rank-2 confluent-
-  Heun connection coefficients (Lisovyy-Naidiuk applies to EACH, published); S_12=P_2->2 is their
+  Heun connection coefficients (Lisovyy-Naidiuk applies to EACH, published); S_12=P_{m→m} is their
   NON-COMMUTATIVE COMPOSITION = the rank-3 (12x13 joint) object (WS-PV). Pieces rank-2 (published);
   composition rank-3. To be confirmed by WS-PA1's PA-1 (irreducibility / accessory-param count).
 - PA-2 still the pivot: v_* rational + A=1 is SUGGESTIVE of algebraic accessory parameter but WS-CH
@@ -357,7 +357,7 @@ RESTART-OPERATOR HYPOTHESIS CARDS (physics-intuition, conjecture):
   = Stokes multipliers = the confluent-Heun coefficient. Test: diagonal of restart = e^{2pi i c_i};
   off-diagonal is TRIANGULAR (Stokes shear) in slope ordering, not dense.
 - H-R2: the two Stokes shears live in the {mid,lo} and {mid,hi} 2D carrier spaces (= WS-G's 12x13
-  joint, middle = shared partner); their non-commutative composition = S_12 = P_2->2. Test: off-diag
+  joint, middle = shared partner); their non-commutative composition = S_12 = P_{m→m}. Test: off-diag
   restart weight concentrates in the mid row/col; decoupling one outer (WS-C trivial-coupling) kills
   one shear -> collapses joint -> elementary (matches 'elementary <=> a level decouples').
 - H-R3: form factor Gamma_j=(-u'(lambda_j))^{-1/2} is ANALYTIC at the poles (~(lambda-eps_i)); WKB
@@ -402,7 +402,7 @@ Q_restart=DP theory constraining the S-matrix A.
   Laplace frame), [K,K]!=0 coordinator-verified. DRAFT with 2 named verification TODOs (the R9
   correlation re-check; the R8 accessory re-derivation = PA-0).
 - **Open problem formalized:** `paper/OPEN_PROBLEM.md`. THE PROBLEM: compute the off-diagonal Stokes
-  coefficient S_12 (=P_2->2) of the single rank-2 irregular point — a confluent-Heun connection
+  coefficient S_12 (=P_{m→m}) of the single rank-2 irregular point — a confluent-Heun connection
   coefficient one accessory parameter above 1F2 — in closed form via the two window actions + the
   turning-point cross-ratio, OR prove irreducibility. KEY LEVER: rank-2 irregular + apparent
   singularity => isomonodromic deformation is Painleve (expected Painleve V), whose connection
@@ -418,7 +418,7 @@ Q_restart=DP theory constraining the S-matrix A.
 ## WS-E + WS-C completed — research arc essentially closed — 2026-06-01
 Both verified by coordinator; deliverables paper/ws_e_junction_Smatrix.md, paper/ws_c_factorization_locus.md (+ experiments/ws_{e,c}_*.py).
 
-### WS-E (the prize) — VERDICT: honest NEGATIVE-with-structure. The closed VALUE of P_2->2 is NOT
+### WS-E (the prize) — VERDICT: honest NEGATIVE-with-structure. The closed VALUE of P_{m→m} is NOT
 elementary; it is the off-diagonal Stokes connection coefficient in the genus-0 confluent-Heun /
 higher-Weber class, ONE accessory parameter above the 1F2 / Kampe de Feriet of the solvable cousins.
 Benchmarked (anchors exact: canonical 0.214724, sampleB 0.021018).
@@ -437,7 +437,7 @@ Benchmarked (anchors exact: canonical 0.214724, sampleB 0.021018).
 - [VERIFIED, NEW cousin-distinguishing fact] Type-1 is NEVER tridiagonal: the extreme-extreme Cauchy
   coupling V_02 is nonzero and DOMINANT (canonical 0.72 > V01 0.60 > V12 0.48). Every solvable MLZ
   cousin (Lin-Sinitsyn/BBGY su(2)-Gaudin) is tridiagonal. Type-1 = the unsolved full confluent case.
-- [num] P_2->2 lies OUTSIDE the entire two-path Stuckelberg interference band on 3/7 overlapping
+- [num] P_{m→m} lies OUTSIDE the entire two-path Stuckelberg interference band on 3/7 overlapping
   samples -> no two-amplitude/product/sech closed form can reproduce it.
 - Maximal honest result: exact integral rep + named function class (args = window actions +
   turning-point cross-ratio) + controlled limits (BE; well-separated->incoherent). Closed VALUE
@@ -476,7 +476,7 @@ independently verified by coordinator).
   P_mid=0.98597 vs incoherent 0.98587). Overlapping sampleB: the 12 and 13 Stokes lines CROSS at 4
   joints (u≈−0.13±0.95i, −0.07±0.85i), node (exact crossing) on the real axis BETWEEN the two joint
   clusters, enhancement 120.5× (consistent with WS-F oracle 128.7×). Joints are 12×13 type = the two
-  off-diagonal pairs sharing the MIDDLE level = exactly P₂→₂.
+  off-diagonal pairs sharing the MIDDLE level = exactly P_{m→m}.
 - **Localizes WS-A's non-Abelian remainder:** the transcendental off-diagonal Stokes coefficient =
   the JOINT HOLONOMY (the GMN junction S-matrix at the 12×13 joint, node between the two joints, as
   a function of the two window actions). Joint-free ⇔ elementary (BE×Weber product); jointed ⇔
@@ -491,7 +491,7 @@ independently verified by coordinator).
   in the far-apart tail; 'no joint' is only a lower-bound witness; full GMN trajectory/junction
   rules needed for a bidirectional classifier); 'joint strength' is a geometric proxy, not the
   literal relative WKB action; WS-G shows joint PRESENCE tracks enhancement but does not COMPUTE
-  P₂→₂ (that is WS-E).
+  P_{m→m} (that is WS-E).
 - This is the verified mechanism behind the obstruction; with WS-A (class) + WS-D/co-scaling
   (obstruction) + WS-F (gold data) + WS-G (mechanism), all launched workstreams are in. Remaining:
   WS-C (factorization/trivial-coupling locus = joint-free locus, prediction P-ii) and WS-E (the
@@ -559,7 +559,7 @@ Deliverable `paper/ws_a_riemann_scheme.md`. Claims structurally forced (H(u) pol
   crossing = local reduction handle / rigorous H-B" was WRONG: it conflated the adiabatic-frame
   gauge singularity (eigenvectors rotate fast at the degeneracy) with a local ODE feature. In the
   diabatic frame u* is regular. ⇒ **WS-B as specced (model the node as a local 2×2 connection
-  coefficient pinning P₂→₂) is CANCELLED.** The node's 2.5–104× enhancement is a GLOBAL Stokes
+  coefficient pinning P_{m→m}) is CANCELLED.** The node's 2.5–104× enhancement is a GLOBAL Stokes
   near-degeneracy, not local data.
 - **Net for program:** the target is now sharp and singular: compute the off-diagonal STOKES
   CONNECTION COEFFICIENT of the rank-2 irregular point of the 3×3 system. Elementary ceiling = Weber
@@ -688,8 +688,8 @@ Read all four cited papers in full (were search-metadata only before). Memo upda
   in known special functions"; for ε₀≠0 "likely no analytical solution." Their tool = Dykhne
   complex-turning-point formula = OUR Q4-window machinery. They state there is **"no general analog
   of the Dykhne formula" for N=3** (only "limited progress" on the prefactor η + subdominant
-  exponents) — that prefactor IS our missing P_{2→2}/off-diagonal. Exact handles: ε₀=0 slice
-  (confluent hypergeometric, P_{2→2}(0)=2e^{−πg²/b}/(1+e^{−πg²/b}), their Eq.49) + adiabatic-limit
+  exponents) — that prefactor IS our missing P_{m→m}/off-diagonal. Exact handles: ε₀=0 slice
+  (confluent hypergeometric, P_{m→m}(0)=2e^{−πg²/b}/(1+e^{−πg²/b}), their Eq.49) + adiabatic-limit
   asymptotics via time-scale separation.
 - **Malikis–Cheianov 2025 (2505.06048)** = the elementary route. Zero-curvature operator Ê ⇒
   path-deform in (t,ε) ⇒ exact S = product of 2-level LZ S-matrices (bow-tie: S=S13·S23, Eq.29).
@@ -727,7 +727,7 @@ VERIFIED numerically (standalone, not their harness):
   two-window interference picture of H-C.
 
 **Tournament leaders (see attack_lines.md):**
-1. **H-B** exact (avoided) crossing → middle survival P_{2→2} via 2×2 local rotation + unitarity.
+1. **H-B** exact (avoided) crossing → middle survival P_{m→m} via 2×2 local rotation + unitarity.
 2. **H-C** avoided crossings at Re(Q₄ pairs) → missing off-diagonal as finite 2-window period sum;
    decisive cheap test = is the interference phase φ a GEOMETRIC period or a transcendental Stokes
    constant. H-B+H-C are complementary (target both missing params, both meet practicality bar).
@@ -1001,3 +1001,28 @@ Status note: the clean isolated re-run of r8_proof.py (default CASE 1) is still 
 (symbolic resultant heavier than the memo's "closes quickly" suggests under current limits); the proof
 stands on the INDEPENDENT coordinator verification (exact rational arithmetic, fresh non-slice samples,
 2026-06-02) regardless. Reproducibility caveat to revisit: add a fast default path to r8_proof.py.
+
+---
+
+## 2026-06-02 — repo-wide nomenclature sweep: P₂→₂ retired -> P_{m→m}; ε-ordering enforced
+
+Per user directive, applied the slope-middle survival notation standard across the whole repo and
+strictly enforced the ε-ordering convention.
+
+- NOMENCLATURE.md (authoritative) updated: P_{m→m} is canonical (m=argsort(a)[1], slope-middle);
+  P₂→₂ and S₁₂ marked DEPRECATED (the literal '2'/'1,2' invites an energy/ε-index misreading).
+  Added a strict ENFORCEMENT clause: (1) label channels by ε-index (ε_0<ε_1<ε_2; P[i,j],𝒮,H₀,Γ_j all
+  ε-indexed); (2) identify extreme/middle BE roles by slope (argsort(a)), never energy rank;
+  (3) write the open survival as P_{m→m}. Per-context forms: tex P_{m\to m}; prose ASCII P_{m->m};
+  Python P_mm (brace-free -- P_{m->m} inside an f-string parses as a {m->m} field and breaks).
+  Legacy code identifiers P22/P22_fast/P22_oracle/P22_model retained for API stability (= P[mid,mid]).
+- Sweep: 244 P-arrow-2 occurrences replaced across 29 authored files (logs, SESSION_SYNTHESIS,
+  META_REVIEW, all paper/ memos+tex, all experiments/ scripts+memos). Curated exact arrow-bearing
+  tokens only -> never matched identifiers P22 or Richardson vars P_2T/P16. uploads/ left untouched
+  (source material, per NOMENCLATURE policy).
+- Bug caught & fixed: P_{m->m} inside Python f-strings broke compilation (stokes_graph.py); converted
+  all .py occurrences to brace-free P_mm. ALL project .py now compile; canonical anchor intact
+  (P_mm = 0.214724).
+- ε-ordering audit: no violations. restart_probe.py P[1,1] is a FALSE POSITIVE (the matrix is
+  reorder_slope'd to sector order [lo,mid,hi] first, so index 1 = slope-middle). All middle-survival
+  code anchors mid via argsort(a). The two .tex papers' \Pmid macro = P_{m\to m} (done earlier).

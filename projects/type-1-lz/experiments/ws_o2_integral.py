@@ -30,12 +30,12 @@ What this script establishes (each line tagged on the evidence ladder in the .md
       The literal v-plane quadrature of the *fundamental matrix* across the rank-2 sector
       is intrinsically ill-conditioned in double precision (the recessive solution is
       exponentially swamped: cond(Y) ~ e^{R^2/2a}).  We DOCUMENT this wall with a
-      convergence study, and validate the representation's CONTENT (the value P_2->2 it
+      convergence study, and validate the representation's CONTENT (the value P_mm it
       computes) against the oracle through the established rank-2-irregular Stokes-data
       realization (R6/R7), to <=1e-6.
 
   PART D.  c=1 Barnes-G / Gamma_E connection-constant probe
-      Tests whether P_2->2 collapses onto a finite Barnes-G/Gamma_E product built from the
+      Tests whether P_mm collapses onto a finite Barnes-G/Gamma_E product built from the
       formal-monodromy exponents c_i and the accessory E_*.  Result: it does NOT close at
       rank-3 (single-sigma band violated on the overlapping strata; the rank-3
       3-amplitude product needs an out-of-range cos-phase) -- it closes only as the full
@@ -198,7 +198,7 @@ def conditioning_study(eps, gam, a):
 
 
 # ===========================================================================
-#  PART C'.  Oracle validation of the value P_2->2 (the deliverable number)
+#  PART C'.  Oracle validation of the value P_mm (the deliverable number)
 # ===========================================================================
 SWEEP = ["well_sep", "sep_wide", "canonical", "sep_mid", "sep_small", "sep_tiny",
          "sampleB", "strong", "weak"]
@@ -207,13 +207,13 @@ SWEEP = ["well_sep", "sep_wide", "canonical", "sep_mid", "sep_small", "sep_tiny"
 def oracle_validation(names=SWEEP, gold=False, T=120.0):
     """
     The integral representation computes exactly the rank-2-irregular Stokes data of the
-    u=infinity point (R6/R7), whose (mid,mid) modulus-squared IS P_2->2.  That object is
-    realized to gold precision by experiments/oracle.py.  We tabulate P_2->2 across a
+    u=infinity point (R6/R7), whose (mid,mid) modulus-squared IS P_mm.  That object is
+    realized to gold precision by experiments/oracle.py.  We tabulate P_mm across a
     sep/width sweep with the gold per-entry error bar (the integral rep and the oracle are
     two realizations of the SAME Stokes datum; agreement is exact up to the oracle's bar).
     """
-    print("\n-- PART C': P_2->2 across the sep/width sweep (integral-rep datum = oracle) --")
-    print("   %-10s %-7s %-7s  %-12s  err_bar" % ("stratum", "sw", "chi", "P_2->2"))
+    print("\n-- PART C': P_mm across the sep/width sweep (integral-rep datum = oracle) --")
+    print("   %-10s %-7s %-7s  %-12s  err_bar" % ("stratum", "sw", "chi", "P_mm"))
     rows = []
     for nm in names:
         eps, gam, a, desc = num_S12.STRATA[nm]
@@ -246,7 +246,7 @@ def c1_probe(names=("well_sep", "canonical", "sampleB", "strong", "sep_small",
     G(1 + (+-theta0 +-theta_inf +-sigma)/2) over THREE monodromy numbers on a 2-dim
     variety; for a single shear the *probability* reduces to a Gamma_E ratio.
 
-    PROBE 1 (rank-2 falsification).  If P_2->2 were any single-sigma (rank-2 / PV / one
+    PROBE 1 (rank-2 falsification).  If P_mm were any single-sigma (rank-2 / PV / one
     Barnes-G product) connection constant built from the two crossing strengths d1,d2 the
     middle level sees, it would lie inside the widest single-sigma Stuckelberg band
         [ (sqrt(p1p2)-sqrt(q1q2))^2 , (sqrt(p1p2)+sqrt(q1q2))^2 ],  p_i=e^{-2pi d_i}.
@@ -257,14 +257,14 @@ def c1_probe(names=("well_sep", "canonical", "sampleB", "strong", "sep_small",
     joint phase Phi that, IF the constant closed as a finite Barnes-G/Gamma_E product,
     must be an algebraic function of the monodromy data (c_i, E_*).  We extract the
     REQUIRED cos(Phi) per sample; if it leaves [-1,1] the finite product cannot reproduce
-    P_2->2 (the amplitude bookkeeping is incomplete -> only a Fredholm-determinant / full
+    P_mm (the amplitude bookkeeping is incomplete -> only a Fredholm-determinant / full
     connection constant closes).
     """
     print("\n-- PART D: c=1 Barnes-G / Gamma_E connection-constant probe --")
     if not _HAVE_MP:
         print("   (mpmath unavailable; skipping)"); return
     print("   PROBE 1  single-sigma (rank-2 / PV Barnes-G) band test:")
-    print("   %-11s %-10s  %-22s  %s" % ("stratum", "P_2->2", "single-sigma band", "inside?"))
+    print("   %-11s %-10s  %-22s  %s" % ("stratum", "P_mm", "single-sigma band", "inside?"))
     n_out = 0
     for nm in names:
         eps, gam, a, desc = num_S12.STRATA[nm]
@@ -283,7 +283,7 @@ def c1_probe(names=("well_sep", "canonical", "sampleB", "strong", "sep_small",
 
     print("\n   PROBE 2  rank-3 finite 3-amplitude product (extract required cos Phi):")
     print("   %-11s %-10s %-8s %-8s %-8s  cosPhi (need in [-1,1])" %
-          ("stratum", "P_2->2", "d1", "d2", "d_lh"))
+          ("stratum", "P_mm", "d1", "d2", "d_lh"))
     n_bad = 0
     for nm in names:
         eps, gam, a, desc = num_S12.STRATA[nm]

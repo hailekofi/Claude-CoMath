@@ -19,12 +19,12 @@ The transition matrix `P_{x→j}=|S_{xj}|²` is the modulus-squared of the conne
 3rd-order ODE `L[b]=0` has **one finite apparent (accessory) singular point** `v_*` with indicial
 exponents `{0,1,3}` (gap at 2) plus the **rank-2 irregular point** at `v=∞`. Equivalently (WS-A,
 `u`-frame) the same class appears directly. The two extreme survivals (BE) are the elementary
-residue-collapsing periods; the **off-diagonal Stokes coefficient `S₁₂` (≡ middle survival `P₂→₂`)
+residue-collapsing periods; the **off-diagonal Stokes coefficient `S₁₂` (≡ middle survival `P_{m→m}`)
 is the open quantity**, carried by the single `12×13` spectral-network joint (WS-G).
 
 **THE PROBLEM.** [Notation: `S₁₂` is DEPRECATED — see NOMENCLATURE.md. The target is the
-middle-survival probability `P₂→₂=|𝒮_{mm}|²` (`m=slope-middle`), whose transcendental ingredient is
-the off-diagonal Stokes multiplier `σ`; `P₂→₂=|C_{mm}|²=f(σ,c_i)`.] Compute `P₂→₂` and one independent off-diagonal — in closed
+middle-survival probability `P_{m→m}=|𝒮_{mm}|²` (`m=slope-middle`), whose transcendental ingredient is
+the off-diagonal Stokes multiplier `σ`; `P_{m→m}=|C_{mm}|²=f(σ,c_i)`.] Compute `P_{m→m}` and one independent off-diagonal — in closed
 form as a function of `{γ,ε,a}`, with the natural arguments being the two window actions
 `I_X = ∮_X √(Q₄) L_H W₄/p³ dλ` (the BE exponents) and the cross-ratio of the four complex turning
 points; **or** prove that `S₁₂` is not reducible to classical special functions (a rigorous
@@ -81,7 +81,7 @@ decoupling (incoherent) limit. *Gate:* matches the oracle to `≤10⁻⁶` acros
 **PA-4 — Validated numerical model + symbolic recognition (parallel safety net).** Build a
 high-precision `S₁₂(I_{X1},I_{X2},\text{cross-ratio})` (mpmath/oracle); attempt inverse-symbolic /
 PSLQ recognition against confluent-Heun and Painlevé-V connection constants. *Deliverable either
-way:* a *computable* `P₂→₂` (a finite formula in named functions evaluated numerically), even if the
+way:* a *computable* `P_{m→m}` (a finite formula in named functions evaluated numerically), even if the
 elementary-closed-form fails — this satisfies the practicality bar pragmatically.
 
 **PA-5 — Literature + irreducibility.** Map the confluent-Heun / Painlevé-V connection-problem
@@ -120,7 +120,7 @@ canonically as **(formal monodromy, diagonal) ⋉ (Stokes matrices, off-diagonal
   `𝒮_canon` (where it is subtracted); the `𝒮_canon` off-diagonal is **cyclic-permutation × the two
   mid-pair shears** (NOT triangular). Carry the connection-matrix `C` framing into PA-3/CH work. [established]
 - the **off-diagonal** part is the **Stokes shears in the 2D carrier-space pairs `{mid,lo}` and
-  `{mid,hi}`** — these *are* WS-G's `12×13` joint, and their non-commutative composition is `S₁₂≡P₂→₂`.
+  `{mid,hi}`** — these *are* WS-G's `12×13` joint, and their non-commutative composition is `S₁₂≡P_{m→m}`.
   The middle level is the shared subdominant partner; that is *why* the joint is `12×13` and why
   decoupling one outer link (WS-C trivial-coupling limit) collapses one shear → elementary. [conj]
 - the form factor `Γ_j=(−u'(λ_j))^{-1/2}` is analytic at the poles (`∝(λ−ε_i)`); the WKB
@@ -145,7 +145,7 @@ family), unpublished and not a classical special function. Published PV/PVI conn
 (Lisovyy et al.) apply at the boundary only. [analytically-grounded; contingent on WS-PA1's PA-0
 confirming the 3rd-order is irreducible / the `{0,1,3}` apparent point is not removable.]
 **Unchanged:** PA-2 (does the Gaudin data fix the one accessory coordinate `σ` algebraically?) remains
-the pivot — `σ` is exactly the Barnes-G argument; WS-NUM still guarantees a computable `P₂→₂`; the
+the pivot — `σ` is exactly the Barnes-G argument; WS-NUM still guarantees a computable `P_{m→m}`; the
 deliverable is still a *named* (now rank-3) connection constant + the numerical model.
 
 ## Workstreams launched (parallel, 2026-06-01)
@@ -156,7 +156,7 @@ deliverable is still a *named* (now rank-3) connection constant + the numerical 
 - **WS-CH** (parallel direct track): the confluent-Heun **central connection problem** attacked
   directly (local solutions at the apparent singularity + irregular point; known CH connection results).
 - **WS-NUM** (PA-4, always-on): high-precision numerical `S₁₂(`window actions, cross-ratio`)` +
-  PSLQ/inverse-symbolic recognition → a computable `P₂→₂` regardless of closed form.
+  PSLQ/inverse-symbolic recognition → a computable `P_{m→m}` regardless of closed form.
 - **WS-R** (H-R1/H-R2/H-R3): extract the restart factor from `𝒮_canon`; test the
   (formal-monodromy diagonal `e^{2πi c_i}`) ⋉ (triangular Stokes shear in `{mid,·}`) structure, the
   mid-pair concentration + decoupling collapse, and the form-factor/branch-point loci.

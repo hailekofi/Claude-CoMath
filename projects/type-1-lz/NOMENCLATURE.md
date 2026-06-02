@@ -36,7 +36,7 @@ remove a `Γ`/`S` collision. **`Γ` and `S` have exactly the meanings below and 
 - **Extreme/middle = SLOPE-ordering.** Brundobler–Elser: the two **extreme-slope** levels
   (`argsort(a)[0]`,`argsort(a)[2]`) have exact survivals; the **middle-slope** level
   `m=argsort(a)[1]` is the OPEN one. The open middle survival is
-  **`P₂→₂ ≡ P_mid := P[m,m]`, `m=argsort(a)[1]`** — the *middle-SLOPE* diagonal entry. It equals the
+  **`P_{m→m} ≡ P_mid := P[m,m]`, `m=argsort(a)[1]`** — the *middle-SLOPE* diagonal entry. It equals the
   literal adiabatic survival of the middle eigenstate (asymptotically adiabatic = diabatic).
   **It is NOT `P[1,1]` (ε-index-1) in general** — slope-middle = ε-middle *only* when the slopes are
   monotonic in ε (true for the `canonical` and `sampleB` benchmarks; false for generic samples). All
@@ -45,22 +45,36 @@ remove a `Γ`/`S` collision. **`Γ` and `S` have exactly the meanings below and 
 - **Energy ordering = NOT a labeling convention.** The instantaneous energy rank *reverses* between
   `u=±∞` (it only swaps the two extremes; the middle is rank-2 at both ends). Do **not** use energy
   rank to label channels — use ε (basis) and slope (BE roles). [Retraction: an earlier framing of
-  `P₂→₂` "by energy rank" was a red herring; the correct statement is slope-middle, ε-indexed.]
+  the middle survival "by energy rank" was a red herring; the correct statement is slope-middle, ε-indexed.]
 
-## The open quantity — three distinct objects (`S₁₂` is DEPRECATED)
+**ENFORCEMENT (strict, repo-wide).** Every artifact (`paper/`, `experiments/`, all logs) MUST:
+(1) label states/channels by the **ε-index** (`ε_0<ε_1<ε_2`) — `P[i,j]`, `𝒮`, `H₀`, `Γ_j` are all
+ε-indexed; (2) identify the extreme/middle BE *roles* by **slope** via `argsort(a)` (`lo,mid,hi =
+argsort(a)`), never by energy rank; (3) write the open middle survival as **`P_{m→m}`**,
+`m=argsort(a)[1]`. Energy ordering is a derived, end-dependent quantity and is **never** a channel
+label. `P₂→₂` (literal subscript `2`) is DEPRECATED — the `2` invites an energy/ε-index reading, but
+the object is the slope-middle diagonal; always use `P_{m→m}`. Per-context forms: **tex**
+`P_{m\to m}`; **markdown/prose ASCII** `P_{m->m}`; **Python code** `P_mm` (brace-free — `P_{m->m}`
+inside an f-string is parsed as a `{m->m}` replacement field and breaks). *Code identifiers:* the
+legacy ASCII names `P22`, `P22_fast`, `P22_oracle`, `P22_model` denote `P_{m→m}` and are retained for
+API stability (they compute `P[mid,mid]`, `mid=argsort(a)[1]`); they are names, not an ordering claim.
+
+## The open quantity — three distinct objects (`S₁₂` and `P₂→₂` are DEPRECATED notation)
 The early notes wrote `S₁₂` (or `𝒮₁₂`) loosely for "the target," conflating three different things
-whose `1,2` subscripts were never pinned. Use these instead:
-- **`P₂→₂ := |𝒮_{mm}|²`**, `m=argsort(a)[1]` (slope-middle) — the physical middle-survival
+whose `1,2` subscripts were never pinned, and wrote the probability as `P₂→₂` (whose literal `2`
+wrongly suggests an energy/ε-index). Use these instead:
+- **`P_{m→m} := |𝒮_{mm}|²`**, `m=argsort(a)[1]` (slope-middle) — the physical middle-survival
   **probability**. Diagonal, gauge-invariant. **THE deliverable.**
 - **`𝒮_{mm}`** (physical, gauge phase) / **`C_{mm}`** (the (mid,mid) entry of the central connection
   matrix `C`) — the survival **amplitude**; `|·|² = P₂→₂`. Diagonal.
 - **`σ`** — the off-diagonal **Stokes multiplier(s)** of the rank-2 irregular point (the `{mid,lo}`,
   `{mid,hi}` shears) — the genuine named transcendental constant. Its indices are abstract
   sector/solution-basis labels, **not** physical levels, so `σ` does **not** carry the ε/slope
-  ordering. `C = (formal monodromy e^{2πi c_i}) ⋉ (shears in σ)`, and `P₂→₂ = |C_{mm}|² = f(σ, c_i)`.
+  ordering. `C = (formal monodromy e^{2πi c_i}) ⋉ (shears in σ)`, and `P_{m→m} = |C_{mm}|² = f(σ, c_i)`.
 
-`S₁₂` ≡ DEPRECATED (it merged `P₂→₂`, `𝒮_{mm}/C_{mm}`, and `σ`). The computed numbers always meant
-`P₂→₂=|𝒮_{mm}|²` (slope-middle), which is correct; only the symbol was ambiguous.
+`S₁₂` ≡ DEPRECATED (it merged `P_{m→m}`, `𝒮_{mm}/C_{mm}`, and `σ`); `P₂→₂` ≡ DEPRECATED notation for
+`P_{m→m}`. The computed numbers always meant `P_{m→m}=|𝒮_{mm}|²` (slope-middle), which is correct;
+only the symbols were ambiguous.
 
 ## Quick map (old → canonical)| old / colliding | canonical |
 |---|---|
@@ -68,6 +82,8 @@ whose `1,2` subscripts were never pinned. Use these instead:
 | `Γ` (the Coulomb `c_i` build) | `c_i = Σ_j s_{ij}²(a_i−a_j)` |
 | `S`, `S_IP`, `S_canon` (scattering) | `𝒮`, `𝒮_IP`, `𝒮_canon` (code: `Smat`) |
 | `S=∏S_{ij}` (factorization) | `𝒮=∏𝒮_{ij}` |
+| `P₂→₂`, `P_2→2`, `P_{2→2}`, `P2→2` (middle survival) | `P_{m→m}`, `m=argsort(a)[1]` (slope-middle); tex `P_{m\to m}`, prose ASCII `P_{m->m}`, Python `P_mm` |
+| `S₁₂` / `𝒮₁₂` (the "target") | one of `P_{m→m}` (prob), `𝒮_{mm}`/`C_{mm}` (amp), `σ` (Stokes) |
 | `Γ_j`, `S_{ij}=Γ_iΓ_j/(λ_i−λ_j)` | UNCHANGED — these are the canonical reserved symbols |
 
 **Note:** files under `uploads/` are the user's original source materials and are left as-is;

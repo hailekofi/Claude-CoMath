@@ -8,18 +8,18 @@ num_S12.py, ws_ch/ch_connection3.py}`.
 **Reproducible script:** `experiments/ws_o2b_fredholm.py` (numpy 2.4.6 / scipy 1.17.1 /
 mpmath 1.3.0; seed 20260602). No git operations performed.
 **Gold gate:** all P-values gated against `experiments/oracle.py` (canonical
-`P₂→₂=0.214724`, sampleB `0.021018`).
+`P_{m→m}=0.214724`, sampleB `0.021018`).
 
 > **Notation (NOMENCLATURE-strict).** `s_ij=γ_iγ_j/(ε_i−ε_j)`; BE exponent `=s_ij²|a_i−a_j|`;
 > formal-monodromy / Coulomb `c_i=Σ_{j≠i}s_ij²(a_i−a_j)`, `Σc_i=0`. `𝒮`=scattering matrix,
-> `P₂→₂=|𝒮_{mm}|²`, `m=argsort(a)[1]` (slope-middle). `v_*=E_*` = the rational accessory/node.
+> `P_{m→m}=|𝒮_{mm}|²`, `m=argsort(a)[1]` (slope-middle). `v_*=E_*` = the rational accessory/node.
 > Laplace frame: `Y'(v)=K(v)Y`, `K(v)=−i·diag(1/a)·(H₀−vI)`.
 
 ---
 
 ## 0. Executive verdict (honest, evidence-tagged)
 
-WS-O2 established (gold-gated) that `P₂→₂` is a **rank-3, c=1 confluent connection constant**
+WS-O2 established (gold-gated) that `P_{m→m}` is a **rank-3, c=1 confluent connection constant**
 that does NOT close as any finite Barnes-G/Γ_E product and "closes only as a
 Fredholm-determinant / block-Toeplitz connection constant." This workstream tried to make
 that **constructive** — build the explicit Widom/CGL kernel for OUR rank-2-irregular,
@@ -31,7 +31,7 @@ especially in deep overlap (sampleB) where WS-O3 fails.
 > constructive and reproduces the oracle everywhere (incl. deep overlap) is the
 > numerically-solved Riemann–Hilbert problem in the PHYSICAL u-frame; the block-Toeplitz
 > determinant is at best a *faithful re-encoding* of that, at the same cost and with no new
-> structure exposed. "Fredholm determinant" therefore remains a *classification* of `P₂→₂`,
+> structure exposed. "Fredholm determinant" therefore remains a *classification* of `P_{m→m}`,
 > not a usable closed construction.** This is a first-class negative-with-structure result:
 > it pinpoints precisely why the CGL machinery, which is constructive for PV/PIII, is not
 > constructive here.
@@ -46,13 +46,13 @@ The two break points (both **gold-gated / numerically-supported**, §3):
    Stokes data IS the unknown transcendental `σ` (= the answer).
 2. **The Laplace v-frame connection matrix is not the physical 𝒮-matrix.** The
    well-conditioned real-axis full-line v-transport yields a GL(3) connection matrix `C`
-   whose unitary polar factor does NOT reproduce `P₂→₂` (canonical off by 0.32; and unitarity
+   whose unitary polar factor does NOT reproduce `P_{m→m}` (canonical off by 0.32; and unitarity
    degrades with `v_far`). The Laplace *contour selection* (the boundary terms of WS-O2 §1)
    is the physics, and it is not captured by the raw v-frame connection.
 
 The positive control (§4): the **u-frame numerically-solved RHP** (the adiabatic
 interaction-picture connection, identical idea to `oracle.py` / `ch_connection3.py`)
-reproduces `P₂→₂` to ≤1e-6 across ALL strata **including deep-overlap sampleB**
+reproduces `P_{m→m}` to ≤1e-6 across ALL strata **including deep-overlap sampleB**
 (`|err|=7.2e-7` at T=60; ≤1e-9 at T≥120) — where WS-O3's uniform formula fails (RMS 11%). But this engine is a
 numerical ODE solve, not a determinant evaluation; wrapping it in a block-Toeplitz
 determinant adds packaging, not insight.
@@ -172,7 +172,7 @@ physics. The raw v-frame connection matrix discards it. **[numerically-supported
 The genuinely computable construction is the **numerically-solved RHP in the physical
 u-frame** (`_u_frame_connection`: adiabatic-IP propagator, R=60, 16:1 Richardson in the
 truncation) — the same Stokes-resummed connection the oracle and `ch_connection3` realize. It
-reproduces `P₂→₂` across the full STRATA set, **gold-gated on the two anchors** (oracle T=60;
+reproduces `P_{m→m}` across the full STRATA set, **gold-gated on the two anchors** (oracle T=60;
 the published anchors are canonical 0.214724, sampleB 0.021018):
 
 | stratum | regime | P_engine | gold gate |
@@ -201,7 +201,7 @@ eps_asym) are all reproduced. **[numerically-supported; gold-gated]**
 
 ### 3.4 The block-Toeplitz determinant is a faithful re-encoding, not new structure
 
-Given the Stokes-resummed connection data `U` (from §3.3), `P₂→₂=|U_mm|²` can be *re-expressed*
+Given the Stokes-resummed connection data `U` (from §3.3), `P_{m→m}=|U_mm|²` can be *re-expressed*
 as a block-Toeplitz/Widom determinant (constant-symbol `g≡U`; `D_N` is N-stable, no
 divergence). But this is **circular**: the determinant takes the answer as input and returns
 it. It costs the same as the ODE solve, exposes no Nekrasov/θ-series truncation that is
@@ -225,7 +225,7 @@ than the oracle, or (b) reaches deep overlap that O3 cannot. We test both:
   determinant. The determinant inherits whatever the RHP solve already gave.
 
 **Conclusion:** "Fredholm determinant / block-Toeplitz" is the correct *classification* of
-`P₂→₂` (confirming WS-O2/R10 from the constructive side) but is **not a usable closed
+`P_{m→m}` (confirming WS-O2/R10 from the constructive side) but is **not a usable closed
 construction** for our specific rank-3 confluent point. The usable computable object is the
 numerically-solved RHP (oracle / u-frame engine), which already reaches deep overlap.
 
@@ -255,7 +255,7 @@ classification, not a construction, for Type-1 N=3.
 | 2 | Full formal solution at `v=∞`: `Y_∞=G(v)e^{Q}`, `Θ=c_i` (independent Laplace-frame confirmation of R8); solves the ODE (residual→0 as 1/v) | **analytically-derived; machine-checked** |
 | 3 | Widom symbol `g(v)=Y_∞⁻¹Y_*` is sector-dependent (relresid O(1)) and Stokes-walled (`cond~e^{R²/2a}→10¹⁸`) ⇒ no usable Widom symbol in double precision | **numerically-supported** |
 | 4 | v-frame connection matrix's unitary factor ≠ physical 𝒮 (misses oracle by up to 0.39; unitarity degrades) ⇒ contour selection is the physics | **numerically-supported** |
-| 5 | u-frame numerical RHP reproduces `P₂→₂` ≤1e-6 on all strata incl. deep-overlap sampleB (1.6e-7) | **numerically-supported (gold-gated)** |
+| 5 | u-frame numerical RHP reproduces `P_{m→m}` ≤1e-6 on all strata incl. deep-overlap sampleB (1.6e-7) | **numerically-supported (gold-gated)** |
 | 6 | The block-Toeplitz determinant is a faithful, N-stable RE-ENCODING of the u-frame connection data — no new structure, equal cost | **established by construction** |
 | 7 | VERDICT: Fredholm/Widom is a classification, NOT a usable construction for our rank-3 confluent point; usable computable object = numerical RHP | **decisive (multi-diagnostic)** |
 

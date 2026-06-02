@@ -3,7 +3,7 @@ ws_c_factorization_scan.py  --  WS-C: locate the FACTORIZATION locus of the Type
 transition matrix P, and test P-ii (factorizable == joint-free == trivial-middle-coupling).
 
 Objective (program prediction P-ii): determine the exact locus in {gamma,eps,a} where the
-middle survival P_{2->2} reduces to the incoherent product of two-level LZ factors
+middle survival P_mm reduces to the incoherent product of two-level LZ factors
    P_mid^{inc} = exp(-2 pi (Gamma_mid,lo + Gamma_mid,hi)),
 and correlate that against (a) the sep/width separation ratio, (b) the minimum middle
 coupling strength min(Gamma_mid,lo, Gamma_mid,hi), and (c) WS-G joint count.

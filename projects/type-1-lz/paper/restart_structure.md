@@ -154,7 +154,7 @@ Two effects fire together in **every** decoupling, in both regimes:
 **Verdict: CONFIRMED (numerically-supported, strong, oracle-grade).** This is the
 content-ful restart statement: the off-diagonal Stokes data *is* carried by the two
 mid-sharing shears `{mid,lo}`, `{mid,hi}`, and their non-commuting composition is the
-`P₂→₂` enhancement; remove either link and the joint reduces to one elementary Weber factor.
+`P_{m→m}` enhancement; remove either link and the joint reduces to one elementary Weber factor.
 Matches WS-G (joint-free ⇔ elementary) and WS-C (factorization locus) from the
 irregular-point side.
 
@@ -223,7 +223,7 @@ The frame-pinned, content-ful restart structure is **not** "(monodromy diagonal)
 
 - **(sheet 3-cycle permutation) ⋉ (mid-concentrated 2-pair Stokes data)** — the permutation
   is the `PI_OUT` relabelling; the genuine non-Abelian content is the two mid-sharing shears
-  of §3, whose composition is `P₂→₂`. The "diagonal/formal" part of the local irregular data
+  of §3, whose composition is `P_{m→m}`. The "diagonal/formal" part of the local irregular data
   is `e^{2πi c_i}` (the drift, §4b, established) and the "off-diagonal" part is the §3
   mid-pair shears (H-R2) — **so the correct restart factorization is the one H-R2 verifies,
   with the permutation being the cyclic sheet map rather than a triangular shear.**
@@ -242,7 +242,7 @@ residue is subsumed by H-R2.
 - **H-R3 (settled).** The two branch structures are cleanly separated: turning points
   (`-u'=0`, W4 zeros) carry the `Γ_j`/window/BE data; the irregular point at `u=∞`
   (`λ→ε_i`, where `Γ_j` is analytic) carries the off-diagonal Stokes data. This justifies
-  treating `P₂→₂` as an **irregular-point connection coefficient** distinct from the
+  treating `P_{m→m}` as an **irregular-point connection coefficient** distinct from the
   elementary Weber/BE part — the foundation the PA-1/PA-2/PV/CH tracks assume.
 
 - **H-R2 (settled, strong).** The off-diagonal Stokes content is a **2-pair object** living

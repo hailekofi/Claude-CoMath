@@ -9,7 +9,7 @@ where the local data does NOT factorize into independent 2-level pieces.
 
 CONJECTURE under test:
   well-separated (the ~15%, incoherent product exact)  =  joint-free Stokes graph,
-  overlapping     (the ~85%, P_2->2 enhanced 2.5-104x)  =  Stokes graph WITH a joint,
+  overlapping     (the ~85%, P_mm enhanced 2.5-104x)  =  Stokes graph WITH a joint,
   and the joint contribution = the off-diagonal Stokes connection coefficient.
 
 MODEL:  H(u) = H0 + u*diag(a),  Type-1 Cauchy coupling.
@@ -484,7 +484,7 @@ def wkb_action_between(tracer, t, u_target, pair, n=600):
     return integ
 
 
-# --------------------------------------------------------------- benchmark P_2->2
+# --------------------------------------------------------------- benchmark P_mm
 def benchmark_P(eps, gam, a, T=100.0, rtol=1e-9, atol=1e-11):
     """
     P[n<-m] = |U_nm|^2 from i U' = H(u) U, U(-T)=I.  Tolerances/horizon are chosen so the
@@ -666,7 +666,7 @@ def main():
         r = sep_width_ratio(*smp)
         Pmid, inc, enh = mid_enhancement(*smp, hi_accuracy=True)
         fn = os.path.join(FIGS, f"stokes_{'sepA' if 'WELL' in lbl else 'overlapB'}.png")
-        title = (f"{lbl}\nsep/width={r:.2f}  P_2->2={Pmid:.4f}  "
+        title = (f"{lbl}\nsep/width={r:.2f}  P_mm={Pmid:.4f}  "
                  f"incoh={inc:.4f}  enh={enh:.2f}x")
         stps, joints, tps = plot_stokes_graph(*smp, fname=fn, title=title)
         strg, nj = joint_strength(tps, joints)
@@ -676,12 +676,12 @@ def main():
         if joints:
             for x, pa, pb in joints:
                 print(f"     joint @ {x.real:+.3f}{x.imag:+.3f}i  types {PAIRLAB[pa]}x{PAIRLAB[pb]}")
-        print(f"  P_2->2={Pmid:.5f}  incoherent={inc:.5f}  enhancement={enh:.2f}x")
+        print(f"  P_mm={Pmid:.5f}  incoherent={inc:.5f}  enhancement={enh:.2f}x")
         print(f"  saved figure: {fn}")
 
     # --------------- correlation scan: ~16 samples, ratio 0.3..4 ----------------
     print("\n" + "=" * 78)
-    print("CORRELATION SCAN: joint presence/strength vs P_2->2 enhancement")
+    print("CORRELATION SCAN: joint presence/strength vs P_mm enhancement")
     print("=" * 78)
     rng = np.random.default_rng(2024)
     rows = []
@@ -699,7 +699,7 @@ def main():
     for eps, gam, a, r in picked:
         cand.append((eps, gam, a))
     seen = set()
-    print(f"\n{'ratio':>7} {'#joints':>7} {'strength':>8} {'P2->2':>9} {'incoh':>9} {'enh(x)':>8}")
+    print(f"\n{'ratio':>7} {'#joints':>7} {'strength':>8} {'P_mm':>9} {'incoh':>9} {'enh(x)':>8}")
     print("-" * 56)
     for smp in cand:
         key = tuple(round(x, 4) for t in smp for x in t)

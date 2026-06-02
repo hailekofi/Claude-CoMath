@@ -1,7 +1,7 @@
 # WS-CH — The direct confluent-Heun central connection problem for `S₁₂`
 
 > **Notation note (coordinator):** this deliverable's `S₁₂` is DEPRECATED — read it as the middle
-> survival `P₂→₂=|𝒮_{mm}|²` (`m=slope-middle`) `=|C_{mm}|²`, built from the off-diagonal Stokes
+> survival `P_{m→m}=|𝒮_{mm}|²` (`m=slope-middle`) `=|C_{mm}|²`, built from the off-diagonal Stokes
 > multiplier `σ`. See `NOMENCLATURE.md`. (The benchmarked numbers are `|𝒮_{mm}|²`, correct.)
 
 
@@ -12,7 +12,7 @@ the Painlevé-V/τ route WS-PV). **Date:** 2026-06-01.
 **Constraint compliance:** no git ops; the only file written under `paper/` is this one; all
 scratch lives under `/tmp/wsch/`.
 
-Target (NOMENCLATURE-strict): the off-diagonal Stokes coefficient `S₁₂ = P₂→₂` (middle-slope
+Target (NOMENCLATURE-strict): the off-diagonal Stokes coefficient `S₁₂ = P_{m→m}` (middle-slope
 survival) — the off-diagonal Stokes multiplier `σ_{mid,·}` (or its composition) of the **single
 rank-2 irregular point** of the Type-1 N=3 connection problem. `s_ij = γ_iγ_j/(ε_i−ε_j)`;
 BE exponent `= s_ij²|a_i−a_j|`; signed-BE Coulomb coefficient `c_i = Σ_{j≠i} s_ij²(a_i−a_j)`.
@@ -139,10 +139,10 @@ C  =  (formal monodromy, diagonal)  ⋉  (Stokes matrices, off-diagonal)
     =  M_form  ·  S^{(mid,hi)}  ·  S^{(mid,lo)}   (schematically),  M_form = diag(formal monodromy),
 ```
 where each `S^{(mid,·)}` is a unipotent Stokes shear in the 2-D carrier space sharing the middle
-sheet. **`S₁₂ = P₂→₂` is the (mid,mid) entry of `|C|²`**. The formal-monodromy diagonal `M_form`
+sheet. **`S₁₂ = P_{m→m}` is the (mid,mid) entry of `|C|²`**. The formal-monodromy diagonal `M_form`
 sets the BE *magnitudes* (its `|·|²` on the extreme rows = the exact BE survivals); the off-diagonal
-content of `P₂→₂` comes from the two Stokes shears `σ_{mid,·}` and, crucially, their non-commutative
-*interference* through the shared middle sheet — this is what makes `P₂→₂` a genuine three-crossing
+content of `P_{m→m}` comes from the two Stokes shears `σ_{mid,·}` and, crucially, their non-commutative
+*interference* through the shared middle sheet — this is what makes `P_{m→m}` a genuine three-crossing
 coherence, not a product `p₁p₂` (WS-E §6).
 
 **Flux normalisation (why `|C|²` is doubly-stochastic).** The raw *diabatic* Thomé basis is NOT
@@ -181,7 +181,7 @@ apparent point (§1b), which the Type-1 Cauchy/Gaudin structure fixes *algebraic
 strong indication the accessory data is algebraic, supporting the "named closed form is in reach"
 branch).
 
-**Concrete form of `S₁₂`.** Putting §1–§2 together, `S₁₂ = P₂→₂` is the `(mid,mid)` modulus-squared
+**Concrete form of `S₁₂`.** Putting §1–§2 together, `S₁₂ = P_{m→m}` is the `(mid,mid)` modulus-squared
 of the central connection matrix `C`, whose off-diagonal Stokes multipliers `σ_{mid,·}` are given by
 the Lisovyy–Naidiuk convergent series in the accessory parameter with:
 - monodromy exponents = the formal `c_j = Σ_{k≠j} s_jk²(a_j−a_k)` (§1c, KNOWN);
@@ -203,7 +203,7 @@ connection problem lifted to the 3×3 system — with Richardson extrapolation i
 
 **Result (two independent runs agree, both reproduce the oracle to ≤4×10⁻⁷):**
 
-| anchor | `P₂→₂` (WS-CH connection) | `P₂→₂` (oracle gold) | `|diff|` |
+| anchor | `P_{m→m}` (WS-CH connection) | `P_{m→m}` (oracle gold) | `|diff|` |
 |---|---|---|---|
 | canonical | `0.214724` | `0.214724` | `3.95×10⁻⁷` |
 | sampleB | `0.021018` | `0.021018` | `1.56×10⁻⁷` |
@@ -216,20 +216,20 @@ canonical  P =                      sampleB  P =
  [0.675196 0.214724 0.110080]        [0.926158 0.021018 0.052824]
  [0.196176 0.729081 0.074743]]       [0.023483 0.976114 0.000403]]
 ```
-(rows = incoming diabatic slope channel, cols = outgoing; `[mid,mid]` = `P₂→₂`.) **[established]**
+(rows = incoming diabatic slope channel, cols = outgoing; `[mid,mid]` = `P_{m→m}`.) **[established]**
 
 Two independent solvers cross-check: `ch_connection3.py` (fast adiabatic interaction-picture,
 Richardson `R∈{40,80}`, ~15 s) and `ch_connection2.py` (direct fundamental-matrix transport,
 Richardson `R∈{120,240}`) agree to `<10⁻⁵` with each other and with the gold oracle. This confirms
 the §1–§2 local-solution / connection-matrix construction *is* the object the oracle computes: the
-central connection coefficient of the rank-2 irregular point, with `P₂→₂` its `(mid,mid)` modulus-
+central connection coefficient of the rank-2 irregular point, with `P_{m→m}` its `(mid,mid)` modulus-
 squared. The deep-overlap sampleB stratum (`~10×` enhancement over the incoherent `p₁p₂≈0.000163`)
 is reproduced — the three-crossing coherence is captured by the connection matrix, not by any
 product/two-path form (WS-E §6). **[established]**
 
 > Caveat: this benchmark validates the connection-matrix *framework and its numerical value*; it does
 > NOT supply a closed-form symbolic `S₁₂`. The symbolic content is §3 (the named convergent
-> Lisovyy–Naidiuk representation); the benchmark is the "computable `P₂→₂`" deliverable (PA-4).
+> Lisovyy–Naidiuk representation); the benchmark is the "computable `P_{m→m}`" deliverable (PA-4).
 
 ---
 
@@ -243,7 +243,7 @@ product/two-path form (WS-E §6). **[established]**
 | 4 | connection-matrix factorisation `C = diag(e^{2πi c_j})⋉ S^{(mid,hi)}S^{(mid,lo)}`; `S₁₂=|C|²_{mid,mid}` | **derived** (restart structure, OPEN_PROBLEM) |
 | 5 | confluent-Heun connection coeff is NOT elementary/classical (determinant/series only) | **literature** (Wolf 1998; Bühring) |
 | 6 | `S₁₂` HAS a named convergent representation = Lisovyy–Naidiuk series ↔ quasiclassical Virasoro block ↔ Painlevé-V τ | **literature** (arXiv:2208.01604) — *the WS-CH/WS-PV convergence point* |
-| 7 | direct central-connection computation reproduces the oracle `P₂→₂` | *(see §4 benchmark)* |
+| 7 | direct central-connection computation reproduces the oracle `P_{m→m}` | *(see §4 benchmark)* |
 
 No claim contradicts WS-A/WS-E/E1–E5. This note **adds the connection-theoretic backing** for the
 non-elementary verdict and **names the convergent form** of `S₁₂` (Lisovyy–Naidiuk / quasiclassical

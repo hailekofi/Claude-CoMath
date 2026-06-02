@@ -1,7 +1,7 @@
 # Attack lines for closed-form Type-1 N=3 P — commuting partner / exact crossing / Q4-pair structure
 
 Generated 2026-06-01 (physics-intuition → reflection → tournament). Target: middle survival
-P_{2→2} and one independent off-diagonal, in closed form over {γ,ε,a}, no numerical ODE, ≤ a
+P_{m→m} and one independent off-diagonal, in closed form over {γ,ε,a}, no numerical ODE, ≤ a
 handful of geometric/Abelian integrals.
 
 ## Grounding fact (numerically-supported, exact to 1e-17)
@@ -31,10 +31,10 @@ close on probabilities alone.
 **Statement.** Type-1 N=3 has a guaranteed exact (real) level crossing. At that degeneracy the local
 monodromy is a computable rotation in the 2-dim crossing eigenspace; the middle-level survival is
 fixed by composing this exact local datum with the two BE extreme periods via unitarity + double
-stochasticity. P_{2→2} = (algebraic function of the crossing data) — elementary in {γ,ε,a}.
+stochasticity. P_{m→m} = (algebraic function of the crossing data) — elementary in {γ,ε,a}.
 **Why practical.** Exact crossing ⇒ a marked regular point with explicit local data; no resummation.
 **Cheapest test.** Locate the exact crossing u_c (real root structure of resultant of q_u); extract
-the 2×2 local rotation; test P_{2→2}^pred vs benchmark on the 3 canonical samples. (exact crossing)
+the 2×2 local rotation; test P_{m→m}^pred vs benchmark on the 3 canonical samples. (exact crossing)
 **Risk.** The crossing may be diabatic (no gap) → trivial local monodromy → no new datum; need to
 confirm it is an *avoided/active* crossing that carries phase.
 
@@ -54,7 +54,7 @@ a period → fails practicality. The test (φ geometric vs free) is decisive.
 
 ## H-D: KZ/Gaudin monodromy specialization (from literature, top of prior memo)
 **Statement.** P is the connection matrix of the rational KZ/Gaudin flat connection; BBGY 2409.17053
-N=3 solution specializes to H₀+uA, giving P_{2→2} and off-diagonal as monodromy/period data.
+N=3 solution specializes to H₀+uA, giving P_{m→m} and off-diagonal as monodromy/period data.
 **Why practical.** Output is connection data in {γ,ε,a}. **Cheapest test.** Specialize their N=3
 formula; demand BE entries drop out; benchmark. (commuting partners, integrability)
 **Risk.** Their model is Â+B̂/t (hyperbolic); specialization to linear uA may be singular.
@@ -72,7 +72,7 @@ the remaining 2 are pinned. **Why practical.** If it closes, algebraic. **Cheape
 - H-A assumes a flow closes on **probabilities**; physically the natural closed object is the
   **amplitude/gauge** S-matrix. Demote unless reformulated on amplitudes. Fundamental-ish.
 - H-B hinges on the crossing being **phase-active** (gapped/avoided), not a bare diabatic crossing.
-  Must verify before investing — but if active, this is the cleanest route to P_{2→2}.
+  Must verify before investing — but if active, this is the cleanest route to P_{m→m}.
 - H-C's make-or-break is **φ geometric vs transcendental** — a single decisive, cheap numerical
   test already expressible in the existing harness (compare fitted φ to a computed mixed period).
 - H-D/H-E import external machinery; both gated on reading 2409.17053 / 2006.15144 directly.
@@ -81,7 +81,7 @@ the remaining 2 are pinned. **Why practical.** If it closes, algebraic. **Cheape
 ## Tournament (Elo seed 1200; criteria novelty×correctness×testability×PRACTICALITY)
 | Rank | Line | Why it leads | Decisive cheap test |
 |------|------|--------------|---------------------|
-| 1 | **H-B exact crossing → P_{2→2}** | directly targets the middle datum the phase curve can't see; exact local data, no resummation; meets bar | is the guaranteed crossing phase-active? extract 2×2 local rotation |
+| 1 | **H-B exact crossing → P_{m→m}** | directly targets the middle datum the phase curve can't see; exact local data, no resummation; meets bar | is the guaranteed crossing phase-active? extract 2×2 local rotation |
 | 2 | **H-C Re(Q₄-pair) avoided crossings → off-diagonal** | targets the *other* missing param; finite period sum; one decisive test (φ geometric?) | fit φ, test if φ equals a computed mixed period |
 | 3 | **H-A slope-flow/isomonodromy** | uses commuting structure rigorously; closed flow if it closes on the right object | log-derivative of P(a) along a slope ray vs algebraic M_k |
 | 4 | **H-D KZ/Gaudin** | literature solves N=3; but specialization risk | specialize BBGY; BE must drop out |

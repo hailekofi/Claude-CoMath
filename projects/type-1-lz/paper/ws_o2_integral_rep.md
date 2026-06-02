@@ -7,12 +7,12 @@
 `experiments/{oracle.py, num_S12.py, ws_e_laplace_class.py}`.
 **Reproducible script:** `experiments/ws_o2_integral.py` (numpy 2.4 / scipy 1.17 / mpmath 1.3;
 seed `20260601`). No git operations performed.
-**Gold gate:** all values gated against `experiments/oracle.py` (canonical `P₂→₂=0.214724`,
+**Gold gate:** all values gated against `experiments/oracle.py` (canonical `P_{m→m}=0.214724`,
 sampleB `0.021018`).
 
 > **Notation (NOMENCLATURE-strict).** `s_ij=γ_iγ_j/(ε_i−ε_j)`; BE exponent `=s_ij²|a_i−a_j|`;
 > formal-monodromy / Coulomb `c_i=Σ_{j≠i}s_ij²(a_i−a_j)`, `Σc_i=0`. `𝒮`=scattering matrix,
-> `P₂→₂=|𝒮_{mm}|²`, `m=argsort(a)[1]` (slope-middle). `Γ_E` = Euler Gamma (NOT the Cauchy form
+> `P_{m→m}=|𝒮_{mm}|²`, `m=argsort(a)[1]` (slope-middle). `Γ_E` = Euler Gamma (NOT the Cauchy form
 > factor `Γ_j`); `G` = Barnes G. The accessory/crossing point is `E_*=v_*` (rational, algebraic).
 
 ---
@@ -36,7 +36,7 @@ sampleB `0.021018`).
    Across the rank-2 irregular sector the recessive solution is exponentially swamped
    (`cond(Y_end)~e^{R²/2a}`, reaching `~10¹⁸–10¹⁹`), so a literal double-precision matrizant
    quadrature for the scattering matrix is **not viable**; a recessive-only / high-precision
-   spectral-network transport is **owed**. The representation's *value* `P₂→₂` is validated against
+   spectral-network transport is **owed**. The representation's *value* `P_{m→m}` is validated against
    the oracle to `≤1e-6` via the established rank-2-irregular Stokes-data realization (R6/R7).
    **[numerically-supported]** (PART C/C'.)
 
@@ -46,7 +46,7 @@ sampleB `0.021018`).
    strata lie strictly outside the widest single-σ band; sampleB, strong, sep_small, sep_mid,
    eps_asym among them), and even the **rank-3 finite 3-amplitude** Barnes-G/Γ_E product fails (it
    forces `|cosΦ|>1` in the strongly-overlapping regime). PV/Barnes-G applies **only** on the
-   one-link-decoupling locus (well_sep), where `P₂→₂` re-enters the band and `cosΦ→0`. **[gold-gated;
+   one-link-decoupling locus (well_sep), where `P_{m→m}` re-enters the band and `cosΦ→0`. **[gold-gated;
    decisive]** (PART D.) This confirms and sharpens R10.
 
 ---
@@ -91,7 +91,7 @@ So the operator identity holds *exactly*; on a genuine Laplace contour the bound
 >   saddle `v_j^*(u)=u a_j` (curvature `Φ_j''=i/a_j`), oriented so `e^{Φ_j}` decays at both ends;
 > - the prefactor `e^{+i a_j u²/2}` strips the outgoing Stark phase (it cancels the saddle value
 >   `e^{Φ_j(v_j^*)}=e^{−i a_j u²/2}`), leaving the convergent connection coefficient.
-> The observable is `P₂→₂=|𝒮_{mm}|²` (`m`=slope-middle).
+> The observable is `P_{m→m}=|𝒮_{mm}|²` (`m`=slope-middle).
 
 This is a single concise formula whose integrand is the solution of one explicit linear ODE; it is
 the Laplace/Borel transform of the rank-2 irregular point of R6/R7. **[analytically-derived]**
@@ -135,13 +135,13 @@ spectral-network/exact-WKB contour with per-channel recessive normalization), or
 (`mpmath`, dps≳40) implementation. The mpmath route is correct but currently too slow in 3×3×3 to
 serve as the production engine; flagged as a proof/engineering item, not a conceptual gap.
 
-### 2.2 The value `P₂→₂` vs the oracle (the deliverable number)
+### 2.2 The value `P_{m→m}` vs the oracle (the deliverable number)
 
 The representation computes exactly the `(mid,mid)` modulus-squared of the rank-2-irregular Stokes
 datum (R6/R7), realized to gold precision by `oracle.py`. Across a sep/width sweep (0.1→4) and the
 two anchors, the integral-rep datum **is** the oracle value, to the gold per-entry bar:
 
-| stratum | sep/width | χ | `P₂→₂` | oracle err-bar |
+| stratum | sep/width | χ | `P_{m→m}` | oracle err-bar |
 |---|---|---|---|---|
 | well_sep | 0.54 | 0.933 | 0.4735470 | ≤1e-9 (gold ≤1e-10) |
 | sep_wide | 0.19 | 0.776 | 0.4486726 | … |
@@ -171,14 +171,14 @@ Gamayun–Iorgov–Lisovyy 1308.4092) is a **finite product of Barnes G**,
 **2-dimensional** wild character variety; for a *single shear* the transition *probability* itself
 reduces to an Euler-Γ ratio (the classic LZ `e^{−2πδ}` magnitude + `arg Γ_E(1−iδ)` Stokes phase).
 
-We probe whether OUR `P₂→₂` collapses onto such a product, with `σ` fixed by our data
+We probe whether OUR `P_{m→m}` collapses onto such a product, with `σ` fixed by our data
 `{c_i, E_*, d_1=BE(mid,lo), d_2=BE(mid,hi), d_{lh}=BE(lo,hi)}`.
 
 ### Probe 1 — single-σ (rank-2 / one-Barnes-G-product) band test [gold-gated]
 A single-σ connection constant built from the two crossing strengths the middle level sees must put
-`P₂→₂` inside the widest Stückelberg band `[(√p₁p₂−√q₁q₂)², (√p₁p₂+√q₁q₂)²]`, `p_i=e^{−2πd_i}`.
+`P_{m→m}` inside the widest Stückelberg band `[(√p₁p₂−√q₁q₂)², (√p₁p₂+√q₁q₂)²]`, `p_i=e^{−2πd_i}`.
 
-| stratum | `P₂→₂` | single-σ band | inside? |
+| stratum | `P_{m→m}` | single-σ band | inside? |
 |---|---|---|---|
 | well_sep | 0.473547 | [0.13827, 1.00000] | yes |
 | canonical | 0.214724 | [0.16312, 0.96957] | yes |
@@ -200,7 +200,7 @@ extract the *required* `cosΦ`; values outside `[−1,1]` falsify any such finit
 
 Required `cosΦ` per stratum (must be in `[−1,1]`):
 
-| stratum | `P₂→₂` | `d₁` | `d₂` | `d_{lh}` | required `cosΦ` |
+| stratum | `P_{m→m}` | `d₁` | `d₂` | `d_{lh}` | required `cosΦ` |
 |---|---|---|---|---|---|
 | well_sep | 0.473547 | 0.060 | 0.060 | 0.030 | −0.201 |
 | canonical | 0.214724 | 0.240 | 0.154 | 0.173 | −0.138 |
@@ -245,7 +245,7 @@ whose computable form is a **Fredholm determinant / block-Toeplitz** (LNR-type),
 | 3 | gauge lemma: `a→a+c` leaves `H₀` invariant ⇒ WLOG all `a_j>0` ⇒ single Stokes wedge | **established** (exact) |
 | 4 | real-axis integrand bounded/well-conditioned (`cond≈2.3`, `|eig Y|=1`) | **numerically-supported** |
 | 5 | literal double-precision matrizant quadrature ill-conditioned across the sector (`cond~e^{R²/2a}→10¹⁹`) ⇒ recessive/high-precision transport owed | **numerically-supported** |
-| 6 | `P₂→₂` (integral-rep datum) = oracle across sep/width 0.1→4 + anchors, `≤1e-6` (gold `≤1e-9`) | **numerically-supported** (gold-gated) |
+| 6 | `P_{m→m}` (integral-rep datum) = oracle across sep/width 0.1→4 + anchors, `≤1e-6` (gold `≤1e-9`) | **numerically-supported** (gold-gated) |
 | 7 | single-σ (rank-2 / one Barnes-G product) band violated on 5/8 strata ⇒ not a rank-2 PV/Barnes-G constant | **gold-gated; decisive** |
 | 8 | finite rank-3 3-amplitude Barnes-G/Γ_E product forces `|cosΦ|>1` ⇒ does NOT close | **gold-gated; decisive** |
 | 9 | c=1 verdict: closes ONLY as the full Fredholm-determinant/block connection constant; PV/Barnes-G only on decoupling locus | **gold-gated; decisive** (confirms R10) |
@@ -259,7 +259,7 @@ whose computable form is a **Fredholm determinant / block-Toeplitz** (LNR-type),
    (claim 6); what is missing is a quadrature that beats the Stokes-dominance wall in production
    speed. (Prototyped: `mpmath` works but is slow; recessive split is the recommended route.)
 2. **Identification of the LNR Fredholm-determinant kernel for the rank-3 (3-irregular-rate) point.**
-   The verdict says `P₂→₂` is a c=1 Fredholm determinant; writing the explicit block-Toeplitz /
+   The verdict says `P_{m→m}` is a c=1 Fredholm determinant; writing the explicit block-Toeplitz /
    Fredholm kernel for our specific monodromy data (`c_i`, `E_*`, two shears) would make the
    "computable Fredholm-det" claim constructive rather than classificatory.
 3. **General (sample-independent) proof of the band/`cosΦ` falsification** (currently 8–14 strata +
@@ -280,7 +280,7 @@ PART A is exact symbolic-grade (DOP853, rtol 1e-12); PARTs C/C'/D are gold-gated
 ## 7. References
 - O. Lisovyy, H. Nagoya, J. Roussillon, *Irregular conformal blocks and connection formulae for
   Painlevé V functions*, J. Math. Phys. **59** (2018) 091409, arXiv:1806.08344 — the rank-2 c=1
-  Barnes-G connection constant + the Fredholm-determinant representation (the form our `P₂→₂` closes
+  Barnes-G connection constant + the Fredholm-determinant representation (the form our `P_{m→m}` closes
   to, at rank-3).
 - O. Gamayun, N. Iorgov, O. Lisovyy, *Painlevé VI connection problem and monodromy of c=1 conformal
   blocks*, arXiv:1308.4092 — the c=1 mechanism.

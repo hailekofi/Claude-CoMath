@@ -69,7 +69,7 @@ the working expectation becomes:
 - **The exact crossing (node) is a genuine reduction handle:** as a marked point with *elementary
   (logarithmic) local connection data*, it may lower the effective number of accessory parameters —
   the concrete thing for theory-building to exploit (this is the rigorous form of the earlier "H-B
-  exact-crossing → P₂→₂" idea).
+  exact-crossing → P_{m→m}" idea).
 
 ## 4. Net for theory-building
 

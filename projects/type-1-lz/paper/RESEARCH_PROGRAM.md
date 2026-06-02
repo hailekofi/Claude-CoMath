@@ -17,7 +17,7 @@ tracks coordinate without colliding.
 
 Closed-form, computationally practical `P` for the `3×3` Type-1 MLZ matrix in `{γ_i,ε_i,a_i}` — no
 ODE matrizant, ≤ a handful of geometric integrals. The two extreme survivals are exact (BE); the
-open content is the **middle survival `P₂→₂`** and **one independent off-diagonal**.
+open content is the **middle survival `P_{m→m}`** and **one independent off-diagonal**.
 
 **Honest target (revised by this session's findings):** a fully-elementary generic closed form is
 unlikely; the achievable, publishable deliverable is a **structured exact result**: elementary
@@ -66,7 +66,7 @@ Everything in the program either (i) makes this statement precise, (ii) computes
 
 **CONJECTURE / OPEN (the program's targets):**
 - O1 Closed form of the prefactor (the confluent-Heun/Kampé de Fériet connection coefficient).
-- O2 Whether the **exact-crossing node** reduces accessory parameters / pins `P₂→₂`.
+- O2 Whether the **exact-crossing node** reduces accessory parameters / pins `P_{m→m}`.
 - O3 Whether the 3rd-order `λ`-connection **factorizes** on Type-1 sub-loci (⇒ elementary there).
 - O4 Whether a **non-commuting zero-curvature `Ê`** exists for Type-1 (⇒ exact product `S=∏S_ij`).
 
@@ -87,7 +87,7 @@ frame maps; point-local Airy; BE-extended diagonals.
         +-----------+-----------+                          exact product OR
         |                       |                          obstruction proof
  [WS-B node reduction]   [WS-C factorization test]
-   (gate 3: P2->2?)        (gate 2: elementary locus?)
+   (gate 3: P_{m→m}?)        (gate 2: elementary locus?)
         |                       |
         +-----------+-----------+
                     |
@@ -135,13 +135,13 @@ outputs · PASS/FAIL gate · parallel? · escalation**.
   `∝ Γ_ij`, that contradicts E1 — halt and re-examine the dictionary.
 
 ### WS-B — Exact-crossing (node) reduction  [rigorous form of old H-B]
-- **Objective:** decide O2 — does the node carry computable local connection data that pins `P₂→₂`
+- **Objective:** decide O2 — does the node carry computable local connection data that pins `P_{m→m}`
   (or reduces the accessory-parameter count)?
 - **Method:** construct the `2×2` local model at `u*` (the crossing pair whose coupling vanishes);
   compute its exact local connection/rotation; compose with the BE data + unitarity + double
-  stochasticity; predict `P₂→₂`. Test against WS-F including the strong-overlap (`104×`) stratum.
+  stochasticity; predict `P_{m→m}`. Test against WS-F including the strong-overlap (`104×`) stratum.
 - **Skills:** physics-derivation → physics-numerics → physics-reflection. **Inputs:** WS-A scheme,
-  WS-F oracle, E3 node location. **Outputs:** candidate `P₂→₂(γ,ε,a)` + benchmark deltas.
+  WS-F oracle, E3 node location. **Outputs:** candidate `P_{m→m}(γ,ε,a)` + benchmark deltas.
 - **PASS (gate 3):** prediction matches oracle to `≤10⁻⁶` on ≥1 stratum ⇒ promote to
   numerically-supported; pursue an analytic proof. **FAIL:** `O(1)` miss on the overlap stratum ⇒
   the node alone does not pin it; log and feed the residual to WS-E.
@@ -217,7 +217,7 @@ outputs · PASS/FAIL gate · parallel? · escalation**.
 
 - **Phase 0 (now):** WS-F online; launch WS-A and WS-D in parallel. *Deliverable: oracle + Riemann
   scheme draft + literature verdict on non-Abelian `Ê`.*
-- **Phase 1 (gate 1 passed):** launch WS-B and WS-C. *Deliverable: `P₂→₂` node-prediction vs oracle;
+- **Phase 1 (gate 1 passed):** launch WS-B and WS-C. *Deliverable: `P_{m→m}` node-prediction vs oracle;
   the elementary locus map.*
 - **Phase 2 (gates 2–3):** WS-E assembles the prefactor; tournament re-rank. *Deliverable: candidate
   closed-form `P` (named functions) + benchmark.*
@@ -230,7 +230,7 @@ outputs · PASS/FAIL gate · parallel? · escalation**.
 |---|---|---|
 | Confluent-Heun connection coeffs have no closed form | high | WS-E falls back to integral rep + asymptotics; still a result |
 | Scalar reduction spawns apparent singularities (WS-A) | med | stay with `3×3` system / spectral-network description |
-| Node does not reduce `P₂→₂` (WS-B FAIL) | med | feed residual to WS-E; node still cuts accessory params |
+| Node does not reduce `P_{m→m}` (WS-B FAIL) | med | feed residual to WS-E; node still cuts accessory params |
 | No non-Abelian `Ê` (WS-D obstruct) | med-high | obstruction is itself a publishable structural theorem |
 | Harness/standalone mismatch near node | med | WS-F escalation; treat node stratum as singular |
 

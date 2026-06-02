@@ -43,7 +43,7 @@ tail — see §2, §5). Concretely:
   reach** the other clusters. **The Stokes graph is JOINT-FREE** (a "ladder"). `P` factorizes
   into independent 2-level Weber pieces ⇒ enhancement `≈ 1.00×`. (`figs/stokes_sepA.png`)
 
-- **Overlapping (ratio ≲ 1, the ~85% where `P₂→₂` is enhanced 2.5–104×):**
+- **Overlapping (ratio ≲ 1, the ~85% where `P_{m→m}` is enhanced 2.5–104×):**
   the complex turning points push deep off the real axis and their Stokes lines of
   **different pair-types (12 and 13) intersect**, forming **genuine joints** — for sampleB,
   **4 joints** (two conjugate pairs at `u ≈ −0.13 ± 0.95 i` and `−0.07 ± 0.85 i`) where the red
@@ -64,12 +64,12 @@ tail — see §2, §5). Concretely:
 that remainder **on the complex u-plane**: it is the holonomy contribution of the **joint**.
 No joint ⇒ the connection matrix is the ordered product of independent 2-level (Weber) Stokes
 factors ⇒ elementary `P`. A joint ⇒ the GMN junction rule mixes the three sheets ⇒ a non-
-factorizable connection coefficient = the measured `P₂→₂` enhancement. The "joint contribution
+factorizable connection coefficient = the measured `P_{m→m}` enhancement. The "joint contribution
 IS the off-diagonal Stokes connection coefficient" conjecture is **supported**.
 
 **Evidence-ladder status:** the turning-point structure and the joint-vs-enhancement
 *correlation* are **numerically-supported (strong)**. The identification "joint holonomy =
-the precise value of the `P₂→₂` enhancement" is **conjectural/framework** — WS-G establishes
+the precise value of the `P_{m→m}` enhancement" is **conjectural/framework** — WS-G establishes
 the qualitative dictionary and a quantitative *correlation*, not the GMN junction-rule
 *computation* of the enhancement (that would be WS-E's job). Honest ambiguities are in §6.
 
@@ -153,7 +153,7 @@ Three **disjoint** turning-point clusters strung along the real axis (node of pa
 Stokes fans confined near its own crossing (note the tps hug the real axis — narrow avoided
 crossings). **No Stokes line of one pair reaches a turning point of another pair ⇒ 0 joints**
 (under the conservative disk mask; see §2 for why a looser reach would spuriously cross here).
-Direct ODE benchmark: `P₂→₂ = 0.98592`, incoherent product `0.98588`, **enhancement 1.00×** —
+Direct ODE benchmark: `P_{m→m} = 0.98592`, incoherent product `0.98588`, **enhancement 1.00×** —
 the incoherent product is *exact* to 4 digits, the factorizing/elementary regime.
 
 ### 3b. OVERLAPPING (sampleB, ratio 0.14) — `figs/stokes_overlapB.png`
@@ -161,10 +161,10 @@ The 12 turning points are at `Im ≈ ±2.05`, the 13 turning points at `Im ≈ �
 Stokes lines sweep across the strip and **the red (12) and green (13) lines cross at four
 joints** at `u ≈ −0.126 ± 0.952 i` and `−0.070 ± 0.853 i` (two conjugate pairs). The node
 (pair 23, black star) sits on the real axis between them. **4 joints.** Direct ODE benchmark
-(T=160, rtol 1e-11): `P₂→₂ = 0.0197`, incoherent product `0.000164`, **enhancement 120.5×** —
+(T=160, rtol 1e-11): `P_{m→m} = 0.0197`, incoherent product `0.000164`, **enhancement 120.5×** —
 strongly non-factorizing, the enhanced regime. (This sample's enhancement exceeds the 104×
 headline because ratio 0.14 is more overlapping than the cases that set that figure; the
-precise ratio is mildly ODE-horizon-sensitive because both `P₂→₂≈0.02` and the incoherent
+precise ratio is mildly ODE-horizon-sensitive because both `P_{m→m}≈0.02` and the incoherent
 `≈1.6e−4` are small.)
 
 ---
@@ -178,7 +178,7 @@ precise ratio is mildly ODE-horizon-sensitive because both `P₂→₂≈0.02` a
 
 The joints in the overlapping case are **12 × 13** crossings — i.e. Stokes lines of the two
 *off-diagonal pairs that share the middle level* (level 1 is common to 12 and 13). This is
-physically exactly right: the middle survival `P₂→₂` is the amplitude that fails to
+physically exactly right: the middle survival `P_{m→m}` is the amplitude that fails to
 factorize, and the joint that controls it is built from the two Stokes lines that both touch
 the middle sheet. The node (pair 23) lies *between* the joints but is not itself a joint
 (consistent with WS-A: the node is an ordinary point of the 3×3 system, carrying no local
@@ -190,12 +190,12 @@ connection data — its role is to sit *inside* the jointed region, not to be th
 
 16 samples, ratio stratified over `0.1 → 4` (the two showcase samples + 14 representatives,
 one per geomspace ratio bin). `# joints` and `strength` from the **conservative disk-mask**
-Stokes graph; `enh` = `P₂→₂ / P₂→₂^{incoherent}` from direct ODE (fast settings, T=100). The
+Stokes graph; `enh` = `P_{m→m} / P_{m→m}^{incoherent}` from direct ODE (fast settings, T=100). The
 enhancement spans `~1 → 1e11`: when the incoherent product `e^{−2π(Γ+Γ)}` underflows (wide-`ε`
 samples) the ratio is astronomically large simply because the BE-product prediction is
 essentially zero — read `log₁₀ enh`, not the raw number.
 
-| ratio | #joints | strength | P₂→₂ | incoherent | enh (×) |
+| ratio | #joints | strength | P_{m→m} | incoherent | enh (×) |
 |---:|---:|---:|---:|---:|---:|
 | 0.142 | **4** | 0.55 | 0.0181 | 1.6e−4 | 110.9 |
 | 0.152 | 0 | 0.00 | 0.0012 | ~0 | 6.3e10  ← *false neg* |
@@ -252,7 +252,7 @@ below the reach needed to meet the cross-pair line.
 
 1. **Junction *rule* vs junction *presence*.** WS-G shows that *when* a joint is found `P` is
    enhanced, and that joint *strength* (geometric depth) trends with the enhancement. It does
-   **not** compute the GMN junction S-matrix and turn it into the *number* `P₂→₂`. The claim
+   **not** compute the GMN junction S-matrix and turn it into the *number* `P_{m→m}`. The claim
    "joint holonomy = the enhancement value" is therefore **framework/conjecture**, not a
    derived identity. Promoting it is WS-E's task (assemble the connection coefficient).
 
@@ -290,7 +290,7 @@ below the reach needed to meet the cross-pair line.
 ## 7. Net for the program
 
 - **Confirms and localizes the WS-A non-Abelian remainder.** `P`'s transcendental content
-  (the off-diagonal Stokes coefficient / the `P₂→₂` enhancement) is the **joint** of the
+  (the off-diagonal Stokes coefficient / the `P_{m→m}` enhancement) is the **joint** of the
   Stokes graph on the complex `u`-plane. Joint-free ⇔ elementary (BE × Weber product);
   jointed ⇔ the genuine confluent connection coefficient.
 - **Sharpens prediction P-ii** (RESEARCH_PROGRAM §9): the factorization locus (WS-C) should
@@ -310,6 +310,6 @@ All results reproduced by `experiments/stokes_graph.py` (numpy/scipy/sympy/matpl
 - `classify_turning_pair()` — branch-tracked colliding-pair labelling.
 - `phase_field()` / `stokes_lines_for_tp()` — vectorized WKB phase field + masked zero-contours.
 - `build_stokes_graph()` — full graph + `find_joints()` (vectorized segment intersection).
-- `mid_enhancement()` — direct ODE `P₂→₂` benchmark (DOP853, rtol 1e-12), the 2.5–104× metric.
+- `mid_enhancement()` — direct ODE `P_{m→m}` benchmark (DOP853, rtol 1e-12), the 2.5–104× metric.
 - `main()` — renders `figs/stokes_sepA.png`, `figs/stokes_overlapB.png`, and the §5 scan.
 Runtime ≈ 4 min. Figures regenerate deterministically (fixed RNG seeds).

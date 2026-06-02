@@ -1,4 +1,4 @@
-# WS-PV — The Painlevé-V / isomonodromic-τ route to `S₁₂` (≡ `P₂→₂`) + literature & irreducibility
+# WS-PV — The Painlevé-V / isomonodromic-τ route to `S₁₂` (≡ `P_{m→m}`) + literature & irreducibility
 
 **Owner:** WS-PV (PA-3 + PA-5). **Date:** 2026-06-01.
 **Inputs read (in order):** `NOMENCLATURE.md`, `paper/OPEN_PROBLEM.md`, `paper/ws_e_junction_Smatrix.md`,
@@ -27,7 +27,7 @@ re-verified (canonical `P_mid=0.214724`, sampleB `P_mid=0.021018`, both at T=120
 > rank-2-irregular isomonodromy problem — the same *family* the c=1 CFT machinery names, but one rank
 > above the published closed PV formula. The PV formula applies *exactly* only on the sub-loci where the
 > rank-3 system reduces to rank-2 (a decoupling / the apparent point becoming non-apparent), which are
-> the BBGY/Demkov–Osherov-type elementary corners — i.e. exactly where `P₂→₂` is already elementary.**
+> the BBGY/Demkov–Osherov-type elementary corners — i.e. exactly where `P_{m→m}` is already elementary.**
 
 What IS delivered:
 1. The PV connection-formula machinery reconstructed and matched against our monodromy data: the formal
@@ -116,13 +116,13 @@ system reduces to rank-2. Two mechanisms:
   piece off — i.e. one diabatic channel decouples (WS-C trivial-coupling limit; one Stokes shear
   collapses, OPEN_PROBLEM addendum). Then the surviving 2×2 connection problem is literally PV (or
   Weber, for full decoupling), and `S₁₂` is elementary/`₂F₁` — *exactly the corner WS-E found elementary*
-  (well-separated / weak strata, `P₂→₂≈p₁p₂`, the incoherent edge).
+  (well-separated / weak strata, `P_{m→m}≈p₁p₂`, the incoherent edge).
 - the BBGY tridiagonal / Demkov–Osherov sub-locus (extreme–extreme coupling `s_lo,hi→0`): again a
   reduction to the solvable `₁F₂` cousin. Type-1 is generically NOT on this locus (WS-E §1: extreme–
   extreme coupling is the *largest* on canonical), so this corner is non-generic.
 
-**Net:** PV names the answer on precisely the loci where `P₂→₂` is *already elementary*; on the generic
-overlapping locus (sampleB, ov1, ov2 — where `P₂→₂` is genuinely enhanced and outside every two-path
+**Net:** PV names the answer on precisely the loci where `P_{m→m}` is *already elementary*; on the generic
+overlapping locus (sampleB, ov1, ov2 — where `P_{m→m}` is genuinely enhanced and outside every two-path
 band, WS-E §6d) the object is the **rank-3 confluent-Garnier Stokes coefficient**, strictly above PV.
 This is consistent with — and sharpens — WS-E's "confluent-Heun, one accessory parameter above ₁F₂".
 
@@ -150,7 +150,7 @@ of PV's `θ₀` (the regular-point exponent governing the Stokes-multiplier magn
 **The unknowns `S₁₂` is built from.** Exactly the **two Stokes multipliers / shears** in the carrier
 pairs `{mid,lo}` and `{mid,hi}` (WS-G's `12×13` joint; the middle level is the shared subdominant
 partner). In PV language these are `s₁,s₂`; here they are the two off-diagonal Stokes coefficients of a
-rank-3 irregular point, and `S₁₂≡P₂→₂` is their non-commutative composition. The **intermediate
+rank-3 irregular point, and `S₁₂≡P_{m→m}` is their non-commutative composition. The **intermediate
 exponent `σ`** (the one accessory coordinate that the PV Barnes-G formula needs) is the rank-3 analog of
 WS-E's "one accessory parameter above ₁F₂" — and **this is exactly the quantity WS-PA1 is trying to fix
 algebraically (PA-2).** If WS-PA1 finds it algebraic in `{γ,ε,a}`, the connection-coefficient program
@@ -186,7 +186,7 @@ Assembled from WS-A (rank-3, rank-2-irregular, apparent `{0,1,3}`), WS-E (one ac
 ₁F₂; benchmarked-transcendental, outside every two-path band on the overlapping strata), the §2 rank
 argument, and the §4 literature map:
 
-> **`S₁₂` (≡ middle survival `P₂→₂`) of generic Type-1 N=3 MLZ is the off-diagonal Stokes/connection
+> **`S₁₂` (≡ middle survival `P_{m→m}`) of generic Type-1 N=3 MLZ is the off-diagonal Stokes/connection
 > coefficient of the rank-3 linear isomonodromy problem with one Poincaré-rank-2 irregular point at ∞
 > (formal exponents `c_i = Σ_{j≠i}s_ij²(a_i−a_j)`, known) and one apparent regular point (exponents
 > `{0,1,3}`). Its monodromy data are these known formal exponents plus the two Stokes shears in the
@@ -219,7 +219,7 @@ exact `{0,1,3}` scheme by WS-PA1).
 2. **Reduction test (decisive, cheap, hands to WS-CH/WS-PA1):** verify symbolically that on the
    decoupling locus (one `s_ij→0`) the 3rd-order ODE factors → 2nd-order with one regular + rank-2
    irregular point = the *literal* PV linear system; then the Lisovyy PV connection constant SHOULD
-   reproduce the (now elementary) `P₂→₂` there. This is the one place the published PV formula is
+   reproduce the (now elementary) `P_{m→m}` there. This is the one place the published PV formula is
    directly benchmarkable against our oracle, and confirms the §2 reduction picture. *(I did not run this
    symbolic factorization here — flagged as the highest-value next probe; it is the concrete bridge
    between the published rank-2 theory and our rank-3 object.)*

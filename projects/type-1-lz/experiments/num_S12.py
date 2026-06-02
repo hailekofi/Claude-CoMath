@@ -5,12 +5,12 @@ This is the *always-on safety net* deliverable for open-problem #2 of the Type-1
 N=3 Landau-Zener program:  a trusted, high-precision, COMPUTABLE model of the open
 middle survival
 
-        P_2->2  ==  |S_12|^2  ==  P[mid, mid]
+        P_mm  ==  |S_12|^2  ==  P[mid, mid]
 
 (the middle-SLOPE diabatic level's survival), expressed as a function of the natural
 geometric arguments, together with inverse-symbolic / PSLQ recognition attempts.
 
-It delivers a computable P_2->2(gamma, eps, a) REGARDLESS of whether a closed form is
+It delivers a computable P_mm(gamma, eps, a) REGARDLESS of whether a closed form is
 recognized, in two tiers:
 
   TIER 0 (FLOOR, gold).  ``P22_oracle`` -- the trusted value from the project gold
@@ -175,7 +175,7 @@ def geometry_args(eps, gam, a) -> dict:
 
 
 # ===========================================================================
-#  3.  The diabatic scattering matrix 𝒮 and the open P_2->2  (engines)
+#  3.  The diabatic scattering matrix 𝒮 and the open P_mm  (engines)
 # ===========================================================================
 def _Smat_adiabatic(geo: Geometry, T: float, rtol: float, atol: float) -> np.ndarray:
     """
@@ -196,7 +196,7 @@ def _Smat_adiabatic(geo: Geometry, T: float, rtol: float, atol: float) -> np.nda
 def P22_fast(eps, gam, a, T: float = 80.0,
              rtol: float = 1e-9, atol: float = 1e-10) -> float:
     """
-    FAST middle survival P_2->2 = P[mid,mid] from ONE adiabatic-IP pass (no Richardson).
+    FAST middle survival P_mm = P[mid,mid] from ONE adiabatic-IP pass (no Richardson).
     At T=80, rtol=1e-9 this already reproduces the gold oracle to ~1e-9 in ~14 s;
     it is the dataset-generation / quick-evaluation engine.
     """
@@ -230,7 +230,7 @@ def S12_canonical_phase(eps, gam, a, T: float = 80.0,
 
     The diabatic-IP off-diagonal phases drift as -(c_j - c_i) log T; the convergent
     canonical scattering matrix is  𝒮_canon[j,i] = e^{i(c_j-c_i) log T} S[j,i].
-    We return |S_{mid, .}| (the amplitudes feeding P_2->2 and the two off-diagonals
+    We return |S_{mid, .}| (the amplitudes feeding P_mm and the two off-diagonals
     out of the middle channel) and the log-T-subtracted phases at base T.
 
     NOTE: amplitudes/probabilities are gauge-clean (T-convergent); the absolute phase
@@ -308,7 +308,7 @@ def build_dataset(names=None, T: float = 80.0, rtol: float = 1e-9,
                   atol: float = 1e-10, engine: str = "fast", verbose: bool = True,
                   cache: bool = False):
     """
-    Compute the high-precision P_2->2 and the geometric arguments for each stratum.
+    Compute the high-precision P_mm and the geometric arguments for each stratum.
 
     engine='fast'   : single adiabatic-IP pass (P22_fast), ~14 s/sample, ~1e-9.
     engine='oracle' : full Richardson gold (P22_oracle), slower, the FLOOR value.
@@ -366,13 +366,13 @@ def build_dataset(names=None, T: float = 80.0, rtol: float = 1e-9,
 #  of pairwise BE exponents through the two extreme levels:
 #       Sigma_lo = be(lo,mid) + be(lo,hi)   (= delta of the lo-window)
 #       Sigma_hi = be(hi,mid) + be(hi,lo)   (= delta of the hi-window)
-#  Together with chi these are the geometry's invariants.  But P_2->2 also needs the
+#  Together with chi these are the geometry's invariants.  But P_mm also needs the
 #  middle's OWN exponent  m = be(lo,mid) + be(mid,hi); equivalently the three pairwise
 #  BE exponents (b_lm, b_mh, b_lh).  We therefore expose BOTH the window-action pair
 #  (Sigma_lo, Sigma_hi, chi) AND the finer (b_lm, b_mh, b_lh, chi), and fit the surrogate
 #  on the finer set (which is well-posed; the window sums are linear combinations of it).
 #
-#  TARGET TRANSFORM.  P_2->2 lives in (0,1) and ranges over many decades (adiabatic ->
+#  TARGET TRANSFORM.  P_mm lives in (0,1) and ranges over many decades (adiabatic ->
 #  diabatic), so a raw or log(P/P_inc) fit is ill-conditioned (P_inc -> 0 adiabatically).
 #  We fit the LOGIT y = log(P/(1-P)) -- bounded-aware, well conditioned across all strata
 #  -- as a low-order polynomial in the three BE exponents and (1-chi).  The model then
@@ -420,7 +420,7 @@ def _row_be(r):
 
 def calibrate_model(rows) -> np.ndarray:
     """
-    Least-squares fit of the LOGIT of P_2->2 to the design features over the dataset.
+    Least-squares fit of the LOGIT of P_mm to the design features over the dataset.
     Returns the coefficient vector; also sets the module-level ``_MODEL_COEFFS``.
     """
     global _MODEL_COEFFS
@@ -494,7 +494,7 @@ def _rbf_feat(b_lm, b_mh, b_lh, chi):
 
 def fit_rbf(rows, kernel="linear"):
     """
-    Fit a radial-basis interpolant of P_2->2 over the natural coordinates.
+    Fit a radial-basis interpolant of P_mm over the natural coordinates.
     'linear'/'thin_plate_spline' were the most stable kernels in LOO.  Sets the
     module-level ``_RBF`` and returns it.
     """
@@ -552,7 +552,7 @@ def rbf_cv(rows, kernel="linear", verbose=True):
 #  KEY STRUCTURAL FACT (verified): the Q4 cross-ratio chi is SCALE-INVARIANT -- it
 #  depends only on the SHAPE of (eps, gam, a), not the overall scale.  Rescaling
 #  eps -> s*eps (with gam, a fixed) leaves chi fixed and scales every BE exponent
-#  by 1/s^2.  So along a pure-scale ray the middle survival P_2->2 is a CLEAN 1-D
+#  by 1/s^2.  So along a pure-scale ray the middle survival P_mm is a CLEAN 1-D
 #  function of a single BE exponent at FIXED chi.  This is the ideal slice both for an
 #  accurate 1-D computable model and for PSLQ recognition (one variable, one constant
 #  chi).  ``build_slice`` samples such a ray; ``slice_model`` is a monotone 1-D spline
@@ -593,7 +593,7 @@ _SLICE_SPLINE = None
 
 
 def fit_slice_model(slice_rows):
-    """1-D monotone spline of P_2->2 vs log(middle BE exponent) along the scale slice."""
+    """1-D monotone spline of P_mm vs log(middle BE exponent) along the scale slice."""
     global _SLICE_SPLINE
     from scipy.interpolate import PchipInterpolator
     xb = np.array([r["geom"]["be"]["lo_mid"] + r["geom"]["be"]["mid_hi"] for r in slice_rows])
@@ -658,7 +658,7 @@ def pslq_recognize(value, basis_names, basis_values, tol=1e-9, maxcoeff=10 ** 6)
 
 def closed_form_candidates(row):
     """
-    Evaluate a battery of CANDIDATE closed forms for P_2->2 from the BE pairwise
+    Evaluate a battery of CANDIDATE closed forms for P_mm from the BE pairwise
     survivals (the elementary-interference hypotheses).  Returns {name: value}.
 
     With  q_lm = exp(-2 pi be(lo,mid)),  q_mh = exp(-2 pi be(mid,hi)),
@@ -687,7 +687,7 @@ def recognition_pass(row, tol=1e-6, verbose=True):
     """
     Inverse-symbolic / PSLQ recognition for one dataset row.
 
-    (a) Test P_2->2 directly against the elementary closed-form candidates
+    (a) Test P_mm directly against the elementary closed-form candidates
         (``closed_form_candidates``) -- the Demkov-Osherov / coherent-path hypotheses.
     (b) PSLQ-search log(P22/P_inc) for a low-height integer combination of the natural
         log-constants (pairwise BE exponents, log(1-chi), pi).
@@ -735,7 +735,7 @@ def recognize_closed_form_across_slice(slice_rows, tol=1e-7, verbose=True):
     """
     A SAMPLE-INDEPENDENT closed-form test (the real recognition guard).
 
-    A genuine closed form for P_2->2 must hold with the SAME analytic structure at every
+    A genuine closed form for P_mm must hold with the SAME analytic structure at every
     sample.  A single-sample PSLQ with many basis constants almost always finds a spurious
     low-height relation; the discriminating test is whether ONE candidate formula matches
     ALL slice points to ``tol``.  We test the elementary closed-form candidates against the
@@ -838,7 +838,7 @@ def validate(rows_fast, names=None, T: float = 120.0, verbose=True):
 # ===========================================================================
 if __name__ == "__main__":
     import argparse
-    ap = argparse.ArgumentParser(description="WS-NUM computable P_2->2 model + recognition")
+    ap = argparse.ArgumentParser(description="WS-NUM computable P_mm model + recognition")
     ap.add_argument("--engine", default="fast", choices=["fast", "oracle"])
     ap.add_argument("--T", type=float, default=80.0)
     ap.add_argument("--only", type=str, default=None)

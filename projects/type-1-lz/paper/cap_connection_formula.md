@@ -1,6 +1,6 @@
 # WS-CAP — Capstone: evaluating the published Painlevé-V / Lisovyy connection formula at the algebraic monodromy data, and the PV-vs-rank-3 verdict
 
-> **Notation (coordinator):** `S₁₂` here = the middle survival `P₂→₂=|𝒮_{mm}|²` (`m=slope-middle`)
+> **Notation (coordinator):** `S₁₂` here = the middle survival `P_{m→m}=|𝒮_{mm}|²` (`m=slope-middle`)
 > `=|C_{mm}|²`; the transcendental ingredient is the off-diagonal Stokes multiplier `σ`. `S₁₂` as a
 > symbol is DEPRECATED — see `NOMENCLATURE.md`. (Benchmarked numbers are `|𝒮_{mm}|²`, correct.)
 
@@ -12,8 +12,8 @@
 `experiments/ws_ch/*`.
 **Constraint compliance:** no git ops; the only files written are this note and
 `experiments/cap_connection_formula.py`; scratch under `/tmp/`. All numbers are gold-gated against
-`experiments/oracle.py` (canonical `P₂→₂=0.214724`, sampleB `0.021018`).
-**Target (NOMENCLATURE-strict):** `𝒮₁₂ = P₂→₂ = |𝒮_{mid,mid}|²`, `mid = argsort(a)[1]`;
+`experiments/oracle.py` (canonical `P_{m→m}=0.214724`, sampleB `0.021018`).
+**Target (NOMENCLATURE-strict):** `𝒮₁₂ = P_{m→m} = |𝒮_{mid,mid}|²`, `mid = argsort(a)[1]`;
 `s_ij = γ_iγ_j/(ε_i−ε_j)`; BE exponent `= s_ij²|a_i−a_j|`; signed-BE Coulomb `c_i = Σ_{j≠i} s_ij²(a_i−a_j)`.
 
 ---
@@ -25,7 +25,7 @@
 > the **rank-3** (3×3, single Poincaré-rank-2 irregular point) isomonodromy problem — the higher
 > (confluent-Garnier / c=1-family) connection constant, which is **unpublished in closed form** and
 > is **not** a classical special function nor the rank-2 PV transcendent. **Painlevé V is exactly the
-> rank-2 reduction (one-link-decoupling) limit of our problem — precisely the corner where `P₂→₂` is
+> rank-2 reduction (one-link-decoupling) limit of our problem — precisely the corner where `P_{m→m}` is
 > already elementary.** This settles the one open structural dispute in favour of **WS-PV over the
 > WS-PA1 "Painlevé V via middle convolution" reading.** The decisive resolution is *positive and
 > sharp*: we identify exactly where and why PV fails, with a gold-gated falsifiable signature.
@@ -102,7 +102,7 @@ above 2).
 ### Angle (B) BOTTOM-UP — the two shears, and the decisive physical test
 
 WS-CH established (and we re-verified, `ws_ch/ch_connection3.py`) that the central connection matrix
-`C = M_form · 𝒮^{(mid,hi)} · 𝒮^{(mid,lo)}` reproduces the oracle: canonical `P₂→₂=0.214724`
+`C = M_form · 𝒮^{(mid,hi)} · 𝒮^{(mid,lo)}` reproduces the oracle: canonical `P_{m→m}=0.214724`
 (`|diff|=4e-7`), sampleB `0.021018` (`|diff|=2e-7`). The "simplification hope" was: if the two shears
 are each an elementary (Weber/Gamma) `2×2` connection and only their *composition* is transcendental,
 then `𝒮₁₂ = (Γ-dressing of the BE data) × (one joint constant)`.
@@ -110,10 +110,10 @@ then `𝒮₁₂ = (Γ-dressing of the BE data) × (one joint constant)`.
 **The decisive test (T5).** A single shear is a `2×2` (2-level) connection: its survival is a
 two-amplitude Stückelberg interference governed by **one** intermediate exponent `σ`. If `𝒮₁₂` were a
 single-`σ` (rank-2 / PV-reducible) object — i.e. if the two shears composed *commutatively* into one
-effective `2×2` connection — then `P₂→₂` would lie inside the **widest possible single-`σ`
+effective `2×2` connection — then `P_{m→m}` would lie inside the **widest possible single-`σ`
 Stückelberg band**
 ```
-P₂→₂ ∈ [ (√(q₁q₂) − √((1−q₁)(1−q₂)))² , (√(q₁q₂) + √((1−q₁)(1−q₂)))² ],
+P_{m→m} ∈ [ (√(q₁q₂) − √((1−q₁)(1−q₂)))² , (√(q₁q₂) + √((1−q₁)(1−q₂)))² ],
 q₁ = e^{−2π·BE(mid,lo)},  q₂ = e^{−2π·BE(mid,hi)}   (the diabatic survivals at the two crossings the
 middle level participates in; fixed by the BE/Stokes magnitudes — NOT fitted).
 ```
@@ -123,7 +123,7 @@ strengths.
 **Result (gold-gated, `cap_connection_formula.py` T5).** Of the 14 strata, **7 lie strictly OUTSIDE
 this band**, by margins up to `+0.99`:
 
-| stratum | `P₂→₂` (oracle/fast) | single-σ band | outside? | margin |
+| stratum | `P_{m→m}` (oracle/fast) | single-σ band | outside? | margin |
 |---|---|---|---|---|
 | strong | 0.010463 | [1.000000, 1.000000] | **YES** | +0.9895 |
 | sep_tiny | 0.028425 | [1.000000, 1.000000] | **YES** | +0.9716 |
@@ -139,7 +139,7 @@ this band**, by margins up to `+0.99`:
 A value outside the widest single-`σ` band **provably cannot be produced by any `2×2` PV connection
 constant** with any single intermediate exponent: it requires a **third coherent amplitude** — exactly
 the non-commutative composition of the two shears through the **shared middle sheet**. This is the
-genuine three-channel (rank-3) coherence WS-E §6 flagged ("`P₂→₂` outside every two-path band"), here
+genuine three-channel (rank-3) coherence WS-E §6 flagged ("`P_{m→m}` outside every two-path band"), here
 as a sharp falsifiable bound, gold-gated. **[gold-gated; decisive]**
 
 > The two shears are individually `2×2` (Weber/Gamma-class) — the simplification hope's *first* half
@@ -153,7 +153,7 @@ as a sharp falsifiable bound, gold-gated. **[gold-gated; decisive]**
 This is the WS-PV §6 highest-value probe, executed. Decoupling the mid–hi link
 (`γ_hi → 0`, holding canonical `ε,a`):
 
-| `γ_hi` | `P₂→₂` | single-σ band | in band? | single-crossing `q_{lo,mid}` |
+| `γ_hi` | `P_{m→m}` | single-σ band | in band? | single-crossing `q_{lo,mid}` |
 |---|---|---|---|---|
 | 1.20 | 0.214724 | [0.16312, 0.96957] | yes | 0.221360 |
 | 0.60 | 0.194605 | [0.00007, 0.68158] | yes | 0.221360 |
@@ -163,11 +163,11 @@ This is the WS-PV §6 highest-value probe, executed. Decoupling the mid–hi lin
 | 0.01 | 0.221349 | [0.21460, 0.22819] | yes | 0.221360 |
 
 As the link decouples, the band **tightens around** the elementary single-crossing survival
-`q_{lo,mid}=0.221360`, and `P₂→₂ → q_{lo,mid}` monotonically. The `3×3` system block-reduces to
-`2×2 ⊕ 1×1`; the surviving `2×2` is the literal PV/Weber linear system, and `P₂→₂` becomes elementary.
+`q_{lo,mid}=0.221360`, and `P_{m→m} → q_{lo,mid}` monotonically. The `3×3` system block-reduces to
+`2×2 ⊕ 1×1`; the surviving `2×2` is the literal PV/Weber linear system, and `P_{m→m}` becomes elementary.
 **This is exactly where the published PV/Barnes-G connection constant applies — the already-elementary
 decoupling corner (WS-C "elementary ⟺ a level decouples").** Off this corner (the 7 OUT strata),
-`P₂→₂` exits the band and PV cannot reach it. **[gold-gated; confirms WS-PV §2]**
+`P_{m→m}` exits the band and PV cannot reach it. **[gold-gated; confirms WS-PV §2]**
 
 ---
 
@@ -205,7 +205,7 @@ is a function on a **6-dimensional** wild character variety (T1), constrained by
    be the single-MC image of a `2×2` PV's two rates — the "PV via middle convolution" embedding does
    not exist for generic Type-1 data.
 3. **Stokes dimension (T1):** the irregular point carries 6 independent Stokes parameters, not 2.
-4. **Physical falsification (T5):** `P₂→₂` lies strictly outside the widest single-`σ` band on 7/14
+4. **Physical falsification (T5):** `P_{m→m}` lies strictly outside the widest single-`σ` band on 7/14
    strata (including sampleB) — no single-`σ` (2×2 PV) connection constant can reproduce it.
 
 Each is necessary; together they are decisive. The blocker is **dimensional/structural, not a missing
@@ -216,7 +216,7 @@ evaluation**: there is no assignment of `{θ₀,θ_∞,σ}` that makes the publi
 
 ## 4. The explicit statement of `𝒮₁₂` (the named, rank-3 object)
 
-> **`𝒮₁₂ = P₂→₂` is the `(mid,mid)` modulus-squared of the central connection matrix
+> **`𝒮₁₂ = P_{m→m}` is the `(mid,mid)` modulus-squared of the central connection matrix
 > `C = M_form · 𝒮^{(mid,hi)} · 𝒮^{(mid,lo)}` of the rank-3 linear isomonodromy problem with one
 > Poincaré-rank-2 irregular point at `u=∞` (formal exponents `c_i = Σ_{j≠i} s_ij²(a_i−a_j)`, `Σc_i=0`,
 > KNOWN) and one apparent regular point at the node `v_*=E_*` (exponents `{0,1,3}`, no log, accessory
@@ -227,7 +227,7 @@ evaluation**: there is no assignment of `{θ₀,θ_∞,σ}` that makes the publi
 > confluent-Garnier-9/2-type connection constant), is **above ₂F₁ / elementary** (WS-A/WS-E) **and
 > above the rank-2 Painlevé-V transcendent** (this note, T1–T5), and is **not published in closed
 > form**. It reduces to the published rank-2 PV / Lisovyy Barnes-G connection constant **exactly on the
-> one-link-decoupling locus** (T6), where `P₂→₂` is already elementary.
+> one-link-decoupling locus** (T6), where `P_{m→m}` is already elementary.
 
 This is the maximal honest closed-form statement: a *named* (c=1-family, rank-3) connection constant
 with **algebraically-fixed** monodromy data, plus the gold-gated computable model (`num_S12.py` /
@@ -244,8 +244,8 @@ with **algebraically-fixed** monodromy data, plus the gold-gated computable mode
 | 3 | 3 generic distinct leading rates ⇒ NOT a single middle-convolution image of a 2×2 PV (escape-hatch closed) | **[analytic; established symbolically]** (T2) |
 | 4 | formal exponents = signed-BE pair `c_i`, Σ=0 — a traceless SL(3) pair, not PV's single `θ_∞` | **[established, exact]** (T3) |
 | 5 | accessory `v_*=E_*` rational ⇒ ALGEBRAIC (PA-2 favourable) | **[established, exact]** (T4) |
-| 6 | `P₂→₂` lies OUTSIDE the widest single-σ (2×2/PV) Stückelberg band on 7/14 strata (incl. sampleB) ⇒ rank-3 | **[gold-gated; decisive]** (T5) |
-| 7 | on the decoupling locus `P₂→₂ → q_{lo,mid}` (elementary); band tightens; PV applies exactly there | **[gold-gated]** (T6) |
+| 6 | `P_{m→m}` lies OUTSIDE the widest single-σ (2×2/PV) Stückelberg band on 7/14 strata (incl. sampleB) ⇒ rank-3 | **[gold-gated; decisive]** (T5) |
+| 7 | on the decoupling locus `P_{m→m} → q_{lo,mid}` (elementary); band tightens; PV applies exactly there | **[gold-gated]** (T6) |
 | 8 | `𝒮₁₂` = rank-3 confluent-Garnier / c=1-family connection constant; named, algebraically pinned, unpublished, non-elementary | **[analytic + literature]** (§4) |
 | 9 | VERDICT: RANK-3 (WS-PV over WS-PA1's "Painlevé V") | **[decisive, multi-diagnostic]** |
 

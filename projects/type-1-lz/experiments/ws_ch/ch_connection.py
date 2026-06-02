@@ -5,7 +5,7 @@ We compute the connection/Stokes data of the rank-2 irregular point at u=inf of 
 Type-1 N=3 system   i psi' = (H0 + u A) psi   directly, by transporting the formal
 (Thome/WKB) solution from one anti-Stokes sector to the opposite one and reading off
 the connection matrix C.  |C_ij|^2 = P_{i->j}.  The off-diagonal entry linking the
-middle slope to itself is P_2->2 = S_12 (the target).
+middle slope to itself is P_mm = S_12 (the target).
 
 This is the SAME object the oracle computes, but assembled as a connection matrix
 between the formal solution bases at u=+/-inf (the two relevant Stokes sectors on the

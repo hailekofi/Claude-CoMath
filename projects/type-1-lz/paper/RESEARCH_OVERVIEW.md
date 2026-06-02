@@ -7,14 +7,14 @@ This is the roadmap: what is achieved, the boundary of knowledge, and the one ca
 ## The problem
 Closed-form Type-1 N=3 MLZ transition matrix `P` (`H(u)=H₀+uA`, Cauchy coupling
 `(H₀)_ij=γ_iγ_j(a_i−a_j)/(ε_i−ε_j)`). Two extreme-slope survivals are Brundobler–Elser (BE), exact.
-**Open:** the middle-slope survival `P₂→₂=|𝒮_{mid,mid}|²` (`mid=argsort(a)[1]`) and one off-diagonal.
+**Open:** the middle-slope survival `P_{m→m}=|𝒮_{mid,mid}|²` (`mid=argsort(a)[1]`) and one off-diagonal.
 
 ## Headline
 We went from "the middle survival is open and unnamed" to **"the middle survival
-`P₂→₂=|𝒮_{mm}|²` (`m=slope-middle`) is `|C_{mm}|²`, built from a specific, named Stokes multiplier
+`P_{m→m}=|𝒮_{mm}|²` (`m=slope-middle`) is `|C_{mm}|²`, built from a specific, named Stokes multiplier
 `σ` of the Painlevé-V / confluent-Heun / `c=1` family, with monodromy data fixed *algebraically* by
 the exact crossing, computable to `10⁻⁹`."** [Notation: the symbol `S₁₂` used in earlier notes is
-DEPRECATED — it conflated `P₂→₂` (diagonal probability), the amplitude `𝒮_{mm}/C_{mm}`, and the
+DEPRECATED — it conflated `P_{m→m}` (diagonal probability), the amplitude `𝒮_{mm}/C_{mm}`, and the
 Stokes multiplier `σ`; see NOMENCLATURE.md.] A fully-elementary closed form does
 not exist (ruled out, multiple ways); the deliverable is a *named* constant + a *computable* model.
 
@@ -35,7 +35,7 @@ not exist (ruled out, multiple ways); the deliverable is a *named* constant + a 
   Stokes shears in the `{mid,lo}`,`{mid,hi}` carrier spaces (the `12×13` joint). The middle is hard
   because `c_mid` is a **cancelling** sum, not a definite survival. [EST: WS-CH, WS-R]
 - **Arguments:** `{two window actions (= BE exponents, scale), scale-invariant cross-ratio χ (shape)}`.
-  On fixed shape, `P₂→₂` is a clean 1-D function. [WS-NUM, EST]
+  On fixed shape, `P_{m→m}` is a clean 1-D function. [WS-NUM, EST]
 - **Named:** Painlevé-V / Lisovyy–Naidiuk confluent-Heun connection coefficient = quasiclassical
   `c=1` Virasoro conformal block = PV τ-ratio (WS-PV and WS-CH converge on this family). [literature]
 
@@ -47,7 +47,7 @@ is built by rational operations from `H₀,1/a_j`, so the accessory parameter is
 **The exact crossing IS the accessory parameter** — the program's arc closes here.
 
 ## Computable model [gold]
-`P₂→₂(γ,ε,a)` validated vs the `10⁻⁹` oracle across sep/width 0.1→4 (canonical `0.2147`,
+`P_{m→m}(γ,ε,a)` validated vs the `10⁻⁹` oracle across sep/width 0.1→4 (canonical `0.2147`,
 sampleB `0.0210`); BE survivals analytic. (num_S12.py, ws_ch.)
 
 ## Boundary of knowledge — what remains

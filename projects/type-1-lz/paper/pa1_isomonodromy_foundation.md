@@ -208,7 +208,7 @@ Consequence for the program (per the PA-2 gate): **ALGEBRAIC ⇒ the closed-form
 The linear isomonodromic problem has *fully specified, algebraic* local data: the formal-monodromy
 exponents `c_i` (known, BE-Coulomb), the apparent point `v_*=E_*` and its `{0,1,3}` spectrum, and the
 algebraic accessory parameter. What remains transcendental is **only the global connection (Stokes)
-coefficient** of this fixed PV linear problem — i.e. `𝒮_{12}≡P₂→₂` is a **Painlevé-V / irregular-`c=1`
+coefficient** of this fixed PV linear problem — i.e. `𝒮_{12}≡P_{m→m}` is a **Painlevé-V / irregular-`c=1`
 connection coefficient with algebraically-pinned monodromy data**, a *named* object (τ-function ratio /
 Nekrasov-type sum), not a generic Heun transcendent with an unknown accessory parameter. This is the
 "realistic win" branch of the OPEN_PROBLEM odds. **Hand off to WS-PV (PV τ / `c=1` blocks) and WS-CH
@@ -217,7 +217,7 @@ Nekrasov-type sum), not a generic Heun transcendent with an unknown accessory pa
 **Caveat (honest):** "algebraic accessory parameter" closes the *first* make-or-break (the parameter is
 pinned, not free), so the connection coefficient is a *specific* named PV/CH constant. It does **not**
 by itself make that constant *elementary* — confluent-Heun/PV connection coefficients are generically
-non-elementary (WS-E §6 benchmarks confirm `P₂→₂` is not any 2-pathway/sech form). The deliverable PV
+non-elementary (WS-E §6 benchmarks confirm `P_{m→m}` is not any 2-pathway/sech form). The deliverable PV
 route yields a *named closed form*, consistent with the program's stated acceptable outcome.
 
 ---
@@ -235,7 +235,7 @@ route yields a *named closed form*, consistent with the program's stated accepta
 | 7 | `v_*=E_*` is RATIONAL in `{γ,ε,a}` (rational double root of `disc_E χ` / node) | **established** (symbolic, both samples + generic-γ resultant) |
 | 8 | ALL accessory Laurent data (residues + regular parts) at `v_*` are Gaussian-rational | **established** (symbolic, both samples) |
 | 9 | accessory parameter is **ALGEBRAIC** in `{γ,ε,a}`, pinned by the Gaudin/Cauchy node (PA-2 verdict) | **established** (structural rational-construction argument + 8 + 7) |
-| 10 | ⇒ `𝒮_{12}=P₂→₂` is a PV / irregular-`c=1` connection coeff with algebraically-fixed monodromy | **analytically-derived** (from 6,9 + PV connection theory) |
+| 10 | ⇒ `𝒮_{12}=P_{m→m}` is a PV / irregular-`c=1` connection coeff with algebraically-fixed monodromy | **analytically-derived** (from 6,9 + PV connection theory) |
 
 No claim contradicts E1–E5, WS-A, WS-E, or gate_test_genus. This work **hardens** WS-E §4 (the
 `{0,1,3}` point, now coordinator-verified with apparency proven two ways), **sharpens** WS-A (the

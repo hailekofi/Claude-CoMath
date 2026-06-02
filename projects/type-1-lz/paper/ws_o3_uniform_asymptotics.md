@@ -1,7 +1,7 @@
 # WS-O3 — Uniform semiclassical (Dykhne + Stückelberg) formula for the Type-1 N=3 middle survival
 
 **Workstream:** WS-O3. **Target:** open question O3 (SESSION_SYNTHESIS §6) — a *validated semi-analytic
-approximation* to the open middle survival `P₂→₂ = |𝒮_{mm}|²` (`m = argsort(a)[1]`), built from
+approximation* to the open middle survival `P_{m→m} = |𝒮_{mm}|²` (`m = argsort(a)[1]`), built from
 single-crossing Dykhne factors composed with a Stückelberg interference phase, made **uniform** so it
 stays controlled through Type-1's permanent marginal overlap (R4).
 **Artifacts:** `experiments/ws_o3_uniform.py` (runnable, reuses `type1`/oracle), this file.
@@ -49,7 +49,7 @@ Two semiclassical Feynman paths return the middle diabatic level to itself:
 The uniform two-path survival is
 
 ```
-P₂→₂  ≈  p_lo p_hi  +  (1−p_lo)(1−p_hi) p_lh
+P_{m→m}  ≈  p_lo p_hi  +  (1−p_lo)(1−p_hi) p_lh
          +  2 √( p_lo p_hi (1−p_lo)(1−p_hi) p_lh ) · cosΦ .          (★)
 ```
 
@@ -103,7 +103,7 @@ survival is **fully explicit** in {window actions, χ}:
 p_X = e^{−2π δ_X};      A₀ = p_lo p_hi;   A_ret = (1−p_lo)(1−p_hi) p_lh;
 cosΦ = clip[ −(δ_lo+δ_hi)(1 − 3(1−χ)) , −1, 1 ];
 
-P₂→₂  ≈  A₀ + A_ret + 2√(A₀ A_ret) · cosΦ .
+P_{m→m}  ≈  A₀ + A_ret + 2√(A₀ A_ret) · cosΦ .
 ```
 
 This **cleanly exhibits the R11 separation**:
@@ -156,7 +156,7 @@ incoherent error (2.5%→1.2% RMS at δ<0.10) and correctly capturing the χ-tre
 | full uniform formula accurate to **RMS ~1–2% (max ~4%) for δ≲0.25**, with the {two window actions} + χ separation manifest | **numerically-supported** |
 | formula fails (>10%) in deep adiabatic overlap δ≳0.5 | **numerically-supported** (consistent with R4/R10) |
 
-**Bottom line.** A concise, computable uniform formula `P₂→₂ = f(δ_lo, δ_hi, χ)` — Dykhne stay+return
+**Bottom line.** A concise, computable uniform formula `P_{m→m} = f(δ_lo, δ_hi, χ)` — Dykhne stay+return
 amplitudes plus a χ-dressed, near-quadrature interference — reproduces the gold middle survival to a
 **few percent (RMS ~1–2%) across the separated-to-moderate regime**, cleanly in the R11
 {two-window-actions (scale) + cross-ratio χ (shape)} structure. It degrades honestly in the deep
