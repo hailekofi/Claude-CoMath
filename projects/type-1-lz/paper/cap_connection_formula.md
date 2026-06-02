@@ -23,7 +23,7 @@
 > **RANK-3. The published rank-2 Painlevé-V / Lisovyy connection constant does NOT compute the
 > generic Type-1 N=3 middle survival.** `𝒮₁₂` is the off-diagonal Stokes/connection coefficient of
 > the **rank-3** (3×3, single Poincaré-rank-2 irregular point) isomonodromy problem — the higher
-> (confluent-Garnier / c=1-family) connection constant, which is **unpublished in closed form** and
+> (rank-3 `GL₃`/`sl₃` confluent — the `W₃`/`sl₃`-Schlesinger arena at `c=N−1=2`, NOT the rank-2 `c=1` free-fermion point) connection constant, which is **unpublished in closed form** and
 > is **not** a classical special function nor the rank-2 PV transcendent. **Painlevé V is exactly the
 > rank-2 reduction (one-link-decoupling) limit of our problem — precisely the corner where `P_{m→m}` is
 > already elementary.** This settles the one open structural dispute in favour of **WS-PV over the

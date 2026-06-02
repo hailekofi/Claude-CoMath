@@ -1027,3 +1027,29 @@ strictly enforced the ε-ordering convention.
 - ε-ordering audit: no violations. restart_probe.py P[1,1] is a FALSE POSITIVE (the matrix is
   reorder_slope'd to sector order [lo,mid,hi] first, so index 1 = slope-middle). All middle-survival
   code anchors mid via argsort(a). The two .tex papers' \Pmid macro = P_{m\to m} (done earlier).
+
+---
+
+## 2026-06-02 — CORRECTION: "c=1" classification was the rank-2 label misapplied -> GL₃/W₃ (c=2)
+
+Prompted by a colleague's note (node-pinned oper strategy) and its sharpening: our R9/R10/R11
+classification called the rank-3 object "c=1 (free-fermion) confluent-Garnier." That is WRONG as a
+label. c=1 is the RANK-2 free-fermion point (sl₂: Painlevé VI/V/III, the Gamayun-Iorgov-Lisovyy
+connection constants). The genuine rank-3 / GL₃ / sl₃ one-irregular-point object lives in the
+sl₃-Schlesinger / W₃ arena, whose self-dual central charge is c=N−1=2, NOT 1.
+
+Corrected (authoritative artifacts): type1_lz_working_paper.tex (title, abstract, sec:class heading,
+R9/R11 verdict, unifying picture, honest-status), accessory_node_letter.tex (intro classification),
+SESSION_SYNTHESIS.md R10, cap_connection_formula.md headline. The rank-2 `c=1` references that
+correctly name the PUBLISHED PV/LNR object we test AGAINST (the falsification target) are kept as-is.
+
+Substance unchanged: the verdict (rank-3, dim-6 wild char variety, no finite-product closed form,
+gold-gated) stands; only the CFT/rep-theory label is corrected. Triangulation from BOTH sides now:
+(us) WS-O2/O2b gold-gated + Fredholm-kernel obstruction; (literature, via colleague) Gavrylenko's
+sl₃/W₃ work is four-point Fuchsian and the constructive three-point / confluent GL₃ connection
+formula is unpublished/open. So no worked rank-3 formula exists -- confirmed numerically AND from
+representation theory. CGL/Widom is the right *machinery* but needs the local parametrix we lack.
+
+NOTE: superseded planning memos (RESEARCH_OVERVIEW.md, OPEN_PROBLEM.md, pa1_isomonodromy_foundation.md)
+and earlier chronological log entries retain historical "c=1" language; not rewritten (history
+preserved). The authoritative paper/Letter/synthesis/cap now carry the corrected GL₃/W₃ (c=2) label.

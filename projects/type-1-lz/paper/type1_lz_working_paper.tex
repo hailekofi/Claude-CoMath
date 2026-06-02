@@ -18,7 +18,7 @@
 \begin{document}
 
 \title{The minimal non-factorizable multistate Landau--Zener problem:\\
-Type-1 $N{=}3$ as a rank-3 $c{=}1$ connection constant,\\
+Type-1 $N{=}3$ as a rank-3 ($GL_3$/$W_3$) connection constant,\\
 with an exact integral representation and a uniform semiclassical law}
 \author{Co-theoretical-physicist working session}
 \affiliation{\texttt{projects/type-1-lz}; branch \texttt{claude/comathematician-agent-skills-9HPSJ}}
@@ -40,9 +40,11 @@ factorization $\Scat=\prod\Scat_{ij}$ exists; and a sharp classifier holds, \emp
 $\Leftrightarrow$ a level decouples}. \emph{Classification.} The irreducible content is the
 off-diagonal connection datum of a single rank-2 irregular point of a \emph{three}-level system,
 whose wild character variety has dimension $6$ (not the $2$ of Painlev\'e~V): the object is a
-\emph{rank-3}, $c{=}1$ (free-fermion) confluent connection constant, not the rank-2 confluent-Heun /
-Painlev\'e-V coefficient of the decoupling cousins. We verify, gold-gated, that no finite Barnes-$G$
-/ Euler-$\GE$ product reproduces $\Pmid$; it closes only as a $c{=}1$ \emph{Fredholm-determinant}
+\emph{rank-3} ($GL_3$/$\mathfrak{sl}_3$) confluent connection constant --- the $W_3$ /
+$\mathfrak{sl}_3$-Schlesinger arena at the self-dual central charge $c=N-1=2$, \emph{not} the rank-2
+$c{=}1$ free-fermion (confluent-Heun / Painlev\'e-V) point, which applies only at the decoupling
+boundary. We verify, gold-gated, that no finite Barnes-$G$
+/ Euler-$\GE$ product reproduces $\Pmid$; it closes only as a \emph{Fredholm-determinant} (Widom)
 connection constant. \emph{Deliverables.} (1) an exact contour-integral representation
 $\Scat_{xj}=\oint_{C_j}e^{-iuv}B(v)\,dv$ with explicitly-defined integrand, machine-verified; (2) a
 uniform Dykhne--St\"uckelberg formula $\Pmid\!\approx\! f(\delta_{\rm lo},\delta_{\rm hi},\chi)$
@@ -72,11 +74,11 @@ off-diagonal are open. \pnote{model+BE from project brief; standard}
 This paper has a three-layer spine. \S\ref{sec:ceiling}--\ref{sec:class} establish the
 \emph{structure} (why $\Pmid$ is hard) and the \emph{classification} (what kind of object it is).
 \S\ref{sec:O2}--\ref{sec:oracle} give three concrete deliverables: an exact integral representation
-(the rigorous backbone), its $c{=}1$ Fredholm-determinant classification, a uniform semiclassical
+(the rigorous backbone), its Fredholm-determinant (Widom) classification, a uniform semiclassical
 \emph{formula} (the computable results), and the benchmark oracle (ground truth). The honest
 through-line, supported on three independent lines of evidence, is that \emph{no elementary or
 finite-special-function closed form for $\Pmid$ exists}; the realistic objects are an exact integral
-representation, a $c{=}1$ Fredholm determinant, and a controlled uniform approximation.
+representation, a Fredholm-determinant (Widom) connection constant, and a controlled uniform approximation.
 
 \section{Framework: $P$ as Stokes data}\label{sec:framework}
 $i\,\psi'(u)=(H_0+uA)\psi$ has entire coefficients, hence a \emph{single} irregular singular point at
@@ -135,7 +137,7 @@ Malikis--Cheianov ``isolated 2-level'' limit is unreachable in Type-1.\pnote{cos
 coupling $V_{02}$ is nonzero and \emph{dominant} (canonical $0.72>0.60>0.48$); every solvable cousin
 is tridiagonal.
 
-\section{Classification: a rank-3 $c{=}1$ connection constant}\label{sec:class}
+\section{Classification: a rank-3 $GL_3$/$W_3$ connection constant}\label{sec:class}
 \textbf{R7 [NS, verified].} The irreducible non-Abelian content is the holonomy of a single
 spectral-network \emph{joint}: in the overlapping regime the two Stokes shears the slope-middle
 level forms with the two outer levels cross, the exact crossing between them; the holonomy of that
@@ -172,7 +174,11 @@ strata generally (the independent $c{=}1$ Barnes-$G$ probe of \S\ref{sec:fredhol
 overlapping strata outside).\pnote{cap\_connection\_formula.md (T1/T2/T5; 7/14 verified, re-run
 2026-06-02); ws\_o2\_integral\_rep.md \S3 (5/8)} The earlier ``confluent-Heun, one accessory above ${}_1F_2$'' reading
 (superseded) is exactly the rank-2 \emph{boundary} case, not the generic object. The correct class is
-a \emph{$c{=}1$ (free-fermion) confluent-Garnier} connection constant.
+a \emph{rank-3 $GL_3$/$\mathfrak{sl}_3$ confluent} connection constant --- the $W_3$ /
+$\mathfrak{sl}_3$-Schlesinger arena at the self-dual central charge $c=N{-}1=2$ (the rank-2 $c{=}1$
+free-fermion / Painlev\'e point is the decoupling boundary only). Even the four-point Fuchsian
+$\mathfrak{sl}_3$/$W_3$ problem is only partially solved and the constructive three-point / confluent
+$GL_3$ connection formula is, to our knowledge, \emph{unpublished}.
 
 \section{Layer 1: the exact integral representation}\label{sec:O2}
 \textbf{R10 [AD, machine-verified].} Applying the Laplace/Euler ansatz to $i\psi'=(H_0+uA)\psi$ and
@@ -199,7 +205,7 @@ representation is therefore exact as a \emph{formula}; a recessive-only / high-p
 engine that evaluates it independently of the oracle is \emph{owed}. Its value is validated against
 the oracle to $\le10^{-6}$ across sep/width $0.1\to4$.\pnote{ws\_o2\_integral\_rep.md \S2}
 
-\subsection{The $c{=}1$ connection constant: finite products falsified}\label{sec:fredholm}
+\subsection{The Fredholm-determinant connection constant: finite products falsified}\label{sec:fredholm}
 \textbf{R11 [GG, decisive].} The published rank-2 $c{=}1$ connection constant (Lisovyy--Nagoya--
 Roussillon, arXiv:1806.08344; Gamayun--Iorgov--Lisovyy, arXiv:1308.4092) is a finite product of
 Barnes $G$. We test whether $\Pmid$ collapses onto such a product. \emph{Probe~1} (single-$\sigma$,
@@ -208,8 +214,9 @@ single-$\sigma$ Stückelberg band. \emph{Probe~2} (finite rank-3 three-amplitude
 $\Pmid=p_1p_2+q_1q_2p_{lh}+2\sqrt{p_1p_2q_1q_2p_{lh}}\cos\Phi$ with one algebraic joint phase): also
 fails --- it forces $|\cos\Phi|>1$ on every strongly-overlapping stratum (e.g.\ sampleB $-20$,
 sep\_small $5838$) and along the fixed-$\chi$ scale ray.\pnote{ws\_o2\_integral\_rep.md \S3, gold-gated}
-\textbf{Verdict.} The $c{=}1$ constant closes \emph{only} as the full \emph{Fredholm-determinant /
-block-Toeplitz} connection constant --- still a computable object (LNR machinery), with monodromy
+\textbf{Verdict.} Our (rank-3) connection constant closes \emph{only} as the full
+\emph{Fredholm-determinant / block-Toeplitz} (Widom) object --- still computable in principle (CGL
+machinery), with monodromy
 data fixed algebraically ($c_i=\sum_j s_{ij}^2(a_i-a_j)$ known, $E_*$ rational by R8), but \emph{not}
 a finite special-function product. Barnes-$G$/Painlev\'e-V applies exactly on the decoupling locus.
 This is the named-closed-form answer, honestly: a Fredholm determinant.
@@ -278,14 +285,14 @@ factorizable, joint-free, and trivial-middle-coupling loci coincide and are the 
 the genuine-LZ region; there is no interior elementary locus.\pnote{ws\_c\_factorization\_locus.md}
 Type-1 is the minimal \emph{full} (non-tridiagonal) confluent system: its Cauchy structure welds
 widths to level spacing (R4) so crossings cannot separate, and keeps the extreme--extreme link
-dominant (R6), guaranteeing the joint. Hence $\Pmid$ is an irreducible rank-3 $c{=}1$ connection
+dominant (R6), guaranteeing the joint. Hence $\Pmid$ is an irreducible rank-3 $GL_3$/$W_3$ connection
 constant.
 
 \section{Honest status, predictions, domain}
 \emph{The exact-elementary target is absent}, on three independent lines: the rank-3 wild-character-
 variety count (R9), the gold-gated falsification of every finite Barnes-$G$/$\GE$ product (R11), and
 the uniform formula's failure precisely in the deep-overlap core (R13). The realistic objects are the
-exact integral representation (R10), the $c{=}1$ Fredholm determinant (R11), and the controlled
+exact integral representation (R10), the Fredholm-determinant (Widom) connection constant (R11), and the controlled
 uniform law (R12--R13). \emph{Predictions.} P-i: the prefactor peaks as parameters approach a joint
 (overlap $\to$ large). P-ii [confirmed, classifier]: factorizable $=$ joint-free $=$ a level
 decouples. P-iii: $\chi$ enters $\Pmid$ only through an interference dressing, not the BE scale ---
