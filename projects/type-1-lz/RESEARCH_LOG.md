@@ -1149,3 +1149,27 @@ separated-regime initial condition). NOT a shortcut around the Abelian ceiling:
    the RH deformation<->monodromy correspondence, not the numerology.
 Actionable hard-but-right next step (if pursued): derive/integrate the isomonodromic a-flow (Schlesinger
 for our node-pinned GL3 point) from the separated-regime IC to deep overlap.
+
+---
+
+## 2026-06-02 — Core principle elevated + WS-AFLOW derivation roadmap scoped
+
+User directive: make the single-seed-W holonomy insight the CORE of the project.
+- Elevated in type1_lz_working_paper.tex: new "Organizing principle" clause in the abstract + a
+  "The central object" paragraph in the intro threading R1/skeleton/WS-RH/deformation into one statement
+  (characterize the Stokes data sigma of the single a-independent geometric seed W). SESSION_SYNTHESIS
+  §1 now leads with the central principle.
+- Scoped paper/ws_aflow_derivation_plan.md (physics-derivation roadmap, NOT a proof): derive the
+  deformation flow of {P_mm(a),b(a)} along the commuting family using W a-independent + the integrable
+  zero-curvature (Lax) M_a. MILESTONE 1 = make-or-break: does the a-flow CLOSE into a finite-dim ODE
+  (and is sigma conserved)? Decisive test: finite-difference d_a{P_mm,b} (deformation_family_probe) vs
+  the proposed closed RHS. Three outcomes: (i) closes + sigma conserved (isomonodromic) -> transport
+  lever; (ii) closes into a 2-component ODE -> usable; (iii) doesn't close -> organizing-only (likely
+  failure mode, consistent with Abelian ceiling). Then M2 derive flow, M3 separated IC (near-elementary,
+  well-conditioned, NOT elementary), M4 integrate to deep-overlap + gold-gate vs oracle (incl sampleB).
+  Honest: realistic best case is a conditioning/transport lever, not a free closed form; the flow's class
+  is the same GL3/W3 confluent-Garnier sigma (frontier). WS-D's abelian Ê warns the closing structure may
+  govern only the abelian data, leaving sigma as the conserved IC (no free lunch).
+
+Status: NOT executed yet (scoped only). Next action when authorized: run Milestone 1 (construct M_a from
+the commuting partner; test closure via the d_a finite-difference-vs-RHS decisive check).

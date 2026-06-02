@@ -18,6 +18,18 @@ Nomenclature (locked): `s_ij=γ_iγ_j/(ε_i−ε_j)`, `w_ij=|2s_ij|`, BE exponen
 `𝒮`=scattering matrix; `Γ_j`=Cauchy form factor (NOT the BE exponent); `S₁₂` DEPRECATED.
 
 ## 1. Honest bottom line (current state)
+
+**CENTRAL ORGANIZING PRINCIPLE (project core, 2026-06-02).** The entire transcendental content of the
+whole Type-1 commuting family is the holonomy of a single, `a`-INDEPENDENT, geometrically-computable
+connection `W_ij(u)=⟨φ_i|φ_j'⟩` (the family shares one `a`-independent eigenbasis — machine precision).
+In the adiabatic frame `iχ'=[D^(a)(u)−iW(u)]χ` with `W` fixed and only the diagonal `D^(a)` carrying the
+slope dependence. Each member's open pair `{P_mm,b}` is this one `W`'s holonomy against the member's
+algebraic phases; the commuting family is `W`'s deformation orbit. The whole project reduces to ONE
+statement: **characterize the Stokes data `σ` of the single seed `W`.** This threads R1 (W a-independent =
+the seed), the skeleton (the 2 transcendentals = the holonomy), WS-RH (`σ` = `W`'s Stokes data, isolated),
+and the deformation probe (family = `W`'s orbit). Deformation-flow programme scoped in
+paper/ws_aflow_derivation_plan.md (make-or-break: does the `a`-flow close?).
+
 We have **not** produced a concise computable closed form, and we have **strong, multi-method
 evidence that an exact one in elementary or *published* special functions does not exist.** What we
 DO have: (i) a complete *structural theory* of why Type-1 N=3 is hard; (ii) the open quantity

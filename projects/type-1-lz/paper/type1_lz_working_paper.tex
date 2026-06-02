@@ -32,7 +32,12 @@ constellation and three concrete deliverables for its first genuinely open membe
 $N{=}3$ model $H(u)=H_0+uA$ with Cauchy couplings
 $(H_0)_{ij}=\gamma_i\gamma_j(a_i-a_j)/(\eps_i-\eps_j)$, the two extreme-slope survivals are the
 classical Brundobler--Elser (BE) factors; the open content is the middle-level survival $\Pmid$ and
-one off-diagonal. \emph{Structure.} We show the integrable (commuting-ring) structure is
+one off-diagonal. \emph{Organizing principle.} The entire transcendental content of the whole
+commuting family is the holonomy of a single, $a$-\emph{independent}, geometrically-computable
+connection $W_{ij}(u)=\langle\phi_i|\phi_j'\rangle$ (the family shares one $a$-independent eigenbasis):
+each member's open data $\{\Pmid,b\}$ is the holonomy of that fixed $W$ against the member's algebraic
+adiabatic-energy profile. The project reduces to characterizing the Stokes data of this one seed.
+\emph{Structure.} We show the integrable (commuting-ring) structure is
 \emph{Abelian} and fixes only spectral data, never the transition amplitudes (an ``Abelian
 ceiling''); the spectral curve is genus-0 rational with a \emph{universal real exact level
 crossing}; the avoided-crossing widths are \emph{slope-independent},
@@ -80,6 +85,21 @@ This paper has a three-layer spine. \S\ref{sec:ceiling}--\ref{sec:class} establi
 through-line, supported on three independent lines of evidence, is that \emph{no elementary or
 finite-special-function closed form for $\Pmid$ exists}; the realistic objects are an exact integral
 representation, a Fredholm-determinant (Widom) connection constant, and a controlled uniform approximation.
+
+\paragraph*{The central object.} Beneath these layers is a single organizing principle that ties them
+together. The Type-1 family $\{H^{(a)}\}$ at fixed $(\gamma,\eps)$ commutes and \emph{shares one
+$a$-independent eigenbasis} $\phi_i(u)$ (verified to machine precision), so the adiabatic derivative
+coupling $W_{ij}(u)=\langle\phi_i|\phi_j'\rangle$ is $a$-independent and algebraic in $(\gamma,\eps,u)$.
+In the adiabatic frame the dynamics is $i\chi'=[\,D^{(a)}(u)-iW(u)\,]\chi$ with $W$ \emph{fixed} and only
+the diagonal energy profile $D^{(a)}$ carrying the slope dependence. Hence \emph{the entire transcendental
+content of the whole commuting family is the holonomy of the one fixed connection $W$}: the abelian data
+(R1), the BE survivals, the formal monodromy, and the diagonal $G_\pm$ map (\S\ref{sec:skeleton}) are all
+algebraic, while the irreducible non-abelian datum is the Stokes data $\sigma$ of $W$ --- the same
+$\sigma$ the rank-3 classification names (\S\ref{sec:class}) and the node-pinned $GL_3$ analysis isolates.
+Each member's open pair $\{\Pmid,b\}$ is this single $W$'s holonomy against the member's algebraic phases;
+the commuting family is $W$'s deformation orbit. Every result below is a facet of \emph{characterizing the
+Stokes data of $W$}.\pnote{experiments/\{ring\_structure.py, deformation\_family\_probe.py\}; the
+deformation-flow programme is scoped in paper/ws\_aflow\_derivation\_plan.md}
 
 \section{Framework: $P$ as Stokes data}\label{sec:framework}
 $i\,\psi'(u)=(H_0+uA)\psi$ has entire coefficients, hence a \emph{single} irregular singular point at
