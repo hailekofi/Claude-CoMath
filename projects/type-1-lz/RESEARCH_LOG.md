@@ -785,3 +785,48 @@ leverage target.**
   Verify directly in 2409.17053 + 2006.15144 (full texts not yet opened — fetcher 403).
 - Two-week critical path in the memo (S1+S2 parallel days 1–3; candidate days 4–8; falsify on
   8 benchmark strata to 1e-9 days 9–14).
+
+---
+
+## 2026-06-02 — WS-O2 + WS-O3 outcomes (parallel constructive workstreams)
+
+Context: after the strategic re-rank (concede exact-WKB product O1 yields a *constructive*
+but not *concise* object; the hard content relocates to one junction Stokes constant), fired
+two parallel workstreams aimed at the two distinct virtues — a *named* closed form (O2) and a
+*usable concise* formula (O3).
+
+**WS-O2 (exact integral rep + c=1 connection-constant probe)** → commit d735490.
+- `S_xj = e^{+i a_j u^2/2} oint_{C_j} e^{-iuv} B(v) dv`, `B' = -i diag(1/a)(H0 - vI) B`,
+  machine-verified (operator-identity residual ~2e-14). [analytically-derived]
+- Gauge lemma `a->a+c` invariant ⇒ WLOG all a_j>0, single Stokes wedge. [established]
+- Literal double-precision matrizant quadrature hits a Stokes-dominance wall
+  (cond ~ e^{R^2/2a} → 1e19); recessive-only / high-precision engine OWED. value validated via
+  oracle to <=1e-6. [numerically-supported]
+- **c=1 Barnes-G/Euler-Gamma probe: NEGATIVE, decisive [gold-gated].** Neither the rank-2
+  single-sigma band (5/8 strata strictly outside) nor a finite rank-3 3-amplitude product
+  (forces |cosPhi|>1 on the overlapping strata) reproduces P_mid. Closes ONLY as the full c=1
+  **Fredholm-determinant / block-Toeplitz** connection constant (LNR arXiv:1806.08344); PV/
+  Barnes-G applies only on the one-link-decoupling locus. Sharpens R10 from the connection-
+  constant side. ⇒ the "named closed form" deliverable is a Fredholm determinant, NOT a finite
+  special-function product.
+
+**WS-O3 (uniform Dykhne-Stuckelberg)** → commit 16a2db9.
+- `P22 ~= A0 + A_ret + 2 sqrt(A0 A_ret) cosPhi`, `A0=p_lo p_hi`,
+  `A_ret=(1-p_lo)(1-p_hi)p_lh`, `cosPhi=clip[-(d_lo+d_hi)(1-3(1-chi)),-1,1]`, `p_X=e^{-2pi d_X}`.
+  Return path is via the OUTER lo-hi link (forced by verified u-ordering). [analytically-derived
+  structure; numerically-supported law, one fitted O(1) const K~3.0, robust]
+- Oracle-validated 53-pt sweep: RMS ~1-2%, max ~4% for delta<=0.25 (the generic regime); the
+  chi-dressing halves the incoherent error and captures the shape trend. Cleanly exhibits R11
+  {two window actions (scale) + chi (shape)}.
+- FAILS (>10%) in deep adiabatic overlap delta>0.5 (sampleB off by 0.27) — exactly the rank-3
+  regime (R4 permanent extreme-extreme coupling / R10). No simple uniform formula reaches it.
+
+**Net (honest).** Two distinct deliverables now exist: (i) an exact concise *formula* (O2
+integral rep) whose evaluation is conditioning-limited and whose *named* form is a c=1 Fredholm
+determinant (not elementary/finite-product — the finite-product hope is falsified); (ii) a
+concise *computable approximation* (O3) good to ~1-2% in the generic separated-to-moderate
+regime, failing in the genuine rank-3 deep-overlap core. The exact-elementary/finite-special-
+function target is now strongly evidenced NOT to exist; the realistic paper = O2 exact-rep +
+Fredholm-det classification as the rigorous spine, O3 as the usable results-section formula,
+oracle as ground truth. OWED: recessive-stable O2 engine; explicit LNR Fredholm kernel for our
+rank-3 point; asymmetry-aware O3 (depends on d_lo+d_hi, not the ratio); proofs to promote NS.
