@@ -56,8 +56,9 @@ label. `P₂→₂` (literal subscript `2`) is DEPRECATED — the `2` invites an
 the object is the slope-middle diagonal; always use `P_{m→m}`. Per-context forms: **tex**
 `P_{m\to m}`; **markdown/prose ASCII** `P_{m->m}`; **Python code** `P_mm` (brace-free — `P_{m->m}`
 inside an f-string is parsed as a `{m->m}` replacement field and breaks). *Code identifiers:* the
-legacy ASCII names `P22`, `P22_fast`, `P22_oracle`, `P22_model` denote `P_{m→m}` and are retained for
-API stability (they compute `P[mid,mid]`, `mid=argsort(a)[1]`); they are names, not an ordering claim.
+canonical Python identifiers are `P_mm`, `P_mm_fast`, `P_mm_oracle`, `P_mm_model` — they denote
+`P_{m→m}` and compute `P[mid,mid]`, `mid=argsort(a)[1]`. They are the standard names (the former legacy ASCII
+slope-middle forms were renamed to this canonical `P_mm*` form); they are names, not an ordering claim.
 
 ## The open quantity — three distinct objects (`S₁₂` and `P₂→₂` are DEPRECATED notation)
 The early notes wrote `S₁₂` (or `𝒮₁₂`) loosely for "the target," conflating three different things

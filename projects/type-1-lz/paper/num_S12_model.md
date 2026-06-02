@@ -34,11 +34,11 @@ The computable model has three tiers (all in `num_S12.py`):
 
 | tier | function | what it is | accuracy |
 |---|---|---|---|
-| **0 (floor, gold)** | `P22_oracle` | full Richardson via `oracle.oracle_P` (FIX1 permutation + FIX2 16:1) | **[gold]** ≤1e-8 (T=80) → few×1e-9 (T≥120) |
-| **1 (fast)** | `P22_fast` | ONE adiabatic-IP pass at T=80, rtol=1e-9 (no Richardson) | **[gold]** ~1e-9, ~14 s/sample |
-| **2 (surrogate)** | `P22_rbf` / `P22_model` / `slice_model` | smooth interpolants in the geometric arguments | **[num-model]** see §4 |
+| **0 (floor, gold)** | `P_mm_oracle` | full Richardson via `oracle.oracle_P` (FIX1 permutation + FIX2 16:1) | **[gold]** ≤1e-8 (T=80) → few×1e-9 (T≥120) |
+| **1 (fast)** | `P_mm_fast` | ONE adiabatic-IP pass at T=80, rtol=1e-9 (no Richardson) | **[gold]** ~1e-9, ~14 s/sample |
+| **2 (surrogate)** | `P_mm_rbf` / `P_mm_model` / `slice_model` | smooth interpolants in the geometric arguments | **[num-model]** see §4 |
 
-The fast engine `P22_fast` is the practical computable recipe: a finite, deterministic
+The fast engine `P_mm_fast` is the practical computable recipe: a finite, deterministic
 procedure that returns `P_{m→m}(γ,ε,a)` to ~1e-9 in seconds. **This satisfies the
 practicality bar regardless of the recognition outcome.** Performance note (this
 environment): the lab-frame diabatic propagator is O(T²) and impractical; the
@@ -96,7 +96,7 @@ on which both an accurate 1-D model (§4) and the recognition attempt (§5) are 
 ## 3. The stratified data (sep/width 0.1 → 4) — gold values
 
 `build_dataset` (engine='fast', T=80, rtol=1e-9) over 14 strata spanning well-separated
-→ strongly overlapping. Selected rows (`P22` = fast engine = gold to ~1e-9; `inc` =
+→ strongly overlapping. Selected rows (`P_mm` = fast engine = gold to ~1e-9; `inc` =
 incoherent baseline; χ = cross-ratio):
 
 | stratum | P_{m→m} | incoherent | ratio | δ (windows) | χ |
@@ -136,8 +136,8 @@ cross-validation (the in-sample residual is ~0 by construction and is *not* the 
 
 | model | function | features | LOO median | LOO max | use |
 |---|---|---|---|---|---|
-| polynomial logit | `P22_model` | 8 terms in (b_lm,b_mh,b_lh,χ) | 1.2e-1 | 8.0e-1 | poor (sparse) |
-| RBF (linear) | `P22_rbf` | (b_lm,b_mh,b_lh,χ) | 6.1e-2 | 3.2e-1 | ballpark only |
+| polynomial logit | `P_mm_model` | 8 terms in (b_lm,b_mh,b_lh,χ) | 1.2e-1 | 8.0e-1 | poor (sparse) |
+| RBF (linear) | `P_mm_rbf` | (b_lm,b_mh,b_lh,χ) | 6.1e-2 | 3.2e-1 | ballpark only |
 | **1-D scale slice** | `slice_model` | log(b_mid), χ fixed | **2.0e-3** | **1.1e-2** | **accurate on-slice** |
 
 **Interpretation.** Fourteen scattered points in 4-D are too sparse for any global
@@ -211,8 +211,8 @@ and the exact BE survivals. The fast single-pass engine **is** gold:
 | sampleB | 0.021017902 | 0.0210176923 | **2.1e-7** |
 | well_sep | 0.473547045 | 0.4735464616 | **5.8e-7** |
 
-(`P22_oracle` with full Richardson tightens these to few×1e-9; it is the slow gold path,
-~200 s/sample in this environment, used as the reference, while `P22_fast` is the
+(`P_mm_oracle` with full Richardson tightens these to few×1e-9; it is the slow gold path,
+~200 s/sample in this environment, used as the reference, while `P_mm_fast` is the
 practical engine.) Double-stochasticity and BE reproduction are inherited from the
 validated oracle (`oracle_report.md`, PASS on all strata including near-node).
 
@@ -224,8 +224,8 @@ validated oracle (`oracle_report.md`, PASS on all strata including near-node).
 cd experiments
 python num_S12.py --cache --recognize        # model fit + CV + validation + recognition (instant from cache)
 python num_S12.py --engine fast --cache       # (re)build the 14-strata gold dataset (~3-4 min) and cache it
-python -c "import num_S12 as M; print(M.P22_fast((-2,0,3),(1,.8,1.2),(-1,.5,2)))"   # one gold value
-python -c "import num_S12 as M; print(M.P22_oracle((-1,0,1.5),(.9,1.1,.8),(-.7,.4,1.3)))"  # slow gold
+python -c "import num_S12 as M; print(M.P_mm_fast((-2,0,3),(1,.8,1.2),(-1,.5,2)))"   # one gold value
+python -c "import num_S12 as M; print(M.P_mm_oracle((-1,0,1.5),(.9,1.1,.8),(-.7,.4,1.3)))"  # slow gold
 ```
 
 Files written by WS-NUM (only its own deliverables; `uploads/assay/*` read-only):

@@ -219,10 +219,10 @@ def oracle_validation(names=SWEEP, gold=False, T=120.0):
         eps, gam, a, desc = num_S12.STRATA[nm]
         g = num_S12.geometry_args(eps, gam, a)
         if gold:
-            r = num_S12.P22_oracle(eps, gam, a, T=T)
-            P, err = r["P22"], r["err"]
+            r = num_S12.P_mm_oracle(eps, gam, a, T=T)
+            P, err = r["P_mm"], r["err"]
         else:
-            P = num_S12.P22_fast(eps, gam, a, T=80.0, rtol=1e-9)
+            P = num_S12.P_mm_fast(eps, gam, a, T=80.0, rtol=1e-9)
             err = 1e-9
         rows.append(dict(nm=nm, sw=g["sep_width"], chi=g["chi"].real, P=P, err=err))
         print("   %-10s %-7.3f %-7.4f  %-12.8f  %.1e" % (nm, g["sep_width"], g["chi"].real, P, err))
@@ -268,7 +268,7 @@ def c1_probe(names=("well_sep", "canonical", "sampleB", "strong", "sep_small",
     n_out = 0
     for nm in names:
         eps, gam, a, desc = num_S12.STRATA[nm]
-        P = num_S12.P22_fast(eps, gam, a, T=80.0, rtol=1e-9)
+        P = num_S12.P_mm_fast(eps, gam, a, T=80.0, rtol=1e-9)
         g = num_S12.geometry_args(eps, gam, a); lo, mid, hi = g["slope"]
         d1 = be_exp(eps, gam, a, mid, lo); d2 = be_exp(eps, gam, a, mid, hi)
         p1 = float(mp.e**(-2*mp.pi*d1)); p2 = float(mp.e**(-2*mp.pi*d2))
@@ -287,7 +287,7 @@ def c1_probe(names=("well_sep", "canonical", "sampleB", "strong", "sep_small",
     n_bad = 0
     for nm in names:
         eps, gam, a, desc = num_S12.STRATA[nm]
-        P = num_S12.P22_fast(eps, gam, a, T=80.0, rtol=1e-9)
+        P = num_S12.P_mm_fast(eps, gam, a, T=80.0, rtol=1e-9)
         g = num_S12.geometry_args(eps, gam, a); lo, mid, hi = g["slope"]
         d1 = be_exp(eps, gam, a, mid, lo); d2 = be_exp(eps, gam, a, mid, hi)
         dlh = be_exp(eps, gam, a, lo, hi)

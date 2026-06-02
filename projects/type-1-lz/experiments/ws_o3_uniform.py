@@ -55,7 +55,7 @@ REGIME OF VALIDITY (honest):
   dominates and no per-crossing factorization is controlled.
 
 Reuses the project builder `type1` and the gold oracle (experiments/oracle.py via
-num_S12.P22_fast / oracle.oracle_P). Run:  python ws_o3_uniform.py
+num_S12.P_mm_fast / oracle.oracle_P). Run:  python ws_o3_uniform.py
 """
 from __future__ import annotations
 import os, sys
@@ -112,13 +112,13 @@ def stokes_phase(delta: float) -> float:
 K_OVERLAP = 3.0
 
 
-def uniform_P22(eps, gam, a, K: float = K_OVERLAP, return_parts: bool = False):
+def uniform_P_mm(eps, gam, a, K: float = K_OVERLAP, return_parts: bool = False):
     """
     Uniform semiclassical middle survival P_mm in {delta_lo, delta_hi, chi}.
 
     eps, gam, a : length-3 model params (eps strictly increasing).
     K           : overlap-dressing constant (eq **).
-    Returns float P22, or (P22, dict-of-parts) if return_parts.
+    Returns float P_mm, or (P_mm, dict-of-parts) if return_parts.
     """
     eps = np.array(eps, float); gam = np.array(gam, float); a = np.array(a, float)
     lo, mid, hi = (int(k) for k in np.argsort(a))            # slope order
@@ -201,7 +201,7 @@ _GOLD_CACHE = os.path.join(_HERE, "ws_o3_gold_cache.pkl")
 
 
 def _gold_values(rows, engine="fast", T=70.0, use_cache=True):
-    """Compute (and cache) gold P22 for each sweep row. Caching keyed by (name,eps,gam,a)."""
+    """Compute (and cache) gold P_mm for each sweep row. Caching keyed by (name,eps,gam,a)."""
     import pickle
     cache = {}
     if use_cache and os.path.exists(_GOLD_CACHE):
@@ -220,7 +220,7 @@ def _gold_values(rows, engine="fast", T=70.0, use_cache=True):
             lo, mid, hi = (int(k) for k in np.argsort(np.array(a, float)))
             val = float(r["P"][mid, mid])
         else:
-            val = num_S12.P22_fast(eps, gam, a, T=T, rtol=3e-9)
+            val = num_S12.P_mm_fast(eps, gam, a, T=T, rtol=3e-9)
         cache[key] = val
         out[nm] = val
         dirty = True
@@ -235,7 +235,7 @@ def run_validation(engine: str = "fast", T: float = 70.0, verbose: bool = True):
     Evaluate the uniform formula vs the oracle across the sweep; print an error table
     stratified by max(delta) (the regime axis) and report max/RMS errors.
 
-    engine='fast'   : num_S12.P22_fast (single IP pass, ~1e-9 vs gold; fast).
+    engine='fast'   : num_S12.P_mm_fast (single IP pass, ~1e-9 vs gold; fast).
     engine='oracle' : full Richardson gold (slow).
     """
     rows = _build_sweep()
@@ -243,7 +243,7 @@ def run_validation(engine: str = "fast", T: float = 70.0, verbose: bool = True):
     recs = []
     for (nm, eps, gam, a) in rows:
         P_gold = golds[nm]
-        P_u, parts = uniform_P22(eps, gam, a, return_parts=True)
+        P_u, parts = uniform_P_mm(eps, gam, a, return_parts=True)
         P_inc = _incoh(eps, gam, a)
         dmax = max(parts["d_lo"], parts["d_hi"])
         recs.append(dict(name=nm, gold=P_gold, uniform=P_u, incoherent=P_inc,
@@ -285,7 +285,7 @@ def check_anchors(verbose: bool = True):
     out = {}
     for nm, gold in GOLD_ANCHORS.items():
         eps, gam, a, desc = num_S12.STRATA[nm]
-        P_u, parts = uniform_P22(eps, gam, a, return_parts=True)
+        P_u, parts = uniform_P_mm(eps, gam, a, return_parts=True)
         P_inc = _incoh(eps, gam, a)
         out[nm] = dict(gold=gold, uniform=P_u, incoherent=P_inc,
                        err=abs(P_u - gold), dmax=max(parts["d_lo"], parts["d_hi"]),
@@ -307,12 +307,12 @@ def recalibrate_K(engine="fast", T=70.0):
     golds = _gold_values(rows, engine=engine, T=T)
     data = []
     for (nm, eps, gam, a) in rows:
-        _, parts = uniform_P22(eps, gam, a, return_parts=True)
+        _, parts = uniform_P_mm(eps, gam, a, return_parts=True)
         if max(parts["d_lo"], parts["d_hi"]) < 0.45:
             data.append((eps, gam, a, golds[nm]))
 
     def loss(K):
-        return float(np.mean([(uniform_P22(e, g, a_, K=K) - P) ** 2
+        return float(np.mean([(uniform_P_mm(e, g, a_, K=K) - P) ** 2
                               for (e, g, a_, P) in data]))
     res = minimize_scalar(loss, bounds=(-2, 8), method="bounded")
     return res.x, np.sqrt(res.fun)

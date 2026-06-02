@@ -13,17 +13,17 @@ geometric arguments, together with inverse-symbolic / PSLQ recognition attempts.
 It delivers a computable P_mm(gamma, eps, a) REGARDLESS of whether a closed form is
 recognized, in two tiers:
 
-  TIER 0 (FLOOR, gold).  ``P22_oracle`` -- the trusted value from the project gold
+  TIER 0 (FLOOR, gold).  ``P_mm_oracle`` -- the trusted value from the project gold
       oracle ``experiments/oracle.py`` (the adiabatic interaction-picture propagator
       with the FIX1 permutation + FIX2 Richardson).  Benchmarked to <=1e-8 (T=80) /
       few x 1e-9 (T>=120) against the EXACT Brundobler-Elser extreme survivals.  This
       is the finite recipe that satisfies the practicality bar.
 
-  TIER 1 (FAST).  ``P22_fast`` -- a single adiabatic-IP pass at T=80, rtol=1e-9, which
+  TIER 1 (FAST).  ``P_mm_fast`` -- a single adiabatic-IP pass at T=80, rtol=1e-9, which
       already reproduces the gold value to ~1e-9 (no Richardson) in ~14 s, used for
       dataset generation and quick evaluation.
 
-  TIER 2 (SURROGATE).  ``P22_model`` -- a smooth, fast-to-evaluate surrogate written
+  TIER 2 (SURROGATE).  ``P_mm_model`` -- a smooth, fast-to-evaluate surrogate written
       purely in the NATURAL GEOMETRIC ARGUMENTS (the two window actions I_X and the
       Q4 turning-point cross-ratio).  It interpolates the gold data; it is the
       "computable model as a function of the geometry" requested by the parametrization
@@ -193,7 +193,7 @@ def _Smat_adiabatic(geo: Geometry, T: float, rtol: float, atol: float) -> np.nda
     return Pd
 
 
-def P22_fast(eps, gam, a, T: float = 80.0,
+def P_mm_fast(eps, gam, a, T: float = 80.0,
              rtol: float = 1e-9, atol: float = 1e-10) -> float:
     """
     FAST middle survival P_mm = P[mid,mid] from ONE adiabatic-IP pass (no Richardson).
@@ -208,15 +208,15 @@ def P22_fast(eps, gam, a, T: float = 80.0,
     return float(Pd[mid, mid])
 
 
-def P22_oracle(eps, gam, a, T: float = 120.0, **kw) -> dict:
+def P_mm_oracle(eps, gam, a, T: float = 120.0, **kw) -> dict:
     """
     GOLD (TIER 0 / FLOOR) middle survival, the trusted computable recipe.
     Thin wrapper over ``oracle.oracle_P`` (full Richardson + convention check).
-    Returns dict(P22, err, full=<oracle result>, geom=<geometry_args>).
+    Returns dict(P_mm, err, full=<oracle result>, geom=<geometry_args>).
     """
     res = oracle.oracle_P(eps, gam, a, T=T, **kw)
     _, mid, _ = slope_order(a)
-    return dict(P22=float(res["P"][mid, mid]),
+    return dict(P_mm=float(res["P"][mid, mid]),
                 err=float(res["err"][mid, mid]),
                 doubly_stochastic_defect=res["doubly_stochastic_defect"],
                 be_delta=res["be_delta"],
@@ -257,7 +257,7 @@ def S12_canonical_phase(eps, gam, a, T: float = 80.0,
         phase_canon[("mid", j)] = float(ph)
     return dict(
         S_mid_amp={j: float(abs(Sd[mid, j])) for j in range(3)},
-        P22=float(abs(Sd[mid, mid]) ** 2),
+        P_mm=float(abs(Sd[mid, mid]) ** 2),
         phase_canon=phase_canon,
         c=c, slope=(lo, mid, hi))
 
@@ -310,14 +310,14 @@ def build_dataset(names=None, T: float = 80.0, rtol: float = 1e-9,
     """
     Compute the high-precision P_mm and the geometric arguments for each stratum.
 
-    engine='fast'   : single adiabatic-IP pass (P22_fast), ~14 s/sample, ~1e-9.
-    engine='oracle' : full Richardson gold (P22_oracle), slower, the FLOOR value.
+    engine='fast'   : single adiabatic-IP pass (P_mm_fast), ~14 s/sample, ~1e-9.
+    engine='oracle' : full Richardson gold (P_mm_oracle), slower, the FLOOR value.
 
     cache=True       : load the persisted dataset (num_S12_dataset.pkl) if present,
                        else build it and save.  (The integration is the bottleneck;
                        caching lets the model/recognition iterate instantly.)
 
-    Returns list of dicts with keys: name, eps, gam, a, P22, geom (geometry_args),
+    Returns list of dicts with keys: name, eps, gam, a, P_mm, geom (geometry_args),
     delta_small, delta_large, chi, sep_width, P_mid_inc, ratio.
     """
     if cache and os.path.exists(_CACHE):
@@ -332,21 +332,21 @@ def build_dataset(names=None, T: float = 80.0, rtol: float = 1e-9,
     for nm in names:
         eps, gam, a, desc = STRATA[nm]
         if engine == "oracle":
-            r = P22_oracle(eps, gam, a, T=max(T, 120.0))
-            P22 = r["P22"]; g = r["geom"]; err = r["err"]
+            r = P_mm_oracle(eps, gam, a, T=max(T, 120.0))
+            P_mm = r["P_mm"]; g = r["geom"]; err = r["err"]
         else:
-            P22 = P22_fast(eps, gam, a, T=T, rtol=rtol, atol=atol)
+            P_mm = P_mm_fast(eps, gam, a, T=T, rtol=rtol, atol=atol)
             g = geometry_args(eps, gam, a); err = None
         d = g["delta_X"]
-        row = dict(name=nm, desc=desc, eps=eps, gam=gam, a=a, P22=P22,
+        row = dict(name=nm, desc=desc, eps=eps, gam=gam, a=a, P_mm=P_mm,
                    delta_small=d[0], delta_large=d[1], chi=g["chi"].real,
                    sep_width=g["sep_width"], P_mid_inc=g["P_mid_inc"],
-                   ratio=P22 / g["P_mid_inc"], err=err, geom=g)
+                   ratio=P_mm / g["P_mid_inc"], err=err, geom=g)
         rows.append(row)
         if verbose:
-            print("[%-10s] P22=%.9f  inc=%.9f  ratio=%6.3f  "
+            print("[%-10s] P_mm=%.9f  inc=%.9f  ratio=%6.3f  "
                   "dlt=(%.4f,%.4f) chi=%.5f sw=%.3f%s"
-                  % (nm, P22, g["P_mid_inc"], row["ratio"],
+                  % (nm, P_mm, g["P_mid_inc"], row["ratio"],
                      d[0], d[1], g["chi"].real, g["sep_width"],
                      "" if err is None else "  err=%.1e" % err))
     if cache:
@@ -357,7 +357,7 @@ def build_dataset(names=None, T: float = 80.0, rtol: float = 1e-9,
 
 
 # ===========================================================================
-#  5.  The surrogate model  P22_model(geometric arguments)
+#  5.  The surrogate model  P_mm_model(geometric arguments)
 # ===========================================================================
 #  PARAMETRIZATION (see paper/num_S12_model.md for the full discussion).
 #
@@ -379,7 +379,7 @@ def build_dataset(names=None, T: float = 80.0, rtol: float = 1e-9,
 #  returns  P = sigmoid(design . coeffs),  guaranteed in (0,1).
 #
 #  This is the computable f(window actions, cross-ratio).  It is an INTERPOLANT of the
-#  gold dataset (tag: [num-model]); for GOLD values use P22_oracle / P22_fast.  Its
+#  gold dataset (tag: [num-model]); for GOLD values use P_mm_oracle / P_mm_fast.  Its
 #  cross-validated generalization error is reported by ``cv_report`` and in the md.
 
 _MODEL_COEFFS = None   # set by calibrate_model(); persisted literals below.
@@ -425,7 +425,7 @@ def calibrate_model(rows) -> np.ndarray:
     """
     global _MODEL_COEFFS
     X = np.array([_design_be(*_row_be(r)) for r in rows])
-    y = np.array([_logit(r["P22"]) for r in rows])
+    y = np.array([_logit(r["P_mm"]) for r in rows])
     coeffs, *_ = np.linalg.lstsq(X, y, rcond=None)
     _MODEL_COEFFS = coeffs
     return coeffs
@@ -434,7 +434,7 @@ def calibrate_model(rows) -> np.ndarray:
 def cv_report(rows, verbose=True):
     """
     Leave-one-out cross-validation of the surrogate: refit on N-1 rows, predict the
-    held-out P22, report the absolute deviation.  This is the HONEST generalization
+    held-out P_mm, report the absolute deviation.  This is the HONEST generalization
     error of the interpolant (in-sample residual is near-zero by construction).
     """
     devs = []
@@ -442,8 +442,8 @@ def cv_report(rows, verbose=True):
         train = [rows[i] for i in range(len(rows)) if i != k]
         c = calibrate_model(train)
         pred = _sigmoid(_design_be(*_row_be(rows[k])) @ c)
-        dev = abs(pred - rows[k]["P22"])
-        devs.append((rows[k]["name"], rows[k]["P22"], float(pred), float(dev)))
+        dev = abs(pred - rows[k]["P_mm"])
+        devs.append((rows[k]["name"], rows[k]["P_mm"], float(pred), float(dev)))
     calibrate_model(rows)   # restore full fit
     if verbose:
         print("  leave-one-out CV:")
@@ -454,7 +454,7 @@ def cv_report(rows, verbose=True):
     return devs
 
 
-def P22_model(eps=None, gam=None, a=None, *,
+def P_mm_model(eps=None, gam=None, a=None, *,
               b_lm=None, b_mh=None, b_lh=None, chi=None, coeffs=None) -> float:
     """
     SURROGATE (TIER 2) middle survival as a smooth function of the natural geometric
@@ -462,7 +462,7 @@ def P22_model(eps=None, gam=None, a=None, *,
     with the four invariants (b_lm, b_mh, b_lh, chi).
 
     P = sigmoid(design . coeffs), guaranteed in (0,1).  Requires a calibrated coefficient
-    vector.  This is the fast computable f; for GOLD values use P22_oracle / P22_fast.
+    vector.  This is the fast computable f; for GOLD values use P_mm_oracle / P_mm_fast.
     """
     c = coeffs if coeffs is not None else _MODEL_COEFFS
     if c is None:
@@ -501,14 +501,14 @@ def fit_rbf(rows, kernel="linear"):
     global _RBF, _RBF_SCALE
     from scipy.interpolate import RBFInterpolator
     X = np.array([_rbf_feat(*_row_be(r)) for r in rows])
-    y = np.array([r["P22"] for r in rows])
+    y = np.array([r["P_mm"] for r in rows])
     mu = X.mean(0); sd = X.std(0); sd[sd == 0] = 1.0
     _RBF_SCALE = (mu, sd)
     _RBF = RBFInterpolator((X - mu) / sd, y, kernel=kernel, smoothing=0.0)
     return _RBF
 
 
-def P22_rbf(eps=None, gam=None, a=None, *, b_lm=None, b_mh=None, b_lh=None, chi=None):
+def P_mm_rbf(eps=None, gam=None, a=None, *, b_lm=None, b_mh=None, b_lh=None, chi=None):
     """RBF-interpolant middle survival (TIER 2, recommended fast model)."""
     if _RBF is None:
         raise RuntimeError("RBF not fitted; run fit_rbf(build_dataset(...))")
@@ -525,7 +525,7 @@ def rbf_cv(rows, kernel="linear", verbose=True):
     """Leave-one-out CV of the RBF interpolant (honest off-sample error)."""
     from scipy.interpolate import RBFInterpolator
     X = np.array([_rbf_feat(*_row_be(r)) for r in rows])
-    y = np.array([r["P22"] for r in rows])
+    y = np.array([r["P_mm"] for r in rows])
     mu = X.mean(0); sd = X.std(0); sd[sd == 0] = 1.0
     Xn = (X - mu) / sd
     devs = []
@@ -574,15 +574,15 @@ def build_slice(eps0=(-2.0, 0.0, 3.0), gam=(1.0, 0.8, 1.2), a=(-1.0, 0.5, 2.0),
     e0 = np.asarray(eps0, float)
     for s in scales:
         eps = tuple(s * e0)
-        P22 = P22_fast(eps, gam, a, T=T, rtol=rtol, atol=atol)
+        P_mm = P_mm_fast(eps, gam, a, T=T, rtol=rtol, atol=atol)
         g = geometry_args(eps, gam, a)
-        rows.append(dict(name="slice_s%.3f" % s, eps=eps, gam=gam, a=a, P22=P22,
+        rows.append(dict(name="slice_s%.3f" % s, eps=eps, gam=gam, a=a, P_mm=P_mm,
                          scale=s, delta_small=g["delta_X"][0], delta_large=g["delta_X"][1],
                          chi=g["chi"].real, P_mid_inc=g["P_mid_inc"],
-                         ratio=P22 / g["P_mid_inc"], err=None, geom=g))
+                         ratio=P_mm / g["P_mid_inc"], err=None, geom=g))
         if verbose:
-            print("  s=%.3f P22=%.8f chi=%.5f b_mid=%.5f"
-                  % (s, P22, g["chi"].real, g["be"]["lo_mid"] + g["be"]["mid_hi"]))
+            print("  s=%.3f P_mm=%.8f chi=%.5f b_mid=%.5f"
+                  % (s, P_mm, g["chi"].real, g["be"]["lo_mid"] + g["be"]["mid_hi"]))
     if cache:
         import pickle
         pickle.dump(rows, open(_SLICE_CACHE, "wb"))
@@ -597,7 +597,7 @@ def fit_slice_model(slice_rows):
     global _SLICE_SPLINE
     from scipy.interpolate import PchipInterpolator
     xb = np.array([r["geom"]["be"]["lo_mid"] + r["geom"]["be"]["mid_hi"] for r in slice_rows])
-    y = np.array([r["P22"] for r in slice_rows])
+    y = np.array([r["P_mm"] for r in slice_rows])
     order = np.argsort(xb)
     _SLICE_SPLINE = PchipInterpolator(np.log(xb[order]), y[order], extrapolate=True)
     return _SLICE_SPLINE
@@ -614,7 +614,7 @@ def slice_cv(slice_rows, verbose=True):
     """Leave-one-out CV of the 1-D slice spline."""
     from scipy.interpolate import PchipInterpolator
     xb = np.array([r["geom"]["be"]["lo_mid"] + r["geom"]["be"]["mid_hi"] for r in slice_rows])
-    y = np.array([r["P22"] for r in slice_rows])
+    y = np.array([r["P_mm"] for r in slice_rows])
     devs = []
     for k in range(len(slice_rows)):
         tr = [i for i in range(len(slice_rows)) if i != k]
@@ -689,23 +689,23 @@ def recognition_pass(row, tol=1e-6, verbose=True):
 
     (a) Test P_mm directly against the elementary closed-form candidates
         (``closed_form_candidates``) -- the Demkov-Osherov / coherent-path hypotheses.
-    (b) PSLQ-search log(P22/P_inc) for a low-height integer combination of the natural
+    (b) PSLQ-search log(P_mm/P_inc) for a low-height integer combination of the natural
         log-constants (pairwise BE exponents, log(1-chi), pi).
 
     Returns a list of hits (name, detail, residual).
     """
     hits = []
     g = row["geom"]; be = g["be"]
-    P22, Pinc = row["P22"], row["P_mid_inc"]
+    P_mm, Pinc = row["P_mm"], row["P_mid_inc"]
 
     # (a) closed-form candidates
     for nm, val in closed_form_candidates(row).items():
-        dev = abs(val - P22)
+        dev = abs(val - P_mm)
         if dev < tol:
             hits.append(("CF: " + nm, float(val), float(dev)))
 
-    # (b) PSLQ on log(P22/P_inc)
-    R = P22 / max(Pinc, 1e-300)
+    # (b) PSLQ on log(P_mm/P_inc)
+    R = P_mm / max(Pinc, 1e-300)
     logR = np.log(R)
     chi = row["chi"]
     basis = {
@@ -725,9 +725,9 @@ def recognition_pass(row, tol=1e-6, verbose=True):
                 print("   HIT:", h)
         else:
             cands = closed_form_candidates(row)
-            best = min(cands.items(), key=lambda kv: abs(kv[1] - P22))
-            print("   no closed-form/PSLQ hit (P22=%.9f; best cand '%s'=%.9f dev=%.2e)"
-                  % (P22, best[0], best[1], abs(best[1] - P22)))
+            best = min(cands.items(), key=lambda kv: abs(kv[1] - P_mm))
+            print("   no closed-form/PSLQ hit (P_mm=%.9f; best cand '%s'=%.9f dev=%.2e)"
+                  % (P_mm, best[0], best[1], abs(best[1] - P_mm)))
     return hits
 
 
@@ -746,7 +746,7 @@ def recognize_closed_form_across_slice(slice_rows, tol=1e-7, verbose=True):
     for r in slice_rows:
         cands = closed_form_candidates(r)
         for nm in cand_names:
-            worst[nm] = max(worst[nm], abs(cands[nm] - r["P22"]))
+            worst[nm] = max(worst[nm], abs(cands[nm] - r["P_mm"]))
     ranked = sorted(worst.items(), key=lambda kv: kv[1])
     if verbose:
         print("  sample-independent closed-form test (worst dev over %d slice points):"
@@ -773,7 +773,7 @@ GOLD_ANCHORS = {
 
 def validate_against_anchors(rows, verbose=True):
     """
-    FAST validation: compare the fast-engine P22 (and the surrogate) to the published
+    FAST validation: compare the fast-engine P_mm (and the surrogate) to the published
     gold-oracle anchor values (oracle_report.md) and to the EXACT Brundobler-Elser
     extreme survivals, WITHOUT re-running the slow Richardson oracle.  The BE extreme
     survivals are analytically exact, so reproducing them is the load-bearing check.
@@ -782,18 +782,18 @@ def validate_against_anchors(rows, verbose=True):
     for r in rows:
         nm = r["name"]
         anchor = GOLD_ANCHORS.get(nm)
-        fast_dev = None if anchor is None else abs(r["P22"] - anchor)
-        model = P22_model(r["eps"], r["gam"], r["a"]) if _MODEL_COEFFS is not None else None
+        fast_dev = None if anchor is None else abs(r["P_mm"] - anchor)
+        model = P_mm_model(r["eps"], r["gam"], r["a"]) if _MODEL_COEFFS is not None else None
         model_dev = None if (model is None or anchor is None) else abs(model - anchor)
         # exact BE extreme survivals via the oracle helper, compared to the fast P diag
         eps, gam, a = r["eps"], r["gam"], r["a"]
         bes = oracle.be_survivals(eps, gam, a)
-        table.append(dict(name=nm, fast=r["P22"], anchor=anchor, fast_dev=fast_dev,
+        table.append(dict(name=nm, fast=r["P_mm"], anchor=anchor, fast_dev=fast_dev,
                           model=model, model_dev=model_dev,
                           P_lo_exact=bes["P_lo"], P_hi_exact=bes["P_hi"]))
         if verbose:
             print("[%-12s] fast=%.9f  anchor=%s  fastdev=%s   model=%s modeldev=%s"
-                  % (nm, r["P22"],
+                  % (nm, r["P_mm"],
                      "%.9f" % anchor if anchor is not None else "    --     ",
                      "%.1e" % fast_dev if fast_dev is not None else "--",
                      "%.6f" % model if model is not None else "  --  ",
@@ -803,7 +803,7 @@ def validate_against_anchors(rows, verbose=True):
 
 def validate(rows_fast, names=None, T: float = 120.0, verbose=True):
     """
-    Compare the fast-engine and surrogate P22 to the GOLD oracle on the named strata.
+    Compare the fast-engine and surrogate P_mm to the GOLD oracle on the named strata.
     Returns a list of dicts; prints a table.  (Oracle calls are slow; default to the
     two precision anchors unless ``names`` widens it.)
     """
@@ -812,14 +812,14 @@ def validate(rows_fast, names=None, T: float = 120.0, verbose=True):
     by_name = {r["name"]: r for r in rows_fast}
     for nm in names:
         eps, gam, a, desc = STRATA[nm]
-        gold = P22_oracle(eps, gam, a, T=T)
-        fast = by_name.get(nm, {}).get("P22")
+        gold = P_mm_oracle(eps, gam, a, T=T)
+        fast = by_name.get(nm, {}).get("P_mm")
         model = None
         if _MODEL_COEFFS is not None:
-            model = P22_model(eps, gam, a)
-        rec = dict(name=nm, gold=gold["P22"], gold_err=gold["err"],
-                   fast=fast, fast_dev=None if fast is None else abs(fast - gold["P22"]),
-                   model=model, model_dev=None if model is None else abs(model - gold["P22"]),
+            model = P_mm_model(eps, gam, a)
+        rec = dict(name=nm, gold=gold["P_mm"], gold_err=gold["err"],
+                   fast=fast, fast_dev=None if fast is None else abs(fast - gold["P_mm"]),
+                   model=model, model_dev=None if model is None else abs(model - gold["P_mm"]),
                    be_delta=gold["be_delta"])
         table.append(rec)
         if verbose:

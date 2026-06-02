@@ -116,7 +116,7 @@ This **cleanly exhibits the R11 separation**:
 ## 5. Validation vs the gold oracle (sep/width 0.1→4, χ ∈ [0.65, 0.98])
 
 53-point sweep: the project STRATA + a scale×coupling family (fixed shape, χ=0.80) + five shape
-families moved across χ. Gold reference = `num_S12.P22_fast` (T=70), cross-checked against the
+families moved across χ. Gold reference = `num_S12.P_mm_fast` (T=70), cross-checked against the
 published gold anchors to ≤1e-6 (canonical 0.214724, sampleB 0.021018). Regime axis = `max(δ_lo,δ_hi)`.
 Full per-sample table printed by `python ws_o3_uniform.py`.
 

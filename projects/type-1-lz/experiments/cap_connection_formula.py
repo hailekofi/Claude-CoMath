@@ -129,9 +129,9 @@ def T5_band_test(strata=None, T=70.0, use_oracle=False, verbose=True):
     for nm in strata:
         eps, gam, a, desc = n.STRATA[nm]
         if use_oracle:
-            P = n.P22_oracle(eps, gam, a, T=max(T, 120.0))["P22"]
+            P = n.P_mm_oracle(eps, gam, a, T=max(T, 120.0))["P_mm"]
         else:
-            P = n.P22_fast(eps, gam, a, T=T)
+            P = n.P_mm_fast(eps, gam, a, T=T)
         pmin, pmax, q1, q2 = single_sigma_band(eps, gam, a)
         out = bool(P < pmin - 1e-5 or P > pmax + 1e-5)
         margin = max(pmin - P, P - pmax)
@@ -155,7 +155,7 @@ def T6_reduction_control(T=70.0, verbose=True):
     rows = []
     for g2 in [1.2, 0.6, 0.3, 0.12, 0.04, 0.01]:
         gam = (1.0, 0.8, g2)
-        P = n.P22_fast(base_eps, gam, base_a, T=T)
+        P = n.P_mm_fast(base_eps, gam, base_a, T=T)
         pmin, pmax, q1, q2 = single_sigma_band(base_eps, gam, base_a)
         # single lo-mid (the surviving 2-level crossing as mid decouples from hi)
         q_lomid = np.exp(-2 * np.pi * n.be_exponent(base_eps, gam, base_a, 1, 0))
@@ -165,7 +165,7 @@ def T6_reduction_control(T=70.0, verbose=True):
         print("  decoupling mid-hi (gam_hi -> 0): P_mm -> elementary single-crossing q_lomid,")
         print("  band tightens around it; PV/2x2 applies exactly on this rank-2 reduction locus.")
         for r in rows:
-            print("    gam_hi=%5.2f: P22=%.6f band=[%.5f,%.5f] inband=%s q_lomid=%.6f"
+            print("    gam_hi=%5.2f: P_mm=%.6f band=[%.5f,%.5f] inband=%s q_lomid=%.6f"
                   % (r["gam_hi"], r["P"], r["pmin"], r["pmax"], r["inband"], r["q_lomid"]))
     return rows
 

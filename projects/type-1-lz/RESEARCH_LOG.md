@@ -811,7 +811,7 @@ two parallel workstreams aimed at the two distinct virtues — a *named* closed 
   special-function product.
 
 **WS-O3 (uniform Dykhne-Stuckelberg)** → commit 16a2db9.
-- `P22 ~= A0 + A_ret + 2 sqrt(A0 A_ret) cosPhi`, `A0=p_lo p_hi`,
+- `P_mm ~= A0 + A_ret + 2 sqrt(A0 A_ret) cosPhi`, `A0=p_lo p_hi`,
   `A_ret=(1-p_lo)(1-p_hi)p_lh`, `cosPhi=clip[-(d_lo+d_hi)(1-3(1-chi)),-1,1]`, `p_X=e^{-2pi d_X}`.
   Return path is via the OUTER lo-hi link (forced by verified u-ordering). [analytically-derived
   structure; numerically-supported law, one fitted O(1) const K~3.0, robust]
@@ -1015,10 +1015,11 @@ strictly enforced the ε-ordering convention.
   ε-indexed); (2) identify extreme/middle BE roles by slope (argsort(a)), never energy rank;
   (3) write the open survival as P_{m→m}. Per-context forms: tex P_{m\to m}; prose ASCII P_{m->m};
   Python P_mm (brace-free -- P_{m->m} inside an f-string parses as a {m->m} field and breaks).
-  Legacy code identifiers P22/P22_fast/P22_oracle/P22_model retained for API stability (= P[mid,mid]).
+  Canonical code identifiers P_mm/P_mm_fast/P_mm_oracle/P_mm_model (= P[mid,mid]); these ARE the
+  standard names (the legacy ASCII slope-middle forms were renamed to the canonical P_mm* form).
 - Sweep: 244 P-arrow-2 occurrences replaced across 29 authored files (logs, SESSION_SYNTHESIS,
   META_REVIEW, all paper/ memos+tex, all experiments/ scripts+memos). Curated exact arrow-bearing
-  tokens only -> never matched identifiers P22 or Richardson vars P_2T/P16. uploads/ left untouched
+  tokens only -> never matched the slope-middle identifiers or Richardson vars P_2T/P16. uploads/ left untouched
   (source material, per NOMENCLATURE policy).
 - Bug caught & fixed: P_{m->m} inside Python f-strings broke compilation (stokes_graph.py); converted
   all .py occurrences to brace-free P_mm. ALL project .py now compile; canonical anchor intact
