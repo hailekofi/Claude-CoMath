@@ -144,14 +144,23 @@ enhanced (sampleB $120.5\times$; canonical $2.58\times$).\pnote{ws\_g\_stokes\_g
 re-verified vs oracle, experiments/anchor\_experiment.py 2026-06-02; Stokes-graph figures not yet
 regenerated}
 
-\textbf{R8 [AD].} The Laplace frame $\psi_j(u)=\int_C e^{-iuv}B_j(v)\,dv$,
-$B'(v)=-i\,\mathrm{diag}(1/a)(H_0-vI)B$, reduces the scalar connection problem to one finite
-\emph{apparent} singular point with anomalous indicial exponents $\{0,1,3\}$ (gap at $2$) plus the
-rank-2 irregular point. The accessory location is \emph{not} a free modulus: it equals the node
-$v_*=E_*$ (\S\ref{sec:ceiling}), the unique rational root of the cyclic Wronskian
-$\det[e_0,Me_0,M^2e_0]$, $M=\mathrm{diag}(1/a)(H_0-vI)$ --- so it is fixed \emph{algebraically} by the
-geometry.\pnote{pa2\_accessory\_algebraic.py; symbolic on 4 samples incl.\ non-monotonic; general
-proof owed}
+\textbf{R8 [EST, proven].} The Laplace frame $\psi_j(u)=\int_C e^{-iuv}B_j(v)\,dv$,
+$B'(v)=-i\,M(v)B$, $M(v)=\mathrm{diag}(1/a)(H_0-vI)$, reduces the scalar connection problem to one
+finite \emph{apparent} singular point with anomalous indicial exponents $\{0,1,3\}$ (gap at $2$) plus
+the rank-2 irregular point. Its location is the unique root $v_*$ of the cyclic Wronskian
+$W(v)=\det[e_0,M(v)e_0,M(v)^2e_0]$, which is \emph{linear} in $v$ (column $e_0$ is $v$-independent),
+so $v_*=-W_0/W_1\in\mathbb{Q}(\gamma^2,\eps,a)$ is manifestly algebraic. \emph{Theorem
+(accessory $=$ node):} $v_*=E_*$, the node energy, as a polynomial identity over
+$\mathbb{Q}(\gamma,\eps,a)$. \emph{Mechanism (structural proof):} $M(v)w=\mu w \Leftrightarrow
+(H_0-vI)w=\mu Aw \Leftrightarrow H(-\mu)w=vw$, so an $M(v)$-eigenpair is an eigenpair of $H(u{=}{-}\mu)$
+at energy $v$; the rank-drop of $e_0$'s $M(v_*)$-Krylov space therefore forces $\chi(u,v_*)$ to have a
+double root $u_*$ ($\mathrm{Disc}_u\chi(\cdot,v_*)\equiv0$), at which $\chi=\partial_E\chi=\partial_u\chi=0$
+--- the node. Hence the accessory parameter is \emph{not} a free modulus but the rational function
+$E_*(\gamma,\eps,a)$, pinned by the spectral degeneracy (bonus: $u_*$ is the rational repeated root of
+$\chi(\cdot,v_*)$).\pnote{r8\_proof.py (Route A: resultant identity $\Phi(v_*)\equiv0$ on the gauge slice
+$a{=}(s,1,2)$ + slope-affine covariance; Route B: structural, above); independently re-verified by the
+coordinator 2026-06-02 (exact rational arithmetic, fresh samples: $\mathrm{Disc}_u\chi(\cdot,v_*)=0$ and
+$\Phi(v_*)=0$); supersedes pa2\_accessory\_algebraic.py's 4-sample check}
 
 \textbf{R9 [GG]. The function class is rank-3, not rank-2.} The connection datum lives on a
 dimension-$6$ wild character variety (three distinct irregular rates $a_0,a_1,a_2$). A rank-2
@@ -291,10 +300,10 @@ overlap, where the rank-3 content is deepest.
 rank-3 point is \emph{not} constructive without the genuine rank-3 special function (the unknown
 local parametrix); the one revival route is an mpmath high-precision recessive-split symbol that
 beats the Stokes wall (break is precision-limited, not structural) and could let one \emph{read}
-$\sigma$, plus the closed $v$-frame$\leftrightarrow\Scat$ contour-selection map; (iii) analytic proofs of
-accessory$=$node in general (R8; \emph{node universality itself is now the Owusu--Wagh--Yuzbashyan
-theorem, R3}), of the $\approx1.6$ overlap bound (R5), and of the
-finite-product falsification (R11) as a parameter-region statement rather than a sample scan;
+$\sigma$, plus the closed $v$-frame$\leftrightarrow\Scat$ contour-selection map; (iii) the
+$\approx1.6$ overlap bound (R5) and the finite-product falsification (R11) as a
+parameter-region statement rather than a sample scan (accessory$=$node, R8, and node universality,
+R3, are now theorems);
 (iv) an asymmetry-aware uniform law (R12 uses $\delta_{\rm lo}+\delta_{\rm hi}$, not the ratio).
 
 % ---------------- Dependency map (evidence-ladder) ----------------
@@ -305,7 +314,7 @@ finite-product falsification (R11) as a parameter-region statement rather than a
 % R5  [NS]  <- coscaling.py (genuine-LZ ~1.6 bound), ws_d_verification.py
 % R6  [EST] <- Cauchy coupling values; ws_d
 % R7  [NS]  <- ws_g_stokes_graph.md (+figs), oracle cross-check
-% R8  [AD]  <- ws_e_junction_Smatrix.md, pa2_accessory_algebraic.py (accessory=node, cyclic Wronskian)
+% R8  [EST] <- r8_proof.py (PROVEN: v_*=E_* identity over Q(g,e,a); Route A resultant + Route B structural); coordinator re-verified 2026-06-02
 % R9  [GG]  <- cap_connection_formula.md (rank-3, dim 6 vs 2; T5 gold-gated falsification)
 % R10 [AD]  <- ws_o2_integral.py PART A (operator identity ~2e-14), gauge lemma
 % R11 [GG]  <- ws_o2_integral_rep.md S3 (Barnes-G finite product falsified; Fredholm-det verdict)

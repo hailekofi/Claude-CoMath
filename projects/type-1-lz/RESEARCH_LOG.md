@@ -932,3 +932,40 @@ finite-product falsification as a parameter-region statement (R11). Strategic: d
 [prove node] is now CLOSED by the literature; the live productive threads are (2) physical meaning
 of the node, the R8 accessory=node proof (now well-posed since node is a theorem), the chi-channel
 map (R13), and publication.
+
+---
+
+## 2026-06-02 — R8 "accessory = node" PROVEN (WS-R8) + independent coordinator verification
+
+WS-R8 (physics-derivation) proved v_* = E_* as a polynomial identity over Q(gamma,eps,a). Files:
+experiments/r8_proof.py, paper/r8_accessory_node_proof.md.
+
+THEOREM (R8): the finite apparent singularity v_* of the Laplace connection ODE equals the OWY node
+energy E_*. Two proofs:
+- Route A (resultant): substitute E=v_* into Phi(E)=Res_u(chi, d_E chi); numerator reduces to the ZERO
+  polynomial on the gauge slice a=(s,1,2) with eps,gamma fully symbolic; lifted to all generic params by
+  slope-affine (a->alpha a+beta) covariance (v_* and E_* both transform as energies).
+- Route B (structural, mechanism): M(v)w=mu w  <=>  H(-mu)w = v w, so an M(v)-eigenpair is an eigenpair
+  of H(u=-mu) at energy v. The cyclic Wronskian W(v)=det[e0,M e0,M^2 e0] is LINEAR in v; its single root
+  v_* is where e0's M(v_*)-Krylov space drops rank, which forces chi(u,v_*) to have a double root u_*
+  (Disc_u chi(.,v_*)=0), i.e. the node (chi=d_E chi=d_u chi=0). Bonus: u_* = rational repeated root.
+
+INDEPENDENT COORDINATOR CHECK (M1, decisive leg): re-derived from scratch in exact rational arithmetic
+on 2 fresh random samples (incl. messy non-slice a=(-1,1/3,2) and a=(-5/4,2/3,11/7)): deg_v W = 1;
+Disc_u chi(u,v_*) == 0 (True) AND Phi(v_*) == 0 (True) on both. Confirms the identity AND the
+gauge-covariance lift (samples were not in slice form). Agent also reports 31/31 exact random samples.
+
+IMPACT:
+- R8/PA-2 promoted: "verified on 4 samples" -> ESTABLISHED (proven identity + independent verification).
+- COROLLARY now fully proven: ALL monodromy data of the rank-3 connection problem are algebraic in
+  (gamma,eps,a): formal exponents Theta=diag(c_i) (R11b) AND accessory v_*=E_* (R8). The "named Fredholm
+  determinant" (R11) has fully explicit, algebraically-determined data.
+- Owed proofs remaining: ~1.6 overlap bound (R5); finite-product falsification (R11) as a region statement;
+  the strict no-log certificate as a single all-symbol identity (secondary; {0,1,3} indices proven on slice).
+- Paper updated: R8 [AD]->[EST, proven] with mechanism; owed-proofs item (iii) trimmed; dep map updated.
+
+LINEAGE COMPLETE: integrability (commuting partner, R1) -> exact crossing (OWY 2009, R3) -> accessory
+parameter pinned to it (R8) -> all monodromy data algebraic. The spectral-side theorem (OWY) and the
+dynamical-side theorem (R8) are now joined. Integrability does not make P_mid elementary (Abelian
+ceiling) but it DOES rigidify the dynamics: the transition amplitude is transcendental with
+algebraically-determined data.
