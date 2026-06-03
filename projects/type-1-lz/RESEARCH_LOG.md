@@ -1238,3 +1238,29 @@ VERDICT: paper is internally coherent, provenance-clean, evidence-tags honest. T
 (structural ceiling -> classification -> 3 deliverables -> skeleton/2-transcendentals -> central seed W ->
 deformation no-go -> conclusion) is one consistent governing account. Remaining for "final": a real
 pdflatex compile (no toolchain here) and the owed proofs already listed (R5/R11 region statements).
+
+---
+
+## 2026-06-02 — New direction scoped: the GEOMETRIC selection question (WS-GEOM) + Magnus/Feynman primer
+
+User pivot beyond closed form: how does the Type-1 Hamiltonian select its slice of U(3)? Two facets
+(both sigma-FREE): (A) the image region of Phi:(g,e,a)->S in reduced-U(3) (directed-cycle bias, boundary
+= classifier locus); (B) the holonomy/topological selection (the a-independent seed W's holonomy on the
+spectral-curve double cover; spinor signs delta_j).
+
+- paper/ws_geom_scope.md: scoping roadmap (physics-derivation + physics-numerics). Part I: the adiabatic-W
+  Magnus expansion to 2nd order -- order 0 = directed-cycle permutation (topological skeleton), Ω_1/Ω_2 =
+  first hop + interference; validate term-by-term vs oracle in the generic regime; Feynman-graph dictionary
+  (sheets=lines, W=vertices, dynamical phase=propagators; W a-independent => geometric vertices, elementary
+  phase edges). Part II: map the image region with cheap data + a CAGED symbolic-regression invariant hunt
+  (structure-detector ONLY, not surrogate/formula-finder). Milestones M1-M4; honest limits (no resum in
+  deep overlap; sigma still the irreducible all-orders datum; ML may find nothing = first-class negative).
+- paper/primer_magnus_feynman_geometry.md: pedagogical primer -- (i) Magnus = exp of nested-commutator
+  series, unitary at each order, converges in weak coupling; (ii) -> Feynman graphs on 3 adiabatic sheets;
+  (iii) -> geometric theory: U(3) selection = (topological permutation/spinor sector from the eigenbundle
+  monodromy) x (smooth W-holonomy dressing), boundary = decoupling locus, sigma = the quarantined
+  irreducible resummation.
+
+Status: SCOPED, not executed. Re-approaches the demoted WKB/selector "common cover & spinor lift"
+geometry with the new seed-W understanding. Entry point: WS-GEOM M1 (write Ω_1,Ω_2; order-0=directed
+cycle; term-by-term oracle validation in the generic regime).
