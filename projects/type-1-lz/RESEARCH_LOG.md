@@ -1444,3 +1444,29 @@ STATUS: M3 T1-T3 closed (rigid skeleton derived); T4 partial (Z2 label establish
 sigma-free topological theory is essentially complete: node-selected directed 3-cycle (T1) + two-vertex
 reachable set (T2) + decoupling-locus boundary (T3) + two Z2 mirror sectors (T4-label). Two open items
 remain, neither touching the derived skeleton: sigma (analytic dressing) and the Z2 orientation selector.
+
+---
+
+## 2026-06-03 — T4 selector: systematic predictor screen => NOT a simple parameter sign (genuine monodromy object)
+
+Pushed the orientation selector empirically (against the reliable adaptive-resolution overlap-continuation
+orientation; node properly resolved with a dense grid near u_*). Screened candidate predictors; ALL fail
+(~chance on clean samples, N~9-11, FWD/REV balanced):
+ - -sign(u_*): 92% one seed, 33% another -> fluke (already retracted).
+ - node nearer hi-mid vs lo-mid diabatic crossing: 4/11 (0.36).
+ - sign(s2_mid,hi - s2_mid,lo): ~0.56;  sign(a_mid-(a_lo+a_hi)/2): ~0.56.
+ - sign(E_*-(H0)_mid,mid): ~0.67;  sign(ucr_lm+ucr_mh): ~0.78 (small-N, did not hold up);
+   sign(ucr_lm*ucr_mh): ~0.56.
+CONCLUSION: the Z2 orientation selector is NOT a simple parameter sign -- it is the genuine spectral-flow /
+delta_j-monodromy object on the genus-0 curve Sigma (which complex branch point reconnects which sheets;
+which mid-crossing the real node realizes). This SHARPENS "selector open": it's not "we didn't look" but
+"the natural elementary predictors are refuted." Remaining path = the analytic spectral-flow/monodromy
+derivation (hard; beyond predictor screening). STOPPED the screen (diminishing returns).
+
+Measurement note: orientation must be read by ADAPTIVE-RESOLUTION continuation (dense grid near u_*);
+coarse continuation gives many ambiguous (o==0) reads, and adiabatic-limit-P reads are unreliable
+(deep-overlap, P not at a vertex). With proper resolution both orientations occur (FWD 5, REV 6).
+
+STATUS unchanged at the theory level: M3 T1-T3 closed (rigid skeleton derived); T4 = Z2 label established,
+selector OPEN and now confirmed to be the genuine monodromy object (not elementary). Two open items remain
+(sigma; the Z2 selector), neither touching the derived sigma-free skeleton.

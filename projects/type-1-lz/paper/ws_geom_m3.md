@@ -122,14 +122,19 @@ orientations occur across parameter space — and it is the eigenframe spinor/do
 construction) yields **both** orientations over broad samples: **REV `(2,0,1)` ×7, FWD `(1,2,0)` ×4**
 (clean samples, `ws_geom_m3_t4.py`). By the group rule (T1 Step 4) this is the node swapping `(lo,mid)`
 vs `(mid,hi)`. So the `U(3)` section comes in **two mirror sectors**, not one.
-*What is OPEN (honest).* The **selector** — what picks the sector — is *not* established. The natural guess
-`orientation = -\mathrm{sign}(u_*)` is **REFUTED**: it held ~92% on one seed but **33%** (worse than
-chance) on an independent seed, so it was a fluke; no validated predictor / dividing locus is known.
-A full account needs the **spectral-flow combinatorics** (which of the lo–mid / hi–mid crossings is the
-*real* node and which is the *avoided complex* branch point — the asymptotic order reverses but only one
-real crossing exists) together with the **`δ_j` monodromy** on the genus-0 curve `Σ` (transpositions at the
-four complex branch points + the real node). Both are **owed**; T4 is the partial piece flagged at the
-outset. *(Methodological note: reading the orientation from the adiabatic-limit `P` is unreliable — the
+*What is OPEN (honest).* The **selector** — what picks the sector — is *not* established, and a systematic
+predictor screen (against the reliable adaptive-resolution continuation orientation) shows it is **not a
+simple parameter sign**. Refuted candidates (all $\approx$chance on clean samples): `-\mathrm{sign}(u_*)`
+(held ~92% on one seed but 33% on another — a fluke); **node-proximity** to the lo–mid vs hi–mid diabatic
+crossing (4/11); the coupling ratio `\mathrm{sign}(s_{mid,hi}^2-s_{mid,lo}^2)`; the slope offset
+`\mathrm{sign}(a_{mid}-\tfrac12(a_{lo}+a_{hi}))`; `\mathrm{sign}(E_*-(H_0)_{mid,mid})`; and sums/products
+of the diabatic crossing times. **None predicts the Z₂.** This is itself informative: the selector is the
+genuine **spectral-flow / monodromy** object, not an elementary sign. A full account needs the
+spectral-flow combinatorics (which of the lo–mid / hi–mid crossings is realized by the *real* node vs the
+*complex* branch point — the asymptotic order reverses but only one real crossing exists) together with the
+**`δ_j` monodromy** on the genus-0 curve `Σ` (transpositions at the four complex branch points + the real
+node). Both are **owed** (hard analytic work, beyond simple-predictor screening); T4 is the partial piece
+flagged at the outset. *(Methodological note: reading the orientation from the adiabatic-limit `P` is unreliable — the
 limit is the deep-overlap regime where `P` does not cleanly reach a vertex; the deterministic
 overlap-continuation is the reliable measurement, and it is what establishes the Z₂.)*
 
