@@ -1298,3 +1298,34 @@ O(sin(cT^2)/T^2) endpoint terms; single-T errors oscillate. Resolved by T-averag
 NET: M1 establishes the geometric SKELETON of S in U(3): order 0 = node-selected directed-cycle
 permutation (topological), orders 1-2 = the W-holonomy dressing (analytic), with marginal (R4/R5)
 convergence so the resummation = sigma stays irreducible. Next: M2 (image-region map) / M3 (invariant hunt).
+
+---
+
+## 2026-06-03 — WS-GEOM M2 DONE & coordinator-verified: the image region (facet A)
+
+M2 complete (agent reclaimed mid-session -- transcript severed, no completion notice -- but the full
+deliverables were written: experiments/ws_geom_m2_image.py, paper/ws_geom_m2.md, 289 lines, all gates).
+Coordinator INDEPENDENTLY VERIFIED the decisive geometric claims (4 cases, fast solve):
+ - weak coupling -> {P_mm,b}=(0.996,0.002) = IDENTITY vertex (1,0);
+ - strong coupling -> (0.034,1.000) = directed CYCLE vertex (0,1);
+ - mid decouple (g_mid->0) -> P_mm=0.9998 (P_mm=1 edge);
+ - extreme decouple (g_lo->0) -> b=0.0002 (b=0 edge).
+
+RESULTS:
+ - M2a PASS: image closure touches EXACTLY two of six Birkhoff vertices -- identity (diabatic/small-delta)
+   and the node-selected directed 3-cycle (adiabatic/large-delta). Reverse-cycle and transposition corners
+   NOT reached (min-dist ~0.27): the cycle ORIENTATION is node-fixed.
+ - M2b: monotone log-in-action bias toward the cycle (Spearman(dist,delta)~-0.77), chi-modulated -- the
+   same {action x shape} split as WS-O3/R11.
+ - M2c CONFIRMED (headline): image boundary = the decoupling locus, with a SHARP EDGE-SELECTION rule --
+   extreme-level decoupling -> b=0; middle-level decoupling -> P_mm=1; global bounds b>=0, P_mm<=1 with no
+   violations. (Honest: the agent flagged that convex-hull distance on a sparse random cloud is misleading;
+   the load-bearing claim is edge-selection + bounds, which I reproduced.)
+ - M2d: effective dimension FULL -- PCA spectrum [1,.70,.65,.49,.20,.07,0,0,0]; the 3 exact zeros are the
+   KNOWN elementary relations among {delta_ij,c_i} (incl sum c_i=0). NO new analytic constraint.
+
+NET (honest "partial" outcome, as anticipated): the section's ANALYTIC content is exhausted by BE+DS+chi
+(no hidden invariant); the genuinely NEW geometric content is TOPOLOGICAL -- two node-selected vertices +
+the edge-selection boundary. IMPLICATION FOR M3: M2d pre-empts the analytic-invariant hunt (full dimension
+=> none to find); M3 reduces to FORMALIZING the topological label (the two-vertex / spinor sector, the
+node-fixed cycle orientation), not searching for an analytic relation.
