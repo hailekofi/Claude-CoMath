@@ -76,8 +76,48 @@ of the convention: a geometric statement that is only correct when the three ord
   regime; for diabatic/small-action samples the oracle sits near the identity. T1 concerns the order-0
   skeleton, not the full dynamics.
 
+## T2 — two-vertex reachability  [analytically-derived + numerically-verified]
+*Claim:* in the two free coordinates `{P_mm,b}` (R15), the image closure of `Φ` touches **exactly two** of
+the six Birkhoff vertices — the identity `(1,0)` and the node-selected directed cycle `(0,1)` — and no
+other. (The six permutations map to `{P_mm,b}` as: identity`→(1,0)`; directed cycle`→(0,1)`; extreme-swap
+`(lo\,hi)→(1,1)`; reverse cycle, `(lo\,mid)`, `(mid\,hi)` `→(0,0)`.)
+*Proof.* A vertex (a permutation matrix `P`) requires every transition probability to be `0` or `1`, which
+occurs only in a deterministic limit.
+- **Diabatic limit** `γ→0`: `H_0→0` (its entries `∝γ_iγ_j,γ_k^2`), so `H(u)→uA=\mathrm{diag}(a)u` is
+  diagonal in the diabatic basis — no transitions, `S→\mathbb 1`, `{P_mm,b}→(1,0)` (identity).
+- **Adiabatic limit** `γ→∞` (gaps `→∞`): evolution is adiabatic, the system follows the instantaneous
+  eigenstates, and by **T1** the node-continued following permutation is the directed 3-cycle, so
+  `{P_mm,b}→(0,1)`.
+- **No other vertex is a limit point.** The extreme-swap `(lo\,hi)` `(1,1)` is the *energy-sorted* order-0,
+  but the node (R3, always present) converts it to the 3-cycle, so it is never the adiabatic limit; it is
+  not the diabatic limit (identity) either. The reverse cycle is excluded because the node fixes the
+  orientation (T1, Step 4). The remaining transpositions are limit points of neither limit. Finite
+  couplings give interior (non-permutation) points interpolating between `(1,0)` and `(0,1)`. ∎
+*Verified* (`ws_geom_m3_t2t3.py`): `gscale=0.03→(1.000,0.000)`, `gscale=2.0→(0.024,1.000)`; the `(0,0)`
+and `(1,1)` corners stay `>0.5` away throughout (and M2a's cloud: min-dist `~0.003,0.005` to the two
+reached vertices, `~0.27` to the forbidden ones).
+
+## T3 — edge-selection boundary $=$ decoupling locus  [analytically-derived + numerically-verified]
+*Claim:* the `{P_mm,b}` image boundary is the decoupling locus (R9), edge-resolved: a **middle** coupling
+`→0` ⇒ `P_mm→1`; an **extreme** coupling `→0` ⇒ `b→0`.
+*Proof (decoupling block structure).* When `γ_k→0`, level `k` decouples and `H` block-reduces to a 2-level
+problem on the other two `⊕` a trivial spectator `k`.
+- **Middle decoupling** (`γ_mid→0` kills both `s_{mid,lo},s_{mid,hi}∝γ_mid`): the middle is a spectator,
+  surviving with probability `1`, so `P_mm=P[mid,mid]→1` — the `{P_mm,b}` point lands on the `P_mm=1`
+  edge (the residual lo–hi 2-level fixes `b∈[0,1]`).
+- **Extreme decoupling** (`γ_lo→0` or `γ_hi→0`): the directed cycle `lo→hi→mid→lo` needs circulation
+  through all three levels; removing an extreme breaks it, so the `lo→hi` amplitude `b=P[hi,lo]→0` — the
+  point lands on the `b=0` edge.
+Global bounds `b≥0`, `P_mm≤1` hold always (probabilities), so these are genuine boundary edges; the
+decoupling locus traces them, edge-selected by *which* level decouples. This is the geometric realization
+of R9 (**elementary ⇔ a level decouples**). ∎
+*Verified* (`ws_geom_m3_t2t3.py`, M2c): `γ_mid→0 ⇒ P_mm=1.0000`; `γ_lo→0 ⇒ b=0.0000`; `γ_hi→0 ⇒ b=0.0000`.
+
 ## Status / hand-off
-T1 [keystone] **closed** (analytically-derived, verified) ⇒ the geometric theory (R18) now has a *derived*
-topological core: the leading `U(3)` permutation is a node-selected directed 3-cycle. Remaining M3:
-T2 (two-vertex reachability), T3 (edge-selection boundary = decoupling locus), T4 (the `δ_j` double-cover
-orientation/label — which would also settle Step 4's orientation in general).
+T1 [keystone], **T2, and T3 are closed** (analytically-derived + numerically-verified) ⇒ the geometric
+theory (R18--R19) now has a *fully derived* topological skeleton: the leading `U(3)` permutation is a
+node-selected directed 3-cycle (T1); the reachable set is the two-vertex region between identity and that
+cycle (T2); its boundary is the decoupling locus, edge-selected (T3). The **only remaining M3 item is T4**
+— the `δ_j` spinor double-cover label, which would also settle the *orientation* of the cycle (T1 Step 4)
+in general — a stretch, possibly partial. With T1--T3 done, the rigid (σ-free) half of the
+`U(3)`-selection theory is derived; `σ` (the analytic dressing) remains the sole irreducible remainder.

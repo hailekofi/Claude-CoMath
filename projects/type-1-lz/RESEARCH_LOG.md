@@ -1386,3 +1386,28 @@ roles=slope (which states swap), energy=derived & end-reversing (hence never a c
 IMPACT: T1 [keystone] closed => the geometric theory (R18) has a DERIVED topological core (the leading
 U(3) permutation is a node-selected directed cycle). Remaining M3: T2 (two-vertex), T3 (edge-selection
 boundary), T4 (delta_j double-cover orientation/label).
+
+---
+
+## 2026-06-03 — M3 T2 + T3 CLOSED (analytically-derived + verified)
+
+Files: paper/ws_geom_m3.md (T2,T3 sections added), experiments/ws_geom_m3_t2t3.py (verified).
+
+T2 (two-vertex reachability) [AD+verified]: the {P_mm,b} image touches EXACTLY identity (1,0) and the
+node-selected directed cycle (0,1); the other 4 permutations map to (0,0) or (1,1) and are unreachable.
+Proof: diabatic limit g->0 => H->uA diagonal => S=I => (1,0); adiabatic limit g->inf => follow eigenstates
+=> node-continued cycle (T1) => (0,1); no other vertex is a limit point (extreme-swap is node-converted to
+the cycle; reverse cycle excluded by orientation; rest are limit points of neither). Verified: gscale 0.03
+->(1.000,0.000), 2.0->(0.024,1.000); (0,0)&(1,1) never approached (>0.5 always).
+
+T3 (edge-selection boundary = decoupling locus, R9) [AD+verified]: middle decouple (g_mid->0) => P_mm->1
+edge (middle is a spectator, survives w.p. 1); extreme decouple (g_lo or g_hi ->0) => b->0 edge (the
+directed cycle needs all 3 links; removing an extreme breaks it). Global bounds b>=0,P_mm<=1 => genuine
+boundary edges; the decoupling locus traces them, edge-selected by WHICH level decouples. Geometric
+realization of R9 (elementary <=> a level decouples). Verified: g_mid->0 P_mm=1.0000; g_lo->0,g_hi->0 b=0.0000.
+
+STATUS: M3 T1+T2+T3 CLOSED. The rigid (sigma-free) half of the U(3)-selection theory is now DERIVED:
+node-selected directed cycle (T1) + two-vertex reachable set (T2) + decoupling-locus boundary (T3). Only
+T4 (the delta_j spinor double-cover ORIENTATION label) remains (a stretch, possibly partial). sigma (the
+analytic dressing) is the sole irreducible remainder. Paper geometric "account" updated to cite the derived
+T1-T3.
