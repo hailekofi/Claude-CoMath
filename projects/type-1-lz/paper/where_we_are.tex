@@ -1,0 +1,151 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Wt}{\widetilde W}
+\newcommand{\Pmid}{P_{m\to m}}
+\setlength{\parskip}{2pt}
+
+\title{\vspace{-2.5em}\textbf{Where we are: the Magnus generators $\Omega_j$ of the Type-1 $N{=}3$ Landau--Zener matrix}}
+\author{}
+\date{2026-06-03 \;\textbar\; Type-1 LZ working notes (companion to \texttt{ws\_geom\_m1.md}--\texttt{m6\_tournament.md})}
+
+\begin{document}
+\maketitle
+\vspace{-3em}
+
+\noindent\textit{Purpose.} A standing one-page-each reference answering: \emph{what exactly are the
+$\Omega_j$, and how do they depend on the model data $\{\gamma,\eps,a\}$?} All matrices are the canonical
+anchor $\eps=(-2,0,3)$, $\gamma=(1,0.8,1.2)$, $a=(-1,0.5,2)$.
+
+\section{The model and where $\Omega$ lives}
+
+The Type-1 $N{=}3$ multistate Landau--Zener problem is $\;i\,\partial_u\psi=H(u)\,\psi$, $H(u)=H_0+uA$,
+$A=\mathrm{diag}(a)$, with the Cauchy/Gaudin coupling
+\[
+(H_0)_{ij}=\frac{\gamma_i\gamma_j\,(a_i-a_j)}{\eps_i-\eps_j}\ (i\neq j),
+\qquad
+(H_0)_{ii}=-\sum_{k\neq i}\frac{\gamma_k^2\,(a_i-a_k)}{\eps_i-\eps_k},
+\qquad
+H_0=\begin{pmatrix}-1.344&0.600&0.720\\0.600&-1.470&0.480\\0.720&0.480&-0.920\end{pmatrix}.
+\]
+The observable is the doubly-stochastic $P_{x\to j}=|S_{xj}|^2$, where $S=\lim_{u\to+\infty}$ of the
+propagator. Milestone~1 writes $S$ in the \textbf{adiabatic frame}:
+\[
+\boxed{\;S \;=\; \Phi(+\infty)\,e^{\Omega}\,\Phi(-\infty)^\dagger,\qquad
+\Omega=\Omega_1+\Omega_2+\Omega_3+\cdots\;}
+\]
+Here $\Phi(u)=[\phi_1(u)\,\phi_2(u)\,\phi_3(u)]$ is the matrix of instantaneous eigenvectors of $H(u)$, with
+$\Phi(\pm\infty)$ the diabatic end-frames; $e^{\Omega}$ is the evolution \emph{within} that moving frame.
+\textbf{The $\Omega_j$ are not part of $H$}: $\Omega$ is the $\log$ of how much the true evolution deviates
+from perfect adiabatic following. $\Omega=0$ (order $0$) gives the bare frame reordering --- the
+node-selected directed $3$-cycle (the topological skeleton, M3/M4).
+
+\section{Exact definitions: nested-commutator integrals}
+
+The single building block is the \textbf{dynamical-phase-dressed derivative coupling}
+\[
+\Wt_{ij}(u)=W_{ij}(u)\,e^{\,i\theta_{ij}(u)},\qquad
+W_{ij}=\langle\phi_i|\partial_u\phi_j\rangle=\frac{\langle\phi_i|A|\phi_j\rangle}{E_j-E_i}\ (i\neq j),\qquad
+\theta_{ij}(u)=\int^{u}\!\big(E_i-E_j\big)\,du',
+\]
+where $E_i(u)$ are the eigenvalues of $H(u)$. The Magnus generators are then the standard nested-commutator
+integrals
+\[
+\Omega_1=-\!\int \Wt\,du,\qquad
+\Omega_2=\tfrac12\!\iint_{u_1>u_2}\![\Wt_1,\Wt_2]\,du_1du_2,
+\]
+\[
+\Omega_3=\tfrac16\!\iiint_{u_1>u_2>u_3}\!\Big([\Wt_1,[\Wt_2,\Wt_3]]+[[\Wt_1,\Wt_2],\Wt_3]\Big)\,du_1du_2du_3,
+\]
+with $\Wt_k\equiv\Wt(u_k)$. Each $\Omega_j$ is a $3\times3$ \emph{anti-Hermitian} matrix, so $e^{\Omega}\in
+U(3)$ at every truncation. Physically: $\Omega_1=$ one non-adiabatic hop, $\Omega_2=$ two ordered hops
+(interference), $\Omega_3=$ three. The expansion parameter is the \textbf{dressed action}
+$\Lambda=\int\|\Wt\|\,du$ (\emph{not} the bare coupling).
+
+\section{How the $\Omega_j$ depend on $\{\gamma,\eps,a\}$ --- three layers}
+
+\textbf{Layer A --- the \emph{integrands} are explicit algebra in $\{\gamma,\eps,a,u\}$.}
+$H_0$ is the rational matrix above; $E_i(u)$ are the three roots of the cubic
+$\det(E-H_0-uA)=0$ (Cardano --- algebraic in $\{\gamma,\eps,a,u\}$); $W_{ij}(u)=\langle\phi_i|A|\phi_j\rangle/
+(E_j-E_i)$ with $A=\mathrm{diag}(a)$ is algebraic in the eigenvectors/eigenvalues; and
+$\theta_{ij}(u)=\int(E_i-E_j)$ is the phase one-form integrated, $\theta_{ij}\approx\tfrac12(a_i-a_j)u^2$ at
+large $u$. \emph{Everything inside the integral signs is closed form.}
+
+\textbf{Layer B --- the $\Omega_j$ themselves are \emph{not} elementary in $\{\gamma,\eps,a\}$.}
+They are \emph{oscillatory $u$-integrals} of those algebraic integrands (an algebraic amplitude $W$ against a
+quadratic-at-infinity phase $e^{i\theta}$ --- Fresnel/Weber-type). One can only give them as \emph{numbers}
+per parameter point; there is \textbf{no closed form in $\{\gamma,\eps,a\}$}. This is the entire difficulty of
+the $3\times3$ problem. Canonically,
+\[
+\Omega_1=\!\begin{pmatrix}
+0 & 0.512{-}0.210i & -0.331{+}0.201i\\
+-0.512{-}0.210i & 0 & 0.158{+}0.223i\\
+0.331{+}0.201i & -0.158{+}0.223i & 0
+\end{pmatrix}\!,\quad
+\Omega_2=\!\begin{pmatrix}
+0.176i & -0.113{-}0.114i & 0.010{+}0.069i\\
+0.113{-}0.114i & 0.180i & -0.033{+}0.051i\\
+-0.010{+}0.069i & 0.033{+}0.051i & -0.355i
+\end{pmatrix}\!,
+\]
+with $\|\Omega_1\|_F=1.03$, $\|\Omega_2\|_F=0.51$, and $\Lambda=2.98$.
+
+\textbf{Layer C --- the one elementary distillate.}
+The \emph{only} closed-form-in-$\{\gamma,\eps,a\}$ object that comes out of the $\Omega_j$ is the leading
+stationary-phase reduction of $\Omega_1$ --- the Brundobler--Elser exponent
+\[
+\delta_{ij}=\frac{\gamma_i^2\gamma_j^2\,|a_i-a_j|}{(\eps_i-\eps_j)^2}
+\qquad\big(\text{canonical: }\delta_{01}=0.240,\ \delta_{02}=0.173,\ \delta_{12}=0.154\big),
+\]
+together with the turning-point cross-ratio $\chi$. Everything \emph{beyond} the leading saddle stays
+transcendental.
+
+\medskip
+\noindent\emph{Why the integral is hard (the saddle structure).} $\theta_{ij}'(u)=E_i(u)-E_j(u)$ has
+\emph{no real zero} (adiabatic levels of a real-symmetric $H$ never cross), so each $\Omega_j$ integral is
+dominated by the \emph{complex} turning points (off-axis branch points of the spectral curve $\Sigma$).
+Steepest descent through them is Dykhne--Davis--Pechukas: $\Omega_1\!\to$ single-crossing survivals
+$p_x=e^{-2\pi\delta_x}$ (the BE extremes), and the $\Omega_2$ commutator $\to$ the St\"uckelberg interference
+$2\sqrt{A_0A_{\rm ret}}\cos\Phi$ of the uniform law.
+
+\section{Where we landed (M1--M6) and the bottom line}
+
+\begin{center}
+\small
+\begin{tabular}{@{}llp{8.0cm}@{}}
+\toprule
+Step & did with the $\Omega_j$ & result \\
+\midrule
+\textbf{M1} & \emph{defined} the representation; $\Omega{=}0$ & order-$0$ $=$ node-selected directed $3$-cycle (topological skeleton). \\
+\textbf{M2} & mapped the image of $\{\Pmid,b\}$ & two-vertex reachable set; \emph{no} hidden analytic invariant. \\
+\textbf{M3} & formalized the rigid sector & node$\to$cycle (T1), reachability (T2), decoupling boundary (T3), $\mathbb Z_2$ orientation $=\operatorname{sgn}(\sigma)$ parity (T4). \\
+\textbf{M4} & synthesized M1--M3 & \emph{Geometric Selection Principle}: $S=(\text{geometry-fixed sector})\times(\text{$W$-holonomy dressing})$. \\
+\textbf{M5} & \emph{truncated} $\Omega\!\approx\!\Omega_1{+}\Omega_2$ as a calculator & transparent in the adiabatic window but \textbf{marginal}: $\Lambda{=}2.98{\approx}\pi$ at canonical, so adding orders cannot beat ${\sim}10^{-3}$. \\
+\textbf{M6} & tried to \emph{improve} the leading-saddle (Dykhne--St\"uckelberg) phase & \textbf{failed} (first-class negative): a fitted constant beats any \emph{elementary} turning-point phase; the deficit \emph{is} $\sigma$. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Bottom line.} The $\Omega_j$ are a clean, unitary, physically transparent \emph{organizing
+scheme} whose \emph{integrands} are explicit algebra in $\{\gamma,\eps,a\}$ (built from $H_0$ and the cubic's
+roots), but whose \emph{values} are transcendental $u$-integrals with no elementary $\{\gamma,\eps,a\}$ form.
+The irreducible non-elementary core of their infinite sum is exactly the single Stokes constant
+$\boldsymbol{\sigma}$ --- the Fredholm/Widom connection constant of the rank-3 ($W_3$, $c{=}2$) confluent
+problem. The number $\Lambda\approx\pi$ (visible already at the canonical point) is what says this series
+\emph{organizes but never closes}: it is order-improving, never fast-resumming. Two solved real parameters
+(the BE extreme survivals) are elementary in $\{\gamma,\eps,a\}$; the remaining content $\{\Pmid,b\}$ is the
+holonomy of one $a$-independent geometric seed $W$, and its sole irreducible datum is $\sigma$, which lives
+only in the deep-overlap core and is computed there by exact two-component integration (not by the graphs).
+
+\medskip
+\noindent\footnotesize\emph{Provenance.} $H_0$, $\delta_{ij}$, $\Omega_1$, $\Omega_2$ from
+\texttt{experiments/ws\_geom\_magnus.py} at the canonical anchor; validity/marginality from
+\texttt{ws\_geom\_m5.md}; the M6 negative from \texttt{ws\_geom\_m6\_tournament.md} /
+\texttt{ws\_geom\_m6\_h1\_phase.py}; the geometric synthesis from \texttt{ws\_geom\_m4.md}.
+
+\end{document}
