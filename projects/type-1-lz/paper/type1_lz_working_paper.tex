@@ -376,6 +376,50 @@ abelian data flows, but the non-abelian seed $\sigma$ is an irreducible constant
 closed flow --- the Abelian ceiling (R1) restated for the deformation.\pnote{paper/ws\_aflow\_milestone1.md;
 experiments/aflow\_closure\_test.py; coordinator-verified (Stark subtlety + plateau + non-transport)}
 
+\section{Geometric structure of the $U(3)$ section}\label{sec:geom}
+Beyond the value of $\Pmid$ lies the question of \emph{which} slice of $U(3)$ the family occupies. The
+central principle (the $a$-independent seed $W$, \S\ref{sec:framework}) makes $S$ the holonomy of one
+geometric connection; here we resolve its structure, $\sigma$-free.
+
+\textbf{R18 [AD/NS]. The leading skeleton is a node-selected directed cycle, dressed by a
+marginally-convergent Magnus series.} In the adiabatic frame $i\chi'=[D^{(a)}-iW]\chi$, the scattering has a
+Magnus expansion $S=\Phi(+\infty)\,e^{\Omega}\,\Phi(-\infty)^\dagger$, $\Omega=\sum_k\Omega_k$, with
+$\Omega_k$ the nested-commutator integrals of the dynamical-phase-dressed coupling
+$\widetilde W_{ij}=W_{ij}e^{\,\mathrm{i}\!\int(E_i-E_j)}$ (unitary at every order). Order $0$ is the
+adiabatic-following permutation; \emph{continued through the universal node} (R3) it is the \textbf{directed
+$3$-cycle} (orientation fixed by the slope ordering), equal to the oracle's dominant pattern --- \emph{not}
+the energy-sorted transposition. The corrections $\Omega_1$ (one non-adiabatic hop $\to$ the BE factors)
+and $\Omega_2$ (leading interference) improve the approximation term-by-term in the adiabatic regime, but
+the dressed action $\Lambda=\int\|\widetilde W\|\approx\pi$ is \emph{marginal almost everywhere} --- the
+flow-side face of the permanent-overlap lemma (R4/R5) --- so the series is an order-improving
+\emph{skeleton}, never a fast resummation; its all-orders sum is the irreducible $\sigma$. In the
+Feynman-graph reading, sheets are lines, the ($a$-independent) $W$ are vertices, and the dynamical phases
+are propagators: the geometry sits in the vertices, the elementary $a$-dependence in the
+edges.\pnote{ws\_geom\_m1.md, ws\_geom\_magnus.py; order-0 $=$ node-selected cycle coordinator-verified}
+
+\textbf{R19 [NS]. The image is a two-vertex reachable set bounded by the decoupling locus, with no hidden
+analytic invariant.} In the two free coordinates $\{\Pmid,b\}$ (R15) the image of
+$\Phi:(\gamma,\eps,a)\mapsto P$ touches \emph{exactly two} of the six Birkhoff vertices: the identity
+$(1,0)$ (diabatic / small action) and the node-selected directed cycle $(0,1)$ (adiabatic / large action);
+the reverse cycle and the transpositions are geometrically forbidden. Distance to the cycle is monotone
+(log-saturating) in $\delta_{\max}$, $\chi$-modulated --- the same scale$\,\times\,$shape split as
+R12--R13. The boundary is the \textbf{decoupling locus} (R9), edge-resolved: driving an \emph{extreme}
+coupling to zero sends $b\to0$, the \emph{middle} coupling sends $\Pmid\to1$ (both verified to $\pm0.000$).
+The effective dimension of the lift $\{\Pmid,b,\delta_{ij},\chi,c_i\}$ is \emph{full} --- the only PCA
+zeros are the known elementary relations (incl.\ $\sum_i c_i=0$) --- so \textbf{there is no hidden analytic
+invariant}; the section's analytic content is exhausted by BE, double-stochasticity, and
+$\chi$.\pnote{ws\_geom\_m2.md, ws\_geom\_m2\_image.py; corners $+$ edge-selection coordinator-verified}
+
+\textbf{The geometric account.} Combining R18--R19 with the central principle: the $U(3)$ section is a
+\emph{topological permutation/spinor sector} --- the node-selected directed cycle together with the
+eigenvector sign sector $\delta_j$ from the eigenbundle monodromy on the genus-0 curve $\Sigma$ ---
+\emph{dressed} by the marginally-convergent $W$-holonomy and \emph{bounded} by the decoupling locus. All
+analytic content is elementary (BE / double-stochasticity / $\chi$); the sole irreducible datum is the
+transcendental Stokes constant $\sigma$ (the all-orders dressing). Formalizing the rigid sector (the
+node$\to$cycle selection, the $\delta_j$ monodromy, the edge-selection boundary) to derived status is the
+remaining $\sigma$-free target (scoped in \texttt{paper/ws\_geom\_m3\_scope.md}); M2 already shows there is
+\emph{no} analytic invariant beyond the elementary data to seek.
+
 \section{The unifying picture and the classifier}
 The BE survivals are residue-collapsing periods of the phase one-form (elementary); the middle
 survival is the holonomy of the one joint that genuine all-to-all coupling forces. \emph{Classifier
@@ -470,6 +514,8 @@ theory the constellation lacked.
 % R15 [EST] <- skeleton_two_transcendentals.py (BE+DS => affine in {Pmid,b}; reconstruct 2e-10; P not symmetric)
 % R16 [NS]  <- skeleton_two_transcendentals.py (Pmid hard / b soft regime table; Abelian-ceiling reading)
 % R17 [NS]  <- ws_aflow_milestone1.md, aflow_closure_test.py (a-flow does NOT close: plateau + R_k non-transport; coordinator-verified)
+% R18 [AD/NS]<- ws_geom_m1.md, ws_geom_magnus.py (adiabatic-W Magnus; order-0 = node-selected directed cycle; Lambda~pi marginal <-> R4/R5)
+% R19 [NS]  <- ws_geom_m2.md, ws_geom_m2_image.py (two-vertex image; boundary = decoupling locus edge-selected; full dimension = no analytic invariant)
 % F1  [AD]  <- single rank-2 irregular point, dim-6 wild char variety; kz_isomonodromy_picture.md
 
 \bibliography{refs}

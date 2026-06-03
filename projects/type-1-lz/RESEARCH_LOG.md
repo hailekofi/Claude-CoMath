@@ -1329,3 +1329,30 @@ NET (honest "partial" outcome, as anticipated): the section's ANALYTIC content i
 the edge-selection boundary. IMPLICATION FOR M3: M2d pre-empts the analytic-invariant hunt (full dimension
 => none to find); M3 reduces to FORMALIZING the topological label (the two-vertex / spinor sector, the
 node-fixed cycle orientation), not searching for an analytic relation.
+
+---
+
+## 2026-06-03 — M3 reframed as FORMALIZATION (M2d killed the invariant hunt) + geometric-theory section (R18,R19)
+
+- paper/ws_geom_m3_scope.md: M3 is NO LONGER a symbolic-regression invariant hunt -- M2d showed FULL
+  effective dimension (no hidden analytic invariant; only the known elementary relations). M3 reframed as a
+  physics-DERIVATION of the topological statements M1+M2 found numerically, all sigma-free:
+  T1 [keystone] node->directed-cycle theorem (eigenbundle monodromy on Sigma: extreme-swap transposition
+  o node-swap = 3-cycle); T2 two-vertex reachability (diabatic limit=identity, adiabatic limit=cycle);
+  T3 edge-selection boundary = decoupling locus (extreme->b=0, middle->P_mm=1, from the decoupling block
+  structure, R9); T4 [stretch] the delta_j spinor double-cover monodromy. Milestones M3a-d; honest ladder
+  (T1 closed = proven topological core; T4 may stay partial). Does NOT touch sigma, claims no closed form.
+
+- type1_lz_working_paper.tex: new section "Geometric structure of the U(3) section" with:
+  R18 [AD/NS] the adiabatic-W Magnus skeleton -- order 0 = node-selected directed cycle (coordinator-
+  verified), marginally-convergent dressing (Lambda~pi <-> R4/R5), Feynman-graph reading (W vertices
+  a-independent/geometric, phase edges elementary).
+  R19 [NS] the image = two-vertex reachable set (identity + node-selected cycle; other 4 forbidden),
+  boundary = decoupling locus edge-selected (extreme->b=0, middle->P_mm=1), FULL effective dimension =>
+  no hidden analytic invariant; analytic content = BE+DS+chi.
+  Plus "the geometric account": U(3) section = topological permutation/spinor sector (node-selected) x
+  W-holonomy dressing, bounded by the decoupling locus; sole irreducible datum = sigma. Dep map updated
+  (R18,R19); fixed a stray \ii -> \mathrm{i}.
+
+Status: M3 scoped (not executed). The geometric theory's RIGID core is now stated (R18-R19) and its
+proof is scoped (M3 T1-T4). sigma remains the explicitly-quarantined irreducible remainder.
