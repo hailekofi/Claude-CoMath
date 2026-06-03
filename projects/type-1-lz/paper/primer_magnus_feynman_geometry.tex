@@ -1,0 +1,248 @@
+\documentclass[11pt]{article}
+% Detailed primer (for review): Magnus expansions -> Feynman graphs -> a geometric theory of U(3)
+% selection for Type-1 N=3 multistate Landau-Zener. Companion to paper/ws_geom_scope.md and the
+% markdown primer paper/primer_magnus_feynman_geometry.md. Expository; no new claims.
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,bm,mathtools}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Tord}{\mathcal{T}}
+\newcommand{\Wt}{\widetilde W}
+\newcommand{\U}{\mathrm{U}}
+\newcommand{\Pmid}{P_{m\to m}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\title{\textbf{From Magnus expansions to a geometric theory of $\U(3)$ selection}\\[2pt]
+\large A primer for the Type-1 $N{=}3$ multistate Landau--Zener problem}
+\author{Co-theoretical-physicist working note}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We assemble the conceptual scaffolding behind the WS-GEOM programme: (i) the \emph{Magnus expansion},
+which writes a time-ordered propagator as a single exponential of nested commutators, unitary at every
+order; (ii) how, in the \emph{adiabatic frame} of the multistate Landau--Zener (MLZ) problem, this becomes
+a \emph{Feynman-graph} expansion on the adiabatic sheets --- geometric vertices (the derivative coupling
+$W$) joined by dynamical-phase propagators; and (iii) how that structure fleshes out a \emph{geometric
+theory} of how the Type-1 Hamiltonian selects its slice of $\U(3)$: a topological permutation/spinor
+sector dressed by the $W$-holonomy, bounded by the decoupling locus, with the one irreducible transcendental
+$\sigma$ quarantined as the all-orders resummation. The final section describes the four milestones
+(M1--M4) of the WS-GEOM workstream. This is an expository companion; it introduces no new claims.
+\end{abstract}
+
+\tableofcontents
+
+\section{Why this primer}
+The closed-form question for the Type-1 $N{=}3$ middle survival is settled in the negative: the irreducible
+content is a single genuinely transcendental Stokes constant $\sigma$, and the most efficient route to the
+\emph{exact} value is structured numerical integration of the governing ODE. What remains wide open is a
+\emph{geometric} question: the map $\Phi:(\gamma,\eps,a)\mapsto S\in\U(3)$ (the propagator from $u=-\infty$
+to $+\infty$) lands the transition data in a particular, structured part of $\U(3)$ --- and we have not
+asked \emph{what} that structure is, or \emph{what selects it}. The Magnus/Feynman machinery below is the
+natural language for that question, because it separates the rigid (topological, knowable) part of the
+answer from the irreducible transcendental part, and it does so $\sigma$-free except for the one resummed
+datum we have proven cannot be put in closed form.
+
+\section{Magnus expansions}\label{sec:magnus}
+
+\subsection{The time-ordering problem}
+The propagator of a linear system $\dot U(t)=A(t)\,U(t)$, $U(0)=\mathbb 1$, is the \emph{time-ordered
+exponential}
+\begin{equation}
+U(t)=\Tord\exp\!\int_0^t A(s)\,\dd s
+=\mathbb 1+\int_0^t\! A(t_1)\,\dd t_1+\int_0^t\!\!\int_0^{t_1}\! A(t_1)A(t_2)\,\dd t_2\,\dd t_1+\cdots,
+\label{eq:dyson}
+\end{equation}
+the \emph{Dyson series}. The obstruction to simply writing $U=\exp\!\int A$ is that $A(t_1)$ and $A(t_2)$
+need not commute. Truncating \eqref{eq:dyson} also \emph{breaks unitarity}: a finite sum of ordered
+products of anti-Hermitian generators is not in general unitary.
+
+\subsection{The Magnus series}
+Magnus's idea \cite{Magnus1954} is to keep a \emph{single} exponential,
+\begin{equation}
+U(t)=\exp\Omega(t),\qquad \Omega=\Omega_1+\Omega_2+\Omega_3+\cdots,
+\end{equation}
+where each $\Omega_k$ is built from $k$-fold nested commutators of $A$:
+\begin{align}
+\Omega_1(t)&=\int_0^t A(t_1)\,\dd t_1,\\
+\Omega_2(t)&=\tfrac12\int_0^t\!\!\int_0^{t_1}\big[A(t_1),A(t_2)\big]\,\dd t_2\,\dd t_1,\\
+\Omega_3(t)&=\tfrac16\int_0^t\!\!\int_0^{t_1}\!\!\int_0^{t_2}\Big(\big[A(t_1),[A(t_2),A(t_3)]\big]
++\big[A(t_3),[A(t_2),A(t_1)]\big]\Big)\,\dd t_3\,\dd t_2\,\dd t_1.
+\end{align}
+The series is the continuous analogue of the Baker--Campbell--Hausdorff formula. Two properties make it the
+right tool here.
+
+\paragraph{Unitarity at every order.} If $A$ is anti-Hermitian ($A^\dagger=-A$), then every nested
+commutator of $A$'s is anti-Hermitian, so each $\Omega_k$ is anti-Hermitian and \emph{every truncation}
+$U_{(n)}=\exp(\Omega_1+\cdots+\Omega_n)$ is exactly unitary. This is a built-in consistency check the Dyson
+truncation lacks: $S\in\U(3)$ holds order by order, so $P=|S|^2$ stays doubly stochastic automatically.
+
+\paragraph{Convergence and regime.} The series converges for
+$\int_0^t\norm{A(s)}\,\dd s<\pi$ \cite{BlanesCasas2009}. Physically: weak coupling or short evolution. In
+our application $A=-\ii\Wt$ is the (dynamical-phase-dressed) \emph{adiabatic} coupling, small when the
+energy gaps are large --- the well-separated/generic regime. \emph{Deep overlap} is precisely
+$\int\norm{\Wt}\to$ large: the series must be resummed, and that resummation is the hard $\sigma$.
+
+\subsection{A two-level sanity check}
+For the ordinary two-level LZ problem the leading Magnus term $\Omega_1$ already reproduces the perturbative
+(weak-coupling) transition amplitude, and $\Omega_2$ supplies the first phase correction; the full
+(non-perturbative) St\"uckelberg result is the resummation. The $N{=}3$ structure below is the multi-sheet
+generalization, with the new feature that the sheets can \emph{recombine}.
+
+\section{The adiabatic-$W$ frame and the Feynman-graph structure}\label{sec:feynman}
+
+\subsection{The adiabatic frame}
+Write $\psi(u)=\Phi(u)\chi(u)$ with $\Phi=[\phi_1\,\phi_2\,\phi_3]$ the instantaneous eigenframe of
+$H(u)=H_0+uA$, $H\Phi=\Phi\,\mathrm{diag}(E_i)$. The Schr\"odinger equation $\ii\psi'=H\psi$ becomes
+\begin{equation}
+\ii\,\chi'=\big[\,D(u)-\ii\,W(u)\,\big]\chi,\qquad D=\mathrm{diag}(E_i),\quad
+W_{ij}=\langle\phi_i|\phi_j'\rangle=\frac{\langle\phi_i|A|\phi_j\rangle}{E_j-E_i}\ (i\neq j),
+\label{eq:adiabatic}
+\end{equation}
+where $W$ is the (anti-Hermitian, off-diagonal) \emph{derivative coupling}. For Type-1 the family shares
+one eigenbasis, so \textbf{$W$ is independent of the slope vector $a$} --- it is fixed geometric data.
+Passing to the interaction picture with respect to $D$ dresses the coupling by the dynamical phase,
+\begin{equation}
+\Wt_{ij}(u)=W_{ij}(u)\,\exp\!\Big(\ii\!\int^u\!(E_i-E_j)\,\dd u'\Big),
+\end{equation}
+and the physical scattering matrix is
+$S=\Phi(+\infty)\,\big[\Tord\exp\!\int(-\Wt)\big]\,\Phi(-\infty)^\dagger$ up to diagonal Stark phases that
+drop from $P=|S|^2$.
+
+\subsection{Diagrams on three sheets}
+Reading the Dyson/Magnus series of $\Tord\exp\!\int(-\Wt)$ as a sum over histories gives a literal
+Feynman expansion on the three adiabatic levels:
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{diagram element} & \textbf{MLZ object}\\
+\midrule
+line (sheet $i$) & adiabatic level $E_i(u)$ \\
+vertex $\Wt_{ij}(u)$ & a non-adiabatic \emph{hop} $j\to i$ at time $u$, amplitude $W_{ij}(u)$ \\
+edge (propagator) & accumulated dynamical phase $e^{\ii\int(E_i-E_j)}$ between hops \\
+order-$n$ term & sum over all ordered $n$-hop paths across the sheets \\
+\midrule
+order $0$ (no vertices) & adiabatic following $\Rightarrow$ the \textbf{directed-cycle} permutation $S_0$ \\
+$1$ vertex ($\Omega_1$) & one hop $\Rightarrow$ leading LZ/St\"uckelberg amplitude ($\to$ BE factors) \\
+$2$ vertices ($\Omega_2$) & two interfering hops $\Rightarrow$ leading $\Pmid$ interference \\
+all orders (resummed) & the full holonomy $=\sigma$ (no closed form) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Order zero is a permutation.} With $W=0$ the interaction-picture propagator is the identity, so
+$S_0=\Phi(+\infty)\,\mathrm{diag(phases)}\,\Phi(-\infty)^\dagger$. Because $\Phi(\pm\infty)$ are the
+standard-basis frames \emph{ordered by adiabatic energy}, and that ordering \emph{reverses} between
+$u=\mp\infty$, $|S_0|^2$ is a \textbf{permutation matrix} --- the directed $3$-cycle that dominates the
+transition matrix at small coupling. This is the geometric skeleton; everything transcendental is in the
+$W$-dressing.
+
+\paragraph{The key separation.} Because $W$ is $a$-independent, the \emph{vertices are fixed geometry} and
+the \emph{$a$-dependence lives entirely in the phase edges} $e^{\ii\int(E_i-E_j)}$. The Feynman expansion
+thus cleanly factors the problem into a geometric part (the vertices, the same for the whole commuting
+family) and an elementary kinematic part (the dynamical actions).
+
+\section{Toward a geometric theory of $\U(3)$ selection}\label{sec:geometry}
+
+\subsection{The eigenbundle and its holonomy}
+The eigenframe $\Phi(u)$ is a section of the (rank-1$\,\times\,3$) eigenbundle over the $u$-line; $W$ is the
+non-abelian Berry/Wilczek--Zee connection on it \cite{Berry1984,WilczekZee1984}, and the scattering matrix
+$S$ is its \emph{holonomy} (parallel transport from $-\infty$ to $+\infty$), dressed by the dynamical
+phases. ``How does $H$ select its slice of $\U(3)$?'' is therefore ``what is the holonomy representation of
+this bundle?''. The Magnus/Feynman structure makes the answer \emph{layered}, and each layer is a geometric
+object.
+
+\subsection{Topological sector $\times$ smooth dressing}
+\begin{description}[leftmargin=1.4em]
+\item[Order $0$ --- a topological datum.] $S_0$ is the permutation by which the adiabatic energy ordering
+reverses between $\mp\infty$. That permutation (the directed $3$-cycle) together with the \textbf{spinor
+double-cover signs} $\delta_j=\pm1$ --- the sign of each eigenvector, which flips on encircling a branch
+point of the spectral curve $\Sigma:\det(E-H(u))=0$ --- is a \emph{discrete, topological label}: the sector
+of $\U(3)$ the dynamics lives in, fixed by the geometry of the eigenbundle, not by any dynamical detail.
+\item[Higher orders --- the smooth dressing.] The $W$-vertices and phase-edges deform $S$ \emph{within}
+that sector. This is the analytic content: the BE factors, the interference, and (resummed) $\sigma$.
+\item[The boundary.] As $(\gamma,\eps,a)$ vary, $S$ sweeps a full-dimensional \emph{region} of
+reduced-$\U(3)$ (the map is $4\to4$). Its boundary is where a hop amplitude $W_{ij}$ vanishes --- a level
+decouples --- which is exactly the classifier locus (elementary $\Leftrightarrow$ a level decouples).
+\end{description}
+
+\noindent The geometric theory therefore reads
+\begin{equation}
+\boxed{\ \U(3)\ \text{selection}\;=\;
+\underbrace{\big(\text{topological permutation/spinor sector}\big)}_{\text{eigenbundle monodromy on }\Sigma}
+\;\times\;
+\underbrace{\big(\text{smooth }W\text{-holonomy dressing}\big)}_{\text{Magnus/Feynman series}},\ }
+\end{equation}
+with the decoupling locus as the boundary of the swept region, and the hard transcendental $\sigma$
+quarantined as the all-orders resummation of the dressing.
+
+\subsection{What a ``geometric invariant'' would be}
+Not a closed form for $\sigma$, but a \emph{characteristic-class}-type object: a winding/permutation label,
+the parity of the spinor sector, or a relation among the BE actions $\delta_{ij}$ and the turning-point
+cross-ratio $\chi$ that is conserved along the family or that cuts the boundary. The Magnus/Feynman
+structure tells you \emph{where to look}: order $0$ for the topology; the boundary $W_{ij}\to0$ for the
+analytic edge.
+
+\section{The WS-GEOM programme: milestones M1--M4}\label{sec:milestones}
+The companion scope (\texttt{paper/ws\_geom\_scope.md}) organizes the work into four milestones; here is
+what each establishes and how it is gated.
+
+\paragraph{M1 --- the adiabatic-$W$ Magnus expansion (\S\ref{sec:feynman}), derivation $+$ numerics.}
+Derive $\Omega_0$ (the directed-cycle permutation), $\Omega_1$ (first hop), $\Omega_2$ (first interference)
+explicitly, and validate \emph{term by term} against the gold oracle in the generic regime. \emph{Gate:}
+the error $|P^{(n)}-P^{\mathrm{oracle}}|$ must (a) decrease with order $n$ at fixed action $\delta$, and (b)
+decrease with $\delta$ at fixed order; the deep-overlap non-convergence ($\delta\gtrsim0.5$) is confirmed as
+the honest boundary. \emph{Output:} \texttt{experiments/ws\_geom\_magnus.py},
+\texttt{paper/ws\_geom\_m1.md}.
+
+\paragraph{M2 --- map the image region (numerics, facet A).} From large cheap $(\gamma,\eps,a)\to P$ data,
+characterize the swept region in reduced-$\U(3)$: the directed-cycle bias (distance to the nearest
+permutation vertex vs.\ $\delta$), the effective dimension, and the \emph{boundary} (test that it coincides
+with the classifier/decoupling locus). \emph{Gate:} boundary $=$ decoupling locus, quantified.
+
+\paragraph{M3 --- the invariant hunt (caged symbolic regression $+$ derivation).} Search a combination of
+$\{\Pmid,b,\delta_{ij},\chi,c_i,\dots\}$ that is conserved along the family or that cuts the boundary.
+Symbolic regression is used \emph{only} as a structure detector --- never a surrogate solver, never a
+closed-form finder (no closed form exists). Any candidate is handed to \texttt{physics-derivation} to
+\emph{prove}. \emph{Gate:} one invariant proven, or precisely refuted (a first-class negative).
+
+\paragraph{M4 --- synthesis (theory).} Assemble M1--M3 into the geometric statement of \S\ref{sec:geometry}:
+the section as a topological permutation/spinor sector dressed by the $W$-holonomy, bounded by the
+decoupling locus --- written as a paper section, entirely $\sigma$-free.
+
+\paragraph{Honest scope.} The Magnus series does not resum in deep overlap (the same boundary as the
+uniform semiclassical law); the geometric \emph{skeleton} (order $0$ $+$ low orders) and the
+\emph{topology} are the targets, and they are $\sigma$-free. M3 may return no new invariant --- that too is
+a real result (the analytic content of the section is exhausted by BE, double-stochasticity and $\chi$, and
+only the topological label remains).
+
+\section{One-paragraph summary}
+A Magnus expansion writes the propagator as $e^{\Omega}$ with $\Omega$ a sum of nested commutators of the
+coupling --- unitary at every order, convergent in the weak-coupling (generic) regime. For Type-1 MLZ the
+coupling is the $a$-independent adiabatic seed $W$, and the expansion becomes a Feynman series on three
+sheets: geometric $W$-vertices joined by dynamical-phase edges, summed over hop-histories. Order $0$ is the
+directed-cycle permutation set by the eigenbundle's energy-reordering and spinor signs (a \emph{topological}
+selection of the $\U(3)$ sector); the higher orders are the smooth $W$-holonomy dressing (the
+\emph{analytic} content, with $\sigma$ as its non-closed resummation); the boundary of the swept region is
+the decoupling locus. That layered decomposition --- topology $\times$ holonomy dressing, with an explicit
+boundary --- is the skeleton of a geometric theory of how the Hamiltonian selects its slice of $\U(3)$.
+
+\begin{thebibliography}{9}
+\bibitem{Magnus1954} W.~Magnus, \emph{On the exponential solution of differential equations for a linear
+operator}, Comm.\ Pure Appl.\ Math.\ \textbf{7}, 649 (1954).
+\bibitem{BlanesCasas2009} S.~Blanes, F.~Casas, J.~A.~Oteo, J.~Ros, \emph{The Magnus expansion and some of
+its applications}, Phys.\ Rep.\ \textbf{470}, 151 (2009).
+\bibitem{Berry1984} M.~V.~Berry, \emph{Quantal phase factors accompanying adiabatic changes}, Proc.\ R.\
+Soc.\ Lond.\ A \textbf{392}, 45 (1984).
+\bibitem{WilczekZee1984} F.~Wilczek, A.~Zee, \emph{Appearance of gauge structure in simple dynamical
+systems}, Phys.\ Rev.\ Lett.\ \textbf{52}, 2111 (1984).
+\end{thebibliography}
+
+\end{document}
