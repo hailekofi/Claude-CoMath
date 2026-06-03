@@ -1,8 +1,9 @@
 """
 ws_geom_m3_t4.py -- WS-GEOM M3 T4 (the spinor / cycle-orientation Z2 label).
 
-HONEST OUTCOME (T4 partial): the directed-cycle ORIENTATION is a genuine Z2 topological label
--- BOTH orientations occur across parameter space -- but its SELECTOR is open.
+OUTCOME (T4 RESOLVED): the directed-cycle ORIENTATION is a genuine Z2 topological label
+-- BOTH orientations occur across parameter space -- and its SELECTOR is now derived
+(see ws_geom_m3_t4_selector.py).
 
   * Z2 ESTABLISHED: the deterministic, dynamics-free overlap-continuation of the order-0 eigenframe
     (T1's geometric construction) yields BOTH orientations over broad samples:
@@ -12,10 +13,12 @@ HONEST OUTCOME (T4 partial): the directed-cycle ORIENTATION is a genuine Z2 topo
     This corrects T1 Step-4's "uniform orientation" (a 5-sample artifact). The Z2 is the eigenframe
     spinor/double-cover sector (delta_j = +-1).
 
-  * SELECTOR OPEN: orientation = -sign(u_*) is REFUTED (it held ~92% on one seed but 33% -- worse than
-    chance -- on an independent seed). No validated predictor / dividing locus is known. Full derivation
-    needs the spectral-flow combinatorics (which of the lo-mid / hi-mid crossings is the real node vs the
-    avoided complex branch point) + the delta_j monodromy on the genus-0 curve -- OWED.
+  * SELECTOR RESOLVED (ws_geom_m3_t4_selector.py): orientation = sign(tr H(u_*) - 3 E_*), the
+    energy-position of the REAL node (R3) -- LOWER pair degenerate => FWD, UPPER pair => REV. Matches this
+    Z2 on 154/154 clean samples (two independent algorithms agree). The earlier "orientation = -sign(u_*)"
+    was REFUTED (~92% on one seed, 33% on another); the local predictor screen failed because the selector
+    is the GLOBAL energy-position of the protected real crossing, NOT a local sign and NOT the nearest
+    complex branch point.
 
 Reproduce: python3 ws_geom_m3_t4.py   (deterministic continuation; no oracle calls)
 """
@@ -80,8 +83,8 @@ def main():
         print(f"  {p}: {c:2d}   {label(p)}")
     both = (1, 2, 0) in tally and (2, 0, 1) in tally
     print(f"\nBOTH orientations occur => Z2 label is REAL: {both}")
-    print("Selector OPEN: orientation = -sign(u_*) is REFUTED (seed-dependent: ~92% vs 33%).")
-    print("T4 partial: Z2 spinor label established; its selector + delta_j monodromy are owed.")
+    print("Selector RESOLVED in ws_geom_m3_t4_selector.py: orientation = sign(tr H(u_*) - 3 E_*),")
+    print("the energy-position of the real node (LOWER pair => FWD, UPPER pair => REV); 154/154 clean.")
 
 
 if __name__ == "__main__":

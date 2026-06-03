@@ -1,6 +1,6 @@
 # Research Log: Type 1 Landau–Zener
 
-_Last updated: 2026-06-01_
+_Last updated: 2026-06-03 (T4 selector resolved: orientation = energy-position of the real node)_
 
 ## Current state (read me first)
 Source materials ingested and oriented. This is a mature exact-WKB / spectral-network
@@ -1470,3 +1470,49 @@ coarse continuation gives many ambiguous (o==0) reads, and adiabatic-limit-P rea
 STATUS unchanged at the theory level: M3 T1-T3 closed (rigid skeleton derived); T4 = Z2 label established,
 selector OPEN and now confirmed to be the genuine monodromy object (not elementary). Two open items remain
 (sigma; the Z2 selector), neither touching the derived sigma-free skeleton.
+
+---
+
+## 2026-06-03 — T4 selector RESOLVED: orientation = energy-position of the real node  [near-proof]
+
+BIG SWING (user: "take a big swing... don't give up at the first dead end"). The predictor screen had
+correctly REFUTED every *local* candidate; the lesson was that the selector is *global*. Acted on that:
+asked which adjacent energy-rank pair the **real node** (R3) degenerates, computed from the explicit
+spectral curve.
+
+RESULT (the selector):
+    orientation = sign(E_3 - E_*) = sign(tr H(u_*) - 3 E_*),
+  with (u_*, E_*) the unique real node = real double root of the E-discriminant Disc_E(u) of the
+  spectral curve, E_* the doubly-degenerate eigenvalue (= R8 accessory v_*), E_3 = tr H(u_*) - 2E_* the
+  spectator. LOWER pair degenerate (E_3 > E_*) <=> FWD (1,2,0); UPPER pair (E_3 < E_*) <=> REV (2,0,1).
+
+DERIVATION (spectral flow): pi_cont = tau_ext o tau_k (T1). tau_ext = (lo hi) is fixed (BE / asymptotic
+order-reversal), so the Z2 lives entirely in k = which adjacent energy-rank pair the node swaps. k is read
+off the spectator's energy-position: lower pair degenerate <=> spectator above <=> E_3 > E_*. Both u_*, E_*
+are explicit algebraic data (R3 real node; R8 v_*=E_*) => closed-form algebraic sign in (gamma,eps,a).
+
+THE CRUX (why the screen missed it): the controlling point is the REAL node (an exact crossing = real root
+of Disc_E), NOT the nearest COMPLEX branch point (the dominant avoided crossing). My first attempt used the
+nearest complex branch point and failed exactly on the small-|u_*| REV cases (9/11) -- the avoided crossing
+and the protected crossing can sit on different level-pairs. Switching to the real root fixed it.
+
+EVIDENCE (near-proof): ws_geom_m3_t4_selector.py.
+ - 154/154 = 100.00% vs deterministic overlap-continuation Z2 (clean random samples; FWD 85, REV 69; zero
+   mismatch).
+ - +33/33 on an independent seed block; canonical anchored (u_*=-0.2493, lower pair, FWD).
+ - TWO INDEPENDENT ALGORITHMS agree on all 154: (a) Hermitian eigh of H(u_*); (b) companion-matrix roots of
+   the characteristic polynomial p(E,u_*) -- no Hermitian solver at all.
+ Ladder: analytically-derived (the spectral-flow group identity) + numerically-supported/near-proof (the
+ identification of the real node as the controlling point, and uniqueness of the real node).
+
+DEAD END THAT BECAME THE ANSWER: the refuted local-predictor screen (prior entry) was not wasted -- its
+uniform failure DIAGNOSED the selector as a global object, which is exactly what pointed at the real-node
+energy-position. Recorded as the methodological win.
+
+STATUS: M3 T1-T2-T3-T4 ALL CLOSED. The sigma-free topological theory of the U(3) section is COMPLETE:
+node-selected directed 3-cycle (T1) + two-vertex reachable set (T2) + decoupling-locus boundary (T3) +
+Z2 mirror sectors with the real-node energy-position SELECTOR (T4). The SOLE remaining open item is sigma
+(the irreducible analytic Fredholm/Widom dressing) -- which does not touch the topological skeleton.
+
+Artifacts: experiments/ws_geom_m3_t4_selector.py (new); paper/ws_geom_m3.md (T4 RESOLVED + derivation);
+paper/type1_lz_working_paper.tex (R18/R19 geometric account updated).

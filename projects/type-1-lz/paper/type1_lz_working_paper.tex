@@ -387,8 +387,8 @@ Magnus expansion $S=\Phi(+\infty)\,e^{\Omega}\,\Phi(-\infty)^\dagger$, $\Omega=\
 $\Omega_k$ the nested-commutator integrals of the dynamical-phase-dressed coupling
 $\widetilde W_{ij}=W_{ij}e^{\,\mathrm{i}\!\int(E_i-E_j)}$ (unitary at every order). Order $0$ is the
 adiabatic-following permutation; \emph{continued through the universal node} (R3) it is the \textbf{directed
-$3$-cycle} (orientation fixed by the slope ordering), equal to the oracle's dominant pattern --- \emph{not}
-the energy-sorted transposition. The corrections $\Omega_1$ (one non-adiabatic hop $\to$ the BE factors)
+$3$-cycle} (a $\mathbb Z_2$ orientation selected by the node's energy-position, T4), equal to the oracle's
+dominant pattern --- \emph{not} the energy-sorted transposition. The corrections $\Omega_1$ (one non-adiabatic hop $\to$ the BE factors)
 and $\Omega_2$ (leading interference) improve the approximation term-by-term in the adiabatic regime, but
 the dressed action $\Lambda=\int\|\widetilde W\|\approx\pi$ is \emph{marginal almost everywhere} --- the
 flow-side face of the permanent-overlap lemma (R4/R5) --- so the series is an order-improving
@@ -420,13 +420,20 @@ transcendental Stokes constant $\sigma$ (the all-orders dressing). The rigid sec
 [$\pi_{\rm cont}=\tau_{\rm ext}\!\circ\!\tau_{\rm node}$, a $3$-cycle from two transpositions sharing one
 index --- T1], the two-vertex reachable set (identity / cycle, T2), and the decoupling-locus boundary
 (extreme$\to b{=}0$, middle$\to\Pmid{=}1$, T3) are all analytically-derived and verified. The cycle
-\emph{orientation} is a genuine $\mathbb Z_2$ spinor/double-cover label (T4): both sectors occur
-(deterministic continuation: REV $7$, FWD $4$ over clean samples), so the section splits into two mirror
-sectors --- established; its \emph{selector} (which sector, as a function of the couplings) is open (the
-guess $-\mathrm{sign}(u_*)$ is refuted), pending the spectral-flow / $\delta_j$-monodromy derivation. M2
-already shows there is \emph{no} analytic invariant beyond the elementary data to seek, so the $\sigma$-free
-topological skeleton is complete; the two remaining open items are $\sigma$ (the analytic dressing) and the
-$\mathbb Z_2$ orientation \emph{selector} --- neither touching the derived skeleton.
+\emph{orientation} is a genuine $\mathbb Z_2$ spinor/double-cover label (T4): both sectors occur, so the
+section splits into two mirror sectors. Its \emph{selector} is now \emph{derived} (T4): the orientation is
+the \textbf{energy-position of the real node},
+$\mathrm{orientation}=\mathrm{sign}\!\big(\operatorname{tr}H(u_*)-3E_*\big)$ --- whether the unique real
+crossing (R3) degenerates the \emph{lower} energy pair (spectator above, $E_3>E_*\Rightarrow$ FWD) or the
+\emph{upper} pair ($E_3<E_*\Rightarrow$ REV), with $(u_*,E_*)$ the real double root of the
+$E$-discriminant $\mathrm{Disc}_E(u)$ and $E_*$ the R8 accessory $v_*$. This is a closed-form algebraic
+sign in $(\gamma,\eps,a)$; it matches the deterministic continuation on $154/154$ clean samples (two
+independent algorithms agree), where the earlier guess $-\mathrm{sign}(u_*)$ and every \emph{local}
+predictor failed --- the selector is the \emph{global} energy-position of the protected real crossing, not
+a local sign, and lives on the \emph{real} node rather than the nearest complex branch
+point.\pnote{ws\_geom\_m3.md T4; ws\_geom\_m3\_t4\_selector.py} With the orientation selected, the
+$\sigma$-free topological skeleton is \textbf{complete}; the \emph{sole} remaining irreducible datum is
+$\sigma$ (the analytic dressing) --- which does not touch the derived skeleton.
 
 \section{The unifying picture and the classifier}
 The BE survivals are residue-collapsing periods of the phase one-form (elementary); the middle

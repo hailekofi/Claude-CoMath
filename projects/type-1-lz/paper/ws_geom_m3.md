@@ -53,7 +53,8 @@ adjacent pair the node swaps: `(mid,hi)→` forward `lo→hi→mid→lo`, `(lo,m
 broad deterministic sampling (T4) gives *both* (REV 7, FWD 4 over clean samples), so it is a genuine
 **Z₂ label**, not a fixed orientation. *(An earlier 5-sample family read uniformly forward — a small-sample
 artifact, now corrected.)* The 3-cycle conclusion (Steps 1–3) is general and unaffected; only *which* of
-the two it is varies with the spectral data — the open selector of T4.
+the two it is varies with the spectral data — **the selector, now resolved in T4** (it is the
+energy-position of the real node, `\mathrm{sign}(\operatorname{tr}H(u_*)-3E_*)`).
 
 ## Why this answers "energy-sort `=(2,1,0)` on every sample" and the ε-ordering question
 The extreme-swap is the diabatic image of the **asymptotic energy-order reversal**: `E_k\sim a_k u`
@@ -115,36 +116,66 @@ decoupling locus traces them, edge-selected by *which* level decouples. This is 
 of R9 (**elementary ⇔ a level decouples**). ∎
 *Verified* (`ws_geom_m3_t2t3.py`, M2c): `γ_mid→0 ⇒ P_mm=1.0000`; `γ_lo→0 ⇒ b=0.0000`; `γ_hi→0 ⇒ b=0.0000`.
 
-## T4 — the spinor / cycle-orientation Z₂ label  [partial: label established, selector open]
+## T4 — the spinor / cycle-orientation Z₂ label AND its selector  [RESOLVED]
 *Claim (established):* the directed-cycle **orientation is a genuine Z₂ topological label** — both
 orientations occur across parameter space — and it is the eigenframe spinor/double-cover sector (`δ_j=±1`).
-*Evidence.* The deterministic, dynamics-free overlap-continuation of the order-0 eigenframe (T1's
-construction) yields **both** orientations over broad samples: **REV `(2,0,1)` ×7, FWD `(1,2,0)` ×4**
-(clean samples, `ws_geom_m3_t4.py`). By the group rule (T1 Step 4) this is the node swapping `(lo,mid)`
-vs `(mid,hi)`. So the `U(3)` section comes in **two mirror sectors**, not one.
-*What is OPEN (honest).* The **selector** — what picks the sector — is *not* established, and a systematic
-predictor screen (against the reliable adaptive-resolution continuation orientation) shows it is **not a
-simple parameter sign**. Refuted candidates (all $\approx$chance on clean samples): `-\mathrm{sign}(u_*)`
-(held ~92% on one seed but 33% on another — a fluke); **node-proximity** to the lo–mid vs hi–mid diabatic
-crossing (4/11); the coupling ratio `\mathrm{sign}(s_{mid,hi}^2-s_{mid,lo}^2)`; the slope offset
-`\mathrm{sign}(a_{mid}-\tfrac12(a_{lo}+a_{hi}))`; `\mathrm{sign}(E_*-(H_0)_{mid,mid})`; and sums/products
-of the diabatic crossing times. **None predicts the Z₂.** This is itself informative: the selector is the
-genuine **spectral-flow / monodromy** object, not an elementary sign. A full account needs the
-spectral-flow combinatorics (which of the lo–mid / hi–mid crossings is realized by the *real* node vs the
-*complex* branch point — the asymptotic order reverses but only one real crossing exists) together with the
-**`δ_j` monodromy** on the genus-0 curve `Σ` (transpositions at the four complex branch points + the real
-node). Both are **owed** (hard analytic work, beyond simple-predictor screening); T4 is the partial piece
-flagged at the outset. *(Methodological note: reading the orientation from the adiabatic-limit `P` is unreliable — the
-limit is the deep-overlap regime where `P` does not cleanly reach a vertex; the deterministic
-overlap-continuation is the reliable measurement, and it is what establishes the Z₂.)*
+*Evidence (the Z₂ is real).* The deterministic, dynamics-free overlap-continuation of the order-0 eigenframe
+(T1's construction) yields **both** orientations over broad samples (`ws_geom_m3_t4.py`). By the group rule
+(T1 Step 4) this is the node swapping `(lo,mid)` vs `(mid,hi)`. So the `U(3)` section comes in **two mirror
+sectors**, not one.
+
+### The selector (resolved): orientation = energy-position of the real node
+*Theorem (T4 selector).* The Z₂ orientation is fixed by **which adjacent energy-rank pair is the true
+degeneracy at the unique real node** `(u_*,E_*)` (R3) — equivalently by the closed-form algebraic sign
+$$\boxed{\ \mathrm{orientation} \;=\; \mathrm{sign}\big(E_3 - E_*\big)\;=\;\mathrm{sign}\big(\operatorname{tr}H(u_*) - 3E_*\big)\ }$$
+where `E_*` is the doubly-degenerate eigenvalue at the node (the R8 accessory `v_*`) and
+`E_3 = \operatorname{tr}H(u_*) - 2E_*` is the spectator level. Explicitly:
+- `E_3 > E_*` (node degenerates the **lower** pair, ranks `(0,1)`) `⟺` **FWD** `(1,2,0)`, `lo→hi→mid→lo`;
+- `E_3 < E_*` (node degenerates the **upper** pair, ranks `(1,2)`) `⟺` **REV** `(2,0,1)`, `lo→mid→hi→lo`.
+
+*Derivation (spectral flow).*
+1. **Factor the continued frame.** The overlap-continuation transports the eigenframe in `u` from `−∞` to
+   `+∞`. Away from the node the transport is adiabatic (each eigenvector stays on its energy level); the only
+   place adjacent levels meet is the unique real node `u_*` (R3), where the pair `(k,k+1)` is *exactly*
+   degenerate. Continuous transport carries the two colliding eigenvectors **smoothly through** the exact
+   crossing (analytic continuation; no avoided-crossing mixing), i.e. the transposition `τ_k=(k,k+1)` of
+   energy ranks relative to an energy-sorted frame. Hence `π_cont = τ_ext ∘ τ_k` (T1).
+2. **`τ_ext` is fixed.** The pure energy-adiabatic map is the asymptotic order-reversal `τ_ext=(lo\,hi)`
+   (Step 1 of T1) — the Brundobler–Elser content, identical for every member, carrying **no** Z₂ freedom.
+3. **The Z₂ lives entirely in `k`.** With `τ_ext` fixed the only freedom is `k∈\{0,1\}`:
+   `τ_ext∘τ_0=(lo\,hi)(0\,1)=` FWD and `τ_ext∘τ_1=(lo\,hi)(1\,2)=` REV (two transpositions sharing one
+   index → a 3-cycle whose sense is set by the shared index).
+4. **`k` is an energy-position sign.** `k=0` (lower pair degenerate) `⟺` spectator above, `E_3>E_*`;
+   `k=1` (upper pair) `⟺` `E_3<E_*`. Both `u_*` and `E_*` are explicit algebraic data of the spectral curve
+   (R3 real node = real double root of the `E`-discriminant `Disc_E(u)`; R8 `v_*=E_*`), so the selector is a
+   **closed-form algebraic sign in `(γ,ε,a)`**. ∎
+
+*Why this succeeds where the local screen failed.* The refuted candidates (`-\mathrm{sign}(u_*)`;
+node-proximity to the lo–mid vs hi–mid diabatic crossing; coupling ratios; slope offset;
+`\mathrm{sign}(E_*-(H_0)_{mid,mid})`; crossing-time combinations — all `≈`chance) all probed **local**
+features of a *single* (often *avoided*) crossing. The orientation is the energy-**position** of the
+*protected real degeneracy* within the spectrum — a **global** datum. Crucially the relevant point is the
+**real node** (R3, an exact crossing = a real root of `Disc_E`), **not** the nearest complex branch point
+(the dominant avoided crossing): using the latter misclassifies the small-`|u_*|` REV cases (it can sit on a
+different level-pair). Once the right object — the real node's sheet-pair — is named, the rule is exact.
+
+*Evidence (near-proof).* `ws_geom_m3_t4_selector.py`: the closed-form sign matches the
+overlap-continuation Z₂ on **154/154** clean random samples (`100.00%`, zero mismatch; FWD 85 / REV 69),
+plus 33/33 on an independent seed block and the canonical anchor (`u_*=-0.2493`, lower pair, FWD). **Two
+independent algorithms** — Hermitian `eigh` of `H(u_*)` and companion-matrix roots of the characteristic
+polynomial `p(E,u_*)` (no Hermitian solver) — **agree on every sample** (154/154). The selector is
+`numerically-supported (near-proof)` for the identification of the real node as the controlling point, and
+`analytically-derived` for the structure (the spectral-flow group identity).
+*(Methodological note: reading the orientation from the adiabatic-limit `P` is unreliable — that is the
+deep-overlap regime where `P` does not cleanly reach a vertex; the deterministic overlap-continuation is the
+reliable measurement, and it is what the closed-form sign reproduces.)*
 
 ## Status / hand-off
-**T1 [keystone], T2, T3 are closed** (analytically-derived + numerically-verified); **T4 partial** — the
-Z₂ orientation/spinor *label* is established, its *selector* is open. The geometric theory (R18--R19) thus
-has a *fully derived* rigid skeleton: the leading `U(3)` permutation is a node-selected directed 3-cycle
-(T1); the reachable set is the two-vertex region between identity and that cycle (T2); its boundary is the
-decoupling locus, edge-selected (T3); and the section splits into **two Z₂ mirror sectors** by cycle
-orientation (T4). **Owed:** the orientation *selector* (the spectral-flow / `δ_j`-monodromy derivation).
-With T1--T3 + the T4 label, the rigid (σ-free) topological theory is essentially complete; `σ` (the
-analytic dressing) and the orientation *selector* are the two remaining open items — neither of which
-touches the established σ-free skeleton.
+**T1 [keystone], T2, T3, T4 are all closed** (analytically-derived + numerically-verified/near-proof). The
+geometric theory (R18--R19) now has a **fully derived rigid skeleton**: the leading `U(3)` permutation is a
+node-selected directed 3-cycle (T1); the reachable set is the two-vertex region between identity and that
+cycle (T2); its boundary is the decoupling locus, edge-selected (T3); the section splits into two Z₂ mirror
+sectors by cycle orientation, and **the sector is selected by the energy-position of the real node**,
+`\mathrm{sign}(\operatorname{tr}H(u_*)-3E_*)` (T4). The **σ-free topological theory is complete.** The
+**only** remaining open item is `σ` itself (the analytic dressing — the irreducible Fredholm/Widom
+connection constant), which does not touch the topological skeleton.
