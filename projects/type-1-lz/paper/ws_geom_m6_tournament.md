@@ -65,21 +65,37 @@ exact-WKB trap the program already hit), that is the stop signal.
 in the **interference regime** (moderate coupling, both A₀,A_ret appreciable; N=17), and compare, at *equal*
 free-parameter count (one constant each), the fitted-K proxy vs a first-principles `cos(φ_dyn+φ_stokes)`.
 
-**Result `[numerically-suggestive]`:** the first-principles phase `φ_ml+φ_stokes` (mid–lo adiabatic gap
-integrated between the two diabatic crossings, + the Stokes phase already in the code) **beats the fitted
-K**: mean `|cosΦ−cosΦ_true|` = **0.161 vs 0.189**. So H1 is **directionally confirmed** — a genuine
-turning-point phase tracks the truth better than the ad-hoc linear proxy.
+**Result `[numerically-supported — a NEGATIVE]`.** *(Process note: an initial N=17 sample showed the
+first-principles phase marginally **beating** the fitted K, 0.161 vs 0.189 — a tempting "structural win."
+The robustness check overturned it.)* On a robust **N=42** interference sample:
 
-**Honest magnitude:** the margin is modest and, in this regime, `cosΦ` is near-quadrature/small (the
-uniform-law derivation's own observation), so both errors are comparable to `cosΦ` itself and the net
-improvement to `P_mm` is `≈ A_c·Δerr ≈ 0.006` — **sub-1%**. **Verdict: H1 is a STRUCTURAL win** (it yields a
-*parameter-free* uniform phase of similar ~1% accuracy, removing the fitted K) **rather than an accuracy
-breakthrough.** The residual phase error is the **σ-adjacent non-period content** — exactly the irreducible
-piece, consistent with the hard ceiling.
+| phase model | mean \|cosΦ − cosΦ_true\| |
+|---|---|
+| **fitted-K law** (1 fitted const) | **0.090** |
+| parameter-free `φ_dyn + Σ₃ φ_stokes` (0 const) | 0.281 (~3× worse) |
+| `φ_dyn + 2 φ_stokes`, best offset (1 const) | 0.179 (~2× worse) |
 
-**Recommended M6 build (if pursued):** (1) derive `φ_dyn` exactly (the true Stückelberg contour on Σ, not
-the crude real-gap proxy) and the constant offset (removing the last fitted number) → a fully parameter-free
-uniform law; (2) extend with **H4** (Weber/parabolic-cylinder uniformization) for the coalescing-turning-point
-regime. Expected payoff: a *first-principles* uniform law (no fitted constants) at ~1% — structural, not a
-new closed form (σ remains). **Escalation flag:** if `φ_dyn` derivation turns into the opaque exact-WKB
-matrix product, stop — the structural win (H1 first-cut) already stands on its own.
+**The fitted K decisively beats the elementary first-principles phase** — even when the latter is given its
+own fitted offset. The elementary turning-point phase (gap action + Stokes phases) does **not** reproduce
+`cosΦ`; the fitted K is absorbing genuinely **non-elementary, σ-adjacent (non-period)** content. So **H1
+fails**: the graph/turning-point machinery cannot improve Dykhne–Stückelberg with an *elementary* phase.
+
+**Consequence for H7/H4 (escalation — do not build).** Beating K requires the **exact** turning-point
+connection, which for this rank-3 (W₃, c=2) problem **is σ** — the Fredholm/Widom constant, i.e. the opaque
+exact-WKB matrix product the programme already rejected. The H4 Weber/parabolic-cylinder uniformization is
+exactly that exact connection; in deep overlap it is *more* σ-dominated, not less. **The escalation flag has
+fired**: there is no non-opaque graph adaptation that beats the fitted constant. Per the hard constraint, we
+stop rather than grind out a Weber computation of σ.
+
+**The valuable takeaway (sharpens the σ story).** σ is not a small remainder bolted onto a good
+semiclassical estimate: it is **load-bearing even in the interference *phase*** — large enough that a single
+*fitted* constant outperforms a first-principles elementary phase. This is a sharp, first-class negative: it
+tells you exactly why no elementary closed form for the interference exists, and that the fitted K in the
+uniform law is the cheapest honest stand-in for σ-content, not a removable blemish.
+
+## Answer to the original question
+**Can the Feynman-graph machinery be adapted to improve on Dykhne–Stückelberg? — No, not with the
+elementary (non-opaque) machinery.** Truncation is marginal (M5); the elementary first-principles phase is
+*worse* than the fitted K (this M6); and the only route that could beat K is computing σ itself (the opaque
+object). The graph engine remains valuable as the *microscopic derivation* of the uniform law (M5 Task B)
+and as a transparent adiabatic-window calculator — but it does not sharpen the semiclassical estimate.

@@ -1600,3 +1600,41 @@ TOURNAMENT (ws_geom_m6_tournament.md) over H1-H6 + evolved H7=H1(+)H4:
 
 Artifacts: experiments/ws_geom_m5_graphs.py, experiments/ws_geom_m6_h1_phase.py; paper/ws_geom_m5.md,
 paper/ws_geom_m6_tournament.md.
+
+---
+
+## 2026-06-03 — M6/H1 CORRECTION: the "structural win" was a sample-size artifact; H1 FAILS (robust negative)
+
+Following the user's "build full M6 (H1 then H7)": pursued H1 to a parameter-free phase and ran a ROBUSTNESS
+check. The earlier suggestive-positive is RETRACTED.
+
+ - Earlier N=17 sample: parameter-free phi_dyn+3*stokes ~ 0.189 = fitted-K 0.189; best-offset 0.161 < fitted.
+   Looked like a structural win (parameter-free at equal/better accuracy).
+ - ROBUST N=42 sample (ws_geom_m6_h1_phase.py, larger scale x shift grid): fitted-K 0.090; parameter-free
+   first-principles 0.281 (~3x WORSE); first-principles + best offset 0.179 (~2x worse, even WITH a fitted
+   offset). The fitted K DECISIVELY BEATS the elementary first-principles phase.
+
+VERDICT (corrected, numerically-supported NEGATIVE): H1 FAILS. The elementary turning-point phase (mid-lo
+adiabatic gap action + the three crossings' Stokes phases) does NOT reproduce cosPhi; the fitted constant K
+is absorbing genuinely NON-elementary, sigma-adjacent (non-period) content. Beating K requires the EXACT
+turning-point connection = sigma (the Fredholm/Widom constant of the rank-3 W3 c=2 problem) = the opaque
+exact-WKB matrix product the program rejected.
+
+H7/H4 ESCALATION (do not build): the H4 Weber/parabolic-cylinder uniformization IS that exact connection; in
+deep overlap it is MORE sigma-dominated. The escalation flag set at M6 scoping has fired -- there is no
+non-opaque graph adaptation that beats the fitted K. Stopped rather than grind out a Weber computation of
+sigma. (Honest dead-end, preserved.)
+
+VALUE (sharpens sigma): sigma is NOT a small remainder on a good semiclassical estimate -- it is LOAD-BEARING
+even in the interference PHASE, large enough that a single fitted constant outperforms first-principles
+elementary semiclassics. This explains why no elementary closed form for the interference exists, and recasts
+the fitted K in the uniform law as the cheapest honest stand-in for sigma-content (not a removable blemish).
+
+ANSWER to the user's question "can the graph machinery improve Dykhne-Stueckelberg?": NO, not with the
+elementary (non-opaque) machinery. Truncation is marginal (M5); the elementary first-principles phase is
+worse than fitted-K (this M6); beating K requires sigma itself. The graph engine remains valuable as the
+microscopic DERIVATION of the uniform law (M5 Task B) and a transparent adiabatic-window calculator, but it
+does not sharpen the estimate. M6 closed as a first-class NEGATIVE.
+
+Process note: the N=17 false positive was caught precisely by the convergence/robustness discipline
+(physics-numerics) -- a good example of why single-sample "wins" must be re-tested before promotion.

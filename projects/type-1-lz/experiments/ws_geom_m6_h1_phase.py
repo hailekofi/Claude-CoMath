@@ -16,13 +16,16 @@ Aret appreciable), the mean |cos - cosPhi_true| of:
     (i)  the fitted-K proxy (its one constant K), vs
     (ii) cos(phi_dyn + phi_stokes) with ONE global additive offset (its one constant).
 
-HONEST OUTCOME (numerically-suggestive): the first-principles phase phi_ml+stokes (mid-lo adiabatic
-gap integrated between the two crossings, + Stokes) beats the fitted K -- 0.161 vs 0.189 mean phase
-error -- at equal parameter count. BUT cosPhi is small here (paths near quadrature), so both errors are
-~ the size of cosPhi itself, and the net improvement to P_mm is sub-1%. So H1 is DIRECTIONALLY right
-(first-principles > fitted) and would yield a PARAMETER-FREE uniform law of similar (~1%) accuracy -- a
-STRUCTURAL win (removes the fitted K) more than an accuracy win. The residual phase error is the
-sigma-adjacent non-period content (the open content is provably not a period).
+HONEST OUTCOME (numerically-supported -- a NEGATIVE result): the elementary first-principles phase
+  Phi = phi_dyn + phi_stokes(d_lo) + phi_stokes(d_hi) + phi_stokes(d_lh)
+(the mid-lo adiabatic gap action between the two crossings + ALL THREE crossings' Stokes phases) does NOT
+beat -- and is substantially WORSE than -- the fitted constant K. On a robust N=42 interference sample:
+fitted-K 0.090, parameter-free first-principles 0.281 (~3x worse), first-principles + best offset 0.179
+(~2x worse). The fitted K is absorbing genuinely NON-elementary (sigma-adjacent, non-period) content that
+no elementary turning-point phase reproduces. (An earlier N=17 sample showed a SPURIOUS near-match -- the
+larger sample overturns it; this is the robustness check catching a false positive.) VERDICT: H1 FAILS --
+the graph machinery does NOT improve Dykhne-Stueckelberg with an elementary phase; beating K requires the
+EXACT connection = sigma (the opaque exact-WKB object). sigma is load-bearing even in the semiclassical phase.
 
 Reproduce: python3 ws_geom_m6_h1_phase.py
 """
@@ -49,24 +52,25 @@ def ref_P(eps, gam, a, T=110.0):
     return np.abs(s.y[:, -1].reshape(3, 3).T) ** 2
 
 
-def dyn_phases(eps, gam, a):
-    """Dynamical actions between the two diabatic crossings: mid-lo gap, hi-mid gap, full span."""
+def phi_dyn(eps, gam, a):
+    """First-principles dynamical action: the mid-lo ADIABATIC gap integrated between the two
+    diabatic crossings (the dominant leg of the STAY-vs-RETURN Stueckelberg loop)."""
     H0, A = type1(eps, gam, a); ad = np.diag(A); d = np.diag(H0)
     lo, mid, hi = (int(k) for k in np.argsort(a))
     ucr = lambda i, j: (d[j] - d[i]) / (a[i] - a[j])
     u1, u2 = sorted([ucr(lo, mid), ucr(mid, hi)])
     us = np.linspace(u1, u2, 200)
     W = np.array([np.linalg.eigvalsh(H0 + u * ad) for u in us])
-    return (float(np.trapezoid(W[:, 1] - W[:, 0], us)),
-            float(np.trapezoid(W[:, 2] - W[:, 1], us)),
-            float(np.trapezoid(W[:, 2] - W[:, 0], us)))
+    return float(np.trapezoid(W[:, 1] - W[:, 0], us))
 
 
-def collect(a0=np.array([-1.0, 0.5, 2.0]), g0=np.array([1.0, 0.8, 1.2])):
+def collect(a0=np.array([-1.0, 0.5, 2.0]), g0=np.array([1.0, 0.8, 1.2]),
+            scales=(0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3),
+            shifts=(-0.9, -0.5, -0.1, 0.3, 0.7, 1.1, 1.5, 1.9)):
     mid = int(np.argsort(a0)[1])
     rows = []
-    for sc in [0.7, 0.85, 1.0, 1.15, 1.3]:
-        for shift in [-0.7, -0.2, 0.4, 1.0, 1.6]:
+    for sc in scales:
+        for shift in shifts:
             eps = np.array([-2.0, shift, 3.0]); gam = sc * g0
             _, pa = uni.uniform_P_mm(eps, gam, a0, return_parts=True)
             A0, Aret = pa["A0"], pa["Aret"]; Ac = 2 * np.sqrt(max(A0 * Aret, 0.0))
@@ -75,9 +79,11 @@ def collect(a0=np.array([-1.0, 0.5, 2.0]), g0=np.array([1.0, 0.8, 1.2])):
             pmm = ref_P(eps, gam, a0)[mid, mid]; ct = (pmm - A0 - Aret) / Ac
             if abs(ct) > 1.0:
                 continue
-            pml, phm, phl = dyn_phases(eps, gam, a0)
-            rows.append(dict(ct=ct, cf=pa["cosPhi"], ml=pml, hm=phm, hl=phl,
-                             fs=pa["phi_stokes"], Ac=Ac))
+            # parameter-free first-principles phase: phi_dyn + ALL THREE crossings' Stokes phases
+            fs3 = (uni.stokes_phase(pa["d_lo"]) + uni.stokes_phase(pa["d_hi"])
+                   + uni.stokes_phase(pa["d_lh"]))
+            rows.append(dict(ct=ct, cf=pa["cosPhi"], ml=phi_dyn(eps, gam, a0),
+                             fs2=pa["phi_stokes"], fs3=fs3, Ac=Ac))
     return rows
 
 
@@ -92,32 +98,33 @@ def best_offset(ct, phi):
 
 def main():
     print("=" * 88)
-    print("M6 / H1 -- first-principles Stueckelberg phase vs fitted K (decisive first-cut)")
+    print("M6 / H1 -- first-principles Stueckelberg phase vs fitted K")
     print("=" * 88)
     rows = collect()
     ct = np.array([r["ct"] for r in rows]); cf = np.array([r["cf"] for r in rows])
     Ac = np.array([r["Ac"] for r in rows])
-    ml = np.array([r["ml"] for r in rows]); hm = np.array([r["hm"] for r in rows])
-    hl = np.array([r["hl"] for r in rows]); fs = np.array([r["fs"] for r in rows])
+    ml = np.array([r["ml"] for r in rows])
+    fs2 = np.array([r["fs2"] for r in rows]); fs3 = np.array([r["fs3"] for r in rows])
     print(f"valid interference samples (both A0,Aret appreciable): N={len(rows)}")
     e_fit = float(np.mean(np.abs(cf - ct)))
-    print(f"\n  fitted-K (1 const):           mean|cos-cos_true| = {e_fit:.3f}")
-    forms = [("phi_ml + stokes", ml + fs), ("phi_hm + stokes", hm + fs),
-             ("phi_hl + stokes", hl + fs), ("phi_ml (no stokes)", ml)]
-    best_form = None
-    for nm, phi in forms:
-        e, ph0 = best_offset(ct, phi)
-        flag = "  <== beats fitted" if e < e_fit else ""
-        if best_form is None or e < best_form[1]:
-            best_form = (nm, e, ph0)
-        print(f"  {nm:20s} (1 offset):  mean|cos-cos_true| = {e:.3f} (offset {ph0:+.2f}){flag}")
-    nm, e, ph0 = best_form
-    dP = float(np.mean(Ac)) * (e_fit - e)
-    print(f"\n  best first-principles form: {nm}  ({e:.3f} vs fitted {e_fit:.3f})")
-    print(f"  => directionally H1 WINS (first-principles phase < fitted error), but the margin is modest")
-    print(f"     and cosPhi is near-quadrature/small here, so the net P_mm improvement ~ {dP:+.4f} (sub-1%).")
-    print("  VERDICT: H1 is a STRUCTURAL win (parameter-free phase of similar ~1% accuracy), not an")
-    print("           accuracy breakthrough; the residual is the sigma-adjacent non-period content.")
+    # the headline: PARAMETER-FREE first-principles phase = phi_dyn + 3 crossings' Stokes phases
+    e_pf = float(np.mean(np.abs(np.cos(ml + fs3) - ct)))
+    e_off, ph0 = best_offset(ct, ml + fs2)
+    print(f"\n  fitted-K law (1 fitted const K):                       mean|cos-cos_true| = {e_fit:.3f}")
+    print(f"  PARAMETER-FREE  phi_dyn + Sum_3 phi_stokes (NO const): mean|cos-cos_true| = {e_pf:.3f}")
+    print(f"  phi_dyn + 2 stokes, best single offset (1 const):      mean|cos-cos_true| = {e_off:.3f}")
+    winner = "fitted K" if e_fit < min(e_pf, e_off) else "first-principles phase"
+    print("\n  READING (robust, honest -- a NEGATIVE result):")
+    print(f"   - the FITTED constant K ({e_fit:.3f}) DECISIVELY BEATS the first-principles phase: the")
+    print(f"     parameter-free form is ~3x worse ({e_pf:.3f}), and even WITH its own fitted offset it is")
+    print(f"     ~2x worse ({e_off:.3f}). Winner: {winner}.")
+    print("   - the elementary turning-point phase (gap action + Stokes phases) does NOT reproduce cosPhi;")
+    print("     the fitted K is absorbing genuinely NON-elementary (sigma-adjacent, non-period) content.")
+    print("   - (An earlier N=17 sample showed a spurious ~match; the larger sample OVERTURNS it -- the")
+    print("      robustness check is what caught the false positive.)")
+    print("  VERDICT: H1 FAILS. The graph/turning-point machinery does NOT improve Dykhne-Stueckelberg with")
+    print("           an elementary phase. Beating K requires the EXACT connection = sigma (the opaque")
+    print("           exact-WKB object). So sigma is load-bearing even at the level of the semiclassical phase.")
 
 
 if __name__ == "__main__":
