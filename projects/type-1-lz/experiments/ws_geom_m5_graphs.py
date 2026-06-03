@@ -90,9 +90,12 @@ def task_A_validity_domain():
         rows.append((sc, r["Lambda"], r["delta"], e0, e1, e2, dom))
         print(f"  {sc:4.1f} {r['Lambda']:7.3f} {r['delta']:7.3f} | "
               f"{e0:9.2e} {e1:9.2e} {e2:9.2e} | {e2/e1:6.2f} {dom:>7}")
-    good = [row for row in rows if row[6] != "FAIL"]
-    print(f"\n  => order-2 graph calculator reaches <=5% once Lambda <~ {max(r[1] for r in good):.2f};")
-    print("     the error is monotone in Lambda (the adiabaticity knob), NOT in the BE action delta.")
+    e2s = [row[5] for row in rows]
+    best = int(np.argmin(e2s))
+    print(f"\n  => NOT monotone in Lambda (which barely moves, all ~pi): e2 has a SWEET SPOT at "
+          f"gamma-scale={rows[best][0]:.1f} (e2={e2s[best]:.1e}) and degrades on BOTH sides --")
+    print("     too diabatic (e0 large) or too strong (order-2 a wash, e2/e1~1). The calculator is a")
+    print("     genuine sub-% tool only in the moderate adiabatic window; adding orders cannot beat ~1e-3.")
     return rows
 
 

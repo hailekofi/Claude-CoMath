@@ -69,14 +69,23 @@ Fresnel endpoint tail; cross-checked against the 1e-13 Richardson oracle (`max|r
 `main`). Knob: scale `γ` up at fixed `(ε,a)` → wider crossings → smaller `Λ` → more adiabatic.
 
 <!-- VALIDITY_TABLE -->
-*(table filled from `ws_geom_m5_graphs.py` Task A — order-0/1/2 graph error vs the reference, classified
-`<1% / <5% / FAIL` against `Λ`.)*
+| `γ`-scale | Λ | δ_max | e₀ | e₁ | e₂ | e₂/e₁ | domain |
+|---|---|---|---|---|---|---|---|
+| 1.0 | 2.98 | 0.24 | 3.3e-1 | 7.4e-2 | 5.6e-2 | 0.76 | FAIL |
+| 1.4 | 2.96 | 0.92 | 1.0e-1 | 2.8e-3 | 8.7e-3 | 3.1 | <1% |
+| 1.8 | 2.93 | 2.52 | 3.8e-2 | 1.6e-3 | **1.3e-3** | 0.80 | <1% |
+| 2.2 | 2.90 | 5.62 | 1.7e-2 | 1.2e-2 | 1.2e-2 | 1.01 | <5% |
+| 2.8 | 2.83 | 14.8 | 7.9e-3 | 1.2e-2 | 1.2e-2 | 1.01 | <5% |
+| 3.5 | 2.73 | 36.0 | 2.0e-2 | 2.9e-2 | 2.9e-2 | 1.00 | <5% |
 
-**Reading.** The error tracks `Λ` (the adiabaticity knob), *not* `δ`. The order-2 graph clears the few-%
-bar once `Λ` drops below the marginal value `~π`; at the canonical anchor `Λ≈3` (right at the wall) the
-order-2 calculator is only ~few-%. The DDP/uniform-law bridge (Task B): the order-1 graph already carries
-the BE extreme survivals, and `P₂(P_mm)` tracks the uniform law and the reference together through the
-adiabatic regime.
+**Reading (honest, non-monotone).** The error is **not** monotone in `Λ` — across the whole sweep `Λ`
+barely moves (2.98→2.73, all near the marginal `~π`), while `e₂` has a **sweet spot** at `γ`-scale≈1.8
+(`e₂≈1.3e-3`) and *degrades on both sides*. Two regimes bracket it: (i) too diabatic (small `γ`): the
+order-0 cycle is the wrong leading term and `e₀` is large; (ii) too strong (large `δ`): the order-2
+correction is a **wash** (`e₂/e₁≈1.0`) and even *worsens* `e₀` — the marginal-`Λ` asymptotic overshoot. So
+the calculator is a genuine sub-% tool only in the **moderate adiabatic window**, and it **cannot be driven
+below ~1e-3 by adding orders**. The DDP/uniform-law bridge (Task B): the order-1 graph already carries the
+BE extreme survivals, and `P₂(P_mm)` tracks the uniform law and the reference together through that window.
 
 ## 4. The honest boundary and the practical recipe
 

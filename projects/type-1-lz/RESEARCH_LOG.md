@@ -1560,3 +1560,43 @@ two-component IP integration).
 Artifacts: paper/ws_geom_m4.md (new synthesis); paper/ws_geom_m3.md T4 (parity law + equivalence + derivation);
 experiments/ws_geom_m3_t4_selector.py (perm_parity_selector + two-form check); paper/type1_lz_working_paper.tex
 (R20 Geometric Selection Principle + selector parity form in the geometric account).
+
+---
+
+## 2026-06-03 — M5 (Feynman-graph calculator + validity domain) and M6 tournament (improve Dykhne-Stuckelberg?)
+
+M5 [physics-numerics + derivation]: the adiabatic-W Magnus/Feynman series is a practical CLOSED-FORM
+calculator for S in the adiabatic window, with a MAPPED validity domain (ws_geom_m5_graphs.py,
+ws_geom_m5.md). Findings:
+ - VALIDITY (Task A): error is NOT monotone in Lambda (which barely moves, ~pi everywhere); there is a
+   SWEET SPOT at gamma-scale~1.8 (e2~1.3e-3) and it degrades on BOTH sides (too diabatic: e0 large; too
+   strong: order-2 a wash e2/e1~1, even worsening e0). The bare truncation CANNOT be driven below ~1e-3.
+ - DDP/uniform-law BRIDGE (Task B): theta_ij'=E_i-E_j has NO real zero (adiabatic levels never cross) ->
+   graph integrals dominated by COMPLEX turning points -> steepest descent = DDP. Order-1 -> single-crossing
+   survivals p_x=exp(-2pi delta_x) (BE extremes); order-2 commutator -> Stuckelberg interference -> the
+   uniform law's 2 sqrt(A0 Aret) cosPhi. The graphs ARE the microscopic derivation of the uniform law.
+ - BOUNDARY (Task C): at Lambda~pi the graphs do NOT resum; the remainder is the irreducible sigma; the
+   practical engine beyond the domain is the exact two-component adiabatic-IP integration.
+
+M6 question (user): can the graph machinery be ADAPTED to IMPROVE Dykhne-Stuckelberg (not just truncated)?
+TOURNAMENT (ws_geom_m6_tournament.md) over H1-H6 + evolved H7=H1(+)H4:
+ - Leaderboard: H1 (first-principles Stuckelberg phase) wins; H7=H1+H4 (graph-derived uniform phase) is the
+   target architecture; H4 (Weber uniformization), H5 (Borel/resurgence of sigma), H6 (graph residual), H2
+   (Zhu-Nakamura prefactors), H3 (multi-path, opaque) follow.
+ - DECISIVE FIRST-CUT for H1 (ws_geom_m6_h1_phase.py) [numerically-suggestive]: extract true cosPhi =
+   (P_mm-A0-Aret)/2sqrt(A0 Aret) in the interference regime (N=17); at EQUAL parameter count (1 const each),
+   the first-principles phase phi_ml+phi_stokes (mid-lo gap integral between the two diabatic crossings +
+   the Stokes phase ALREADY in ws_o3_uniform but unused) BEATS the fitted K: mean|cos-cos_true| 0.161 vs
+   0.189. DIRECTIONALLY H1 wins.
+ - HONEST MAGNITUDE: cosPhi is near-quadrature/small in the interference regime, so net P_mm improvement
+   ~ +0.006 (SUB-1%). VERDICT: H1 is a STRUCTURAL win (a parameter-free uniform phase of similar ~1%
+   accuracy, removing the fitted K), NOT an accuracy breakthrough. The residual is the sigma-adjacent
+   non-period content -- consistent with the hard ceiling (the open content is provably not a period).
+ - ANSWER to "can it be done?": YES but bounded -- the machinery improves the *period part* of the phase
+   (removes the fitted constant) and gives a few orders of systematic correction before the marginal-Lambda
+   wall and sigma take over; it does NOT yield an exact closed form. Recommended M6 build: derive phi_dyn
+   exactly + the offset (parameter-free law) and extend with H4 (Weber uniformization); ESCALATION FLAG: stop
+   if phi_dyn turns into the opaque exact-WKB matrix product.
+
+Artifacts: experiments/ws_geom_m5_graphs.py, experiments/ws_geom_m6_h1_phase.py; paper/ws_geom_m5.md,
+paper/ws_geom_m6_tournament.md.
