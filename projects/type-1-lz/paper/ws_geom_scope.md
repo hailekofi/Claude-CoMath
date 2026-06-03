@@ -53,15 +53,22 @@ regardless. This workstream targets that geometry.
 
 **Tasks.** (a) Derive `Ω_1,Ω_2` explicitly; identify the directed-cycle order-0 term and the first hop +
 interference corrections; keep `W` (geometric, `a`-independent) separate from the phase edges
-(elementary, `a`-dependent). (b) Validate **term by term** against the oracle in the **generic regime**
-(`δ≲0.25`, where `\tilde W` is small): `S_0`, `S_0+Ω_1`, `S_0+Ω_1+Ω_2` should approach the oracle with
+(elementary, `a`-dependent). (b) Validate **term by term** against the oracle in the **adiabatic
+regime** (large gaps; order 0 = the directed cycle there, selected by continuation *through the node*):
+`S_0`, `S_0+Ω_1`, `S_0+Ω_1+Ω_2` should approach the oracle with
 the expected order in the gap. (c) Map the result onto the Feynman-graph structure (primer §ii): sheets =
 lines, `W` = vertices, dynamical phases = propagators.
 
-**Honest limits.** The series does **not** resum in deep overlap (`δ≳0.5`) — same boundary as WS-O3/R17;
-that is fine, the geometric *skeleton* (order 0 + low orders) is the target, and the resummation boundary
-*is* the deep-overlap core. Unitarity: Magnus (exp of anti-Hermitian `Ω`) preserves `S∈U(3)` at each
-order — a built-in consistency check the Dyson truncation lacks.
+**Honest limits (M1 findings, ws_geom_m1.md).** Two corrections to the naive picture, both now verified:
+(1) the directed cycle is the **adiabatic** order 0, **not** a small-`δ` object — small `δ` is the
+*diabatic* corner where order 0 is the **identity** (consistent with R16: small `δ` → near-identity, deep
+overlap → cycle). (2) The convergence parameter `Λ=∫‖W̃‖≈3≈π` is **marginal everywhere** (nearly
+slope-invariant) — the flow-side face of **R4/R5 permanent marginal overlap**: the slope-free width lemma
+keeps the series *permanently at its convergence boundary*, so it is an **order-improving skeleton, never a
+fast `δ`-series**, and it stops improving in the deepest overlap (`δ≳5`). Order 0 = directed cycle is
+coordinator-verified (it equals the oracle's dominant pattern, and is selected by continuing the eigenframe
+*through the universal node* — energy-sorting gives the wrong transposition). Unitarity: Magnus (exp of
+anti-Hermitian `Ω`) preserves `S∈U(3)` at each order — a built-in check the Dyson truncation lacks.
 
 ## 2. Part II (`physics-numerics`): map the image region + invariant hunt — facet A
 
@@ -82,7 +89,7 @@ first-class negative (the section's analytic structure is exhausted; only the to
 
 ## 3. Milestones
 1. **M1 (derivation):** `Ω_1,Ω_2` explicit; order-0 = directed cycle proven; Feynman-graph dictionary
-   written. *Gate:* term-by-term convergence to the oracle in the generic regime.
+   written. *Gate:* term-by-term convergence to the oracle in the adiabatic regime (PASSED — see ws_geom_m1.md).
 2. **M2 (numerics):** image-region map; boundary = classifier locus confirmed; directed-cycle-bias law.
 3. **M3 (invariant):** one candidate invariant from the caged regression, **proven** or precisely refuted.
 4. **M4 (synthesis):** the geometric statement — *the section = (order-0 topological permutation from the

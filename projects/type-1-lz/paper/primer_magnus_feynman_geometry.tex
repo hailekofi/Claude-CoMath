@@ -86,8 +86,11 @@ truncation lacks: $S\in\U(3)$ holds order by order, so $P=|S|^2$ stays doubly st
 \paragraph{Convergence and regime.} The series converges for
 $\int_0^t\norm{A(s)}\,\dd s<\pi$ \cite{BlanesCasas2009}. Physically: weak coupling or short evolution. In
 our application $A=-\ii\Wt$ is the (dynamical-phase-dressed) \emph{adiabatic} coupling, small when the
-energy gaps are large --- the well-separated/generic regime. \emph{Deep overlap} is precisely
-$\int\norm{\Wt}\to$ large: the series must be resummed, and that resummation is the hard $\sigma$.
+energy gaps are large --- the \emph{adiabatic} regime (large BE action $\delta$). A Type-1 surprise (M1,
+\S\ref{sec:milestones}): the dressed action $\Lambda=\int\norm{\Wt}\approx\pi$ is \emph{marginal almost
+everywhere} --- the flow-side face of the permanent-overlap lemma --- so the series is order-improving but
+never \emph{fast}, and in the deepest overlap $\Lambda$ exceeds $\pi$ and it ceases to resum (that
+resummation is the hard $\sigma$).
 
 \subsection{A two-level sanity check}
 For the ordinary two-level LZ problem the leading Magnus term $\Omega_1$ already reproduces the perturbative
@@ -196,11 +199,13 @@ what each establishes and how it is gated.
 
 \paragraph{M1 --- the adiabatic-$W$ Magnus expansion (\S\ref{sec:feynman}), derivation $+$ numerics.}
 Derive $\Omega_0$ (the directed-cycle permutation), $\Omega_1$ (first hop), $\Omega_2$ (first interference)
-explicitly, and validate \emph{term by term} against the gold oracle in the generic regime. \emph{Gate:}
-the error $|P^{(n)}-P^{\mathrm{oracle}}|$ must (a) decrease with order $n$ at fixed action $\delta$, and (b)
-decrease with $\delta$ at fixed order; the deep-overlap non-convergence ($\delta\gtrsim0.5$) is confirmed as
-the honest boundary. \emph{Output:} \texttt{experiments/ws\_geom\_magnus.py},
-\texttt{paper/ws\_geom\_m1.md}.
+explicitly, and validate \emph{term by term} against the gold oracle in the \emph{adiabatic} regime.
+\emph{Gate [PASSED]:} the error $|P^{(n)}-P^{\mathrm{oracle}}|$ (a) decreases with order $n$ at each
+sample, and (b) improves as the system is made more adiabatic (larger $\delta$), up to the marginal
+convergence boundary $\Lambda\!\approx\!\pi$; the deepest-overlap non-convergence is confirmed as the honest
+boundary. Order $0=$ the directed cycle is coordinator-verified to equal the oracle's dominant pattern and
+to be \emph{selected by continuation through the universal node} (energy-sorting gives the wrong
+transposition). \emph{Output:} \texttt{experiments/ws\_geom\_magnus.py}, \texttt{paper/ws\_geom\_m1.md}.
 
 \paragraph{M2 --- map the image region (numerics, facet A).} From large cheap $(\gamma,\eps,a)\to P$ data,
 characterize the swept region in reduced-$\U(3)$: the directed-cycle bias (distance to the nearest

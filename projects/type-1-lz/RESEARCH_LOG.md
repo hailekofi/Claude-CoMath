@@ -1264,3 +1264,37 @@ spectral-curve double cover; spinor signs delta_j).
 Status: SCOPED, not executed. Re-approaches the demoted WKB/selector "common cover & spinor lift"
 geometry with the new seed-W understanding. Entry point: WS-GEOM M1 (write Ω_1,Ω_2; order-0=directed
 cycle; term-by-term oracle validation in the generic regime).
+
+---
+
+## 2026-06-02 — WS-GEOM M1 DONE & verified: the adiabatic-W Magnus skeleton (order 0 = node-selected directed cycle)
+
+WS-GEOM Milestone 1 complete. Files: experiments/ws_geom_magnus.py, paper/ws_geom_m1.md.
+
+ORDER 0 = DIRECTED CYCLE (coordinator-VERIFIED independently): the overlap-continued adiabatic-following
+permutation |S_0|^2 = the directed 3-cycle [1,2,0], = the oracle's dominant-entry pattern (MATCH). KEY
+NEW GEOMETRIC INSIGHT (from coordinator verification): the directed cycle is SELECTED BY CONTINUING THE
+EIGENFRAME THROUGH THE UNIVERSAL NODE (R3) -- energy-sorting (ignoring the node) gives the WRONG
+transposition (0 2); continuing through the exact crossing turns it into the 3-cycle. So the node (R3) is
+what makes the leading U(3) structure a directed cycle. This links R3 <-> R16 geometrically.
+
+ORDER-BY-ORDER GATE PASSED (adiabatic regime, agent table, T-averaged to cancel a Stark-tail oscillation):
+e0>e1>e2 at every sample; all decrease as adiabaticity grows (gamma up): e.g. gamma 1.0/1.3/1.6/2.0 ->
+e0 .325/.129/.065/.027, e1 .073/.0146/.0111/.0067, e2 .059/.0104/.0105/.0066. Order 1 cuts error ~5-10x
+(leading non-adiabatic correction); order 2 (interference) adds a smaller gain to a ~5e-3 floor.
+Unitarity exact at every order (exp(Omega) unitary to 4e-17).
+
+TWO HONEST CORRECTIONS to my scope (now fixed in ws_geom_scope.md + primer .tex):
+1. The directed cycle is the ADIABATIC order-0, NOT a small-delta object. Small delta = DIABATIC corner
+   (order 0 = IDENTITY). Consistent with R16 (small delta -> near-identity; deep overlap -> cycle).
+2. The Magnus convergence parameter Lambda=∫||Wtil||≈3≈pi is MARGINAL EVERYWHERE (nearly slope-invariant)
+   = the FLOW-SIDE FACE OF R4/R5 permanent marginal overlap. So the series is an order-improving SKELETON,
+   never a fast delta-series; stops improving in deepest overlap (delta≳5) where Lambda>pi and sigma lives.
+
+Stark-tail subtlety (agent, honest): Wtil has a Fresnel tail e^{icu^2}/u^2 -> Omega_1,2 pick up
+O(sin(cT^2)/T^2) endpoint terms; single-T errors oscillate. Resolved by T-averaging (NOT faked); full fix
+= canonical log-T Stark subtraction (beyond M1).
+
+NET: M1 establishes the geometric SKELETON of S in U(3): order 0 = node-selected directed-cycle
+permutation (topological), orders 1-2 = the W-holonomy dressing (analytic), with marginal (R4/R5)
+convergence so the resummation = sigma stays irreducible. Next: M2 (image-region map) / M3 (invariant hunt).
