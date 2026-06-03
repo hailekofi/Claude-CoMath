@@ -1638,3 +1638,23 @@ does not sharpen the estimate. M6 closed as a first-class NEGATIVE.
 
 Process note: the N=17 false positive was caught precisely by the convergence/robustness discipline
 (physics-numerics) -- a good example of why single-sample "wins" must be re-tested before promotion.
+
+---
+
+## 2026-06-03 — Omega_3 directly computed: NO significant refinement (closes a real gap)
+
+User flagged that the marginality verdict (M5) only used Omega_0,1,2 -- we never formed Omega_3. Closed the
+gap: implemented Omega_3 = 1/6 int_{t1>t2>t3}([A1,[A2,A3]]+[A3,[A2,A1]]), A=-Wtil, via nested cumulative
+integrals (ws_geom_m5_omega3.py).
+ - CORRECTNESS GATE: Om1,Om2 reproduce magnus_terms() to 0.0; ||Om3+Om3^H||=0 (anti-Hermitian) => correct.
+ - TERM NORMS shrink geometrically: canonical ||Om1,2,3||=1.03,0.51,0.12; sweet spot sc=1.8: 0.295,0.041,
+   0.004 (ratio ~0.1). So Om3 is genuinely small, not a hidden large term.
+ - REFINEMENT: e3 ~ e2 across the sweep, raw AND cleanly T-averaged. Sweet spot sc=1.8 (T-avg vs 1e-13
+   oracle): e1,e2,e3 = 1.64e-3, 1.45e-3, 1.45e-3. ||Om3||=0.004 exceeds the 1.45e-3 residual yet does not
+   reduce it.
+ - VERDICT: Omega_3 gives NO significant refinement. The residual floor is OUTSIDE the perturbative Magnus
+   tower (non-perturbative sigma-scale remainder + finite-T endpoint tail), not a missing finite order;
+   Om4... are smaller still and cannot reach it. The M5 marginality verdict HOLDS and is now unambiguous.
+ - Side product (pedagogy): documented WHY steepest descent through the COMPLEX turning points gives BE/DDP
+   (imaginary action to u_c = 2*pi*delta_ij) and Stueckelberg (two-saddle interference = the uniform-law
+   cosPhi); see where_we_are.tex sec 3.
