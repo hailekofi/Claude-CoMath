@@ -1356,3 +1356,33 @@ node-fixed cycle orientation), not searching for an analytic relation.
 
 Status: M3 scoped (not executed). The geometric theory's RIGID core is now stated (R18-R19) and its
 proof is scoped (M3 T1-T4). sigma remains the explicitly-quarantined irreducible remainder.
+
+---
+
+## 2026-06-03 — M3 T1 CLOSED: the node->directed-cycle theorem [analytically-derived]
+
+Files: paper/ws_geom_m3.md, experiments/ws_geom_m3_t1.py (verified: T1 True on canonical + 4 random).
+
+THEOREM T1: the order-0 adiabatic-following permutation, CONTINUED THROUGH the unique real node (R3),
+is a DIRECTED 3-CYCLE (not the energy-sorted extreme-swap transposition). Proof (3 steps + verification):
+ 1. Bare reordering = extreme-SLOPE swap tau_ext=(lo hi): E_k~a_k u reverses ordering between -+inf;
+    N=3 full reversal = swap extremes, fix middle. Universal (any distinct slopes). [verified (2,1,0)]
+ 2. Node = adjacent-rank transposition tau_node: R3's unique real crossing is between energy-adjacent
+    levels; continuation through it swaps that adjacent pair. [verified: continued differs by 1 adj swap]
+ 3. Composition: pi_cont = tau_ext o tau_node; two transpositions sharing one index = a 3-cycle
+    ((a b)(a c)=(a c b)); (lo hi) o (adjacent) = directed 3-cycle. [verified pi_cont=(1,2,0)=tau_ext o tau_node]
+ 4. Orientation set by which adjacent pair the node swaps (spectral data); uniform on the family (verified,
+    not separately proved -- minor owed item, ties to T4).
+
+Caveat (M1): order-0 = the full ORACLE permutation only in the adiabatic regime; for diabatic/small-action
+samples the oracle is near identity. T1 is about the order-0 skeleton.
+
+EPS-ORDERING (answers a user question): the extreme-swap is the diabatic image of the asymptotic
+energy-order REVERSAL; it swaps the extreme-SLOPE pair argsort(a)[0]<->argsort(a)[2] expressed in the
+EPS-indexed basis. In the samples slopes were eps-monotone so it read (2,1,0); generically it swaps
+eps-indices argsort(a)[0],argsort(a)[2]. This is exactly why strict eps-ordering matters: basis=eps (fixed),
+roles=slope (which states swap), energy=derived & end-reversing (hence never a channel label).
+
+IMPACT: T1 [keystone] closed => the geometric theory (R18) has a DERIVED topological core (the leading
+U(3) permutation is a node-selected directed cycle). Remaining M3: T2 (two-vertex), T3 (edge-selection
+boundary), T4 (delta_j double-cover orientation/label).
