@@ -1658,3 +1658,43 @@ integrals (ws_geom_m5_omega3.py).
  - Side product (pedagogy): documented WHY steepest descent through the COMPLEX turning points gives BE/DDP
    (imaginary action to u_c = 2*pi*delta_ij) and Stueckelberg (two-saddle interference = the uniform-law
    cosPhi); see where_we_are.tex sec 3.
+
+---
+
+## 2026-06-03 — H3 reopened (M7): multi-path / transfer-matrix sum -- NEGATIVE for Type-1, but DEMYSTIFIED
+
+User (correctly) flagged that H3 (Sinitsyn-style multi-path interference) was deprioritized in the M6
+tournament but never tested, and that the Omega_3 negative does NOT refute it (multi-path = a semiclassical
+TRAJECTORY sum, not the perturbative Magnus tower -- a distinct object). Reopened it properly (test + explain
++ literature).
+
+LITERATURE (WebSearch, grounded): Sinitsyn et al. obtain EXACT transition probabilities via path
+interference for SPECIAL solvable MLZ models (4-state arXiv:..., 6-state arXiv:1501.06083), where
+trajectories connecting the same endpoints interfere coherently -- explicitly NOT the incoherent LZ product.
+The independent-crossing approximation factorizes only "if path interference and accidental crossings are
+absent." Type-1 N=3 general is not such a solvable model (P_mm is sigma-transcendental).
+
+TEST (ws_geom_m7_multipath.py): built the independent-crossing transfer-matrix (ICTM) cleanly -- each
+crossing = exact isolated 2-level integration (DOP853), spectator gets its diabatic phase, product in
+u-order (convention-safe; Stokes phases automatic; coherent multi-path interference included).
+ - Type-1 P_mm: ICTM is MUCH WORSE than the calibrated 2-path uniform law. |ICTM-ref| vs |uni-ref|:
+   sc=0.5: 0.101 vs 0.001; sc=0.8: 0.342 vs 0.018; sc=1.2: 0.049 vs 0.073; sc=1.8: 0.078 vs 0.039.
+   Uniform wins 3/4; ICTM edges only at sc=1.2. Mean ICTM err ~0.14 >> uniform ~0.03.
+ - Separable generic toy (b_i free): ICTM error DECREASES with crossing separation (0.16 -> 0.043 as
+   +-5 -> +-40) but slowly; no clean exact-in-the-limit validation obtained -> ICTM numbers indicative,
+   not definitive (finite-separation ICA residual +/- phase-bookkeeping).
+
+STRUCTURAL RESULT (the real contribution): Type-1's Cauchy weld (R4/R5) PREVENTS crossing separation.
+Since H0 ~ gamma^2, small coupling sends all (H0)_ii -> 0, COLLAPSING every crossing to u=0 (maximal
+overlap); large coupling widens them. There is NO limit where Type-1 crossings are isolated, so the
+independent-crossing/multi-path factorization can NEVER reach its exact regime; its error is the overlap
+content = sigma. This DEMYSTIFIES Sinitsyn's effectiveness (his models permit separation or exactly-summed
+interference) and bounds it: Type-1 is the structural worst case for multi-path.
+
+VERDICT: H3 = NEGATIVE for Type-1 N=3 (multi-path is not a refinement; worse than the uniform law), but
+with a clean explanation. Consistent with every prior result: the uniform law is already the best cheap
+estimate, and the irreducible remainder under permanent overlap is sigma. M7 closed.
+
+Process note: the M6 tournament's low ranking of H3 was a too-quick dismissal (conflated with the Magnus
+tower); reopening on the user's prompt produced the structural R4 insight. Good example of scientist-in-the-
+loop catching an under-examined branch.
