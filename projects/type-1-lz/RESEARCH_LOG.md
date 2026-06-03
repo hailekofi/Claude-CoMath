@@ -1411,3 +1411,36 @@ node-selected directed cycle (T1) + two-vertex reachable set (T2) + decoupling-l
 T4 (the delta_j spinor double-cover ORIENTATION label) remains (a stretch, possibly partial). sigma (the
 analytic dressing) is the sole irreducible remainder. Paper geometric "account" updated to cite the derived
 T1-T3.
+
+---
+
+## 2026-06-03 — M3 T4 PARTIAL: cycle-orientation Z2 label ESTABLISHED, selector OPEN (with a retraction)
+
+Files: paper/ws_geom_m3.md (T4 section + T1 Step-4 correction), experiments/ws_geom_m3_t4.py, paper update.
+
+ESTABLISHED [numerically-supported, deterministic]: the directed-cycle ORIENTATION is a genuine Z2
+topological label = the eigenframe spinor/double-cover sector (delta_j=+-1). The dynamics-free
+overlap-continuation of the order-0 eigenframe gives BOTH orientations over broad samples: REV (2,0,1) x7,
+FWD (1,2,0) x4 (clean). So the U(3) section splits into TWO MIRROR SECTORS. Group rule (T1 Step 4):
+node swaps (mid,hi) => FWD, (lo,mid) => REV.
+
+RETRACTION (M1 honesty): orientation = -sign(u_*) is REFUTED. It held ~92% on seed 7 (N=13) but 33%
+(worse than chance) on seed 11 (N=9), with misses at LARGE |u_*| -> a seed-dependent fluke, not a rule.
+I had stated the 92% in an interim; retracted. No validated selector/dividing-locus is known.
+
+CORRECTION to T1: T1 Step-4's "uniform orientation (lo->hi->mid->lo on the family)" was a 5-sample
+artifact (seeds 0,3 happened to be FWD). Broad sampling flips it -> Z2. T1's CORE (order-0 = a directed
+3-CYCLE, not a transposition; Steps 1-3) is UNAFFECTED and stands. Corrected in ws_geom_m3.md + paper.
+
+METHOD note: reading orientation from the adiabatic-limit P is UNRELIABLE -- the limit is the deep-overlap
+regime where P does not cleanly reach a vertex (clean-defect ~0.4 at scale 8). The deterministic
+overlap-continuation is the reliable measurement and is what establishes the Z2.
+
+OWED (T4): the orientation SELECTOR -- the spectral-flow combinatorics (which of lo-mid / hi-mid is the
+real node vs the avoided complex branch point; only one real crossing exists though the asymptotic order
+reverses) + the delta_j monodromy on the genus-0 curve Sigma. T4 is the partial piece flagged at outset.
+
+STATUS: M3 T1-T3 closed (rigid skeleton derived); T4 partial (Z2 label established, selector open). The
+sigma-free topological theory is essentially complete: node-selected directed 3-cycle (T1) + two-vertex
+reachable set (T2) + decoupling-locus boundary (T3) + two Z2 mirror sectors (T4-label). Two open items
+remain, neither touching the derived skeleton: sigma (analytic dressing) and the Z2 orientation selector.

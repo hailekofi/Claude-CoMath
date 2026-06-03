@@ -47,11 +47,13 @@ and `τ_node` is an adjacent pair — `(\mathrm{lo}\ \mathrm{mid})` or `(\mathrm
 sharing one index with `(\mathrm{lo}\ \mathrm{hi})` — the product is a directed 3-cycle. *Verified:*
 `π_{\rm cont}=(1,2,0)` (a 3-cycle) on all samples, and `π_{\rm cont}=τ_ext∘τ_node` holds exactly. ∎
 
-**Step 4 — orientation.** Which 3-cycle (the two orientations) is fixed by *which* adjacent pair the node
-swaps, i.e. by the node's sheet labels at `(u_*,E_*)` — a function of the spectral data. On the sampled
-family the node uniformly swaps the lower adjacent pair, giving the cycle
-`\mathrm{lo}\to\mathrm{hi}\to\mathrm{mid}\to\mathrm{lo}`. *(The 3-cycle conclusion is general; the uniform
-orientation is verified on the family, not separately proved — a minor owed item.)*
+**Step 4 — orientation (a Z₂ label; see T4).** Which 3-cycle (the two orientations) is fixed by *which*
+adjacent pair the node swaps: `(mid,hi)→` forward `lo→hi→mid→lo`, `(lo,mid)→` reverse `lo→mid→hi→lo`
+(the two transpositions sharing one index with `(lo\,hi)`). **This orientation is NOT universal** —
+broad deterministic sampling (T4) gives *both* (REV 7, FWD 4 over clean samples), so it is a genuine
+**Z₂ label**, not a fixed orientation. *(An earlier 5-sample family read uniformly forward — a small-sample
+artifact, now corrected.)* The 3-cycle conclusion (Steps 1–3) is general and unaffected; only *which* of
+the two it is varies with the spectral data — the open selector of T4.
 
 ## Why this answers "energy-sort `=(2,1,0)` on every sample" and the ε-ordering question
 The extreme-swap is the diabatic image of the **asymptotic energy-order reversal**: `E_k\sim a_k u`
@@ -113,11 +115,31 @@ decoupling locus traces them, edge-selected by *which* level decouples. This is 
 of R9 (**elementary ⇔ a level decouples**). ∎
 *Verified* (`ws_geom_m3_t2t3.py`, M2c): `γ_mid→0 ⇒ P_mm=1.0000`; `γ_lo→0 ⇒ b=0.0000`; `γ_hi→0 ⇒ b=0.0000`.
 
+## T4 — the spinor / cycle-orientation Z₂ label  [partial: label established, selector open]
+*Claim (established):* the directed-cycle **orientation is a genuine Z₂ topological label** — both
+orientations occur across parameter space — and it is the eigenframe spinor/double-cover sector (`δ_j=±1`).
+*Evidence.* The deterministic, dynamics-free overlap-continuation of the order-0 eigenframe (T1's
+construction) yields **both** orientations over broad samples: **REV `(2,0,1)` ×7, FWD `(1,2,0)` ×4**
+(clean samples, `ws_geom_m3_t4.py`). By the group rule (T1 Step 4) this is the node swapping `(lo,mid)`
+vs `(mid,hi)`. So the `U(3)` section comes in **two mirror sectors**, not one.
+*What is OPEN (honest).* The **selector** — what picks the sector — is *not* established. The natural guess
+`orientation = -\mathrm{sign}(u_*)` is **REFUTED**: it held ~92% on one seed but **33%** (worse than
+chance) on an independent seed, so it was a fluke; no validated predictor / dividing locus is known.
+A full account needs the **spectral-flow combinatorics** (which of the lo–mid / hi–mid crossings is the
+*real* node and which is the *avoided complex* branch point — the asymptotic order reverses but only one
+real crossing exists) together with the **`δ_j` monodromy** on the genus-0 curve `Σ` (transpositions at the
+four complex branch points + the real node). Both are **owed**; T4 is the partial piece flagged at the
+outset. *(Methodological note: reading the orientation from the adiabatic-limit `P` is unreliable — the
+limit is the deep-overlap regime where `P` does not cleanly reach a vertex; the deterministic
+overlap-continuation is the reliable measurement, and it is what establishes the Z₂.)*
+
 ## Status / hand-off
-T1 [keystone], **T2, and T3 are closed** (analytically-derived + numerically-verified) ⇒ the geometric
-theory (R18--R19) now has a *fully derived* topological skeleton: the leading `U(3)` permutation is a
-node-selected directed 3-cycle (T1); the reachable set is the two-vertex region between identity and that
-cycle (T2); its boundary is the decoupling locus, edge-selected (T3). The **only remaining M3 item is T4**
-— the `δ_j` spinor double-cover label, which would also settle the *orientation* of the cycle (T1 Step 4)
-in general — a stretch, possibly partial. With T1--T3 done, the rigid (σ-free) half of the
-`U(3)`-selection theory is derived; `σ` (the analytic dressing) remains the sole irreducible remainder.
+**T1 [keystone], T2, T3 are closed** (analytically-derived + numerically-verified); **T4 partial** — the
+Z₂ orientation/spinor *label* is established, its *selector* is open. The geometric theory (R18--R19) thus
+has a *fully derived* rigid skeleton: the leading `U(3)` permutation is a node-selected directed 3-cycle
+(T1); the reachable set is the two-vertex region between identity and that cycle (T2); its boundary is the
+decoupling locus, edge-selected (T3); and the section splits into **two Z₂ mirror sectors** by cycle
+orientation (T4). **Owed:** the orientation *selector* (the spectral-flow / `δ_j`-monodromy derivation).
+With T1--T3 + the T4 label, the rigid (σ-free) topological theory is essentially complete; `σ` (the
+analytic dressing) and the orientation *selector* are the two remaining open items — neither of which
+touches the established σ-free skeleton.
