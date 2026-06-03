@@ -1211,3 +1211,30 @@ restated as a flow statement, consistent with WS-D and deformation_family_probe.
 ws_aflow_derivation_plan.md are NOT viable as a closed transport flow; sigma-conservation is moot (no
 closed abelian dressing flow to carry it). The irreducible transcendental sigma (= W's Stokes data, the
 rank-3 GL3/W3 connection constant, WS-RH) remains, with no closed flow to it.
+
+---
+
+## 2026-06-02 — physics-reflection pass: add R17 + Conclusion (the honest reframe); coherence fixes
+
+Final review pass over type1_lz_working_paper.tex.
+- Added R17 [NS] (sec:skeleton): the commuting-family deformation flow does NOT close (Abelian ceiling
+  as a flow statement) -- plateau (no algebraic Q_k), R_k non-transport (O(1)), converged
+  d_a P_mm=(+0.062,-0.035,-0.027) reproduced only by full-history Duhamel; Stark d_a/lim_T subtlety.
+  Coordinator-verified this session.
+- Added Conclusion section "a governed account, and why the answer is the ODE": the honest reframe so the
+  reader finds insight in the dead end. Corollary: for the exact value, structured numerical integration of
+  the governing ODE is the most efficient method (evidence-backed). NOT naive integration -- the theory
+  delivers the right (adiabatic) frame (cond 1e18 -> 1e-9), reduces to 2 numbers (BE+DS), gives the uniform
+  formula for the generic regime, and certifies the residue irreducible. "What the dead ends bought":
+  the governing account for an ungoverned constellation.
+- REVIEW FINDINGS FIXED (M6 honesty): conclusion overstated "theorem-backed"/"provably no algebraic
+  object"/"we proved there is none" -> softened to "evidence-backed (gold-gated, short of a closure
+  theorem)". Coherence: intro central-object pnote presented the deformation programme as an open hope ->
+  reconciled with R17 (the seed W organizes but does not compute).
+- Cross-check: R15/R16/R17 numbers match their scripts (verified this session). Structure: braces balanced,
+  all envs OK, R1-R17 present, no stray c=1 mislabels, no P_{2->2} leftover. No pdflatex in env (no compile).
+
+VERDICT: paper is internally coherent, provenance-clean, evidence-tags honest. The session's full arc
+(structural ceiling -> classification -> 3 deliverables -> skeleton/2-transcendentals -> central seed W ->
+deformation no-go -> conclusion) is one consistent governing account. Remaining for "final": a real
+pdflatex compile (no toolchain here) and the owed proofs already listed (R5/R11 region statements).

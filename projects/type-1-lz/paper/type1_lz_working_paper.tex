@@ -99,7 +99,8 @@ $\sigma$ the rank-3 classification names (\S\ref{sec:class}) and the node-pinned
 Each member's open pair $\{\Pmid,b\}$ is this single $W$'s holonomy against the member's algebraic phases;
 the commuting family is $W$'s deformation orbit. Every result below is a facet of \emph{characterizing the
 Stokes data of $W$}.\pnote{experiments/\{ring\_structure.py, deformation\_family\_probe.py\}; the
-deformation-flow programme is scoped in paper/ws\_aflow\_derivation\_plan.md}
+deformation flow of this seed does \emph{not} close into a computational shortcut (R17): $W$ organizes
+the family but does not compute its transcendence}
 
 \section{Framework: $P$ as Stokes data}\label{sec:framework}
 $i\,\psi'(u)=(H_0+uA)\psi$ has entire coefficients, hence a \emph{single} irregular singular point at
@@ -358,6 +359,22 @@ has nowhere to live but $\Pmid$ (and its soft companion $b$), because the middle
 two-path sum whose joint dressing $\sigma$ is irreducible; the extremes each see a one-way cascade and are
 BE-exact.
 
+\textbf{R17 [NS]. The deformation flow does not close --- the Abelian ceiling as a flow statement.}
+The single seed $W$ organizes the whole family, but it yields no computational shortcut. The decisive
+test of the deformation programme --- whether the $a$-flow of $\{\Pmid,b\}$ closes into a
+finite-dimensional geometric ODE (which would transport a well-conditioned separated-regime computation
+into the deep-overlap core) --- \emph{fails}. Neither candidate closes: the homological (zero-curvature)
+equation $\partial_u Q_k-i[H,Q_k]=\partial_{a_k}H$ has no algebraic solution (the polynomial residual
+\emph{plateaus}, $\sim3\times10^{-2}$ at degree $6$, never collapsing to machine zero as a genuine
+$Q_k$ would), and the Gaudin/KZ linear form $\partial_{a_k}\Scat=R_k\Scat$ is not geometric ($R_k$
+carries the full propagator history --- transport error $O(1)$). The converged
+$\partial_{a_k}\Pmid=(+0.062,-0.035,-0.027)$ is reproduced by the full-history Duhamel integral but by
+\emph{no} history-free flow. (Subtlety: the Stark phase makes $\partial_a$ and $\lim_{T\to\infty}$
+non-commuting on the truncated propagator; the derivative must be taken on the converged $P$.) Thus the
+abelian data flows, but the non-abelian seed $\sigma$ is an irreducible constant, transported by no
+closed flow --- the Abelian ceiling (R1) restated for the deformation.\pnote{paper/ws\_aflow\_milestone1.md;
+experiments/aflow\_closure\_test.py; coordinator-verified (Stark subtlety + plateau + non-transport)}
+
 \section{The unifying picture and the classifier}
 The BE survivals are residue-collapsing periods of the phase one-form (elementary); the middle
 survival is the holonomy of the one joint that genuine all-to-all coupling forces. \emph{Classifier
@@ -395,6 +412,44 @@ parameter-region statement rather than a sample scan (accessory$=$node, R8, and 
 R3, are now theorems);
 (iv) an asymmetry-aware uniform law (R12 uses $\delta_{\rm lo}+\delta_{\rm hi}$, not the ratio).
 
+\section{Conclusion: a governed account, and why the answer is the ODE}
+The Type-1 $N{=}3$ middle survival has no closed form --- and we can now say precisely why, and what to
+do instead. On three independent, gold-gated lines (the rank-3 wild-character-variety count R9, the
+falsification of every finite Barnes-$G$ product R11, and the structural non-closure of both the Fredholm
+kernel R11b and the commuting-family deformation flow R17) the irreducible content is a single genuinely
+transcendental Stokes constant $\sigma$. The honest corollary is blunt: \emph{for the exact value, the
+most efficient method is structured numerical integration of the governing ODE} --- and this is an
+evidence-backed conclusion, not a mere concession. On the present evidence (strong and multi-method,
+though short of a closure theorem) there is no algebraic object to evaluate in its place.
+
+That would be deflating only if ``integrate the ODE'' meant \emph{na\"ive} integration. It does not. The
+structural theory turns the numerics from barely-working to optimal. (i) It identifies the \emph{adiabatic
+frame} --- available only because the commuting family shares one $a$-independent seed $W$ --- in which the
+integration is well-conditioned to $10^{-9}$, where the na\"ive diabatic propagator hits a
+Stokes-dominance wall ($\mathrm{cond}\sim10^{18}$). (ii) It reduces the task to \emph{two} numbers
+$\{\Pmid,b\}$: BE fixes the extreme survivals and double-stochasticity (R15) fixes the rest. (iii) It
+supplies a uniform semiclassical law (R12--R13) accurate to $\sim$1--2\% across the generic regime,
+leaving the ODE necessary only in the deep-overlap core. (iv) It certifies that the residual content is
+\emph{irreducible}, so no further closed-form search is warranted. The efficient recipe is therefore not
+``integrate the $3\times3$ propagator'' but: BE for the extremes, the uniform law for $\{\Pmid,b\}$ in the
+generic regime, a two-component adiabatic-IP integration with Richardson only in deep overlap, and
+double-stochasticity to fill the matrix.
+
+\emph{What the dead ends bought.} Each no-go sharpened the picture rather than emptying it. The search for
+a closed form produced the Abelian ceiling (R1: integrability fixes spectral data, never the prefactor),
+the slope-free width lemma and the permanent-overlap obstruction (R4--R6), the universal node $=$ accessory
+theorem (R3, R8), the classifier \emph{elementary $\Leftrightarrow$ a level decouples} (R9), and finally
+the single organizing object --- the geometric seed $W$ whose holonomy is the whole family's transcendence
+--- with the irreducible part localized to the one channel that recombines. The result is a \emph{governing
+account} of one member of a constellation its own literature calls ungoverned: integrability fixes the
+entire abelian skeleton --- spectrum, periods, BE survivals, formal monodromy, the seed $W$ --- and pins
+the hard part to one irreducible Stokes constant on the one recombining channel; everything else is
+closed-form or fast-asymptotic, and that constant is the ODE's, full stop. The value here is not a formula
+we failed to find --- the evidence says there is none --- but the map of \emph{why}, \emph{which} numerics, and
+\emph{what is free} without them. In a field of disconnected exact solutions, a sharp account of why a
+problem is irreducibly hard, together with the optimal way to compute it anyway, is itself the governing
+theory the constellation lacked.
+
 % ---------------- Dependency map (evidence-ladder) ----------------
 % R1  [EST] <- ring_structure.py (commuting ring, shared eigenbasis; Abelian ceiling)
 % R2  [EST] <- gate_test_genus.md (Gaudin parametrization; node)
@@ -413,6 +468,7 @@ R3, are now theorems);
 % R14 [EST/NS]<- oracle.py, num_S12.py, num_S12_model.md (1e-9 benchmark; re-verified 2026-06-02)
 % R15 [EST] <- skeleton_two_transcendentals.py (BE+DS => affine in {Pmid,b}; reconstruct 2e-10; P not symmetric)
 % R16 [NS]  <- skeleton_two_transcendentals.py (Pmid hard / b soft regime table; Abelian-ceiling reading)
+% R17 [NS]  <- ws_aflow_milestone1.md, aflow_closure_test.py (a-flow does NOT close: plateau + R_k non-transport; coordinator-verified)
 % F1  [AD]  <- single rank-2 irregular point, dim-6 wild char variety; kz_isomonodromy_picture.md
 
 \bibliography{refs}
