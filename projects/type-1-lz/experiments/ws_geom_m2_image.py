@@ -181,8 +181,13 @@ def sample_params(rng):
     e2 = spread * rng.uniform(0.5, 1.5)
     e1 = rng.uniform(e0 + 0.15 * (e2 - e0), e0 + 0.85 * (e2 - e0))
     eps = (e0, e1, e2)
-    # gamma: a log-uniform overall coupling scale times per-channel jitter; signs random
-    gscale = 10.0 ** rng.uniform(-0.7, 0.75)           # ~0.2 .. 5.6
+    # gamma: a log-uniform overall coupling scale times per-channel jitter; signs random.
+    # Upper bound ~2.8: this spans diabatic (small) -> adiabatic (the strong anchor gam~2.2
+    # already reaches the directed-cycle vertex b~0.997).  We deliberately do NOT sample the
+    # deep-overlap STRONG-coupling corner (gam>~3 with merged eps): there the fast engine is
+    # both very expensive (3e5+ rhs evals) AND unreliable (the non-resumming sigma core,
+    # M1 sec 4.4) -- including it would inject wrong points, not extend the reachable set.
+    gscale = 10.0 ** rng.uniform(-0.7, 0.45)           # ~0.2 .. 2.8
     gam = tuple(rng.choice([-1.0, 1.0]) * gscale * rng.uniform(0.6, 1.4) for _ in range(3))
     # a: distinct nonzero slopes
     a = tuple(np.sort(rng.uniform(-2.0, 2.0, 3)))
@@ -201,6 +206,14 @@ def build_cloud(n, seed=0, verbose=True):
         eps, gam, a = sample_params(rng)
         # reject pathological draws (near-degenerate eps/a)
         if min(np.diff(eps)) < 1e-3 or min(np.diff(sorted(a))) < 1e-3:
+            continue
+        # reject deep-overlap samples the fast engine cannot resolve (and which it would
+        # solve very slowly): the max pairwise BE window action > 8 marks the non-resumming
+        # core (M1 sec 4.4).  Cheap to pre-screen from the closed-form BE exponents.
+        bemax = max(be_exponent(np.asarray(eps, float), np.asarray(gam, float),
+                                np.asarray(a, float), i, j)
+                    for i in range(3) for j in range(i + 1, 3))
+        if bemax > 8.0:
             continue
         try:
             r = lift_features(eps, gam, a)
