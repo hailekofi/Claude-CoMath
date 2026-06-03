@@ -124,14 +124,27 @@ orientations occur across parameter space — and it is the eigenframe spinor/do
 (T1 Step 4) this is the node swapping `(lo,mid)` vs `(mid,hi)`. So the `U(3)` section comes in **two mirror
 sectors**, not one.
 
-### The selector (resolved): orientation = energy-position of the real node
-*Theorem (T4 selector).* The Z₂ orientation is fixed by **which adjacent energy-rank pair is the true
-degeneracy at the unique real node** `(u_*,E_*)` (R3) — equivalently by the closed-form algebraic sign
-$$\boxed{\ \mathrm{orientation} \;=\; \mathrm{sign}\big(E_3 - E_*\big)\;=\;\mathrm{sign}\big(\operatorname{tr}H(u_*) - 3E_*\big)\ }$$
-where `E_*` is the doubly-degenerate eigenvalue at the node (the R8 accessory `v_*`) and
-`E_3 = \operatorname{tr}H(u_*) - 2E_*` is the spectator level. Explicitly:
-- `E_3 > E_*` (node degenerates the **lower** pair, ranks `(0,1)`) `⟺` **FWD** `(1,2,0)`, `lo→hi→mid→lo`;
-- `E_3 < E_*` (node degenerates the **upper** pair, ranks `(1,2)`) `⟺` **REV** `(2,0,1)`, `lo→mid→hi→lo`.
+### The selector (resolved): the parity of the ε→slope ordering
+*Theorem (T4 selector).* The Z₂ orientation has **two equivalent closed forms**:
+
+**(1) Combinatorial — the clean form.** The orientation is the **parity of the permutation `σ` that maps
+the ε-order to the slope-order** (the slope rank carried by each ε-index):
+$$\boxed{\ \mathrm{orientation} \;=\; \operatorname{sgn}(\sigma)\ }\qquad \text{even}\Rightarrow\text{FWD}\ (1,2,0),\quad \text{odd}\Rightarrow\text{REV}\ (2,0,1).$$
+This is the **sign character `S_3\to\{\pm1\}`** — the eigenframe Z₂/spinor sector itself. It is **purely
+combinatorial: independent of the couplings `γ` and of every spacing** — it depends *only* on the relative
+order of the diabatic (ε) and adiabatic (slope) labels. *(Verified γ-independent: an odd assignment stays
+REV and an even one stays FWD over 80 random `γ` draws.)*
+
+**(2) Spectral — the geometric realization.** Equivalently, the orientation is the energy-position of the
+true degeneracy at the unique real node `(u_*,E_*)` (R3):
+$$\mathrm{orientation} \;=\; \mathrm{sign}\big(E_3 - E_*\big)\;=\;\mathrm{sign}\big(\operatorname{tr}H(u_*) - 3E_*\big),$$
+with `E_*` the doubly-degenerate eigenvalue (the R8 accessory `v_*`) and `E_3 = \operatorname{tr}H(u_*) - 2E_*`
+the spectator. Explicitly:
+- `E_3 > E_*` (node degenerates the **lower** pair) `⟺` even `σ` `⟺` **FWD** `(1,2,0)`, `lo→hi→mid→lo`;
+- `E_3 < E_*` (node degenerates the **upper** pair) `⟺` odd `σ` `⟺` **REV** `(2,0,1)`, `lo→mid→hi→lo`.
+
+The two forms **agree on every sample** — the real node sits on the lower/upper pair exactly according to
+`\operatorname{sgn}(σ)`.
 
 *Derivation (spectral flow).*
 1. **Factor the continued frame.** The overlap-continuation transports the eigenframe in `u` from `−∞` to
@@ -145,27 +158,33 @@ where `E_*` is the doubly-degenerate eigenvalue at the node (the R8 accessory `v
 3. **The Z₂ lives entirely in `k`.** With `τ_ext` fixed the only freedom is `k∈\{0,1\}`:
    `τ_ext∘τ_0=(lo\,hi)(0\,1)=` FWD and `τ_ext∘τ_1=(lo\,hi)(1\,2)=` REV (two transpositions sharing one
    index → a 3-cycle whose sense is set by the shared index).
-4. **`k` is an energy-position sign.** `k=0` (lower pair degenerate) `⟺` spectator above, `E_3>E_*`;
-   `k=1` (upper pair) `⟺` `E_3<E_*`. Both `u_*` and `E_*` are explicit algebraic data of the spectral curve
-   (R3 real node = real double root of the `E`-discriminant `Disc_E(u)`; R8 `v_*=E_*`), so the selector is a
-   **closed-form algebraic sign in `(γ,ε,a)`**. ∎
+4. **`k` is the parity of `σ`.** `k=0` (lower pair degenerate) `⟺` spectator above, `E_3>E_*`;
+   `k=1` (upper pair) `⟺` `E_3<E_*`. To see this is `\operatorname{sgn}(σ)`: relabel by an **adjacent
+   slope-transposition** (two slopes cross, `a_i\leftrightarrow a_{i+1}`). At that slope collision the real
+   node runs to `u\to\pm\infty` and returns on the other side (verified: scanning `a_{mid}` through `a_{lo}`
+   flips the orientation as `u_*` diverges), so the node moves from one adjacent pair to the other and `k`
+   flips. Hence the orientation changes sign under every transposition of `σ` ⟹ `\text{orientation}(σ) =
+   \operatorname{sgn}(σ)\cdot\text{orientation}(\mathbb 1)`, and the ε-monotone identity is FWD ⟹
+   `\text{orientation}=\operatorname{sgn}(σ)`. Both `u_*,E_*` are explicit algebraic data (R3 real node =
+   real double root of `Disc_E(u)`; R8 `v_*=E_*`), so the spectral form is a closed-form algebraic sign. ∎
 
 *Why this succeeds where the local screen failed.* The refuted candidates (`-\mathrm{sign}(u_*)`;
 node-proximity to the lo–mid vs hi–mid diabatic crossing; coupling ratios; slope offset;
-`\mathrm{sign}(E_*-(H_0)_{mid,mid})`; crossing-time combinations — all `≈`chance) all probed **local**
-features of a *single* (often *avoided*) crossing. The orientation is the energy-**position** of the
-*protected real degeneracy* within the spectrum — a **global** datum. Crucially the relevant point is the
+`\mathrm{sign}(E_*-(H_0)_{mid,mid})`; crossing-time combinations — all `≈`chance) all probed **continuous,
+local** features. The selector is a **discrete combinatorial invariant** — a permutation *parity*,
+`γ`-independent — invisible to any single continuous local probe. Its spectral realization lives on the
 **real node** (R3, an exact crossing = a real root of `Disc_E`), **not** the nearest complex branch point
-(the dominant avoided crossing): using the latter misclassifies the small-`|u_*|` REV cases (it can sit on a
-different level-pair). Once the right object — the real node's sheet-pair — is named, the rule is exact.
+(the dominant avoided crossing): using the latter misclassifies the small-`|u_*|` REV cases. Once the right
+object — the ε↔slope parity, equivalently the real node's sheet-pair — is named, the rule is exact.
 
-*Evidence (near-proof).* `ws_geom_m3_t4_selector.py`: the closed-form sign matches the
-overlap-continuation Z₂ on **154/154** clean random samples (`100.00%`, zero mismatch; FWD 85 / REV 69),
-plus 33/33 on an independent seed block and the canonical anchor (`u_*=-0.2493`, lower pair, FWD). **Two
-independent algorithms** — Hermitian `eigh` of `H(u_*)` and companion-matrix roots of the characteristic
-polynomial `p(E,u_*)` (no Hermitian solver) — **agree on every sample** (154/154). The selector is
-`numerically-supported (near-proof)` for the identification of the real node as the controlling point, and
-`analytically-derived` for the structure (the spectral-flow group identity).
+*Evidence (near-proof).* `ws_geom_m3_t4_selector.py`: **both** forms match the overlap-continuation Z₂ —
+the **parity** `\operatorname{sgn}(σ)` on **119/119** clean samples, the **spectral** sign on **154/154**
+(`100.00%`, zero mismatch; FWD 85 / REV 69) plus 33/33 on an independent block and the canonical anchor
+(`u_*=-0.2493`, lower pair, FWD). The two forms **agree on every sample**. **Two independent algorithms**
+for the spectral form — Hermitian `eigh` of `H(u_*)` and companion-matrix roots of `p(E,u_*)` (no Hermitian
+solver) — agree on all 154; and the parity form is **`γ`-independent over 80 random draws** at fixed
+ordering. The selector is `analytically-derived` (the spectral-flow group identity + the
+transposition-flip ⟹ `\operatorname{sgn}(σ)` argument) and `numerically-supported (near-proof)`.
 *(Methodological note: reading the orientation from the adiabatic-limit `P` is unreliable — that is the
 deep-overlap regime where `P` does not cleanly reach a vertex; the deterministic overlap-continuation is the
 reliable measurement, and it is what the closed-form sign reproduces.)*

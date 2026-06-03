@@ -1516,3 +1516,47 @@ Z2 mirror sectors with the real-node energy-position SELECTOR (T4). The SOLE rem
 
 Artifacts: experiments/ws_geom_m3_t4_selector.py (new); paper/ws_geom_m3.md (T4 RESOLVED + derivation);
 paper/type1_lz_working_paper.tex (R18/R19 geometric account updated).
+
+---
+
+## 2026-06-03 — T4 selector SHARPENED to a parity law + M4 synthesis (Geometric Selection Theory)
+
+While building M4 (the synthesis of M1-M3), tested the selector's predictions and FOUND a much cleaner
+form than the energy-position sign.
+
+PREDICTION TEST (physics-numerics discipline): conjectured the orientation flips through a TRIPLE
+degeneracy (E_3=E_* at the node). REFUTED by a 1-param scan (a_mid through a_lo): |E_3-E_*| is LARGE on
+both sides; the node instead runs u_*->+-inf at a SLOPE COLLISION. The flip is a parity-change at an
+ordering wall, not a triple point. This refutation POINTED at the right answer:
+
+PARITY LAW (the clean selector): orientation = sgn(sigma), the PARITY of the permutation sigma mapping the
+eps-order to the slope-order (slope-rank at each eps-index). EVEN => FWD (1,2,0); ODD => REV (2,0,1). It is
+the sign character S3->{+-1} (the eigenframe Z2/spinor sector). PURELY combinatorial:
+  - INDEPENDENT of gamma and of all spacings (depends only on the relative ORDER of eps & slopes);
+  - chamber-constant: no interior flip in eps_1 or gamma_mid scans;
+  - all 6 slope-to-eps assignments give exactly the even/odd split;
+  - gamma-INDEPENDENT over 80 random draws (odd stays REV, even stays FWD);
+  - matches cont_orient on 119/119 clean samples, AND equals the energy-position selector on every sample.
+DERIVATION: each adjacent slope-transposition swaps which adjacent pair the real node degenerates (node ->
+inf at the slope collision), flipping the orientation; so orientation = sgn(sigma)*orientation(identity),
+and the eps-monotone identity = FWD => orientation = sgn(sigma). [AD + near-proof.]
+
+So the selector now has TWO equivalent closed forms: (1) combinatorial parity sgn(sigma) [clean, gamma-free];
+(2) spectral sign(tr H(u_*)-3E_*) [the geometric realization on the real node]. Why the local screen failed
+is now obvious: a permutation PARITY is a discrete global invariant, invisible to any continuous local probe.
+
+M4 SYNTHESIS (ws_geom_m4.md): the Geometric Selection Principle. S = (rigid topological sector fixed by Sigma
++ its real node) x (W-holonomy dressing). Shape fixed by geometry: node-selected directed 3-cycle (T1),
+two-vertex reachable set (T2), decoupling-locus boundary (T3), parity-selected orientation (T4). Position =
+holonomy of the single a-independent seed W (M1), summing to ONE irreducible Stokes constant sigma. Geometry
+selects the section; dynamics only dresses it. No further analytic invariant (M2d). Dependency map +
+predictions (P1 refuted-kept, P2 parity supported, P3/P4 N>3 conjectures, P5 sigma-uniqueness consistency).
+
+STATUS: M1-M4 COMPLETE. The sigma-free Geometric Selection Theory of the U(3) section is finished. Sole open
+frontier = sigma (the Fredholm/Widom constant of the rank-3 W3 c=2 problem). Roadmap: (1) sigma as a Fredholm
+determinant (WS-O2b); (2) N=4 test of P3/P4; (3) sigma-free corollaries already cashed (BE + uniform law +
+two-component IP integration).
+
+Artifacts: paper/ws_geom_m4.md (new synthesis); paper/ws_geom_m3.md T4 (parity law + equivalence + derivation);
+experiments/ws_geom_m3_t4_selector.py (perm_parity_selector + two-form check); paper/type1_lz_working_paper.tex
+(R20 Geometric Selection Principle + selector parity form in the geometric account).
