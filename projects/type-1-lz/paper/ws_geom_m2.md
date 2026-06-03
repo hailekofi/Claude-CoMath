@@ -56,10 +56,12 @@ therefore convention-independent; the off-diagonal $b$ is compared against the o
 convention.
 
 **Engine and validation.** A single DOP853 solve of $i\dot U=(H_0+uA)U$ on $[-T,T]$, $T=50$,
-$\mathrm{rtol}=10^{-7}$ ($\sim$1.3 s/sample, $\sim$few$\times10^{-3}$ vs gold). The region
+$\mathrm{rtol}=10^{-7}$ ($\sim$1.12 s/sample, $\sim$few$\times10^{-3}$ vs gold). The region
 SHAPE / boundary / dimension do not need $10^{-9}$. Spot-checked against the gold oracle
-(`oracle.py`, $T=120$) at four anchors — `[numerically-verified]` the fast $P_{mm}$ and $b$
-agree with gold to $\sim3$–$4\times10^{-3}$ (see the run banner). The Birkhoff-vertex,
+(`oracle.py`, $T=80$) at four anchors — `[numerically-verified]` the fast $P_{mm}$ and $b$
+agree with gold to $\le 9\times10^{-3}$ (canonical $P_{mm}$ dev $3.6\times10^{-3}$, $b$ dev
+$7.7\times10^{-3}$; sampleB $b$ dev $3.3\times10^{-4}$; all four anchors $P_{mm}$ dev
+$\le 8.6\times10^{-3}$). The Birkhoff-vertex,
 boundary, and dimension results are **gauge-robust reachable-set features**, reported NOT as a
 sampling density (the parameter measure is arbitrary; risk §3 of the scope).
 
@@ -77,14 +79,14 @@ the lo–hi transposition $\to(1,1)$; and the **reverse** cycle
 $\mathrm{lo}\to\mathrm{mid}\to\mathrm{hi}\to\mathrm{lo}$ together with the lo–mid and mid–hi
 transpositions all $\to(0,0)$.
 
-Distance of the N=2000 cloud closure to each:
+Distance of the N=2000 cloud closure to each (exact run values):
 
-| vertex | $\{P_{mm},b\}$ | min-dist over cloud | reached? |
-|---|---|---:|---|
-| **identity** | $(1,0)$ | $\approx 0.003$ | **YES** |
-| **directed 3-cycle** ($\mathrm{lo}\to\mathrm{hi}\to\mathrm{mid}\to\mathrm{lo}$) | $(0,1)$ | $\approx 0.005$ | **YES** |
-| transposition lo–hi | $(1,1)$ | $\approx 0.65$ | no |
-| reverse-cycle / transp. | $(0,0)$ | $\approx 0.27$ | no |
+| vertex | $\{P_{mm},b\}$ | min-dist over cloud | frac within 0.02 | reached? |
+|---|---|---:|---:|---|
+| **identity** | $(1,0)$ | $0.0000$ | $0.16$ | **YES** |
+| **directed 3-cycle** ($\mathrm{lo}\to\mathrm{hi}\to\mathrm{mid}\to\mathrm{lo}$) | $(0,1)$ | $0.0011$ | $0.07$ | **YES** |
+| transposition lo–hi | $(1,1)$ | $0.573$ | $0$ | no |
+| reverse-cycle / transp. | $(0,0)$ | $0.096$ | $0$ | no |
 
 Only the **identity** (diabatic / small-action corner) and the **node-selected directed
 3-cycle** $\mathrm{lo}\to\mathrm{hi}\to\mathrm{mid}\to\mathrm{lo}$ (adiabatic / large-action
@@ -105,23 +107,26 @@ ordering.
 Distance to the cycle vertex $(0,1)$ vs the middle window action
 $\delta_{\max}=\max(\delta_{\mathrm{lo,mid}},\delta_{\mathrm{mid,hi}})$, binned over the cloud:
 
-| $\delta_{\max}$ bin | mean dist to cycle | mean $P_{mm}$ |
-|---|---:|---:|
-| $<0.05$ | $\sim1.3$ (near identity) | $\sim0.87$ |
-| $0.1$–$0.2$ | $\sim0.86$ | $\sim0.37$ |
-| $0.4$–$0.8$ | $\sim0.40$ | $\sim0.06$ |
-| $>1.6$ | $\sim0.17$ (near cycle) | $\sim0.07$ |
+| $\delta_{\max}$ bin | $n$ | mean dist to cycle | mean $P_{mm}$ |
+|---|---:|---:|---:|
+| $<0.05$ | 898 | $1.338$ (near identity) | $0.918$ |
+| $0.05$–$0.1$ | 153 | $1.035$ | $0.587$ |
+| $0.1$–$0.2$ | 170 | $0.822$ | $0.365$ |
+| $0.2$–$0.4$ | 178 | $0.541$ | $0.173$ |
+| $0.4$–$0.8$ | 153 | $0.370$ | $0.070$ |
+| $0.8$–$1.6$ | 129 | $0.220$ | $0.028$ |
+| $>1.6$ | 319 | $0.079$ (near cycle) | $0.013$ |
 
-- **Monotone in the action:** Spearman$(\mathrm{dist}_{\rm cycle},\delta_{\max})\approx-0.77$
+- **Monotone in the action:** Spearman$(\mathrm{dist}_{\rm cycle},\delta_{\max})=-0.978$
   — more window action drives $\{P_{mm},b\}$ toward the directed cycle, exactly the M1/R16
   adiabatic picture. The approach is **logarithmic in $\delta$** (the distance saturates; a
-  linear-in-$\delta$ exponent is the wrong model), $\mathrm{dist}_{\rm cycle}\sim
-  \alpha\log\delta_{\max}+\beta$ with $\alpha<0$.
+  linear-in-$\delta$ exponent is the wrong model): the trend fit is
+  $\mathrm{dist}_{\rm cycle}\approx -0.162\,\log\delta_{\max}+0.399$.
 - **$\chi$-modulation (shape, not scale):** within a fixed action band
-  ($0.2<\delta_{\max}<1.6$), Spearman$(\mathrm{dist}_{\rm cycle},\chi)>0$ — at the *same*
-  action, **more-separated windows ($\chi\to1$) sit farther from the cycle**. This is the same
-  $\{$action $\times$ shape$\}$ split as WS-O3/R11 ($P_{mm}=f(\delta_X,\chi)$): the action sets
-  the scale of the approach, $\chi$ tilts it.
+  ($0.2<\delta_{\max}<1.6$, $n=460$), Spearman$(\mathrm{dist}_{\rm cycle},\chi)=+0.426$ — at the
+  *same* action, **more-separated windows ($\chi\to1$) sit farther from the cycle**. This is the
+  same $\{$action $\times$ shape$\}$ split as WS-O3/R11 ($P_{mm}=f(\delta_X,\chi)$): the action
+  sets the scale of the approach, $\chi$ tilts it.
 
 **Gate M2b: characterized** — a monotone (log-in-action) bias toward the directed cycle,
 shape-modulated by $\chi$. (Note: this is a regime *trend* of a 2-D reachable set, not a
@@ -165,13 +170,13 @@ edge-selection rule (extreme $\to b=0$, middle $\to P_{mm}=1$).
 
 **Global PCA** of the standardized 9-feature lift
 $\{P_{mm},b,\delta_{\rm lm},\delta_{\rm mh},\delta_{\rm lh},\chi,c_0,c_1,c_2\}$ has spectrum
-(normalized) $\approx[1.00,\,0.70,\,0.65,\,0.49,\,0.20,\,0.07,\,0,\,0,\,0]$: the three exact
+(normalized) $[1.000,\,0.659,\,0.483,\,0.414,\,0.229,\,0.149,\,0,\,0,\,0]$: the three exact
 zeros are the elementary relations among $\{\delta_{ij},c_i\}$ (including $\sum_i c_i=0$).
 
-**Local Jacobian** of $\Phi:(\epsilon,\gamma,a)\to$ lift (finite-difference, median over
-interior points): singular spectrum $\approx[18,\,1.8,\,1.2,\,0.7,\,0.3,\,1.4\times10^{-3},\,
-\sim10^{-13},\,\sim10^{-13},\,\sim10^{-14}]$ — numerical rank 6, i.e. **3 exact relations**
-among the 9 features. The decisive diagnostics:
+**Local Jacobian** of $\Phi:(\epsilon,\gamma,a)\to$ lift (finite-difference, median over 12
+interior points): singular spectrum $[7.4,\,2.2,\,0.60,\,0.28,\,0.073,\,1.8\times10^{-4},\,
+\sim4\times10^{-14},\,\sim10^{-14},\,\sim7\times10^{-15}]$ — numerical rank 6, i.e. **3 exact
+relations** among the 9 features. The decisive diagnostics:
 
 - **The 3 relations live ENTIRELY in the elementary BE-action / Coulomb block**
   $\{\delta_{ij},c_i\}$. Both $c_i=\sum_{j\ne i}s_{ij}^2(a_i-a_j)$ and
@@ -180,9 +185,11 @@ among the 9 features. The decisive diagnostics:
   kinematic algebra, already known.**
 - **$P_{mm}$, $b$, and $\chi$ have ZERO weight in every null (relation) vector.** They are
   genuinely free; no relation ties the dynamical content to the BE/Coulomb data.
-- The $\{P_{mm},b\}$ **sub-Jacobian has rank 2** ($\sigma_2/\sigma_1\approx0.13$, clearly
+- The $\{P_{mm},b\}$ **sub-Jacobian has rank 2** ($\sigma_2/\sigma_1=0.128$, clearly
   nonzero): $P_{mm}$ and $b$ are locally independent directions — **no collapse, no hidden
-  $P_{mm}$–$b$ constraint**, exactly confirming the R15 prior.
+  $P_{mm}$–$b$ constraint**, exactly confirming the R15 prior. (Null-vector feature
+  participation over the 9 features is $[0,0,1.0,1.05,1.10,0,1.01,1.05,1.02]$ — exactly zero on
+  $P_{mm},b,\chi$ and order-1 on the $\{\delta_{ij},c_i\}$ block.)
 
 **Codimension for M3 $=0$ in the dynamical coordinates.** The lift's only relations are the
 elementary BE-action/Coulomb identities; the dynamical pair $\{P_{mm},b\}$ (and $\chi$) is
@@ -233,14 +240,20 @@ curved boundary only along the elementary $b=0$ / $P_{mm}=1$ edges (the decoupli
 3. **Moderate-accuracy engine.** $\sim$few$\times10^{-3}$ vs gold — adequate for shape/boundary/
    dimension, validated at four anchors against the oracle. The bias law (M2b) is a regime
    *trend* of a 2-D set, not a sharp scalar law.
-4. **Deep-overlap caveat (inherited).** The fast $T=50$ engine carries an endpoint-Stark tail
-   in deep overlap (M1 §5); it does not affect the corner/boundary/dimension verdicts (which are
-   robust), only the precise interior values near the cycle vertex.
+4. **Deep-overlap sampling restriction (explicit).** The sampler bounds the coupling scale
+   ($\gamma\lesssim 2.8$) and **rejects deep-overlap samples** with max pairwise BE action
+   $>8$. In that strong-coupling/merged-window corner the fast $T=50$ engine is both expensive
+   ($\sim3\times10^{5}$ rhs evals) and unreliable (the non-resumming $\sigma$ core, M1 §4.4) — so
+   including it would inject wrong points, not extend the reachable set. The cloud still reaches
+   both corners (identity to $0.0000$, cycle to $0.0011$) and spans $P_{mm}\in[0,1]$,
+   $b\in[0,1]$; the corner/boundary/dimension verdicts are robust. The fast engine also carries an
+   endpoint-Stark tail at finite $T$ (M1 §5), affecting only precise interior values, not the
+   gauge-robust features.
 
 **Evidence-ladder tags.**
 - `[numerically-verified]` — exactly two Birkhoff vertices reached (M2a); $b\ge0$, $P_{mm}\le1$
-  with no violations and the exact edge selection (M2c); unistochasticity ($0$ failures);
-  fast-vs-gold spot agreement to $\sim3$–$4\times10^{-3}$.
+  with no violations and the exact edge selection (M2c); unistochasticity ($0/2000$ failures);
+  fast-vs-gold spot agreement to $\le 9\times10^{-3}$ on $P_{mm}$ and $b$.
 - `[numerically-supported]` — the monotone $\delta$-bias law and its $\chi$-modulation (M2b);
   the rank-2 $\{P_{mm},b\}$ Jacobian and the rank-6 full-map Jacobian (M2d).
 - `[honest-negative]` — **FULL effective dimension: no new analytic invariant** (M2d); the
