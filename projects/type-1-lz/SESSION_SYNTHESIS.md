@@ -30,6 +30,15 @@ the seed), the skeleton (the 2 transcendentals = the holonomy), WS-RH (`σ` = `W
 and the deformation probe (family = `W`'s orbit). Deformation-flow programme scoped in
 paper/ws_aflow_derivation_plan.md (make-or-break: does the `a`-flow close?).
 
+**WS-AFLOW Milestone 1 VERDICT (2026-06-03): OUTCOME (iii) — the `a`-flow does NOT close** into a
+finite-dim geometric ODE (coordinator-verified). No algebraic `Q_k`/`M_a` solves the homological
+equation (residual plateaus, the WS-D null signature); the KZ `R_k=(∂S)S⁻¹` carries propagator history
+(transport_err O(1), |R_k|~1500 = divergent Stark content); only the full-history Duhamel reproduces the
+converged `∂_a{P_mm,b}=(+0.062,−0.035,−0.027)`. ⇒ the deformation/transport method is a **closed dead-end**:
+the central principle SURVIVES as *organizing structure* (one rigid seed `W`) but yields **no computational
+shortcut** — the Abelian ceiling restated as a flow statement. Subtlety verified: `∂_a` and `lim_T` do not
+commute on the raw propagator (Stark phase); the derivative must be taken on converged `P`.
+
 We have **not** produced a concise computable closed form, and we have **strong, multi-method
 evidence that an exact one in elementary or *published* special functions does not exist.** What we
 DO have: (i) a complete *structural theory* of why Type-1 N=3 is hard; (ii) the open quantity

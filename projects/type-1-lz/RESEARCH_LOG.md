@@ -1173,3 +1173,41 @@ User directive: make the single-seed-W holonomy insight the CORE of the project.
 
 Status: NOT executed yet (scoped only). Next action when authorized: run Milestone 1 (construct M_a from
 the commuting partner; test closure via the d_a finite-difference-vs-RHS decisive check).
+
+---
+
+## 2026-06-03 — WS-AFLOW Milestone 1: a-flow does NOT close (OUTCOME iii) — coordinator-verified
+
+The make-or-break of the central programme. Files: experiments/aflow_closure_test.py,
+paper/ws_aflow_milestone1.md. Relaunched after the first background agent died in an idle container
+reclaim.
+
+VERDICT [numerically-supported]: OUTCOME (iii) — the a-flow of {P_mm,b} does NOT close into a
+finite-dimensional geometric ODE. Both candidate closed forms FAIL the decisive test:
+- Mechanism 2 (algebraic M_a / Q_k via the homological eq d_u Q_k - i[H,Q_k] = d_{a_k}H): the polynomial
+  residual PLATEAUS (k=0..2, degrees 1->6: ~0.76 -> 0.10 -> 0.06 -> 0.06 -> 0.026..0.035; never collapses
+  to machine zero as a true algebraic Q_k would, cf. the commuting-partner reconstruction at 1e-14). The
+  WS-D null signature. => no algebraic Q_k.
+- Mechanism 3 (KZ/Gaudin linear R_k=(d_a S)S^{-1}): fits at a point (1e-16) but does NOT transport
+  (transport_err 0.40-0.54 = O(1); |R_k|~1500 = divergent Stark content). => not a flat geometric
+  connection; carries propagator history.
+- Ground truth: converged d{P_mm}/da_k = (+0.0620, -0.0352, -0.0267) (sum 0 = a-shift gauge), reproduced
+  ONLY by the full-history Duhamel, by NEITHER history-free mechanism.
+
+COORDINATOR VERIFICATION (M1 discipline, this is a load-bearing negative):
+- Independently reproduced the STARK SUBTLETY: naive d_a of a finite-T propagator oscillates and does NOT
+  converge (my crude Richardson-at-T=80 gave dP_mm/da=(-1.82,+1.68,+0.27), a point on the agent's
+  oscillation -4.4/+1.4/+0.78/+0.70) -- confirms d_a and lim_T do not commute (Stark phase a_k u^2/2).
+- Re-ran the agent script: reproduced the residual plateau and the R_k transport failure.
+- (Oracle-path converged-derivative cross-check via num_S12.P_mm_oracle launched as extra confirmation.)
+The closure logic is robust: a closing flow needs an algebraic Q_k (ruled out) OR a geometric R_k (ruled
+out); both fail, so the only "closure" is the full Duhamel history = not a finite-dim ODE. Not a false
+negative.
+
+MEANING: the central principle (one a-independent geometric seed W organizes the whole 2-param family)
+SURVIVES as organizing structure but yields NO computational shortcut. The deformation/transport method
+(compute sigma cheap, transport to deep overlap) is a CLOSED DEAD-END. This is the Abelian ceiling (R1)
+restated as a flow statement, consistent with WS-D and deformation_family_probe. Milestones 2-4 of
+ws_aflow_derivation_plan.md are NOT viable as a closed transport flow; sigma-conservation is moot (no
+closed abelian dressing flow to carry it). The irreducible transcendental sigma (= W's Stokes data, the
+rank-3 GL3/W3 connection constant, WS-RH) remains, with no closed flow to it.
