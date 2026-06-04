@@ -651,7 +651,7 @@ def main():
     gate_uni(rows)
 
     print("\n" + "=" * 84)
-    print("DONE.  See paper/ws_geom_m2.md for the writeup, gate verdicts, and the M3 hand-off.")
+    print("DONE.  See paper/working_sessions/ws_geom_m2.md for the writeup, gate verdicts, and the M3 hand-off.")
     print("=" * 84)
 
 

@@ -1,7 +1,7 @@
 # WS-GEOM — scope: the geometric selection of U(3) sections (adiabatic-W Magnus + image-region)
 
 **Type:** `physics-derivation` + `physics-numerics` scoping roadmap (NOT a finished result). **Date:**
-2026-06-02. **Companion primer:** `paper/primer_magnus_feynman_geometry.md`. **Status:** scoped, not
+2026-06-02. **Companion primer:** `paper/drafts/primer_magnus_feynman_geometry.md`. **Status:** scoped, not
 executed.
 
 ---
@@ -117,4 +117,4 @@ deformation_family_probe.py / ring_structure.py (the seed `W`, shared eigenbasis
 transcendentals.py (the directed cycle, `{Pmid,b}`), ws_o3_uniform.py (the semiclassical leading terms,
 the generic-regime validation), oracle.py / num_S12.py (gold + cheap data), ws_g_stokes_graph.md (the
 Stokes/cover geometry), the demoted WKB/selector "common cover & spinor lift" material (now re-approached
-with the seed-`W` understanding). Primer: `paper/primer_magnus_feynman_geometry.md`.
+with the seed-`W` understanding). Primer: `paper/drafts/primer_magnus_feynman_geometry.md`.

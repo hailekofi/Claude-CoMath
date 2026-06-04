@@ -1,11 +1,11 @@
 """
 gl3_rh_solver.py  --  WS-RH: a HIGH-PRECISION (mpmath) Riemann-Hilbert / Stokes evaluator
 for the Type-1 N=3 multistate Landau-Zener scattering matrix S, built on the node-pinned
-GL3 oper specified in paper/gl3_rh_problem.md.
+GL3 oper specified in paper/notes/gl3_rh_problem.md.
 
 WHAT THIS DELIVERS (rungs 1-2 of the node-pinned GL3 / RH program)
 ------------------------------------------------------------------
-Rung 1 (specification): see paper/gl3_rh_problem.md.  This script realizes the data
+Rung 1 (specification): see paper/notes/gl3_rh_problem.md.  This script realizes the data
 numerically: the irregular point at v=infinity (Poincare rank 2, three rates -i/a_j,
 formal exponents Theta=diag(c_i)), the apparent point v_*=E_* (indices {0,1,3}), the
 Wasow formal solution, and the steepest-descent G_+- saddle maps.
@@ -349,7 +349,7 @@ def banner():
     print("WS-RH  GL3 node-pinned RH solver  --  high-precision Stokes/connection evaluator")
     print(f"  python {sys.version.split()[0]}  numpy {np.__version__}  scipy {scipy.__version__}"
           f"  mpmath {mp.__version__}  seed {SEED}")
-    print("  rung 1 spec: paper/gl3_rh_problem.md ; gold gate: oracle.py "
+    print("  rung 1 spec: paper/notes/gl3_rh_problem.md ; gold gate: oracle.py "
           "(canonical 0.214724, sampleB 0.021018)")
     print("=" * 80)
 
@@ -505,7 +505,7 @@ def main():
     part4_convergence_vplane()
     print("\n" + "=" * 80)
     print("VERDICT (honest, evidence-tagged):")
-    print("  * RUNG 1 (spec): DELIVERED -- paper/gl3_rh_problem.md; data realized in PART 0.")
+    print("  * RUNG 1 (spec): DELIVERED -- paper/notes/gl3_rh_problem.md; data realized in PART 0.")
     print("  * RUNG 2, engine A (v-plane RH solve): high precision BEATS the cond~1e18 wall")
     print("    (PART 1: Z computed, O(1e8) not overflow) but STALLS at the G_+-/sigma map")
     print("    (PART 2: no dressing of Z recovers the oracle).  PRECISE NEGATIVE RESULT.")

@@ -229,7 +229,7 @@ python -c "import num_S12 as M; print(M.P_mm_oracle((-1,0,1.5),(.9,1.1,.8),(-.7,
 ```
 
 Files written by WS-NUM (only its own deliverables; `uploads/assay/*` read-only):
-`experiments/num_S12.py`, `paper/num_S12_model.md`, and the data caches
+`experiments/num_S12.py`, `paper/notes/num_S12_model.md`, and the data caches
 `experiments/num_S12_dataset.pkl`, `experiments/num_S12_slice.pkl`.
 
 ---

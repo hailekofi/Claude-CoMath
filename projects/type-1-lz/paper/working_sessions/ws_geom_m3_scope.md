@@ -79,7 +79,7 @@ but a partial/heuristic result is an acceptable M3 outcome.
   from NS to AD where T1--T3 close).
 
 ## 4. Deliverables (when executed)
-`paper/ws_geom_m3.md` (the derivations T1--T4 with symbolic checks + evidence tags) and any supporting
+`paper/working_sessions/ws_geom_m3.md` (the derivations T1--T4 with symbolic checks + evidence tags) and any supporting
 `experiments/ws_geom_m3_*.py` (the permutation-composition / branch-monodromy checks). No `σ`, no closed
 form claimed.
 

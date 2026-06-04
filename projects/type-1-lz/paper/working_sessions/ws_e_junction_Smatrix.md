@@ -1,8 +1,8 @@
 # WS-E — Closed form of the 12×13 junction S-matrix / the middle survival `P_{m→m}`
 
 **Owner:** WS-E (prize workstream / closed-form prefactor assembly). **Date:** 2026-06-01.
-**Inputs read (in order):** `paper/RESEARCH_PROGRAM.md`, `paper/ws_a_riemann_scheme.md`,
-`paper/ws_g_stokes_graph.md`, `paper/gate_test_genus.md`, `paper/coscaling_derivation.md`,
+**Inputs read (in order):** `paper/program/RESEARCH_PROGRAM.md`, `paper/working_sessions/ws_a_riemann_scheme.md`,
+`paper/working_sessions/ws_g_stokes_graph.md`, `paper/notes/gate_test_genus.md`, `paper/notes/coscaling_derivation.md`,
 `experiments/oracle_report.md`; plus `uploads/assay/{geometry,actions}.py`, `experiments/oracle.py`.
 **Literature:** Lin–Sinitsyn (arXiv:1310.7245, the LZ-Coulomb 3-level exact matrix) and
 Barik–Bakker–Gritsev–Yuzbashyan "BBGY" (arXiv:2409.17053, KZ ↔ hyperbolic-LZ, the Kampé de Fériet /

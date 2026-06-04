@@ -2,10 +2,10 @@
 
 **Type:** `physics-numerics` (executed; gauge-robust reachable-set characterization, with an
 explicit first-class negative). **Date:** 2026-06-03. **Builds on:** M1
-(`paper/ws_geom_m1.md` — the node-selected directed-cycle skeleton), R15/R16
+(`paper/working_sessions/ws_geom_m1.md` — the node-selected directed-cycle skeleton), R15/R16
 (`experiments/skeleton_two_transcendentals.py` — the two-transcendental $\{P_{mm},b\}$
-coordinates), R9 / WS-C (`paper/ws_c_factorization_locus.md` — the decoupling locus).
-**Scope followed:** `paper/ws_geom_m2_scope.md`. **Code:**
+coordinates), R9 / WS-C (`paper/working_sessions/ws_c_factorization_locus.md` — the decoupling locus).
+**Scope followed:** `paper/working_sessions/ws_geom_m2_scope.md`. **Code:**
 `experiments/ws_geom_m2_image.py` (reproducible; reuses `type1` + the gold `oracle.py`,
 caches the cloud to `ws_geom_m2_cloud.pkl`). **Conventions:** NOMENCLATURE.md — states
 $\epsilon$-indexed; BE roles by slope `lo,mid,hi = argsort(a)`; $P[x,j]=\mathrm{prob}(x\to j)$.

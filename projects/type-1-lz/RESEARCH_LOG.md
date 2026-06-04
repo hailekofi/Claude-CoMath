@@ -114,10 +114,10 @@ insertion-rule assembly across all active selector points, plus sector-propagato
 It does not deliver an elementary {γ,ε,a} form. ⇒ DEMOTE O3 from "single highest-leverage."
 The literature points to a different top strategy: the **KZ/Gaudin monodromy route**, which
 targets a closed amplitude in {γ,ε,a} + a handful of monodromy/period integrals directly. See
-strategy memo `paper/type1_lz_strategy_memo.tex`.
+strategy memo `paper/drafts/type1_lz_strategy_memo.tex`.
 
 ## Theory-building: autonomous research program drafted — 2026-06-01
-`paper/RESEARCH_PROGRAM.md` (the plan) + `paper/type1_lz_working_paper.tex` (living paper, DRAFT,
+`paper/program/RESEARCH_PROGRAM.md` (the plan) + `paper/drafts/type1_lz_working_paper.tex` (living paper, DRAFT,
 not finalized until physics-reflection passes). Unifying principle: P = |Stokes/connection data of a
 rank-2 irregular connection on the genus-0 rational spectral curve marked by {eps_i}, irregular inf,
 and the exact-crossing node|^2; Abelian ring fixes elementary exponents (BE), non-Abelian connection
@@ -172,7 +172,7 @@ propagate-forward rules). Read those + NOMENCLATURE.md first.
   Wronskian), the ~1.6 bound, accessory algebraicity, the dim-count 6>2.
 
 ## WS-CAP completed — CAPSTONE VERDICT: RANK-3 (WS-PV confirmed; WS-PA1 'PV' refuted) — 2026-06-01
-Deliverables paper/cap_connection_formula.md, experiments/cap_connection_formula.py. The capstone
+Deliverables paper/notes/cap_connection_formula.md, experiments/cap_connection_formula.py. The capstone
 DECISIVELY settles the one open structural dispute. (Reverses my prior lean toward WS-PA1's 'PV'.)
 - **VERDICT: the published rank-2 Painleve-V / Lisovyy connection constant does NOT compute the
   generic Type-1 N=3 P_{m→m}.** It fails at the SIZE/RANK of the monodromy manifold, not a missing calc.
@@ -217,7 +217,7 @@ DECISIVELY settles the one open structural dispute. (Reverses my prior lean towa
   constant. The governing theory + computable model stand.
 
 ## WS-PA1 completed — PA-0/1/2 — PA-2 VERDICT: ALGEBRAIC (the make-or-break pivot) — 2026-06-01
-Deliverable paper/pa1_isomonodromy_foundation.md; coordinator verification experiments/pa2_accessory_algebraic.py.
+Deliverable paper/notes/pa1_isomonodromy_foundation.md; coordinator verification experiments/pa2_accessory_algebraic.py.
 - **PA-0 [established; R8 TODO CLOSED — 3rd independent confirmation]:** cyclic-vector elimination
   (two different cyclic vectors, both samples) => 3rd-order scalar Laplace ODE with ONE finite
   singular point v_* (NOT an H0 eigenvalue), exponents {0,1,3}, NO log (Frobenius resonances auto-
@@ -247,7 +247,7 @@ Deliverable paper/pa1_isomonodromy_foundation.md; coordinator verification exper
   benchmark vs the oracle -> (a) confirms PV (WS-PA1) vs rank-3 (WS-PV), (b) writes S_12 EXPLICITLY.
 
 ## WS-NUM completed (PA-4) — computable P_{m→m} floor MET + clean negative + separation finding — 2026-06-01
-Deliverables experiments/num_S12.py, paper/num_S12_model.md (num_S12_dataset.pkl gitignored).
+Deliverables experiments/num_S12.py, paper/notes/num_S12_model.md (num_S12_dataset.pkl gitignored).
 - **FLOOR DELIVERABLE MET [gold]:** a trusted computable P_{m→m}(gamma,eps,a) (one adiabatic-IP pass,
   T=80, rtol=1e-9, ~14s) validated vs the oracle across sep/width 0.1->4: canonical 1.6e-9, weak
   1.1e-8, strong 7.8e-8, sampleB 2.1e-7, well_sep 5.8e-7; BE extreme survivals reproduce analytically.
@@ -269,7 +269,7 @@ Deliverables experiments/num_S12.py, paper/num_S12_model.md (num_S12_dataset.pkl
   (PA-0/1/2: rank + the PA-2 accessory-parameter-algebraicity pivot).
 
 ## WS-R completed — restart-structure tests (H-R3,H-R2 confirmed; H-R1 reframed) — 2026-06-01
-Deliverables paper/restart_structure.md, experiments/restart_probe.py. All measured in the
+Deliverables paper/program/restart_structure.md, experiments/restart_probe.py. All measured in the
 convergent canonical frame (Coulomb-subtracted; T-convergence verified). Coordinator spot-checks pass.
 - **H-R3 CONFIRMED [symbolic]:** -u'(lambda)=W4(lambda)/p(lambda)^2 (W4=np'-n'p), so Gamma_j~(lambda-eps_i)/|g_i|
   near the poles -- ANALYTIC, no monodromy at eps_i. The sqrt branch points of Gamma are the W4 zeros
@@ -295,7 +295,7 @@ convergent canonical frame (Coulomb-subtracted; T-convergence verified). Coordin
   S_canon reality is cyclic-permutation x mid-pair shears.
 
 ## WS-CH completed — confluent-Heun central connection; benchmarked computable P_{m→m} — 2026-06-01
-Deliverable paper/ch_direct_connection.md; benchmark scripts archived experiments/ws_ch/.
+Deliverable paper/notes/ch_direct_connection.md; benchmark scripts archived experiments/ws_ch/.
 - **CONFIRMS (2nd independent derivation, coordinator-spot-checked):** scalar 3rd-order Laplace ODE
   has ONE apparent singularity {0,1,3} (no log), residue A=1, v_* RATIONAL (canonical -748/375,
   sampleB -112147/44000), NOT an H0 eigenvalue. This independently confirms WS-E's {0,1,3} =>
@@ -321,7 +321,7 @@ Deliverable paper/ch_direct_connection.md; benchmark scripts archived experiment
   did not prove full algebraicity -> WS-PA1.
 
 ## WS-PV completed — RANK CORRECTION (target is rank-3, not Painleve V) — 2026-06-01
-Deliverable paper/pv_tau_route.md. Coordinator-verified the load-bearing logic.
+Deliverable paper/notes/pv_tau_route.md. Coordinator-verified the load-bearing logic.
 - **CORRECTION to my plan (and to the WS-A/WS-E 'confluent-Heun' label):** Painleve V is a 2x2
   (rank-2) isomonodromy problem and confluent-Heun a 2nd-order (rank-2) ODE; the Type-1 scalar
   reduction is genuinely RANK-3 (3rd-order, irreducible over Q(g,e,a) per WS-C; WS-E 3rd-order
@@ -369,7 +369,7 @@ object; the Painleve/CH monodromy data = known formal exponents c_i + these two 
 WORKSTREAMS (parallel background agents): WS-PA1 (PA-0/1/2 foundation+pivot, critical path),
 WS-PV (Painleve-V tau + lit/irreducibility), WS-CH (direct confluent-Heun connection, parallel track),
 WS-NUM (high-precision S_12 + PSLQ, always-on), WS-R (H-R1/2/3 restart structure). See
-paper/OPEN_PROBLEM.md addendum.
+paper/program/OPEN_PROBLEM.md addendum.
 
 ## Q_restart / cyclic-monodromy line (user) — geometric backbone real, bare relation CONTENT-FREE — 2026-06-01
 Code: `experiments/q_restart_probe.py`. User intuition: lambda->u=n/p is degree-3 (3:1), so 3 LZ
@@ -396,12 +396,12 @@ Q_restart=DP theory constraining the S-matrix A.
   Failed-exploration preserved; the Coulomb-phase result feeds #2 (PA-0/PA-1 frame).
 
 ## Deliverable #1 (paper) + #2 (open problem & plan) — 2026-06-01
-- **Paper draft:** `paper/type1_lz_working_paper.tex` — 10 evidence-tagged results + dependency map.
+- **Paper draft:** `paper/drafts/type1_lz_working_paper.tex` — 10 evidence-tagged results + dependency map.
   Passed a coordinator physics-reflection pass: corrected R3 universal [EST]->[NS] (scan not proof);
   R8 accessory-exponent count flagged as resting on two agreeing agent frames (WS-A u-frame + WS-E
   Laplace frame), [K,K]!=0 coordinator-verified. DRAFT with 2 named verification TODOs (the R9
   correlation re-check; the R8 accessory re-derivation = PA-0).
-- **Open problem formalized:** `paper/OPEN_PROBLEM.md`. THE PROBLEM: compute the off-diagonal Stokes
+- **Open problem formalized:** `paper/program/OPEN_PROBLEM.md`. THE PROBLEM: compute the off-diagonal Stokes
   coefficient S_12 (=P_{m→m}) of the single rank-2 irregular point — a confluent-Heun connection
   coefficient one accessory parameter above 1F2 — in closed form via the two window actions + the
   turning-point cross-ratio, OR prove irreducibility. KEY LEVER: rank-2 irregular + apparent
@@ -416,7 +416,7 @@ Q_restart=DP theory constraining the S-matrix A.
   algebraic; irreducibility+numerical model=floor. AWAITING USER REVIEW before dispatch.
 
 ## WS-E + WS-C completed — research arc essentially closed — 2026-06-01
-Both verified by coordinator; deliverables paper/ws_e_junction_Smatrix.md, paper/ws_c_factorization_locus.md (+ experiments/ws_{e,c}_*.py).
+Both verified by coordinator; deliverables paper/working_sessions/ws_e_junction_Smatrix.md, paper/working_sessions/ws_c_factorization_locus.md (+ experiments/ws_{e,c}_*.py).
 
 ### WS-E (the prize) — VERDICT: honest NEGATIVE-with-structure. The closed VALUE of P_{m→m} is NOT
 elementary; it is the off-diagonal Stokes connection coefficient in the genus-0 confluent-Heun /
@@ -468,7 +468,7 @@ coefficient. The elementary pieces (BE, integral rep, all limits, the bimodal lo
 generic middle-survival VALUE is the named-but-unevaluated connection coefficient.
 
 ## WS-G completed + coordinator integration (VERIFIED, promoted) — 2026-06-01
-Deliverables `paper/ws_g_stokes_graph.md`, `experiments/stokes_graph.py`, figs/{stokes_sepA,
+Deliverables `paper/working_sessions/ws_g_stokes_graph.md`, `experiments/stokes_graph.py`, figs/{stokes_sepA,
 stokes_overlapB}.png. First agent result promoted with FULL confidence (load-bearing claims
 independently verified by coordinator).
 - **Joint diagnosis SUPPORTED (numerically-supported, figures decisive).** Well-separated sampleA:
@@ -521,7 +521,7 @@ suite) and `experiments/oracle_report.md`. Verification `experiments/structural_
   — WS-F's complex-node finding would have mis-centered the near-node stratum and the local models.
 
 ## Co-scaling derivation (obstruction upgraded) — 2026-06-01
-`paper/coscaling_derivation.md` + `experiments/coscaling.py`. Done by coordinator (not delegated;
+`paper/notes/coscaling_derivation.md` + `experiments/coscaling.py`. Done by coordinator (not delegated;
 the obstruction statement needed judgment).
 - **WIDTH LEMMA [established, exact, symbolic]:** w_ij = 2|γ_iγ_j|/|ε_i−ε_j| — avoided-crossing
   width is SLOPE-INDEPENDENT (Δa cancels). Primary variable = w_ij; Γ_ij keeps its established
@@ -541,7 +541,7 @@ the obstruction statement needed judgment).
 - Open: fully-analytic sup of the O(1) constant over shape space.
 
 ## WS-A completed (gate-1 PASS) + coordinator integration — 2026-06-01
-Deliverable `paper/ws_a_riemann_scheme.md`. Claims structurally forced (H(u) polynomial), low risk.
+Deliverable `paper/working_sessions/ws_a_riemann_scheme.md`. Claims structurally forced (H(u) polynomial), low risk.
 - **Riemann scheme (established):** honest object = 3×3 diabatic system ψ'=−i(H0+uA)ψ; entire
   coefficients ⇒ EXACTLY ONE singular point: u=∞, rank-2 irregular (the 3-level Weber/parabolic-
   cylinder point). No finite singularities. Accessory parameters (Fuchsian) = 0.
@@ -568,7 +568,7 @@ Deliverable `paper/ws_a_riemann_scheme.md`. Claims structurally forced (H(u) pol
   on sub-loci, e.g. ε₂=½(ε₁+ε₃)) is the remaining gate-2 question. WS-F (oracle) still running.
 
 ## WS-D completed + coordinator reflection — 2026-06-01
-Deliverable `paper/ws_d_nonabelian_E.md`; verification `experiments/ws_d_verification.py`.
+Deliverable `paper/working_sessions/ws_d_nonabelian_E.md`; verification `experiments/ws_d_verification.py`.
 - **KEY CORRECTION (established):** Malikis–Cheianov's `Ê` is **Abelian** ([Ê,H]=0, Ê∈span{I,H,H²},
   machine precision) — it is a Chernyak–Sinitsyn time-quadratic commuting partner re-read as
   ε-translations. There is NO non-commuting generator for either model. ⇒ my earlier framing
@@ -592,7 +592,7 @@ Deliverable `paper/ws_d_nonabelian_E.md`; verification `experiments/ws_d_verific
   leg; a correct conclusion can ride on a wrong argument.
 
 ## Gate-test #1 (genus of spectral curve) — function class CORRECTED — 2026-06-01
-Full result: `paper/gate_test_genus.md`. Ran the review's decisive test; it OVERTURNS the review's
+Full result: `paper/notes/gate_test_genus.md`. Ran the review's decisive test; it OVERTURNS the review's
 own A4 elliptic-refutation (in the constructive direction).
 - **Spectral curve Σ: χ_H(E,u)=0 is GENUS-0 RATIONAL, universally for Type-1.** Proof: global Gaudin
   parametrization (E,u)=(m(λ)/p(λ), n(λ)/p(λ)) verified |·|≤9e-16. Riemann-Hurwitz agrees once the
@@ -618,7 +618,7 @@ own A4 elliptic-refutation (in the constructive direction).
   imprecise — compute the curve's genus+singularities for OUR model, never import from a neighbor.
 
 ## Deep-verification review of the KZ line — 2026-06-01
-Full review: `paper/REVIEW_kz_line.md`. Peer-review BEFORE theory-building (user-requested).
+Full review: `paper/notes/REVIEW_kz_line.md`. Peer-review BEFORE theory-building (user-requested).
 **SURVIVES (keep, established/analytically-derived):** P = connection/Stokes coefficient of the
 rank-2 irregular ODE at u=∞; C-S τ-deformations are isomonodromic (preserve P); commuting-partner
 Abelian ceiling; "closed form in special functions, not elementary" at the existence level.
@@ -682,7 +682,7 @@ Full write-up + reproducible code: `experiments/anchor_experiment.{md,py}`.
 
 ## Primary-source read + strategy v2 re-rank — 2026-06-01
 Read all four cited papers in full (were search-metadata only before). Memo updated to v2
-(`paper/type1_lz_strategy_memo.tex`). Key findings:
+(`paper/drafts/type1_lz_strategy_memo.tex`). Key findings:
 - **Chernyak–Sinitsyn 2021 (2006.15144)** = OUR exact model class (linear 3-state, time-quadratic
   commuting partner, Eq.20). Verdict: integrability ⇒ τ-invariant P but "generally NOT expressible
   in known special functions"; for ε₀≠0 "likely no analytical solution." Their tool = Dykhne
@@ -715,7 +715,7 @@ multistate-Dykhne prefactor problem; H-C's "is φ geometric or transcendental?" 
 literature-predicted answer (transcendental). H-A slope-flow ⊂ S1 (zero-curvature is its closed form).
 
 ## Ideation pass (commuting partners / exact crossing / Q4 pairs) — 2026-06-01
-Attack lines generated + reflected + tournamented in `paper/attack_lines.md`. Grounding facts
+Attack lines generated + reflected + tournamented in `paper/program/attack_lines.md`. Grounding facts
 VERIFIED numerically (standalone, not their harness):
 - Commuting family shares p,n,W₄,Q₄,κ_S **exactly** (max|Δ|=0); a enters only via L_H; L_H linear
   in a (residual 3e-17). ⇒ transport curve ν²=W₄ is family-invariant; all slope-dependence is the
@@ -778,7 +778,7 @@ leverage target.**
   of phase + guaranteed crossing as a regular singular point (but NOT a product ansatz —
   falsified). (2) audit: O1/O2 proved; lone local gap O3 is low-leverage for closed form.
   (3) literature: KZ/Gaudin (BBGY 2409.17053, does N=3) is the live lead. (4) Strategy memo
-  written: `paper/type1_lz_strategy_memo.tex`. **Rank: S1 KZ/Gaudin monodromy > S2 constraint
+  written: `paper/drafts/type1_lz_strategy_memo.tex`. **Rank: S1 KZ/Gaudin monodromy > S2 constraint
   closure > S3 Lax > S4 contour integral > S5 transport recurrence (finishing only).**
 - **Highest-conviction next move:** determine whether the BBGY N=3 KZ solution specializes to
   Type-1 H₀+uA. If yes, the open 2 params are likely KZ monodromy/period data in {γ,ε,a}.
@@ -837,7 +837,7 @@ rank-3 point; asymmetry-aware O3 (depends on d_lo+d_hi, not the ratio); proofs t
 
 Constructive swing at turning the c=1 Fredholm-determinant classification (WS-O2/R11) into a usable
 a-priori construction for our rank-3 (three-distinct-rate) confluent point. → files
-experiments/ws_o2b_fredholm.py, paper/ws_o2b_fredholm_kernel.md.
+experiments/ws_o2b_fredholm.py, paper/working_sessions/ws_o2b_fredholm_kernel.md.
 
 - Literature verified (M2): CGL/Widom recipe `tau=det(1-K)` of an IIKS/Plemelj operator; one-circle
   = block-Toeplitz Widom determinant (1712.08546); regular case 1608.00958; irregular generalized-
@@ -870,7 +870,7 @@ Paper updated: new R11b in sec:fredholm; open-problem (ii) marked attempted/obst
 
 ## 2026-06-02 — physics-reflection pass: every paper claim cross-checked vs its script
 
-Adversarial verification of paper/type1_lz_working_paper.tex (R1-R14, R11b, F1). Re-ran the
+Adversarial verification of paper/drafts/type1_lz_working_paper.tex (R1-R14, R11b, F1). Re-ran the
 load-bearing scripts; ALL headline numbers reproduced. Result: VERDICT = KEEP (no result changed);
 only citation/number hygiene fixed.
 
@@ -938,7 +938,7 @@ map (R13), and publication.
 ## 2026-06-02 — R8 "accessory = node" PROVEN (WS-R8) + independent coordinator verification
 
 WS-R8 (physics-derivation) proved v_* = E_* as a polynomial identity over Q(gamma,eps,a). Files:
-experiments/r8_proof.py, paper/r8_accessory_node_proof.md.
+experiments/r8_proof.py, paper/notes/r8_accessory_node_proof.md.
 
 THEOREM (R8): the finite apparent singularity v_* of the Laplace connection ODE equals the OWY node
 energy E_*. Two proofs:
@@ -972,7 +972,7 @@ algebraically-determined data.
 
 ---
 
-## 2026-06-02 — R8 memorialized as a review Letter (paper/accessory_node_letter.tex)
+## 2026-06-02 — R8 memorialized as a review Letter (paper/drafts/accessory_node_letter.tex)
 
 Wrote a journal-style (PRL revtex) review Letter, "Pinning the accessory parameter: a
 spectral-dynamical identity for the integrable multistate Landau-Zener problem." Structure:
@@ -1058,7 +1058,7 @@ preserved). The authoritative paper/Letter/synthesis/cap now carry the corrected
 
 ## 2026-06-02 — WS-RH: node-pinned GL₃ RH spec + high-precision evaluator (rung 1 done; rung 2 = structural negative)
 
-Files: paper/gl3_rh_problem.md, experiments/gl3_rh_solver.py. Coordinator independently verified and
+Files: paper/notes/gl3_rh_problem.md, experiments/gl3_rh_solver.py. Coordinator independently verified and
 CORRECTED the agent's "rung 2 achieved" overstatement.
 
 RUNG 1 — ACHIEVED. Explicit algebraic RH spec for the Laplace-dual oper: irregular point v=∞ (Poincaré
@@ -1159,7 +1159,7 @@ User directive: make the single-seed-W holonomy insight the CORE of the project.
   "The central object" paragraph in the intro threading R1/skeleton/WS-RH/deformation into one statement
   (characterize the Stokes data sigma of the single a-independent geometric seed W). SESSION_SYNTHESIS
   §1 now leads with the central principle.
-- Scoped paper/ws_aflow_derivation_plan.md (physics-derivation roadmap, NOT a proof): derive the
+- Scoped paper/working_sessions/ws_aflow_derivation_plan.md (physics-derivation roadmap, NOT a proof): derive the
   deformation flow of {P_mm(a),b(a)} along the commuting family using W a-independent + the integrable
   zero-curvature (Lax) M_a. MILESTONE 1 = make-or-break: does the a-flow CLOSE into a finite-dim ODE
   (and is sigma conserved)? Decisive test: finite-difference d_a{P_mm,b} (deformation_family_probe) vs
@@ -1179,7 +1179,7 @@ the commuting partner; test closure via the d_a finite-difference-vs-RHS decisiv
 ## 2026-06-03 — WS-AFLOW Milestone 1: a-flow does NOT close (OUTCOME iii) — coordinator-verified
 
 The make-or-break of the central programme. Files: experiments/aflow_closure_test.py,
-paper/ws_aflow_milestone1.md. Relaunched after the first background agent died in an idle container
+paper/working_sessions/ws_aflow_milestone1.md. Relaunched after the first background agent died in an idle container
 reclaim.
 
 VERDICT [numerically-supported]: OUTCOME (iii) — the a-flow of {P_mm,b} does NOT close into a
@@ -1248,14 +1248,14 @@ User pivot beyond closed form: how does the Type-1 Hamiltonian select its slice 
 = classifier locus); (B) the holonomy/topological selection (the a-independent seed W's holonomy on the
 spectral-curve double cover; spinor signs delta_j).
 
-- paper/ws_geom_scope.md: scoping roadmap (physics-derivation + physics-numerics). Part I: the adiabatic-W
+- paper/working_sessions/ws_geom_scope.md: scoping roadmap (physics-derivation + physics-numerics). Part I: the adiabatic-W
   Magnus expansion to 2nd order -- order 0 = directed-cycle permutation (topological skeleton), Ω_1/Ω_2 =
   first hop + interference; validate term-by-term vs oracle in the generic regime; Feynman-graph dictionary
   (sheets=lines, W=vertices, dynamical phase=propagators; W a-independent => geometric vertices, elementary
   phase edges). Part II: map the image region with cheap data + a CAGED symbolic-regression invariant hunt
   (structure-detector ONLY, not surrogate/formula-finder). Milestones M1-M4; honest limits (no resum in
   deep overlap; sigma still the irreducible all-orders datum; ML may find nothing = first-class negative).
-- paper/primer_magnus_feynman_geometry.md: pedagogical primer -- (i) Magnus = exp of nested-commutator
+- paper/drafts/primer_magnus_feynman_geometry.md: pedagogical primer -- (i) Magnus = exp of nested-commutator
   series, unitary at each order, converges in weak coupling; (ii) -> Feynman graphs on 3 adiabatic sheets;
   (iii) -> geometric theory: U(3) selection = (topological permutation/spinor sector from the eigenbundle
   monodromy) x (smooth W-holonomy dressing), boundary = decoupling locus, sigma = the quarantined
@@ -1269,7 +1269,7 @@ cycle; term-by-term oracle validation in the generic regime).
 
 ## 2026-06-02 — WS-GEOM M1 DONE & verified: the adiabatic-W Magnus skeleton (order 0 = node-selected directed cycle)
 
-WS-GEOM Milestone 1 complete. Files: experiments/ws_geom_magnus.py, paper/ws_geom_m1.md.
+WS-GEOM Milestone 1 complete. Files: experiments/ws_geom_magnus.py, paper/working_sessions/ws_geom_m1.md.
 
 ORDER 0 = DIRECTED CYCLE (coordinator-VERIFIED independently): the overlap-continued adiabatic-following
 permutation |S_0|^2 = the directed 3-cycle [1,2,0], = the oracle's dominant-entry pattern (MATCH). KEY
@@ -1304,7 +1304,7 @@ convergence so the resummation = sigma stays irreducible. Next: M2 (image-region
 ## 2026-06-03 — WS-GEOM M2 DONE & coordinator-verified: the image region (facet A)
 
 M2 complete (agent reclaimed mid-session -- transcript severed, no completion notice -- but the full
-deliverables were written: experiments/ws_geom_m2_image.py, paper/ws_geom_m2.md, 289 lines, all gates).
+deliverables were written: experiments/ws_geom_m2_image.py, paper/working_sessions/ws_geom_m2.md, 289 lines, all gates).
 Coordinator INDEPENDENTLY VERIFIED the decisive geometric claims (4 cases, fast solve):
  - weak coupling -> {P_mm,b}=(0.996,0.002) = IDENTITY vertex (1,0);
  - strong coupling -> (0.034,1.000) = directed CYCLE vertex (0,1);
@@ -1334,7 +1334,7 @@ node-fixed cycle orientation), not searching for an analytic relation.
 
 ## 2026-06-03 — M3 reframed as FORMALIZATION (M2d killed the invariant hunt) + geometric-theory section (R18,R19)
 
-- paper/ws_geom_m3_scope.md: M3 is NO LONGER a symbolic-regression invariant hunt -- M2d showed FULL
+- paper/working_sessions/ws_geom_m3_scope.md: M3 is NO LONGER a symbolic-regression invariant hunt -- M2d showed FULL
   effective dimension (no hidden analytic invariant; only the known elementary relations). M3 reframed as a
   physics-DERIVATION of the topological statements M1+M2 found numerically, all sigma-free:
   T1 [keystone] node->directed-cycle theorem (eigenbundle monodromy on Sigma: extreme-swap transposition
@@ -1361,7 +1361,7 @@ proof is scoped (M3 T1-T4). sigma remains the explicitly-quarantined irreducible
 
 ## 2026-06-03 — M3 T1 CLOSED: the node->directed-cycle theorem [analytically-derived]
 
-Files: paper/ws_geom_m3.md, experiments/ws_geom_m3_t1.py (verified: T1 True on canonical + 4 random).
+Files: paper/working_sessions/ws_geom_m3.md, experiments/ws_geom_m3_t1.py (verified: T1 True on canonical + 4 random).
 
 THEOREM T1: the order-0 adiabatic-following permutation, CONTINUED THROUGH the unique real node (R3),
 is a DIRECTED 3-CYCLE (not the energy-sorted extreme-swap transposition). Proof (3 steps + verification):
@@ -1391,7 +1391,7 @@ boundary), T4 (delta_j double-cover orientation/label).
 
 ## 2026-06-03 — M3 T2 + T3 CLOSED (analytically-derived + verified)
 
-Files: paper/ws_geom_m3.md (T2,T3 sections added), experiments/ws_geom_m3_t2t3.py (verified).
+Files: paper/working_sessions/ws_geom_m3.md (T2,T3 sections added), experiments/ws_geom_m3_t2t3.py (verified).
 
 T2 (two-vertex reachability) [AD+verified]: the {P_mm,b} image touches EXACTLY identity (1,0) and the
 node-selected directed cycle (0,1); the other 4 permutations map to (0,0) or (1,1) and are unreachable.
@@ -1416,7 +1416,7 @@ T1-T3.
 
 ## 2026-06-03 — M3 T4 PARTIAL: cycle-orientation Z2 label ESTABLISHED, selector OPEN (with a retraction)
 
-Files: paper/ws_geom_m3.md (T4 section + T1 Step-4 correction), experiments/ws_geom_m3_t4.py, paper update.
+Files: paper/working_sessions/ws_geom_m3.md (T4 section + T1 Step-4 correction), experiments/ws_geom_m3_t4.py, paper update.
 
 ESTABLISHED [numerically-supported, deterministic]: the directed-cycle ORIENTATION is a genuine Z2
 topological label = the eigenframe spinor/double-cover sector (delta_j=+-1). The dynamics-free
@@ -1514,8 +1514,8 @@ node-selected directed 3-cycle (T1) + two-vertex reachable set (T2) + decoupling
 Z2 mirror sectors with the real-node energy-position SELECTOR (T4). The SOLE remaining open item is sigma
 (the irreducible analytic Fredholm/Widom dressing) -- which does not touch the topological skeleton.
 
-Artifacts: experiments/ws_geom_m3_t4_selector.py (new); paper/ws_geom_m3.md (T4 RESOLVED + derivation);
-paper/type1_lz_working_paper.tex (R18/R19 geometric account updated).
+Artifacts: experiments/ws_geom_m3_t4_selector.py (new); paper/working_sessions/ws_geom_m3.md (T4 RESOLVED + derivation);
+paper/drafts/type1_lz_working_paper.tex (R18/R19 geometric account updated).
 
 ---
 
@@ -1557,8 +1557,8 @@ frontier = sigma (the Fredholm/Widom constant of the rank-3 W3 c=2 problem). Roa
 determinant (WS-O2b); (2) N=4 test of P3/P4; (3) sigma-free corollaries already cashed (BE + uniform law +
 two-component IP integration).
 
-Artifacts: paper/ws_geom_m4.md (new synthesis); paper/ws_geom_m3.md T4 (parity law + equivalence + derivation);
-experiments/ws_geom_m3_t4_selector.py (perm_parity_selector + two-form check); paper/type1_lz_working_paper.tex
+Artifacts: paper/working_sessions/ws_geom_m4.md (new synthesis); paper/working_sessions/ws_geom_m3.md T4 (parity law + equivalence + derivation);
+experiments/ws_geom_m3_t4_selector.py (perm_parity_selector + two-form check); paper/drafts/type1_lz_working_paper.tex
 (R20 Geometric Selection Principle + selector parity form in the geometric account).
 
 ---
@@ -1598,8 +1598,8 @@ TOURNAMENT (ws_geom_m6_tournament.md) over H1-H6 + evolved H7=H1(+)H4:
    exactly + the offset (parameter-free law) and extend with H4 (Weber uniformization); ESCALATION FLAG: stop
    if phi_dyn turns into the opaque exact-WKB matrix product.
 
-Artifacts: experiments/ws_geom_m5_graphs.py, experiments/ws_geom_m6_h1_phase.py; paper/ws_geom_m5.md,
-paper/ws_geom_m6_tournament.md.
+Artifacts: experiments/ws_geom_m5_graphs.py, experiments/ws_geom_m6_h1_phase.py; paper/working_sessions/ws_geom_m5.md,
+paper/working_sessions/ws_geom_m6_tournament.md.
 
 ---
 

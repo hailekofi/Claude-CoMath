@@ -359,7 +359,7 @@ def build_dataset(names=None, T: float = 80.0, rtol: float = 1e-9,
 # ===========================================================================
 #  5.  The surrogate model  P_mm_model(geometric arguments)
 # ===========================================================================
-#  PARAMETRIZATION (see paper/num_S12_model.md for the full discussion).
+#  PARAMETRIZATION (see paper/notes/num_S12_model.md for the full discussion).
 #
 #  The natural geometric arguments are the two WINDOW ACTIONS I_X (imaginary periods)
 #  and the Q4 turning-point CROSS-RATIO chi.  The two window actions are the two SUMS

@@ -294,6 +294,6 @@ P-values match the oracle to ≤1e-6.
   Bessel kernel*, Proc. Symp. Pure Math. **98** (2018) 181–205, arXiv:1705.01869.
 - O. Lisovyy, H. Nagoya, J. Roussillon, *Irregular conformal blocks and connection formulae
   for Painlevé V functions*, J. Math. Phys. **59** (2018) 091409, arXiv:1806.08344.
-- Project: WS-O2 (`paper/ws_o2_integral_rep.md`), R10 (`paper/cap_connection_formula.md`),
-  WS-O3 (`paper/ws_o3_uniform_asymptotics.md`), `experiments/{oracle.py, num_S12.py}`.
+- Project: WS-O2 (`paper/working_sessions/ws_o2_integral_rep.md`), R10 (`paper/notes/cap_connection_formula.md`),
+  WS-O3 (`paper/working_sessions/ws_o3_uniform_asymptotics.md`), `experiments/{oracle.py, num_S12.py}`.
 ```

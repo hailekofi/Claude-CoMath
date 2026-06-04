@@ -1,12 +1,12 @@
 # WS-R — Restart-operator structure of the Type-1 N=3 LZ scattering matrix
 
 **Owner:** WS-R (restart-operator / irregular-point local structure). **Date:** 2026-06-01.
-**Tests the addendum hypotheses H-R1 / H-R2 / H-R3** of `paper/OPEN_PROBLEM.md`
+**Tests the addendum hypotheses H-R1 / H-R2 / H-R3** of `paper/program/OPEN_PROBLEM.md`
 (restart-operator structure of the single rank-2 irregular point at `u=∞`).
 **Inputs used:** `NOMENCLATURE.md`, `experiments/q_restart_probe.py` (canonical frame &
-Coulomb `c_i`), `paper/ws_g_stokes_graph.md` (12×13 joint, mid-level sharing),
+Coulomb `c_i`), `paper/working_sessions/ws_g_stokes_graph.md` (12×13 joint, mid-level sharing),
 `experiments/oracle.py` / `uploads/assay/ip.py` (the trusted IP propagator).
-**Constraint compliance:** no git; only `paper/restart_structure.md` and
+**Constraint compliance:** no git; only `paper/program/restart_structure.md` and
 `experiments/restart_probe.py` written; scratch under `/tmp`.
 **Reproducer:** `experiments/restart_probe.py` (`python3 experiments/restart_probe.py`,
 ≈4 min, numpy/scipy/sympy). Convergence side-check in §A.

@@ -6,8 +6,8 @@
 
 
 **Owner:** WS-CAP (capstone, open-problem #2). **Date:** 2026-06-01.
-**Inputs read:** `NOMENCLATURE.md`, `paper/RESEARCH_OVERVIEW.md`, `paper/OPEN_PROBLEM.md`,
-`paper/pa1_isomonodromy_foundation.md`, `paper/ch_direct_connection.md`, `paper/pv_tau_route.md`,
+**Inputs read:** `NOMENCLATURE.md`, `paper/program/RESEARCH_OVERVIEW.md`, `paper/program/OPEN_PROBLEM.md`,
+`paper/notes/pa1_isomonodromy_foundation.md`, `paper/notes/ch_direct_connection.md`, `paper/notes/pv_tau_route.md`,
 `experiments/pa2_accessory_algebraic.py`, `experiments/num_S12.py`, `experiments/oracle.py`,
 `experiments/ws_ch/*`.
 **Constraint compliance:** no git ops; the only files written are this note and

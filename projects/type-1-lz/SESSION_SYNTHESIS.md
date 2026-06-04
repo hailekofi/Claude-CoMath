@@ -28,7 +28,7 @@ algebraic phases; the commuting family is `W`'s deformation orbit. The whole pro
 statement: **characterize the Stokes data `σ` of the single seed `W`.** This threads R1 (W a-independent =
 the seed), the skeleton (the 2 transcendentals = the holonomy), WS-RH (`σ` = `W`'s Stokes data, isolated),
 and the deformation probe (family = `W`'s orbit). Deformation-flow programme scoped in
-paper/ws_aflow_derivation_plan.md (make-or-break: does the `a`-flow close?).
+paper/working_sessions/ws_aflow_derivation_plan.md (make-or-break: does the `a`-flow close?).
 
 **WS-AFLOW Milestone 1 VERDICT (2026-06-03): OUTCOME (iii) — the `a`-flow does NOT close** into a
 finite-dim geometric ODE (coordinator-verified). No algebraic `Q_k`/`M_a` solves the homological
@@ -52,15 +52,15 @@ or a **validated semi-analytic approximation** — see §6.
 | id | result | status | artifact |
 |----|--------|--------|----------|
 | R1 | Commuting Type-1 family is a **ring**; quadratic partner reduces to linear w/ linear-in-u coeffs; **shared eigenbasis** ⇒ integrability is **Abelian** and fixes only spectrum/BE, **never the prefactor** ("Abelian ceiling"). | **established** (machine-prec) | experiments/ring_structure.py |
-| R2 | Spectral curve `Σ:det(E−H)=0` is **genus-0 rational** (Gaudin param `(E,u)=(m/p,n/p)`) with a structural **node** (real exact crossing). | **established** | paper/gate_test_genus.md |
+| R2 | Spectral curve `Σ:det(E−H)=0` is **genus-0 rational** (Gaudin param `(E,u)=(m/p,n/p)`) with a structural **node** (real exact crossing). | **established** | paper/notes/gate_test_genus.md |
 | R3 | The real exact crossing (node) is **universal** (rational `u_*,E_*`). | **established** — THEOREM: Owusu-Wagh-Yuzbashyan 2009 (arXiv:0807.0259): integrability (commuting partner R1) => exact crossings, violating von Neumann-Wigner. Corroborated by our Brent re-scan (96.9%/351, median 3.1e-9). | arXiv:0807.0259; experiments/structural_crossing.py |
-| R4 | **Width lemma** `w_ij=2|γ_iγ_j|/|ε_i−ε_j|` (slope-free, exact); crossings **permanently marginally overlap** ⇒ no exact `𝒮=∏𝒮_ij`; **never tridiagonal** (extreme–extreme coupling dominant). | **established** (symbolic) + NS (bound) | paper/coscaling_derivation.md, ws_d_verification.py |
-| R5 | **Classifier:** elementary ⟺ a level decouples ⟺ joint-free spectral network ⟺ rank-2 boundary. | **numerically-supported** | paper/ws_c_factorization_locus.md |
-| R6 | `P=|𝒮|²` = Stokes data of a **single rank-2 irregular point** at u=∞ (3-level Weber). | analytically-derived | paper/kz_isomonodromy_picture.md |
+| R4 | **Width lemma** `w_ij=2|γ_iγ_j|/|ε_i−ε_j|` (slope-free, exact); crossings **permanently marginally overlap** ⇒ no exact `𝒮=∏𝒮_ij`; **never tridiagonal** (extreme–extreme coupling dominant). | **established** (symbolic) + NS (bound) | paper/notes/coscaling_derivation.md, ws_d_verification.py |
+| R5 | **Classifier:** elementary ⟺ a level decouples ⟺ joint-free spectral network ⟺ rank-2 boundary. | **numerically-supported** | paper/working_sessions/ws_c_factorization_locus.md |
+| R6 | `P=|𝒮|²` = Stokes data of a **single rank-2 irregular point** at u=∞ (3-level Weber). | analytically-derived | paper/notes/kz_isomonodromy_picture.md |
 | R7 | Scalar Laplace ODE: one **apparent `{0,1,3}`** singularity + rank-2 irregular point. | **established** (3 independent derivations: WS-E, WS-CH, WS-PA1; symbolic, 2 samples each) | paper/{ws_e,ch_direct,pa1}*.md |
 | R8 | **Formal monodromy = signed BE:** `c_i=Σ_j s_ij²(a_i−a_j)` (Σ=0); `|e^{2πc_i}|`=BE survival for extremes; `c_mid` is a **cancelling** sum ⇒ middle is the hard one. | **established** (verified) | ws_ch, ws_e |
 | R9 | **Accessory point = node:** `v_*=E_*`=rational double root of discriminant; = unique rational root of cyclic Wronskian `det[e₀,Me₀,M²e₀]`. ⇒ **PA-2 = ALGEBRAIC** (accessory not a free modulus). | **numerically/symbolically-supported** (4 samples incl. non-monotonic) — NOT a general theorem | experiments/pa2_accessory_algebraic.py |
-| R10 | **RANK-3 verdict:** the object is a rank-3 (`GL₃`/`sl₃` confluent) connection constant — the `W₃` / `sl₃`-Schlesinger arena at self-dual `c=N−1=2`, **NOT** the rank-2 `c=1` free-fermion Painlevé-V/confluent-Heun (the earlier `c=1` tag was the rank-2 point misapplied; corrected 2026-06-02). dim(wild char variety) 6 vs PV's 2; gold-gated falsification `P_{m→m}` outside the single-σ band (sampleB 0.021 vs [0.83,0.88]). PV/Heun apply **only at the decoupling (elementary) boundary**. | **numerically-supported (decisive tier T5 gold-gated)** + analytic (T1/T2, not machine-proved) | paper/cap_connection_formula.md |
+| R10 | **RANK-3 verdict:** the object is a rank-3 (`GL₃`/`sl₃` confluent) connection constant — the `W₃` / `sl₃`-Schlesinger arena at self-dual `c=N−1=2`, **NOT** the rank-2 `c=1` free-fermion Painlevé-V/confluent-Heun (the earlier `c=1` tag was the rank-2 point misapplied; corrected 2026-06-02). dim(wild char variety) 6 vs PV's 2; gold-gated falsification `P_{m→m}` outside the single-σ band (sampleB 0.021 vs [0.83,0.88]). PV/Heun apply **only at the decoupling (elementary) boundary**. | **numerically-supported (decisive tier T5 gold-gated)** + analytic (T1/T2, not machine-proved) | paper/notes/cap_connection_formula.md |
 | R11 | Computable `P_{m→m}(γ,ε,a)` validated vs 1e-9 oracle across sep/width 0.1→4; args separate as `{BE window actions (scale), scale-invariant cross-ratio χ (shape)}`. | **gold / numerically-supported** | experiments/num_S12.py, oracle.py |
 
 Anchor numbers: canonical `P_{m→m}=0.214724`, sampleB `0.021018`; enhancement over incoherent 2.5–130×.

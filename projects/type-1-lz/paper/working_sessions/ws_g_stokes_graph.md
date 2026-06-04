@@ -1,8 +1,8 @@
 # WS-G — The Stokes graph and the "joint" diagnosis of the Type-1 N=3 MLZ prefactor
 
 **Owner:** WS-G (Stokes-graph / spectral-network mapping). **Date:** 2026-06-01.
-**Inputs used:** WS-A Riemann scheme (`paper/ws_a_riemann_scheme.md`), gate-test genus
-(`paper/gate_test_genus.md`), WS-D obstruction (`experiments/ws_d_verification.py`),
+**Inputs used:** WS-A Riemann scheme (`paper/working_sessions/ws_a_riemann_scheme.md`), gate-test genus
+(`paper/notes/gate_test_genus.md`), WS-D obstruction (`experiments/ws_d_verification.py`),
 `experiments/anchor_experiment.py`. **Constraint compliance:** no git ops; the only files
 written are this note, `experiments/stokes_graph.py`, and `experiments/figs/*.png`;
 throwaway probes lived under `/tmp/`.

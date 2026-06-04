@@ -12,7 +12,7 @@ This script bundles the decisive structural + physical tests (all reproducible, 
 NOT fit-then-rationalize: every monodromy datum used is the ALGEBRAIC value from PA-1/PA-2 (or the
 exact BE/Coulomb data), never a fitted number.
 
-Tests (evidence ladder tagged in the printout and in paper/cap_connection_formula.md):
+Tests (evidence ladder tagged in the printout and in paper/notes/cap_connection_formula.md):
   T1  dim_char_variety   : wild-character-variety dimension of the irregular point (3x3 rank-2)
                            vs Painleve V (2x2 rank-2 + 1 regular). [analytic count]
   T2  leading_rates      : middle-convolution / Laplace escape-hatch test -- the count of independent

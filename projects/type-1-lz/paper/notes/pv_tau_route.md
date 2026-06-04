@@ -1,8 +1,8 @@
 # WS-PV — The Painlevé-V / isomonodromic-τ route to `S₁₂` (≡ `P_{m→m}`) + literature & irreducibility
 
 **Owner:** WS-PV (PA-3 + PA-5). **Date:** 2026-06-01.
-**Inputs read (in order):** `NOMENCLATURE.md`, `paper/OPEN_PROBLEM.md`, `paper/ws_e_junction_Smatrix.md`,
-`paper/ws_a_riemann_scheme.md`, `paper/kz_isomonodromy_picture.md`, `paper/ws_g_stokes_graph.md`,
+**Inputs read (in order):** `NOMENCLATURE.md`, `paper/program/OPEN_PROBLEM.md`, `paper/working_sessions/ws_e_junction_Smatrix.md`,
+`paper/working_sessions/ws_a_riemann_scheme.md`, `paper/notes/kz_isomonodromy_picture.md`, `paper/working_sessions/ws_g_stokes_graph.md`,
 `experiments/oracle.py`. **Literature:** Gamayun–Iorgov–Lisovyy (PVI, arXiv:1308.4092); Its–Lisovyy–
 Prokhorov / "Irregular conformal blocks and connection formulae for Painlevé V" (arXiv:1806.08344);
 Iorgov–Lisovyy–Teschner (sine-Gordon/PIII, arXiv:1403.1235); Mazzocco (rank-2 irregular Garnier,

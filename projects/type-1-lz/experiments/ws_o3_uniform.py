@@ -9,7 +9,7 @@ interference phase that is DRESSED by the spectral-geometry shape (the cross-rat
 so it does not blow up as Type-1's two avoided crossings marginally overlap (R4).
 
 The construction (full derivation + evidence-ladder tags in
-paper/ws_o3_uniform_asymptotics.md):
+paper/working_sessions/ws_o3_uniform_asymptotics.md):
 
   The middle-slope level passes two avoided crossings, mid-lo and mid-hi, with the
   intermediate lo-hi crossing sitting between them in u (verified ordering). The two

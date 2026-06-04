@@ -1,8 +1,8 @@
 # Open problem: the Type-1 N=3 middle-survival Stokes coefficient — statement & plan-of-attack
 
 **Status:** for review. Everything below the "## Plan" line is a proposal to be critiqued before
-dispatch. Companion: `paper/type1_lz_working_paper.tex` (the closed structural theory),
-`paper/ws_e_junction_Smatrix.md` (the Laplace representation), `paper/ws_a_riemann_scheme.md`.
+dispatch. Companion: `paper/drafts/type1_lz_working_paper.tex` (the closed structural theory),
+`paper/working_sessions/ws_e_junction_Smatrix.md` (the Laplace representation), `paper/working_sessions/ws_a_riemann_scheme.md`.
 
 ---
 

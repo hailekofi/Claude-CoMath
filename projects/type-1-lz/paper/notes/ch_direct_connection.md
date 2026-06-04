@@ -7,8 +7,8 @@
 
 **Owner:** WS-CH (parallel direct confluent-Heun connection-coefficient track, independent of
 the Painlevé-V/τ route WS-PV). **Date:** 2026-06-01.
-**Inputs read:** `NOMENCLATURE.md`, `paper/OPEN_PROBLEM.md`, `paper/ws_e_junction_Smatrix.md`,
-`paper/ws_a_riemann_scheme.md`, `experiments/oracle.py`, `experiments/ws_e_laplace_class.py`.
+**Inputs read:** `NOMENCLATURE.md`, `paper/program/OPEN_PROBLEM.md`, `paper/working_sessions/ws_e_junction_Smatrix.md`,
+`paper/working_sessions/ws_a_riemann_scheme.md`, `experiments/oracle.py`, `experiments/ws_e_laplace_class.py`.
 **Constraint compliance:** no git ops; the only file written under `paper/` is this one; all
 scratch lives under `/tmp/wsch/`.
 

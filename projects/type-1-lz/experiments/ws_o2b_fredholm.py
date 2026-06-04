@@ -4,14 +4,14 @@ ws_o2b_fredholm.py  --  WS-O2b: the EXPLICIT Fredholm-determinant / block-Toepli
 
 GOAL (open problem ii, made constructive)
 -----------------------------------------
-WS-O2 (paper/ws_o2_integral_rep.md) established, gold-gated, that P_mm is a RANK-3,
+WS-O2 (paper/working_sessions/ws_o2_integral_rep.md) established, gold-gated, that P_mm is a RANK-3,
 c=1 (free-fermion) confluent connection constant that does NOT close as any finite
 Barnes-G / Euler-Gamma product -- it closes only as a Fredholm-determinant /
 block-Toeplitz connection constant (the Cafasso-Gavrylenko-Lisovyy "Widom constant"
 machinery, arXiv:1712.08546).  This script tries to make that CONSTRUCTIVE: build the
 explicit kernel/symbol for OUR specific rank-3 confluent point and test whether its
 (truncated) determinant reproduces the gold oracle -- especially in the deep-overlap
-regime (sampleB) where the WS-O3 uniform formula (paper/ws_o3_uniform_asymptotics.md)
+regime (sampleB) where the WS-O3 uniform formula (paper/working_sessions/ws_o3_uniform_asymptotics.md)
 fails (RMS 11%).
 
 THE OBJECT (NOMENCLATURE-strict)

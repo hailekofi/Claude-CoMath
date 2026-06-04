@@ -1,7 +1,7 @@
 # Primer — Magnus expansions, Feynman graphs, and a geometric theory of U(3) selection
 
 **Audience:** a physicist who wants the conceptual scaffolding behind the WS-GEOM workstream
-(`paper/ws_geom_scope.md`). **Goal:** explain (i) what a Magnus expansion is, (ii) how it becomes a
+(`paper/working_sessions/ws_geom_scope.md`). **Goal:** explain (i) what a Magnus expansion is, (ii) how it becomes a
 Feynman-graph structure for our multistate Landau–Zener (MLZ) problem, and (iii) how that structure
 fleshes out a *geometric* theory of how the Type-1 Hamiltonian selects its slice of `U(3)`. Self-contained;
 no new claims (a pedagogical companion).

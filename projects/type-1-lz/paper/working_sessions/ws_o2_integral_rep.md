@@ -2,8 +2,8 @@
 
 **Owner:** WS-O2 (open-problem O2: exact integral representation; + the c=1 connection-constant lead).
 **Date:** 2026-06-01.
-**Inputs read:** `NOMENCLATURE.md`, `SESSION_SYNTHESIS.md`, `paper/ws_e_junction_Smatrix.md` (R6/R7),
-`paper/cap_connection_formula.md` (R10, the rank-3 verdict), `paper/ch_direct_connection.md`,
+**Inputs read:** `NOMENCLATURE.md`, `SESSION_SYNTHESIS.md`, `paper/working_sessions/ws_e_junction_Smatrix.md` (R6/R7),
+`paper/notes/cap_connection_formula.md` (R10, the rank-3 verdict), `paper/notes/ch_direct_connection.md`,
 `experiments/{oracle.py, num_S12.py, ws_e_laplace_class.py}`.
 **Reproducible script:** `experiments/ws_o2_integral.py` (numpy 2.4 / scipy 1.17 / mpmath 1.3;
 seed `20260601`). No git operations performed.
@@ -284,7 +284,7 @@ PART A is exact symbolic-grade (DOP853, rtol 1e-12); PARTs C/C'/D are gold-gated
   to, at rank-3).
 - O. Gamayun, N. Iorgov, O. Lisovyy, *Painlevé VI connection problem and monodromy of c=1 conformal
   blocks*, arXiv:1308.4092 — the c=1 mechanism.
-- Project: R6/R7 (`paper/ws_e_junction_Smatrix.md`), R10 (`paper/cap_connection_formula.md`),
+- Project: R6/R7 (`paper/working_sessions/ws_e_junction_Smatrix.md`), R10 (`paper/notes/cap_connection_formula.md`),
   `experiments/oracle.py`, `experiments/num_S12.py`.
 ```
 ```

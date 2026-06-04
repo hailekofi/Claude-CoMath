@@ -2,3 +2,18 @@
 experiments/*.pkl
 *.pyc
 __pycache__/
+
+# LaTeX build artifacts (regenerate by recompiling the .tex)
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# macOS
+.DS_Store
+
+# graphify knowledge-graph output (regenerable via /graphify; .graphify_python is machine-specific)
+graphify-out/

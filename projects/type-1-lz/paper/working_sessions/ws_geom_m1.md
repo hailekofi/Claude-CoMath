@@ -1,7 +1,7 @@
 # WS-GEOM Milestone 1 — the adiabatic-W Magnus skeleton of S in U(3), order by order
 
 **Type:** `physics-derivation` + `physics-numerics` (validated result, with honest limits). **Date:**
-2026-06-03. **Companion:** `paper/ws_geom_scope.md` §1, `paper/primer_magnus_feynman_geometry.md`.
+2026-06-03. **Companion:** `paper/working_sessions/ws_geom_scope.md` §1, `paper/drafts/primer_magnus_feynman_geometry.md`.
 **Code:** `experiments/ws_geom_magnus.py` (reproducible; reuses `type1` + the gold `oracle.py`).
 **Conventions:** NOMENCLATURE.md — states ε-indexed (`ε_0<ε_1<ε_2`); BE roles by slope `argsort(a)`;
 `P[x,j] = prob(x→j)`.

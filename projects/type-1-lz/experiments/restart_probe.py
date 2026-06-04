@@ -2,7 +2,7 @@
 restart_probe.py  --  WS-R: tests of the RESTART-OPERATOR structure of the Type-1 N=3
 Landau-Zener scattering matrix at the single rank-2 irregular point u=inf.
 
-Hypotheses under test (see paper/restart_structure.md for verdicts):
+Hypotheses under test (see paper/program/restart_structure.md for verdicts):
 
   H-R1 [lead, subtle]
       In the CANONICAL frame (symmetric diabatic IP, Coulomb-subtracted) with channels

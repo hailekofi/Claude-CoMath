@@ -2,8 +2,8 @@
 
 **Status:** draft for review & discussion (2026-06-01). **Owner:** co-physicist working session.
 **Branch:** `claude/comathematician-agent-skills-9HPSJ`. **Shared state:** `RESEARCH_LOG.md`.
-**Companion artifacts:** `paper/type1_lz_working_paper.tex` (living paper), `paper/gate_test_genus.md`,
-`paper/REVIEW_kz_line.md`, `experiments/{anchor_experiment,ring_structure}.{py,md}`.
+**Companion artifacts:** `paper/drafts/type1_lz_working_paper.tex` (living paper), `paper/notes/gate_test_genus.md`,
+`paper/notes/REVIEW_kz_line.md`, `experiments/{anchor_experiment,ring_structure}.{py,md}`.
 
 This plan is written so that the workstreams below can be dispatched **autonomously** to the
 co-physicist sub-skills (intuition / literature / numerics / derivation / reflection / tournament /
@@ -53,7 +53,7 @@ Everything in the program either (i) makes this statement precise, (ii) computes
   [`experiments/ring_structure.py`]
 - E3 **Spectral curve `Σ` is genus-0 rational**, via Gaudin parametrization `(E,u)=(m/p,n/p)`; a
   **structural node = the exact crossing** at real `u*` (two eigenvalues exactly degenerate) + 4
-  simple branch points (avoided crossings). [`paper/gate_test_genus.md`]
+  simple branch points (avoided crossings). [`paper/notes/gate_test_genus.md`]
 - E4 `P^(a) = |holonomy of a fixed algebraic connection `W_ij=⟨φ_i|φ_j'⟩` (a-independent) twisted by
   a-linear phases|²`. [`experiments/ring_structure.py`]
 - E5 Middle-survival prefactor **dominates**: `P_mid/P_mid^{incoherent} = 2.5–104×`, growing with
@@ -244,7 +244,7 @@ too ambitious as a requirement, but hope for the best and present the cleanest t
 needed so the gold-standard oracle is highly accurate and faithful to the Type-1 construction.
 
 
-1. **Living working paper** (`paper/type1_lz_working_paper.tex`) — assumptions → model → results →
+1. **Living working paper** (`paper/drafts/type1_lz_working_paper.tex`) — assumptions → model → results →
    predictions → comparison, with provenance margin notes and links to every derivation/script,
    passing `physics-reflection`.
 2. **Closed-form `P`** in named special functions (or the integral rep + asymptotics + elementary

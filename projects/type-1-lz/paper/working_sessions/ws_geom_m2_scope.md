@@ -1,7 +1,7 @@
 # WS-GEOM Milestone 2 — scope: mapping the image region of $\Phi$ in reduced-$U(3)$ (facet A)
 
 **Type:** `physics-numerics` scoping (a roadmap for review, NOT executed). **Date:** 2026-06-02.
-**Builds on:** M1 (`paper/ws_geom_m1.md` — the node-selected directed-cycle skeleton), R15/R16 (the
+**Builds on:** M1 (`paper/working_sessions/ws_geom_m1.md` — the node-selected directed-cycle skeleton), R15/R16 (the
 two-transcendental skeleton), R9 (the classifier), R3 (the node). **Status:** SCOPED — pausing for review
 before launch.
 
@@ -98,4 +98,4 @@ handed to `physics-derivation` to prove.
 oracle.py / num_S12.py (cheap+gold data), ws_o3_uniform.py (instant generic-regime `{P_mm,b}`),
 skeleton_two_transcendentals.py (the `{P_mm,b}` coordinates, the directed cycle, the incoherent baseline),
 ws_geom_magnus.py (the order-0 sector label), ws_c_factorization_locus.md (the classifier/decoupling
-locus). Companion: `paper/ws_geom_scope.md`, `paper/primer_magnus_feynman_geometry.{md,tex}`.
+locus). Companion: `paper/working_sessions/ws_geom_scope.md`, `paper/primer_magnus_feynman_geometry.{md,tex}`.

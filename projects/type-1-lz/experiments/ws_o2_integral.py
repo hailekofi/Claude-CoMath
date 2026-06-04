@@ -346,7 +346,7 @@ def main(gold=False):
     c1_probe()
 
     print("\n" + "=" * 78)
-    print("DONE.  See paper/ws_o2_integral_rep.md for the derivation, formula, evidence "
+    print("DONE.  See paper/working_sessions/ws_o2_integral_rep.md for the derivation, formula, evidence "
           "tags, and proofs owed.")
     print("=" * 78)
 

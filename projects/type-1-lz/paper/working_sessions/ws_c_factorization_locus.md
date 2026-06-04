@@ -2,8 +2,8 @@
 
 **Owner:** WS-C (factorization / reducibility of the connection). **Date:** 2026-06-01.
 **Inputs used:** WS-F gold oracle (`experiments/oracle.py`), WS-A Riemann scheme
-(`paper/ws_a_riemann_scheme.md`), WS-G Stokes graph (`paper/ws_g_stokes_graph.md`),
-co-scaling theorem (`paper/coscaling_derivation.md`), WS-D obstruction
+(`paper/working_sessions/ws_a_riemann_scheme.md`), WS-G Stokes graph (`paper/working_sessions/ws_g_stokes_graph.md`),
+co-scaling theorem (`paper/notes/coscaling_derivation.md`), WS-D obstruction
 (`experiments/ws_d_verification.py`). **Constraint compliance:** no git ops; the only files
 written are this note and `experiments/ws_c_*.py`; throwaway probes lived under `/tmp/`.
 
@@ -227,7 +227,7 @@ precise classifier.
 
 ## 6. Reconciliation with co-scaling (genuine-LZ ⇒ always non-factorizing) — [analytic + numeric]
 
-Co-scaling (`paper/coscaling_derivation.md`) proved that on the **genuine-LZ locus** — all
+Co-scaling (`paper/notes/coscaling_derivation.md`) proved that on the **genuine-LZ locus** — all
 `Γ_ij∈[Γ_min,Γ_max]⊂(0,∞)` — the crossings are *permanently marginally-overlapping*
 (`sep/width ≲ 1.6`). WS-C closes the loop:
 
