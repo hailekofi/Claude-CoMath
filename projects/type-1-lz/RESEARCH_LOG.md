@@ -1698,3 +1698,47 @@ estimate, and the irreducible remainder under permanent overlap is sigma. M7 clo
 Process note: the M6 tournament's low ranking of H3 was a too-quick dismissal (conflated with the Magnus
 tower); reopening on the user's prompt produced the structural R4 insight. Good example of scientist-in-the-
 loop catching an under-examined branch.
+
+---
+
+## 2026-06-03 — PARALLEL ANALYSIS: perturb Type-1, remove the protected crossing — PERTURBATIVE
+
+New goal (user): perturb the Type-1 matrix to remove the crossing; is the impact on the LZ amplitudes
+perturbative, or is there a non-perturbative component?
+
+FRAMING (engaging the user's claims): the protected real node (R3) is a codim-2 degeneracy stabilized by
+integrability. For real-symmetric H(u)=H0+uA a degeneracy is codim 2, so a generic 1-parameter family has
+NO real crossing -- a real crossing requires either fine-tuning (unprotected, perturbs away) or a structure
+forcing it (commuting => Type-1, protected). So "remove the crossing" = break the commuting structure; the
+crossing and integrability are the same feature. (User's "crossing => Type-1" holds for PROTECTED crossings.)
+
+EXPERIMENT (ws_pert_crossing.py): H_eps(u) = H0 + eps*V + u*A, V fixed generic symmetric (||V||=1, seed 7),
+A unchanged (so it stays an MLZ model). Sweep eps in [1e-3, 0.2]; measure min_gap(eps), dP_mm, db,
+d(extreme survivals), scaling exponents. Reference: T-averaged DOP853.
+
+RESULT (numerically-supported): PERTURBATIVE.
+ - gap ∝ eps^0.98 (≈0.42 eps): the protected node opens LINEARLY.
+ - |dP_mm| ∝ eps^0.96, |d_surv_lo| ∝ eps^1.06, |db| ~ eps^1 (noisier) -- ALL exponents ~1.
+ - The slope dP/eps is CONSTANT in eps (the eps^1 signature) -- robust across two numerical configs.
+ - CAVEAT: the precise dP_mm SLOPE COEFFICIENT is endpoint-tail-limited (~1e-4): +0.11 vs -0.022 across
+   configs (sign not resolved). The EXPONENT ~1 is robust; the coefficient is not. Does not affect the
+   verdict.
+ - No fractional power, no eps^2 log eps at leading order, no exp(-c/eps). The crossing-specific new LZ
+   channel (diabatic traversal of the opened gap) is exp(-c eps^2) -> O(eps^2), subdominant + analytic.
+
+WHY (analytic): S(eps) is differentiable at eps=0 -- dS/deps = -i int U0^dag V U0 du is FINITE despite the
+degeneracy, because the degeneracy is a single point (measure zero) in the u-integral. So first-order
+perturbation theory for the S-matrix is NON-SINGULAR -> O(eps).
+
+CONSISTENCY: since A is unchanged, H_eps is still an MLZ model, so the EXTREME survivals remain exactly
+Brundobler-Elser (with eps-shifted couplings) -- which is why d_surv ~ eps is clean and analytic. Only
+integrability + the protected crossing are removed, not the LZ structure.
+
+INTERPRETATION (the answer): the crossing is TOPOLOGICAL for the eigenframe/integrability (it carries the
+node-swap T1, the parity selector T4, and is where sigma is defined), but its removal is an ANALYTIC
+perturbation of the OBSERVABLE. The non-perturbative object sigma lives AT the integrable point, not in the
+response to leaving it -- sigma is a property of the limit, not of the perturbation.
+
+Open follow-ups (not pursued): (i) isolate the crossing-specific O(eps^2) channel from the generic O(eps)
+global response (localized perturbation in the node's 2D subspace); (ii) higher-accuracy propagator
+(Richardson) to pin the dP_mm coefficient and probe for a subleading non-analytic (eps^2 log eps) term.
