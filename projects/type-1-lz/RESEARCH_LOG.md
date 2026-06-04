@@ -1742,3 +1742,35 @@ response to leaving it -- sigma is a property of the limit, not of the perturbat
 Open follow-ups (not pursued): (i) isolate the crossing-specific O(eps^2) channel from the generic O(eps)
 global response (localized perturbation in the node's 2D subspace); (ii) higher-accuracy propagator
 (Richardson) to pin the dP_mm coefficient and probe for a subleading non-analytic (eps^2 log eps) term.
+
+---
+
+## 2026-06-03 — Perturbation analysis, broadened: multi-direction + node-isolated (ws_pert_crossing_isolate.py)
+
+Followed up the perturbation goal with (1) multiple V directions and (2) a node-isolated comparison, per
+user request.
+
+PART 1 (direction-genericity): seeds 1-4, generic dense symmetric eps*V on H0. |dP_mm| ~ eps^(~1) each
+(exponents scatter 0.65-1.76 in a lean single-T / narrow-eps config -- numerical noise, NOT physical; none
+non-perturbative). With the clean seed-7 run (eps^1.0 to 1e-3), the PERTURBATIVE scaling is direction-generic.
+
+PART 2 (isolate the crossing): built V_open (generic -> opens node gap O(eps)) vs V_keep (same M but with the
+node's 2x2 block SCALARIZED in the degenerate eigenbasis at u_*, so the pair stays degenerate to first order
+-> crossing preserved, gap opens only O(eps^2)), equal norm. Result:
+ - gap_keep stays at the grid floor (~4e-4 ≈ crossing preserved) while gap_open grows -> construction works.
+ - ROBUST: dPmm_open ~= dPmm_keep (differ ~30-40%; their DIFFERENCE is ~10x smaller than either). So WHETHER
+   OR NOT the crossing is opened, dP_mm is nearly the same -- the observable responds to the GENERIC
+   integrability-breaking; the crossing-removal per se is a SUBDOMINANT contribution.
+ - The predicted O(eps^2) scaling of the isolated crossing channel is NOT cleanly resolved (diff exponent
+   ~1.1-1.4, crossover+noise-limited). Honest caveat; would need T-averaging + finer gap + smaller eps.
+
+NET (answers the broadening): the impact of removing the protected crossing is PERTURBATIVE, direction-generic,
+AND the crossing-removal is not even the dominant part of a generic perturbation's effect on the observable --
+the bulk is ordinary first-order integrability-breaking. Reinforces: sigma is a property of the integrable
+LIMIT, not of the response to leaving it; the crossing's topological role is in the eigenframe/integrability,
+not a special driver of the observable.
+
+Compute note: propP (DOP853 over u in [-T,T] with oscillatory Stark phases) is the bottleneck; several runs
+timed out at full accuracy. The clean exponents live in ws_pert_crossing.py (seed 7, T-averaged); this
+broadened run is qualitative (direction-genericity + crossing-subdominance), honestly noise-limited on the
+finer exponents.

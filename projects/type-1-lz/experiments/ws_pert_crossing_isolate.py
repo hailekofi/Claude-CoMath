@@ -10,8 +10,25 @@ ws_pert_crossing_isolate.py -- broaden the perturbation analysis:
   The crossing-specific effect is the DIFFERENCE dP(V_open) - dP(V_keep): if the crossing-removal channel is
   analytic O(eps^2), this difference is subdominant to the common O(eps) bulk.
 
-P[x,j]=|U[j,x]|^2; slope lo,mid,hi=argsort(a). Reference: T-averaged DOP853.
-Reproduce: python3 ws_pert_crossing_isolate.py
+P[x,j]=|U[j,x]|^2; slope lo,mid,hi=argsort(a).
+
+FINDINGS (numerically-supported, with honest noise caveats):
+  PART 1 (direction-genericity): across seeds 1-4, |dP_mm| ~ eps^(~1) -- exponents scatter 0.65-1.76 in this
+    lean (single-T, narrow-eps) config, but NONE is non-perturbative (no fractional-stable / ->0 exponent).
+    Together with the clean seed-7 run (ws_pert_crossing.py: eps^1.0 down to eps=1e-3), the PERTURBATIVE
+    scaling is direction-generic.
+  PART 2 (isolating the crossing): the construction works -- gap_keep stays at the grid floor (crossing
+    PRESERVED) while gap_open grows. The robust result: dPmm_open ~= dPmm_keep (they differ by ~30-40%; the
+    DIFFERENCE is ~10x smaller than either). So WHETHER OR NOT the crossing is opened, dP_mm is nearly the
+    same -- the observable responds to the GENERIC integrability-breaking, and the crossing-removal per se is
+    a SUBDOMINANT contribution. (The predicted O(eps^2) scaling of the isolated channel is NOT cleanly
+    resolved here -- diff exponent ~1.1-1.4, crossover+noise-limited; would need T-averaging + finer gaps +
+    smaller eps to pin.)
+  NET: consistent with ws_pert_crossing.py -- the impact of removing the protected crossing is PERTURBATIVE
+  and, moreover, the crossing-removal is not even the DOMINANT part of a generic perturbation's effect on the
+  observable; the bulk is ordinary first-order integrability-breaking.
+
+Reproduce: python3 ws_pert_crossing_isolate.py  (lean defaults; raise Ts/n and lower eps for clean exponents)
 """
 from __future__ import annotations
 import numpy as np
@@ -30,11 +47,12 @@ def type1(eps, gam, a):
     return H0, np.diag(a)
 
 
-def propP(H0p, A, Ts=(90.0, 120.0)):
+def propP(H0p, A, Ts=(70.0,)):
+    # single T: the endpoint Fresnel tail cancels in dP = P(eps)-P(0) (same T for both).
     acc = np.zeros((3, 3))
     for T in Ts:
         s = solve_ivp(lambda u, y: (-1j * (H0p + u * A) @ y.reshape(3, 3)).ravel(),
-                      [-T, T], np.eye(3, dtype=complex).ravel(), rtol=3e-10, atol=1e-12, method="DOP853")
+                      [-T, T], np.eye(3, dtype=complex).ravel(), rtol=1e-9, atol=1e-11, method="DOP853")
         acc += np.abs(s.y[:, -1].reshape(3, 3).T) ** 2
     return acc / len(Ts)
 
@@ -55,7 +73,7 @@ def node_data(H0, A, T=80.0, n=6001):
     return ustar, kp, Phi
 
 
-def min_gap(H0p, A, T=80.0, n=3001):
+def min_gap(H0p, A, T=80.0, n=1501):
     av = np.diag(np.diag(A)); us = np.linspace(-T, T, n)
     gs = np.array([np.min(np.diff(np.linalg.eigvalsh(H0p + u * av))) for u in us])
     k = int(np.argmin(gs))
@@ -86,12 +104,13 @@ def main():
     ustar, kp, Phi = node_data(H0, A)
     P0 = propP(H0, A)
     epss = [0.1, 0.03, 0.01, 0.003]
+    SEEDS = [1, 2, 3, 4]
     print("=" * 90)
     print(f"Isolating the crossing: node at u_*={ustar:+.3f}, degenerate pair (ranks {kp},{kp+1})")
     print("=" * 90)
 
     print("\nPART 1 -- multiple generic V directions: exponent of |dP_mm| (expect ~1 each):")
-    for seed in [1, 2, 3, 4, 5]:
+    for seed in SEEDS:
         V = make_V(seed, Phi, kp, keep=False)
         dmm = [propP(H0 + e * V, A)[mid, mid] - P0[mid, mid] for e in epss]
         gex = expo(epss, [min_gap(H0 + e * V, A) for e in epss])
