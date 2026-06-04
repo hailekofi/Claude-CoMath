@@ -1774,3 +1774,34 @@ Compute note: propP (DOP853 over u in [-T,T] with oscillatory Stark phases) is t
 timed out at full accuracy. The clean exponents live in ws_pert_crossing.py (seed 7, T-averaged); this
 broadened run is qualitative (direction-genericity + crossing-subdominance), honestly noise-limited on the
 finer exponents.
+
+---
+
+## 2026-06-03 — CONCEPTUAL NOTE: why "non-perturbative in the eigenbasis" does NOT imply non-perturbative P
+
+Resolving an intuition that the perturbation analysis usefully undermined. The intuition: because opening the
+crossing is dramatic in the EIGENFRAME evolution, that drama should surface in the LZ probabilities as a
+non-perturbative effect. It does not. Two clean distinctions explain why:
+
+1. EIGENFRAME-SINGULAR vs DYNAMICALLY-SINGULAR (a gauge artifact).
+   The intuition's correct half: opening a gap eps reorganizes the adiabatic frame violently -- the
+   eigenvectors (ill-defined at the exact degeneracy) rotate over a u-window of width ~eps, so the derivative
+   coupling W_ij = <phi_i|d_u phi_j> ~ 1/gap spikes to height ~1/eps; the eigenvector ordering and the
+   node-swap (T1) reorganize. BUT this is the price of the ADIABATIC frame being a bad coordinate system at a
+   degeneracy. The observable lives in the DIABATIC frame, where the generator H0+eps*V+uA is smooth and
+   LINEAR in eps over a finite u-measure, so S(eps)=T exp(-i int H) is analytic (dS/deps finite). The 1/eps
+   spike is a COORDINATE singularity, not a dynamical one; it is tall-but-narrow, so int W stays O(1) and the
+   integrated effect is bounded.
+
+2. GAP-eps (diabatic, perturbative) vs RATE-eps (adiabatic, non-perturbative).
+   Non-perturbative LZ -- exp(-c/eps) -- is the regime where eps sets the SWEEP RATE (slow/adiabatic passage).
+   Here eps sets the GAP. Opening a crossing is the SMALL-GAP / DIABATIC direction of LZ, where stay-diabatic
+   = exp(-c eps^2) ~ 1 - O(eps^2) (analytic) and the new adiabatic channel is 1 - exp(-c eps^2) = O(eps^2).
+   So LZ DOES capture the crossing-opening -- and tells you it is perturbative. The intuition attached
+   "non-perturbative" to the wrong limit of LZ (slow passage), whereas opening a gap is the fast/diabatic limit.
+
+THROUGH-LINE (recurring project lesson): the ADIABATIC frame is where the topological/structural drama lives
+(node-swap + parity T1/T4, the 1/gap coupling, the Magnus cumulants), and the OBSERVABLE is largely blind to
+it. The genuine non-perturbative content of THIS problem (sigma) sits at the integrable point and in the
+permanent-overlap regime (Lambda~pi), NOT in the gauge-singular response to opening one crossing. A
+crossing-removing perturbation stresses the FRAME, not the dynamics.
