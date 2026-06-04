@@ -1847,3 +1847,54 @@ Open: (a) decompose the response into the parameter-free incoherent part (A0+Are
 interference (cosPhi, transcendental) to see which drives the ~0.92 capture; (b) characterize the near-null
 locus where the elementary response vanishes (likely an extremum ridge of P_mm on the base); (c) holonomicity
 of P_mm on the base (is it D-finite/period-like or genuinely wild/Painleve -- predicted wild from W_3 class).
+
+---
+
+## 2026-06-03 — THEORY-BUILDING: the commuting family as a section; the bundle over the transport cover
+
+User broadened out (geometry/topology, NOT solving amplitudes): (1) theory of sections of the vector bundle
+over the transport cover; (2) selecting a commuting family = a choice of section; (3) how this shapes the
+space of amplitudes over the family. Built paper/working_sessions/ws_geom_bundle_theory.md.
+
+GEOMETRIC HOME (lit-confirmed: Boalch/Biquard-Boalch/Sabbah wild nonabelian Hodge; Hitchin; BNR; JMU
+isomonodromy): the LZ problem is a WILD HITCHIN SYSTEM on P^1 with one rank-2 irregular point at u=inf.
+Dictionary: H(u)=H0+uA <-> irregular connection; E_i(u) <-> genus-0 spectral curve Sigma (R2); real crossing
+<-> node of Sigma (R3); eigenvectors <-> spectral line bundle L (BNR) / eigenbundle E with a-independent
+connection W (M4); commuting ring <-> Hitchin base/abelian algebra (R1); member a <-> Hitchin-section point
+(phase differential on Sigma); amplitude S/P <-> Stokes data = point of the wild character variety (dim 6,
+R9/R11); map a->S <-> wild Riemann-Hilbert restricted to the Hitchin section; sigma <-> RH transcendence
+(non-algebraicity on the Hitchin base; R11b/R17). "Nonabelian Hodge encodes two nonlinear systems: integrable
+(the family) + isomonodromy (the amplitude flow)" -- exactly our two sides.
+
+THE THREE BULLETS:
+ (1) Transport cover = Sigma + its Z2 spinor double cover (eigenframe single-valued on Sigma, phases on the
+     double cover). Sections = global eigen-frames, constrained by: abelian formal monodromy (F1), node
+     gluing (R3), spinor Z2 sign. Canonical section = adiabatic frame Phi; bundle marginally non-flat
+     (Lambda~pi); holonomy = the one seed W = the whole transcendence (M4).
+ (2) A commuting family is the SECTION (Hitchin section / polarization) that makes the multivalued eigenframe
+     coherent with an a-INDEPENDENT W; Type-1 is one such section; a-independence of W = the section
+     trivializes the eigenbundle connection over the base. Abelian ceiling (R1) = the section is abelian =>
+     it fixes the BASE (spectral data), never the FIBER (Stokes data).
+ (3) Space of amplitudes = wild-RH image of the Hitchin section = the bundle over the ring: base (delta,chi)
+     elementary; fiber {P_mm,b} rank-2 transcendental; reachable = two-vertex region + decoupling boundary
+     (M2/T2/T3); orientation Z2 = sgn(eps<->slope) (T4, the only section-dependent topology); connection =
+     abelian-flat + rank-2 sigma-twist (ws_ring_bundle); transcendence = sigma = RH non-algebraicity.
+
+UNIFYING PRINCIPLE (bundle form of Geometric Selection): one intrinsic datum (E,W on the transport cover);
+a family = the section trivializing W; the amplitude = the section's wild-RH image; the whole non-elementary
+content = one isomonodromy constant sigma. Geometry selects which slice of the wild cv the family sweeps;
+it never computes the slice.
+
+INTRINSIC vs CHOSEN vs IRREDUCIBLE ledger: intrinsic (Sigma, node, irregular type, formal monodromy, cycle
+structure, W, wild-cv ambient); member-dependent (orientation Z2, position {P_mm,b}, periods delta,chi);
+irreducible (sigma = a property of the RH map).
+
+STATUS: mostly a REFRAMING (all quantitative claims are established results re-expressed); the new content
+is the organizing identification (family<->Hitchin section, amplitude<->wild RH, sigma<->RH transcendence),
+tagged 'framing' throughout -- the natural, consistent math home, NOT theorems proved here. Roadmap (S9):
+(1) pin the wild-RH dictionary against Boalch/Sabbah; (2) identify the BNR line bundle (why is W a-indep?);
+(3) two-vertex set as a wild-cv stratum; (4) N=4 test of the structural predictions. No amplitude solved --
+the value is the map of where the geometry lives and what is intrinsic vs chosen vs irreducible.
+
+Refs: Hitchin 1987; Beauville-Narasimhan-Ramanan 1989; Jimbo-Miwa-Ueno 1981; Sabbah; Biquard-Boalch; Boalch
+(wild character varieties / meromorphic Hitchin systems, e.g. arXiv:1703.10376, 1512.08091, 1203.6607).
