@@ -452,6 +452,66 @@ governing account of the selection: every discrete and abelian feature is derive
 transcendence is localized to $\sigma$ --- the Fredholm/Widom constant of the rank-3 ($W_3$, $c{=}2$)
 problem, the one remaining frontier.\pnote{ws\_geom\_m4.md; synthesis of M1--M3}
 
+\section{Computational mechanics: the Magnus calculator and the limits of resummation}\label{sec:compute}
+The geometric theory (R18--R20) names the descriptors; here we ask what the adiabatic-Magnus/Feynman
+expansion delivers as a \emph{practical calculator}, and prove --- by direct computation, including the
+third generator --- the limits of resummation. The verdict is uniform: every route improves the description
+but none removes $\sigma$, and the reason is always R4.
+
+\textbf{R21 [AD/NS]. The graph calculator and its validity domain (M5).} The order-2 Magnus value
+$P_2=|\Phi(+\infty)\,e^{\Omega_1+\Omega_2}\,\Phi(-\infty)^\dagger|^2$ is a closed-form adiabatic calculator
+for $S$. Because the dressed phase $\theta_{ij}'=E_i-E_j$ has \emph{no real zero} (adiabatic levels never
+cross), each generator integral is dominated by the \emph{complex} turning points of $\Sigma$; steepest
+descent through them is Dykhne--Davis--Pechukas, so $\Omega_1$ reproduces the single-crossing survivals
+$p_x=e^{-2\pi\delta_x}$ (the BE extremes) and the $\Omega_2$ commutator the St\"uckelberg interference ---
+the closed form is the uniform law (R12). Accuracy is controlled by the dressed action
+$\Lambda=\int\!\|\widetilde W\|\,du$, \emph{not} by $\delta$: a sweet spot $e_2\!\approx\!1.3\times10^{-3}$
+near coupling-scale $1.8$, degrading on both sides, with $\Lambda\approx\pi$ throughout (R4/R5) capping
+it.\pnote{ws\_geom\_m5.md; ws\_geom\_m5\_graphs.py}
+
+\textbf{R22 [NS, negative]. The higher orders do not resum; the residual is $\sigma$ (M5/$\Omega_3$).} We
+formed the third generator $\Omega_3=\tfrac16\!\int_{t_1>t_2>t_3}\!([\,\widetilde W_1,[\widetilde
+W_2,\widetilde W_3]]+[\widetilde W_3,[\widetilde W_2,\widetilde W_1]])$ (correctness gate: $\Omega_1,\Omega_2$
+reproduce the existing code to $0$, $\|\Omega_3+\Omega_3^\dagger\|=0$). The term norms shrink geometrically
+($\|\Omega_1,\Omega_2,\Omega_3\|=1.03,0.51,0.12$ canonically) --- yet adding $\Omega_3$ does \emph{not}
+reduce the error ($T$-averaged sweet spot $e_1,e_2,e_3=1.64,1.45,1.45\times10^{-3}$; $\|\Omega_3\|$ exceeds
+the residual yet does not touch it). The floor lies \emph{outside} the perturbative tower: it is the
+non-perturbative ($\sigma$-scale) remainder plus the finite-$T$ endpoint tail, not a missing finite order;
+$\Omega_4,\dots$ are smaller still. Adding graph orders cannot push the calculator below
+$\sim\!10^{-3}$.\pnote{ws\_geom\_m5\_omega3.py}
+
+\textbf{R23 [NS, negative]. Neither a first-principles phase nor a multi-path sum improves on
+Dykhne--St\"uckelberg (M6/M7).} \emph{(a)} Replacing the fitted uniform-law phase
+$\cos\Phi\!\approx\!-(\delta_{\rm lo}+\delta_{\rm hi})(1-K(1-\chi))$ with the genuine turning-point period
+phase (a tournament leader) is \emph{worse} than the fitted constant: on a robust $N{=}42$ sample
+$\langle|\cos\Phi-\cos\Phi_{\rm true}|\rangle = 0.090$ (fitted $K$) vs $0.281$ (parameter-free) --- $K$ is
+absorbing genuinely non-elementary, $\sigma$-adjacent content. \emph{(b)} The coherent multi-path /
+independent-crossing transfer-matrix sum (Sinitsyn/Kayanuma; exact per-crossing $2$-level integration) is
+\emph{much worse} than the uniform law for Type-1 ($\Pmid$ error: uniform wins $4/5$ samples; at
+coupling-scale $0.8$, multi-path $0.34$ vs uniform $0.018$). The structural reason is R4: the Cauchy weld
+forbids crossing \emph{separation} --- since $H_0\!\propto\!\gamma^2$, weak coupling \emph{merges} all
+crossings at $u{=}0$ rather than isolating them, so the independent-crossing approximation never reaches its
+exact regime and its error \emph{is} $\sigma$. (In a generic, non-Cauchy $3$-level toy, where crossings
+\emph{can} separate, the multi-path error does fall off with separation --- confirming it is separation, not
+the method, that Type-1 denies.)\pnote{ws\_geom\_m6\_tournament.md; ws\_geom\_m7\_multipath.py}
+
+\textbf{Why the Magnus program has the reach it does.} The expansion was meant to furnish local geometric
+coordinates on the image: first cumulants ($\Omega_1$), first interference ($\Omega_2$), a few stable
+descriptors of the $W$-holonomy. It delivered exactly those objects --- but \emph{not their dominance}. A
+cumulant expansion is a faithful local chart only when the holonomy is weakly curved, i.e.\ when $\Lambda$
+is small; R4/R5 pin $\Lambda\approx\pi$ everywhere in the interior. Thus ``no dominant Magnus chart'' and
+``$\sigma$ is irreducible'' are the \emph{same fact} --- marginal holonomy. Two further points sharpen this:
+the $\Omega_k$ are coordinates on the Lie algebra $\mathfrak{u}(3)$, and the observable
+$|\Phi e^{\Omega}\Phi^\dagger|^2$ applies $\exp$ then $|\cdot|^2$, scrambling the additive cumulant structure
+off the image; and the genuinely stable descriptors $\{\delta_{ij},\chi\}$ are read directly from the branch
+points of $\Sigma$ (R2, M4), not assembled from Magnus, which reaches them only by a marginal stationary-phase
+route and cannot reach $\sigma$ at all. Consistently, the Magnus chart \emph{is} faithful exactly at the
+weakly-coupled corners --- the two Birkhoff vertices and the decoupling boundary (R19) --- and marginal only
+in the generic interior. The same permanent overlap that welds the crossings denies the calculator a small
+parameter; the practical recipe is therefore BE for the extremes, the uniform law for $\{\Pmid,b\}$ in the
+generic regime, and the exact two-component integration (R14) in the deep-overlap core where $\sigma$
+lives.\pnote{where\_we\_are.tex; M5--M7 synthesis}
+
 \section{The unifying picture and the classifier}
 The BE survivals are residue-collapsing periods of the phase one-form (elementary); the middle
 survival is the holonomy of the one joint that genuine all-to-all coupling forces. \emph{Classifier
