@@ -1805,3 +1805,45 @@ THROUGH-LINE (recurring project lesson): the ADIABATIC frame is where the topolo
 it. The genuine non-perturbative content of THIS problem (sigma) sits at the integrable point and in the
 permanent-overlap regime (Lambda~pi), NOT in the gauge-singular response to opening one crossing. A
 crossing-removing perturbation stresses the FRAME, not the dynamics.
+
+---
+
+## 2026-06-03 — /goal: the fiber bundle over the ring -- how a WITHIN-RING perturbation perturbs the amplitude
+
+New goal: Type-1 is a commuting ring; for each member there is a transition amplitude (mod phase). No
+elementary closed form (sigma), but characterize the fiber bundle: how does a within-ring perturbation
+(fixed gamma,eps; vary slopes a) perturb the amplitude? Non-transcendentally?
+
+Builds on R17/WS-AFLOW (the autonomous a-flow does NOT close into a finite elementary ODE) and R15/R16
+(P affine in two transcendentals {P_mm,b}), R11/R16 (base invariants delta_lo,delta_hi,chi).
+
+STRUCTURE (the bundle): base = ring = a mod shift (2-dim with fixed gamma,eps); the map a -> (delta_lo,
+delta_hi,chi) is ELEMENTARY. Fiber = {P_mm,b}. Connection = abelian-flat (formal monodromy, elementary) +
+sigma-twist.
+
+EXPERIMENT (ws_ring_bundle.py): finite within-ring steps (|da|=0.1), T-averaged DOP853.
+ NUMERICAL LESSON (logged honestly): a first tiny-h (1e-3) central-difference gradient gave GARBAGE
+ (~ -2.4) because the single-T propagator's endpoint Fresnel tail varies with a and is amplified by 1/h.
+ The direct finite-step (h=0.05) gave the true ~ -0.08. RETRACTED the noisy gradient numbers
+ (cos -0.994 / 26x). Fix: T-averaged P + finite steps.
+ CORRECTED FINDINGS:
+  * SHIFT-NULL exact: a->a+(1,1,1) gives dP_mm = -0.0000 (global-phase invariance).
+  * RANK-2 TANGENT: any within-ring dP reproduced from {dP[lo,lo],dP[hi,hi],dP_mm,db} via
+    double-stochasticity to 1e-6 -> the tangent map is ELEMENTARY except for the rank-2 transcendental
+    {dP_mm,db}. (Tangent-level R15.)
+  * ELEMENTARY CAPTURE: the elementary uniform law (R12) TRACKS the exact within-ring response of P_mm:
+    cosine +0.92, magnitude ratio ~1.3 (per-direction 1.50,1.01,1.08 in substantial directions). It flips
+    sign only in near-null directions (true response ~1e-3, swamped by the law's ~2% value-error).
+
+ANSWER (non-transcendental characterization): YES, mostly. (i) The base deformation a->(delta,chi) is
+elementary. (ii) The tangent map is elementary EXCEPT for the rank-2 pair {dP_mm,db}. (iii) Even that pair's
+response is ~elementary: the uniform law captures the within-ring response direction (cos 0.92) and magnitude
+(~30%); the transcendental residual is SUBDOMINANT, dominant only where the elementary response nearly
+vanishes. So the perturbation is mostly characterizable non-transcendentally, with a subdominant sigma-residual.
+No EXACT elementary flow (R17 stands), but a good APPROXIMATE one -- and the bundle's whole non-elementary
+content is rank-2.
+
+Open: (a) decompose the response into the parameter-free incoherent part (A0+Aret, elementary) vs the
+interference (cosPhi, transcendental) to see which drives the ~0.92 capture; (b) characterize the near-null
+locus where the elementary response vanishes (likely an extremum ridge of P_mm on the base); (c) holonomicity
+of P_mm on the base (is it D-finite/period-like or genuinely wild/Painleve -- predicted wild from W_3 class).
