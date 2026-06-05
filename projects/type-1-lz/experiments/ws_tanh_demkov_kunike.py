@@ -27,6 +27,12 @@ FINDINGS (numerically-supported, decisive):
       only oscillates with a slow ~1e-4 Fresnel tail (needs T-averaging) -- the wild/irregular hallmark.
   (C) sech/Rosen-Zener P = sin^2(Omega*pi/2) reproduced to 1e-12 -> tame => exact elementary closed form.
   (D) P_mm^tanh = 0.20383 (tame; same H0,A, just a BOUNDED ramp) vs P_mm^linear = 0.21472 (= sigma, wild).
+  RIGIDITY CAVEAT (AD): tame != closed-form. In z=(1+tanh u)/2 the tanh model is a rank-N Fuchsian system
+  with 3 regular singular points; Katz rigidity rig=(2-3)N^2+3N=N(3-N): N=2 => rig=2 (RIGID => 2F1, Gamma-
+  ratios, elementary, the (C) anchor); N=3 => rig=0 (NON-rigid, 1 accessory parameter => HEUN class:
+  holonomic/D-finite but NOT elementary). So for OUR N=3, Demkov-Kunike gives holonomic-but-non-rigid (a
+  linear ODE replaces the wild isomonodromy), NOT closed form. sigma is the irregular/confluent limit of the
+  Heun accessory parameter.
   NOTE (a real subtlety, fixed): the tanh channel amplitude must be read in the EIGENBASIS of H(+-inf)
   (which is constant-but-not-diagonal); the diabatic-basis P oscillates indefinitely -- itself the
   regular-singular e^{i*lambda*u} signature -- and does NOT converge.
@@ -118,11 +124,12 @@ def main():
 
     print("\n(D) CONTRAST (N=3 middle survival):")
     pt = Pmatrix(H0, A, "tanh", 16.0)[mid, mid]
-    print(f"  P_mm^tanh   = {pt:.5f}  (TAME: regular-singular, hypergeometric-class, converged)")
+    print(f"  P_mm^tanh   = {pt:.5f}  (TAME but HEUN-class: regular-singular, holonomic, non-rigid, converged)")
     print(f"  P_mm^linear = 0.21472   (WILD: the transcendental sigma -- no closed form, the whole project)")
-    print("\n  => bounding the ramp (tanh) removes the rank-2 irregular point: the spectrum saturates, the")
-    print("     phase is regular (~u not ~u^2), scattering is well-conditioned, and the amplitude is")
-    print("     tame/closed-form. LZ's sigma is the price of the UNBOUNDED linear ramp.")
+    print("\n  => bounding the ramp (tanh) removes the rank-2 irregular point: spectrum saturates, phase is")
+    print("     regular (~u not ~u^2), scattering well-conditioned, amplitude HOLONOMIC (a linear ODE). But")
+    print("     for N=3 it is NON-RIGID (Heun, 1 accessory parameter), NOT elementary closed form -- only")
+    print("     N=2 (rigid, 2F1) is. sigma is the irregular limit of the Heun accessory parameter.")
 
 
 if __name__ == "__main__":

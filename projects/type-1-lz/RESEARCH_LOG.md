@@ -1923,3 +1923,30 @@ CONCLUSION (near-proof of the structural claim): the wildness/sigma is the rank-
 unbounded ramp. Tame neighbors (bounded sweep -> Fuchsian/hypergeometric; or finite-pole Gaudin/KZ) have
 closed-form/holonomic amplitudes. Second axis: N=2 LZ is elementary even when wild; N>=3 (W3) is what makes
 the connection constant transcendental. Folded into ws_geom_bundle_theory.md S8b (tame neighbors).
+
+---
+
+## 2026-06-03 — CORRECTION: Demkov-Kunike does NOT restore closed form for N=3 (rigidity)
+
+User asked: does DK place us unambiguously back in closed-form territory? Answer: NO -- and this corrects an
+overgenerous phrasing ("hypergeometric-class") in the prior tanh writeup.
+
+TAME != CLOSED-FORM. Tame (regular-singular, no Stokes) = HOLONOMIC (D-finite, a linear ODE). Holonomic
+splits by RIGIDITY (Katz). In z=(1+tanh u)/2 the tanh model is a rank-N Fuchsian system with 3 regular
+singular points (z=0,1,inf; residues (H0-+A)/2i and -iA, regular-semisimple). Rigidity index
+rig=(2-3)N^2+3N=N(3-N):
+ - N=2: rig=2 => RIGID => Gauss 2F1 => Gamma-ratios, ELEMENTARY closed form (the (C) sech anchor, 1e-12).
+ - N=3 (OURS): rig=0 => NON-rigid, 1 accessory parameter => HEUN class: holonomic but NOT elementary.
+
+So for N=3, Demkov-Kunike moves us WILD (sigma; Stokes; nonlinear isomonodromy/Fredholm; beyond holonomic)
+-> HOLONOMIC-but-non-rigid (Heun; a linear ODE + 1 accessory parameter). A real, large gain (linear ODE
+replaces wild isomonodromy) but NOT closed form. Closed form needs BOTH a bounded ramp AND rigidity (N=2,
+or a reducible/degenerate config).
+
+TAXONOMY: elementary (rigid tame: 2F1, N=2 DK) C holonomic (tame: Heun, N=3 DK) -- both below wild (sigma,
+N=3 LZ). REFRAMING: the N=3 LZ is the irregular/confluent limit of the N=3 tanh Heun system (z=0,1 confluence
+to the rank-2 Weber point); under confluence the Heun ACCESSORY PARAMETER becomes the Stokes constant sigma.
+=> sigma is the isomonodromy avatar of a Heun accessory parameter (consistent with rank-3/W3/confluent-Garnier).
+
+Artifacts corrected: ws_geom_bundle_theory.md S8b (rigidity caveat + reframing); ws_tanh_demkov_kunike.py
+(D + docstring: "Heun-class, holonomic, non-rigid", not "hypergeometric-class").

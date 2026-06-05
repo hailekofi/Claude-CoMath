@@ -192,10 +192,28 @@ canonical `H₀,A`) removes the irregular point: the spectrum **saturates** (reg
 scales as `T^{1.05}` (`e^{iλu}`, regular) vs the linear sweep's `T^{1.99}` (`e^{iλu²}`, Fresnel/irregular),
 and the channel amplitude (read in the eigenbasis of `H(±∞)`) **converges exponentially to 1e-12** vs the
 linear sweep's slow Fresnel tail. The closed-form anchor — the sech/Rosen–Zener member `P=sin²(Ωπ/2)` —
-matches to 1e-12. So **σ is the price of the unbounded ramp** (the rank-2 wildness), not of the level
-structure; the tame neighbor `H₀+tanh(u)A` has `P_mm=0.20383`, computed trivially, where the LZ `P_mm=σ` is
-the whole project. (A second tameness axis: even at fixed rank-2 wildness, N=2 LZ is *elementary* — it is the
-jump to N≥3, the non-abelian W₃ Stokes structure, that produces σ.)
+matches to 1e-12.
+
+**But tame ≠ closed-form, and our N=3 is *not* closed-form** `[AD: rigidity]`. In `z=(1+\tanh u)/2` the tanh
+model is a **rank-`N` Fuchsian system with 3 regular singular points** (`z=0,1,∞`; residues `(H₀∓A)/2i`,
+`−iA`, regular-semisimple). Katz rigidity `rig=(2-3)N²+3N=N(3-N)`: **N=2 ⟹ rig=2 (rigid ⟹ ₂F₁, Γ-ratios,
+elementary)**; **N=3 ⟹ rig=0 (non-rigid, one accessory parameter ⟹ HEUN class: holonomic/D-finite but NOT
+elementary)**. So for our N=3, Demkov–Kunike moves us from **wild (σ, Stokes, beyond holonomic)** to
+**holonomic-but-non-rigid (Heun)** — a real gain (a *linear* ODE replaces the isomonodromy/Fredholm) but not
+elementary closed form. The closed regime needs *both* a bounded ramp *and* rigidity (N=2, or a
+reducible/degenerate configuration).
+
+**Reframing σ.** The N=3 LZ model is the **irregular (confluent) limit** of the N=3 tanh Heun system (the two
+regular points at `z=0,1` confluence into the rank-2 irregular Weber point as the ramp is unbounded). Under
+that confluence the tame **Heun accessory parameter** becomes the wild **Stokes constant σ** — i.e.
+**σ is the isomonodromy avatar of the Heun accessory parameter**, consistent with the rank-3 / W₃ /
+confluent-Garnier classification.
+
+The taxonomy: **elementary** (rigid tame: ₂F₁, N=2 DK; Γ-ratios) ⊂ **holonomic** (tame: Heun, N=3 DK; linear
+ODE + accessory parameter) — both *below* **wild** (σ, N=3 LZ; nonlinear isomonodromy / Fredholm). So **σ is
+the price of the unbounded ramp** (the rank-2 wildness), and even the tame neighbor of our N=3 is Heun-class,
+not elementary. (Second tameness axis: even at fixed rank-2 wildness, N=2 LZ is *elementary*; it is the jump
+to N≥3, the non-abelian W₃ Stokes structure, that produces σ.)
 
 ## 9. Research overview / roadmap (meta-review)
 
