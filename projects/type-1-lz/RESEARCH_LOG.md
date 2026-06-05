@@ -1950,3 +1950,35 @@ to the rank-2 Weber point); under confluence the Heun ACCESSORY PARAMETER become
 
 Artifacts corrected: ws_geom_bundle_theory.md S8b (rigidity caveat + reframing); ws_tanh_demkov_kunike.py
 (D + docstring: "Heun-class, holonomic, non-rigid", not "hypergeometric-class").
+
+---
+
+## 2026-06-03 — Rigid 3F2 3-level model built; RIGIDITY = SOLVABILITY (the real criterion)
+
+User: is there a u-dependent N=3 connection that is both tame AND rigid? Yes -- and pinning it down gives the
+real solvability criterion.
+
+RIGIDITY ARITHMETIC (Katz): rig=(2-k)N^2 + sum dimZ(A_i), rigid <=> rig=2. For N=3, k=3: rig=2 <=> sum dimZ
+= 11 = 3+3+5, so ONE residue must have a repeated eigenvalue (a pseudo-reflection, dimZ=5). The basic
+tame+rigid rank-3 connection is the generalized hypergeometric 3F2 (regular semisimple at 0,inf; pseudo-
+reflection at 1), closed-form (Gamma-ratios / Thomae-Levelt). More via Katz middle convolution.
+
+BUILT (ws_rigid_3F2.py):
+ (I) Rigidity index of the tanh 3-level system (residues R0=(H0-A)/2i, R1=-(H0+A)/2i, Rinf=-iA), verified:
+     TWO EQUAL SLOPES a=(a,a,c) -> Rinf pseudo-reflection -> dimZ=(3,3,5), rig=2 (RIGID, 3F2);
+     DISTINCT slopes (Type-1) -> (3,3,3), rig=0 (non-rigid, Heun).
+ (II) RIGID => CLOSED FORM (degenerate-pair / Demkov-Osherov instance): a dark combination of the degenerate
+     pair decouples EXACTLY (P=1.0000000000) and the bright sector is a 2-level tanh-DK (closed-form 2F1);
+     full 3-level amplitude = (2-level 2F1) (+) (dark=identity), verified to 4.5e-12. (Generic two-equal-slope
+     is irreducible 3F2, also closed-form by Gamma-ratios.)
+
+THE CRITERION (AD+NS): tameness is NOT the closed-form line -- RIGIDITY is. Rigid <=> monodromy fixed by
+local data <=> closed-form, and it persists under confluence (covers wild rigid systems). Four-box table:
+                 rigid                              non-rigid
+  tame    3F2 / Katz (Gamma-ratios)            Heun / Garnier (holonomic)
+  wild    N=2 LZ; bowtie/Sinitsyn (closed)     TYPE-1 N=3 = sigma
+=> EXACTLY-SOLVABLE <=> RIGID. The solvable MLZ zoo (bowtie, Sinitsyn 4/6-state) are the rigid representatives
+(closed-form Stokes despite being wild); Type-1 N=3 generic is NON-rigid -- the one box with neither lever
+(wild AND non-rigid). sigma is the accessory parameter of the generic rank-3 connection promoted to a wild
+Stokes constant. Rigidity = an engineered degeneracy (pseudo-reflection = rank-1 coupling / coinciding
+exponents); generic Cauchy has none -> no closed form. Folded into ws_geom_bundle_theory.md S8c.

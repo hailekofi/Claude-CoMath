@@ -215,6 +215,36 @@ the price of the unbounded ramp** (the rank-2 wildness), and even the tame neigh
 not elementary. (Second tameness axis: even at fixed rank-2 wildness, N=2 LZ is *elementary*; it is the jump
 to N≥3, the non-abelian W₃ Stokes structure, that produces σ.)
 
+## 8c. The real criterion: rigidity, not tameness  [AD + NS]
+
+Tameness is *not* the dividing line for closed form — **rigidity** is (Katz). For an irreducible rank-`N`
+Fuchsian system, `rig = (2-k)N² + Σ_i \dim Z(A_i)`, rigid `⟺ rig=2` `⟺` the monodromy is determined by local
+data alone `⟺` connection coefficients are closed-form (Γ-ratios). Rigidity **persists under confluence**, so
+it covers *wild* rigid systems too. This gives a four-box classification of u-dependent connections:
+
+| | **rigid** (closed form) | **non-rigid** (accessory parameter) |
+|---|---|---|
+| **tame** (regular singular) | `₃F₂` / Katz local systems (Γ-ratios) | Heun / Garnier (holonomic, D-finite) |
+| **wild** (irregular) | N=2 LZ; solvable MLZ (bowtie, Sinitsyn) — closed-form Stokes | **Type-1 N=3 — our σ** |
+
+> **Exactly-solvable ⟺ rigid.** The exactly-solvable multistate LZ models (the bowtie, Sinitsyn's 4-/6-state)
+> are the **rigid** representatives — closed-form *because* rigid, despite being wild. **Type-1 N=3 generic is
+> non-rigid**, and σ is its accessory parameter promoted to a wild Stokes constant. We sit in the one box
+> with **neither** lever: wild *and* non-rigid. Bounding the ramp (tanh) moved us tame but kept us non-rigid
+> (Heun); only rigidity gives closed form.
+
+**Rank-3 rigidity requires a pseudo-reflection.** For `N=3, k=3`, `rig=2 ⟺ Σ\dim Z = 11 = 3+3+5`, so **one
+residue must have a repeated eigenvalue** (centralizer dim 5). **Demonstrated** (`experiments/ws_rigid_3F2.py`,
+`[NS]`): for the tanh 3-level system (residues `(H₀∓A)/2i, −iA`), **two equal slopes** `a=(a,a,c)` make
+`R_∞=−i\,\mathrm{diag}(a,a,c)` a pseudo-reflection → `\dim Z=(3,3,5)`, `rig=2` (RIGID, ₃F₂-class); **distinct
+slopes** (Type-1) give `(3,3,3)`, `rig=0` (non-rigid, Heun). And **rigid ⇒ closed form**: in the cleanest
+(degenerate-pair / Demkov–Osherov) instance a **dark** combination decouples exactly (`P=1.0000000000`) and
+the bright sector is a 2-level tanh-DK (closed-form ₂F₁) — the full 3-level amplitude `=` (2-level ₂F₁) `⊕`
+(dark=identity), verified to `4.5e-12`. (The generic two-equal-slope case is *irreducible* ₃F₂, also
+closed-form by Γ-ratios.) Physically: **rigidity = an engineered degeneracy** (a pseudo-reflection — a
+rank-1 coupling / two coinciding exponents); our generic Cauchy structure has none, which is *exactly* why
+Type-1 N=3 has no closed form.
+
 ## 9. Research overview / roadmap (meta-review)
 
 The geometry is now organized; the productive next moves, ranked by leverage:
