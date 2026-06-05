@@ -176,6 +176,27 @@ RH image over the family:
   integrability (leaving the ring) destroys the section entirely (opens the node; the perturbation analysis,
   ws_pert_crossing) — that is *off* this geometry.
 
+## 8b. Tame neighbors: the wildness axis  [demonstrated]
+
+The wildness is the **order of the irregular singularity** at `u=∞`, set by the *unbounded linear ramp* `uA`
+(Poincaré rank 2, "Weber/parabolic-cylinder"). De-confluence gives tamer u-dependent connections:
+
+| connection | singularity at ∞ | functions | RH / variety | amplitude |
+|---|---|---|---|---|
+| Fuchsian (tanh-sweep DK; Gaudin/KZ) | regular singular | ₂F₁ / Heun | **tame** (no Stokes) | **closed-form** (Γ) / holonomic |
+| confluent (rank-1 irregular) | rank-1 irregular | Kummer/Bessel | mild wild | closed-form-ish |
+| **LZ (ours)** | **rank-2 irregular** | Weber | **wild** (dim-6 W₃) | **σ** |
+
+**Demonstrated** (`experiments/ws_tanh_demkov_kunike.py`, `[NS]`): bounding the ramp `uA → tanh(u)A` (same
+canonical `H₀,A`) removes the irregular point: the spectrum **saturates** (regular), the dynamical phase
+scales as `T^{1.05}` (`e^{iλu}`, regular) vs the linear sweep's `T^{1.99}` (`e^{iλu²}`, Fresnel/irregular),
+and the channel amplitude (read in the eigenbasis of `H(±∞)`) **converges exponentially to 1e-12** vs the
+linear sweep's slow Fresnel tail. The closed-form anchor — the sech/Rosen–Zener member `P=sin²(Ωπ/2)` —
+matches to 1e-12. So **σ is the price of the unbounded ramp** (the rank-2 wildness), not of the level
+structure; the tame neighbor `H₀+tanh(u)A` has `P_mm=0.20383`, computed trivially, where the LZ `P_mm=σ` is
+the whole project. (A second tameness axis: even at fixed rank-2 wildness, N=2 LZ is *elementary* — it is the
+jump to N≥3, the non-abelian W₃ Stokes structure, that produces σ.)
+
 ## 9. Research overview / roadmap (meta-review)
 
 The geometry is now organized; the productive next moves, ranked by leverage:

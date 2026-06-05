@@ -1898,3 +1898,28 @@ the value is the map of where the geometry lives and what is intrinsic vs chosen
 
 Refs: Hitchin 1987; Beauville-Narasimhan-Ramanan 1989; Jimbo-Miwa-Ueno 1981; Sabbah; Biquard-Boalch; Boalch
 (wild character varieties / meromorphic Hitchin systems, e.g. arXiv:1703.10376, 1512.08091, 1203.6607).
+
+---
+
+## 2026-06-03 — Tame neighbor built: the tanh (Demkov-Kunike) analog vs the linear LZ sweep
+
+Demonstration (ws_tanh_demkov_kunike.py) that LZ's transcendental sigma is the price of the UNBOUNDED linear
+ramp (the rank-2 irregular point at u=inf), not of the level structure. Compared, same canonical (gamma,eps,a):
+LINEAR (LZ, wild) H=H0+u*A  vs  TANH (DK, tame) H=H0+tanh(u)*A.
+ (A) tanh eigenvalues SATURATE to eig(H0+-A) by u~5 (regular singular); linear diverge ~a_i*u (irregular).
+     Dynamical phase scaling: theta_tanh ~ T^1.05 (e^{i*lambda*u}, regular) vs theta_linear ~ T^1.99
+     (e^{i*lambda*u^2}, Fresnel/irregular). The exact regular-vs-irregular signature, measured.
+ (B) Channel amplitude (read in the eigenbasis of H(+-inf), NOT diabatic): P_mm^tanh converges
+     EXPONENTIALLY to ~1e-12 (increments -2.7e-5,-1.1e-7,+2.2e-8,+8e-12 at T=6,8,12,16); P_mm^linear only
+     oscillates with a slow ~1e-4 Fresnel tail. Tame=well-conditioned, wild=Stokes-tailed.
+     [Subtlety fixed: the tanh diabatic-basis P oscillates indefinitely because H(+-inf)=H0+-A is
+      constant-but-not-diagonal -- itself the regular-singular e^{i*lambda*u} hallmark; the physical
+      amplitude is the H(+-inf)-eigenbasis projection.]
+ (C) Closed-form anchor: sech/Rosen-Zener P = sin^2(Omega*pi/2) reproduced to 1e-12 -> tame => exact
+     elementary amplitude.
+ (D) P_mm^tanh = 0.20383 (tame, trivially converged) vs P_mm^linear = 0.21472 (= sigma, wild).
+
+CONCLUSION (near-proof of the structural claim): the wildness/sigma is the rank-2 IRREGULAR point from the
+unbounded ramp. Tame neighbors (bounded sweep -> Fuchsian/hypergeometric; or finite-pole Gaudin/KZ) have
+closed-form/holonomic amplitudes. Second axis: N=2 LZ is elementary even when wild; N>=3 (W3) is what makes
+the connection constant transcendental. Folded into ws_geom_bundle_theory.md S8b (tame neighbors).
