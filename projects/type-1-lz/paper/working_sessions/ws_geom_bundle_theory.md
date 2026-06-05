@@ -237,7 +237,18 @@ it covers *wild* rigid systems too. This gives a four-box classification of u-de
 residue must have a repeated eigenvalue** (centralizer dim 5). **Demonstrated** (`experiments/ws_rigid_3F2.py`,
 `[NS]`): for the tanh 3-level system (residues `(H₀∓A)/2i, −iA`), **two equal slopes** `a=(a,a,c)` make
 `R_∞=−i\,\mathrm{diag}(a,a,c)` a pseudo-reflection → `\dim Z=(3,3,5)`, `rig=2` (RIGID, ₃F₂-class); **distinct
-slopes** (Type-1) give `(3,3,3)`, `rig=0` (non-rigid, Heun). And **rigid ⇒ closed form**: in the cleanest
+slopes** (Type-1) give `(3,3,3)`, `rig=0` (non-rigid, Heun).
+
+**Equal slopes is *sufficient but not necessary*** `[NS]`. `rig=2 ⟺` *exactly one* of `{A, H₀−A, H₀+A}` has
+a repeated eigenvalue — a pseudo-reflection parked at one of the connection's three singular points
+`s∈{∞,−1,+1}`. The geometric reading: **`A` degenerate (`s=∞`) = equal slopes; `H₀±A` degenerate (`s=±1`) =
+the R3 real node sitting at an endpoint `u_*=±1`.** The node-at-endpoint branches give rigidity with *generic
+distinct* slopes — verified: a Type-1 point with distinct `a=[-1,.5,2]` and the node tuned to `u_*=1`
+(`ε≈[-2,1.926,3], γ≈[0.356,.8,1.2]`) has `H₀+A` degenerate, `dimZ=(3,5,3)`, `rig=2`. So the rigidity locus is
+a union of three codim-1 components; equal slopes is only the `s=∞` one. (For the *wild* linear model the
+endpoints sit at `u=±∞`, so the node-at-endpoint branches collapse to the slope-coincidence limit; wild
+rigidity is the wild-cv question, with further mechanisms — e.g. the bowtie — at distinct slopes.) **Rigid ⇒
+closed form**: in the cleanest
 (degenerate-pair / Demkov–Osherov) instance a **dark** combination decouples exactly (`P=1.0000000000`) and
 the bright sector is a 2-level tanh-DK (closed-form ₂F₁) — the full 3-level amplitude `=` (2-level ₂F₁) `⊕`
 (dark=identity), verified to `4.5e-12`. (The generic two-equal-slope case is *irreducible* ₃F₂, also

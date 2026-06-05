@@ -1982,3 +1982,30 @@ local data <=> closed-form, and it persists under confluence (covers wild rigid 
 (wild AND non-rigid). sigma is the accessory parameter of the generic rank-3 connection promoted to a wild
 Stokes constant. Rigidity = an engineered degeneracy (pseudo-reflection = rank-1 coupling / coinciding
 exponents); generic Cauchy has none -> no closed form. Folded into ws_geom_bundle_theory.md S8c.
+
+---
+
+## 2026-06-03 — Rigidity locus: equal slopes is SUFFICIENT but NOT NECESSARY (node-at-endpoint branch)
+
+User: for Type-1 N=3, is two equal slopes the necessary AND sufficient condition for rigidity? Answer: NO --
+sufficient, not necessary.
+
+For the tame (tanh) Type-1, rig=2 <=> EXACTLY ONE of {A, H0-A, H0+A} has a repeated eigenvalue (a pseudo-
+reflection at one of the 3 singular points s in {inf,-1,+1}):
+  * A degenerate (s=inf)  <=> two equal slopes a_i=a_j;
+  * H0+A degenerate (s=+1) <=> the R3 real node sits at u_*=+1;
+  * H0-A degenerate (s=-1) <=> the R3 real node sits at u_*=-1.
+So the rigidity locus is a UNION of >=3 codim-1 components; equal slopes is only the s=inf one.
+
+VERIFIED (distinct slopes, node-at-endpoint): Type-1 with DISTINCT a=[-1,0.5,2], tuned eps=[-2,1.926,3],
+gamma=[0.356,0.8,1.2] -> H0+A eig=[-2.1293,-2.1293,1.620] (degenerate), real node of H0+uA at u_*=1.0000,
+dimZ=(3,5,3), sum=11, rig=2 -> RIGID with DISTINCT slopes (pseudo-reflection at R1, not A). Found via a 2D
+(eps_1,gamma_0) scan + Nelder-Mead refine to gap(H0+A)=0.
+
+UNIFIED STATEMENT: rigidity <=> a real degeneracy of the spectral curve (the R3 node, or the s->inf slope
+coincidence) coincides with a singular point of the connection (s in {-1,+1,inf}).
+
+CAVEAT (tame vs wild): this is for the tanh (tame) model (endpoints at finite s=+-1). For the WILD linear
+model the endpoints are at u=+-inf, so node-at-endpoint collapses to the slope-coincidence limit; wild
+rigidity is the wild-cv (dim->0) question, with further mechanisms (bowtie) at distinct slopes. So even wild,
+equal-slopes is not the unique solvability route. Folded into ws_geom_bundle_theory.md S8c.
