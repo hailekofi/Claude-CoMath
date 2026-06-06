@@ -2009,3 +2009,26 @@ CAVEAT (tame vs wild): this is for the tanh (tame) model (endpoints at finite s=
 model the endpoints are at u=+-inf, so node-at-endpoint collapses to the slope-coincidence limit; wild
 rigidity is the wild-cv (dim->0) question, with further mechanisms (bowtie) at distinct slopes. So even wild,
 equal-slopes is not the unique solvability route. Folded into ws_geom_bundle_theory.md S8c.
+## 2026-06-03 — Stepping back: where the structure travels (research overview); LZ solvability quest set down
+
+User set down the Type-1 N=3 SOLVABILITY quest (the wildness is near-irreducible) and asked where the
+beautiful geometry is useful beyond LZ. Reframed: the wildness is a THEOREM (Type-1 N=3 = generic non-rigid
+rank-3 connection; sigma = its accessory parameter as a wild Stokes constant; solvable <=> rigid), not a
+defeat. Memorialized the brainstorm as paper/program/where_this_travels.md.
+
+TRANSFERABLE ASSETS (what the project MADE): (I.1) solvable<=>rigid as a CONSTRUCTIVE design principle for
+driven multilevel systems (unifies bowtie/Demkov-Osherov/Demkov-Kunike as the rigid ones; tells you how to
+build solvable protocols + certifies the non-solvable) -- highest-leverage export; (I.2) sigma = Fredholm/
+Widom determinant <-> RMT gap probabilities / Painleve tau (probe: match the kernel -> could COMPUTE sigma);
+(I.3) the wild-Hitchin/RH dictionary as a reusable "where does transcendence live" template.
+
+DOMAINS THE OBJECT INHABITS (ranked): Richardson-Gaudin pairing (node/discriminant geometry for quench
+dynamics -- Yuzbashyan home turf); Argyres-Douglas/class-S (the curve is an AD SW curve; sigma=wall-crossing;
+"rigid=solvable" = "AD is Lagrangian" -- same statement as I.1 in gauge language!); holonomic gates &
+reachability (W-holonomy Lambda~pi, two-vertex reachable set = controllability); conical intersections /
+diabolical points / topological matter (R3 node); non-Hermitian exceptional points (complex branch points);
+structured LA / tensor joint-diagonalization (shared eigenbasis).
+
+TOP PICKS: (1) I.1 rigidity->control note [finished physics, no sigma-heroics]; (2) I.2 sigma<->RMT [match a
+kernel]; (3) II.2 Argyres-Douglas [lit pass]. Recommended: develop ONE -- I.1 is the cleanest self-contained
+gift. Offered: draft I.1, do II.2 lit scan, or take I.2 probe. Quest set down; map preserved.
