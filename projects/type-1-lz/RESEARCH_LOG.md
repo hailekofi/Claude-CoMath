@@ -2032,3 +2032,32 @@ structured LA / tensor joint-diagonalization (shared eigenbasis).
 TOP PICKS: (1) I.1 rigidity->control note [finished physics, no sigma-heroics]; (2) I.2 sigma<->RMT [match a
 kernel]; (3) II.2 Argyres-Douglas [lit pass]. Recommended: develop ONE -- I.1 is the cleanest self-contained
 gift. Offered: draft I.1, do II.2 lit scan, or take I.2 probe. Quest set down; map preserved.
+
+---
+
+## 2026-06-03 — APPLICATION probe: level statistics of the Type-M integrable family (ws_type_M_levelstats.py)
+
+User reframed: NOT deepening sigma -- APPLYING Type-1 geometry to unsolved problems; flagged level statistics.
+First probe (unfolding-free consecutive-spacing ratio <r>; ABGR; Poisson 0.386, GOE 0.531):
+ (1) INTEGRABLE Type-M H0 (Cauchy/Gaudin) -> <r>=0.39 at M=100,200,400 (ensemble-avg) = POISSON. Berry-Tabor
+     integrability signature, confirmed.
+ (2) Integrability-breaking H0 + eps*GOE (M=300): crossover Poisson->GOE is STRIKINGLY SHARP -- <r> jumps
+     0.386 (eps=0) -> 0.483 (eps=0.01) -> 0.51 (eps=0.03-0.1) -> 0.531 (eps>=1, full GOE). The integrable
+     point is a fragile/singular point.
+ (3) Controls OK (pure GOE 0.533, pure Poisson 0.389).
+HONEST: integrable->Poisson is expected (Berry-Tabor); the VALUE is that Type-M is a rare integrable family
+with FULL geometric control (genus-0 spectral curve = exact DOS; discriminant = the exact crossing/node
+structure). Sharp crossover is partly finite-size (dense levels), standard.
+
+OPEN APPLICATION TARGETS (where Type-M geometry = leverage, ranked):
+ (A) Type-M as an analytically-tractable Poisson->GOE crossover model -- the spectral curve could PREDICT
+     the crossover scale/form (most crossover physics is numerical/phenomenological); the protected node /
+     diabolical-point structure is a handle generic integrable models lack.
+ (B) Many-body ETH / integrability-breaking onset: Type-M IS Richardson-Gaudin (real many-body BCS pairing);
+     breaking it -> thermalization; the geometry could give analytic handles on the ETH crossover /
+     prethermalization (hot open area).
+ (C) Diabolical-point / avoided-crossing statistics from the discriminant (the [1,1,1,1,2]-type real-root
+     structure): how the exact crossings (nodes) lift under integrability-breaking = a solvable model of
+     Berry-phase / diabolical-point statistics.
+Next-probe candidates: crossover-scale vs M (is it geometry-controlled or generic Rosenzweig-Porter?); the
+node-lifting statistics; local statistics near the node vs bulk. Quest = APPLY the geometry, not solve sigma.
