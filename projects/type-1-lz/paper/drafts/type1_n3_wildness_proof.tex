@@ -41,7 +41,12 @@ rank-$3$ Fuchsian system of Katz rigidity index $0$ (one accessory parameter, He
 character variety has positive dimension. \emph{(Theorem~\ref{thm:noclosed})} Consequently the amplitude lies
 in the unique cell of the (tame/wild)$\times$(rigid/non-rigid) classification that admits \emph{no} closed-form
 mechanism: it is neither a tame (Fuchsian) monodromy datum nor a rigid (generalized-hypergeometric /
-$\Gamma$-function) connection constant. We then certify, gold-gated, that the residual constant
+$\Gamma$-function) connection constant. A structural normal form
+(Proposition~\ref{prop:skeleton}) separates the amplitude into an explicit \textbf{algebraic skeleton} ---
+two Brundobler--Elser survivals graded by the exponential torus, assembled by an oriented formal-monodromy
+$3$-cycle and double stochasticity --- and a \textbf{two-dimensional transcendental Stokes core}
+$\{\sigma,b\}$ that dresses it (Remark~\ref{rem:trdeg}). We then certify, gold-gated, that the residual
+constant
 $\sigma=\Pmid$ admits no finite Barnes-$G$/Euler-$\Gamma$ product and closes only as a Fredholm/Widom
 determinant (Proposition~\ref{prop:cert}). \textbf{Honest scope.} Theorems~\ref{thm:wild}--\ref{thm:noclosed}
 are rigorous (standard irregular-connection theory and Katz rigidity). The non-elementarity of the single
@@ -79,9 +84,11 @@ $P_{\mathrm{hi}\to\mathrm{hi}}=e^{-2\pi(\delta_{hm}+\delta_{lh})}$, with
 $\delta_{ij}=\gamma_i^2\gamma_j^2|a_i-a_j|/(\eps_i-\eps_j)^2$ \cite{BE}. Imposing the two extreme survivals
 together with double stochasticity (row/column sums $1$) leaves the entire matrix determined by just
 \emph{two} further numbers, which one may take to be $\Pmid$ and a single off-diagonal $b=P_{\mathrm{hi}\to
-\mathrm{lo}}$. Of these, $b$ is ``soft'' (it is elementary in both the diabatic and adiabatic limits), while
-$\Pmid$ is the one genuinely transcendental quantity --- the lone number that no elementary formula
-reproduces. We name it
+\mathrm{lo}}$. Of these, $b$ is ``soft'' --- elementary in both the diabatic and adiabatic
+limits --- while $\Pmid$ is hard in \emph{every} regime: it is the one number that no elementary formula
+reproduces anywhere. (As Proposition~\ref{prop:skeleton} and Remark~\ref{rem:trdeg} below make precise, $b$ is
+nonetheless a \emph{second}, independent Stokes transcendental; $\sigma$ is the \emph{universally} hard one,
+not the only one.) We name it
 \begin{equation}\label{eq:sigma}
 \boxed{\ \sigma \;:=\; \Pmid\ }\qquad\text{(the irreducible Stokes constant).}
 \end{equation}
@@ -139,6 +146,65 @@ $\Scat$ (hence $\Pmid$) is a \emph{Stokes connection constant} of the wild conne
 of its wild character variety, determined by the global gluing of the four Stokes sectors at $\infty$, not by
 any Fuchsian (regular-singular) monodromy.
 \end{corollary}
+
+\begin{proposition}[Algebraic skeleton and the two-dimensional Stokes core]\label{prop:skeleton}
+Order the channels by slope, $\mathrm{lo}<\mathrm{mid}<\mathrm{hi}$ (by $a$). The scattering matrix factorizes
+as
+\[
+\Scat \;=\; (\text{formal monodromy})\cdot(\text{exponential torus})\cdot(\text{Stokes}),
+\]
+in which the first two factors are fixed by the \emph{local formal data} at $u=\infty$ of
+Theorem~\ref{thm:wild} and are rational (Liouvillian) in $(\eps,\gamma,a)$:
+\begin{enumerate}
+\item[\textup{(a)}] the \emph{exponential torus} $\diag(e^{q_i})$, $q_i=\tfrac{i}{2}a_iu^2$, is a transparent
+grading of the three channels by slope --- linear in the commuting-member datum $a_i$, which \emph{is} the
+irregular type;
+\item[\textup{(b)}] the \emph{formal monodromy}, read on the doubly-stochastic observable $P$, is a single
+oriented $3$-cycle (circulant permutation); its orientation is the algebraic $\mathbb{Z}_2$ datum
+$\mathrm{sgn}(\pi)$, the parity of the slope-ordering permutation $\pi:\eps\mapsto a$ \cite{OWY}.
+\end{enumerate}
+Consequently $P$ has the exact normal form
+\[
+P \;=\; \Phi_{\mathrm{aff}}\big(\,\underbrace{P_{\mathrm{lo}},\,P_{\mathrm{hi}}}_{\text{algebraic (BE)}};\ \
+\underbrace{\sigma,\,b}_{\text{Stokes core}}\,\big),
+\]
+where the two extreme-slope survivals are pinned to the Brundobler--Elser values
+$P_{\mathrm{lo}},P_{\mathrm{hi}}=e^{-2\pi\sum\delta}$ \emph{exactly}, and $\Phi_{\mathrm{aff}}$ is the affine
+map fixing the remaining seven entries by double stochasticity. Only the middle (recombining) channel carries
+the Stokes constants $\{\sigma,b\}$. The skeleton is realized concretely by the time-ordered product
+$M_3M_2M_1$ of three elementary $2$-level Landau--Zener stochastic factors, composed in the order of the
+rational diabatic crossing times $u_{ij}=\big((H_0)_{jj}-(H_0)_{ii}\big)/(a_i-a_j)$; this product reproduces
+$P_{\mathrm{lo}},P_{\mathrm{hi}}$ and the oriented cycle exactly.
+\end{proposition}
+
+\begin{proof}
+The factorization and (a) are the unramified formal decomposition of Theorem~\ref{thm:wild}
+\cite{Wasow,JMU}: the formal solution at $\infty$ is $\hat F(u)\,u^{L}e^{Q(u)}$ with $Q=\diag(q_i)$ and $\hat
+F$ a formal gauge, giving the exponential torus $e^{Q}$ and the formal monodromy $e^{2\pi i L}$. Statement (b)
+is the value of that formal monodromy on $|\Scat|^2$; the orientation equals the sign of the slope-ordering
+permutation, an algebraic function of $(\eps,a)$, established by the selector computation \cite{OWY}. The
+exact pinning of the two extreme survivals is the Brundobler--Elser theorem \cite{BE}; in Stokes-graph terms
+the extreme rate $q_{\mathrm{lo}}$ (resp.\ $q_{\mathrm{hi}}$) is recessive (resp.\ dominant) throughout, so
+its diagonal entry receives no Stokes correction --- the extreme channel is diagonally isolated. Double
+stochasticity then determines the remaining seven entries affinely from
+$\{P_{\mathrm{lo}},P_{\mathrm{hi}},\sigma,b\}$, which is $\Phi_{\mathrm{aff}}$. The ordered-product
+realization is the standard independent-crossing (incoherent) composition of pairwise LZ factors in
+crossing-time order.
+\end{proof}
+
+\begin{remark}[The Stokes core is two-dimensional]\label{rem:trdeg}
+The core $\{\sigma,b\}$ has \emph{transcendence degree two} over the elementary field
+$\mathrm{Liouv}(\eps,\gamma,a)$: $b$ is not a function of $(P_{\mathrm{lo}},P_{\mathrm{hi}},\sigma)$. This is
+numerically supported (not claimed as a theorem). Across the family the Jacobian of
+$(\eps,\gamma,a)\mapsto(P_{\mathrm{lo}},P_{\mathrm{hi}},\sigma,b)$ attains full rank $4$, and the best
+polynomial fit of $b$ on $(P_{\mathrm{lo}},P_{\mathrm{hi}},\sigma)$ leaves an irreducible residual
+$\approx 0.26$ (against $\mathrm{std}(b)\approx 0.35$), far above the $10^{-3}$ integration floor; were $b$
+determined, the residual would collapse to that floor. Hence $\sigma$ is the \emph{universally hard} datum ---
+the only one not elementary in any limit --- but \emph{not} the sole transcendental: the wild core of the
+Type-1 $N{=}3$ amplitude is genuinely two-dimensional, $\{\sigma,b\}$, dressing the algebraic skeleton.
+Proving $\sigma,b$ non-Liouvillian (as opposed to ``no closed form found'') is a question of parameterized
+differential Galois theory beyond the present scope.
+\end{remark}
 
 \section{Non-rigidity}\label{sec:nonrigid}
 

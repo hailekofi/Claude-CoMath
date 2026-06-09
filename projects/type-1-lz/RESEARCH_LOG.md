@@ -2115,3 +2115,10 @@ Provable vs open: the ISOLATION (which pieces algebraic, transcendence confined 
 analytically-derived (wild RH + Kolchin). PROVING sigma,b genuinely non-Liouvillian (transcendental OVER the
 elementary field, not merely "no closed form found") is frontier functional transcendence (parameterized
 Picard-Vessiot; Ramis density, Andre, Hardouin-Singer) -- out of reach here.
+
+Folded into the wildness proof (type1_n3_wildness_proof.tex) as Proposition (Algebraic skeleton and the
+two-dimensional Stokes core) + Remark (the Stokes core is two-dimensional): S = (formal monodromy)(exp torus)
+(Stokes); skeleton = 2 BE survivals graded by exp torus + oriented formal-monodromy 3-cycle (orientation =
+sgn of slope-ordering permutation, OWY selector) + double-stochastic affine glue; realized concretely as the
+time-ordered product M3 M2 M1 of pairwise LZ factors (exact on extremes + cycle). Core {sigma,b} dresses it,
+trdeg 2 (R24, numerically supported). Abstract updated. Lint clean (braces/math/envs/refs/cites all resolve).
