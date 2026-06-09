@@ -68,9 +68,34 @@ bundle over $\PP_u$,
 holomorphic on $\C_u$ and singular only at $u=\infty$ (the coefficients are entire). The observable is the
 doubly-stochastic transition matrix $P_{x\to j}=|\Scat_{xj}|^2$, where $\Scat$ is the scattering
 (connection) matrix relating the canonical asymptotic frames at $u=\mp\infty$. We write $m=\mathrm{argsort}(a)[1]$
-(slope-middle) and study the irreducible datum $\Pmid=|\Scat_{mm}|^2$. Canonical anchor (used for the
-numerical certification, \S\ref{sec:cert}): $\eps=(-2,0,3)$, $\gamma=(1,0.8,1.2)$, $a=(-1,0.5,2)$, for which
-$\Pmid=0.214724\ldots$
+(slope-middle) and study the middle-level survival $\Pmid=|\Scat_{mm}|^2$ --- the probability that a system
+swept from $u=-\infty$ to $u=+\infty$, entering on the middle diabatic level, exits on it.
+
+\paragraph{What $\sigma$ is, and why it is the only hard number.}
+The matrix $P$ has four real degrees of freedom (doubly stochastic, $3\times3$). Two are fixed exactly and
+\emph{elementarily}: the two extreme-slope survivals are the Brundobler--Elser factors
+$P_{\mathrm{lo}\to\mathrm{lo}}=e^{-2\pi(\delta_{lm}+\delta_{lh})}$,
+$P_{\mathrm{hi}\to\mathrm{hi}}=e^{-2\pi(\delta_{hm}+\delta_{lh})}$, with
+$\delta_{ij}=\gamma_i^2\gamma_j^2|a_i-a_j|/(\eps_i-\eps_j)^2$ \cite{BE}. Imposing the two extreme survivals
+together with double stochasticity (row/column sums $1$) leaves the entire matrix determined by just
+\emph{two} further numbers, which one may take to be $\Pmid$ and a single off-diagonal $b=P_{\mathrm{hi}\to
+\mathrm{lo}}$. Of these, $b$ is ``soft'' (it is elementary in both the diabatic and adiabatic limits), while
+$\Pmid$ is the one genuinely transcendental quantity --- the lone number that no elementary formula
+reproduces. We name it
+\begin{equation}\label{eq:sigma}
+\boxed{\ \sigma \;:=\; \Pmid\ }\qquad\text{(the irreducible Stokes constant).}
+\end{equation}
+The name is literal: by Corollary~\ref{cor:stokes} below, $\Scat$ is the Stokes data of the wild connection
+\eqref{eq:conn}, so $\sigma$ is the value of the wild Riemann--Hilbert map --- a Stokes constant of an
+irregular ODE, in the precise sense made elementary for $N{=}2$, where the analogous constant is exactly the
+Landau--Zener factor $e^{-2\pi\delta}$. \emph{Intuition for its value:} $\sigma$ is a smooth function of the
+model data taking values throughout $(0,1)$ --- near $1$ in the diabatic regime (small couplings: the middle
+level is barely disturbed), near $0$ in the deep-adiabatic regime (the level is swept away) --- but, unlike
+the two extreme survivals, it is \emph{not} an exponential of any elementary action: it is the holonomy of the
+one channel that genuine three-level coupling forces to recombine. Canonical anchor (used for the numerical
+certification, \S\ref{sec:cert}): $\eps=(-2,0,3)$, $\gamma=(1,0.8,1.2)$, $a=(-1,0.5,2)$, for which
+$\sigma=\Pmid=0.214724\ldots$ The entire content of this paper is the structural reason this single number
+admits no closed form.
 
 \begin{definition}[Wild / tame; rigid]\label{def:terms}
 A meromorphic connection is \emph{tame} (regular-singular) at a point if every formal solution there grows at
