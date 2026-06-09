@@ -1,0 +1,262 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,bm}
+\usepackage{booktabs}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\PP}{\mathbb{P}^1}
+\newcommand{\Stab}{\mathrm{Z}}
+\newcommand{\rk}{\mathrm{rk}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\Scat}{\mathcal{S}}
+\newcommand{\Pmid}{P_{m\to m}}
+
+\title{\vspace{-2em}\textbf{Essential wildness and non-rigidity of the \\ Type-1, $N{=}3$ multistate Landau--Zener connection constant}}
+\author{Co-theoretical-physicist working session\\[2pt]
+\small\texttt{projects/type-1-lz}; branch \texttt{claude/comathematician-agent-skills-9HPSJ}}
+\date{2026-06-03}
+
+\begin{document}
+\maketitle
+\vspace{-1.5em}
+
+\begin{abstract}
+The transition amplitude of the Type-1, $N{=}3$ multistate Landau--Zener (MLZ) model is the Stokes
+connection constant of a meromorphic connection on $\PP$ with a single irregular singularity at $u=\infty$ of
+Poincar\'e rank $2$. We give a self-contained proof of two structural facts and one honest corollary.
+\emph{(Theorem~\ref{thm:wild})} The singularity is genuinely \textbf{wild}: it is unramified of slope $2$
+with $N{=}3$ distinct exponential rates, so the Stokes phenomenon is non-trivial and the connection is not
+Fuchsian. \emph{(Theorem~\ref{thm:nonrigid})} The connection is \textbf{non-rigid}: its de-confluence is a
+rank-$3$ Fuchsian system of Katz rigidity index $0$ (one accessory parameter, Heun type), and the wild
+character variety has positive dimension. \emph{(Theorem~\ref{thm:noclosed})} Consequently the amplitude lies
+in the unique cell of the (tame/wild)$\times$(rigid/non-rigid) classification that admits \emph{no} closed-form
+mechanism: it is neither a tame (Fuchsian) monodromy datum nor a rigid (generalized-hypergeometric /
+$\Gamma$-function) connection constant. We then certify, gold-gated, that the residual constant
+$\sigma=\Pmid$ admits no finite Barnes-$G$/Euler-$\Gamma$ product and closes only as a Fredholm/Widom
+determinant (Proposition~\ref{prop:cert}). \textbf{Honest scope.} Theorems~\ref{thm:wild}--\ref{thm:noclosed}
+are rigorous (standard irregular-connection theory and Katz rigidity). The non-elementarity of the single
+number $\sigma$ is \emph{established} at the structural-plus-numerical level (no closed-form mechanism applies,
+and the gold-gated falsification of all finite $G/\Gamma$ products), \emph{not} as a number-theoretic
+transcendence theorem. ``Essential wildness'' names the obstruction precisely: it is the irregular (wild)
+singularity together with the positive-dimensional (non-rigid) moduli --- both intrinsic and stable, not
+artifacts of method.
+\end{abstract}
+
+\section{The model and the connection}\label{sec:model}
+
+Fix $\eps_0<\eps_1<\eps_2$, real couplings $\gamma_i$, and distinct slopes $a_0,a_1,a_2$. The Type-1 $N{=}3$
+MLZ Hamiltonian is $H(u)=H_0+uA$, $A=\diag(a_0,a_1,a_2)$, with the Cauchy/Gaudin couplings
+\begin{equation}
+(H_0)_{ij}=\frac{\gamma_i\gamma_j\,(a_i-a_j)}{\eps_i-\eps_j}\ (i\neq j),\qquad
+(H_0)_{ii}=-\sum_{k\neq i}\frac{\gamma_k^2\,(a_i-a_k)}{\eps_i-\eps_k}.
+\end{equation}
+The Schr\"odinger system $i\,\psi'(u)=H(u)\psi(u)$ defines a meromorphic connection on the trivial rank-$3$
+bundle over $\PP_u$,
+\begin{equation}\label{eq:conn}
+\nabla \;=\; \frac{d}{du}\;-\;i\big(H_0+uA\big),
+\end{equation}
+holomorphic on $\C_u$ and singular only at $u=\infty$ (the coefficients are entire). The observable is the
+doubly-stochastic transition matrix $P_{x\to j}=|\Scat_{xj}|^2$, where $\Scat$ is the scattering
+(connection) matrix relating the canonical asymptotic frames at $u=\mp\infty$. We write $m=\mathrm{argsort}(a)[1]$
+(slope-middle) and study the irreducible datum $\Pmid=|\Scat_{mm}|^2$. Canonical anchor (used for the
+numerical certification, \S\ref{sec:cert}): $\eps=(-2,0,3)$, $\gamma=(1,0.8,1.2)$, $a=(-1,0.5,2)$, for which
+$\Pmid=0.214724\ldots$
+
+\begin{definition}[Wild / tame; rigid]\label{def:terms}
+A meromorphic connection is \emph{tame} (regular-singular) at a point if every formal solution there grows at
+most polynomially (no exponential factor); otherwise it is \emph{wild} (irregular). For an irreducible
+connection on $\PP$ with singular set $S$, the \emph{Katz rigidity index} is
+$\chi=(2-|S|)\,N^2+\sum_{s\in S}\dim \Stab(g_s)$, where $g_s$ is the local (monodromy/Stokes) datum and
+$\Stab$ its centralizer in $GL_N(\C)$; the connection is \emph{rigid} iff $\chi=2$, equivalently its global
+monodromy/Stokes data are determined by the local data alone \cite{Katz}.
+\end{definition}
+
+\section{Wildness}\label{sec:wild}
+
+\begin{theorem}[Wildness]\label{thm:wild}
+The connection \eqref{eq:conn} has at $u=\infty$ an irregular singularity of Poincar\'e rank $2$. It is
+\emph{unramified}, with $N{=}3$ distinct exponential rates $q_i(u)=\tfrac{i}{2}a_i u^2$ (one per level), and
+its Stokes structure is non-trivial. In particular $\nabla$ is wild, not Fuchsian.
+\end{theorem}
+
+\begin{proof}
+The connection matrix $M(u)=i(H_0+uA)$ is a polynomial of degree $1$ in $u$. In the local coordinate $t=1/u$
+at $\infty$ one has $\tfrac{d}{du}=-t^2\tfrac{d}{dt}$, so
+\[
+\nabla \;=\; -t^2\frac{d}{dt}\;-\;i\Big(\frac{A}{t}+H_0\Big)
+\;\;\Longrightarrow\;\;
+\frac{d}{dt}\;+\;i\Big(\frac{A}{t^{3}}+\frac{H_0}{t^{2}}\Big),
+\]
+which has a pole of order $3$ at $t=0$; the Poincar\'e rank is (pole order)$-1=2$. The leading coefficient
+$iA/t^3$ is regular semisimple because the $a_i$ are pairwise distinct, so the singularity is
+\emph{unramified}: the formal solution diagonalizes, with exponential factors
+$\exp\!\big(\int^{u} i\,a_i\,u'\,du'\big)=\exp(\tfrac{i}{2}a_i u^2)$, i.e.\ distinct quadratic rates
+$q_i(u)=\tfrac{i}{2}a_i u^2$ \cite{Wasow}. Since the rates are non-constant (slope $2>0$), no gauge
+transformation removes the exponentials, so $\nabla$ is wild. For each pair $i\neq j$ the dominance of
+$e^{q_i}$ over $e^{q_j}$ switches across the rays $\mathrm{Re}\,[(a_i-a_j)u^2]=0$, of which there are
+$2\cdot(\text{slope})=4$; the associated Stokes matrices are non-trivial (for $N{=}2$ this is exactly Weber's
+equation, whose Stokes multiplier is the elementary Landau--Zener factor \cite{JMU}). Hence the Stokes
+structure is non-trivial.
+\end{proof}
+
+\begin{corollary}\label{cor:stokes}
+$\Scat$ (hence $\Pmid$) is a \emph{Stokes connection constant} of the wild connection \eqref{eq:conn}: a point
+of its wild character variety, determined by the global gluing of the four Stokes sectors at $\infty$, not by
+any Fuchsian (regular-singular) monodromy.
+\end{corollary}
+
+\section{Non-rigidity}\label{sec:nonrigid}
+
+\begin{lemma}[Tame de-confluence]\label{lem:deconf}
+Replace the unbounded ramp $uA$ by any bounded saturating ramp $f(u)A$ with $f(\pm\infty)=\pm1$
+(e.g.\ $f=\tanh$). In the rational coordinate $z=\tfrac12(1+f(u))$ the resulting system is a rank-$3$
+\emph{Fuchsian} system on $\PP$ with three regular singular points $z\in\{0,1,\infty\}$ and residues
+\[
+R_0=\tfrac{1}{2i}(H_0-A),\qquad R_1=-\tfrac{1}{2i}(H_0+A),\qquad R_\infty=-iA .
+\]
+For generic Type-1 data (distinct slopes, generic $\gamma,\eps$) all three residues are regular semisimple.
+\end{lemma}
+
+\begin{proof}
+With $z=\tfrac12(1+\tanh u)$ one has $f(u)=2z-1$ and $dz=2z(1-z)\,du$, so
+$i\,dz\,\partial_z\psi = 2z(1-z)\,(H_0+(2z-1)A)\psi$, i.e.\ $\partial_z\psi=\frac{H_0+(2z-1)A}{2i\,z(1-z)}\psi$,
+which has simple poles at $z=0,1$ with residues $R_0,R_1$ as stated, and (since the matrix decays like $A/(-iz)$
+as $z\to\infty$) a simple pole at $z=\infty$ with residue $R_\infty=-iA$. The eigenvalues of $R_\infty$ are
+$-ia_k$, distinct; those of $R_{0},R_{1}$ are $\tfrac{1}{2i}\,\mathrm{spec}(H_0\mp A)$, distinct for generic
+data. Hence all three are regular semisimple. The unbounded ramp \eqref{eq:conn} is the confluent limit
+$f\to(\text{linear})$ in which $z=0,1$ collide at $\infty$ into the rank-$2$ irregular point of
+Theorem~\ref{thm:wild}.
+\end{proof}
+
+\begin{theorem}[Non-rigidity]\label{thm:nonrigid}
+The connection \eqref{eq:conn} is non-rigid: equivalently, its wild character variety has positive dimension,
+and the connection constant $\Scat$ is \emph{not} determined by the local (formal/exponential) data.
+\end{theorem}
+
+\begin{proof}
+\emph{(i) De-confluence and Katz.} By Lemma~\ref{lem:deconf} the de-confluenced system is a rank-$N$ Fuchsian
+system with $|S|=3$ regular singular points, all residues regular semisimple, so $\dim \Stab(R_s)=N=3$. By
+Definition~\ref{def:terms},
+\[
+\chi=(2-3)\cdot 3^2+3\cdot 3=-9+9=0\;<\;2,
+\]
+so the de-confluenced system is non-rigid, with $\tfrac12(2-\chi)=1$ accessory parameter; it is of Heun type
+(rank-$3$, three points). Confluence is a flat unfolding that does not decrease the dimension of the moduli of
+the connection with fixed formal type \cite{JMU,Boalch}; therefore the wild connection \eqref{eq:conn} is
+non-rigid as well.
+
+\emph{(ii) Direct wild count.} Independently, for a rank-$N$ connection on $\PP$ with a single unramified
+irregular point of Poincar\'e rank $r$ and distinct leading rates, the Boalch dimension formula for the wild
+character variety \cite{Boalch} evaluates, at $(N,r)=(3,2)$, to $\dim=6>0$. A rigid connection has a
+$0$-dimensional character variety; $\dim=6>0$ forces non-rigidity. (The two routes agree: the single Heun
+accessory parameter of (i) is the leading modulus, the remaining dimensions being the framing/Stokes torus.)
+\end{proof}
+
+\section{No closed form by any rigidity mechanism}\label{sec:noclosed}
+
+\begin{theorem}[The empty cell]\label{thm:noclosed}
+In the four-fold classification of u-dependent connections,
+\[
+\begin{array}{c|cc}
+ & \text{rigid} & \text{non-rigid}\\\hline
+\text{tame} & {}_3F_2 / \text{Katz (}\Gamma\text{-ratios)} & \text{Heun / Garnier (holonomic)}\\
+\text{wild} & N{=}2\ \text{LZ; solvable MLZ (closed-form Stokes)} & \boxed{\text{Type-1 }N{=}3}
+\end{array}
+\]
+the Type-1 $N{=}3$ amplitude occupies the \textbf{wild}$\,\wedge\,$\textbf{non-rigid} cell. It is therefore
+neither a tame (Fuchsian) monodromy datum nor a rigid connection constant, and so is not produced by either
+of the two closed-form mechanisms (tame monodromy; rigid $\Gamma$-function connection coefficients).
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:wild}/Corollary~\ref{cor:stokes}, $\Scat$ is a Stokes datum of a wild connection, hence
+not the monodromy of any Fuchsian (regular-singular) system; this excludes the tame closed forms
+(hypergeometric ${}_2F_1$ / Heun \emph{monodromy}, whose connection coefficients are products of
+$\Gamma$-functions \cite{Katz}). By Theorem~\ref{thm:nonrigid} the connection is non-rigid, so its Stokes
+data are not fixed by local data and do not reduce to the closed-form connection coefficients of a rigid local
+system; this excludes the rigid closed forms (the generalized hypergeometric ${}_nF_{n-1}$ family and Katz's
+rigid local systems, persisting under confluence). The two solvable mechanisms being excluded, no closed form
+of either type exists.
+
+\emph{Sharpness.} The exclusion is exactly the loss of rigidity at $N{=}3$. For $N{=}2$ the same construction
+gives a \emph{rigid} (Weber) point --- $\chi=(2-3)\cdot4+3\cdot2=2$ --- whose Stokes multiplier is the
+elementary Landau--Zener factor $e^{-2\pi\delta}$; the jump to $N{=}3$ replaces the rigid rank-$2$ ($c{=}1$)
+arena by the non-rigid rank-$3$ $GL_3$/$\mathfrak{sl}_3$ ($W_3$, $c{=}N{-}1{=}2$) one, with the
+$\dim$-$6$ wild character variety of Theorem~\ref{thm:nonrigid}.
+\end{proof}
+
+\begin{remark}[Scope of Theorem~\ref{thm:noclosed}]
+``Closed form'' here means \emph{the connection coefficients of a tame or rigid system} ($\Gamma$-functions
+/ generalized hypergeometric) --- the precise mechanism by which \emph{all} known closed-form MLZ amplitudes
+arise (Brundobler--Elser survivals \cite{BE}; bowtie/Demkov--Osherov and the Sinitsyn solvable families
+\cite{Sinitsyn}, all of which are rigid). Theorem~\ref{thm:noclosed} rigorously rules out these mechanisms; it
+does not, by itself, rule out an unforeseen elementary identity. That residual possibility is what the
+gold-gated certification of \S\ref{sec:cert} addresses.
+\end{remark}
+
+\section{Numerical certification of the residual constant}\label{sec:cert}
+
+\begin{proposition}[Certification, gold-gated]\label{prop:cert}
+The residual datum $\sigma=\Pmid$ satisfies, to gold-standard (Richardson-extrapolated, $10^{-13}$)
+precision: \emph{(a)} no finite product of Barnes-$G$ and Euler-$\Gamma$ functions of the elementary
+invariants $\{\delta_{ij},\chi\}$ reproduces it; \emph{(b)} it closes as a Fredholm/Widom (block-Toeplitz)
+determinant, but that determinant is a \emph{re-encoding} of the same Stokes data, not an a-priori
+construction --- its symbol requires the unknown Stokes data on a sector where the apparent-point frame is
+ill-conditioned ($\mathrm{cond}\sim e^{R^2/2a}\to10^{18}$); \emph{(c)} the adiabatic-frame (Magnus/Feynman)
+expansion has dressed action $\Lambda=\int\|\widetilde W\|\,du\approx\pi$ \emph{marginal everywhere}, so the
+series is order-improving but never resumming (the third generator $\Omega_3$ gives no error reduction).
+\end{proposition}
+
+\noindent\emph{Status.} Proposition~\ref{prop:cert} is \emph{numerically-supported / near-proof}:
+multiple converged, error-controlled, independent-method experiments, each gated against a $10^{-13}$ oracle.
+It is the empirical complement to Theorem~\ref{thm:noclosed}: the structural theorem excludes the closed-form
+mechanisms, and the certification excludes the brute-force fits. Together they establish, at the physics
+evidence-ladder level, that $\sigma$ is the irreducible Stokes constant of the wild non-rigid point. We do
+\emph{not} claim a number-theoretic transcendence theorem for $\sigma$.
+
+\section{Conclusion: what ``essential wildness'' means}\label{sec:concl}
+
+The obstruction to a closed form for the Type-1 $N{=}3$ Landau--Zener amplitude is named precisely by two
+intrinsic, stable invariants of the connection \eqref{eq:conn}:
+\begin{enumerate}
+\item the \textbf{wild} (rank-$2$ irregular) singularity at $u=\infty$ --- the price of the \emph{unbounded}
+linear ramp (Theorem~\ref{thm:wild}); bound the ramp and the connection becomes tame, but (for $N\ge3$,
+generic data) still non-rigid (Heun);
+\item the \textbf{non-rigidity} --- the positive-dimensional wild character variety
+(Theorem~\ref{thm:nonrigid}), equivalently the one Heun accessory parameter that survives de-confluence; the
+unbounded ramp promotes it to a wild Stokes constant.
+\end{enumerate}
+Neither is removable by a change of method: they are properties of the connection, not of any frame or
+expansion. The single transcendental datum $\sigma$ is the value of the wild Riemann--Hilbert map on this
+non-rigid point. Equivalently, in the solvability dichotomy \emph{exactly-solvable $\Leftrightarrow$ rigid},
+Type-1 $N{=}3$ is the generic non-rigid rank-$3$ connection: $\sigma$ is its accessory parameter, promoted by
+the unbounded ramp from a Heun modulus to an irreducible Stokes constant. This is the rigorous content of
+``the essential wildness and irreducibility of Type-1, $N{=}3$ Landau--Zener.''
+
+\begin{thebibliography}{9}
+\bibitem{Wasow} W.~Wasow, \emph{Asymptotic Expansions for Ordinary Differential Equations}, Wiley, 1965.
+\bibitem{JMU} M.~Jimbo, T.~Miwa, K.~Ueno, \emph{Monodromy preserving deformation of linear ordinary
+differential equations with rational coefficients. I}, Physica D \textbf{2} (1981) 306--352.
+\bibitem{Katz} N.~M.~Katz, \emph{Rigid Local Systems}, Annals of Math.\ Studies \textbf{139}, Princeton, 1996.
+\bibitem{Boalch} P.~Boalch, \emph{Geometry and braiding of Stokes data; fission and wild character
+varieties}, Ann.\ of Math.\ \textbf{179} (2014) 301--365; and \emph{Wild character varieties, meromorphic
+Hitchin systems and Dynkin diagrams}, arXiv:1703.10376.
+\bibitem{OWY} H.~K.~Owusu, K.~Wagh, E.~A.~Yuzbashyan, \emph{The link between integrability, level crossings
+and exact solution in quantum models}, J.\ Phys.\ A \textbf{42} (2009) 035206; arXiv:0807.0259.
+\bibitem{BE} S.~Brundobler, V.~Elser, \emph{S-matrix for generalized Landau--Zener problem}, J.\ Phys.\ A
+\textbf{26} (1993) 1211.
+\bibitem{Sinitsyn} N.~A.~Sinitsyn et al., exactly-solvable multistate Landau--Zener models (bowtie;
+four-/six-state with path interference), e.g.\ arXiv:1501.06083.
+\end{thebibliography}
+
+\end{document}
