@@ -1,0 +1,116 @@
+"""
+ws_transcendence_degree.py -- isolate algebraic vs transcendental content of the
+Type-1 N=3 transition matrix P.
+
+Question (well-posed, differential-algebra sense): P has 4 functional DOF.
+BE makes 2 elementary (extreme-slope survivals p_lo,p_hi = exp(-2*pi*sum delta)).
+The remaining two are {sigma:=P[mid,mid], b:=P[hi,lo]}.  Is b functionally
+DETERMINED by (p_lo,p_hi,sigma) across the family (=> trdeg 1, sigma the sole
+transcendental generator), or an INDEPENDENT transcendental (=> trdeg 2)?
+
+Decisive statistic: the map Phi:(eps,gam,a) -> (p_lo,p_hi,sigma,b).
+  - Jacobian rank 3  => one functional relation; b = f(p_lo,p_hi,sigma); sigma sole.
+  - Jacobian rank 4  => b independent; two transcendentals.
+Cross-check: regress b on (p_lo,p_hi,sigma); residual ~ noise floor => determined.
+
+NOTE on precision: brute ODE to finite T leaves a ~1e-3 oscillatory tail on b
+(constant H0 coupling). Contrast is asymmetric: INDEPENDENCE would show O(0.1)
+spread (unmistakable); DEPENDENCE shows spread ~ floor. Evidence level here:
+numerically-suggestive (near-proof needs the connection-formula solver).
+"""
+import numpy as np
+from scipy.integrate import solve_ivp
+
+rng = np.random.default_rng(7)
+
+def type1(eps,gam,a):
+    eps=np.array(eps,float);gam=np.array(gam,float);a=np.array(a,float);g2=gam**2
+    H0=np.zeros((3,3))
+    for i in range(3):
+        for j in range(3):
+            if i!=j: H0[i,j]=gam[i]*gam[j]*(a[i]-a[j])/(eps[i]-eps[j])
+        H0[i,i]=-sum(g2[k]*(a[i]-a[k])/(eps[i]-eps[k]) for k in range(3) if k!=i)
+    return H0,np.diag(a)
+
+def outputs(eps,gam,a,T=80.0):
+    """Return (p_lo,p_hi,sigma,b) in slope order lo,mid,hi=argsort(a)."""
+    H0,A=type1(eps,gam,a)
+    sol=solve_ivp(lambda u,y:(-1j*(H0+u*A)@y.reshape(3,3)).ravel(),
+                  [-T,T],np.eye(3,dtype=complex).ravel(),
+                  rtol=1e-9,atol=1e-10,method="DOP853")
+    P=np.abs(sol.y[:,-1].reshape(3,3))**2
+    lo,mid,hi=np.argsort(a)
+    return np.array([P[lo,lo],P[hi,hi],P[mid,mid],P[hi,lo]])
+
+def sample_params():
+    while True:
+        eps=np.sort(rng.uniform(-3,3,3))
+        if np.min(np.diff(eps))<1.0: continue
+        gam=rng.uniform(0.4,1.3,3)*rng.choice([-1,1],3)
+        a=rng.uniform(-2,2,3)
+        if np.min(np.abs(np.subtract.outer(a,a)+np.eye(3)*9))<0.5: continue
+        H0,_=type1(eps,gam,a)
+        if np.max(np.abs(H0))>4.0: continue          # cap coupling -> fast, accurate solves
+        return eps,gam,a
+
+# ---------- 1. Jacobian rank at several base points ----------
+print("="*78)
+print("TRANSCENDENCE-DEGREE TEST: rank of Phi=(p_lo,p_hi,sigma,b) over params")
+print("="*78)
+print("\n[1] Jacobian singular spectra (4 outputs x 9 params), central diff h=4e-3")
+print("    rank 3 => sigma sole transcendental ; rank 4 => b independent\n")
+print(f"    {'point':6s} {'s1':>9} {'s2':>9} {'s3':>9} {'s4':>9}  {'s4/s1':>8}  rank")
+h=5e-3
+ranks=[]
+for p in range(4):
+    eps,gam,a=sample_params()
+    theta=np.concatenate([eps,gam,a]).astype(float)
+    def remap(th): return outputs(th[:3],th[3:6],th[6:9])
+    J=np.zeros((4,9))
+    for k in range(9):
+        tp=theta.copy(); tp[k]+=h
+        tm=theta.copy(); tm[k]-=h
+        J[:,k]=(remap(tp)-remap(tm))/(2*h)
+    s=np.linalg.svd(J,compute_uv=False)
+    r=int(np.sum(s>1e-2*s[0]))   # tol relative; floor-aware
+    ranks.append(r)
+    print(f"    {p:<6d} {s[0]:9.3e} {s[1]:9.3e} {s[2]:9.3e} {s[3]:9.3e}  {s[3]/s[0]:8.1e}  {r}")
+
+# ---------- 2. fiber spread + regression ----------
+print("\n[2] Sampling family for fiber/regression test ...")
+N=350
+Y=np.zeros((N,4))
+for i in range(N):
+    eps,gam,a=sample_params()
+    Y[i]=outputs(eps,gam,a)
+plo,phi,sig,b=Y.T
+print(f"    N={N}; ranges  p_lo[{plo.min():.3f},{plo.max():.3f}] "
+      f"p_hi[{phi.min():.3f},{phi.max():.3f}] sigma[{sig.min():.3f},{sig.max():.3f}] "
+      f"b[{b.min():.3f},{b.max():.3f}]")
+print(f"    std(b)={b.std():.4f}")
+
+# polynomial regression b ~ poly3(p_lo,p_hi,sigma), 5-fold CV
+from itertools import combinations_with_replacement
+def polyfeat(X,deg):
+    n,d=X.shape; cols=[np.ones(n)]
+    for o in range(1,deg+1):
+        for idx in combinations_with_replacement(range(d),o):
+            c=np.ones(n)
+            for j in idx: c=c*X[:,j]
+            cols.append(c)
+    return np.vstack(cols).T
+X=np.column_stack([plo,phi,sig])
+Xr=np.column_stack([rng.standard_normal(N) for _ in range(3)])  # control: random features
+def cv_rmse(Xf,y,deg,folds=5):
+    idx=rng.permutation(len(y)); res=[]
+    for f in range(folds):
+        te=idx[f::folds]; tr=np.setdiff1d(idx,te)
+        A=polyfeat(Xf[tr],deg); coef,*_=np.linalg.lstsq(A,y[tr],rcond=None)
+        pred=polyfeat(Xf[te],deg)@coef
+        res.append(pred-y[te])
+    return np.sqrt(np.mean(np.concatenate(res)**2))
+for deg in [1,2,3,4]:
+    print(f"    deg {deg}: CV-RMSE  b~poly(p_lo,p_hi,sigma) = {cv_rmse(X,b,deg):.4e}"
+          f"   | control b~poly(random3) = {cv_rmse(Xr,b,deg):.4e}")
+print(f"\n    interpretation: RMSE -> noise floor(~1e-3) as deg up  => b DETERMINED (trdeg 1)")
+print(f"                    RMSE plateaus ~ std(b)={b.std():.3f}        => b INDEPENDENT (trdeg 2)")
