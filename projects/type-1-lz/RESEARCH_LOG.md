@@ -2061,3 +2061,57 @@ OPEN APPLICATION TARGETS (where Type-M geometry = leverage, ranked):
      Berry-phase / diabolical-point statistics.
 Next-probe candidates: crossover-scale vs M (is it geometry-controlled or generic Rosenzweig-Porter?); the
 node-lifting statistics; local statistics near the node vs bulk. Quest = APPLY the geometry, not solve sigma.
+
+---
+
+## 2026-06-09 — Algebraic/transcendental isolation; transcendence degree of P is 2 (R24)
+
+User question: P_mm is transcendental, but that does not isolate algebraic-from-transcendental in the
+WHOLE transition matrix. Formalize the isolation so the algebraic dependence on family (eps,gam) and on
+the commuting-member parameter (a) is transparent. Is it well-posed?
+
+Framing [AD]: well-posed in the DIFFERENTIAL-ALGEBRA sense (not the arithmetic "is this value an algebraic
+number" sense, which is hopeless: even BE survivals exp(-2pi*delta) are transcendental numbers by
+Lindemann). Canonical home = differential Galois (Picard-Vessiot) + wild Riemann-Hilbert. The connection
+i psi' = (H0+uA)psi has one irregular singularity at u=inf (Poincare rank 2). Its local Galois group splits:
+  - exponential torus  exp(a_i u^2/2)   -- depends LINEARLY on the member slopes a_i (the commuting member
+    A=diag(a) IS the irregular type); maximally transparent.    [ALGEBRAIC]
+  - formal monodromy   -- rational in (eps,gam,a); the directed-cycle skeleton (R16).   [ALGEBRAIC]
+  - Stokes matrices    -- NOT fixed by local formal data.   [TRANSCENDENTAL]
+Isolation theorem (structural, provable via Kolchin): S = (formal monodromy)(exp torus)(Stokes); the first
+two are Liouvillian & explicit in (eps,gam,a); ALL transcendence sits in Stokes. Transition field
+K = Liouv(eps,gam,a)(Stokes data), with trdeg_Liouv K <= 2 = #{sigma, b}. The lone open integer: trdeg 1
+(sigma alone) or 2 (sigma and b independent)?
+
+R24 [NS->near-supported]: trdeg(P / elementary base) = 2. b is an INDEPENDENT transcendental.
+  Experiment ws_transcendence_degree.py (interaction-picture solver psi=exp(-i u^2 A/2)phi removes the fast
+  diagonal oscillation; cross-validates the old DOP853 to ~1e-12 on pt0). Two statistics, both decisive:
+  [1] Jacobian rank of Phi:(eps,gam,a)->(p_lo,p_hi,sigma,b): rank 4 at 3/4 random base points, decisively
+      pt2 with singular values (1.50,0.39,0.35,0.21) -- smallest 0.21 ~ 200x the 1e-3 floor => genuine full
+      rank => Phi a submersion => b NOT a function of (p_lo,p_hi,sigma). (One clean rank-4 point suffices,
+      generic rank = max over points. pt3 rank 3 is a local near-fiber.)
+  [2] Regression b ~ poly_deg{1..4}(p_lo,p_hi,sigma): CV-RMSE plateaus at 0.255 vs std(b)=0.345 (explains
+      ~45% variance but residual 0.255 >> 1e-3 floor). If b were determined the residual would collapse to
+      the floor; it does not.
+  Precision caveat: brute ODE leaves a ~1e-3 OSCILLATORY (not monotone) tail in sigma,b (T=90..600 sweep:
+  sigma in [0.2119,0.2156], gold 0.21472 sits inside the band). Floor 1e-3 << the 0.2-0.26 signals, so the
+  rank-4 conclusion is safe; only the absolute sigma,b values need the connection-formula solver.
+
+Narrative reconciliation (NOT a contradiction of "sigma the sole irreducible datum"): sigma is the sole
+UNIVERSALLY-HARD datum (R16: b is elementary in BOTH the separated and deep-overlap limits, sigma is off by
+~0.99 incoherently). But "soft" (elementary in the limits) =/= "Liouvillian globally": b's mid-regime
+interference dressing is a SECOND independent Stokes transcendental, not a function of sigma. So the clean
+isolation of the Type-1 N=3 transition matrix is:
+   P  =  [ 2 ALGEBRAIC numbers: the BE extreme-slope survivals exp(-2pi*sum delta) ]
+       (+) [ 2 TRANSCENDENTAL Stokes numbers: sigma (universally hard) and b (soft, but independent) ]
+   everything else = an explicit AFFINE (double-stochasticity) reconstruction from these 4 (R15).
+
+Dead-end / lesson: a brute-force NEAR-PROOF rank test is blocked by the 1e-3 oscillatory ODE tail; relies on
+the asymmetric contrast (independence shows O(0.2) >> floor). To promote R24 to 'established' would need the
+connection-formula solver (oracle.py / num_S12) for the Jacobian. Current level: numerically-supported for
+trdeg=2 (two independent statistics, two solvers agree, signal 200x floor).
+
+Provable vs open: the ISOLATION (which pieces algebraic, transcendence confined to the 2D Stokes core) is
+analytically-derived (wild RH + Kolchin). PROVING sigma,b genuinely non-Liouvillian (transcendental OVER the
+elementary field, not merely "no closed form found") is frontier functional transcendence (parameterized
+Picard-Vessiot; Ramis density, Andre, Hardouin-Singer) -- out of reach here.
