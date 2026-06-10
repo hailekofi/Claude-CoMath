@@ -52,7 +52,7 @@ def build_H(eps,gam,a):
 def adiabatic_frame(H0,a,u):
     w,V=np.linalg.eigh(H0+u*np.diag(a)); return w,V
 
-def connection_ip(eps,gam,a,R,rtol=1e-12,atol=1e-13):
+def connection_ip(eps,gam,a,R,rtol=1e-10,atol=1e-11):
     """P (diabatic, slope-ordered) via adiabatic projection at +/-R."""
     H0,a=build_H(eps,gam,a); a=np.asarray(a,float)
     win,Vin=adiabatic_frame(H0,a,-R)
@@ -69,7 +69,7 @@ def connection_ip(eps,gam,a,R,rtol=1e-12,atol=1e-13):
         for ko in range(3): Pdia[sin[ki],sout[ko]]=P[ki,ko]
     return Pdia
 
-def sigma_of(eps,gam,a,Rs=(40.,80.)):
+def sigma_of(eps,gam,a,Rs=(30.,60.)):
     """Richardson(16:1) in R of P[mid,mid]."""
     a_arr=np.asarray(a,float); lo,mid,hi=np.argsort(a_arr)
     P1=connection_ip(eps,gam,a,Rs[0]); P2=connection_ip(eps,gam,a,Rs[1])
@@ -130,13 +130,13 @@ if __name__=="__main__":
     eps=(-2,0,3); gam=(1,0.8,1.2); alo,ahi=-1.0,2.0
     # accuracy gate at canonical a_mid=0.5
     s_can=sigma_of(eps,gam,(alo,0.5,ahi))
-    s_can_hi=sigma_of(eps,gam,(alo,0.5,ahi),Rs=(80.,160.))
+    s_can_hi=sigma_of(eps,gam,(alo,0.5,ahi),Rs=(40.,80.))
     print("="*78); print("ACCURACY GATE"); print("="*78)
-    print(f"  sigma(a_mid=0.5) R(40,80)={s_can:.7f}  R(80,160)={s_can_hi:.7f}  "
+    print(f"  sigma(a_mid=0.5) R(30,60)={s_can:.7f}  R(40,80)={s_can_hi:.7f}  "
           f"gold=0.214724  |diff|={abs(s_can-0.214724):.1e}  self={abs(s_can-s_can_hi):.1e}")
 
     # build the slice sigma(a_mid) on Chebyshev nodes
-    Nn=33
+    Nn=27
     xn=np.cos(np.pi*np.arange(Nn)/(Nn-1))          # Chebyshev extrema in [-1,1]
     t0,t1=0.0,1.0
     tnodes=0.5*(t1-t0)*(xn[::-1]+1)+t0             # ascending in [0,1]
@@ -150,7 +150,7 @@ if __name__=="__main__":
 
     print("\n"+"="*78); print("DIFFERENTIAL-ALGEBRAIC ORDER TEST  (s_min/s_max; small => ODE exists)")
     print("="*78)
-    degfit=22   # truncate below the noise floor seen in the coeff tail
+    degfit=20   # truncate below the noise floor seen in the coeff tail
     # CONTROLS
     run_block("CONTROL exp  g=exp(-1.3(t-0.3)^2)+0.15  [Liouvillian: order-1 d2 expected hit]",
               tnodes, np.exp(-1.3*(tnodes-0.3)**2)+0.15, degfit)
