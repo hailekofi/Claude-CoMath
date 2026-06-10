@@ -139,7 +139,7 @@ if __name__=="__main__":
     # chosen so sigma sweeps a LARGE range (diabatic ~1 -> adiabatic ~0) with curvature, so a
     # genuine order-1 MISS is resolvable above the ~1e-6 floor (the flat a_mid slice was not).
     gam0=np.array([1.0,0.8,1.2]); a3=(alo,0.5,ahi)
-    Nn=27
+    Nn=35
     xn=np.cos(np.pi*np.arange(Nn)/(Nn-1))          # Chebyshev extrema in [-1,1]
     t0,t1=0.45,2.3
     tnodes=0.5*(t1-t0)*(xn[::-1]+1)+t0             # ascending lambda in [t0,t1]
@@ -154,7 +154,7 @@ if __name__=="__main__":
 
     print("\n"+"="*78); print("DIFFERENTIAL-ALGEBRAIC ORDER TEST  (s_min/s_max; small => ODE exists)")
     print("="*78)
-    degfit=20   # truncate below the noise floor seen in the coeff tail
+    degfit=26   # resolve sigma to its ~1e-6 noise floor (deg-20 under-resolved it)
     # CONTROLS
     run_block("CONTROL exp  g=exp(-1.3(t-0.3)^2)+0.15  [Liouvillian: order-1 d2 expected hit]",
               tnodes, np.exp(-1.3*(tnodes-0.3)**2)+0.15, degfit)
