@@ -2122,3 +2122,40 @@ two-dimensional Stokes core) + Remark (the Stokes core is two-dimensional): S = 
 sgn of slope-ordering permutation, OWY selector) + double-stochastic affine glue; realized concretely as the
 time-ordered product M3 M2 M1 of pairwise LZ factors (exact on extremes + cycle). Core {sigma,b} dresses it,
 trdeg 2 (R24, numerically supported). Abstract updated. Lint clean (braces/math/envs/refs/cites all resolve).
+
+---
+
+## 2026-06-10 — Blind sectorial factorization: S = U·Δ·L with elementary Δ; slots for {σ,b} (R25)
+
+Redraft interrogation (4 rounds, 15 questions) locked the rebuild shape for the wildness proof:
+title "Algebraic skeleton and transcendental Stokes core of the Type-1 N=3 LZ transition matrix";
+one doc; construction centerpiece; symmetric {sigma,b}; bilingual register; two-tier rigor;
+DERIVE-BLIND protocol with a memo gate before the rebuild. User directive mid-derivation:
+DISAGGREGATE wildness (architecture: where the data lives) from transcendence (hardness: what
+the slot values are) -- both emphasized; witnesses of independence: N=2 LZ (wild+elementary),
+Heun (tame+transcendental).
+
+R25 [NS]: (ws_stokes_slots.py, ws_stokes_slots2.py; memo ws_memo_sectorial_factorization.md)
+ (1) MAXIMAL RAY-DEGENERACY [AD]: all pairwise rates -i(a_i-a_j)u^2/2 pure-imaginary => all 3
+     pairs share 4 jump rays (diagonals) + 4 anti-Stokes axes; physical directions are
+     anti-Stokes (why P is unistochastic); dominance = slope order in Q1/Q3, reversed Q2/Q4;
+     upper path crosses exactly 2 rays => S = U.Delta.L predicted.
+ (2) Delta IS PURELY ELEMENTARY [NS, 3 cases, 2 gold-gated, <=1e-3]:
+     |Delta| = (e^{+pi|b1_lo|}, e^{-pi|b1_mid|}, e^{-pi|b1_hi|}); dual weight on lo FORCED by
+     |det S|=1 with sum b1=0 (checked to 4e-6 on unsorted case). LDU does NOT factor
+     elementarily -> numerics IDENTIFY UDL as the upper-lateral product (log branch +i pi).
+ (3) SLOT EQUATIONS (exact): P_hh=|Delta_h|^2 (BE manifest); P_ll = BE as forced cancellation
+     (dual identity); b = |L20|^2|Delta_h|^2 (ONE multiplier); sigma = |Delta_m + U12 Delta_h
+     L21|^2 (TWO multipliers + rel phase) = direct-formal-mid INTERFERING with the mid->hi->mid
+     recombination. Disjoint slots {L20} vs {U12,L21} = structural face of trdeg 2 (R24).
+ (4) Dimension count: 6 complex multipliers + 3 Delta phases - 9 unitarity = 6 real
+     = dim wild character variety (Thm 2 Boalch) -- consistency, not proof.
+ (5) RETRACTION: committed Proposition claim (b) "formal monodromy = oriented 3-cycle" is WRONG:
+     unramified => formal monodromy DIAGONAL, half-turn moduli e^{+-pi b1} = literally the BE
+     weights. The 3-cycle belongs to the incoherent skeleton (R16); Z2 selector is its
+     invariant. Rebuild relocates it.
+ Location statement licensed (blind): wildness lives in A (architect: rays/sectors/Delta-pinning);
+ ALL transcendence in the 6 unipotent multipliers; in P: exactly the sigma,b slots; WHY hard =
+ non-rigidity, not wildness (N=2 witness). Open appendix items: prove Delta-formality;
+ log-normalize Delta phases; LDU-branch bookkeeping.
+ Memo sent to user as review gate; rebuild awaits reaction.
