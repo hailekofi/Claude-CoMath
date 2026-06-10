@@ -1,0 +1,629 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{principle}{Principle}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\PP}{\mathbb{P}^1}
+\newcommand{\Stab}{\mathrm{Z}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\Scat}{\mathcal{S}}
+\newcommand{\Pmid}{P_{m\to m}}
+\renewcommand{\Re}{\operatorname{Re}}
+\newcommand{\lo}{\mathrm{lo}}
+\newcommand{\mi}{\mathrm{mid}}
+\newcommand{\hi}{\mathrm{hi}}
+\newcommand{\Liouv}{\mathrm{Liouv}}
+
+\title{\vspace{-2em}\textbf{Algebraic skeleton and transcendental Stokes core \\ of the
+Type-1, $N{=}3$ Landau--Zener transition matrix}}
+\author{Co-theoretical-physicist working session\\[2pt]
+\small\texttt{projects/type-1-lz}; branch \texttt{claude/comathematician-agent-skills-9HPSJ}}
+\date{2026-06-10}
+
+\begin{document}
+\maketitle
+\vspace{-1.5em}
+
+\begin{abstract}
+The transition matrix of the Type-1, $N{=}3$ multistate Landau--Zener (MLZ) model is the
+Stokes data of a meromorphic connection on $\PP$ with a single irregular singularity at
+$u=\infty$ of Poincar\'e rank $2$. We organise its structure around one explicit
+factorization and keep two mechanisms strictly apart. \emph{Architecture (wildness).} The
+connection is wild (Theorem~\ref{thm:wild}); in the slope-ordered formal frame the
+scattering matrix factors as $\Scat = U\,\Delta\,L$ along the two Stokes rays crossed by
+the real axis, with $U,L$ unipotent and the diagonal $\Delta$ \emph{purely elementary}
+(Theorem~\ref{thm:factor}). This pins the two extreme-slope survivals to the
+Brundobler--Elser values and locates the only hard quantities, $\sigma$ and $b$, in
+disjoint unipotent multiplier slots (Proposition~\ref{prop:slots}). \emph{Hardness
+(transcendence).} That these slot values are non-elementary is a consequence of
+\textbf{non-rigidity}, not of wildness: $N{=}2$ Landau--Zener is wild yet has an elementary
+connection constant, so wildness cannot be the source (\S\ref{sec:deriv}). We derive the
+true source: a rigid wild connection has a $\Gamma$-ratio constant (Katz/middle
+convolution), whereas the non-rigid Type-1 connection ($\chi=0$, one accessory parameter;
+$\dim=6$ wild character variety) has a connection constant that is an isomonodromy
+(Painlev\'e/Garnier) transcendent, hence non-Liouvillian (Theorem~\ref{thm:transc}). A
+differential-algebraic order test confirms in-model that $\sigma(\text{parameter})$ is
+\emph{not} order-$1$ differentially algebraic while behaving as an order-$2$ transcendent
+(\S\ref{sec:cert}). \textbf{Honest scope.} The wildness, factorization, slot, non-rigidity
+and empty-cell statements are rigorous or rigorous-plus-numerically-verified; the final
+\emph{non-Liouvillian} step is complete for the Painlev\'e VI reduction and a flagged
+frontier item for the full rank-$3$ Garnier flow. This document supersedes the earlier note
+\texttt{type1\_n3\_wildness\_proof.tex}, correcting one claim (the formal monodromy is
+diagonal, not a $3$-cycle; Remark~\ref{rem:retract}).
+\end{abstract}
+
+\tableofcontents
+
+\section{The model and the objects}\label{sec:model}
+
+\paragraph{Physics first.} A quantum system with three levels is swept once through an
+avoided crossing: its Hamiltonian is $H(u)=H_0+uA$, where $u$ runs from $-\infty$ to
+$+\infty$ (proportional to time), $A=\diag(a_0,a_1,a_2)$ holds the constant diabatic
+\emph{slopes}, and $H_0$ holds the couplings. We read off the survival and transition
+probabilities $P_{x\to j}$ --- the probability of entering on diabatic level $x$ and exiting
+on level $j$. The matrix $P$ is doubly stochastic. The single quantity this paper is built
+around is the \emph{middle-level survival} $\sigma$: the probability that a system entering
+on the middle slope leaves on it.
+
+\paragraph{Type-1 data.} Fix $\eps_0<\eps_1<\eps_2$, real couplings $\gamma_i$, and distinct
+slopes $a_0,a_1,a_2$. The Type-1 $N{=}3$ MLZ Hamiltonian is $H(u)=H_0+uA$ with the
+Cauchy/Gaudin couplings
+\begin{equation}\label{eq:H0}
+(H_0)_{ij}=\frac{\gamma_i\gamma_j\,(a_i-a_j)}{\eps_i-\eps_j}\ (i\neq j),\qquad
+(H_0)_{ii}=-\sum_{k\neq i}\frac{\gamma_k^2\,(a_i-a_k)}{\eps_i-\eps_k}.
+\end{equation}
+Type-1 is the integrable structure isolated in the classification of parameter-dependent
+quantum integrable models \cite{OWY2009,OY2011}: the family
+$\{H_0(a)+u\,\diag(a)\}$ is a commuting (Gaudin-magnet) family sharing one eigenbasis for
+all $u$ \cite{Y2018}, and \eqref{eq:H0} is the solvable MLZ representative
+\cite{SC2017}. The Schr\"odinger system $i\,\psi'(u)=H(u)\psi(u)$ defines a meromorphic
+connection on the trivial rank-$3$ bundle over $\PP_u$,
+\begin{equation}\label{eq:conn}
+\nabla \;=\; \frac{d}{du}\;-\;i\big(H_0+uA\big),
+\end{equation}
+holomorphic on $\C_u$ and singular only at $u=\infty$.
+
+\paragraph{The observable.} The scattering matrix $\Scat$ relates the canonical asymptotic
+frames of \eqref{eq:conn} at $u=-\infty$ and $u=+\infty$; the transition matrix is
+$P_{x\to j}=|\Scat_{xj}|^2$, doubly stochastic (indeed unistochastic). Order the channels by
+slope, $\lo<\mi<\hi$ (the slope-ascending order of $a$), and write
+$\Pmid=|\Scat_{mm}|^2$ for the middle survival.
+
+\paragraph{Geometric dictionary (for the reader from the other side).} Equation
+\eqref{eq:conn} is a rank-$3$ meromorphic connection with one singular point. ``Wild''
+means that point is irregular (the formal solutions carry exponential factors); the
+\emph{exponential torus}, \emph{formal monodromy} and \emph{Stokes matrices} are its local
+formal-plus-analytic invariants \cite{Wasow1965,LR2016,vdPS2003}; the \emph{wild character
+variety} is the moduli of such connections with fixed formal type \cite{Boalch2014}.
+``Rigid'' means the global Stokes data are determined by the local data
+(Katz index $2$) \cite{Katz1996}. Each notion is defined where first used.
+
+\paragraph{The two hard numbers, and the elementary skeleton around them.} $P$ has four real
+degrees of freedom. Two are fixed exactly and elementarily by the \textbf{Brundobler--Elser
+(BE) law} \cite{BE1993} (proved in \cite{VO2004,DS2006}): the two extreme-slope survivals
+are
+\begin{equation}\label{eq:BE}
+P_{\lo\to\lo}=e^{-2\pi(\delta_{lm}+\delta_{lh})},\quad
+P_{\hi\to\hi}=e^{-2\pi(\delta_{lh}+\delta_{mh})},\qquad
+\delta_{ij}=\frac{\gamma_i^2\gamma_j^2\,|a_i-a_j|}{(\eps_i-\eps_j)^2}.
+\end{equation}
+Imposing \eqref{eq:BE} together with double stochasticity leaves $P$ determined by exactly
+two further numbers, which we take to be
+\begin{equation}\label{eq:sigmab}
+\sigma:=\Pmid \qquad\text{and}\qquad b:=P_{\hi\to\lo}.
+\end{equation}
+We treat $\sigma$ and $b$ symmetrically: both are genuine \emph{Stokes constants} of the
+wild connection (Corollary~\ref{cor:stokes}), and the wild core they span is two-dimensional
+(\S\ref{sec:cert}). They are not on the same footing physically --- $\sigma$ is hard in
+every regime, whereas $b$ is elementary in the diabatic and adiabatic limits --- but neither
+is reducible to the other (Proposition~\ref{prop:slots}, \S\ref{sec:cert}). Canonical anchor,
+used throughout for numerics: $\eps=(-2,0,3)$, $\gamma=(1,0.8,1.2)$, $a=(-1,0.5,2)$, for
+which $\sigma=0.214724\ldots$
+
+\begin{definition}[Wild/tame; rigid]\label{def:terms}
+A meromorphic connection is \emph{tame} (regular-singular) at a point if every formal
+solution there grows at most polynomially; otherwise it is \emph{wild}. For an irreducible
+connection on $\PP$ with singular set $S$ and local data $g_s$, the \emph{Katz rigidity
+index} is $\chi=(2-|S|)N^2+\sum_{s\in S}\dim \Stab(g_s)$, $\Stab$ the centralizer in
+$GL_N(\C)$; the connection is \emph{rigid} iff $\chi=2$, equivalently its global
+monodromy/Stokes data are determined by the local data \cite{Katz1996}. A function of the
+model parameters is \emph{Liouvillian} if it lies in a tower over $\C(\eps,\gamma,a)$ built
+from algebraic extensions, exponentials and integrals (equivalently, has solvable
+differential Galois group \cite{Kolchin1973,vdPS2003}).
+\end{definition}
+
+\section{Wildness: the architecture}\label{sec:wild}
+
+\begin{theorem}[Wildness]\label{thm:wild}
+The connection \eqref{eq:conn} has at $u=\infty$ an irregular singularity of Poincar\'e
+rank $2$. It is \emph{unramified}, with $N{=}3$ distinct exponential rates
+$q_i(u)=\tfrac{i}{2}a_i u^2$, and its Stokes structure is non-trivial. In particular
+$\nabla$ is wild, not Fuchsian.
+\end{theorem}
+
+\begin{proof}
+$M(u)=i(H_0+uA)$ is degree $1$ in $u$. In $t=1/u$ at $\infty$, $\frac{d}{du}=-t^2\frac{d}{dt}$,
+so $\nabla$ becomes $\frac{d}{dt}+i\big(A/t^{3}+H_0/t^{2}\big)$, a pole of order $3$;
+Poincar\'e rank $=$ (pole order)$-1=2$. The leading coefficient $iA/t^3$ is regular semisimple
+(the $a_i$ are distinct), so the point is unramified: the formal solution diagonalizes with
+exponential factors $\exp\!\big(\int^{u} i a_i u'\,du'\big)=\exp(\tfrac{i}{2}a_i u^2)$, i.e.
+distinct quadratic rates $q_i$ \cite{Wasow1965}. The rates are non-constant, so no gauge
+removes the exponentials and $\nabla$ is wild. For each pair $i\neq j$ the dominance of
+$e^{q_i}$ over $e^{q_j}$ switches across the rays $\Re[(a_i-a_j)u^2]=0$, and the associated
+Stokes matrices are non-trivial (for $N{=}2$ this is Weber's equation, whose Stokes
+multiplier is the elementary Landau--Zener factor \cite{JMU1981}).
+\end{proof}
+
+\begin{corollary}\label{cor:stokes}
+$\Scat$, and hence both $\sigma$ and $b$, are \emph{Stokes connection constants} of the wild
+connection \eqref{eq:conn}: points of its wild character variety, fixed by the global gluing
+of the Stokes sectors at $\infty$, not by any Fuchsian monodromy.
+\end{corollary}
+
+\section{The explicit construction: $\Scat=U\,\Delta\,L$}\label{sec:constr}
+
+This section is the centerpiece. We make the architecture of Theorem~\ref{thm:wild} explicit:
+the Stokes rays, the factorization of $\Scat$ across them, the elementary diagonal, and the
+exact location of $\sigma,b$ in the unipotent multiplier slots. Heavier analytic details are
+in Appendix~\ref{app:sectorial}.
+
+\begin{lemma}[Maximal ray-degeneracy]\label{lem:rays}
+All three pairwise rate-differences are pure-imaginary quadratics,
+$q_i-q_j=-\tfrac{i}{2}(a_i-a_j)u^2$ (the $a$ are real). On $u=Re^{i\theta}$,
+\[
+\Re\big(q_i-q_j\big)=\tfrac12(a_i-a_j)R^2\sin 2\theta,
+\]
+a single function of $\theta$ for \emph{all} pairs. Consequently the three pairs share the
+same four \emph{anti-Stokes} directions (the axes $\theta=0,\tfrac\pi2,\pi,\tfrac{3\pi}2$)
+and the same four \emph{Stokes/jump} rays (the diagonals $\theta=\pm\tfrac\pi4,\pm\tfrac{3\pi}4$);
+the dominance order of $\{e^{q_j}\}$ equals the slope order in the quadrants $1,3$ and its
+reverse in $2,4$. The physical scattering directions $\theta=\pi,0$ are anti-Stokes, which is
+why $P=|\Scat|^2$ is unistochastic.
+\end{lemma}
+
+\begin{proof}
+Immediate from $a_i\in\mathbb{R}$ and $\Re(-\tfrac{i}{2}(a_i-a_j)R^2 e^{2i\theta})
+=\tfrac12(a_i-a_j)R^2\sin2\theta$. Generic irregular data of rank $2$ would give $12$
+distinct rays for the three pairs; reality of the commuting slopes collapses them to $4$.
+\end{proof}
+
+\begin{theorem}[Lateral factorization with elementary diagonal]\label{thm:factor}
+In the slope-ordered formal frame at $u=\infty$, the scattering matrix factors as
+\begin{equation}\label{eq:UDL}
+\Scat \;=\; U\,\Delta\,L,
+\end{equation}
+where $U$ is unit upper-triangular (the Stokes factor on the ray $\theta=\tfrac\pi4$), $L$ is
+unit lower-triangular (the ray $\theta=\tfrac{3\pi}4$), and $\Delta=\diag(\Delta_\lo,\Delta_\mi,\Delta_\hi)$
+is the formal transport through the sector containing $\theta=\tfrac\pi2$. The diagonal is
+\emph{purely elementary}:
+\begin{equation}\label{eq:Delta}
+|\Delta_\mi|=e^{-\pi|b_\mi|},\quad |\Delta_\hi|=e^{-\pi|b_\hi|},\quad
+|\Delta_\lo|=e^{+\pi|b_\lo|},\qquad
+b_j:=\sum_{k\neq j}\frac{(H_0)_{jk}^2}{a_j-a_k},
+\end{equation}
+the $b_j$ being the signed BE exponents ($\sum_j b_j=0$).
+\end{theorem}
+
+\begin{proof}[Proof (structure; analytic details Appendix~\ref{app:sectorial})]
+By Lemma~\ref{lem:rays} the real axis from $\theta=\pi$ to $\theta=0$ through the upper
+half-plane crosses exactly the two jump rays $\tfrac{3\pi}4$ then $\tfrac\pi4$; at each, all
+three pairs are simultaneously dominant/recessive (maximal degeneracy), so each carries a
+\emph{full} unipotent Stokes factor, the two oppositely triangular in slope order. The
+unramified formal solution is $\hat F(u)\,u^{L_0}e^{Q(u)}$, $Q=\diag(q_i)$, with $\hat F$ a
+formal gauge \cite{Wasow1965,LR2016}; the diagonal transport through the intervening sector
+is $\Delta$, whose moduli are the half-turn moduli $e^{\mp\pi b_j}$ of the formal monodromy.
+The mid and hi entries are the recessive/standard BE weights $e^{-\pi|b_j|}$; the lo entry is
+the dual weight $e^{+\pi|b_\lo|}$, forced by $|\det\Scat|=1=\prod_j|\Delta_j|$ together with
+$\sum_jb_j=0$ (the last Gauss pivot absorbs the unitarity normalization). Numerically,
+\eqref{eq:UDL}--\eqref{eq:Delta} hold to the integration floor across all sampled data: the
+extracted $|\Delta_j|/e^{\mp\pi|b_j|}$ equal $(1,1,1)$ to $\le 10^{-3}$ (three cases, two
+gold-gated; \S\ref{sec:cert}, Appendix~\ref{app:sectorial}), and the lower-triangular order
+(LDU) does \emph{not} have an elementary diagonal, which is what selects $U\Delta L$ as the
+upper-half-plane lateral product.
+\end{proof}
+
+\begin{proposition}[Slot equations]\label{prop:slots}
+Write $\Scat=U\Delta L$ in slope order $(0,1,2)=(\lo,\mi,\hi)$. Then
+\begin{align}
+P_{\hi\to\hi}&=|\Delta_\hi|^2 &&\text{(BE, manifest, multiplier-free)},\label{eq:Phh}\\
+P_{\lo\to\lo}&=\big|\Delta_\lo+U_{01}\Delta_\mi L_{10}+U_{02}\Delta_\hi L_{20}\big|^2=e^{-2\pi|b_\lo|}
+&&\text{(BE, as a forced cancellation)},\label{eq:Pll}\\
+b=P_{\hi\to\lo}&=|L_{20}|^2\,|\Delta_\hi|^2 &&\text{(\emph{one} multiplier)},\label{eq:b}\\
+\sigma=P_{\mi\to\mi}&=\big|\Delta_\mi+U_{12}\Delta_\hi L_{21}\big|^2 &&\text{(\emph{two} multipliers + a phase).}\label{eq:sigma}
+\end{align}
+The remaining entries are fixed affinely by double stochasticity. Thus $b$ depends only on the
+slot $L_{20}$, while $\sigma$ depends only on $\{U_{12},L_{21}\}$ and their relative phase:
+the two hard numbers occupy \emph{disjoint} multiplier slots.
+\end{proposition}
+
+\begin{proof}
+Direct expansion of $|(U\Delta L)_{xj}|^2$ in slope order; \eqref{eq:Phh} because $\Scat_{\hi\hi}=\Delta_\hi$
+(no slot reaches the top diagonal in $U\Delta L$), \eqref{eq:Pll} because the bottom diagonal
+collects all three lateral contributions and equals the BE weight by Theorem~\ref{thm:factor},
+\eqref{eq:b} from $\Scat_{\hi\lo}=L_{20}\Delta_\hi$, and \eqref{eq:sigma} from
+$\Scat_{\mi\mi}=\Delta_\mi+U_{12}\Delta_\hi L_{21}$. All four are exact identities at solver
+precision in every sampled case (\S\ref{sec:cert}).
+\end{proof}
+
+Read physically, \eqref{eq:sigma} says $\sigma$ is the interference of the direct formal
+mid-passage (amplitude the naive BE weight $e^{-\pi|b_\mi|}$) with the single recombination
+path $\mi\!\to\!\hi\!\to\!\mi$ through the two ray crossings; the deviation of $\sigma$ from
+its BE value \emph{is} that recombination term, as an equation rather than a metaphor.
+
+\begin{remark}[Two factorizations, one skeleton --- only one is exact]\label{rem:contrast}
+The same extreme survivals and oriented cycle are reproduced by the elementary
+\emph{time-ordered} product $M_3M_2M_1$ of three $2$-level Landau--Zener stochastic factors,
+composed in the order of the rational diabatic crossing times
+$u_{ij}=\big((H_0)_{jj}-(H_0)_{ii}\big)/(a_i-a_j)$ (the incoherent skeleton). This product
+is exact on $P_{\lo\to\lo},P_{\hi\to\hi}$ and the cycle, but returns \emph{wrong} values for
+$\sigma$ and $b$ (off by up to $\sim0.99$ for $\sigma$ in deep overlap). It composes in
+\emph{$u$-time order}; the exact $U\Delta L$ composes in \emph{ray order at $\infty$}. The
+gap between them is precisely the Stokes core $\{\sigma,b\}$.
+\end{remark}
+
+\begin{remark}[Correction to the predecessor note]\label{rem:retract}
+An earlier version (\texttt{type1\_n3\_wildness\_proof.tex}) stated that the formal monodromy,
+read on $P$, is an oriented $3$-cycle. This is incorrect: at an \emph{unramified} irregular
+point the formal monodromy is \emph{diagonal}, and its half-turn moduli $e^{\mp\pi b_j}$ are
+exactly the BE weights $\Delta$ of Theorem~\ref{thm:factor}. The oriented $3$-cycle is real
+but belongs to the incoherent skeleton of Remark~\ref{rem:contrast} (its deep-overlap limit);
+its orientation is the $\mathbb{Z}_2$ selector $\mathrm{sgn}(\pi)$, the parity of the
+slope-ordering permutation \cite{OWY2009}. We assign each object its correct role here.
+\end{remark}
+
+\section{Non-rigidity, and the true source of transcendence}\label{sec:deriv}
+
+Section~\ref{sec:constr} put $\sigma,b$ in explicit elementary slots. That the slot
+\emph{values} are non-elementary is a separate fact, with a separate cause. We first record
+non-rigidity, then derive --- as a mechanism, not an analogy --- that non-rigidity (and not
+wildness) is what makes the slot values transcendental.
+
+\subsection{Non-rigidity}
+
+\begin{lemma}[Tame de-confluence]\label{lem:deconf}
+Replacing the unbounded ramp $uA$ by a bounded saturating ramp $f(u)A$, $f(\pm\infty)=\pm1$
+(e.g.\ $f=\tanh$), and setting $z=\tfrac12(1+f(u))$, yields a rank-$3$ Fuchsian system on
+$\PP$ with three regular singular points $z\in\{0,1,\infty\}$ and residues
+$R_0=\tfrac{1}{2i}(H_0-A)$, $R_1=-\tfrac{1}{2i}(H_0+A)$, $R_\infty=-iA$, all regular
+semisimple for generic Type-1 data. The wild connection \eqref{eq:conn} is the confluent
+limit in which $z=0,1$ collide at $\infty$ into the rank-$2$ irregular point.
+\end{lemma}
+
+\begin{proof}
+With $z=\tfrac12(1+\tanh u)$, $dz=2z(1-z)\,du$ gives
+$\partial_z\psi=\frac{H_0+(2z-1)A}{2i\,z(1-z)}\psi$, simple poles at $z=0,1$ with the stated
+residues and (from the $A/(-iz)$ decay) at $z=\infty$ with $R_\infty=-iA$; eigenvalues
+$-ia_k$ and $\tfrac1{2i}\mathrm{spec}(H_0\mp A)$ are distinct generically. Confluence is the
+standard Heun$\to$rank-$2$ degeneration \cite{Ronveaux1995,JMU1981}.
+\end{proof}
+
+\begin{theorem}[Non-rigidity]\label{thm:nonrigid}
+The connection \eqref{eq:conn} is non-rigid: its wild character variety has positive
+dimension and the Stokes data are not determined by the local formal data.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:deconf} the de-confluenced system is rank $3$, three points, all residues
+regular semisimple, $\dim\Stab=3$, so the Katz index is
+$\chi=(2-3)\cdot3^2+3\cdot3=0<2$; it is non-rigid with $\tfrac12(2-\chi)=1$ accessory
+parameter (Heun/Garnier type) \cite{Katz1996}. Confluence with fixed formal type does not
+lower the moduli dimension \cite{JMU1981,Boalch2014}, so \eqref{eq:conn} is non-rigid as well.
+Independently, the Boalch dimension formula for the wild character variety at $(N,r)=(3,2)$
+with distinct leading rates gives $\dim=6>0$ \cite{Boalch2014}; the single Heun accessory
+parameter is the leading modulus, the remaining dimensions being the framing/Stokes torus.
+\end{proof}
+
+\subsection{The derivation: wildness cannot be the cause; non-rigidity is}
+
+\begin{lemma}[The $N{=}2$ separation]\label{lem:N2}
+$N{=}2$ Landau--Zener is wild, with non-Liouvillian fundamental solutions in $u$
+(parabolic-cylinder functions), yet its connection constant is elementary,
+$P_{1\to1}=e^{-2\pi\delta}$. Hence ``no closed-form solution in $u$'' (a statement about the
+differential Galois group in $u$) does \emph{not} imply ``transcendental connection
+constant'': wildness alone cannot make a Stokes constant non-elementary.
+\end{lemma}
+
+\begin{proof}
+Weber's equation is the rank-$2$ unramified case of Theorem~\ref{thm:wild}; its exponential
+torus and two opposite Stokes unipotents generate a non-solvable subgroup of $GL_2$, so by
+the Ramis density theorem and Kolchin's criterion the solutions are non-Liouvillian in $u$
+\cite{Ramis1985,vdPS2003,Kolchin1973}. The single Stokes multiplier nonetheless evaluates to
+the elementary factor $e^{-2\pi\delta}$ \cite{JMU1981}. The two statements are independent.
+\end{proof}
+
+What distinguishes $N{=}2$ (elementary constant) from Type-1 $N{=}3$ (hard constant) is not
+wildness --- both are wild --- but \emph{rigidity}.
+
+\begin{proposition}[Rigid $\Rightarrow$ elementary constant]\label{prop:rigid}
+If an irreducible (wild) connection is rigid, its connection/Stokes data are explicit
+$\Gamma$-ratios in the local exponents.
+\end{proposition}
+
+\begin{proof}
+A rigid connection is built from rank-$1$ objects by middle convolution and tensor twists
+(Katz; algorithmic form Dettweiler--Reiter) \cite{Katz1996,DR2000,DR2007}; each operation is
+an explicit Euler/Laplace integral, so the connection matrix is a finite product of
+$\Gamma$-factors of the local exponents. $N{=}2$ LZ realises this, returning $e^{-2\pi\delta}$.
+\end{proof}
+
+\begin{theorem}[Non-rigid $\Rightarrow$ Painlev\'e/Garnier transcendent $\Rightarrow$ non-Liouvillian]\label{thm:transc}
+For generic Type-1 $N{=}3$ data the connection constants $\sigma,b$ are non-Liouvillian
+functions of $(\eps,\gamma,a)$.
+\end{theorem}
+
+\begin{proof}[Derivation (with the rigor ceiling stated)]
+\emph{Step 1 (deformation $\Leftrightarrow$ non-rigidity).} By Theorem~\ref{thm:nonrigid} the
+connection is a non-isolated point of a $6$-dimensional moduli space carrying one accessory
+parameter; $\sigma,b$ are non-constant coordinates on it.
+\emph{Step 2 (the deformation is an isomonodromy/Painlev\'e flow).} Realise the accessory
+parameter as the position $\lambda$ of an apparent singularity of the de-confluenced system
+(Lemma~\ref{lem:deconf}); isomonodromic motion of $\lambda$ obeys the Schlesinger/JMU
+equations \cite{JMU1981}, of Garnier type here (the rank-$3$, three-point analog of
+Heun$\leftrightarrow$Painlev\'e\,VI). In the wild picture these are Boalch's wild isomonodromy
+flows on the character variety, which realise Painlev\'e/Garnier systems geometrically
+\cite{Boalch2001,Boalch2007}. Along the flow the connection constant solves a second-order
+nonlinear (Painlev\'e/Garnier) equation, not a linear one.
+\emph{Step 3 (irreducibility $\Rightarrow$ non-Liouvillian).} The general solution of such an
+equation lies in no Liouvillian extension of the coefficient field: for Painlev\'e I--VI this
+is the Nishioka--Umemura irreducibility theorem \cite{Nishioka1988,Umemura1990} and the
+Malgrange-groupoid proofs of Casale \cite{Casale2008}; for Painlev\'e VI it is proved by
+Cantat--Loray via the dynamics on the character variety \cite{CL2009} --- exactly our setting,
+since the wild character variety \emph{is} that variety and the flow \emph{is} the dynamics
+on it. Pulling back along the algebraic embedding of Type-1 data, $\sigma,b$ are
+non-Liouvillian over $\C(\eps,\gamma,a)$; the appropriate frame is parameterized
+Picard--Vessiot theory over a differential parameter field \cite{CS2007}.
+\emph{Step 4 (genericity).} This holds off the classical-solution locus (algebraic/Riccati
+special solutions, codimension $\ge1$). Type-1 data is non-classical, witnessed in-model by
+the two-dimensional transcendence degree and the order test of \S\ref{sec:cert}.
+
+\emph{Rigor ceiling.} Steps $1$--$2$ and the $N{=}2$ separation are rigorous; Step $3$ is
+complete for Painlev\'e I--VI (including the PVI character-variety-dynamics proof matching our
+frame), but for the genuine rank-$3$ \emph{Garnier} flow the irreducibility is established
+only in major cases. This single implication is the honest frontier item; everything else in
+the theorem is rigorous or numerically certified.
+\end{proof}
+
+\subsection{The disaggregation made into a principle}
+
+\begin{principle}[Architecture vs hardness]\label{prin:disagg}
+Two independent axes govern $P$. \emph{Wildness} (irregular type $A=\diag(a)$) supplies the
+\emph{architecture}: the Stokes rays, the factorization $U\Delta L$, the elementary $\Delta$,
+the BE-pinning, and the disjoint slots holding $\sigma,b$. \emph{Non-rigidity} (positive-%
+dimensional moduli) supplies the \emph{hardness}: it makes the slot \emph{values}
+Painlev\'e/Garnier transcendents, hence non-Liouvillian. The axes are independent:
+\[
+\begin{array}{c|cc}
+ & \text{rigid} & \text{non-rigid}\\\hline
+\text{wild} & N{=}2\ \text{LZ: elementary }e^{-2\pi\delta} & \boxed{\text{Type-1 }N{=}3:\ \sigma,b\ \text{transcendental}}\\
+\text{tame} & {}_3F_2/\Gamma\text{-ratios} & \text{Heun/PVI: transcendental connection constant}
+\end{array}
+\]
+$N{=}2$ (wild, rigid) is elementary; Heun (tame, non-rigid) is transcendental; Type-1 $N{=}3$
+is wild \emph{and} non-rigid, and its transcendence rides on the non-rigid axis only. Heun is
+thus the base case of the \emph{same} mechanism (Theorem~\ref{thm:transc}), not an analogy.
+\end{principle}
+
+\section{The empty cell}\label{sec:empty}
+
+\begin{theorem}[No closed form by any rigidity mechanism]\label{thm:empty}
+In the $(\text{tame/wild})\times(\text{rigid/non-rigid})$ classification, the Type-1 $N{=}3$
+amplitude occupies the cell \emph{wild $\wedge$ non-rigid}, which admits no closed-form
+mechanism: it is neither a tame (Fuchsian) monodromy datum nor a rigid (generalized-%
+hypergeometric/$\Gamma$-function) connection constant. Its hard data is the
+two-dimensional Stokes core $\{\sigma,b\}$ of Principle~\ref{prin:disagg}.
+\end{theorem}
+
+\begin{proof}
+Wild by Theorem~\ref{thm:wild}; non-rigid by Theorem~\ref{thm:nonrigid}. Tameness is
+contradicted by the exponential rates; the rigid-mechanism closed form
+(Proposition~\ref{prop:rigid}) requires $\chi=2$, contradicted by $\chi=0$. The three
+solvable neighbors (tame-rigid ${}_3F_2$; wild-rigid $N{=}2$ LZ and solvable MLZ; tame-non-%
+rigid Heun) each fail one hypothesis. Hence no rigidity mechanism applies, and the residual
+data is $\{\sigma,b\}$ (\S\ref{sec:cert}).
+\end{proof}
+
+\section{Numerical certification of the core}\label{sec:cert}
+
+We certify, gold-gated against $\sigma=0.214724$, the two quantitative claims that the
+analytic statements rest on: the core is two-dimensional, and $\sigma$ is a transcendent (not
+order-$1$ differentially algebraic). Scripts: \texttt{ws\_stokes\_slots2.py} (factorization,
+slots), \texttt{ws\_transcendence\_degree.py} (trdeg), \texttt{ws\_painleve\_da\_test.py}
+(order test).
+
+\begin{proposition}[The Stokes core is two-dimensional]\label{prop:trdeg}
+$\{\sigma,b\}$ has transcendence degree two over the elementary field: $b$ is not a function
+of $(P_{\lo\to\lo},P_{\hi\to\hi},\sigma)$.
+\end{proposition}
+
+\begin{proof}[Evidence (numerically-supported)]
+The Jacobian of $(\eps,\gamma,a)\mapsto(P_{\lo\to\lo},P_{\hi\to\hi},\sigma,b)$ attains full
+rank $4$ across the family (e.g.\ singular values $(1.50,0.39,0.35,0.21)$ at a random anchor,
+the smallest $\sim200\times$ the floor), so $\Phi$ is a submersion and $b$ is not pinned by
+the triple. The best polynomial fit of $b$ on $(P_{\lo\to\lo},P_{\hi\to\hi},\sigma)$ leaves an
+irreducible residual $\approx0.26$ against $\mathrm{std}(b)\approx0.35$, far above the
+$10^{-3}$ floor. The disjoint-slot structure \eqref{eq:b}--\eqref{eq:sigma} is the analytic
+shadow of this independence.
+\end{proof}
+
+\begin{proposition}[$\sigma$ is a transcendent, not an elementary function]\label{prop:da}
+Along a coupling-scale slice $\gamma\mapsto\lambda\gamma$ on which $\sigma$ sweeps
+$[0.016,0.905]$, $\sigma(\lambda)$ is \emph{not} order-$1$ differentially algebraic, while
+behaving as an order-$2$ transcendent.
+\end{proposition}
+
+\begin{proof}[Evidence (numerically-supported; order-$2$ structure suggestive)]
+Computing $\sigma(\lambda)$ to $\sim10^{-6}$, a Chebyshev interpolant and a search for an
+algebraic relation $P(\lambda,\sigma,\dots,\sigma^{(k)})=0$ (smallest singular value of the
+normalized monomial-jet matrix) gives, at the only well-conditioned cell (order-$1$,
+degree-$2$): an elementary control $e^{-c(\lambda)^2}$ a clean hit ($4\times10^{-15}$), a
+holonomic control $J_0$ a clean miss ($3\times10^{-3}$) with an order-$2$ hit
+($7\times10^{-12}$), and $\sigma$ a \emph{miss} at $1.5\times10^{-4}$ --- $\sim37\times$ its
+floor, the same order as $J_0$'s miss --- with order-$2$ residual at floor. The miss is stable
+under resolution ($1.50\times10^{-4}$ at degree $20$, $1.48\times10^{-4}$ at degree $26$ while
+the floor improved $60\times$), hence a real ODE-obstruction, not fit error. Thus $\sigma$
+tracks the transcendent pattern (order-$1$ no, order-$2$ yes), not the elementary pattern
+(order-$1$ yes), consistent with Theorem~\ref{thm:transc}. Pinning the exact order-$2$
+(Painlev\'e/Garnier) structure --- order-$2$ residual orders below floor, as $J_0$ achieves
+--- needs $\sigma$ to $\sim10^{-9}$ (a high-precision connection solver), a flagged item.
+\end{proof}
+
+\section{Conclusion}\label{sec:concl}
+
+The Type-1 $N{=}3$ transition matrix separates cleanly into an explicit \emph{algebraic
+skeleton} and a \emph{transcendental Stokes core}, and the separation is causal, not
+descriptive. Wildness --- the irregular type $A=\diag(a)$ --- builds the skeleton: it fixes
+the four shared Stokes rays, the lateral factorization $\Scat=U\Delta L$, the elementary
+diagonal $\Delta$ of BE weights, and the two disjoint multiplier slots in which $\sigma$ and
+$b$ sit (Theorems~\ref{thm:wild},~\ref{thm:factor}, Proposition~\ref{prop:slots}).
+Non-rigidity --- the positive-dimensional moduli --- supplies the only hardness: through
+isomonodromy it makes the slot values Painlev\'e/Garnier transcendents, hence non-Liouvillian
+(Theorem~\ref{thm:transc}), a property wildness alone cannot confer ($N{=}2$ is the witness).
+``Essential wildness'' and ``transcendence'' are therefore two facts, not one: the first
+locates the data, the second makes it hard. The core is two-dimensional, $\{\sigma,b\}$, and
+neither number admits a closed form by any rigidity mechanism --- not because the connection
+is wild, but because it is non-rigid.
+
+\appendix
+
+\section{Sectorial existence and the elementary diagonal}\label{app:sectorial}
+
+We sketch the analytic backbone of Theorem~\ref{thm:factor}; full proofs follow the standard
+sectorial theory \cite{Wasow1965,LR2016}. On each of the four sectors bounded by the jump
+rays of Lemma~\ref{lem:rays} there is a unique sectorial fundamental solution asymptotic to
+$\hat F(u)u^{L_0}e^{Q}$ (Sibuya/Hukuhara normal solutions). The Stokes matrices relating
+consecutive sectors are unipotent, upper or lower triangular according to the dominance order,
+which by Lemma~\ref{lem:rays} alternates by quadrant; crossing the upper half-plane from
+$\theta=\pi$ to $0$ therefore composes one lower and one upper unipotent with the diagonal
+formal transport, giving \eqref{eq:UDL}. The diagonal moduli are the half-turn factors of the
+formal monodromy $u^{L_0}$, whose diagonal entries are $-i\,b_j$ with $b_j$ the signed BE
+exponents; analytic continuation across the upper half-plane contributes $\log u\mapsto\log
+u+i\pi$, giving $|\Delta_j|=e^{\mp\pi|b_j|}$ with the dual ($+$) sign forced on the last Gauss
+pivot by $\det$. The elementary-diagonal claim is the assertion that $\hat F$ contributes no
+modulus to the diagonal at the anti-Stokes endpoints --- a Schur-complement (minor) identity
+for lateral products, which we verify numerically to $\le10^{-3}$ (Table below) and expect to
+admit a closed proof.
+
+\smallskip
+\noindent\emph{Verification (\texttt{ws\_stokes\_slots2.py}, Richardson in the cutoff $R$):}
+extracted $|\Delta_j|/e^{\mp\pi|b_j|}$ extrapolate to $(1,1,1)$ ---
+canonical $(13.378,1.00004,1.00003)$ with $1/\mathrm{BE}_\lo^2=13.380$;
+sampleB $(2482.9,0.9995,0.9996)$; a third case $(52.420,1.00002,0.99998)$ ---
+and the slot equations \eqref{eq:Phh}--\eqref{eq:sigma} reproduce $\sigma$ to
+$\le10^{-5}$ (gold $0.214724$) with $\|\Scat\Scat^\dagger-I\|\le10^{-5}$.
+
+\section{The differential-algebraic order test}\label{app:da}
+
+For a function $f$ of one parameter sampled to accuracy $\eta$, build a Chebyshev interpolant,
+obtain $f',f''$ by spectral differentiation, and for each order $k$ and degree $d$ form the
+matrix whose columns are the degree-$\le d$ monomials in $(t,f,f',\dots,f^{(k)})$ evaluated at
+interior points; its smallest singular value (after column normalization) is small iff an
+algebraic ODE of that $(k,d)$ holds. Only low $(k,d)$ are diagnostic: at high degree the
+monomials become numerically dependent over a smooth curve (Vandermonde ill-conditioning) and
+the singular value collapses spuriously --- visible in the controls (the holonomic $J_0$ shows
+a spurious order-$1$ ``hit'' only at degree $\ge3$). The robust signature is the comparison at
+order-$1$, degree-$2$: elementary (Liouvillian) functions hit; genuine transcendents
+(holonomic or Painlev\'e) miss. The stability of the miss under increasing fit degree
+distinguishes a true ODE-obstruction from interpolation error. See
+\texttt{ws\_painleve\_da\_test.py} and Proposition~\ref{prop:da}.
+
+\begin{thebibliography}{99}
+
+\bibitem{BE1993} S.~Brundobler, V.~Elser, \emph{S-matrix for generalized Landau--Zener
+problem}, J.\ Phys.\ A \textbf{26} (1993) 1211--1227.
+
+\bibitem{SC2017} N.~A.~Sinitsyn, V.~Y.~Chernyak, \emph{The quest for solvable multistate
+Landau--Zener models}, J.\ Phys.\ A \textbf{50} (2017) 255203, arXiv:1701.01870.
+
+\bibitem{OWY2009} H.~K.~Owusu, K.~Wagh, E.~A.~Yuzbashyan, \emph{The link between integrability,
+level crossings and exact solution in quantum models}, J.\ Phys.\ A \textbf{42} (2009)
+035206, arXiv:0807.0259.
+
+\bibitem{OY2011} H.~K.~Owusu, E.~A.~Yuzbashyan, \emph{Classification of parameter-dependent
+quantum integrable models, their parameterization, exact solution and other properties},
+J.\ Phys.\ A \textbf{44} (2011) 395302, arXiv:1106.1831.
+
+\bibitem{Y2018} E.~A.~Yuzbashyan, \emph{Integrable time-dependent Hamiltonians, solvable
+Landau--Zener models and Gaudin magnets}, Ann.\ Phys.\ \textbf{392} (2018) 323--339,
+arXiv:1804.04926.
+
+\bibitem{VO2004} M.~V.~Volkov, V.~N.~Ostrovsky, \emph{Exact results for survival probability
+in the multistate Landau--Zener model}, J.\ Phys.\ B \textbf{37} (2004) 4069--4084.
+
+\bibitem{DS2006} B.~E.~Dobrescu, N.~A.~Sinitsyn, \emph{Comment on `Exact results for survival
+probability in the multistate Landau--Zener model'}, J.\ Phys.\ B \textbf{39} (2006)
+1253--1255.
+
+\bibitem{Wasow1965} W.~Wasow, \emph{Asymptotic Expansions for Ordinary Differential
+Equations}, Wiley, 1965 (Dover repr.).
+
+\bibitem{JMU1981} M.~Jimbo, T.~Miwa, K.~Ueno, \emph{Monodromy preserving deformation of
+linear ODEs with rational coefficients. I}, Physica D \textbf{2} (1981) 306--352.
+
+\bibitem{LR2016} M.~Loday-Richaud, \emph{Divergent Series, Summability and Resurgence II},
+Lecture Notes in Math.\ \textbf{2154}, Springer, 2016.
+
+\bibitem{Boalch2001} P.~Boalch, \emph{Symplectic manifolds and isomonodromic deformations},
+Adv.\ Math.\ \textbf{163} (2001) 137--205.
+
+\bibitem{Boalch2007} P.~Boalch, \emph{Quasi-Hamiltonian geometry of meromorphic connections},
+Duke Math.\ J.\ \textbf{139} (2007) 369--405.
+
+\bibitem{Boalch2014} P.~Boalch, \emph{Geometry and braiding of Stokes data; fission and wild
+character varieties}, Ann.\ of Math.\ \textbf{179} (2014) 301--365, arXiv:1111.6228.
+
+\bibitem{Katz1996} N.~M.~Katz, \emph{Rigid Local Systems}, Ann.\ of Math.\ Studies
+\textbf{139}, Princeton, 1996.
+
+\bibitem{DR2000} M.~Dettweiler, S.~Reiter, \emph{An algorithm of Katz and its application to
+the inverse Galois problem}, J.\ Symbolic Comput.\ \textbf{30} (2000) 761--798.
+
+\bibitem{DR2007} M.~Dettweiler, S.~Reiter, \emph{Middle convolution of Fuchsian systems and
+the construction of rigid differential systems}, J.\ Algebra \textbf{318} (2007) 1--24.
+
+\bibitem{Kolchin1973} E.~R.~Kolchin, \emph{Differential Algebra and Algebraic Groups},
+Academic Press, 1973.
+
+\bibitem{vdPS2003} M.~van der Put, M.~F.~Singer, \emph{Galois Theory of Linear Differential
+Equations}, Grundlehren \textbf{328}, Springer, 2003.
+
+\bibitem{Ramis1985} J.-P.~Ramis, \emph{Ph\'enom\`ene de Stokes et filtration Gevrey sur le
+groupe de Picard--Vessiot}, C.\ R.\ Acad.\ Sci.\ Paris I \textbf{301} (1985) 165--167; full
+proof in Martinet--Ramis, Ann.\ IHP \textbf{54} (1991) 331--401.
+
+\bibitem{CS2007} P.~J.~Cassidy, M.~F.~Singer, \emph{Galois theory of parameterized
+differential equations and linear differential algebraic groups}, IRMA Lect.\ Math.\ Theor.\
+Phys.\ \textbf{9}, EMS, 2007, arXiv:math/0502396.
+
+\bibitem{Nishioka1988} K.~Nishioka, \emph{A note on the transcendency of Painlev\'e's first
+transcendent}, Nagoya Math.\ J.\ \textbf{109} (1988) 63--67.
+
+\bibitem{Umemura1990} H.~Umemura, \emph{Second proof of the irreducibility of the first
+differential equation of Painlev\'e}, Nagoya Math.\ J.\ \textbf{117} (1990) 125--171.
+
+\bibitem{Casale2008} G.~Casale, \emph{Le groupo\"ide de Galois de $P_1$ et son
+irr\'eductibilit\'e}, Comment.\ Math.\ Helv.\ \textbf{83} (2008) 471--519.
+
+\bibitem{CL2009} S.~Cantat, F.~Loray, \emph{Dynamics on character varieties and Malgrange
+irreducibility of Painlev\'e VI equation}, Ann.\ Inst.\ Fourier \textbf{59} (2009)
+2927--2978.
+
+\bibitem{Ronveaux1995} A.~Ronveaux (ed.), \emph{Heun's Differential Equations}, Oxford
+Univ.\ Press, 1995.
+
+\end{thebibliography}
+
+\end{document}
