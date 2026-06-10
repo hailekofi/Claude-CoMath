@@ -2234,3 +2234,30 @@ This is the in-model confirmation the non-rigidity->transcendence derivation (R2
 Remaining: pin the exact order-2 (Painleve) structure -> needs sigma to ~1e-9 (oracle/mpmath);
 a TRUE isomonodromic deformation (lam=apparent-singularity position) would name the Garnier eqn.
 Folded into ws_memo_nonrigidity_transcendence.md I.5.
+
+---
+
+## 2026-06-10 — REBUILD COMPLETE: skeleton-and-core paper (R28)
+
+Green light given; full rebuild executed -> paper/drafts/type1_n3_skeleton_core.tex (supersedes
+type1_n3_wildness_proof.tex). Structure as agreed across the 4-round interrogation:
+ - Title "Algebraic skeleton and transcendental Stokes core of the Type-1 N=3 LZ transition matrix".
+ - S1 Model+objects: physics-first intro (the sweep, sigma) + geometric dictionary + Type-1 cited
+   (OWY2009/OY2011/Y2018/SC2017); BE law + delta cited (BE1993/VO2004/DS2006); sigma,b SYMMETRIC.
+ - S2 Wildness (Thm1 architecture) + Cor Stokes.
+ - S3 CONSTRUCTION (centerpiece): Lem rays (maximal degeneracy, 4 shared rays), Thm factorization
+   S=U.Delta.L with ELEMENTARY Delta, Prop slot equations (sigma,b in DISJOINT multiplier slots),
+   Rem contrast (time-ordered LZ product vs ray-ordered Stokes), Rem RETRACTION (formal monodromy
+   diagonal not 3-cycle).
+ - S4 Non-rigidity + transcendence DERIVATION: Lem deconfluence, Thm non-rigidity, Lem N=2
+   separation (wildness CANNOT be the cause), Prop rigid=>Gamma-ratio, Thm non-rigid=>Painleve/
+   Garnier=>non-Liouvillian (Nishioka-Umemura/Casale/Cantat-Loray; CS2007 frame), Principle
+   disaggregation (four-box, two witnesses).
+ - S5 Empty cell. S6 Numerical certification: Prop trdeg-2 (R24/R25), Prop DA-order test (R27).
+ - S7 Conclusion (the two motions, disaggregated). App A sectorial+Delta-formality (+verification
+   table). App B the DA-order test.
+ - Bibliography: 25 web-verified refs only (verified_bibliography.md); honest-scope ceiling stated
+   (Garnier irreducibility the one frontier gap).
+Lint clean (braces/$ even/envs/refs/cites all resolve; fixed \Re renewcommand). No LaTeX compiler
+in container; .tex delivered for user-side compile. Evidence levels marked throughout (rigorous /
+rigorous+numerically-verified / numerically-supported / one flagged frontier item).
