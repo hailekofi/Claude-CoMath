@@ -135,14 +135,18 @@ if __name__=="__main__":
     print(f"  sigma(a_mid=0.5) R(30,60)={s_can:.7f}  R(40,80)={s_can_hi:.7f}  "
           f"gold=0.214724  |diff|={abs(s_can-0.214724):.1e}  self={abs(s_can-s_can_hi):.1e}")
 
-    # build the slice sigma(a_mid) on Chebyshev nodes
+    # build the slice sigma(lambda) on Chebyshev nodes -- COUPLING-SCALE slice gam->lam*gam,
+    # chosen so sigma sweeps a LARGE range (diabatic ~1 -> adiabatic ~0) with curvature, so a
+    # genuine order-1 MISS is resolvable above the ~1e-6 floor (the flat a_mid slice was not).
+    gam0=np.array([1.0,0.8,1.2]); a3=(alo,0.5,ahi)
     Nn=27
     xn=np.cos(np.pi*np.arange(Nn)/(Nn-1))          # Chebyshev extrema in [-1,1]
-    t0,t1=0.0,1.0
-    tnodes=0.5*(t1-t0)*(xn[::-1]+1)+t0             # ascending in [0,1]
-    print("\nbuilding sigma(a_mid) on %d Chebyshev nodes in [%.2f,%.2f] ..."%(Nn,t0,t1))
-    snodes=np.array([sigma_of(eps,gam,(alo,t,ahi)) for t in tnodes])
-    print("  sigma range [%.5f, %.5f]" % (snodes.min(),snodes.max()))
+    t0,t1=0.45,2.3
+    tnodes=0.5*(t1-t0)*(xn[::-1]+1)+t0             # ascending lambda in [t0,t1]
+    print("\nbuilding sigma(lambda) [gam->lam*gam] on %d Chebyshev nodes, lam in [%.2f,%.2f] ..."
+          %(Nn,t0,t1))
+    snodes=np.array([sigma_of(eps,lam*gam0,a3) for lam in tnodes])
+    print("  sigma range [%.5f, %.5f]   (want a WIDE sweep)" % (snodes.min(),snodes.max()))
     # smoothness diagnostic: chebyshev coeff decay of sigma
     cfull=C.chebfit((2*tnodes-(t0+t1))/(t1-t0),snodes,Nn-1)
     print("  sigma chebyshev coeff |c_k|: first 6", np.round(np.abs(cfull[:6]),6),
@@ -157,10 +161,13 @@ if __name__=="__main__":
     run_block("CONTROL J0   g=J0(9 t)  [holonomic: order-1 miss, order-2 hit]",
               tnodes, j0(9*tnodes), degfit)
     # SIGMA
-    run_block("SIGMA  sigma(a_mid)  [claim: order-1 MISS at all d => non-Liouvillian]",
+    run_block("SIGMA  sigma(lambda)  [claim: order-1 MISS like J0 => non-Liouvillian-classical]",
               tnodes, snodes, degfit)
 
-    print("\nREADING: compare each row to the exp control's order-1 d2 entry (the Liouvillian")
-    print("floor). sigma's order-1 residuals staying ORDERS ABOVE that floor = sigma is not")
-    print("order-1 differentially algebraic on this slice = non-Liouvillian-classical, the")
-    print("conclusion the non-rigidity->transcendence derivation targets.")
+    print("\nREADING (only LOW (k,d) are diagnostic; high-degree collapse is Vandermonde")
+    print("ill-conditioning, not an ODE). Calibrate by the controls at order-1 d2:")
+    print("  exp (Liouvillian, order-1) -> ~1e-15 HIT ;  J0 (no order-1) -> ~1e-4 MISS.")
+    print("If sigma's order-1 d2 residual sits at J0's MISS scale (>> its ~1e-6 floor), sigma")
+    print("is NOT order-1 differentially algebraic = non-Liouvillian-classical (derivation target).")
+    print("If it sits at the noise floor, the test is precision-limited -> needs a higher-")
+    print("precision sigma(parameter) solver (oracle/mpmath).")
