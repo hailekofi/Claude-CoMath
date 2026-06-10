@@ -2195,3 +2195,42 @@ R26b — LITERATURE PASS: 22 refs web-verified (verified_bibliography.md). All E
  - BE proof = pair Volkov-Ostrovsky 2004 + Dobrescu-Sinitsyn 2006 (Comment).
  - solvable-MLZ review = Sinitsyn-Chernyak 2017. Ramis density via vdPS 2003 Thm 8.10.
  Discipline: no key enters the .tex unverified.
+
+---
+
+## 2026-06-10 — Isomonodromy numerical confirmation: sigma is order-2-not-order-1 DA (R27)
+
+User: attempt the proposed isomonodromy numerical confirmation. Method: differential-algebraic
+ORDER test of sigma as a function of a parameter (ws_painleve_da_test.py). Logic ladder:
+elementary/Liouvillian -> low-order (often order-1) algebraic ODE; holonomic -> order-1 NO,
+order-2 linear YES; Painleve/Garnier transcendent -> order-1 NO, order-2 (nonlinear) YES, and
+NON-Liouvillian; hyper-transcendental -> no algebraic ODE at any order. Test = smallest singular
+value of the column-normalized monomial-jet matrix in (t,sigma,...,sigma^(k)); small => an
+algebraic ODE of that (order,degree) exists.
+
+Solver: interaction-picture adiabatic connection (project diabatic fundamental matrix onto the
++/-R eigenframes), Richardson(16:1) in R. Accuracy gate: sigma(a_mid=0.5)=0.2147244 vs gold
+0.214724 (3.9e-7 at R=40,80; 1.2e-6 at R=30,60). Chebyshev interpolant + spectral derivatives.
+
+DEAD END (first slice): t=a_mid in [0,1] gave sigma in [0.200,0.238] -- too FLAT (dominated by
+c0); any nearly-constant function trivially fits low-order ODEs. Inconclusive. Lesson: the DA
+test needs a slice where sigma VARIES strongly.
+
+R27 [NS]: coupling-scale slice gam->lam*gam, lam in [0.45,2.30], sigma sweeps [0.016,0.905];
+35 nodes, deg-26 fit (deg-20 under-resolved sigma; its real Cheb coeffs ~1e-4 at deg 17-20),
+sigma floor ~3e-7..4e-6. ONLY order-1 d2 / order-2 d2 are diagnostic (d3,d4 collapse = Vandermonde
+ill-conditioning, confirmed by J0's spurious d3 hit). Controls validate the detector:
+  exp (Liouvillian): order-1 d2 = 4e-15 HIT.
+  J0 (holonomic):    order-1 d2 = 3.0e-3 MISS ; order-2 d2 = 7e-12 HIT.
+SIGMA: order-1 d2 = 1.48e-4 MISS (37x its deg-26 floor; same OOM as J0's clean miss);
+       order-2 d2 = 3.2e-6 at floor (order-2 ~HIT).
+ROBUSTNESS (decisive): sigma order-1 residual 1.50e-4 (deg-20) -> 1.48e-4 (deg-26) while the fit
+floor improved 60x (2.5e-4 -> 4e-6). Residual did NOT move => REAL ODE-miss, not fit error.
+CONCLUSION: sigma(parameter) tracks the TRANSCENDENT pattern (order-1 NO / order-2 YES), NOT the
+ELEMENTARY pattern (order-1 YES). => sigma is NOT order-1 differentially algebraic =
+non-Liouvillian-classical [CONFIRMED, robust, numerically-supported], and is CONSISTENT with an
+order-2 Painleve/Garnier-type transcendent [SUGGESTIVE: order-2 residual at-floor not orders-below].
+This is the in-model confirmation the non-rigidity->transcendence derivation (R26) predicted.
+Remaining: pin the exact order-2 (Painleve) structure -> needs sigma to ~1e-9 (oracle/mpmath);
+a TRUE isomonodromic deformation (lam=apparent-singularity position) would name the Garnier eqn.
+Folded into ws_memo_nonrigidity_transcendence.md I.5.

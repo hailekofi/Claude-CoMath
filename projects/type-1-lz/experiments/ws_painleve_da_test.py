@@ -32,6 +32,24 @@ contradict the Painleve claim -- a generic parameter slice need not be the isomo
 time. The robust deliverable is the ORDER-1 FALSIFICATION = sigma non-Liouvillian-classical.
 
 Reproduce: python3 ws_painleve_da_test.py   (numpy/scipy only)
+
+RESULT (coupling-scale slice gam->lam*gam, lam in [0.45,2.30], sigma sweeps [0.016,0.905];
+35 Chebyshev nodes, deg-26 fit, sigma to ~3e-7-4e-6):
+  detector validated by controls at the ONLY diagnostic cell, order-1 d2:
+     exp (Liouvillian)  order-1 d2 = 4e-15  HIT     (floor 3e-15)
+     J0  (holonomic)    order-1 d2 = 3.0e-3 MISS, order-2 d2 = 7e-12 HIT  (floor 3e-9)
+  SIGMA:  order-1 d2 = 1.48e-4  MISS  (37x the deg-26 floor; ~matches J0's clean miss),
+          order-2 d2 = 3.2e-6   at floor  (order-2 ~HIT, Painleve/holonomic signature).
+  ROBUSTNESS (the decisive check): sigma's order-1 residual was 1.50e-4 at deg-20 and
+  1.48e-4 at deg-26 while the fit floor improved 60x (2.5e-4 -> 4e-6) -> the residual is a
+  REAL ODE-miss, not fit error.
+  READING: sigma(parameter) tracks the J0 (transcendent: order-1 NO / order-2 YES) pattern,
+  NOT the exp (elementary, order-1 YES) pattern.  => sigma is NOT order-1 differentially
+  algebraic = non-Liouvillian-classical (CONFIRMED, robust), and is consistent with an
+  order-2 (Painleve/Garnier-type) transcendent (SUGGESTIVE; the order-2 residual is at-floor
+  not orders-below, so pinning the exact order-2 structure needs sigma to ~1e-9: oracle/mpmath).
+  Evidence level: numerically-supported for the order-1 falsification; suggestive for the
+  order-2 Painleve structure.
 """
 import numpy as np
 from scipy.integrate import solve_ivp

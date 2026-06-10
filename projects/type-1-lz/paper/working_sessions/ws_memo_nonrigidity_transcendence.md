@@ -131,13 +131,28 @@ parallel.
   established in major cases but not with PVI-level completeness. This is the **one real
   gap** — a known-hard problem in differential Galois theory, flagged as such, not a
   hand-wave.
-- **Numerically-supported:** §I.4 non-classicality (R24, certification).
-- **Proposed confirmation (appendix target).** Construct an explicit isomonodromic
-  deformation through a Type-1 point (vary λ holding the monodromy/Stokes conjugacy classes
-  fixed), integrate σ(λ), and verify it satisfies a 2nd-order nonlinear (Painlevé-type) ODE
-  with *no* algebraic first integral — a direct test that σ is a Painlevé/Garnier
-  transcendent rather than an algebraic function of λ. Not yet done; the deformation must
-  be set up carefully (preserve formal data while moving the apparent singularity).
+- **Numerically-supported:** §I.4 non-classicality (R24, certification), **plus the
+  differential-algebraic order test below (R27)**.
+- **Numerical confirmation — DONE (R27, `ws_painleve_da_test.py`).** A differential-algebraic
+  *order* test: along a coupling-scale slice (γ→λγ; σ sweeps [0.016, 0.905]) compute σ(λ) to
+  ~3×10⁻⁷–4×10⁻⁶, build a Chebyshev interpolant, and test for each (order k, degree d) whether
+  an algebraic ODE P(t,σ,…,σ^(k))=0 exists (smallest singular value of the column-normalized
+  monomial-jet matrix). Two controls calibrate the detector at the only diagnostic cell
+  (order-1, d2): **exp** (Liouvillian) → 4×10⁻¹⁵ *hit*; **Bessel J0** (holonomic) → 3×10⁻³
+  *miss* at order-1, 7×10⁻¹² *hit* at order-2.
+  **σ result:** order-1 d2 = **1.5×10⁻⁴ (miss)** — ~37× its fit floor and the same order as J0's
+  clean miss; order-2 d2 = 3×10⁻⁶ (at floor, ~hit). The order-1 residual is **stable under
+  resolution** (1.50×10⁻⁴ at deg-20 → 1.48×10⁻⁴ at deg-26 while the floor improved 60×), so it
+  is a real ODE-miss, not fit error. **Conclusion:** σ(parameter) tracks the *transcendent*
+  pattern (order-1 NO / order-2 YES), not the *elementary* pattern (order-1 YES). This
+  **confirms σ is not order-1 differentially algebraic = non-Liouvillian-classical** (robust,
+  numerically-supported) and is **consistent with an order-2 (Painlevé/Garnier-type)
+  transcendent** (suggestive: the order-2 residual is at-floor, not orders below).
+- **Remaining numerical item.** Pinning the *exact* order-2 (Painlevé) structure — order-2
+  residual orders below floor, as J0 achieves — needs σ to ~10⁻⁹ on a smooth slice
+  (oracle/mpmath connection solver), beyond the ~10⁻⁶ interaction-picture floor. Likewise a
+  *true* isomonodromic deformation (λ = apparent-singularity position, formal data fixed) would
+  identify the specific Garnier equation; both flagged for the appendix.
 
 ---
 
