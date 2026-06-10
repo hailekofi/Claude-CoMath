@@ -2159,3 +2159,39 @@ R25 [NS]: (ws_stokes_slots.py, ws_stokes_slots2.py; memo ws_memo_sectorial_facto
  non-rigidity, not wildness (N=2 witness). Open appendix items: prove Delta-formality;
  log-normalize Delta phases; LDU-branch bookkeeping.
  Memo sent to user as review gate; rebuild awaits reaction.
+
+---
+
+## 2026-06-10 — Literature pass (22 refs verified) + non-rigidity->transcendence derivation memo (R26)
+
+User directives: (1) make non-rigidity->transcendence a derivation in its own right (not the
+Heun analogy); (2) self-contained paper (Type-1 + intermediate quantities defined or cited).
+
+R26a — DERIVATION [AD, with one frontier gap]: memo ws_memo_nonrigidity_transcendence.md.
+ Core move: WILDNESS CANNOT be the source of sigma's transcendence; N=2 LZ is the separating
+ witness (wild, non-Liouvillian solutions in u, YET elementary connection constant e^{-2pi d}).
+ So "no closed-form solution in u" (a differential-Galois-in-u / wildness fact) =/=> "transcendental
+ connection constant". The chain that DOES distinguish N=2 (rigid->elementary) from Type-1 N=3:
+   rigid => Katz/middle-convolution => explicit Euler-Laplace integral => Gamma-ratio constant;
+   non-rigid (chi=0, 1 accessory param; dim-6 wild char variety) => connection constant is a
+     non-constant coord on positive-dim moduli => isomonodromic (Schlesinger/JMU; Boalch wild
+     isomonodromy) Garnier-type flow => sigma solves a 2nd-order nonlinear (Painleve/Garnier) ODE
+     => (Nishioka-Umemura; Casale; Cantat-Loray PVI-via-character-variety-dynamics = OUR frame)
+     general solution non-Liouvillian => sigma non-Liouvillian, off the classical-solution locus.
+ Genericity (non-classical) witnessed by R24 (trdeg 2) + cert (Gamma-product falsification).
+ RIGOR CEILING: rigorous through the isomonodromy/Painleve identification; irreducibility theorem
+ complete for PI-PVI but only partial for the genuine rank-3 GARNIER flow = the one real gap
+ (flagged, known-hard). Heun (tame+non-rigid+transcendental via PVI) is now the BASE CASE of the
+ same mechanism, not an analogy. Disaggregation MECHANIZED: wildness=architect (slots, BE-pinning);
+ non-rigidity=hardness (Painleve transcendent). Transcendence rides the non-rigid axis only.
+
+R26b — LITERATURE PASS: 22 refs web-verified (verified_bibliography.md). All EXIST. Key fixes:
+ - OWY is 2009 (J Phys A 42 035206) = integrability<->level-crossing link, NOT the classification.
+ - Type-M classification = Owusu-Yuzbashyan 2011 (J Phys A 44 395302); Type-1<->Gaudin = Yuzbashyan
+   2018 (Ann Phys 392 323).
+ - "non-rigid=>Painleve/Garnier" cite = Boalch 2001 Adv Math 163 (not the survey).
+ - sigma non-Liouvillian over a DIFFERENTIAL parameter field = Cassidy-Singer 2007 (parameterized
+   PV), NOT Hardouin-Singer 2008 (that is the DIFFERENCE case).
+ - BE proof = pair Volkov-Ostrovsky 2004 + Dobrescu-Sinitsyn 2006 (Comment).
+ - solvable-MLZ review = Sinitsyn-Chernyak 2017. Ramis density via vdPS 2003 Thm 8.10.
+ Discipline: no key enters the .tex unverified.
