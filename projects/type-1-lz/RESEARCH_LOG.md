@@ -2425,3 +2425,52 @@ Evidence: (i),(ii) exact algebra [ESTABLISHED]; P-invariance analytic via u-shif
 [ESTABLISHED]; completeness-of-generators local (rank argument) [AD]; arity exactly 4 rests on R24
 [NS]. Next: global/branch bookkeeping of the Mobius action (eps ordering, tau poles); fold R31+R32
 into a short note.
+
+---
+
+## 2026-06-11 — R33: the Type-1 MATRIX anchor — nodal spectral cubic, explicit rational uniformization
+
+User redirect: R31/R32 is scalar (invariant-ring) structure; the goal is MATRIX structure — a
+factorization of S anchored in {gam,eps,a}/Type-1 geometry (unlike the generic U.Delta.L whose
+unipotents are unanchored). Candidate anchor identified and verified (ws_nodal_cubic.py).
+
+R33a [ESTABLISHED, exact polynomial algebra]: THE GENUS DICHOTOMY OF THE SPECTRAL PLANE CUBIC
+  F(u,E) = det(E I - H0 - uA) = 0   (total degree 3 in (u,E): a plane cubic).
+   - GENERIC symmetric H0 (2 samples): SMOOTH cubic. 0 singular points; Disc_E structure
+     [1,1,1,1,1,1] (6 simple branch points) => genus 1 (ELLIPTIC). Frames/periods need
+     theta/elliptic functions.
+   - TYPE-1 (2 samples): NODAL cubic. Exactly 1 singular point, REAL = the protected crossing
+     (canonical node (u*,E*)=(-0.249333,-1.994667), matches R3/R8); Disc_E structure [2,1,1,1,1]
+     (4 simple branch points + real double root) => genus 0 (RATIONAL).
+  => "Type-1 at N=3 <=> the spectral cubic is nodal" — the node DEGENERATES the elliptic curve to a
+  rational one. (Consistent with Type-M = genus M-1: Type-1 g=0; generic = g=1 at N=3.)
+
+R33b [ESTABLISHED]: EXPLICIT RATIONAL UNIFORMIZATION by lines through the node:
+     u(lam) = u* - Q2(1,lam)/PROD_i(lam - a_i),     E(lam) = E* + lam*(u(lam) - u*)
+  with Q2 = the node's tangent-cone quadratic (algebraic in {gam,eps,a}; canonical
+  Q2(1,lam) = -1.876 lam^2 + 2.362 lam + 0.188) and the cubic form C3(1,lam) = PROD(lam-a_i)
+  RECOGNIZED structurally (leading form of F is PROD(E - a_i u)). Verified: F(u(lam),E(lam)) == 0
+  IDENTICALLY (sympy); sheets over u=0.7 reproduce eigh to 4.4e-16.
+  Geometric dictionary: lam = secant slope through the node; the three diabatic channels are the
+  three POLES lam -> a_i (u -> infty on sheet i has E/u -> a_i); the node's two branches have
+  slopes = roots of Q2(1,lam)=0 (tangent cone); the 4 turning points = critical points of u(lam)
+  (a quartic = Q4).
+
+R33c [the factorization architecture this anchors -- programme]:
+  Pull the connection back to the lam-sphere: dpsi/dlam = -i u'(lam) (H0 + u(lam)A) psi:
+  a RATIONAL 3x3 system whose data are EXPLICIT in {gam,eps,a} via (u*,E*,Q2,a):
+   - the only singular points are the three PUNCTURES lam = a_1,a_2,a_3 (the slopes!) --
+     irregular, from u ~ 1/(lam-a_i);
+   - the TURNING POINTS BECOME REGULAR points (u'(lam)=0 is smooth in lam): the two Stokes
+     windows are resolved by the curve geometry;
+   - eigenvectors/projectors are RATIONAL in lam (adjugate of (H0+u(lam)A-E(lam)));
+   - S = (explicit rational frame data) . (connection data of the rational lam-system at the
+     three slope-punctures) . (frame data)^{-1}: the anchored factorization sought. The
+     transcendental core {sigma,b} persists inside the puncture connection data (as it must,
+     R26/R27), but the SYSTEM and FRAMES are now canonically Type-1.
+  COROLLARY TO TEST NEXT (sharp, falsifiable): all Stuckelberg PHASE data
+  int (E_i - E_j) du between turning points pulls back to integrals of RATIONAL differentials on
+  P^1_lam => ELEMENTARY (algebro-logarithmic) closed forms in {gam,eps,a} for Type-1, vs ELLIPTIC
+  integrals for generic N=3. If verified, the entire semiclassical factorization of S (local Weber
+  factors + phase diagonals) has every ingredient except {sigma,b} in closed form -- the matrix
+  structure anchored in Type-1 geometry, beyond BE.
