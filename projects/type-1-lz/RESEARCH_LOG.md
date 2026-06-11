@@ -2602,3 +2602,42 @@ points = zeros, node resolved, reversal arcs); S7 discussion (the core cornered;
 Stokes extraction). 9 verified refs only. Lint clean (envs/braces/$ even/refs/cites all resolve).
 Next: (a) extract the puncture Stokes data (the exact Weber-replacements) against this note's
 definitions.
+
+---
+
+## 2026-06-11 — R38: puncture Stokes data of C extracted (the exact "Weber replacements")
+
+(a) executed (ws_puncture_stokes.py; canonical + sampleB). Direct semicircle transport is
+numerically impossible (exponents ~ e^{aR^2/2}); the correct extraction is real-axis data +
+branch bookkeeping: upper ray pair = UDL at branch +i pi (R25), lower ray pair = LDU at the
+lower-branch normalization S_low = S.diag(e^{-2 pi b}).
+
+[E1, ESTABLISHED] upper factors at 1e-5: |Du|/elementary = (1,1,1); all 6 upper multipliers
+  extracted with phases (canonical: |U01|=1.2135, |U02|=1.2349, |U12|=2.2911, |L10|=3.1232,
+  |L20|=2.5174, |L21|=0.6609).
+[E2, ESTABLISHED -- resolves R25 open item (c)] the LOWER-branch LDU has ELEMENTARY diagonal,
+  with the SAME weight triple (e^{+pi|b_lo|}, e^{-pi|b_mid|}, e^{-pi|b_hi|}): the branch/order
+  pairing is confirmed: UDL<->upper lateral, LDU<->lower lateral. Lower multipliers extracted.
+[E3, corrected reading -- Schwarz reflection at factor level] the printed pairing compared the
+  wrong slots; the true match: ADJACENT lower slots equal upper TRANSPOSE-partners in modulus:
+  |L10_low|=1.2136 vs |U01_up|=1.2135; |L21_low|=2.2912 vs |U12_up|=2.2911 (canonical);
+  |L10_low|=11.479 vs |U01_up|=11.470; |L21_low|=4.2893 vs |U12_up|=4.2892 (sampleB).
+  CORNER slots are convention-entangled (Gauss corner mixes composites; L20_low ~ |L10_up| scale).
+  => the lower ray data is reflection-determined by the upper in the adjacent slots; the
+  matrix-level identity conj(S)=D1 S^{-1} D2 FAILS (E5) -- reflection reverses factor order,
+  it does not act entrywise.
+[E4, new invariant] cyclic chirality Z=(S01 S12 S20)/(S10 S21 S02), torus-invariant:
+  canonical |Z|=18.19, argZ=-1.117; sampleB |Z|=490.8, argZ=+0.141. The directed-cycle
+  asymmetry of C, quantified (the R16 cycle's exact invariant).
+[E6, Weber-shadow table] extracted |multiplier| vs 2-level model sqrt(e^{2pi be_ij}-1):
+  ratios canonical (0.647, 1.665, 1.797, 0.518, 0.882, 1.797) -- O(1) deviations slot by slot:
+  the exact data is NOT a dressed 2-level product (consistent with WS-E/M7). Suggestive
+  (canonical only, NOT a law -- sampleB deviates more): adjacent-pair PRODUCTS |U_ij L_ji| are
+  within 8% of (e^{2pi be_ij}-1) while the corner pair deviates 59% -- a possible scalar measure
+  of genuine 3-level entanglement per pair; would need a battery to promote.
+
+STATUS: (a) complete at the level reachable from real-axis data. The wild RH dataset of C at
+each puncture: {6 upper multipliers (with phases)} + elementary Delta + lower pair determined by
+reflection in adjacent slots + closure S_up S_low^{-1} = diag(e^{2 pi b}). {sigma,b} sit in
+the named slots (sigma: U12,L21 + rel phase; b: L20). Caveats: corner-slot conventions; E5
+matrix-level identity fails (expected); the per-pair product observation unpromoted.
