@@ -49,8 +49,13 @@ adj=M.adjugate()
 vcol=sp.simplify(adj[:,0])           # rational eigenvector (unnormalized) as function of lam
 degs=[(sp.degree(sp.numer(sp.together(vcol[k])),lam),sp.degree(sp.denom(sp.together(vcol[k])),lam)) for k in range(3)]
 print(f"\n(iii) rational eigenvector v(lam) = adjugate column; entry degrees (num,den): {degs}")
+def real_lams(uv):
+    pol=sp.Poly(sp.together(ul-uv).as_numer_denom()[0],lam)
+    rts=[complex(r) for r in pol.nroots(n=30)]
+    rl=[sp.Float(r.real,25) for r in rts if abs(r.imag)<1e-12]
+    return sorted(rl,key=lambda r:float(El.subs(lam,r)))
 uu=sp.Rational(7,10)
-lams=sorted([r for r in sp.solve(sp.Eq(ul,uu),lam) if r.is_real],key=lambda r:float(El.subs(lam,r)))
+lams=real_lams(uu)
 Hn=np.array((H0+uu*sp.diag(*A)).evalf(),dtype=float)
 w,V=np.linalg.eigh(Hn)
 errs=[]
@@ -67,10 +72,7 @@ print(f"\n(ii) antiderivative of E dlam-pullback (structure): "
       f"{sp.count_ops(Fanti)} ops; log arguments: "
       f"{sorted([str(t.args[0]) for t in Fanti.atoms(sp.log)])}")
 uA,uB=sp.Rational(7,10),sp.Rational(3,2)
-def sheet_lams(uv):
-    return sorted([r for r in sp.solve(sp.Eq(ul,uv),lam) if r.is_real],
-                  key=lambda r: float(El.subs(lam,r)))
-lA,lB=sheet_lams(uA),sheet_lams(uB)
+lA,lB=real_lams(uA),real_lams(uB)
 i,j=2,1                                          # top two sheets
 Phi_closed=float(sp.re((Fanti.subs(lam,lB[i])-Fanti.subs(lam,lA[i])
             -(Fanti.subs(lam,lB[j])-Fanti.subs(lam,lA[j]))).evalf(30)))
