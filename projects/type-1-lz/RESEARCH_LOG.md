@@ -2546,3 +2546,42 @@ the closed-form carriers of the divergent tiers (Type-1 bonus: the counterterms 
 algebro-log antiderivatives on the rational curve — even the regulator is anchored in {gam,eps,a});
 C is the cutoff-independent central object, defined up to constant torus conjugation; its
 invariants (moduli + phase cross-ratios) carry {sigma,b} and the physical Stuckelberg content.
+
+---
+
+## 2026-06-11 — R36: C constructed — the lambda-sphere system (ws_lambda_system.py)
+
+The central factor C of S = W+ D+ . C . D- W-^{-1} now has a canonical definition:
+   C = wild connection data of (P^1_lam, A(lam) dlam),  A(lam) = -i u'(lam)(H0 + u(lam) diag(a)),
+glued along the closed-form interval transports (R34), modulo the constant torus (R35).
+Verified at the canonical anchor (exact rationals):
+
+[C1, ESTABLISHED] A(lam) is rational with poles ONLY at the three slope-punctures:
+  denominator = (lam+1)^3 (2lam-1)^3 (lam-2)^3 — order 3 = Poincare rank 2 at each a_i.
+  Leading coefficients EXACTLY i r_i^2 diag(a) with RATIONAL residues r_i = -Q2(a_i)/prod(a_i-a_j):
+  canonical r = (9/10, 2/5, 72/125). The wild data of C is thus anchored: punctures AT the slopes,
+  irregular types r_i^2*diag(a) — all rational in {gam,eps,a}.
+  SURPRISE 1: the four turning points are ZEROS of A(lam) (A = u'.(...) and u'(tp)=0): the u-plane
+  "Stokes windows" are not just regularized — the connection VANISHES there. All wildness is pushed
+  into the three punctures; nothing singular remains in the finite bulk.
+
+[C2, ESTABLISHED] node resolution: the two Q2-roots lam = (-0.075113, +1.334174) are distinct real
+  regular points both mapping to (u*,E*) = (-187/750, -748/375): the curve separates the crossing.
+
+[C3, blind] real channel combinatorics: the three real arcs pair the punctures by the adiabatic
+  REVERSAL permutation: hi->lo (bottom level), mid->mid (middle), lo->hi (top). The energy-sorted
+  middle track runs 0.4867 -> node-lambda(-0.075) -> SWAPS at the node -> node-lambda(+1.334) ->
+  0.5133: the resolved node is exactly where energy-sorting and smooth-arc continuation differ
+  (the level exchange is a visible branch swap between the two node points). The E != E* level
+  passes through lam = infinity (a regular curve point) once.
+
+[C4, ESTABLISHED] pullback equivalence: the lambda-ODE transport equals the u-ODE propagator on the
+  image segment to 9.2e-13.
+
+STATUS of the anchored factorization after R33-R36:
+  S (torus double-coset, R35) = [rational frames W+-, R34] . [algebro-log phases D+-(R) = regulators,
+  logs at the slopes, R34/R35] . C, where C's ONLY non-closed-form content is the Stokes data of the
+  three rank-2 punctures (rational irregular types). {sigma, b} = torus-invariants of that puncture
+  Stokes data; observable content = F(be_lm, be_mh, be_lh, chi) (R31/R32).
+NEXT options: (a) extract the puncture Stokes data numerically (local models at a_i; the exact
+"Weber-replacements"); (b) consolidate R31-R36 into the short Type-1 note.
