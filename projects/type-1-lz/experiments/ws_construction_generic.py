@@ -53,7 +53,7 @@ def connection_S(H0,a,R,rtol=1e-12,atol=1e-13):
     return S,b1o
 
 def gauss_LDU(C):
-    L=np.eye(3,complex);U=np.eye(3,complex);D=np.zeros(3,complex)
+    L=np.eye(3,dtype=complex);U=np.eye(3,dtype=complex);D=np.zeros(3,complex)
     D[0]=C[0,0];L[1,0]=C[1,0]/D[0];L[2,0]=C[2,0]/D[0]
     U[0,1]=C[0,1]/D[0];U[0,2]=C[0,2]/D[0]
     D[1]=C[1,1]-L[1,0]*D[0]*U[0,1]
@@ -96,8 +96,7 @@ if __name__=="__main__":
     assess("TYPE-1 (Cauchy H0)  -- canonical anchor",H0_t1,a)
     # generic real symmetric H0, same slopes, NOT Type-1
     for tag in ("generic-1","generic-2"):
-        M=rng.standard_normal((3,3)); H0g=0.6*(M+M.T)/2
-        H0g-= np.diag(np.diag(H0g)) + np.diag([H0g[0,0],H0g[1,1],H0g[2,2]])*0  # keep as-is symmetric
+        M=rng.standard_normal((3,3)); H0g=0.6*(M+M.T)/2     # random real symmetric, NOT Cauchy
         assess(f"GENERIC symmetric H0 ({tag}) -- NOT Type-1",H0g,a)
     print("\nIf GENERIC H0 also gives Delta-elementary + exact slot eqns => the construction")
     print("is general N=3 MLZ sectorial structure, NOT a Type-1 fact. Type-1 content (integrability,")
