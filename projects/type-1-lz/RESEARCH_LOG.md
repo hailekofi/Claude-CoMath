@@ -2474,3 +2474,44 @@ R33c [the factorization architecture this anchors -- programme]:
   integrals for generic N=3. If verified, the entire semiclassical factorization of S (local Weber
   factors + phase diagonals) has every ingredient except {sigma,b} in closed form -- the matrix
   structure anchored in Type-1 geometry, beyond BE.
+
+---
+
+## 2026-06-11 — R34: the anchored factorization adjudicated — S = W+ D+ . C . D- W-^{-1}
+
+User's iff-challenge: "every ingredient except {sigma,b} in closed form" is true iff (i) local Weber
+factors, (ii) phase diagonals, (iii) rational frames each reduce to explicit {gam,eps,a} expressions
+or quadratures. Adjudicated (ws_anchored_factors.py, canonical anchor, exact rationals):
+
+A-PRIORI LEMMA: not all three can reduce — else S would be Liouvillian, contradicting R26/R27.
+The failure must localize somewhere; it localizes in (i).
+
+(iii) RATIONAL FRAMES — YES [ESTABLISHED, constructive]: node exact (u*,E*)=(-187/750,-748/375);
+  uniformization u(lam) = u* - Q2(lam)/[(lam+1)(lam-1/2)(lam-2)] with Q2 = -469lam^2/250
+  + 1181lam/500 + 47/250 (all exact rationals in {gam,eps,a}-data). Eigenvectors = adjugate
+  columns: rational in lam, entry degrees (2,2); match eigh to 2.2e-16 on all three sheets.
+
+(ii) PHASE DIAGONALS — YES [ESTABLISHED, constructive]: int E du pulls back to a rational
+  differential with poles ONLY at lam = a_i; antiderivative = rational function + sum_i c_i
+  log(lam - a_i) — ALGEBRO-LOGARITHMIC WITH LOGS AT THE SLOPES (48 ops). Stuckelberg-type phase
+  Phi_21 = int_0.7^1.5 (E_2-E_1) du: closed form 1.983673224768 vs quadrature 1.983673224768
+  (diff 4.4e-16). For generic N=3 (smooth cubic, genus 1) the same integral is elliptic — the
+  elementarity is Type-1's nodal-rationality, exactly as the user predicted ("straightforward to
+  prove algebraically": the proof = partial fractions over the rational curve).
+
+(i) LOCAL WEBER FACTORS — NO [necessary failure]: the Weber/incoherent central model gives
+  P_mm = 0.0843 vs true 0.2147 (2.5x; up to ~100x in overlap, R16); WS-E band exclusion and M7
+  negative results already established non-exactness; the a-priori lemma makes it structural.
+  The Gamma-form Weber factors are the ASYMPTOTIC SHADOW of the central factor C, not C itself.
+
+FINAL STATEMENT (the Type-1-anchored matrix structure, beyond BE):
+   S = W+ D+ . C . D- W-^{-1}
+ - W± : explicit RATIONAL frames from the nodal-cubic uniformization        [closed form]
+ - D± : explicit ALGEBRO-LOGARITHMIC phase diagonals, logs at the slopes    [closed form]
+ - C  : central connection factor; observable content = F(be_lm,be_mh,be_lh,chi) on the
+        4-invariant moduli (R31/R32); leading model = Weber Gamma-product; the deviation
+        IS the 2-dim transcendental core {sigma,b}                          [irreducible]
+ All Type-1 anchoring (node, slopes-as-punctures, rational curve) lives in W±, D±, and in C's
+ invariant arguments; the irreducible content is minimized and localized. Status: (ii),(iii)
+ established; architecture of C (exact definition as 2-puncture connection on P^1_lam, its
+ Weber asymptotics, the {sigma,b} embedding) = the open construction.
