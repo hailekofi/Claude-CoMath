@@ -2641,3 +2641,24 @@ each puncture: {6 upper multipliers (with phases)} + elementary Delta + lower pa
 reflection in adjacent slots + closure S_up S_low^{-1} = diag(e^{2 pi b}). {sigma,b} sit in
 the named slots (sigma: U12,L21 + rel phase; b: L20). Caveats: corner-slot conventions; E5
 matrix-level identity fails (expected); the per-pair product observation unpromoted.
+
+---
+
+## 2026-06-11 — R39 (clarification): two spheres, not one — the eps/a pole collision repaired
+
+User challenge: "poles of u(lambda) should be at lambda = eps?" Adjudicated: NO for the sweep
+sphere — the leading form of the spectral cubic is det(EI-uA) = PROD(E - a_i u) (eps enters only
+via the lower-order H0), so the points at infinity are the slope directions; receipts: the exact
+symbolic factorization C3(1,lam)=(lam+1)(lam-1/2)(lam-2) matches a=(-1,1/2,2) not eps=(-2,0,3);
+sheets vs eigh 4e-16. The cubic's asymptotes are the diabatic lines E = a_i u + (H0)_ii.
+
+BUT the instinct identifies a real notation collision: TWO spheres coexist:
+ - GAUDIN/LAX sphere CP^1_x: marked points AT eps_i, weights gamma_i^2 — the symmetry side; this
+   is where the R32 Mobius flow acts and where the (be x3, chi) moduli live.
+ - SWEEP sphere P^1_lambda: punctures AT a_i (rank-2, rational types) — the dynamics side; the
+   factorization and C's Stokes data (R33/R36/R38).
+Notation fixed (note updated, new Remark "two spheres"): "punctures" = lambda-sphere/slopes;
+"marked points" = Gaudin sphere/eps.
+OPEN PROBE flagged (not asserted): the eps <-> a exchange between the spheres smells of a
+bispectral (MTV-type) duality of the Type-1 family; whether it is an exact duality of P is
+testable cheaply and ranked the most interesting next probe.
