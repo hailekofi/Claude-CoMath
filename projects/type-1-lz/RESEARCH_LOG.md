@@ -2299,3 +2299,42 @@ solvable" is the Type-1 thesis; the skeleton/core is the (general-MLZ) vehicle t
 where solvability fails. Decision (reframe scope) deferred to user.
 Refinement noted: Delta-elementarity SIGN-pattern (which channel is dual) is dominance-dependent;
 clean when extreme b_lo is large (Type-1, generic-1), blurred at weak coupling (generic-2).
+
+---
+
+## 2026-06-10 — DECISION: shelve the skeleton/core paper; distil what survives (R30)
+
+User decision (after R29 reflection): SHELVE type1_n3_skeleton_core.tex as a paper. The
+skeleton/core framing is too generic (general N=3 MLZ, not Type-1) to be a strong standalone
+result. Fold honest findings into the log/project; do NOT push as a paper. Status header added
+to the .tex; predecessor type1_n3_wildness_proof.tex already superseded -> both shelved.
+
+WHAT SURVIVES AS GENUINE (general N=3 MLZ unless noted):
+ - trdeg-2 of the Stokes core {sigma,b} (R24,R25): the amplitude's hard content is exactly
+   two transcendentals; numerically-supported (Jacobian rank 4; regression residual 0.26>>floor).
+ - sigma is order-2-not-order-1 differentially algebraic (R27): non-Liouvillian-classical,
+   robust (stable under resolution; matches Bessel benchmark, not the exp/Liouvillian one).
+ - non-rigidity -> isomonodromy(Painleve/Garnier) -> non-Liouvillian mechanism (R26), with the
+   N=2 separation (wild but elementary) and the disaggregation wildness(architecture) vs
+   non-rigidity(hardness). Rigor ceiling: rank-3 Garnier irreducibility is the frontier gap.
+ - the sectorial S=U.Delta.L exposition + elementary Delta (=formal monodromy moduli, BE weights):
+   correct and a clean repackaging, but GENERIC MLZ sectorial-Stokes theory, not a new result.
+
+WHAT IS NOT A RESULT (the oversell, now retracted):
+ - the factorization as a Type-1 "construction/centerpiece" (it is generic LU);
+ - the slot equations as evidence (they are the UDL reconstruction identity, tautological);
+ - any Type-1 specificity in the skeleton/wildness/non-rigidity (a random symmetric H0
+   reproduces all of it; ws_construction_generic.py).
+
+THE OPEN TYPE-1 QUESTION (the real prize, still open; "hunt fingerprint" not yet done):
+ Does Type-1 INTEGRABILITY (commuting family, genus-0 Lax/spectral curve) leave ANY fingerprint
+ the generic case lacks -- e.g. a constraint on the multiplier VALUES, on the {sigma,b} locus,
+ or via the genus-0 spectral geometry? If not, the honest thesis is the NEGATIVE result
+ "integrable yet not solvable": integrability does not rescue closed form; sigma is transcendental
+ for the same generic wild+non-rigid reason as any N=3 MLZ.
+
+META-REVIEW LESSON (prompt-propagate to physics-intuition/reflection): TEST GENERICITY EARLY.
+Before building a paper around "property X is special to system S", check whether a GENERIC member
+of the ambient class also has X. Here an elaborate "construction" was elevated to a Type-1
+centerpiece before a one-script generic-H0 baseline (which deflated it). A generic-baseline check
+is now a required gate before claiming system-specific structure.
