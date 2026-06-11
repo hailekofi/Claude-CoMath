@@ -2662,3 +2662,31 @@ Notation fixed (note updated, new Remark "two spheres"): "punctures" = lambda-sp
 OPEN PROBE flagged (not asserted): the eps <-> a exchange between the spheres smells of a
 bispectral (MTV-type) duality of the Type-1 family; whether it is an exact duality of P is
 testable cheaply and ranked the most interesting next probe.
+
+---
+
+## 2026-06-11 — R40: topology & geometry of the (be x3, chi) moduli space
+
+User: topology/geometry of the 4-dim moduli. Sampler ws_moduli_geometry.py (20k pts, pure
+geometry, no ODE):
+ [G1] chi in (0,1) RIGOROUS (cross-ratio of two conj pairs = |z-w|^2/|z-wbar|^2, and
+      |z-wbar|^2-|z-w|^2 = 4 Im z Im w >0). Data [0.037,1.000]; measure CONCENTRATED near 1
+      (median 0.996): generic Type-1 = well-separated/incoherent; merged (chi->0) is a thin corner.
+      chi = real arc of M_{0,4} (config of the 4 turning points).
+ [G2] be-octant R^3_{>0} FILLED (log-be spans ~[-4.6,3.2]); +0.50 corr(be_lh, be_lm/be_mh) is a
+      MEASURE effect (shared gammas), not a constraint (any positive triple solvable for gamma^2).
+ [G3/G4] IMAGE IS NOT A CLEAN PRODUCT: at median be's chi only reached [0.72,1] (small-chi corner
+      unreachable there) while at fixed chi the be's still span ~1e4 => a COUPLING ENVELOPE
+      chi >= chi_min(be); the deep-coherent (chi->0) corner opens only in PART of the octant.
+      [CAVEAT: measure-vs-hard-constraint not fully resolved by uniform sampling; needs a targeted
+      optimizer (minimize chi s.t. be~median) to confirm the envelope is a true boundary.]
+ TOPOLOGY: contractible open 4-cell / manifold-with-corners; pi_1=0; NO topological obstruction in
+   the base (all richness in the boundary + the map F). (Global injectivity of coords asserted from
+   local arity-4 independence R31, not globally proven; slope-order fixes the S_3 orbifold quotient.)
+ GEOMETRY: (a) chi-factor = real M_{0,4} arc; M fibers over it, fiber=BE window actions; (b)
+   compactification boundary divisors = the SOLVABLE limits (be->0 decoupling; chi->1 incoherent
+   2-level product = M7 corner; chi->0 maximally-3-level) => transcendence in the open interior,
+   tame skirt on the boundary; (c) natural coords = window actions (Sigma_lo,Sigma_hi) + overlap
+   be_lh (cone be_lh<=min) + projective chi. CONJECTURAL: Gaudin-descended symplectic form,
+   possibly self-dual under the R39 eps<->a exchange.
+OPEN: confirm the chi_min(be) envelope (targeted search); the symplectic structure; the duality.
