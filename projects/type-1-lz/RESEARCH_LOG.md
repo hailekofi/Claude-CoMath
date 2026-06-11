@@ -2382,3 +2382,46 @@ Next analytic steps: (a) PROVE arity-4 from the zero-curvature / commuting-partn
 Y as the Chernyak-Sinitsyn/Gaudin inhomogeneity flow; P invariance along it = integrability Ward
 identity); (b) derive the codim-2 node equations Phi_1=Phi_2=0 of the Type-1 stratum explicitly;
 (c) battery test of P=F(be x3, chi) at random points + tighter floors.
+
+---
+
+## 2026-06-11 — R32 [ESTABLISHED]: hidden flow = OWY special linear (Mobius) eps-transformation; arity-4 PROVEN
+
+User asked whether the R31 hidden non-gauge P-preserving flow is the special linear transformation of
+eps identified in OWY. ANSWER: YES — verified and now proven (ws_mobius_flow.py).
+
+THE FLOW (the inversion generator completing shift+scale to the full fractional-linear action):
+    eps_i -> eps_i/(1 - tau eps_i),   gam_i -> gam_i/(1 - tau eps_i),   a fixed
+(gamma carries the Mobius weight; infinitesimally eps-dot = eps^2, gam-dot = gam*eps, a-dot = 0).
+
+ANALYTIC FACTS (exact, finite tau):
+ (i)  s_ij = gam_i gam_j/(eps_i - eps_j) invariant EXACTLY -> off-diag H0 and all pairwise be_ij
+      invariant; chi also EXACTLY invariant (numerically 3e-16).
+ (ii) CLOSURE IDENTITY: H0(gam',eps',a) = H0(gam,eps,a) + tau[ G(tau) A - T(tau) I ],
+      G = sum gam_k^2/(1-tau eps_k), T = sum gam_k^2 a_k/(1-tau eps_k). Verified 2.2e-16.
+      Since +c1*A = u-translation and +c2*I = global phase, P is EXACTLY invariant.
+ (iii) Resolves the F5/F6 closure-probe paradox (R31): the flow traces the CURVE (c1(tau), c2(tau))
+      in the (A,I)-shift plane; the probes demanded the axes (c2=0 or c1=0) — both off-curve.
+ (iv) The measured hidden Y's small da-component was the F4(u-scale)-orthogonalization artifact:
+      analytically a-dot = 0. cos(predicted, measured) = 1.000000 at BOTH base points.
+ (v)  Finite-flow P-invariance: max|dP| = 3.4e-6 / 2.8e-6 (solver floor) at the two points.
+
+THEOREM (analytically-derived; the R31 conjecture upgraded):
+  The five flows {eps-shift, (gam,eps)-scale, a-shift, u-scale, OWY-Mobius} preserve P exactly and
+  are independent. Hence P factors through the 4-dim invariant quotient, and since
+  (be_lm, be_mh, be_lh, chi) are flow-invariants with independent gradients (rank dI4 = 4), locally
+      P = F(be_lm, be_mh, be_lh, chi).
+  Arity EXACTLY 4: R24's rank-4 Jacobian shows no further collapse. The SL(2) structure: eps are
+  marked points on CP^1 with gamma^2 as weights — the full fractional-linear covariance of the
+  Type-1/Gaudin family (OWY), of which F1/F2 were the affine part all along.
+
+SIGNIFICANCE: the algebraic structure of P anchored in {gamma,eps,a} beyond BE (the user's goal):
+  - P = F(be x3, chi): four explicit algebraic invariants are the complete natural coordinates;
+  - the transcendental content (sigma, b) is now a function on a 4-dim moduli of invariants, not 9
+    parameters — the sharpest possible factorization given R24;
+  - the BE law itself is re-derived as the two extreme-survival values of F;
+  - chi's exact Mobius-invariance slots it as the unique shape coordinate.
+Evidence: (i),(ii) exact algebra [ESTABLISHED]; P-invariance analytic via u-shift+phase
+[ESTABLISHED]; completeness-of-generators local (rank argument) [AD]; arity exactly 4 rests on R24
+[NS]. Next: global/branch bookkeeping of the Mobius action (eps ordering, tau poles); fold R31+R32
+into a short note.
