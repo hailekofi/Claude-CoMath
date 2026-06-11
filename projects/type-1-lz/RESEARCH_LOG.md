@@ -2515,3 +2515,34 @@ FINAL STATEMENT (the Type-1-anchored matrix structure, beyond BE):
  invariant arguments; the irreducible content is minimized and localized. Status: (ii),(iii)
  established; architecture of C (exact definition as 2-puncture connection on P^1_lam, its
  Weber asymptotics, the {sigma,b} embedding) = the open construction.
+
+---
+
+## 2026-06-11 — R35: the phase-renormalized definition of S (user's cutoff-ambiguity point)
+
+User: practical S(R) converges only "up to accelerating phases" — this must be reflected in the
+corrected S definition. Adopted and quantified (ws_phase_renorm.py, canonical):
+
+CORRECTED DEFINITION: S := lim_R F+(R)^{-1} U(R,-R) F-(-R), Thome frames with THREE divergent
+phase tiers per channel: quadratic a_j u^2/2, linear (H0)_jj u, LOGARITHMIC b_j ln u
+(b_j = signed BE exponents). Convergence facts measured:
+ [T1] tier-1 stripping (quad+lin only): MODULI converge (1.6e-5) but entry phases drift
+      logarithmically. MEASURED LAW: drift_ij per e-fold = (b_j - b_i), ANTISYMMETRIC
+      (measured 0.4993/0.7383/0.2409 vs b-differences 0.4992/0.7392/0.2400; diagonal drift 0).
+      [My a-priori guess -(b_i+b_j) was WRONG — row enters via F+^{-1} (+b_i), column via F- (-b_j);
+      corrected by the data.] Notably the DIVERGENCE LAW itself is BE-anchored: the log-drift
+      coefficients are differences of signed BE exponents. Diagonal phases (survivals) are
+      drift-free even at tier-1.
+ [T2] tier-2 (+log): all entry phases converge (~1/R; moduli ~1/R^2 with the T1 prefactor).
+ [T3] residual ambiguity after full stripping = CONSTANT TORUS: S -> D+ S D- (incl. log-branch
+      choice). Physical content = P=|S|^2 + torus-invariant phase cross-ratios
+      arg(S_ij S_kl S*_il S*_kj): these are IDENTICAL under tier-1 and tier-2 stripping (drift
+      cancels exactly in cross-ratios; equal to all printed digits) and converge in R.
+      => S is rigorously a TORUS DOUBLE-COSET; the cross-ratio phases are its well-defined angles.
+ [T4] sigma via the slot equation is exactly torus-invariant (spread 1.9e-16 under random twists).
+
+Consequences for the factorization S = W+ D+ . C . D- W-^{-1} (R34): D+- must be read as D+-(R),
+the closed-form carriers of the divergent tiers (Type-1 bonus: the counterterms are the exact
+algebro-log antiderivatives on the rational curve — even the regulator is anchored in {gam,eps,a});
+C is the cutoff-independent central object, defined up to constant torus conjugation; its
+invariants (moduli + phase cross-ratios) carry {sigma,b} and the physical Stuckelberg content.
