@@ -1,0 +1,367 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\PP}{\mathbb{P}^1}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\Scat}{\mathcal{S}}
+\newcommand{\be}{\mathrm{be}}
+\newcommand{\lo}{\mathrm{lo}}
+\newcommand{\mi}{\mathrm{mid}}
+\newcommand{\hi}{\mathrm{hi}}
+\newcommand{\evidence}[1]{\textnormal{\small[\textit{#1}]}}
+
+\title{\vspace{-2em}\textbf{Anchored algebraic structure of the Type-1, $N{=}3$
+Landau--Zener transition matrix:\\ \large M\"obius covariance, invariant coordinates,
+and the nodal-cubic factorization}}
+\author{Co-theoretical-physicist working session\\[2pt]
+\small\texttt{projects/type-1-lz}; branch \texttt{claude/comathematician-agent-skills-9HPSJ}}
+\date{2026-06-11}
+
+\begin{document}
+\maketitle
+\vspace{-1.5em}
+
+\begin{abstract}
+We collect the algebraic structure of the Type-1, $N{=}3$ multistate Landau--Zener
+transition matrix that is genuinely anchored in the model parameters
+$\{\gamma,\eps,a\}$ --- as opposed to structure shared by every $N{=}3$ sweep. Each claim
+is tagged by its evidence level and by whether it is Type-1-specific.
+\textbf{(1)}~The physical $S$-matrix is a torus double-coset, defined by a three-tier
+phase renormalization whose logarithmic counterterms have Brundobler--Elser coefficients;
+the cutoff phase-drift law is $\arg S_{ij}\sim(b_j-b_i)\ln R$.
+\textbf{(2)}~Beyond four gauge flows, the family admits a hidden $P$-preserving flow:
+the special fractional-linear transformation $\eps_i\mapsto\eps_i/(1-\tau\eps_i)$,
+$\gamma_i\mapsto\gamma_i/(1-\tau\eps_i)$ closes into the family up to a $u$-translation
+and a global phase --- an exact finite-$\tau$ identity. Consequently $P$ depends on the
+nine parameters only through four explicit invariants:
+$P=F(\be_{lm},\be_{mh},\be_{lh},\chi)$, the three pairwise BE exponents and the
+turning-point cross-ratio.
+\textbf{(3)}~The spectral curve $\det(EI-H_0-uA)=0$ is a plane cubic: smooth (elliptic)
+for a generic sweep, \emph{nodal} (rational) exactly in the Type-1 case, the node being
+the protected crossing; lines through the node give an explicit rational uniformization
+with $C_3(\lambda)=\prod_i(\lambda-a_i)$.
+\textbf{(4)}~This yields a factorization $\Scat=W_+D_+\cdot C\cdot D_-W_-^{-1}$ in which
+the frames $W_\pm$ are explicit rational functions and the phase diagonals $D_\pm$ are
+algebro-logarithmic with logarithms at the slopes --- both verified to machine
+precision --- while the central factor $C$ is necessarily irreducible (else $\sigma$
+would be Liouvillian).
+\textbf{(5)}~$C$ is realized canonically on $\PP_\lambda$: a rational connection whose
+only singularities are three rank-$2$ irregular punctures \emph{at the slopes}
+$\lambda=a_i$ with rational irregular types $i\,r_i^2\,\diag(a)$; the four turning
+points become \emph{zeros} of the connection and the node resolves into two regular
+points. The transcendental core $\{\sigma,b\}$ is thereby cornered: it consists of the
+torus-invariants of the Stokes data of three explicitly anchored punctures, as a function
+on the four-invariant moduli of (2).
+\end{abstract}
+
+\section{Introduction: what is Type-1 structure and what is not}\label{sec:intro}
+
+The Type-1, $N{=}3$ multistate Landau--Zener (MLZ) model is the integrable three-level
+sweep $i\psi'(u)=(H_0+uA)\psi$, $A=\diag(a_0,a_1,a_2)$, with Cauchy--Gaudin couplings
+\begin{equation}\label{eq:H0}
+(H_0)_{ij}=\frac{\gamma_i\gamma_j(a_i-a_j)}{\eps_i-\eps_j}\ (i\neq j),\qquad
+(H_0)_{ii}=-\sum_{k\neq i}\frac{\gamma_k^2(a_i-a_k)}{\eps_i-\eps_k},
+\end{equation}
+the $N{=}3$ representative of the Type-1 class of parameter-dependent integrable models
+\cite{OWY2009,OY2011,Y2018,SC2017}. Its transition matrix $P_{x\to j}=|\Scat_{xj}|^2$ is
+doubly stochastic; the Brundobler--Elser (BE) law \cite{BE1993,VO2004,DS2006} fixes the
+two extreme-slope survivals elementarily, leaving two hard numbers: the middle survival
+$\sigma$ and one off-diagonal $b$, known to be non-Liouvillian (a companion analysis:
+wildness/non-rigidity, the isomonodromic mechanism, and differential-algebraic order
+tests).
+
+A structural caution governs this note. Much of what one is tempted to call ``Type-1
+structure'' --- the wildness of the connection at $u=\infty$, its non-rigidity, the
+sectorial $U\Delta L$ factorization with elementary diagonal, the BE law itself --- is
+in fact \emph{generic $N{=}3$ MLZ structure}: a random symmetric $H_0$ with the same
+slopes reproduces all of it (we verified this directly). This note collects only what
+survives that test, i.e.\ structure that uses the Cauchy parameterization
+\eqref{eq:H0} or the integrable geometry, and we tag each statement:
+
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+Result & Type-1-specific? & Evidence \\
+\midrule
+renormalized $S$, drift law, torus coset (\S\ref{sec:renorm}) & generic MLZ & established \\
+M\"obius covariance / hidden flow (\S\ref{sec:flow}) & \textbf{Type-1} & established (exact identity) \\
+$P=F(\be\times3,\chi)$, arity 4 (\S\ref{sec:flow}) & \textbf{Type-1} & num.\ supported + derived \\
+nodal vs smooth spectral cubic (\S\ref{sec:cubic}) & \textbf{Type-1} (node) & established \\
+rational uniformization (\S\ref{sec:cubic}) & \textbf{Type-1} & established \\
+rational frames $W_\pm$ (\S\ref{sec:fact}) & \textbf{Type-1} & established \\
+algebro-log phases, logs at slopes (\S\ref{sec:fact}) & \textbf{Type-1} & established \\
+irreducibility of the central factor (\S\ref{sec:fact}) & generic MLZ & established (a priori) \\
+$\lambda$-sphere realization of $C$ (\S\ref{sec:C}) & \textbf{Type-1} & established \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Canonical anchor throughout: $\eps=(-2,0,3)$, $\gamma=(1,\tfrac45,\tfrac65)$,
+$a=(-1,\tfrac12,2)$, for which $\sigma=0.214724\ldots$ All numerical statements are
+reproduced by the cited scripts in \texttt{experiments/}.
+
+\section{The renormalized $S$-matrix}\label{sec:renorm}
+
+A cutoff propagator $U(R,-R)$ does not converge: each channel carries accelerating
+phases. The correct definition strips the Thom\'e frames \cite{Wasow1965}
+\begin{equation}\label{eq:Sdef}
+\Scat:=\lim_{R\to\infty}F_+(R)^{-1}\,U(R,-R)\,F_-(-R),\qquad
+F_\pm\sim\Big(I+\tfrac{T_1}{u}\Big)\,
+e^{-i\left(\frac{a_ju^2}{2}+(H_0)_{jj}u+b_j\ln u\right)},
+\end{equation}
+with $b_j=\sum_{k\neq j}(H_0)_{jk}^2/(a_j-a_k)$ the signed BE exponents
+($\sum_jb_j=0$) and $(T_1)_{kj}=(H_0)_{kj}/(a_j-a_k)$.
+
+\begin{lemma}[three-tier divergence; drift law]\label{lem:drift}
+If the logarithmic tier is omitted, the moduli $|S_{ij}(R)|$ still converge but the
+entry phases drift as
+$\arg S_{ij}(R)\sim(b_j-b_i)\ln R$ --- an antisymmetric law with BE coefficients;
+diagonal phases are drift-free. With all three tiers, \eqref{eq:Sdef} converges
+(phases $\sim1/R$, moduli $\sim1/R^2$). \evidence{established; measured slopes match
+$b_j-b_i$ to $10^{-3}$; \texttt{ws\_phase\_renorm.py}}
+\end{lemma}
+
+\begin{proposition}[torus double-coset]\label{prop:coset}
+After full stripping a constant ambiguity remains: $\Scat\to D_+\Scat D_-$ with
+$D_\pm$ diagonal unitary (including the branch choice of $\ln u$). The well-defined
+content of $\Scat$ is the doubly-stochastic $P=|\Scat|^2$ together with the
+torus-invariant phase cross-ratios $\arg(S_{ij}S_{kl}\bar S_{il}\bar S_{kj})$; these are
+numerically identical under either stripping convention, and $\sigma$, computed through
+any factorization, is exactly torus-invariant. \evidence{established}
+\end{proposition}
+
+These statements hold for any $N{=}3$ sweep; they fix the object that the Type-1
+structure below factorizes.
+
+\section{The hidden flow and the invariant coordinates}\label{sec:flow}
+
+Four flows on the nine parameters preserve $P$ for elementary (gauge) reasons:
+$\eps$-shift; the joint scale $(\eps,\gamma)\to(\ell\eps,\sqrt\ell\gamma)$ (which fixes
+$H_0$ identically); $a$-shift (a global phase $e^{-icu^2/2}$); and the $u$-rescaling
+$(\eps,a)\to(\mu\eps,\mu^2a)$. The fifth is Type-1-specific:
+
+\begin{theorem}[M\"obius covariance; the hidden flow]\label{thm:mobius}
+For any $\tau$ (locally), the special fractional-linear transformation
+\begin{equation}\label{eq:mobius}
+\eps_i\mapsto\frac{\eps_i}{1-\tau\eps_i},\qquad
+\gamma_i\mapsto\frac{\gamma_i}{1-\tau\eps_i},\qquad a\ \text{fixed},
+\end{equation}
+satisfies the exact closure identity
+\begin{equation}\label{eq:closure}
+H_0(\gamma',\eps',a)\;=\;H_0(\gamma,\eps,a)\;+\;\tau\big[G(\tau)\,A-T(\tau)\,I\big],
+\qquad
+G=\textstyle\sum_k\frac{\gamma_k^2}{1-\tau\eps_k},\quad
+T=\textstyle\sum_k\frac{\gamma_k^2a_k}{1-\tau\eps_k}.
+\end{equation}
+Since $+c_1A$ is a $u$-translation and $+c_2I$ a global phase, $P$ is exactly invariant
+along \eqref{eq:mobius}. The generators $s_{ij}=\gamma_i\gamma_j/(\eps_i-\eps_j)$ and the
+cross-ratio $\chi$ are exactly invariant. \evidence{established: \eqref{eq:closure}
+verified to $2\times10^{-16}$; finite-flow $\max|\Delta P|$ at solver floor; the flow
+matches the numerically extracted kernel direction with $\cos=1.000000$;
+\texttt{ws\_mobius\_flow.py}}
+\end{theorem}
+
+\begin{remark}
+\eqref{eq:mobius} is the inversion generator completing $\eps$-shift and $\eps$-scale to
+the full fractional-linear action on the $\eps_i$ --- the covariance of the Type-1
+family under linear-fractional transformations of the parameters identified in the
+classification \cite{OWY2009,OY2011} --- with $\gamma_i$ carrying the M\"obius weight.
+In Gaudin terms \cite{Y2018}: the $\eps_i$ are marked points on $\C\mathbb{P}^1$ with
+weights $\gamma_i^2$. Probes that demand the $A$-shift or the $I$-shift \emph{alone}
+fail to close into the family (residuals $\sim0.15$): the flow traces a curve
+$(c_1(\tau),c_2(\tau))$, not the axes. The Type-1 locus at fixed $a$ is a genuine
+codimension-2 subvariety of symmetric matrices.
+\end{remark}
+
+\begin{corollary}[invariant coordinates; arity 4]\label{cor:arity}
+The five flows are independent and $P$-preserving, so $P$ factors through the
+four-dimensional invariant quotient. The pairwise BE exponents and the cross-ratio,
+\[
+\be_{ij}=\frac{\gamma_i^2\gamma_j^2|a_i-a_j|}{(\eps_i-\eps_j)^2},\qquad
+\chi=\text{cross-ratio of the four turning points},
+\]
+are flow-invariants with independent gradients; hence locally
+\begin{equation}\label{eq:F4}
+\boxed{\ P\;=\;F\big(\be_{lm},\,\be_{mh},\,\be_{lh},\,\chi\big)\ }
+\end{equation}
+and the arity is exactly $4$ (the $4{\times}9$ Jacobian of
+$(P_{\lo\to\lo},P_{\hi\to\hi},\sigma,b)$ attains rank $4$).
+\evidence{flow-invariance and independence established; completeness of the generating
+set verified at two base points: adding $\be_{lh}$ collapses the residual fiber motion of
+$(\sigma,b)$ by a factor $770$, to the numerical floor; \texttt{ws\_invariance\_algebra*.py}}
+\end{corollary}
+
+The BE window actions are the sums $\Sigma_\lo=\be_{lm}+\be_{lh}$,
+$\Sigma_\hi=\be_{mh}+\be_{lh}$; \eqref{eq:F4} states that the \emph{split} of those sums
+(the third pairwise exponent), plus the shape $\chi$, exhausts the parameter dependence
+of the full matrix. For a generic $H_0$ the quantities $\be_{ij}$ do not exist (there is
+no $(\gamma,\eps)$ split): \eqref{eq:F4} is anchored in the Type-1 parameterization.
+
+\section{The nodal spectral cubic and its uniformization}\label{sec:cubic}
+
+\begin{theorem}[genus dichotomy]\label{thm:cubic}
+The spectral curve $F(u,E)=\det(EI-H_0-uA)=0$ is a plane cubic. For a generic symmetric
+$H_0$ it is \emph{smooth}: no singular points; $\mathrm{Disc}_EF$ has six simple roots
+in $u$; genus $1$. For Type-1 data it is \emph{nodal}: exactly one singular point,
+real --- the protected crossing $(u_*,E_*)$ --- with discriminant structure
+$[2,1,1,1,1]$ (four simple branch points $+$ one real double root); genus $0$.
+\evidence{established by exact polynomial algebra at $2+2$ parameter points; canonical
+node $(u_*,E_*)=(-\tfrac{187}{750},-\tfrac{748}{375})$; \texttt{ws\_nodal\_cubic.py}}
+\end{theorem}
+
+\begin{proposition}[rational uniformization by lines through the node]\label{prop:unif}
+Writing $F(u_*+x,E_*+y)=Q_2(x,y)+C_3(x,y)$ (no constant or linear part at a double
+point), the pencil of lines $y=\lambda x$ gives the birational parameterization
+\begin{equation}\label{eq:unif}
+u(\lambda)=u_*-\frac{Q_2(1,\lambda)}{\prod_i(\lambda-a_i)},\qquad
+E(\lambda)=E_*+\lambda\,(u(\lambda)-u_*),
+\end{equation}
+where $C_3(1,\lambda)=\prod_i(\lambda-a_i)$ \emph{identically} (the leading form of $F$
+is $\prod_i(E-a_iu)$): the three points of the curve over $u=\infty$ --- the diabatic
+channels --- are the poles $\lambda\to a_i$. All data are algebraic in
+$\{\gamma,\eps,a\}$; at the anchor everything is rational, e.g.\
+$Q_2(1,\lambda)=-\tfrac{469}{250}\lambda^2+\tfrac{1181}{500}\lambda+\tfrac{47}{250}$.
+\evidence{established: $F(u(\lambda),E(\lambda))\equiv0$ identically; sheets reproduce
+eigenvalues to $4\times10^{-16}$}
+\end{proposition}
+
+The geometric dictionary: $\lambda$ is the secant slope through the node; the node's two
+branches have slopes $=$ the roots of $Q_2(1,\lambda)$; the four turning points are the
+critical points of $u(\lambda)$. The generic (smooth, elliptic) curve admits no such
+parameterization --- eigenframes and periods are theta/elliptic objects. The node, i.e.\
+Type-1 integrability \cite{OWY2009}, is exactly what rationalizes the geometry.
+
+\section{The anchored factorization}\label{sec:fact}
+
+\begin{proposition}[rational frames]\label{prop:frames}
+Eigenvectors are adjugate columns of $H_0+u(\lambda)A-E(\lambda)I$: rational in
+$\lambda$ (entry degrees $(2,2)$ at the anchor), with coefficients rational in
+$\{\gamma,\eps,a\}$; they match numerical eigenvectors to $2\times10^{-16}$ on all
+sheets. \evidence{established; \texttt{ws\_anchored\_factors.py}}
+\end{proposition}
+
+\begin{proposition}[algebro-logarithmic phases, logs at the slopes]\label{prop:phases}
+Phase integrals pull back to rational differentials:
+$\int E\,du=\int E(\lambda)u'(\lambda)\,d\lambda$ has poles only at $\lambda=a_i$, so
+its antiderivative is a rational function plus $\sum_ic_i\log(\lambda-a_i)$. A
+St\"uckelberg-type integral $\int_{0.7}^{1.5}(E_2-E_1)\,du$ evaluates in closed form to
+$1.983673224768$, agreeing with quadrature to $4\times10^{-16}$. (Generically the same
+integral is elliptic.) \evidence{established; the proof is partial fractions on the
+rational curve}
+\end{proposition}
+
+\begin{lemma}[necessary irreducibility of the central factor]\label{lem:irr}
+Write $\Scat=W_+D_+\cdot C\cdot D_-W_-^{-1}$ with $W_\pm$ the rational frames and
+$D_\pm$ the (regulator) phase diagonals carrying the divergent tiers of
+Lemma~\ref{lem:drift}. Then $C$ cannot be reducible to explicit
+$\{\gamma,\eps,a\}$-expressions or quadratures: otherwise $\Scat$, hence $\sigma$, would
+be Liouvillian, contradicting its established non-Liouvillian character. Quantitatively,
+the explicit Weber ($\Gamma$-product) model of $C$ errs on $\sigma$ by a factor $2.5$ at
+the anchor (up to $\sim10^2$ in overlap regimes): the local Weber factors are the
+asymptotic shadow of $C$, not $C$. \evidence{established}
+\end{lemma}
+
+Thus the precise statement of the factorization is: \emph{all} of $\Scat$'s parameter
+dependence is explicit --- rational frames, algebro-logarithmic phases whose
+counterterms are themselves closed-form --- except a single central factor whose
+observable content is the function $F$ of \eqref{eq:F4} on the four-invariant moduli.
+
+\section{The central factor on the $\lambda$-sphere}\label{sec:C}
+
+\begin{definition}\label{def:C}
+$C$ is the wild connection datum \cite{Wasow1965,JMU1981} of the pulled-back system on
+$\PP_\lambda$,
+\begin{equation}\label{eq:lamsys}
+\frac{d\psi}{d\lambda}=A(\lambda)\,\psi,\qquad
+A(\lambda)=-i\,u'(\lambda)\big(H_0+u(\lambda)\,\diag(a)\big),
+\end{equation}
+between its sectorial frames at the punctures, glued along the closed-form interval
+transports of \S\ref{sec:fact}, modulo the constant torus of
+Proposition~\ref{prop:coset}.
+\end{definition}
+
+\begin{theorem}[anchored realization of $C$]\label{thm:C}
+At the anchor (exact rational arithmetic):
+\begin{enumerate}\itemsep2pt
+\item $A(\lambda)$ is rational with denominator
+$(\lambda+1)^3(2\lambda-1)^3(\lambda-2)^3$: its only singularities are three rank-$2$
+irregular punctures \emph{at the slopes} $\lambda=a_i$, with leading coefficients exactly
+$i\,r_i^2\,\diag(a)$, where $r_i=-Q_2(1,a_i)/\prod_{j\neq i}(a_i-a_j)$ are rational
+(canonically $r=(\tfrac9{10},\tfrac25,\tfrac{72}{125})$): the irregular types of $C$ are
+explicit $\{\gamma,\eps,a\}$-data.
+\item The four turning points are \emph{zeros} of $A(\lambda)$ (the connection vanishes
+there): the bulk of $\PP_\lambda$ is wholly tame; all wildness resides at the punctures.
+\item The node resolves into the two real regular points $\lambda=$ roots of
+$Q_2(1,\lambda)$, both mapping to $(u_*,E_*)$; the level exchange at the crossing is the
+visible branch swap between them.
+\item The three real arcs of the curve pair the punctures by the adiabatic reversal
+($\hi\to\lo$, $\mi\to\mi$, $\lo\to\hi$); the $E\neq E_*$ level passes once through
+$\lambda=\infty$ (a regular point). These arcs are the channel combinatorics of $C$.
+\item The $\lambda$-transport equals the $u$-propagator on image segments to
+$9\times10^{-13}$.
+\end{enumerate}
+\evidence{established; \texttt{ws\_lambda\_system.py}}
+\end{theorem}
+
+\section{Discussion}\label{sec:disc}
+
+The transcendental core of the Type-1 $N{=}3$ problem is now cornered in the smallest
+cage its geometry admits. The two hard numbers $\{\sigma,b\}$ are torus-invariants of
+the Stokes data of \emph{three rank-$2$ irregular punctures located at the slopes, with
+rational irregular types}, in a bulk connection that literally vanishes at the old
+turning points; as functions of the parameters they live on the four-dimensional
+invariant moduli $(\be_{lm},\be_{mh},\be_{lh},\chi)$ carved out by the M\"obius
+covariance. Everything else --- frames, phases, counterterms, channel combinatorics,
+even the cutoff divergence law --- is in anchored closed form.
+
+What remains open is the extraction of the puncture Stokes data itself (the exact
+``Weber replacements''), and the global bookkeeping of the M\"obius action. Neither can
+yield closed-form $\{\sigma,b\}$ --- that is foreclosed by irreducibility
+(Lemma~\ref{lem:irr} and the companion non-Liouvillian analysis) --- but the puncture
+realization reduces their computation to three local connection problems with rational
+data, and any future structure theory of $F$ in \eqref{eq:F4} now has its natural
+domain.
+
+\begin{thebibliography}{9}
+\bibitem{OWY2009} H.~K.~Owusu, K.~Wagh, E.~A.~Yuzbashyan, \emph{The link between
+integrability, level crossings and exact solution in quantum models}, J.\ Phys.\ A
+\textbf{42} (2009) 035206, arXiv:0807.0259.
+\bibitem{OY2011} H.~K.~Owusu, E.~A.~Yuzbashyan, \emph{Classification of
+parameter-dependent quantum integrable models, their parameterization, exact solution
+and other properties}, J.\ Phys.\ A \textbf{44} (2011) 395302, arXiv:1106.1831.
+\bibitem{Y2018} E.~A.~Yuzbashyan, \emph{Integrable time-dependent Hamiltonians, solvable
+Landau--Zener models and Gaudin magnets}, Ann.\ Phys.\ \textbf{392} (2018) 323--339,
+arXiv:1804.04926.
+\bibitem{SC2017} N.~A.~Sinitsyn, V.~Y.~Chernyak, \emph{The quest for solvable multistate
+Landau--Zener models}, J.\ Phys.\ A \textbf{50} (2017) 255203, arXiv:1701.01870.
+\bibitem{BE1993} S.~Brundobler, V.~Elser, \emph{S-matrix for generalized Landau--Zener
+problem}, J.\ Phys.\ A \textbf{26} (1993) 1211--1227.
+\bibitem{VO2004} M.~V.~Volkov, V.~N.~Ostrovsky, \emph{Exact results for survival
+probability in the multistate Landau--Zener model}, J.\ Phys.\ B \textbf{37} (2004)
+4069--4084.
+\bibitem{DS2006} B.~E.~Dobrescu, N.~A.~Sinitsyn, \emph{Comment on `Exact results for
+survival probability in the multistate Landau--Zener model'}, J.\ Phys.\ B \textbf{39}
+(2006) 1253--1255.
+\bibitem{Wasow1965} W.~Wasow, \emph{Asymptotic Expansions for Ordinary Differential
+Equations}, Wiley, 1965.
+\bibitem{JMU1981} M.~Jimbo, T.~Miwa, K.~Ueno, \emph{Monodromy preserving deformation of
+linear ODEs with rational coefficients.~I}, Physica D \textbf{2} (1981) 306--352.
+\end{thebibliography}
+
+\end{document}

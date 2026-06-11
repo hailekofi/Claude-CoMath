@@ -2585,3 +2585,20 @@ STATUS of the anchored factorization after R33-R36:
   Stokes data; observable content = F(be_lm, be_mh, be_lh, chi) (R31/R32).
 NEXT options: (a) extract the puncture Stokes data numerically (local models at a_i; the exact
 "Weber-replacements"); (b) consolidate R31-R36 into the short Type-1 note.
+
+---
+
+## 2026-06-11 — R37: consolidation note (b) drafted: type1_n3_anchored_structure.tex
+
+R31-R36 consolidated into paper/drafts/type1_n3_anchored_structure.tex ("Anchored algebraic
+structure of the Type-1 N=3 LZ transition matrix: Mobius covariance, invariant coordinates, and
+the nodal-cubic factorization"). Structure: S1 intro WITH the Type-1-vs-generic boundary table
+(the R29 lesson institutionalized: every result tagged specific-vs-generic + evidence level);
+S2 renormalized S (R35: 3-tier, drift law (b_j-b_i)lnR, torus coset); S3 Mobius covariance theorem
++ closure identity + P=F(be x3, chi) arity 4 (R31/R32); S4 nodal-vs-smooth cubic + uniformization
+(R33); S5 anchored factorization: rational frames, algebro-log phases, a-priori irreducibility of C
+(R34); S6 C on the lambda-sphere (R36: punctures at slopes, rational types i r_i^2 diag(a), turning
+points = zeros, node resolved, reversal arcs); S7 discussion (the core cornered; open: puncture
+Stokes extraction). 9 verified refs only. Lint clean (envs/braces/$ even/refs/cites all resolve).
+Next: (a) extract the puncture Stokes data (the exact Weber-replacements) against this note's
+definitions.
