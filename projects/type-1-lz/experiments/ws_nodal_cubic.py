@@ -65,7 +65,8 @@ cases=[]
 cases.append(("TYPE-1 canonical",H0_type1([-2,0,3],[1,sp.Rational(4,5),sp.Rational(6,5)],[-1,sp.Rational(1,2),2]),[-1,sp.Rational(1,2),2]))
 cases.append(("TYPE-1 second",H0_type1([-1,0,sp.Rational(3,2)],[sp.Rational(9,10),sp.Rational(11,10),sp.Rational(4,5)],[sp.Rational(-7,10),sp.Rational(2,5),sp.Rational(13,10)]),[sp.Rational(-7,10),sp.Rational(2,5),sp.Rational(13,10)]))
 for tag in ("generic-1","generic-2"):
-    M=rng.standard_normal((3,3)); Hg=sp.Matrix(np.round(0.6*(M+M.T)/2,3))
+    M=rng.standard_normal((3,3)); Hf=np.round(0.6*(M+M.T)/2,3)
+    Hg=sp.Matrix(3,3,lambda i,j: sp.Rational(int(round(Hf[i,j]*1000)),1000))
     cases.append((f"GENERIC {tag}",Hg,[-1,sp.Rational(1,2),2]))
 
 node_data={}
