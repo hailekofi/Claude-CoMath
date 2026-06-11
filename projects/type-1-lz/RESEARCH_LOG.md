@@ -2338,3 +2338,47 @@ Before building a paper around "property X is special to system S", check whethe
 of the ambient class also has X. Here an elaborate "construction" was elevated to a Type-1
 centerpiece before a one-script generic-H0 baseline (which deflated it). A generic-baseline check
 is now a required gate before claiming system-specific structure.
+
+---
+
+## 2026-06-11 — DISCOVERY (R31): P = F(be_lm, be_mh, be_lh, chi) — the arity-4 invariant structure
+
+User goal: discover the algebraic structure of P anchored in {gamma,eps,a} BEYOND BE, analytically.
+Method: invariance-algebra program (ws_invariance_algebra.py, ws_invariance_algebra2.py).
+
+Setup [AD]: the exact P-preserving gauge flows on the 9 params are F1 eps-shift, F2 (gam,eps)-scale
+(eps->l eps, gam->sqrt(l) gam: H0 literally invariant, dP=9e-15), F3 a-shift (phase; dP=1.3e-9),
+F4 u-scale ((eps,a)->(m eps, m^2 a)). IN-FAMILY CLOSURE probes: H0->H0+tau*A (u-shift) and H0->H0+cI
+do NOT close in the Cauchy slice at fixed a (residuals 0.14-0.16): the Type-1 stratum at fixed a is a
+genuine codim-2 subvariety of symmetric H0s (4-dim Cauchy family in 6-dim ambient), conjecturally cut
+out by the exact-real-crossing (node) condition (ties to R3/R8, OWY2009). => essential param count
+9-4 = 5.
+
+R31 [NS, 2 base points, floors 1.8e-4/5.7e-4]:
+  (1) {Sigma_lo, Sigma_hi, chi} is INCOMPLETE: fiber sv of d(sigma,b) on ker d(I3) = 0.135 (canonical;
+      ~1000x floor) -> R11's 3-invariant separation is approximate only, refuted as exact.
+  (2) The missing invariant is the THIRD PAIRWISE BE EXPONENT: the windows are sums Sigma_lo =
+      be_lm + be_lh, Sigma_hi = be_mh + be_lh; R11 used only the sums. Each pairwise
+      be_ij = gam_i^2 gam_j^2 |a_i-a_j| / (eps_i-eps_j)^2 is individually invariant under F1-F4 [AD].
+      The strong I3-fiber direction has d(be_lh).X = +0.039 / +0.025 (explains it).
+  (3) ARITY 4: with I4 = (be_lm, be_mh, be_lh, chi) the fiber collapses: sv (1.8e-4, 3.5e-5) canonical
+      [x770], (5.7e-4, 1.9e-5) second [x17]. CONJECTURE (numerically-supported):
+          P = F(be_lm, be_mh, be_lh, chi)
+      i.e. all 9 parameters enter the full transition matrix ONLY through the three pairwise BE
+      exponents and the Q4 turning-point cross-ratio. Reconciles R24 exactly (rank dP = 4 = arity).
+  (4) Dual phrasing -- THE HIDDEN FLOW: ker dP is 5-dim = 4 gauge flows + ONE non-gauge P-preserving
+      flow Y. Gauge-orthogonal Y has |da| ~ 0.01-0.03 (nearly slope-free): "move eps in the unique
+      non-gauge direction, lift to gam by x_i = (c_ij+c_ik-c_jk)/2 (log-derivative system holding the
+      three window areas), nudge a to hold chi." Y(canonical): dgam=(-0.416,-0.076,0.462),
+      deps=(0.386,-0.631,0.245), da=(-0.007,0,0.007). A genuine dynamical (non-gauge) symmetry of P --
+      the Type-1 integrability fingerprint candidate (cf. Chernyak-Sinitsyn tau-invariance).
+
+Honest caveats: 2 base points; FD h=2e-3; chi gradient by FD; the second point's residual 5.7e-4 is
+~3x its nominal floor (deep-suppression regime amplifies FD error) -- needs a battery (more points,
+tighter floors, analytic chi-gradient) to upgrade. If the canonical residual 1.8e-4 fails to shrink
+under better numerics there is a WEAK 5th dependence and the claim becomes "arity 4 to 2e-4".
+
+Next analytic steps: (a) PROVE arity-4 from the zero-curvature / commuting-partner structure (derive
+Y as the Chernyak-Sinitsyn/Gaudin inhomogeneity flow; P invariance along it = integrability Ward
+identity); (b) derive the codim-2 node equations Phi_1=Phi_2=0 of the Type-1 stratum explicitly;
+(c) battery test of P=F(be x3, chi) at random points + tighter floors.
