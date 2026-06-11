@@ -2261,3 +2261,41 @@ type1_n3_wildness_proof.tex). Structure as agreed across the 4-round interrogati
 Lint clean (braces/$ even/envs/refs/cites all resolve; fixed \Re renewcommand). No LaTeX compiler
 in container; .tex delivered for user-side compile. Evidence levels marked throughout (rigorous /
 rigorous+numerically-verified / numerically-supported / one flagged frontier item).
+
+---
+
+## 2026-06-10 — REFLECTION (reviewer challenge): the construction is GENERIC N=3 MLZ, not Type-1 (R29)
+
+Reviewer (user): "Isn't S=U.Delta.L a bit trivial? U,L have no anchor in {gamma,eps,a}. Isn't
+this the classic linear algebra result?" Stress-tested honestly; the critique LANDS at three
+depths (ws_construction_generic.py):
+
+ (1) EXISTENCE of S=U.Delta.L = generic LU/Gaussian elimination. Trivial. Conceded.
+ (2) SLOT EQUATIONS (sigma=|D_m+U12 D_h L21|^2, b=|L20|^2|D_h|^2) = the UDL RECONSTRUCTION
+     IDENTITY of S_{11}, S_{20}. Hold for ANY matrix by algebra (d~1e-16 is tautological, NOT
+     verification). I over-presented these as evidence. Conceded. The only non-vacuous part is
+     the DISJOINT-slot structure (sigma uses {U12,L21}; b uses {L20}) -- a real but elementary
+     triangular-position fact.
+ (3) DELTA-ELEMENTARITY + BE-PINNING are GENERIC N=3 MLZ, not Type-1: a RANDOM real symmetric
+     H0 (same slopes) reproduces them. Type-1 canonical: Delta ratios (13.38,1.00001,1.00001),
+     BE pin (1.0,1.0). Generic-1: (64.19,0.9997,0.99999), BE pin (0.9994,1.0). Generic-2:
+     (1.111,1.131,1.0) [weak-coupling: |b|~0.02 so dual/standard nearly coincide], BE pin
+     (1.0,1.0). => b_j=sum H0_jk^2/(a_j-a_k) is elementary for ANY H0; BE law is general MLZ
+     (Brundobler-Elser). NEITHER uses the Cauchy/Type-1 form.
+ (4) The maximal ray-degeneracy (12->4) needs only REAL SLOPES + linear sweep = generic
+     Hermitian MLZ, again not Type-1-specific.
+
+CONCLUSION: the ENTIRE skeleton/core construction is GENERIC N=3 MLZ sectorial-Stokes structure.
+Even wildness and non-rigidity (chi=0 for any N=3 rank-2 irregular w/ generic residues) are
+generic MLZ. Type-1's Cauchy H0 / integrability / genus-0 spectral curve enter the construction
+NOWHERE. U,L are the transcendental Stokes multipliers -- UNANCHORED BY DESIGN (the thesis;
+anchoring them = solving = impossible by Thm transc).
+
+=> The paper (type1_n3_skeleton_core.tex) OVERSELLS the construction as a Type-1 centerpiece.
+Honest repositioning needed. The genuine TYPE-1 payload is the NEGATIVE result: Type-1
+INTEGRABILITY (commuting family, genus-0 Lax) does NOT rescue solvability -- sigma is
+transcendental for the same generic wild+non-rigid reason as any N=3 MLZ. "Integrable yet not
+solvable" is the Type-1 thesis; the skeleton/core is the (general-MLZ) vehicle that localizes
+where solvability fails. Decision (reframe scope) deferred to user.
+Refinement noted: Delta-elementarity SIGN-pattern (which channel is dual) is dominance-dependent;
+clean when extreme b_lo is large (Type-1, generic-1), blurred at weak coupling (generic-2).
