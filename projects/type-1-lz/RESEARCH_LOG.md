@@ -2727,3 +2727,34 @@ analytic exclusion (quadrature is an Umemura-classical operation; Painleve/Garni
 kills all finite quadrature depths -- modulo the Garnier rigor ceiling). Each derivative-order
 test pushes exclusion one quadrature deeper; the analytic chain closes the whole tower.
 NOT YET RUN: the same battery for b (machinery in place; expected same; flagged).
+
+---
+
+## 2026-06-12 — R42: explicit iterated-integral tower for sigma (+ retracted numerics, honest)
+
+User: express the tower of iterated integrals explicitly. Delivered ANALYTICALLY [AD]:
+on the genus-0 curve P^1_lambda, sigma = |S_mm|^2 with
+  S_mm = 1 + sum_{n>=1} (-1)^n sum_{walks m->...->m} int_{lam_1<...<lam_2n} w_{m k}...w_{k m},
+  dressed 1-form  w_ij = W_ij(lam) e^{i Theta_ij(lam)} dlam,
+  W_ij = u'(lam) <V_i|A|V_j>/(E_j-E_i)  RATIONAL (Hellmann-Feynman, R34 frames),
+  Theta_ij = int (E_i-E_j) u' dlam  ALGEBRO-LOG (R34).
+Leading single-excursion term explicit (Stuckelberg double integral).
+
+TWO CORRECTIONS of my earlier phrasing [meta-review]:
+ (i) NOT "multiple polylogarithms": w_ij = rational * exp(i*rational) * prod(lam-a_p)^{i c_p}
+     are OSCILLATORY exact-WKB / spectral-network (GMN nonabelianization) integrands, not
+     dlog forms. (MPLs would appear only if one illegitimately Taylor-expands e^{i Theta},
+     Theta ~ u^2 large.)
+ (ii) NOT "transcendence = non-truncation": N=2's adiabatic tower is ALSO infinite but
+     resums to an elementary exponential (LZ). N=3's resummation is NON-elementary; the
+     obstruction is the three-level STOKES JOINT (WS-G: Stokes lines from different
+     turning-point pairs intersect -> BPS junction); the resummation is the Fredholm/Widom
+     determinant (WS-O2b). So: transcendence = non-elementary RESUMMATION gated by the joint.
+
+DEAD-END (numerical instantiation, ws_iterated_tower.py) [retracted]: the grid eigenframe
+under-resolves the sharp avoided crossing (pair 01 gap ~2e-4 at u~-0.25); eigenvector
+sign-alignment fails -> W corrupted. Symptom: EXACT adiabatic resummation gave 0.498 while a
+correct diabatic propagator at the SAME U=30 gives 0.214725 (verified). Retract the leading-term
+value and Lambda. CLEAN FIX (not done): compute in the rational lambda-frame where E_i(lam),
+V_i(lam) are smooth rational (adjugate columns, R34) -- no alignment, no avoided-crossing
+under-resolution. Flagged for next session if the leading-order value is wanted.

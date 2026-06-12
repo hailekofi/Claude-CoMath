@@ -1,16 +1,16 @@
 """
-ws_iterated_tower.py -- the explicit iterated-integral tower for sigma, concretely.
-Builds the dressed coupling W~_{ij}(u) = W_{ij}(u) e^{i Theta_{ij}(u)} on a fine u-grid
-(eigenframe + Hellmann-Feynman + cumulative phase), then:
- [1] exact adiabatic resummation (integrate c' = -W~ c) -> sigma (validate vs gold);
- [2] leading tower term sigma_2 = |1 + c_m^{(2)}|^2, the single-excursion Stuckelberg
-     double integral, written explicitly;
- [3] marginality diagnostic Lambda = sum_{i<j} int |W_ij| du (M5: ~pi = boundary of
-     geometric convergence => the tower neither terminates nor converges geometrically;
-     the transcendence is its non-elementary RESUMMATION, not mere non-termination --
-     N=2's adiabatic tower is also infinite but resums to an elementary exponential).
-Reproduce: python3 ws_iterated_tower.py
+ws_iterated_tower.py -- explicit iterated-integral tower for sigma.
+
+*** NUMERICAL CAVEAT (R42): the grid reconstruction below is UNRELIABLE. ***
+The quick eigenframe under-resolves the sharp avoided crossing (pair 01, gap ~2e-4),
+corrupting W near u~-0.25. Symptom: the EXACT adiabatic resummation [1] gives 0.498 while
+a correct propagator at the SAME window U=30 gives gold 0.214725. Hence the leading-term
+value [2] and Lambda [3] are RETRACTED. The ANALYTIC tower (the dressed-coupling 1-forms
+and the Dyson/iterated-integral series) is correct and independent of this instantiation.
+Trustworthy numbers require the rational lambda-frame (E_i(lam),V_i(lam) smooth rational,
+no eigenvector alignment) -- not yet done.
 """
+
 import numpy as np
 from scipy.integrate import cumulative_trapezoid, trapezoid, solve_ivp
 
