@@ -2690,3 +2690,40 @@ geometry, no ODE):
    be_lh (cone be_lh<=min) + projective chi. CONJECTURAL: Gaudin-descended symplectic form,
    possibly self-dual under the R39 eps<->a exchange.
 OPEN: confirm the chi_min(be) envelope (targeted search); the symplectic structure; the duality.
+
+---
+
+## 2026-06-12 — R41: sigma is NOT an antiderivative of an elementary function (+ R27 reading corrected)
+
+User challenge: "derivatives of transcendental functions are often elementary; do we know {sigma,b}
+are not antiderivatives of well-behaved functions in u or lambda?" Three-part answer:
+
+(1) CORRECTION of R27's over-claim [meta-review]: "order-1 DA failure => non-Liouvillian-classical"
+was TOO STRONG. erf = int e^{-t^2} is Liouvillian (quadrature of elementary) yet fails order-1 DA
+and passes order-2 -- the SAME signature sigma showed. R27 thus excluded only the no-quadrature
+exp-closure class. The user's hypothesis class (antiderivatives) was NOT excluded numerically.
+
+(2) u/lambda reading [AD, settled]: single antiderivatives of algebraic data on the spectral curve
+are PERIODS, and the Type-1 curve is rational (genus 0) => all such are ELEMENTARY (R34 closed
+forms) and fail sigma (Dykhne-type 0.0843 vs 0.2147; Gamma-cert). In the lambda-frame sigma IS an
+infinite tower of iterated integrals of rational forms (term-by-term multiple polylogarithms at
+cross-ratio arguments; Fredholm closure WS-O2b): not AN antiderivative -- a non-terminating series
+of them.
+
+(3) parameter reading [NS, now settled numerically]: discriminator = order-1 DA of sigma' (an
+antiderivative of exp-closure elementary has order-1-DA derivative: erf': g'=-2a(t-b)g) PLUS the
+sharper RATIO test (h = f''/f' rational <=> f in the antiderivative class). High-accuracy slice
+(ws_anti_chunk.py: 35 nodes, R=(40,80), rtol=1e-12, sigma ~1e-7; ws_anti_verdict.py):
+  [A] order-1 on f': erf'(HIT rail) 6.6e-6; J0'(MISS rail) 2.1e-3; SIGMA' 5.7e-4
+      -> 85x above HIT rail, 3.7x below MISS rail: on the MISS side.
+  [B] ratio test h=f''/f' rational(deg 1..4): erf (2e-5 -> 2.5e-8, HIT at every degree);
+      J0 (1.5e-1 -> 1.9e-4, MISS); SIGMA (4.2e-2 -> 3.4e-5): tracks the J0 MISS ladder at every
+      degree, 3 ORDERS OF MAGNITUDE above the erf HIT rail. DECISIVE MISS.
+  Robustness: rails dropped 10x (1e-6 -> 1e-7 slice) while sigma's residuals were UNCHANGED
+  (1.48e-4 / 5.67e-4): real obstructions, not floors.
+VERDICT: sigma is NOT an antiderivative of an elementary (exp-closure) function of the parameter
+on this slice [numerically-supported, calibrated rails], independently consistent with the
+analytic exclusion (quadrature is an Umemura-classical operation; Painleve/Garnier irreducibility
+kills all finite quadrature depths -- modulo the Garnier rigor ceiling). Each derivative-order
+test pushes exclusion one quadrature deeper; the analytic chain closes the whole tower.
+NOT YET RUN: the same battery for b (machinery in place; expected same; flagged).
