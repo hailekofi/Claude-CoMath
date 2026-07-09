@@ -2758,3 +2758,44 @@ correct diabatic propagator at the SAME U=30 gives 0.214725 (verified). Retract 
 value and Lambda. CLEAN FIX (not done): compute in the rational lambda-frame where E_i(lam),
 V_i(lam) are smooth rational (adjugate columns, R34) -- no alignment, no avoided-crossing
 under-resolution. Flagged for next session if the leading-order value is wanted.
+
+---
+
+## 2026-07-09 — Where Type-M travels, v2: outstanding-problems map (Generation pass, lit-grounded)
+
+User re-opened the application question at full Type-M generality: the classification is completely
+parameterized, exactly solvable, nontrivially geometric — what OUTSTANDING physics problems can it
+attack beyond LZ? Delivered paper/program/type_M_outstanding_problems.md (supersedes/extends the
+2026-06-03 where_this_travels.md, which was Type-1-N=3-centric and predates R31-R42).
+
+WHAT'S NEW vs v1: (i) asset list updated with the arity-4/Mobius invariant theory (R31/R32), the
+nodal-cubic genus dichotomy + "Type-M = genus M-1" [NS/conj], the wildness theorem, the eps<->a
+duality flag (R39); (ii) the pool is organized around RECOGNIZED open problems, not domains;
+(iii) two prior-art checks run (WebSearch, confirmed):
+  - Scaramazza-Shastry-Yuzbashyan, PRE 94, 032106 (2016) "Integrable matrix theory: level
+    statistics" — typical integrable matrices Poisson iff #partners n >~ log N, else level
+    repulsion WITHIN the solvable class. => the type index M is a discrete integrability dial that
+    crosses the Berry-Tabor boundary while staying exactly solvable. Statics baseline = prior art;
+    the mechanism/crossover/order-parameter space is open.
+  - Pandey-Claeys-Campbell-Polkovnikov-Sels, PRX 10, 041017 (2020): AGP norm = most sensitive
+    chaos probe, numerics-only; (also Pozsgay et al. SciPost 17, 075 (2024) free-fermion AGP).
+
+RANKED VERDICT (tournament in the note):
+ 1. FLAGSHIP P1+P2 — "the integrability-breaking laboratory": (a) distance-to-Type-M-variety as
+    the missing distance-from-integrability order parameter (variety is explicit — projectable);
+    (b) the M-dial crossover (solvable model OF the Poisson->WD transition; SSY = ancestor);
+    (c) exact AGP: the a-independent W (R1) IS the family-direction adiabatic connection, rational
+    on the curve => analytic anchor for the AGP chaos program + exact counterdiabatic driving for
+    Richardson/central-spin sweeps. Attacks the quantum-KAM / ETH-onset problem with three handles
+    unique to Type-M. First probes: <r> vs M at fixed N; dist-to-variety vs <r>; ||W||^2 closed
+    form + node divergence structure.
+ 2. P3 rigid<=>solvable classifier note (finished physics, v1 top pick, now wildness-theorem-backed).
+ 3. P4 diabolical-point/node-lifting statistics (first solvable model of degeneracy statistics).
+ 4. P5 eigenvector-solvable ensemble (rational eigenvectors on the curve -> analytic multifractality
+    baseline for RP/NEE debates).
+ 5. Deep tier: sigma<->Painleve kernels; Type-M genus hierarchy <-> AD/class-S ("rigid=solvable" =
+    "AD is Lagrangian"); eps<->a bispectral duality probe (cheapest surprise).
+
+STATUS: all exports [conjecture] until probed; no numerics run this session (Generation +
+literature grounding only). Next actionable: extend ws_type_M_levelstats.py to the M-dial, or the
+exact-AGP derivation from the curve.
