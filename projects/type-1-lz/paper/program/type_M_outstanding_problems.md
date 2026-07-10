@@ -167,3 +167,119 @@ cheap curiosity with the highest surprise-per-cost.
 *Discipline (META_REVIEW):* every export above is `[conjecture]` until its first probe runs;
 M-dial statics must cite SSY 2016 as prior art; AGP claims must state which deformation
 direction is exact before any norm is quoted.
+
+---
+
+## V. The isospectral-torus asset (Hermitian Type-M, M ≥ 2) — added 2026-07-10
+
+**The asset (user, 2026-07-10).** For ansatz Type-M with M ≥ 2 there are **M−1 additional
+parameters** deforming a real-symmetric Type-M family into a *Hermitian* Type-M family with
+**identical spectrum**. I.e. over every real-symmetric Type-M point sits an explicit
+(M−1)-dimensional **isospectral torus** of Hermitian Hamiltonians: eigenvalues (as functions of
+u) frozen; eigenvectors, and everything built from them, free to move. Type-1 (M=1) has no such
+torus — consistent with everything the N=3 program found.
+
+### V.0 The structural identification (the headline conjecture)
+
+**[conjecture, dimension-matched]** The M−1 isospectral phases are the **angle variables on the
+Jacobian of the genus-(M−1) spectral curve** — the fiber of the spectrum map. The two
+conjectures now support each other:
+- "Type-M ⇔ genus M−1" (R33-adjacent) predicts a Jacobian of complex dimension M−1; its real
+  slice (the fixed torus of the anti-holomorphic involution picking out real-symmetric members)
+  has real dimension M−1 — **exactly the user's parameter count**. Type-1: g=0, trivial
+  Jacobian, no phases. ✓
+- This is precisely the **finite-gap paradigm** (Dubrovin–Novikov: the isospectral manifold of a
+  g-gap potential is the Jacobian of the genus-g curve; angles = norming-constant phases), and
+  the Beauville–Mumford/Hitchin picture: the Type-M variety is an **algebraic completely
+  integrable system** — spectral data = action/base coordinates, the θ-torus = the fiber. The
+  θ-flows are Lax (isospectral) flows: dH/dθ = [H, A_θ].
+So Type-M is the matrix pencil analog of finite-gap theory, with the type index = number of
+"gaps" + 1. First test: on the minimal example, track the eigenvector (Mumford) divisor vs θ and
+check *linear* motion on Jac. **CRITICAL PRE-CHECK (M1 discipline, gates everything below):**
+verify the θ-deformation is **not pure gauge** — not a u-independent unitary (e.g. diagonal
+phase) conjugation of the whole pencil. If it were, every claim below trivializes. Expected
+genuine (the count M−1 is already modulo the N−1 diagonal-phase gauge), but must be computed
+once, not asserted.
+
+### V.1 What the torus is, physically: a spectrum-frozen dial
+
+Everything **spectral** is exactly frozen along θ: char-poly coefficients, gaps, DOS, level
+statistics, discriminant/node locations, Stückelberg actions, BE exponents, the formal monodromy
+c_i. Everything **eigenvector-borne** may move: transition amplitudes' Stokes content,
+AGP/quantum-geometric tensor, Berry curvature, eigenstate expectation values and entanglement,
+currents. That makes θ a *scalpel that separates spectral from non-spectral physics* — with
+theorem-grade cleanliness, because the freezing is exact, not approximate. New problems this
+opens:
+
+**Q1 — Gap-vs-dynamics separation theorems (driven systems / adiabatic computing).**
+Outstanding: adiabatic theorems and annealing runtimes are gap-based; how much dynamical
+information do gaps actually carry? Probe: does the LZ transition matrix P move along θ at
+frozen spectrum? *Either answer is a result:* θ-invariant ⇒ P is a function of spectral data
+alone (a massive new solvability lever: compute P from the curve, no dynamics) and the R31/R32
+arity theorem generalizes verbatim; θ-varying ⇒ an exactly parameterized family of Hamiltonians
+with identical gap structure and computably different transition probabilities — the spread over
+the torus IS the irreducible non-spectral (eigenvector/Stokes) content, quantifying the slack in
+all gap-based bounds. Note the N=3 Type-1 arity theorem P = F(be×3, χ) used *spectral*
+invariants only — consistent with M=1 having no torus; Q1 is its M ≥ 2 continuation.
+[conjecture; probe = minimal Type-2 example, days]
+
+**Q2 — Time-reversal breaking that is invisible to the spectrum (RMT foil; T-violation bounds).**
+The θ's deform real-symmetric (TRS, β=1) into genuinely Hermitian (β=2) **with zero spectral
+signature** — impossible for generic ensembles, where GOE→GUE is *defined* spectrally.
+Integrability screens TRS breaking from the spectrum. Consequences: (a) a precise counterexample
+class for the statistical-spectroscopy program that bounds T-violation (nuclear data) from level
+statistics — exposes the genericity assumption those bounds need; (b) under integrability
+breaking +εV, does the endpoint universality class (GOE vs GUE) depend on θ? If yes, θ *steers
+the universality class while spectrally invisible at ε=0* — the flagship laboratory (§P1/P2)
+gains a second, orthogonal dial: (M, θ) = (how integrable, how time-reversal-broken), with the
+AGP (exponentially TRS-sensitive per the PRX 2020 line) as the natural detector; (c) conceptual
+hook: single-system spectra cannot distinguish real from complex quantum mechanics here — an
+exactly solvable illustration of why the real-vs-complex-QM falsification program needed
+entangled tests. [conjecture/framing]
+
+**Q3 — Pure-holonomy control: geometric phase at exactly frozen dynamical phase.**
+Along θ the instantaneous spectrum — hence every dynamical phase ∫E dt — is *identically*
+constant; only the connection/holonomy (Berry, Wilczek–Zee) moves. Outstanding: separating
+geometric from dynamical phase is the perennial obstacle in holonomic gates and geometric-phase
+metrology. Type-M with M ≥ 2 is a completely parameterized control manifold on which that
+separation is exact by construction. Bonus geometry: the protected node persists at the same
+(u*, E*) for **all** θ (spectrum frozen), so the degeneracy sweeps out a manifold of
+**anomalous codimension** in (u, θ)-space — Hermitian degeneracies generically need codimension
+3, integrability + isospectrality beat that by construction — an exactly solvable factory of
+Weyl-point/monopole/diabolical structures with algebraically known loci, sharpening §P4 and the
+OWY crossing theorem simultaneously. Probe: Berry curvature and Chern numbers on (u, θ) around
+the persistent node in the minimal Type-2 example. [conjecture]
+
+**Q4 — Eigenvector chaos/ETH at frozen (Poisson) spectrum.**
+ETH is an eigenvector statement; level statistics is spectral. The field routinely infers
+eigenstate properties from spectral probes. The θ-torus moves eigenstate structure (matrix
+elements of observables, eigenstate entanglement) at exactly fixed Poisson spectrum — a
+counterexample factory for "spectrum ⇒ eigenstates" inferences and a clean testbed for which
+diagnostics probe which sector. Combines with §P5 (rational eigenvectors ⇒ analytic overlap
+statistics as functions on the torus). [conjecture]
+
+**Q5 — The wild-character-variety orbit (math-phys anchor; upgrades the AD long shot).**
+Frozen spectrum ⇒ frozen formal data (exponents, irregular types); the θ-action on the driven
+problem can move **only the Stokes matrices**: the isospectral torus maps into the wild
+character variety at fixed formal data — plausibly a (Lagrangian) torus orbit, i.e. the
+angle-fibration of the wild Hitchin system made explicit at matrix-pencil level. This is the
+concrete bridge the §II AD/class-S item was missing: base = curve moduli (frozen), fiber = θ.
+[conjecture; needs the gauge pre-check first]
+
+### V.2 Minimal probe (fully specified, cheap)
+
+N=3, generic real-symmetric pencil = the smooth-cubic genus-1 samples already in hand (R33a
+generic samples) ⇒ Type-2 ⇒ **one** phase θ; driver A=diag(a) as always. Steps: (1) construct
+the Hermitian isospectral extension (OY 2011 Hermitian Type-2 ansatz, or solve isospectrality
+directly); (2) **gauge check** (V.0); (3) verify spectrum-freezing to machine precision along θ;
+(4) compute P(θ), ‖AGP‖(θ), Berry curvature at the (persistent) degeneracy vs θ. Outcomes gate
+Q1–Q5. All machinery (propagators, oracle-grade solvers, curve builders) exists in
+`experiments/`.
+
+### V.3 Effect on the tournament
+
+The isospectral torus does not displace the flagship — it **arms it**: §P1+P2 becomes a
+two-dial laboratory (M = integrability dial, θ = spectrally-invisible TRS dial, both exactly
+solvable), and Q1's either-way payoff makes the minimal Type-2 probe arguably the highest
+information-per-cost experiment now on the board — cheaper than the M-dial sweep and decisive
+for the structure (gauge or genuine; spectral or not) before anything else is built on M ≥ 2.

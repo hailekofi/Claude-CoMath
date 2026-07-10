@@ -2799,3 +2799,48 @@ RANKED VERDICT (tournament in the note):
 STATUS: all exports [conjecture] until probed; no numerics run this session (Generation +
 literature grounding only). Next actionable: extend ws_type_M_levelstats.py to the M-dial, or the
 exact-AGP derivation from the curve.
+
+---
+
+## 2026-07-10 — Isospectral-torus asset (Hermitian Type-M, M>=2): map extended (note SV)
+
+User supplied a new structural asset: for ansatz Type-M, M>=2, there are M-1 extra parameters
+deforming real-symmetric Type-M -> Hermitian Type-M with IDENTICAL spectrum. Folded into
+paper/program/type_M_outstanding_problems.md as new SV (V.0-V.3).
+
+HEADLINE IDENTIFICATION [conjecture, dimension-matched, NEW to the log]: the M-1 phases = angle
+variables on the JACOBIAN of the genus-(M-1) spectral curve (fiber of the spectrum map). The
+dimension count M-1 = dim Jac(genus M-1) ties the user's asset to the project's "Type-M <=> genus
+M-1" conjecture — each is now evidence for the other (Type-1: g=0, no torus, consistent with the
+whole N=3 program incl. the arity theorem using spectral invariants only). This is the finite-gap
+paradigm (Dubrovin-Novikov isospectral torus = Jacobian; angles = norming-constant phases) and the
+Beauville/Hitchin fibration at matrix-pencil level; theta-flows are Lax flows dH/dtheta=[H,A_theta].
+
+CRITICAL PRE-CHECK flagged (M1 discipline, gates everything): verify theta is NOT pure gauge (no
+u-independent unitary conjugating the whole pencil). Expected genuine (count is modulo diagonal-
+phase gauge) but must be computed once.
+
+NEW PROBLEMS OPENED (theta = a spectrum-frozen dial: spectral data exactly frozen, eigenvector-
+borne data free):
+ Q1 gap-vs-dynamics separation: does P move along theta at frozen spectrum? EITHER answer is a
+    result (invariant => P computable from the curve alone + arity theorem generalizes; varying =>
+    theorem-grade proof gaps don't determine transitions, torus spread = the non-spectral content).
+ Q2 TRS breaking invisible to the spectrum: real->Hermitian at zero spectral signature
+    ("integrability screens TRS breaking"); counterexample class for T-violation-from-level-
+    statistics bounds; does theta steer the GOE-vs-GUE endpoint under +eps breaking? => the
+    flagship lab gains a second dial (M, theta); AGP the natural detector.
+ Q3 pure-holonomy control: dynamical phases identically constant along theta, only holonomy moves
+    (holonomic gates / geometric-phase metrology with exact separation); node persists at all
+    theta => degeneracy manifold of ANOMALOUS codimension in (u,theta) — exact Weyl/monopole
+    factory, sharpens P4 + the OWY crossing theorem.
+ Q4 eigenvector chaos/ETH at frozen Poisson spectrum (counterexample factory for spectrum=>
+    eigenstate inferences; eigenstate entanglement moving at fixed spectrum).
+ Q5 wild-character-variety orbit: frozen formal data => theta moves ONLY Stokes matrices;
+    isospectral torus -> (plausibly Lagrangian) torus in the wild character variety — the concrete
+    bridge the AD/class-S long shot was missing.
+
+MINIMAL PROBE (fully specified, days): N=3 generic smooth-cubic (g=1) samples from R33a = Type-2,
+ONE phase; build Hermitian extension (OY 2011 ansatz), gauge check, freeze check, then P(theta),
+||AGP||(theta), Berry curvature at the persistent node. TOURNAMENT EFFECT: doesn't displace the
+flagship — ARMS it (two-dial lab); the Type-2 probe is now the highest information-per-cost
+experiment on the board. No numerics run this session (Generation + structure only).
